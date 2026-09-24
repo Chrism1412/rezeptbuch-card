@@ -4934,8 +4934,6 @@ const SORTIER_OPTIONEN = [
   { wert: "neu", labelSchluessel: "sortier_neu" },
 ];
 
-const PDF_WASSERZEICHEN_TEXT = "... geklaut bei Katja & Chris";
-
 // Schema-Versionierung: Version des JSON-Formats, das im "description"-Feld
 // jedes To-do-Items gespeichert wird. Wird bei jeder künftigen strukturellen
 // Änderung am Format (neues Pflichtfeld, geändertes Format eines Felds usw.)
@@ -7212,23 +7210,6 @@ class RezeptbuchCard extends HTMLElement {
     });
   }
 
-  _wasserzeichenAufSeite(doc, startY = null) {
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    const mittelY = startY !== null ? startY + (pageHeight - startY) / 2 : pageHeight / 2;
-    doc.saveGraphicsState();
-    doc.setGState(new doc.GState({ opacity: 0.12 }));
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(30);
-    doc.setTextColor(193, 101, 47);
-    doc.text(PDF_WASSERZEICHEN_TEXT, pageWidth / 2, mittelY, {
-      angle: 45,
-      align: "center",
-    });
-    doc.restoreGraphicsState();
-    doc.setTextColor(20);
-  }
-
   async _pdfErstellen(r) {
     const jsPDFKlasse = await this._jsPdfLaden();
     const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
@@ -7241,7 +7222,6 @@ class RezeptbuchCard extends HTMLElement {
     const neueSeiteFallsNoetig = (benoetigterPlatz = 8) => {
       if (y + benoetigterPlatz > pageHeight - margin) {
         doc.addPage();
-        this._wasserzeichenAufSeite(doc, margin);
         y = margin;
       }
     };
@@ -7276,10 +7256,6 @@ class RezeptbuchCard extends HTMLElement {
     doc.setLineWidth(1);
     doc.line(margin, y, margin + 18, y);
     y += 9;
-
-    // Wasserzeichen erst ab hier (unterhalb von Bild, Titel und Trennlinie),
-    // damit es nur über Zutaten/Zubereitung liegt, nicht über dem Bild.
-    this._wasserzeichenAufSeite(doc, y);
 
     const basisPortionen = r.servings || 1;
 
@@ -7358,14 +7334,8 @@ class RezeptbuchCard extends HTMLElement {
 <style>
   body {
     font-family: Georgia, "Times New Roman", serif; max-width: 700px; margin: 30px auto;
-    padding: 0 20px; color: #2b2b2b; background: #fdfbf8; position: relative;
+    padding: 0 20px; color: #2b2b2b; background: #fdfbf8;
   }
-  .wasserzeichen {
-    position: fixed; top: 62%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);
-    font-size: 3em; font-weight: bold; color: #c1652f; opacity: 0.12; white-space: nowrap;
-    pointer-events: none; z-index: 0;
-  }
-  body > *:not(.wasserzeichen) { position: relative; z-index: 1; }
   img { width: 100%; max-height: 340px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
   h1 { font-size: 1.9em; margin: 0 0 4px; }
   .meta { color: #8a8a8a; margin-bottom: 22px; font-size: 0.95em; }
@@ -7378,7 +7348,6 @@ class RezeptbuchCard extends HTMLElement {
 </style>
 </head>
 <body>
-  <div class="wasserzeichen">... geklaut bei Katja &amp; Chris</div>
   ${bildHtml}
   <h1>${this._escape(r.title)}</h1>
   <div class="meta">${this._portionen} ${this._t("detail_portionen_suffix")}${r.category ? " · " + this._escape(this._kategorieLabel(r.category)) : ""}</div>
