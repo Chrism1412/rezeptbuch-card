@@ -1,0 +1,46 @@
+# ---------------------------------------------------------------------
+# Rezeptbuch-Karte - benötigter Ausschnitt für deine configuration.yaml
+# ---------------------------------------------------------------------
+# WICHTIG: Das hier ist NUR der Rezeptbuch-relevante Ausschnitt, nicht eine
+# komplette configuration.yaml! Füge diese Zeilen in deine eigene,
+# bestehende configuration.yaml ein (falls du schon einen shell_command:-
+# Block hast, dort nur die neuen Zeilen ergänzen statt den Block zu
+# duplizieren - YAML erlaubt jeden Schlüssel nur einmal).
+#
+# Ausführliche Installationsanleitung: siehe docs/ANLEITUNG-Backup.md
+# ---------------------------------------------------------------------
+
+# pyscript wird von der Karte selbst NICHT benötigt (siehe README) - falls
+# du es aus anderen Gründen schon nutzt, kannst du diesen Block ignorieren.
+
+shell_command:
+  # Tägliches Backup + manuelles Wiederherstellen (Abschnitt 1/8 der Anleitung)
+  rezeptbuch_backup_schreiben: "python3 /config/scripts/rezeptbuch_backup.py"
+  rezeptbuch_backup_wiederherstellen: "python3 /config/scripts/rezeptbuch_restore.py '{{ backup_datum }}'"
+
+  # Rezeptfotos aus dem JSON in echte Dateien auslagern (Abschnitt 9)
+  rezeptbuch_bilder_verarbeiten: "python3 /config/scripts/rezeptbuch_bilder_verarbeiten.py"
+
+  # Rezept per URL importieren, liest schema.org/Recipe-Strukturdaten (Abschnitt 14),
+  # mit Text-Heuristik-Fallback für Seiten ohne Strukturdaten (Abschnitt 21)
+  rezeptbuch_url_importieren: "python3 /config/scripts/rezeptbuch_url_import.py '{{ url }}'"
+
+  # Ein Rezept dauerhaft aus ALLEN Backup-Dateien entfernen, damit es bei
+  # einem künftigen Restore nicht wieder auftaucht (Abschnitt 22)
+  rezeptbuch_backup_bereinigen: "python3 /config/scripts/rezeptbuch_backup_bereinigen.py '{{ titel }}'"
+
+# ---------------------------------------------------------------------
+# Einkaufsliste (Abschnitt 18) + Wochenplan (Abschnitt 19): dafür wird KEIN
+# shell_command benötigt, sondern NUR eine zweite Lokale To-do-Liste als
+# Helfer (Einstellungen -> Geräte & Dienste -> Helfer -> "+ Helfer
+# hinzufügen" -> "Lokale To-do-Liste" -> z.B. "Einkaufsliste", erzeugt z.B.
+# todo.einkaufsliste) sowie das zusätzliche Kartenfeld shopping_list_entity:
+# ---------------------------------------------------------------------
+#
+# type: custom:rezeptbuch-card
+# entity: todo.rezepte
+# shopping_list_entity: todo.einkaufsliste   # optional - ohne diese Zeile
+#                                             # funktioniert die Karte unverändert
+#                                             # weiter, nur der "Einkaufsliste
+#                                             # erstellen"-Knopf zeigt dann nur
+#                                             # einen erklärenden Hinweis an.

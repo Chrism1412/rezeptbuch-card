@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # npm-Abhängigkeiten (playwright, eslint, globals - siehe package.json)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "npm"
+
+  # Versionen der in den GitHub-Actions-Workflows verwendeten Actions
+  # (actions/checkout, actions/setup-node, hacs/action, ...)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"

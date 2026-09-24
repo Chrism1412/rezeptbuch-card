@@ -1,0 +1,18 @@
+alias: "Rezeptbuch: Tägliches Backup"
+description: >
+  Sichert um 23:59 Uhr alle Rezepte als datierte JSON-Datei nach
+  /config/Backup-Rezepte/. Backups älter als 30 Tage werden dabei
+  automatisch gelöscht.
+
+  Das Skript ruft die Rezeptdaten selbst über die Home-Assistant-REST-API ab
+  (kein Datentransport mehr über eine Jinja-Vorlage) - damit läuft keine
+  große Datenmenge (inkl. Rezeptfotos) mehr durch eine Vorlage, deren Ausgabe
+  Home Assistant hart auf 256 KB begrenzt und die deshalb zuvor mit
+  "Template output exceeded maximum size" fehlgeschlagen ist.
+triggers:
+  - trigger: time
+    at: "23:59:00"
+conditions: []
+actions:
+  - action: shell_command.rezeptbuch_backup_schreiben
+mode: single

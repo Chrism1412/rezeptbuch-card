@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Frage zur Einrichtung
+    url: ../../discussions
+    about: Für allgemeine Fragen zur Installation/Konfiguration bitte Discussions statt Issues nutzen (falls aktiviert), damit Issues für Fehler/Funktionswünsche übersichtlich bleiben.

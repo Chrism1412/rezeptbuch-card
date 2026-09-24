@@ -1,0 +1,47 @@
+name: Tests
+
+# Läuft bei jedem Push und jedem Pull Request auf main - so fällt eine
+# kaputte Änderung (JS-Kartenlogik ODER Python-Importskript) auf, bevor sie
+# gemergt wird, statt erst beim manuellen "npm test" von Hand entdeckt zu
+# werden.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  javascript:
+    name: Karten-Tests (Playwright) + Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Abhängigkeiten installieren
+        run: npm install
+
+      - name: Chromium für Playwright installieren
+        run: npx playwright install --with-deps chromium
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Kartentests ausführen
+        run: npm test
+
+  python:
+    name: URL-Import-Tests (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Tests ausführen
+        run: python3 scripts/test_rezeptbuch_url_import.py

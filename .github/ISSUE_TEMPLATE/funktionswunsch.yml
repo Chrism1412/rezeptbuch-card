@@ -1,0 +1,35 @@
+name: Funktionswunsch
+description: Eine neue Funktion oder Verbesserung vorschlagen
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Welches Problem soll das lösen?
+      description: Was funktioniert aktuell nicht oder nur umständlich?
+    validations:
+      required: true
+  - type: textarea
+    id: vorschlag
+    attributes:
+      label: Vorgeschlagene Lösung
+      description: Wie stellst du dir die Funktion vor?
+    validations:
+      required: true
+  - type: textarea
+    id: alternativen
+    attributes:
+      label: Alternativen
+      description: Hast du bereits Umgehungslösungen ausprobiert?
+    validations:
+      required: false
+  - type: checkboxes
+    id: architektur
+    attributes:
+      label: Architektur-Grundsätze
+      description: Siehe CONTRIBUTING.md - bitte kurz einschätzen, ob dein Vorschlag damit vereinbar ist.
+      options:
+        - label: Der Vorschlag braucht keinen zusätzlichen Build-Schritt (eine einzige rezeptbuch-card.js bleibt ausreichend).
+          required: false
+        - label: Der Vorschlag braucht kein separates Backend/Pyscript/Datenbank.
+          required: false

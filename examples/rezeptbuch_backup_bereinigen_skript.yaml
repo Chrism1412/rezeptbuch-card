@@ -1,0 +1,42 @@
+rezeptbuch_backup_bereinigen:
+  alias: "Rezeptbuch: Rezept dauerhaft aus allen Backups entfernen"
+  description: >
+    Entfernt ein Rezept anhand seines Titels aus JEDER vorhandenen
+    Backup-Datei unter /config/Backup-Rezepte/, nicht nur aus der aktuellen
+    Rezeptliste. Ohne das würde ein bereits (über die Karte) gelöschtes
+    Rezept bei einem späteren Wiederherstellen eines alten Backups
+    ungewollt wieder auftauchen, weil das Restore-Skript nur nach dem
+    aktuellen Bestand abgleicht, nicht nach der Löschabsicht.
+    Betroffene Backup-Dateien werden direkt überschrieben (kein separates
+    Rückgängig) - vorher den Titel genau prüfen. Groß-/Kleinschreibung wird
+    beim Abgleich unterschieden.
+  fields:
+    titel:
+      name: "Rezepttitel"
+      description: >
+        Exakter Titel des Rezepts, wie er in Home Assistant/den Backups
+        gespeichert ist (Groß-/Kleinschreibung beachten).
+      example: "24h Pizzateig"
+      selector:
+        text:
+  sequence:
+    # Sicherheits-Check: shell_command.rezeptbuch_backup_bereinigen bettet
+    # "titel" in configuration.yaml zwischen einfachen Anführungszeichen in
+    # einen von Home Assistant über die Shell ausgeführten Befehl ein
+    # ("'{{ titel }}'"). Ein Apostroph im Titel würde dieses Quoting
+    # aufbrechen - harmlos bei einem zufällig apostroph-haltigen Titel
+    # (z.B. "Mama's Kuchen", der Befehl schlägt dann nur fehl), aber ein
+    # gezielt präparierter Titel (z.B. automatisiert per URL-Import von
+    # einer fremden Webseite übernommen) könnte darüber beliebige weitere
+    # Shell-Befehle einschleusen. Dieselbe Prüfung wie beim URL-Import in
+    # der Karte selbst (dort clientseitig in JavaScript) - hier serverseitig
+    # in der einzigen Stelle, über die dieses Skript aufgerufen wird.
+    - if:
+        - condition: template
+          value_template: "{{ \"'\" in titel }}"
+      then:
+        - stop: "Der Rezepttitel darf kein Apostroph (') enthalten - das würde den zugrunde liegenden Befehl unterbrechen bzw. wird aus Sicherheitsgründen nicht ausgeführt."
+    - action: shell_command.rezeptbuch_backup_bereinigen
+      data:
+        titel: "{{ titel }}"
+  mode: single

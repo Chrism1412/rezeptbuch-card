@@ -1,0 +1,25 @@
+name: HACS-Validierung
+
+# Nutzt HACS' eigenen offiziellen Validator (das ist derselbe Check, den
+# HACS selbst durchführt, bevor ein Repo als Standard-Repository gelistet
+# werden könnte) - prüft automatisiert, ob hacs.json, README und die
+# Repo-Struktur den Anforderungen für ein Lovelace-Plugin genügen. Läuft
+# regelmäßig zusätzlich zu push/PR, damit eine Änderung an HACS' eigenen
+# Anforderungen ebenfalls auffällt, nicht nur eine Änderung an diesem Repo.
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 3 * * 0"
+
+jobs:
+  hacs:
+    name: HACS-Validierung
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: HACS-Validierung ausführen
+        uses: hacs/action@main
+        with:
+          category: plugin

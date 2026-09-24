@@ -1,0 +1,68 @@
+name: Fehlerbericht
+description: Etwas funktioniert nicht wie erwartet
+labels: ["bug"]
+body:
+  - type: textarea
+    id: beschreibung
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du erwartet, was ist stattdessen passiert?
+    validations:
+      required: true
+  - type: textarea
+    id: schritte
+    attributes:
+      label: Schritte zum Nachstellen
+      description: Möglichst genau, damit sich der Fehler reproduzieren lässt.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: ha-version
+    attributes:
+      label: Home-Assistant-Version
+      placeholder: "z. B. 2026.9.1"
+    validations:
+      required: true
+  - type: input
+    id: karten-version
+    attributes:
+      label: Version von rezeptbuch-card
+      description: Siehe package.json bzw. CHANGELOG.md, oder das Datum, an dem du die Datei zuletzt aktualisiert hast.
+    validations:
+      required: false
+  - type: dropdown
+    id: bereich
+    attributes:
+      label: Betroffener Bereich
+      multiple: true
+      options:
+        - Karte allgemein (rezeptbuch-card.js)
+        - Text-Erkennung
+        - URL-Import
+        - Backup/Restore-Skripte
+        - Einkaufsliste/Wochenplan
+        - Barrierefreiheit
+        - Sonstiges
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevante Log-Ausschnitte / Browser-Konsole
+      description: Bei Problemen mit einem Python-Skript die passende .log-Datei unter /config/scripts/, bei Kartenproblemen die Browser-Konsole (F12).
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: pruefung
+    attributes:
+      label: Vorab geprüft
+      options:
+        - label: Ich habe in bestehenden Issues nachgesehen, ob das Problem schon gemeldet wurde.
+          required: true
+        - label: Keine privaten Zugangsdaten oder echten Home-Assistant-Tokens sind in diesem Bericht enthalten.
+          required: true

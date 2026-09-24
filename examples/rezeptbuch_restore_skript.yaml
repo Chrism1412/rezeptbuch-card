@@ -1,0 +1,36 @@
+rezeptbuch_backup_wiederherstellen:
+  alias: "Rezeptbuch: Backup wiederherstellen"
+  description: >
+    Stellt Rezepte aus einem Backup in /config/Backup-Rezepte/ wieder her.
+    Fügt NUR Rezepte hinzu, die aktuell nicht mehr in der Liste vorhanden sind
+    (Abgleich nach Titel) - bestehende Rezepte werden nie überschrieben oder
+    verändert. Gedacht, um versehentlich gelöschte Rezepte zurückzuholen.
+  fields:
+    backup_datum:
+      name: "Backup-Datum"
+      description: >
+        Datum des Backups im Format JJJJ-MM-TT (z. B. 2026-09-18), oder
+        "neuestes" für das zuletzt erstellte Backup.
+      example: "neuestes"
+      default: "neuestes"
+      selector:
+        text:
+  sequence:
+    # Sicherheits-Check: shell_command.rezeptbuch_backup_wiederherstellen
+    # bettet "backup_datum" in configuration.yaml zwischen einfachen
+    # Anführungszeichen in einen von Home Assistant über die Shell
+    # ausgeführten Befehl ein ("'{{ backup_datum }}'"). Da für dieses Feld
+    # ohnehin nur zwei Formen gültig sind (ein Datum JJJJ-MM-TT oder das
+    # Wort "neuestes"), wird hier statt einer bloßen Apostroph-Sperre
+    # gleich eine vollständige Positivliste (Allowlist) über einen regulären
+    # Ausdruck erzwungen - das schließt jede Art von Shell-Metazeichen aus,
+    # nicht nur das Anführungszeichen selbst.
+    - if:
+        - condition: template
+          value_template: "{{ not (backup_datum | default('neuestes') | regex_match('^(neuestes|[0-9]{4}-[0-9]{2}-[0-9]{2})$')) }}"
+      then:
+        - stop: "Ungültiges Format - bitte 'neuestes' oder ein Datum als JJJJ-MM-TT angeben."
+    - action: shell_command.rezeptbuch_backup_wiederherstellen
+      data:
+        backup_datum: "{{ backup_datum | default('neuestes') }}"
+  mode: single

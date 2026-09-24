@@ -1,0 +1,21 @@
+# Geheimnisse - NIEMALS committen
+rezeptbuch_backup_token.txt
+*_token.txt
+.env
+
+# Persönliche Rezeptdaten / Backups (falls du das Repo im selben Ordner
+# wie deine echte Home-Assistant-config nutzt)
+Backup-Rezepte/
+*.log
+
+# Node / Playwright
+node_modules/
+test-results/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor-/OS-Dateien
+.DS_Store
+.vscode/

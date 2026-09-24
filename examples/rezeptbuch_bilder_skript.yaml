@@ -1,0 +1,13 @@
+rezeptbuch_fotos_auslagern:
+  alias: "Rezeptbuch: Fotos in Dateien auslagern"
+  description: >
+    Lagert alle Rezeptfotos, die noch als Base64-Text im JSON gespeichert
+    sind, in echte Dateien unter /config/www/rezeptbuch-bilder/ aus. Läuft
+    danach automatisch auch nach jedem neuen Foto-Upload über die Karte -
+    dieses Skript ist nur für die EINMALIGE Migration bereits vorhandener
+    Rezeptfotos gedacht (bzw. um es bei Bedarf erneut manuell anzustoßen).
+    Gefahrlos mehrfach ausführbar: bereits ausgelagerte Fotos werden
+    übersprungen, verwaiste Bilddateien werden nebenbei aufgeräumt.
+  sequence:
+    - action: shell_command.rezeptbuch_bilder_verarbeiten
+  mode: single
