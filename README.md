@@ -1,7 +1,7 @@
 # Rezeptbuch-Karte für Home Assistant
 
 <p align="center">
-  <img src="docs/logo/logo-wortmarke.png" alt="Rezeptbuch-Karte Logo: aufgeschlagenes Buch, davor überkreuz Kochlöffel und Schneebesen" width="480">
+  <img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/logo/logo-wortmarke.png" alt="Rezeptbuch-Karte Logo: aufgeschlagenes Buch, davor überkreuz Kochlöffel und Schneebesen" width="480">
 </p>
 
 [![Tests](https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/test.yml/badge.svg)](https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/test.yml)
