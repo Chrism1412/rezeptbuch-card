@@ -6504,6 +6504,11 @@ class RezeptbuchCard extends HTMLElement {
           --kb-schrift-titel: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
         }
         ha-card { padding: 18px; }
+        /* Detail-/Formular-Ansicht: bei sehr breiten Containern (z.B. Panel-Ansicht
+           auf einem großen Monitor) nicht auf volle Breite strecken - lange
+           Textzeilen/Formularfelder werden sonst schlecht lesbar. Die Kachel-
+           Übersicht (.grid) ist davon bewusst ausgenommen, die soll die Breite nutzen. */
+        .eng, .formular { max-width: 700px; margin: 0 auto; }
         .kopf { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:8px; flex-wrap:wrap; }
         .kopf h2 {
           margin:0; font-size:1.5em; font-family: var(--kb-schrift-titel); font-weight:700;
@@ -6558,7 +6563,7 @@ class RezeptbuchCard extends HTMLElement {
         button.gefahr {
           background:#a8402a; color:#fff; border:none; border-radius:999px; padding:8px 16px; cursor:pointer; font-weight:600; white-space:nowrap;
         }
-        .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:16px; }
+        .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,240px)); gap:16px; justify-content: start; }
         .kachel {
           cursor:pointer; border-radius:18px; overflow:hidden; background: var(--card-background-color);
           box-shadow: 0 2px 10px rgba(0,0,0,0.10); transition: transform .18s, box-shadow .18s;
@@ -7463,6 +7468,7 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       ${stil}
       <ha-card>
+       <div class="eng">
         <div class="kopf">
           <button class="sekundaer" id="zurueck-btn">${this._t("allgemein_zurueck")}</button>
           <button class="sekundaer" id="drucken-btn">${this._t("detail_teilen_drucken_btn")}</button>
@@ -7506,6 +7512,7 @@ class RezeptbuchCard extends HTMLElement {
             <button class="gefahr" id="loeschen-btn">${this._t("allgemein_loeschen")}</button>
           </div>
         ` : `<div class="bearbeiten-hinweis">${this._t("detail_bearbeiten_hinweis", { name: r.creatorName ? this._escape(r.creatorName) : this._t("detail_ersteller_unbekannt") })}</div>`}
+       </div>
 
         <div class="modal-overlay" id="zubereitet-modal" style="display:none;">
           <div class="modal-box">
@@ -7716,6 +7723,7 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       ${stil}
       <ha-card>
+       <div class="eng">
         <div class="kopf">
           <h2>${istNeu ? this._t("formular_titel_neu") : this._t("formular_titel_bearbeiten")}</h2>
         </div>
@@ -7797,6 +7805,7 @@ class RezeptbuchCard extends HTMLElement {
             </div>
           </div>
         </div>
+       </div>
       </ha-card>
     `;
 
