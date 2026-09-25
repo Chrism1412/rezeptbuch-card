@@ -121,6 +121,26 @@ views:
         shopping_list_entity: todo.einkaufsliste   # optional, siehe Abschnitt 18
 ```
 
+### Aktualisieren
+
+Bei einer neuen Version reicht es nicht immer, nur die neue
+`rezeptbuch-card.js` nach `/config/www/` hochzuladen - Home Assistant bzw.
+der Browser cachen JavaScript-Module oft hartnäckig, sodass weiterhin die
+alte Version geladen wird, auch nach einem normalen Neuladen der Seite.
+Am zuverlässigsten hilft, die **Ressourcen-URL um einen Versions-Parameter
+zu ergänzen** (und bei jedem Update hochzuzählen):
+
+Einstellungen → Dashboards → oben rechts die drei Punkte → Ressourcen →
+den bestehenden `rezeptbuch-card.js`-Eintrag öffnen → URL von
+`/local/rezeptbuch-card.js` auf z. B. `/local/rezeptbuch-card.js?v=2` ändern
+(nächstes Update dann `?v=3` usw.) → speichern.
+
+Das zwingt Home Assistant, die Datei als "neue" Ressource zu behandeln und
+sie wirklich neu zu laden, statt eine zwischengespeicherte Version zu
+verwenden. Ein einfaches `Strg`+`Shift`+`R` im Browser reicht oft ebenfalls,
+ist aber weniger zuverlässig (wirkt z. B. nicht auf andere Geräte/die
+Companion-App).
+
 ### Optionale Python-Skripte
 
 Jede der folgenden Funktionen ist unabhängig von den anderen - nur
