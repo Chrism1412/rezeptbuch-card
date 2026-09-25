@@ -295,11 +295,16 @@ ask_cooked: false
 Bereits erfasste Zubereitungen bleiben dabei erhalten, es kommen nur
 keine neuen mehr hinzu. Solange die Abfrage aktiv ist (Standard, oder
 `ask_cooked` gar nicht gesetzt), erscheint zusätzlich ein
-**"Statistik"**-Knopf im Kopfbereich der Rezeptliste: er zeigt, wie oft
-in diesem und insgesamt gekocht wurde, sowie die 5 meistgekochten
-Rezepte - ein "?" daneben erklärt kurz, wie die Zahlen zustande kommen.
-Reine Auswertung der ohnehin gespeicherten Daten, kein zusätzliches
-Skript und keine Automation nötig.
+**"Statistik"**-Knopf im Kopfbereich der Rezeptliste: er zeigt "Du hast
+in [Jahr] Xx aus deinem Rezeptbuch gekocht" sowie "insgesamt", dazu die
+5 meistgekochten Rezepte. Reine Auswertung der ohnehin gespeicherten
+Daten, kein zusätzliches Skript und keine Automation nötig.
+
+Ein "?" neben dem Statistik-Titel erklärt das genauer: gezählt wird
+jede Bestätigung der Frage "Hast du zubereitet?", unabhängig von
+Portionsgröße oder wie oft am selben Tag. Ist diese Frage über
+`ask_cooked: false` deaktiviert, wachsen die Zahlen nicht weiter -
+bereits erfasste Zubereitungen bleiben aber erhalten.
 
 ## Projektstruktur
 
