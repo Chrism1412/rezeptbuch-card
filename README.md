@@ -81,46 +81,32 @@ Ausführliche Schritt-für-Schritt-Anleitung: **[docs/ANLEITUNG-Backup.md](docs/
 ### Grundinstallation (Pflicht)
 
 Reicht für den vollen Funktionsumfang der Karte selbst - kein Python, kein
-`shell_command`, keine `scripts.yaml` nötig. Zwei Wege, **einer davon
-reicht**:
-
-#### Weg A: Über HACS (empfohlen)
+`shell_command`, keine `scripts.yaml` nötig. Installation über **HACS**:
 
 1. In HACS: oben rechts die drei Punkte → **"Benutzerdefinierte
    Repositories"** → URL `https://github.com/Chrism1412/rezeptbuch-card`
    eintragen, Kategorie **"Dashboard"** auswählen → hinzufügen.
 2. Die "Rezeptbuch-Karte" in HACS suchen und installieren. HACS legt die
    Datei dabei automatisch unter `/config/www/community/rezeptbuch-card/`
-   ab und trägt die Dashboard-Ressource meist auch gleich selbst ein -
-   Schritt 1+3 aus Weg B entfallen dadurch in der Regel. Falls die Karte
-   nach einem Neuladen trotzdem nicht gefunden wird, unter Einstellungen →
-   Dashboards → ⋮ → Ressourcen prüfen, ob dort ein Eintrag mit
-   `/hacsfiles/rezeptbuch-card/rezeptbuch-card.js` existiert - falls nicht,
-   manuell mit genau dieser URL hinzufügen (Typ **JavaScript-Modul**).
+   ab und trägt die Dashboard-Ressource meist auch gleich selbst ein. Falls
+   die Karte nach einem Neuladen trotzdem nicht gefunden wird, unter
+   Einstellungen → Dashboards → ⋮ → Ressourcen prüfen, ob dort ein Eintrag
+   mit `/hacsfiles/rezeptbuch-card/rezeptbuch-card.js` existiert - falls
+   nicht, manuell mit genau dieser URL hinzufügen (Typ
+   **JavaScript-Modul**).
 3. Für den Offline-PDF-Export zusätzlich `rezeptbuch-jspdf.min.js` aus
    diesem Repository nach `/config/www/community/rezeptbuch-card/`
    kopieren (HACS installiert davon nur die eigentliche Karte automatisch).
-4. Weiter mit Schritt 2 aus Weg B (Lokale To-do-Liste anlegen).
-
-#### Weg B: Manuell (ohne HACS)
-
-1. `rezeptbuch-card.js` und (für den Offline-PDF-Export)
-   `rezeptbuch-jspdf.min.js` nach `/config/www/` kopieren.
-2. In Home Assistant eine **Lokale To-do-Liste** anlegen: Einstellungen →
+4. In Home Assistant eine **Lokale To-do-Liste** anlegen: Einstellungen →
    Geräte & Dienste → **Integrationen** → unten rechts "+ Integration
    hinzufügen" → "Lokale To-do" auswählen → z. B. Name "Rezepte" (erzeugt
    direkt die Entity `todo.rezepte`, kein separater Helfer-Schritt nötig).
-3. Dashboard-Ressource hinzufügen: Einstellungen → Dashboards → oben rechts
-   die drei Punkte → Ressourcen → "+ Ressource hinzufügen" → URL
-   `/local/rezeptbuch-card.js`, Typ **JavaScript-Modul**.
+5. Karte einbinden, z. B. im YAML-Modus eines Dashboards:
 
-Danach in beiden Fällen die Karte einbinden, z. B. im YAML-Modus eines
-Dashboards:
-
-```yaml
-type: custom:rezeptbuch-card
-entity: todo.rezepte
-```
+   ```yaml
+   type: custom:rezeptbuch-card
+   entity: todo.rezepte
+   ```
 
 **Tipp bei sehr schmaler Darstellung (z. B. am PC/großen Monitor):** Die
 Karte selbst passt sich responsiv an ihre Umgebung an, kann aber nicht
@@ -156,25 +142,18 @@ bei der bisherigen einspaltigen Ansicht.
 
 ### Aktualisieren
 
-**Über HACS installiert:** ein Update in HACS aktualisiert die Datei
-automatisch. Trotzdem kann es sein, dass Home Assistant bzw. der Browser
-die alte Version noch zwischengespeichert haben (siehe unten) - falls die
-Karte nach einem Update unverändert wirkt, dieselbe
-Versions-Parameter-Methode wie im manuellen Fall anwenden, nur mit der
-HACS-URL `/hacsfiles/rezeptbuch-card/rezeptbuch-card.js?v=2` statt
-`/local/...`.
-
-**Manuell installiert:** es reicht nicht immer, nur die neue
-`rezeptbuch-card.js` nach `/config/www/` hochzuladen - Home Assistant bzw.
-der Browser cachen JavaScript-Module oft hartnäckig, sodass weiterhin die
-alte Version geladen wird, auch nach einem normalen Neuladen der Seite.
-Am zuverlässigsten hilft, die **Ressourcen-URL um einen Versions-Parameter
-zu ergänzen** (und bei jedem Update hochzuzählen):
+Ein Update in HACS aktualisiert die Datei automatisch. Trotzdem kann es
+sein, dass Home Assistant bzw. der Browser die alte Version noch
+zwischengespeichert haben, sodass die Karte nach einem Update unverändert
+wirkt. Am zuverlässigsten hilft dann, die **Ressourcen-URL um einen
+Versions-Parameter zu ergänzen** (und bei jedem weiteren Update
+hochzuzählen):
 
 Einstellungen → Dashboards → oben rechts die drei Punkte → Ressourcen →
 den bestehenden `rezeptbuch-card.js`-Eintrag öffnen → URL von
-`/local/rezeptbuch-card.js` auf z. B. `/local/rezeptbuch-card.js?v=2` ändern
-(nächstes Update dann `?v=3` usw.) → speichern.
+`/hacsfiles/rezeptbuch-card/rezeptbuch-card.js` auf z. B.
+`/hacsfiles/rezeptbuch-card/rezeptbuch-card.js?v=2` ändern (nächstes
+Update dann `?v=3` usw.) → speichern.
 
 Das zwingt Home Assistant, die Datei als "neue" Ressource zu behandeln und
 sie wirklich neu zu laden, statt eine zwischengespeicherte Version zu
