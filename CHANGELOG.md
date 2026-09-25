@@ -4,6 +4,16 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.0.1] - 2026-09-25
+
+### Behoben
+- **Ausgeschriebene Einheiten wie "Gramm", "Liter", "Glas"/"Gläser" wurden
+  bei der automatischen Text-/JSON-Erkennung falsch erkannt**: da die
+  interne Einheiten-Erkennung nur bis zur ersten passenden (kürzeren)
+  Abkürzung suchte, wurde z. B. bei "400 Gramm Mehl" nur "g" als Einheit
+  erkannt und "ramm Mehl" fälschlich Teil des Zutatennamens. Betraf auch
+  "Liter" (nur "l" erkannt) sowie "Glas"/"Gläser" (nur "g" erkannt).
+
 ## [1.0.0] - 2026-09-24
 
 Erste öffentliche Version.
@@ -97,7 +107,7 @@ Erste öffentliche Version.
   für den privaten Einsatz ist das Restrisiko gering.
 
 ### Tests
-- Umfangreiche automatisierte Testsuite: 204 Tests für die Karte selbst
+- Umfangreiche automatisierte Testsuite: 208 Tests für die Karte selbst
   (Playwright, echter Browser) sowie 36 + 7 Python-Tests für die optionalen
   Backup-/Import-Skripte - läuft bei jedem Push/Pull-Request automatisch
   über GitHub Actions, inklusive ESLint und HACS-Struktur-Validierung.

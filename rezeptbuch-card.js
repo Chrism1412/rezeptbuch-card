@@ -5086,7 +5086,12 @@ const ZUTAT_MENGE_EINZELWERT = `(?:\\d+\\s+(?:${ZUTAT_MENGE_EINFACHER_BRUCH}|${Z
 const ZUTAT_MENGE_BEREICH = `(?:\\s*(?:-|–|—|bis)\\s*${ZUTAT_MENGE_EINZELWERT})?`;
 const ZUTAT_MENGE_ZAHL = `${ZUTAT_MENGE_EINZELWERT}${ZUTAT_MENGE_BEREICH}`;
 const ZUTAT_MENGE_WORT = "ein(?:e|en)?|ein paar|einige|etwas|wenig|mehrere";
-const ZUTAT_EINHEITEN = "g|kg|mg|ml|cl|l|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|liter|milliliter";
+// Reihenfolge wichtig: Regex-Alternativen nehmen die ERSTE passende Option,
+// nicht die längste - kurze Abkürzungen ("g", "l"), die zugleich Präfix
+// eines ausgeschriebenen Wortes sind ("gramm", "glas", "gläser", "liter"),
+// müssen deshalb NACH diesen längeren Alternativen stehen. Sonst matcht
+// z.B. bei "400 Gramm Mehl" nur das "g", und "ramm Mehl" landet im Namen.
+const ZUTAT_EINHEITEN = "kg|mg|ml|cl|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|g|milliliter|liter|l";
 
 // Erkennt "Menge Einheit Name" (z.B. "500 g Mehl", "1/2 TL Salz", "½ TL
 // Salz", "1,5 EL Öl", "400-500 g Mehl", "eine Prise Salz") - Menge und

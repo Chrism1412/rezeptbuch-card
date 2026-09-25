@@ -478,6 +478,44 @@ async function testJsonImportZutatenAlsText(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test 6b: Ausgeschriebene Einheiten ("Gramm", "Liter", "Glas"/"Gläser")
+// werden vollständig erkannt statt nur als Abkürzungs-Präfix ("g"/"l")
+// - Regex-Alternativen nehmen sonst die erste passende (kürzere) Option,
+// wodurch z.B. bei "400 Gramm Mehl" nur "g" als Einheit erkannt und
+// "ramm Mehl" fälschlich Teil des Namens wird.
+// ---------------------------------------------------------------------
+async function testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser) {
+  console.log("\nTest: Ausgeschriebene Einheiten (Gramm/Liter/Glas) werden vollständig erkannt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await page.evaluate(() => window.__karte._neuesRezeptFormular());
+
+    const importierteJson = JSON.stringify({
+      title: "Soße",
+      servings: 4,
+      ingredients: ["400 Gramm Cannelloni", "1 Liter Brühe", "1 Glas Tomaten", "2 Gläser Pesto"],
+      steps: ["Alles vermengen"],
+    });
+
+    await page.evaluate((json) => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("json-einfuegen-btn").click();
+      root.getElementById("json-feld").value = json;
+      root.getElementById("json-uebernehmen-btn").click();
+    }, importierteJson);
+
+    const aktiv = await page.evaluate(() => window.__karte._aktivesRezept);
+
+    assert(aktiv.ingredients[0].unit === "Gramm" && aktiv.ingredients[0].name === "Cannelloni", "\"Gramm\" wird vollständig als Einheit erkannt, nicht nur \"g\" (Rest \"ramm\" bliebe sonst am Namen kleben)");
+    assert(aktiv.ingredients[1].unit === "Liter" && aktiv.ingredients[1].name === "Brühe", "\"Liter\" wird vollständig als Einheit erkannt, nicht nur \"l\"");
+    assert(aktiv.ingredients[2].unit === "Glas" && aktiv.ingredients[2].name === "Tomaten", "\"Glas\" wird vollständig als Einheit erkannt, nicht nur \"g\"");
+    assert(aktiv.ingredients[3].unit === "Gläser" && aktiv.ingredients[3].name === "Pesto", "\"Gläser\" wird vollständig als Einheit erkannt, nicht nur \"g\"");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 7: Löschen erfordert die Bestätigung im eigenen Modal (kein
 // window.confirm()) und kann per Rückgängig-Fenster abgebrochen werden.
 // ---------------------------------------------------------------------
@@ -2140,6 +2178,7 @@ async function testPlatzhalterMitDollarZeichen(browser) {
     await testDurchschnittsBewertungStringSicher(browser);
     await testJsonImportUebernimmtAlleFelder(browser);
     await testJsonImportZutatenAlsText(browser);
+    await testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);
     await testTextErkennungUeberUi(browser);
