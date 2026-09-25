@@ -86,8 +86,9 @@ Reicht für den vollen Funktionsumfang der Karte selbst - kein Python, kein
 1. `rezeptbuch-card.js` und (für den Offline-PDF-Export)
    `rezeptbuch-jspdf.min.js` nach `/config/www/` kopieren.
 2. In Home Assistant eine **Lokale To-do-Liste** anlegen: Einstellungen →
-   Geräte & Dienste → Helfer → "+ Helfer hinzufügen" → "Lokale To-do-Liste"
-   → z. B. Name "Rezepte" (erzeugt die Entity `todo.rezepte`).
+   Geräte & Dienste → **Integrationen** → unten rechts "+ Integration
+   hinzufügen" → "Lokale To-do" auswählen → z. B. Name "Rezepte" (erzeugt
+   direkt die Entity `todo.rezepte`, kein separater Helfer-Schritt nötig).
 3. Dashboard-Ressource hinzufügen: Einstellungen → Dashboards → oben rechts
    die drei Punkte → Ressourcen → "+ Ressource hinzufügen" → URL
    `/local/rezeptbuch-card.js`, Typ **JavaScript-Modul**.
@@ -216,8 +217,9 @@ rezeptbuch_backup_bereinigen:
 ```
 
 **Einkaufsliste + Wochenplan** brauchen dagegen **keinen** `shell_command`
-und **keine** `scripts.yaml` - nur eine zweite Lokale To-do-Liste als
-Helfer (z. B. `todo.einkaufsliste`) sowie das zusätzliche Kartenfeld
+und **keine** `scripts.yaml` - nur eine zweite Lokale To-do-Liste (über
+Integrationen angelegt, z. B. `todo.einkaufsliste`) sowie das zusätzliche
+Kartenfeld
 `shopping_list_entity:`:
 
 ```yaml

@@ -19,9 +19,9 @@
     kann ("Rezept-URL importieren"-Knopf im Formular).
 
   Voraussetzung:
-  1. Einstellungen -> Geräte & Dienste -> Helfer -> "+ Helfer hinzufügen"
-     -> "Lokale To-do-Liste" -> z.B. "Rezepte" anlegen
-     (erzeugt eine Entität wie todo.rezepte)
+  1. Einstellungen -> Geräte & Dienste -> Integrationen -> "+ Integration
+     hinzufügen" -> "Lokale To-do" -> z.B. "Rezepte" anlegen
+     (erzeugt direkt eine Entität wie todo.rezepte)
 
   Installation der Karte:
   1. Diese Datei nach /config/www/rezeptbuch-card.js kopieren
@@ -33,7 +33,7 @@
      shopping_list_entity: todo.einkaufsliste   # optional, siehe Abschnitt 18
 
   Optional: shopping_list_entity zeigt auf eine ZWEITE Lokale To-do-Liste
-  (eigener Helfer, siehe ANLEITUNG-Backup.md Abschnitt 18) - erst damit
+  (eigene Integration, siehe ANLEITUNG-Backup.md Abschnitt 18) - erst damit
   funktioniert der "Einkaufsliste erstellen"-Knopf (Zutaten mehrerer
   ausgewählter Rezepte bzw. des Wochenplans werden dort angehängt). Ohne
   diese Angabe funktioniert die Karte unverändert weiter, der Knopf zeigt
@@ -5086,7 +5086,30 @@ const ZUTAT_MENGE_EINZELWERT = `(?:\\d+\\s+(?:${ZUTAT_MENGE_EINFACHER_BRUCH}|${Z
 const ZUTAT_MENGE_BEREICH = `(?:\\s*(?:-|–|—|bis)\\s*${ZUTAT_MENGE_EINZELWERT})?`;
 const ZUTAT_MENGE_ZAHL = `${ZUTAT_MENGE_EINZELWERT}${ZUTAT_MENGE_BEREICH}`;
 const ZUTAT_MENGE_WORT = "ein(?:e|en)?|ein paar|einige|etwas|wenig|mehrere";
-const ZUTAT_EINHEITEN = "g|kg|mg|ml|cl|l|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|liter|milliliter";
+// Reihenfolge wichtig: Regex-Alternativen nehmen die ERSTE passende Option,
+// nicht die längste - kurze Abkürzungen ("g", "l"), die zugleich Präfix
+// eines ausgeschriebenen Wortes sind ("gramm", "glas", "gläser", "liter"),
+// müssen deshalb NACH diesen längeren Alternativen stehen. Sonst matcht
+// z.B. bei "400 Gramm Mehl" nur das "g", und "ramm Mehl" landet im Namen.
+const ZUTAT_EINHEITEN = "kg|mg|ml|cl|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|gr\\.?|g|milliliter|liter|l";
+
+// Kleine, bewusst auf die häufigsten Fälle beschränkte Synonym-Tabelle für
+// die Einkaufslisten-Zusammenfassung: verschiedene Schreibweisen derselben
+// Einheit ("g"/"gr"/"Gramm", "l"/"Liter" usw.) sollen dort als EINE Einheit
+// gelten - sonst tauchen z.B. "50 g Salz" aus einem Rezept und "1 Gramm
+// Salz" aus einem anderen als zwei getrennte Zeilen auf der Einkaufsliste
+// auf. Bewusst KEINE Einheiten-UMRECHNUNG (z.B. g <-> kg, ml <-> l) - nur
+// textuelle Gleichsetzung offensichtlicher Synonyme derselben Einheit, im
+// selben minimalistischen Geist wie der Rest der Karte (kein Wörterbuch,
+// keine Datenbank, nur eine feste kleine Tabelle im Code).
+const EINHEIT_SYNONYME = {
+  g: "g", gr: "g", gramm: "g",
+  kg: "kg", kilo: "kg", kilogramm: "kg",
+  ml: "ml", milliliter: "ml",
+  l: "l", liter: "l",
+  el: "EL", essloffel: "EL",
+  tl: "TL", teeloffel: "TL",
+};
 
 // Erkennt "Menge Einheit Name" (z.B. "500 g Mehl", "1/2 TL Salz", "½ TL
 // Salz", "1,5 EL Öl", "400-500 g Mehl", "eine Prise Salz") - Menge und
@@ -6064,10 +6087,13 @@ class RezeptbuchCard extends HTMLElement {
   // Fasst die Zutaten mehrerer Rezepte zu einer Einkaufsliste zusammen:
   // gleicher Name (klein geschrieben/getrimmt verglichen) UND gleiche
   // Einheit werden zu einer Zeile mit aufsummierter Menge zusammengefasst.
-  // Unterschiedliche Einheiten der gleichen Zutat werden bewusst NICHT
-  // zusammengeführt (z.B. "200 g Mehl" + "1 Päckchen Mehl" ergäben sonst
-  // eine sinnlose Summe) - die bleiben als eigene Zeilen erhalten, genau wie
-  // Mengen, die sich nicht sauber addieren lassen (siehe _mengeNumerischParsen).
+  // "Gleiche Einheit" schließt bekannte Synonyme ein (siehe EINHEIT_
+  // SYNONYME oben) - "g"/"gr"/"Gramm" gelten hier also als eine Einheit,
+  // nicht als drei verschiedene. Unterschiedliche (echte) Einheiten der
+  // gleichen Zutat werden bewusst NICHT zusammengeführt (z.B. "200 g Mehl" +
+  // "1 Päckchen Mehl" ergäben sonst eine sinnlose Summe) - die bleiben als
+  // eigene Zeilen erhalten, genau wie Mengen, die sich nicht sauber addieren
+  // lassen (siehe _mengeNumerischParsen).
   _einkaufslisteAggregieren(rezepteListe) {
     const gruppen = new Map();
     const einzelZeilen = [];
@@ -6076,7 +6102,8 @@ class RezeptbuchCard extends HTMLElement {
       for (const zutat of rezept.ingredients || []) {
         const name = (zutat.name || "").trim();
         if (!name) continue;
-        const einheit = (zutat.unit || "").trim();
+        const einheitRoh = (zutat.unit || "").trim();
+        const einheit = EINHEIT_SYNONYME[this._normalisieren(einheitRoh)] || einheitRoh;
         const numerisch = this._mengeNumerischParsen(zutat.amount);
 
         if (numerisch === null) {
@@ -6504,6 +6531,11 @@ class RezeptbuchCard extends HTMLElement {
           --kb-schrift-titel: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
         }
         ha-card { padding: 18px; }
+        /* Detail-/Formular-Ansicht: bei sehr breiten Containern (z.B. Panel-Ansicht
+           auf einem großen Monitor) nicht auf volle Breite strecken - lange
+           Textzeilen/Formularfelder werden sonst schlecht lesbar. Die Kachel-
+           Übersicht (.grid) ist davon bewusst ausgenommen, die soll die Breite nutzen. */
+        .eng, .formular { max-width: 700px; margin: 0 auto; }
         .kopf { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:8px; flex-wrap:wrap; }
         .kopf h2 {
           margin:0; font-size:1.5em; font-family: var(--kb-schrift-titel); font-weight:700;
@@ -6558,7 +6590,7 @@ class RezeptbuchCard extends HTMLElement {
         button.gefahr {
           background:#a8402a; color:#fff; border:none; border-radius:999px; padding:8px 16px; cursor:pointer; font-weight:600; white-space:nowrap;
         }
-        .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:16px; }
+        .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,240px)); gap:16px; justify-content: start; }
         .kachel {
           cursor:pointer; border-radius:18px; overflow:hidden; background: var(--card-background-color);
           box-shadow: 0 2px 10px rgba(0,0,0,0.10); transition: transform .18s, box-shadow .18s;
@@ -7463,6 +7495,7 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       ${stil}
       <ha-card>
+       <div class="eng">
         <div class="kopf">
           <button class="sekundaer" id="zurueck-btn">${this._t("allgemein_zurueck")}</button>
           <button class="sekundaer" id="drucken-btn">${this._t("detail_teilen_drucken_btn")}</button>
@@ -7506,6 +7539,7 @@ class RezeptbuchCard extends HTMLElement {
             <button class="gefahr" id="loeschen-btn">${this._t("allgemein_loeschen")}</button>
           </div>
         ` : `<div class="bearbeiten-hinweis">${this._t("detail_bearbeiten_hinweis", { name: r.creatorName ? this._escape(r.creatorName) : this._t("detail_ersteller_unbekannt") })}</div>`}
+       </div>
 
         <div class="modal-overlay" id="zubereitet-modal" style="display:none;">
           <div class="modal-box">
@@ -7716,6 +7750,7 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       ${stil}
       <ha-card>
+       <div class="eng">
         <div class="kopf">
           <h2>${istNeu ? this._t("formular_titel_neu") : this._t("formular_titel_bearbeiten")}</h2>
         </div>
@@ -7797,6 +7832,7 @@ class RezeptbuchCard extends HTMLElement {
             </div>
           </div>
         </div>
+       </div>
       </ha-card>
     `;
 
