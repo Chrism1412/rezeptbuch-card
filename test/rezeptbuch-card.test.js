@@ -1357,18 +1357,62 @@ async function testAskCookedDeaktiviert(browser) {
     });
     assert(!ohneAbfrage, "Mit ask_cooked: false ist der Statistik-Knopf ausgeblendet");
 
-    const zurueckOhneModal = await page.evaluate(async (uid) => {
+    await page.evaluate(() => {
       window.__karte._rezeptOeffnen(window.__karte._rezepte[0]);
       window.__karte.shadowRoot.getElementById("zurueck-btn").click();
-      await new Promise((r) => setTimeout(r, 0));
-      return {
-        ansicht: window.__karte._ansicht,
-        modalSichtbar: window.__karte.shadowRoot.getElementById("zubereitet-modal") &&
-          window.__karte.shadowRoot.getElementById("zubereitet-modal").style.display === "flex",
-      };
     });
+    // _navigationZurueck() -> _zurListe() ist async (lädt die Rezepte neu),
+    // der Klick-Handler wartet das NICHT ab - daher hier aktiv auf die
+    // Listenansicht warten statt eines festen setTimeout (sonst flaky).
+    await page.waitForFunction(() => window.__karte._ansicht === "liste", { timeout: 2000 });
+    const zurueckOhneModal = await page.evaluate(() => ({
+      ansicht: window.__karte._ansicht,
+      modalSichtbar: window.__karte.shadowRoot.getElementById("zubereitet-modal") &&
+        window.__karte.shadowRoot.getElementById("zubereitet-modal").style.display === "flex",
+    }));
     assert(zurueckOhneModal.ansicht === "liste", "Mit ask_cooked: false springt der Zurück-Knopf direkt zur Liste");
     assert(!zurueckOhneModal.modalSichtbar, "Mit ask_cooked: false erscheint die 'Hast du zubereitet?'-Abfrage nicht");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test 25e: Detailansicht - auf breiten Bildschirmen (z.B. Wandtablet im
+// Querformat) stehen Zutaten/Bild und Zubereitung nebeneinander (zwei
+// Spalten) statt wie auf schmalen Bildschirmen untereinander (eine Spalte).
+// ---------------------------------------------------------------------
+async function testDetailZweiSpaltenAufBreitemBildschirm(browser) {
+  console.log("\nTest: Detailansicht wird auf breiten Bildschirmen zweispaltig (Zutaten links, Zubereitung rechts)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Schritt 1", "Schritt 2"] }),
+    });
+
+    // Schmaler Bildschirm (Handy-Hochformat): eine Spalte, wie bisher.
+    await page.setViewportSize({ width: 375, height: 800 });
+    const schmal = await page.evaluate(() => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte[0]);
+      const stil = getComputedStyle(window.__karte.shadowRoot.getElementById("detail-zwei-spalten"));
+      return stil.gridTemplateColumns.trim().split(/\s+/).length;
+    });
+    assert(schmal === 1, "Auf schmalen Bildschirmen (375px) bleibt es bei einer Spalte (tatsächlich: " + schmal + ")");
+
+    // Breiter Bildschirm (Wandtablet im Querformat): zwei Spalten nebeneinander.
+    await page.setViewportSize({ width: 1280, height: 800 });
+    const breit = await page.evaluate(() => {
+      const links = window.__karte.shadowRoot.querySelector(".detail-spalte-links");
+      const rechts = window.__karte.shadowRoot.querySelector(".detail-spalte-rechts");
+      const stil = getComputedStyle(window.__karte.shadowRoot.getElementById("detail-zwei-spalten"));
+      return {
+        spalten: stil.gridTemplateColumns.trim().split(/\s+/).length,
+        nebeneinander: links.getBoundingClientRect().right <= rechts.getBoundingClientRect().left + 1,
+      };
+    });
+    assert(breit.spalten === 2, "Auf breiten Bildschirmen (1280px) sind es zwei Spalten (tatsächlich: " + breit.spalten + ")");
+    assert(breit.nebeneinander, "Zutaten-Spalte (links) und Zubereitung-Spalte (rechts) stehen auf breiten Bildschirmen tatsächlich nebeneinander, nicht übereinander");
   } finally {
     await page.close();
   }
@@ -2297,6 +2341,7 @@ async function testPlatzhalterMitDollarZeichen(browser) {
     await testEinkaufslisteEinheitenSynonyme(browser);
     await testStatistikBerechnung(browser);
     await testAskCookedDeaktiviert(browser);
+    await testDetailZweiSpaltenAufBreitemBildschirm(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);
     await testWochenplanZuweisenUndPersistenz(browser);

@@ -6911,6 +6911,19 @@ class RezeptbuchCard extends HTMLElement {
         .detail-bildbox { width:100%; aspect-ratio: 16 / 9; border-radius:16px; overflow:hidden;
           box-shadow: 0 3px 14px rgba(0,0,0,0.14); margin-bottom:14px; }
         .detail-bild { width:100%; height:100%; object-fit:cover; display:block; }
+        /* Standardmäßig (schmaler Bildschirm) eine einzige Spalte, genau wie
+           bisher - Bild/Zutaten/Zubereitung stehen einfach untereinander.
+           Auf ausreichend breiten Bildschirmen (z.B. Wandtablet im Quer-
+           format) wird daraus eine Zwei-Spalten-Ansicht, siehe Media Query
+           unten - dafür wird auch der sonst bewusst schmal gehaltene
+           Container (.eng, siehe oben) für die Detailansicht etwas breiter. */
+        .detail-zwei-spalten { display:grid; grid-template-columns: 1fr; }
+        .detail-spalte-links { margin-bottom: 8px; }
+        @media (min-width: 860px) {
+          .detail-breit { max-width: 1100px; }
+          .detail-zwei-spalten { grid-template-columns: 1fr 1fr; gap: 0 40px; align-items: start; }
+          .detail-spalte-links { margin-bottom: 0; }
+        }
         .detail-titel {
           font-family: var(--kb-schrift-titel); font-size:1.7em; font-weight:700; margin:0 0 4px;
           color: var(--primary-text-color);
@@ -7840,12 +7853,11 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       ${stil}
       <ha-card>
-       <div class="eng">
+       <div class="eng detail-breit">
         <div class="kopf">
           <button class="sekundaer" id="zurueck-btn">${this._t("allgemein_zurueck")}</button>
           <button class="sekundaer" id="drucken-btn">${this._t("detail_teilen_drucken_btn")}</button>
         </div>
-        ${bild}
         <h2 class="detail-titel">${this._escape(r.title)}</h2>
         <div class="kategorie-badge">🏷️ ${this._escape(this._kategorieLabel(r.category || "Sonstiges"))}</div>
         ${r.creatorName ? `<div class="ersteller-zeile">${this._t("detail_erstellt_von", { name: this._escape(r.creatorName) })}</div>` : ""}
@@ -7860,14 +7872,29 @@ class RezeptbuchCard extends HTMLElement {
         </div>
         ${(r.cookLog || []).length > 0 ? `<div class="bewertung-zeile">${this._t("detail_zubereitet_x", { anzahl: r.cookLog.length })}</div>` : ""}
 
-        <div class="portionen-zeile">
-          <button id="minus-btn">−</button>
-          <span><strong>${this._portionen}</strong> ${this._t("detail_portionen_suffix")}</span>
-          <button id="plus-btn">+</button>
+        <!-- Auf schmalen Bildschirmen (Handy) untereinander wie bisher, auf
+             breiten Bildschirmen (z.B. Wandtablet im Querformat in der Küche)
+             nebeneinander: links Bild+Zutaten, rechts die Zubereitung - siehe
+             .detail-zwei-spalten weiter unten. Damit entfällt auf breiten
+             Displays das lange Scrollen durch einen einzelnen schmalen
+             "Schlauch". -->
+        <div class="detail-zwei-spalten" id="detail-zwei-spalten">
+          <div class="detail-spalte-links">
+            ${bild}
+            <div class="portionen-zeile">
+              <button id="minus-btn">−</button>
+              <span><strong>${this._portionen}</strong> ${this._t("detail_portionen_suffix")}</span>
+              <button id="plus-btn">+</button>
+            </div>
+            <h3 class="abschnitt-titel">${this._t("abschnitt_titel_zutaten")}</h3>
+            <ul class="zutaten-liste">${zeilen || `<li>${this._t("keine_zutaten")}</li>`}</ul>
+          </div>
+          ${schritteListe ? `
+          <div class="detail-spalte-rechts">
+            <h3 class="abschnitt-titel">${this._t("abschnitt_titel_zubereitung")}</h3>
+            <ol class="schritte-liste">${schritteListe}</ol>
+          </div>` : ""}
         </div>
-        <h3 class="abschnitt-titel">${this._t("abschnitt_titel_zutaten")}</h3>
-        <ul class="zutaten-liste">${zeilen || `<li>${this._t("keine_zutaten")}</li>`}</ul>
-        ${schritteListe ? `<h3 class="abschnitt-titel">${this._t("abschnitt_titel_zubereitung")}</h3><ol class="schritte-liste">${schritteListe}</ol>` : ""}
 
         <h3 class="abschnitt-titel">${this._t("detail_kommentare_titel")}${(r.comments || []).length ? ` (${r.comments.length})` : ""}</h3>
         <ul class="kommentar-liste">

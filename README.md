@@ -121,6 +121,14 @@ views:
         shopping_list_entity: todo.einkaufsliste   # optional, siehe Abschnitt 18
 ```
 
+Eine so gewonnene **Panel**-Ansicht auf einem breiten Wandtablet im
+Querformat nutzt die Karte automatisch aus: ab ca. 860px Breite zeigt die
+geöffnete Rezept-Detailansicht Bild+Zutaten links und die Zubereitung
+rechts nebeneinander an, statt alles in einer einzigen schmalen Spalte
+untereinander - kein langes Scrollen mehr zwischen Zutaten und Anleitung.
+Auf schmäleren Bildschirmen (Handy) bleibt es bei der bisherigen
+einspaltigen Ansicht.
+
 ### Aktualisieren
 
 Bei einer neuen Version reicht es nicht immer, nur die neue

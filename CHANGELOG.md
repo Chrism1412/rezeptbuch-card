@@ -4,6 +4,18 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.0] - 2026-09-25
+
+### Hinzugefügt
+- **Zweispaltige Detailansicht auf breiten Bildschirmen**: auf ausreichend
+  breiten Displays (ab ca. 860px, z. B. ein Wandtablet im Querformat in der
+  Küche) zeigt die Rezept-Detailansicht Bild+Zutaten links und die
+  Zubereitung rechts nebeneinander an, statt wie bisher alles in einer
+  einzigen, auf schmalen Bildschirmen absichtlich schmal gehaltenen Spalte
+  untereinander - dort musste bislang lange gescrollt werden, um zwischen
+  Zutaten und Anleitung hin- und herzuspringen. Auf schmalen Bildschirmen
+  (Handy) bleibt die einspaltige Ansicht unverändert erhalten.
+
 ## [1.1.0] - 2026-09-25
 
 ### Hinzugefügt
@@ -152,7 +164,7 @@ Erste öffentliche Version.
   für den privaten Einsatz ist das Restrisiko gering.
 
 ### Tests
-- Umfangreiche automatisierte Testsuite: 219 Tests für die Karte selbst
+- Umfangreiche automatisierte Testsuite: 222 Tests für die Karte selbst
   (Playwright, echter Browser) sowie 36 + 7 Python-Tests für die optionalen
   Backup-/Import-Skripte - läuft bei jedem Push/Pull-Request automatisch
   über GitHub Actions, inklusive ESLint und HACS-Struktur-Validierung.
