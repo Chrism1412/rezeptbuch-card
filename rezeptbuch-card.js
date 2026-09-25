@@ -6922,13 +6922,20 @@ class RezeptbuchCard extends HTMLElement {
         .detail-bild { width:100%; height:100%; object-fit:cover; display:block; }
         /* Standardmäßig (schmaler Bildschirm) eine einzige Spalte, genau wie
            bisher - Bild/Zutaten/Zubereitung stehen einfach untereinander.
-           Auf ausreichend breiten Bildschirmen (z.B. Wandtablet im Quer-
-           format) wird daraus eine Zwei-Spalten-Ansicht, siehe Media Query
-           unten - dafür wird auch der sonst bewusst schmal gehaltene
-           Container (.eng, siehe oben) für die Detailansicht etwas breiter. */
+           Auf ausreichend breiten Bildschirmen wird daraus eine Zwei-
+           Spalten-Ansicht, siehe Media Query unten - dafür wird auch der
+           sonst bewusst schmal gehaltene Container (.eng, siehe oben) für
+           die Detailansicht etwas breiter. Die Grenze liegt bewusst bei
+           700px statt z.B. 860px: normale Handys im HOCHFORMAT bleiben
+           damit sicher einspaltig (deren Breite liegt so gut wie immer
+           deutlich darunter), aber ein Handy im QUERFORMAT (typischerweise
+           650-930px breit) profitiert schon OHNE eigens aktivierte
+           "Desktopwebseite" von der Zwei-Spalten-Ansicht - genau dort war
+           zuvor am wenigsten Bildschirmhöhe übrig (siehe .detail-bildbox
+           weiter oben), die Zwei-Spalten-Ansicht federt das zusätzlich ab. */
         .detail-zwei-spalten { display:grid; grid-template-columns: 1fr; }
         .detail-spalte-links { margin-bottom: 8px; }
-        @media (min-width: 860px) {
+        @media (min-width: 700px) {
           .detail-breit { max-width: 1100px; }
           .detail-zwei-spalten { grid-template-columns: 1fr 1fr; gap: 0 40px; align-items: start; }
           .detail-spalte-links { margin-bottom: 0; }

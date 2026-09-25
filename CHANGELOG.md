@@ -4,6 +4,18 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.2] - 2026-09-25
+
+### Geändert
+- **Grenze für die zweispaltige Detailansicht von 860px auf 700px
+  gesenkt**: dadurch greift die Zwei-Spalten-Ansicht (siehe 1.2.0) jetzt
+  auch auf einem normalen Handy im **Querformat** (typischerweise
+  650-930px breit) automatisch, ganz ohne eigens aktivierte
+  "Desktopwebseite" im mobilen Browser - genau dort war zuvor am
+  wenigsten Bildschirmhöhe übrig (siehe 1.2.1). Ein Handy im
+  **Hochformat** liegt mit seiner Breite so gut wie immer deutlich unter
+  700px und bleibt daher unverändert einspaltig.
+
 ## [1.2.1] - 2026-09-25
 
 ### Behoben
