@@ -31,9 +31,9 @@ shell_command:
 
 # ---------------------------------------------------------------------
 # Einkaufsliste (Abschnitt 18) + Wochenplan (Abschnitt 19): dafür wird KEIN
-# shell_command benötigt, sondern NUR eine zweite Lokale To-do-Liste als
-# Helfer (Einstellungen -> Geräte & Dienste -> Helfer -> "+ Helfer
-# hinzufügen" -> "Lokale To-do-Liste" -> z.B. "Einkaufsliste", erzeugt z.B.
+# shell_command benötigt, sondern NUR eine zweite Lokale To-do-Liste
+# (Einstellungen -> Geräte & Dienste -> Integrationen -> "+ Integration
+# hinzufügen" -> "Lokale To-do" -> z.B. "Einkaufsliste", erzeugt z.B.
 # todo.einkaufsliste) sowie das zusätzliche Kartenfeld shopping_list_entity:
 # ---------------------------------------------------------------------
 #

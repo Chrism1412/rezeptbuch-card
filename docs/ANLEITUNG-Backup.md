@@ -493,9 +493,10 @@ Einkaufsliste erstellen, statt Zutaten von Hand abzutippen.
 
 **Einrichtung (einmalig):**
 
-1. Eine ZWEITE Lokale To-do-Liste als Helfer anlegen: Einstellungen →
-   Geräte & Dienste → Helfer → "+ Helfer hinzufügen" → "Lokale To-do-Liste"
-   → z.B. "Einkaufsliste" (erzeugt z.B. `todo.einkaufsliste`). Das ist eine
+1. Eine ZWEITE Lokale To-do-Liste anlegen: Einstellungen → Geräte &
+   Dienste → **Integrationen** → unten rechts "+ Integration hinzufügen" →
+   "Lokale To-do" auswählen → z.B. Name "Einkaufsliste" (erzeugt z.B.
+   `todo.einkaufsliste`, kein separater Helfer-Schritt nötig). Das ist eine
    ganz normale To-do-Liste - sie lässt sich auch unabhängig von der Karte
    als eigene Lovelace-Karte (`type: todo-list`) anzeigen.
 2. In der Kartenkonfiguration die neue Entität eintragen:

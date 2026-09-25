@@ -19,9 +19,9 @@
     kann ("Rezept-URL importieren"-Knopf im Formular).
 
   Voraussetzung:
-  1. Einstellungen -> Geräte & Dienste -> Helfer -> "+ Helfer hinzufügen"
-     -> "Lokale To-do-Liste" -> z.B. "Rezepte" anlegen
-     (erzeugt eine Entität wie todo.rezepte)
+  1. Einstellungen -> Geräte & Dienste -> Integrationen -> "+ Integration
+     hinzufügen" -> "Lokale To-do" -> z.B. "Rezepte" anlegen
+     (erzeugt direkt eine Entität wie todo.rezepte)
 
   Installation der Karte:
   1. Diese Datei nach /config/www/rezeptbuch-card.js kopieren
@@ -33,7 +33,7 @@
      shopping_list_entity: todo.einkaufsliste   # optional, siehe Abschnitt 18
 
   Optional: shopping_list_entity zeigt auf eine ZWEITE Lokale To-do-Liste
-  (eigener Helfer, siehe ANLEITUNG-Backup.md Abschnitt 18) - erst damit
+  (eigene Integration, siehe ANLEITUNG-Backup.md Abschnitt 18) - erst damit
   funktioniert der "Einkaufsliste erstellen"-Knopf (Zutaten mehrerer
   ausgewählter Rezepte bzw. des Wochenplans werden dort angehängt). Ohne
   diese Angabe funktioniert die Karte unverändert weiter, der Knopf zeigt

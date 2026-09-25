@@ -13,6 +13,13 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Abkürzung suchte, wurde z. B. bei "400 Gramm Mehl" nur "g" als Einheit
   erkannt und "ramm Mehl" fälschlich Teil des Zutatennamens. Betraf auch
   "Liter" (nur "l" erkannt) sowie "Glas"/"Gläser" (nur "g" erkannt).
+- **Veraltete Einrichtungs-Anleitung für die Lokale To-do-Liste**: die
+  Dokumentation (README, ANLEITUNG-Backup.md, Kartenkommentar,
+  Beispiel-YAML) verwies noch auf Einstellungen → Helfer → "+ Helfer
+  hinzufügen", was in aktuellen Home-Assistant-Versionen nicht mehr zum
+  Ziel führt - die Lokale To-do-Liste wird dort inzwischen direkt über
+  Einstellungen → Geräte & Dienste → Integrationen → "+ Integration
+  hinzufügen" → "Lokale To-do" angelegt.
 
 ## [1.0.0] - 2026-09-24
 
