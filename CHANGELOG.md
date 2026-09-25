@@ -37,6 +37,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Ansicht (statt der schmaleren Standard-Sections-Ansicht) auf die volle
   Bildschirmbreite bringen lässt - reine Dokumentation, keine Code-Änderung
   an der Karte selbst.
+- **Neuer README-Abschnitt "Aktualisieren"**: Hinweis, dass nach einem
+  Update der `rezeptbuch-card.js` oft ein Versions-Parameter an der
+  Ressourcen-URL (z. B. `/local/rezeptbuch-card.js?v=2`) nötig ist, damit
+  Home Assistant die neue Version auch wirklich lädt statt eine
+  zwischengespeicherte alte Version weiterzuverwenden.
 
 ## [1.0.0] - 2026-09-24
 
