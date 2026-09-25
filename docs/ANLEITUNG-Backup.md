@@ -178,8 +178,8 @@ läuft.
 3. Die beiliegende komplette `configuration.yaml` verwenden – der
    `shell_command`-Eintrag `rezeptbuch_bilder_verarbeiten` ist bereits
    enthalten.
-4. Die aktualisierte `rezeptbuch-card.js` nach `/config/www/` hochladen
-   (ersetzt die bisherige Datei).
+4. Die aktualisierte `rezeptbuch-card.js` über HACS aktualisieren (siehe
+   Abschnitt "Aktualisieren" in der README).
 5. Home Assistant neu starten.
 
 ### Verwendung
@@ -226,10 +226,11 @@ noch als Rückfallebene auf ein externes CDN zurück, falls die Datei fehlt.
 
 ### Installation
 
-`rezeptbuch-jspdf.min.js` nach `/config/www/` hochladen (gleicher Ordner wie
-die Karte selbst). Ohne diesen Schritt funktioniert der PDF-Export weiterhin
-wie bisher über das CDN – dieser Schritt ist optional, macht den Export aber
-unabhängig vom Internetzugang.
+`rezeptbuch-jspdf.min.js` nach `/config/www/community/rezeptbuch-card/`
+hochladen (gleicher Ordner wie die Karte selbst, siehe README). Ohne diesen
+Schritt funktioniert der PDF-Export weiterhin wie bisher über das CDN –
+dieser Schritt ist optional, macht den Export aber unabhängig vom
+Internetzugang.
 
 ## 12. Automatisierte Tests
 
@@ -345,8 +346,9 @@ Hilfsskripten in dieser Anleitung.
    `shell_command` registriert neue Einträge nur bei einem vollständigen
    Neustart, das gilt hier genauso wie bei den bisherigen Skripten).
 4. Die aktualisierte `rezeptbuch-card.js` (mit dem neuen "URL importieren"-
-   Button) wie gewohnt nach `/config/www/rezeptbuch-card.js` hochladen und den
-   Browser-Cache der Dashboard-Ansicht einmal neu laden (Strg+Shift+R).
+   Button) über HACS aktualisieren (siehe Abschnitt "Aktualisieren" in der
+   README) und den Browser-Cache der Dashboard-Ansicht einmal neu laden
+   (Strg+Shift+R).
 
 ### Benutzung
 
@@ -417,8 +419,8 @@ war auch nicht das gemeldete Problem. Beim reinen Ansehen eines Rezepts
 (Detailansicht) funktioniert die Wiederherstellung aber zuverlässig.
 
 Kein Konfigurationsschritt nötig - einfach die aktualisierte
-`rezeptbuch-card.js` wie gewohnt nach `/config/www/rezeptbuch-card.js`
-hochladen und den Browser-/App-Cache wie in den vorherigen Abschnitten
+`rezeptbuch-card.js` über HACS aktualisieren (siehe Abschnitt
+"Aktualisieren" in der README) und den Browser-/App-Cache wie dort
 beschrieben leeren.
 
 ## 16. Sicherheits-Fix: Attribut-Injection über Titel/Bild-URL
@@ -450,8 +452,9 @@ genau so einen Angriffsversuch nach und prüft, dass kein eingeschleusetes
 Attribut mehr entsteht und kein Code ausgeführt wird - der Test wurde vor
 dem Fix nachweislich rot, danach grün.
 
-**Handlungsbedarf:** Einfach die aktualisierte `rezeptbuch-card.js`
-hochladen (wie immer: Cache leeren). Kein Konfigurationsschritt nötig.
+**Handlungsbedarf:** Einfach die aktualisierte `rezeptbuch-card.js` über
+HACS aktualisieren (wie immer: Cache leeren). Kein Konfigurationsschritt
+nötig.
 Falls du bereits Rezepte per URL-Import oder JSON-Einfügen von einer
 Quelle übernommen hast, der du nicht vollständig vertraust, ist es eine
 gute Idee, deren Titel/Zutaten/Schritte einmal kurz durchzusehen.
@@ -747,8 +750,9 @@ sind vier Bereiche:
 
 **Was zu tun ist:** Nichts - es handelt sich um reine
 Verhaltens-/Darstellungsänderungen innerhalb der Karte selbst. Es genügt,
-`rezeptbuch-card.js` wie gewohnt zu ersetzen (Abschnitt 1). Keine neuen
-Helfer, keine geänderte Konfiguration.
+`rezeptbuch-card.js` über HACS zu aktualisieren (siehe Abschnitt
+"Aktualisieren" in der README). Keine neuen Helfer, keine geänderte
+Konfiguration.
 
 ## 24. Sicherheits-Fixes: Shell-Injection-Schutz & SSRF-Schutz beim URL-Import
 
