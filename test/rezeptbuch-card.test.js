@@ -1279,6 +1279,35 @@ async function testEinkaufslisteAggregation(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test 25b: Einkaufsliste - bekannte Einheiten-Synonyme ("g"/"gr"/"Gramm",
+// "l"/"Liter" usw.) werden bei der Aggregation als EINE Einheit behandelt,
+// nicht als drei getrennte Zeilen (gemeldeter Effekt: Salz taucht mehrfach
+// auf der Einkaufsliste auf, je nachdem wie die Einheit im Rezept
+// geschrieben war).
+// ---------------------------------------------------------------------
+async function testEinkaufslisteEinheitenSynonyme(browser) {
+  console.log("\nTest: Einkaufsliste - Einheiten-Synonyme (g/gr/Gramm) werden zusammengefasst");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      const rezepte = [
+        { ingredients: [{ amount: "1", unit: "g", name: "Salz" }] },
+        { ingredients: [{ amount: "2", unit: "gr", name: "Salz" }] },
+        { ingredients: [{ amount: "3", unit: "Gramm", name: "Salz" }] },
+        { ingredients: [{ amount: "1", unit: "l", name: "Milch" }] },
+        { ingredients: [{ amount: "1", unit: "Liter", name: "Milch" }] },
+      ];
+      return window.__karte._einkaufslisteAggregieren(rezepte);
+    });
+    assert(ergebnis.length === 2, "Trotz drei verschiedener Schreibweisen für Gramm und zwei für Liter bleiben nur 2 Zeilen übrig (tatsächlich: " + JSON.stringify(ergebnis) + ")");
+    assert(ergebnis.some((z) => z === "6 g Salz"), "\"g\", \"gr\" und \"Gramm\" werden als eine Einheit summiert (1+2+3=6 g Salz)");
+    assert(ergebnis.some((z) => z === "2 l Milch"), "\"l\" und \"Liter\" werden als eine Einheit summiert (1+1=2 l Milch)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 26: Einkaufsliste - ohne konfigurierte shopping_list_entity erscheint
 // eine erklärende Warnung statt eines Absturzes, und es wird KEIN add_item
 // aufgerufen.
@@ -2198,6 +2227,7 @@ async function testPlatzhalterMitDollarZeichen(browser) {
     await testAbsatzSchritteOhneNummerierung(browser);
     await testEnglischeUeberschriftenWerdenErkannt(browser);
     await testEinkaufslisteAggregation(browser);
+    await testEinkaufslisteEinheitenSynonyme(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);
     await testWochenplanZuweisenUndPersistenz(browser);

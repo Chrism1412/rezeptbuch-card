@@ -5091,7 +5091,25 @@ const ZUTAT_MENGE_WORT = "ein(?:e|en)?|ein paar|einige|etwas|wenig|mehrere";
 // eines ausgeschriebenen Wortes sind ("gramm", "glas", "gläser", "liter"),
 // müssen deshalb NACH diesen längeren Alternativen stehen. Sonst matcht
 // z.B. bei "400 Gramm Mehl" nur das "g", und "ramm Mehl" landet im Namen.
-const ZUTAT_EINHEITEN = "kg|mg|ml|cl|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|g|milliliter|liter|l";
+const ZUTAT_EINHEITEN = "kg|mg|ml|cl|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|gr\\.?|g|milliliter|liter|l";
+
+// Kleine, bewusst auf die häufigsten Fälle beschränkte Synonym-Tabelle für
+// die Einkaufslisten-Zusammenfassung: verschiedene Schreibweisen derselben
+// Einheit ("g"/"gr"/"Gramm", "l"/"Liter" usw.) sollen dort als EINE Einheit
+// gelten - sonst tauchen z.B. "50 g Salz" aus einem Rezept und "1 Gramm
+// Salz" aus einem anderen als zwei getrennte Zeilen auf der Einkaufsliste
+// auf. Bewusst KEINE Einheiten-UMRECHNUNG (z.B. g <-> kg, ml <-> l) - nur
+// textuelle Gleichsetzung offensichtlicher Synonyme derselben Einheit, im
+// selben minimalistischen Geist wie der Rest der Karte (kein Wörterbuch,
+// keine Datenbank, nur eine feste kleine Tabelle im Code).
+const EINHEIT_SYNONYME = {
+  g: "g", gr: "g", gramm: "g",
+  kg: "kg", kilo: "kg", kilogramm: "kg",
+  ml: "ml", milliliter: "ml",
+  l: "l", liter: "l",
+  el: "EL", essloffel: "EL",
+  tl: "TL", teeloffel: "TL",
+};
 
 // Erkennt "Menge Einheit Name" (z.B. "500 g Mehl", "1/2 TL Salz", "½ TL
 // Salz", "1,5 EL Öl", "400-500 g Mehl", "eine Prise Salz") - Menge und
@@ -6069,10 +6087,13 @@ class RezeptbuchCard extends HTMLElement {
   // Fasst die Zutaten mehrerer Rezepte zu einer Einkaufsliste zusammen:
   // gleicher Name (klein geschrieben/getrimmt verglichen) UND gleiche
   // Einheit werden zu einer Zeile mit aufsummierter Menge zusammengefasst.
-  // Unterschiedliche Einheiten der gleichen Zutat werden bewusst NICHT
-  // zusammengeführt (z.B. "200 g Mehl" + "1 Päckchen Mehl" ergäben sonst
-  // eine sinnlose Summe) - die bleiben als eigene Zeilen erhalten, genau wie
-  // Mengen, die sich nicht sauber addieren lassen (siehe _mengeNumerischParsen).
+  // "Gleiche Einheit" schließt bekannte Synonyme ein (siehe EINHEIT_
+  // SYNONYME oben) - "g"/"gr"/"Gramm" gelten hier also als eine Einheit,
+  // nicht als drei verschiedene. Unterschiedliche (echte) Einheiten der
+  // gleichen Zutat werden bewusst NICHT zusammengeführt (z.B. "200 g Mehl" +
+  // "1 Päckchen Mehl" ergäben sonst eine sinnlose Summe) - die bleiben als
+  // eigene Zeilen erhalten, genau wie Mengen, die sich nicht sauber addieren
+  // lassen (siehe _mengeNumerischParsen).
   _einkaufslisteAggregieren(rezepteListe) {
     const gruppen = new Map();
     const einzelZeilen = [];
@@ -6081,7 +6102,8 @@ class RezeptbuchCard extends HTMLElement {
       for (const zutat of rezept.ingredients || []) {
         const name = (zutat.name || "").trim();
         if (!name) continue;
-        const einheit = (zutat.unit || "").trim();
+        const einheitRoh = (zutat.unit || "").trim();
+        const einheit = EINHEIT_SYNONYME[this._normalisieren(einheitRoh)] || einheitRoh;
         const numerisch = this._mengeNumerischParsen(zutat.amount);
 
         if (numerisch === null) {

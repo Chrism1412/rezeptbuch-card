@@ -13,6 +13,16 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Abkürzung suchte, wurde z. B. bei "400 Gramm Mehl" nur "g" als Einheit
   erkannt und "ramm Mehl" fälschlich Teil des Zutatennamens. Betraf auch
   "Liter" (nur "l" erkannt) sowie "Glas"/"Gläser" (nur "g" erkannt).
+- **Einkaufsliste führte Zutaten mit unterschiedlich geschriebener, aber
+  gleicher Einheit nicht zusammen** (z. B. "1 g Salz" aus einem Rezept und
+  "1 Gramm Salz" aus einem anderen landeten als zwei getrennte Zeilen auf
+  der Einkaufsliste): eine kleine Synonym-Tabelle für die gängigsten Fälle
+  ("g"/"gr"/"Gramm", "kg"/"Kilo"/"Kilogramm", "ml"/"Milliliter",
+  "l"/"Liter", "EL"/"Esslöffel", "TL"/"Teelöffel") sorgt jetzt dafür, dass
+  diese bei der Aggregation als eine Einheit gelten. Bewusst weiterhin ohne
+  Einheiten-Umrechnung (z. B. g <-> kg) - nur textuelle Gleichsetzung
+  offensichtlicher Synonyme derselben Einheit. Zusätzlich erkennt die
+  Text-/JSON-Erkennung jetzt auch die Abkürzung "gr" für Gramm.
 - **Veraltete Einrichtungs-Anleitung für die Lokale To-do-Liste**: die
   Dokumentation (README, ANLEITUNG-Backup.md, Kartenkommentar,
   Beispiel-YAML) verwies noch auf Einstellungen → Helfer → "+ Helfer
@@ -114,7 +124,7 @@ Erste öffentliche Version.
   für den privaten Einsatz ist das Restrisiko gering.
 
 ### Tests
-- Umfangreiche automatisierte Testsuite: 208 Tests für die Karte selbst
+- Umfangreiche automatisierte Testsuite: 211 Tests für die Karte selbst
   (Playwright, echter Browser) sowie 36 + 7 Python-Tests für die optionalen
   Backup-/Import-Skripte - läuft bei jedem Push/Pull-Request automatisch
   über GitHub Actions, inklusive ESLint und HACS-Struktur-Validierung.
