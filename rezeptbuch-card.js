@@ -7247,10 +7247,10 @@ class RezeptbuchCard extends HTMLElement {
 
         <div class="modal-overlay" id="statistik-modal" style="display:none;">
           <div class="modal-box modal-box-breit">
-            <h3 style="margin-top:0;">
-              ${this._t("statistik_titel")}
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+              <h3 style="margin:0;">${this._t("statistik_titel")}</h3>
               <button type="button" class="info-btn" id="statistik-info-btn" title="${this._t("statistik_info_aria")}" aria-label="${this._t("statistik_info_aria")}">?</button>
-            </h3>
+            </div>
             ${this._statistikModalInhalt()}
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="primaer" id="statistik-schliessen-btn">${this._t("allgemein_schliessen")}</button>
