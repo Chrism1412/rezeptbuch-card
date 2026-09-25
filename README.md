@@ -270,6 +270,27 @@ entity: todo.rezepte
 shopping_list_entity: todo.einkaufsliste
 ```
 
+**"Hast du zubereitet?"-Abfrage abschalten + Statistik:** Beim Verlassen
+eines geöffneten Rezepts fragt die Karte standardmäßig nach, ob es
+zubereitet wurde, und zählt "Ja" in einer kleinen Zubereitungs-Historie
+je Rezept mit. Wer das nicht möchte, kann die Abfrage über das
+Kartenfeld `ask_cooked: false` komplett abschalten:
+
+```yaml
+type: custom:rezeptbuch-card
+entity: todo.rezepte
+ask_cooked: false
+```
+
+Bereits erfasste Zubereitungen bleiben dabei erhalten, es kommen nur
+keine neuen mehr hinzu. Solange die Abfrage aktiv ist (Standard, oder
+`ask_cooked` gar nicht gesetzt), erscheint zusätzlich ein
+**"Statistik"**-Knopf im Kopfbereich der Rezeptliste: er zeigt, wie oft
+in diesem und insgesamt gekocht wurde, sowie die 5 meistgekochten
+Rezepte - ein "?" daneben erklärt kurz, wie die Zahlen zustande kommen.
+Reine Auswertung der ohnehin gespeicherten Daten, kein zusätzliches
+Skript und keine Automation nötig.
+
 ## Projektstruktur
 
 ```

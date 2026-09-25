@@ -1308,6 +1308,73 @@ async function testEinkaufslisteEinheitenSynonyme(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test 25c: Statistik - _statistikBerechnen() wertet cookLog über alle
+// Rezepte hinweg korrekt aus (dieses Jahr / insgesamt / Top-Liste).
+// ---------------------------------------------------------------------
+async function testStatistikBerechnung(browser) {
+  console.log("\nTest: Statistik - _statistikBerechnen() wertet cookLog korrekt aus");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      const heuer = new Date().getFullYear();
+      const vorJahr = new Date(new Date().setFullYear(heuer - 1)).toISOString();
+      window.__karte._rezepte = [
+        { title: "Pizza", cookLog: [new Date().toISOString(), new Date().toISOString(), vorJahr] },
+        { title: "Salat", cookLog: [new Date().toISOString()] },
+        { title: "Ungekocht", cookLog: [] },
+      ];
+      return window.__karte._statistikBerechnen();
+    });
+    assert(ergebnis.gesamt === 4, "Insgesamt werden alle cookLog-Einträge über alle Rezepte gezählt (2+1+1=4, tatsächlich: " + ergebnis.gesamt + ")");
+    assert(ergebnis.diesesJahr === 3, "Nur die Einträge aus dem laufenden Kalenderjahr zählen für 'dieses Jahr' (tatsächlich: " + ergebnis.diesesJahr + ")");
+    assert(ergebnis.top[0].title === "Pizza" && ergebnis.top[0].anzahl === 3, "Das meistgekochte Rezept steht an erster Stelle der Top-Liste");
+    assert(ergebnis.top.every((r) => r.title !== "Ungekocht"), "Rezepte ohne cookLog-Einträge tauchen nicht in der Top-Liste auf");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test 25d: ask_cooked: false blendet sowohl die "Hast du zubereitet?"-
+// Abfrage als auch den Statistik-Knopf aus.
+// ---------------------------------------------------------------------
+async function testAskCookedDeaktiviert(browser) {
+  console.log("\nTest: Kartenoption ask_cooked: false deaktiviert Abfrage und Statistik-Knopf");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+
+    const mitAbfrage = await page.evaluate(() => {
+      window.__karte._render();
+      return !!window.__karte.shadowRoot.getElementById("statistik-btn");
+    });
+    assert(mitAbfrage, "Ohne ask_cooked-Option (Standard) ist der Statistik-Knopf sichtbar");
+
+    const ohneAbfrage = await page.evaluate(() => {
+      window.__karte.setConfig({ entity: "todo.rezepte", ask_cooked: false });
+      window.__karte._render();
+      return !!window.__karte.shadowRoot.getElementById("statistik-btn");
+    });
+    assert(!ohneAbfrage, "Mit ask_cooked: false ist der Statistik-Knopf ausgeblendet");
+
+    const zurueckOhneModal = await page.evaluate(async (uid) => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte[0]);
+      window.__karte.shadowRoot.getElementById("zurueck-btn").click();
+      await new Promise((r) => setTimeout(r, 0));
+      return {
+        ansicht: window.__karte._ansicht,
+        modalSichtbar: window.__karte.shadowRoot.getElementById("zubereitet-modal") &&
+          window.__karte.shadowRoot.getElementById("zubereitet-modal").style.display === "flex",
+      };
+    });
+    assert(zurueckOhneModal.ansicht === "liste", "Mit ask_cooked: false springt der Zurück-Knopf direkt zur Liste");
+    assert(!zurueckOhneModal.modalSichtbar, "Mit ask_cooked: false erscheint die 'Hast du zubereitet?'-Abfrage nicht");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 26: Einkaufsliste - ohne konfigurierte shopping_list_entity erscheint
 // eine erklärende Warnung statt eines Absturzes, und es wird KEIN add_item
 // aufgerufen.
@@ -2228,6 +2295,8 @@ async function testPlatzhalterMitDollarZeichen(browser) {
     await testEnglischeUeberschriftenWerdenErkannt(browser);
     await testEinkaufslisteAggregation(browser);
     await testEinkaufslisteEinheitenSynonyme(browser);
+    await testStatistikBerechnung(browser);
+    await testAskCookedDeaktiviert(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);
     await testWochenplanZuweisenUndPersistenz(browser);

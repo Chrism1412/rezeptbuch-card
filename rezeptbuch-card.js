@@ -177,6 +177,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Nur {{name}} (oder ein Admin) kann dieses Rezept bearbeiten oder löschen.",
     detail_ersteller_unbekannt: "der/die Ersteller:in",
     modal_zubereitet_frage: "Hast du \"{{titel}}\" zubereitet?",
+    statistik_btn: "📊 Statistik",
+    statistik_titel: "Koch-Statistik",
+    statistik_info_aria: "Erklärung zur Statistik anzeigen",
+    statistik_info_titel: "Wie wird diese Statistik berechnet?",
+    statistik_info_text:
+      "Diese Auswertung zählt jede Bestätigung der Frage „Hast du zubereitet?“ - unabhängig von Portionsgröße oder Häufigkeit am selben Tag. Ist diese Frage über die Kartenoption ask_cooked: false deaktiviert, wachsen die Zahlen nicht weiter, bereits erfasste Zubereitungen bleiben aber erhalten.",
+    statistik_dieses_jahr: "{{anzahl}}x in {{jahr}} zubereitet",
+    statistik_gesamt: "{{anzahl}}x insgesamt zubereitet",
+    statistik_top_titel: "Meistgekocht",
+    statistik_keine_daten: "Noch keine Zubereitungen erfasst.",
     modal_loeschen_frage: "\"{{titel}}\" wirklich löschen?",
     modal_loeschen_ja_btn: "Ja, löschen",
 
@@ -431,6 +441,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Nur {{name}} (oder en Admin) cha das Rezäpt bearbeite oder lösche.",
     detail_ersteller_unbekannt: "de/die Ersteller:in",
     modal_zubereitet_frage: "Hesch \"{{titel}}\" zubereitet?",
+    statistik_btn: "📊 Statistik",
+    statistik_titel: "Koch-Statistik",
+    statistik_info_aria: "Erklärig zur Statistik zeige",
+    statistik_info_titel: "Wie wird die Statistik berechnet?",
+    statistik_info_text:
+      "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über d'Charte-Option ask_cooked: false deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
+    statistik_dieses_jahr: "{{anzahl}}x im {{jahr}} zubereitet",
+    statistik_gesamt: "{{anzahl}}x im Ganze zubereitet",
+    statistik_top_titel: "Am meischte gkocht",
+    statistik_keine_daten: "No kei Zubereitige erfasst.",
     modal_loeschen_frage: "\"{{titel}}\" wirklich lösche?",
     modal_loeschen_ja_btn: "Ja, lösche",
 
@@ -665,6 +685,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Only {{name}} (or an admin) can edit or delete this recipe.",
     detail_ersteller_unbekannt: "the creator",
     modal_zubereitet_frage: "Did you cook \"{{titel}}\"?",
+    statistik_btn: "📊 Statistics",
+    statistik_titel: "Cooking statistics",
+    statistik_info_aria: "Show explanation of the statistics",
+    statistik_info_titel: "How is this statistic calculated?",
+    statistik_info_text:
+      "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the ask_cooked: false card option, the numbers stop growing, but already recorded preparations are kept.",
+    statistik_dieses_jahr: "Cooked {{anzahl}}x in {{jahr}}",
+    statistik_gesamt: "Cooked {{anzahl}}x in total",
+    statistik_top_titel: "Most cooked",
+    statistik_keine_daten: "No preparations recorded yet.",
     modal_loeschen_frage: "Really delete \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Yes, delete",
 
@@ -878,6 +908,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Само {{name}} (или администратор) може да редактира или изтрие тази рецепта.",
     detail_ersteller_unbekannt: "създателя/създателката",
     modal_zubereitet_frage: "Приготви ли \"{{titel}}\"?",
+    statistik_btn: "📊 Статистика",
+    statistik_titel: "Статистика за готвене",
+    statistik_info_aria: "Показване на обяснение за статистиката",
+    statistik_info_titel: "Как се изчислява тази статистика?",
+    statistik_info_text:
+      "Тази статистика брои всяко потвърждение на въпроса „Приготви ли го?“ - независимо от размера на порцията или колко пъти в един и същи ден. Ако този въпрос е деактивиран чрез опцията ask_cooked: false, числата спират да растат, но вече записаните приготвяния се запазват.",
+    statistik_dieses_jahr: "Приготвено {{anzahl}}x през {{jahr}}",
+    statistik_gesamt: "Приготвено общо {{anzahl}}x",
+    statistik_top_titel: "Най-често готвено",
+    statistik_keine_daten: "Все още няма записани приготвяния.",
     modal_loeschen_frage: "Наистина ли да изтрия \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Да, изтрий",
     wochenplan_titel: "Седмичен план",
@@ -1064,6 +1104,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Samo {{name}} (ili administrator) može uređivati ili izbrisati ovaj recept.",
     detail_ersteller_unbekannt: "tvorac/tvorka recepta",
     modal_zubereitet_frage: "Jesi li pripremio/la \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Statistika kuhanja",
+    statistik_info_aria: "Prikaži objašnjenje statistike",
+    statistik_info_titel: "Kako se izračunava ova statistika?",
+    statistik_info_text:
+      "Ova statistika broji svaku potvrdu pitanja „Jesi li pripremio/la?“ - bez obzira na veličinu porcije ili koliko puta istog dana. Ako je to pitanje onemogućeno putem opcije kartice ask_cooked: false, brojevi prestaju rasti, ali već zabilježene pripreme ostaju sačuvane.",
+    statistik_dieses_jahr: "Pripremljeno {{anzahl}}x u {{jahr}}",
+    statistik_gesamt: "Ukupno pripremljeno {{anzahl}}x",
+    statistik_top_titel: "Najčešće pripremano",
+    statistik_keine_daten: "Još nema zabilježenih priprema.",
     modal_loeschen_frage: "Stvarno izbrisati \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Da, izbriši",
     wochenplan_titel: "Tjedni plan",
@@ -1250,6 +1300,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Tento recept může upravit nebo smazat pouze {{name}} (nebo administrátor).",
     detail_ersteller_unbekannt: "tvůrce/tvůrkyně",
     modal_zubereitet_frage: "Připravil(a) jste \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Statistika vaření",
+    statistik_info_aria: "Zobrazit vysvětlení statistiky",
+    statistik_info_titel: "Jak se tato statistika počítá?",
+    statistik_info_text:
+      "Toto vyhodnocení počítá každé potvrzení otázky „Připravil(a) jste?“ - bez ohledu na velikost porce nebo počet za stejný den. Pokud je tato otázka vypnuta pomocí volby karty ask_cooked: false, čísla dál nerostou, ale již zaznamenané přípravy zůstávají zachovány.",
+    statistik_dieses_jahr: "Připraveno {{anzahl}}x v {{jahr}}",
+    statistik_gesamt: "Celkem připraveno {{anzahl}}x",
+    statistik_top_titel: "Nejčastěji připravováno",
+    statistik_keine_daten: "Zatím nejsou zaznamenány žádné přípravy.",
     modal_loeschen_frage: "Opravdu smazat \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Ano, smazat",
     wochenplan_titel: "Týdenní plán",
@@ -1436,6 +1496,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Kun {{name}} (eller en administrator) kan redigere eller slette denne opskrift.",
     detail_ersteller_unbekannt: "den/dem der oprettede opskriften",
     modal_zubereitet_frage: "Tilberedte du \"{{titel}}\"?",
+    statistik_btn: "📊 Statistik",
+    statistik_titel: "Madlavningsstatistik",
+    statistik_info_aria: "Vis forklaring af statistikken",
+    statistik_info_titel: "Hvordan beregnes denne statistik?",
+    statistik_info_text:
+      "Denne opgørelse tæller hver bekræftelse af spørgsmålet „Tilberedte du den?“ - uanset portionsstørrelse eller hvor mange gange samme dag. Hvis spørgsmålet er deaktiveret via kortindstillingen ask_cooked: false, holder tallene op med at stige, men allerede registrerede tilberedninger bevares.",
+    statistik_dieses_jahr: "Tilberedt {{anzahl}}x i {{jahr}}",
+    statistik_gesamt: "Tilberedt {{anzahl}}x i alt",
+    statistik_top_titel: "Mest tilberedt",
+    statistik_keine_daten: "Endnu ingen tilberedninger registreret.",
     modal_loeschen_frage: "Vil du virkelig slette \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Ja, slet",
     wochenplan_titel: "Ugeplan",
@@ -1622,6 +1692,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Alleen {{name}} (of een beheerder) kan dit recept bewerken of verwijderen.",
     detail_ersteller_unbekannt: "de maker",
     modal_zubereitet_frage: "Heb je \"{{titel}}\" bereid?",
+    statistik_btn: "📊 Statistiek",
+    statistik_titel: "Kookstatistiek",
+    statistik_info_aria: "Uitleg over de statistiek tonen",
+    statistik_info_titel: "Hoe wordt deze statistiek berekend?",
+    statistik_info_text:
+      "Deze weergave telt elke bevestiging van de vraag „Heb je het bereid?“ - ongeacht portiegrootte of hoe vaak op dezelfde dag. Als deze vraag is uitgeschakeld via de kaartoptie ask_cooked: false, groeien de aantallen niet meer, maar al geregistreerde bereidingen blijven behouden.",
+    statistik_dieses_jahr: "{{anzahl}}x bereid in {{jahr}}",
+    statistik_gesamt: "In totaal {{anzahl}}x bereid",
+    statistik_top_titel: "Meest bereid",
+    statistik_keine_daten: "Nog geen bereidingen geregistreerd.",
     modal_loeschen_frage: "\"{{titel}}\" echt verwijderen?",
     modal_loeschen_ja_btn: "Ja, verwijderen",
     wochenplan_titel: "Weekmenu",
@@ -1808,6 +1888,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Ainult {{name}} (või administraator) saab seda retsepti muuta või kustutada.",
     detail_ersteller_unbekannt: "looja",
     modal_zubereitet_frage: "Kas valmistasid \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Toiduvalmistamise statistika",
+    statistik_info_aria: "Näita statistika selgitust",
+    statistik_info_titel: "Kuidas seda statistikat arvutatakse?",
+    statistik_info_text:
+      "See ülevaade loeb kokku iga kinnituse küsimusele „Kas valmistasid?“ - sõltumata portsjoni suurusest või sellest, mitu korda samal päeval. Kui see küsimus on kaardi valikuga ask_cooked: false välja lülitatud, arvud enam ei kasva, kuid juba salvestatud valmistamised säilivad.",
+    statistik_dieses_jahr: "Valmistatud {{anzahl}} korda aastal {{jahr}}",
+    statistik_gesamt: "Kokku valmistatud {{anzahl}} korda",
+    statistik_top_titel: "Enim valmistatud",
+    statistik_keine_daten: "Valmistamisi pole veel salvestatud.",
     modal_loeschen_frage: "Kas tõesti kustutada \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Jah, kustuta",
     wochenplan_titel: "Nädalaplaan",
@@ -1994,6 +2084,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Vain {{name}} (tai ylläpitäjä) voi muokata tai poistaa tämän reseptin.",
     detail_ersteller_unbekannt: "tekijä",
     modal_zubereitet_frage: "Valmistitko reseptin \"{{titel}}\"?",
+    statistik_btn: "📊 Tilastot",
+    statistik_titel: "Ruoanlaittotilastot",
+    statistik_info_aria: "Näytä selitys tilastoista",
+    statistik_info_titel: "Miten tämä tilasto lasketaan?",
+    statistik_info_text:
+      "Tämä yhteenveto laskee jokaisen vahvistuksen kysymykseen „Valmistitko sen?“ - annoskoosta tai saman päivän toistokerroista riippumatta. Jos tämä kysymys on poistettu käytöstä kortin asetuksella ask_cooked: false, luvut eivät enää kasva, mutta jo tallennetut valmistuskerrat säilyvät.",
+    statistik_dieses_jahr: "Valmistettu {{anzahl}} kertaa vuonna {{jahr}}",
+    statistik_gesamt: "Valmistettu yhteensä {{anzahl}} kertaa",
+    statistik_top_titel: "Eniten valmistetut",
+    statistik_keine_daten: "Valmistuskertoja ei ole vielä tallennettu.",
     modal_loeschen_frage: "Poistetaanko \"{{titel}}\" varmasti?",
     modal_loeschen_ja_btn: "Kyllä, poista",
     wochenplan_titel: "Viikkosuunnitelma",
@@ -2181,6 +2281,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Seul(e) {{name}} (ou un administrateur) peut modifier ou supprimer cette recette.",
     detail_ersteller_unbekannt: "l'auteur/autrice",
     modal_zubereitet_frage: "As-tu préparé \"{{titel}}\" ?",
+    statistik_btn: "📊 Statistiques",
+    statistik_titel: "Statistiques de cuisine",
+    statistik_info_aria: "Afficher l'explication des statistiques",
+    statistik_info_titel: "Comment cette statistique est-elle calculée ?",
+    statistik_info_text:
+      "Ce bilan comptabilise chaque confirmation de la question « As-tu préparé ? » - quelle que soit la taille des portions ou le nombre de fois le même jour. Si cette question est désactivée via l'option de carte ask_cooked: false, les chiffres cessent d'augmenter, mais les préparations déjà enregistrées sont conservées.",
+    statistik_dieses_jahr: "Préparé {{anzahl}}x en {{jahr}}",
+    statistik_gesamt: "Préparé {{anzahl}}x au total",
+    statistik_top_titel: "Les plus préparées",
+    statistik_keine_daten: "Aucune préparation enregistrée pour l'instant.",
     modal_loeschen_frage: "Vraiment supprimer \"{{titel}}\" ?",
     modal_loeschen_ja_btn: "Oui, supprimer",
     wochenplan_titel: "Planning de la semaine",
@@ -2368,6 +2478,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Μόνο ο/η {{name}} (ή διαχειριστής) μπορεί να επεξεργαστεί ή να διαγράψει αυτή τη συνταγή.",
     detail_ersteller_unbekannt: "ο/η δημιουργός",
     modal_zubereitet_frage: "Παρασκεύασες το \"{{titel}}\";",
+    statistik_btn: "📊 Στατιστικά",
+    statistik_titel: "Στατιστικά μαγειρικής",
+    statistik_info_aria: "Εμφάνιση επεξήγησης των στατιστικών",
+    statistik_info_titel: "Πώς υπολογίζεται αυτή η στατιστική;",
+    statistik_info_text:
+      "Αυτή η αξιολόγηση μετρά κάθε επιβεβαίωση της ερώτησης «Το παρασκεύασες;» - ανεξάρτητα από το μέγεθος της μερίδας ή το πόσες φορές την ίδια ημέρα. Αν αυτή η ερώτηση είναι απενεργοποιημένη μέσω της επιλογής κάρτας ask_cooked: false, οι αριθμοί σταματούν να αυξάνονται, αλλά οι ήδη καταγεγραμμένες παρασκευές διατηρούνται.",
+    statistik_dieses_jahr: "Παρασκευάστηκε {{anzahl}} φορές το {{jahr}}",
+    statistik_gesamt: "Παρασκευάστηκε συνολικά {{anzahl}} φορές",
+    statistik_top_titel: "Πιο συχνά παρασκευασμένα",
+    statistik_keine_daten: "Δεν έχουν καταγραφεί ακόμη παρασκευές.",
     modal_loeschen_frage: "Να διαγραφεί πραγματικά το \"{{titel}}\";",
     modal_loeschen_ja_btn: "Ναι, διαγραφή",
     wochenplan_titel: "Εβδομαδιαίος προγραμματισμός",
@@ -2555,6 +2675,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Csak {{name}} (vagy egy adminisztrátor) szerkesztheti vagy törölheti ezt a receptet.",
     detail_ersteller_unbekannt: "a létrehozó",
     modal_zubereitet_frage: "Elkészítetted a(z) \"{{titel}}\" receptet?",
+    statistik_btn: "📊 Statisztika",
+    statistik_titel: "Főzési statisztika",
+    statistik_info_aria: "A statisztika magyarázatának megjelenítése",
+    statistik_info_titel: "Hogyan számítjuk ki ezt a statisztikát?",
+    statistik_info_text:
+      "Ez a kiértékelés minden megerősítést számol az „Elkészítetted?“ kérdésre - függetlenül az adag méretétől vagy attól, hányszor ugyanazon a napon. Ha ez a kérdés ki van kapcsolva az ask_cooked: false kártyabeállítással, a számok nem nőnek tovább, de a már rögzített elkészítések megmaradnak.",
+    statistik_dieses_jahr: "{{anzahl}}x elkészítve {{jahr}}-ban",
+    statistik_gesamt: "Összesen {{anzahl}}x elkészítve",
+    statistik_top_titel: "Leggyakrabban elkészítve",
+    statistik_keine_daten: "Még nincs rögzített elkészítés.",
     modal_loeschen_frage: "Biztosan törlöd a(z) \"{{titel}}\" receptet?",
     modal_loeschen_ja_btn: "Igen, törlés",
     wochenplan_titel: "Heti étrend",
@@ -2742,6 +2872,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Ní féidir ach le {{name}} (nó riarthóir) an t-oideas seo a chur in eagar nó a scriosadh.",
     detail_ersteller_unbekannt: "an cruthaitheoir",
     modal_zubereitet_frage: "Ar ullmhaigh tú \"{{titel}}\"?",
+    statistik_btn: "📊 Staitisticí",
+    statistik_titel: "Staitisticí cócaireachta",
+    statistik_info_aria: "Taispeáin míniú na staitisticí",
+    statistik_info_titel: "Conas a ríomhtar an staitistic seo?",
+    statistik_info_text:
+      "Áirítear sa mheasúnú seo gach deimhniú ar an gceist „Ar ullmhaigh tú é?“ - beag beann ar mhéid an fhreastail nó cé mhéad uair an lá céanna. Má tá an cheist seo díchumasaithe tríd an rogha cárta ask_cooked: false, ní fhásfaidh na huimhreacha a thuilleadh, ach coinneofar na hullmhúcháin atá taifeadta cheana.",
+    statistik_dieses_jahr: "Ullmhaithe {{anzahl}}x i {{jahr}}",
+    statistik_gesamt: "Ullmhaithe {{anzahl}}x san iomlán",
+    statistik_top_titel: "Is mó a ullmhaíodh",
+    statistik_keine_daten: "Níl aon ullmhúcháin taifeadta fós.",
     modal_loeschen_frage: "An bhfuil tú cinnte gur mian leat \"{{titel}}\" a scriosadh?",
     modal_loeschen_ja_btn: "Tá, scrios",
     wochenplan_titel: "Plean seachtainiúil",
@@ -2929,6 +3069,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Solo {{name}} (o un amministratore) può modificare o eliminare questa ricetta.",
     detail_ersteller_unbekannt: "chi l'ha creata",
     modal_zubereitet_frage: "Hai preparato \"{{titel}}\"?",
+    statistik_btn: "📊 Statistiche",
+    statistik_titel: "Statistiche di cucina",
+    statistik_info_aria: "Mostra la spiegazione delle statistiche",
+    statistik_info_titel: "Come viene calcolata questa statistica?",
+    statistik_info_text:
+      "Questo riepilogo conta ogni conferma alla domanda «Hai preparato?» - indipendentemente dalla dimensione delle porzioni o da quante volte nello stesso giorno. Se questa domanda è disattivata tramite l'opzione della scheda ask_cooked: false, i numeri smettono di crescere, ma le preparazioni già registrate vengono mantenute.",
+    statistik_dieses_jahr: "Preparato {{anzahl}} volte nel {{jahr}}",
+    statistik_gesamt: "Preparato {{anzahl}} volte in totale",
+    statistik_top_titel: "Più preparate",
+    statistik_keine_daten: "Nessuna preparazione registrata finora.",
     modal_loeschen_frage: "Eliminare davvero \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Sì, elimina",
     wochenplan_titel: "Piano settimanale",
@@ -3115,6 +3265,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Šo recepti drīkst rediģēt vai dzēst tikai {{name}} (vai administrators).",
     detail_ersteller_unbekannt: "autors/autore",
     modal_zubereitet_frage: "Vai pagatavoji \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Gatavošanas statistika",
+    statistik_info_aria: "Rādīt statistikas skaidrojumu",
+    statistik_info_titel: "Kā tiek aprēķināta šī statistika?",
+    statistik_info_text:
+      "Šis apkopojums saskaita katru apstiprinājumu jautājumam „Vai pagatavoji?“ - neatkarīgi no porcijas lieluma vai reižu skaita tajā pašā dienā. Ja šis jautājums ir atspējots ar kartītes opciju ask_cooked: false, skaitļi vairs nepieaug, bet jau reģistrētās gatavošanas reizes saglabājas.",
+    statistik_dieses_jahr: "Pagatavots {{anzahl}}x {{jahr}} gadā",
+    statistik_gesamt: "Kopā pagatavots {{anzahl}}x",
+    statistik_top_titel: "Visbiežāk gatavots",
+    statistik_keine_daten: "Vēl nav reģistrēta neviena gatavošana.",
     modal_loeschen_frage: "Vai tiešām dzēst \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Jā, dzēst",
     wochenplan_titel: "Nedēļas plāns",
@@ -3301,6 +3461,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Šį receptą redaguoti ar ištrinti gali tik {{name}} (arba administratorius).",
     detail_ersteller_unbekannt: "autorius (-ė)",
     modal_zubereitet_frage: "Ar pagaminai \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Gaminimo statistika",
+    statistik_info_aria: "Rodyti statistikos paaiškinimą",
+    statistik_info_titel: "Kaip skaičiuojama ši statistika?",
+    statistik_info_text:
+      "Šioje apžvalgoje skaičiuojamas kiekvienas patvirtinimas į klausimą „Ar paruošei?“ - nepriklausomai nuo porcijos dydžio ar kartų skaičiaus tą pačią dieną. Jei šis klausimas išjungtas naudojant kortelės parinktį ask_cooked: false, skaičiai nebeauga, tačiau jau užfiksuoti gaminimai išlieka.",
+    statistik_dieses_jahr: "Pagaminta {{anzahl}}x {{jahr}} metais",
+    statistik_gesamt: "Iš viso pagaminta {{anzahl}}x",
+    statistik_top_titel: "Dažniausiai gaminami",
+    statistik_keine_daten: "Kol kas neužfiksuota jokių gaminimų.",
     modal_loeschen_frage: "Tikrai ištrinti \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Taip, ištrinti",
     wochenplan_titel: "Savaitės planas",
@@ -3488,6 +3658,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Din ir-riċetta tista' tiġi editjata jew imħassra biss minn {{name}} (jew amministratur).",
     detail_ersteller_unbekannt: "min ħolqot/ħalaq ir-riċetta",
     modal_zubereitet_frage: "Ħejjejt \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Statistika tat-tisjir",
+    statistik_info_aria: "Uri spjegazzjoni tal-istatistika",
+    statistik_info_titel: "Kif tiġi kkalkulata din l-istatistika?",
+    statistik_info_text:
+      "Din il-valutazzjoni tgħodd kull konferma tal-mistoqsija „Ħejjejtu?“ - irrispettivament mid-daqs tal-porzjon jew kemm-il darba fl-istess jum. Jekk din il-mistoqsija tkun diżattivata permezz tal-għażla tal-karta ask_cooked: false, in-numri jieqfu jikbru, iżda t-tħejjijiet diġà rreġistrati jibqgħu.",
+    statistik_dieses_jahr: "Imħejji {{anzahl}}x fl-{{jahr}}",
+    statistik_gesamt: "Imħejji {{anzahl}}x b'kollox",
+    statistik_top_titel: "L-aktar imħejji",
+    statistik_keine_daten: "Għadha ma ġiet irreġistrata l-ebda tħejjija.",
     modal_loeschen_frage: "Tassew tħassar \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Iva, ħassar",
     wochenplan_titel: "Pjan tal-Ġimgħa",
@@ -3674,6 +3854,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Tylko {{name}} (lub administrator) może edytować lub usunąć ten przepis.",
     detail_ersteller_unbekannt: "autor(ka)",
     modal_zubereitet_frage: "Czy przygotowałeś/aś \"{{titel}}\"?",
+    statistik_btn: "📊 Statystyki",
+    statistik_titel: "Statystyki gotowania",
+    statistik_info_aria: "Pokaż wyjaśnienie statystyk",
+    statistik_info_titel: "Jak obliczana jest ta statystyka?",
+    statistik_info_text:
+      "To zestawienie liczy każde potwierdzenie pytania „Czy przygotowałeś/aś?“ - niezależnie od wielkości porcji czy liczby powtórzeń tego samego dnia. Jeśli to pytanie jest wyłączone opcją karty ask_cooked: false, liczby przestają rosnąć, ale już zapisane przygotowania pozostają zachowane.",
+    statistik_dieses_jahr: "Przygotowano {{anzahl}}x w {{jahr}}",
+    statistik_gesamt: "Przygotowano łącznie {{anzahl}}x",
+    statistik_top_titel: "Najczęściej przygotowywane",
+    statistik_keine_daten: "Nie zapisano jeszcze żadnych przygotowań.",
     modal_loeschen_frage: "Czy na pewno usunąć \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Tak, usuń",
     wochenplan_titel: "Plan tygodnia",
@@ -3861,6 +4051,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Apenas {{name}} (ou um administrador) pode editar ou eliminar esta receita.",
     detail_ersteller_unbekannt: "quem criou a receita",
     modal_zubereitet_frage: "Preparaste a receita \"{{titel}}\"?",
+    statistik_btn: "📊 Estatísticas",
+    statistik_titel: "Estatísticas de cozinha",
+    statistik_info_aria: "Mostrar explicação das estatísticas",
+    statistik_info_titel: "Como é calculada esta estatística?",
+    statistik_info_text:
+      "Esta avaliação conta cada confirmação da pergunta «Preparaste?» - independentemente do tamanho da porção ou de quantas vezes no mesmo dia. Se esta pergunta estiver desativada através da opção do cartão ask_cooked: false, os números deixam de aumentar, mas as preparações já registadas são mantidas.",
+    statistik_dieses_jahr: "Preparado {{anzahl}}x em {{jahr}}",
+    statistik_gesamt: "Preparado {{anzahl}}x no total",
+    statistik_top_titel: "Mais preparado",
+    statistik_keine_daten: "Ainda não há preparações registadas.",
     modal_loeschen_frage: "Eliminar mesmo \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Sim, eliminar",
     wochenplan_titel: "Plano semanal",
@@ -4047,6 +4247,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Doar {{name}} (sau un administrator) poate edita sau șterge această rețetă.",
     detail_ersteller_unbekannt: "autorul/autoarea",
     modal_zubereitet_frage: "Ai preparat \"{{titel}}\"?",
+    statistik_btn: "📊 Statistici",
+    statistik_titel: "Statistici de gătit",
+    statistik_info_aria: "Afișează explicația statisticii",
+    statistik_info_titel: "Cum se calculează această statistică?",
+    statistik_info_text:
+      "Această evaluare numără fiecare confirmare a întrebării „Ai preparat?“ - indiferent de dimensiunea porției sau de câte ori în aceeași zi. Dacă această întrebare este dezactivată prin opțiunea de card ask_cooked: false, numerele nu mai cresc, dar preparările deja înregistrate rămân păstrate.",
+    statistik_dieses_jahr: "Preparat de {{anzahl}}x în {{jahr}}",
+    statistik_gesamt: "Preparat de {{anzahl}}x în total",
+    statistik_top_titel: "Cel mai des preparat",
+    statistik_keine_daten: "Încă nu sunt înregistrate preparări.",
     modal_loeschen_frage: "Chiar vrei să ștergi \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Da, șterge",
     wochenplan_titel: "Plan săptămânal",
@@ -4233,6 +4443,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Tento recept môže upraviť alebo vymazať iba {{name}} (alebo administrátor).",
     detail_ersteller_unbekannt: "tvorca/tvorkyňa",
     modal_zubereitet_frage: "Pripravili ste \"{{titel}}\"?",
+    statistik_btn: "📊 Štatistika",
+    statistik_titel: "Štatistika varenia",
+    statistik_info_aria: "Zobraziť vysvetlenie štatistiky",
+    statistik_info_titel: "Ako sa táto štatistika počíta?",
+    statistik_info_text:
+      "Toto vyhodnotenie počíta každé potvrdenie otázky „Pripravil(a) si?“ - bez ohľadu na veľkosť porcie alebo počet za rovnaký deň. Ak je táto otázka vypnutá pomocou voľby karty ask_cooked: false, čísla ďalej nerastú, ale už zaznamenané prípravy zostávajú zachované.",
+    statistik_dieses_jahr: "Pripravené {{anzahl}}x v {{jahr}}",
+    statistik_gesamt: "Celkovo pripravené {{anzahl}}x",
+    statistik_top_titel: "Najčastejšie pripravované",
+    statistik_keine_daten: "Zatiaľ nie sú zaznamenané žiadne prípravy.",
     modal_loeschen_frage: "Naozaj vymazať \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Áno, vymazať",
     wochenplan_titel: "Týždenný plán",
@@ -4419,6 +4639,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Samo {{name}} (ali skrbnik) lahko ureja ali izbriše ta recept.",
     detail_ersteller_unbekannt: "avtor(ica)",
     modal_zubereitet_frage: "Si pripravil(a) \"{{titel}}\"?",
+    statistik_btn: "📊 Statistika",
+    statistik_titel: "Statistika kuhanja",
+    statistik_info_aria: "Prikaži razlago statistike",
+    statistik_info_titel: "Kako se izračuna ta statistika?",
+    statistik_info_text:
+      "Ta pregled šteje vsako potrditev vprašanja „Si pripravil/a?“ - ne glede na velikost porcije ali kolikokrat isti dan. Če je to vprašanje onemogočeno z možnostjo kartice ask_cooked: false, se števila ne povečujejo več, že zabeležene priprave pa ostanejo ohranjene.",
+    statistik_dieses_jahr: "Pripravljeno {{anzahl}}x v letu {{jahr}}",
+    statistik_gesamt: "Skupno pripravljeno {{anzahl}}x",
+    statistik_top_titel: "Največkrat pripravljeno",
+    statistik_keine_daten: "Še ni zabeleženih priprav.",
     modal_loeschen_frage: "Res izbrisati \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Da, izbriši",
     wochenplan_titel: "Tedenski načrt",
@@ -4605,6 +4835,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Solo {{name}} (o un administrador) puede editar o eliminar esta receta.",
     detail_ersteller_unbekannt: "quien la creó",
     modal_zubereitet_frage: "¿Preparaste \"{{titel}}\"?",
+    statistik_btn: "📊 Estadísticas",
+    statistik_titel: "Estadísticas de cocina",
+    statistik_info_aria: "Mostrar explicación de las estadísticas",
+    statistik_info_titel: "¿Cómo se calcula esta estadística?",
+    statistik_info_text:
+      "Este resumen cuenta cada confirmación de la pregunta «¿Lo preparaste?» - independientemente del tamaño de la porción o de cuántas veces el mismo día. Si esta pregunta está desactivada mediante la opción de tarjeta ask_cooked: false, los números dejan de aumentar, pero las preparaciones ya registradas se conservan.",
+    statistik_dieses_jahr: "Preparado {{anzahl}}x en {{jahr}}",
+    statistik_gesamt: "Preparado {{anzahl}}x en total",
+    statistik_top_titel: "Más preparado",
+    statistik_keine_daten: "Todavía no hay preparaciones registradas.",
     modal_loeschen_frage: "¿Eliminar realmente \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Sí, eliminar",
     wochenplan_titel: "Plan semanal",
@@ -4791,6 +5031,16 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Endast {{name}} (eller en administratör) kan redigera eller ta bort detta recept.",
     detail_ersteller_unbekannt: "den som skapade det",
     modal_zubereitet_frage: "Lagade du \"{{titel}}\"?",
+    statistik_btn: "📊 Statistik",
+    statistik_titel: "Matlagningsstatistik",
+    statistik_info_aria: "Visa förklaring av statistiken",
+    statistik_info_titel: "Hur beräknas denna statistik?",
+    statistik_info_text:
+      "Den här sammanställningen räknar varje bekräftelse av frågan „Lagade du den?“ - oavsett portionsstorlek eller hur många gånger samma dag. Om frågan är inaktiverad via kortalternativet ask_cooked: false slutar siffrorna att öka, men redan registrerade tillagningar behålls.",
+    statistik_dieses_jahr: "Tillagad {{anzahl}}x under {{jahr}}",
+    statistik_gesamt: "Tillagad {{anzahl}}x totalt",
+    statistik_top_titel: "Mest tillagad",
+    statistik_keine_daten: "Inga tillagningar registrerade ännu.",
     modal_loeschen_frage: "Verkligen ta bort \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Ja, ta bort",
     wochenplan_titel: "Veckoplan",
@@ -5568,10 +5818,12 @@ class RezeptbuchCard extends HTMLElement {
       }
 
       // Ab hier: ein ECHTER Zurück-Tastendruck/-Wisch des Geräts.
-      if (this._ansicht === "detail") {
+      if (this._ansicht === "detail" && this._config.ask_cooked !== false) {
         // Bei einer offenen Rezept-Detailansicht zuerst fragen, ob
         // zubereitet wurde - dazu den soeben verbrauchten History-Eintrag
-        // wiederherstellen, statt direkt zur Liste zu springen.
+        // wiederherstellen, statt direkt zur Liste zu springen. Per
+        // Kartenoption "ask_cooked: false" lässt sich diese Abfrage
+        // komplett abschalten (siehe _zurueck-btn-Handler und README).
         history.pushState({ rezeptbuchOffen: true }, "", location.href);
         this._historyGeschoben = true;
         this._zubereitetModalAnzeigen();
@@ -6161,6 +6413,50 @@ class RezeptbuchCard extends HTMLElement {
       }
     }
     alert(this._t("einkaufsliste_hinzugefuegt", { anzahl: zeilen.length, entity: this._config.shopping_list_entity }));
+  }
+
+  // Wertet die cookLog-Einträge (je ein ISO-Zeitstempel pro Bestätigung der
+  // "Hast du zubereitet?"-Frage) über alle Rezepte hinweg aus: Anzahl im
+  // laufenden Kalenderjahr, Anzahl insgesamt, sowie die 5 meistgekochten
+  // Rezepte. Reine Client-seitige Auswertung vorhandener Daten - kein
+  // separates Skript, keine Datenbank, kein automation-Trigger (siehe
+  // _zubereitetModalAnzeigen/ask_cooked für die Datenerfassung selbst).
+  _statistikBerechnen() {
+    const aktuellesJahr = new Date().getFullYear();
+    let gesamt = 0;
+    let diesesJahr = 0;
+    const proRezept = [];
+    for (const r of this._rezepte) {
+      const log = r.cookLog || [];
+      if (log.length === 0) continue;
+      gesamt += log.length;
+      diesesJahr += log.filter((iso) => {
+        const datum = new Date(iso);
+        return !isNaN(datum) && datum.getFullYear() === aktuellesJahr;
+      }).length;
+      proRezept.push({ title: r.title, anzahl: log.length });
+    }
+    proRezept.sort((a, b) => b.anzahl - a.anzahl);
+    return { gesamt, diesesJahr, jahr: aktuellesJahr, top: proRezept.slice(0, 5) };
+  }
+
+  // Baut das HTML für den Inhalt des Statistik-Modals aus _statistikBerechnen().
+  // Eigene Methode statt Inline-Code in _render(), damit sie sich unabhängig
+  // testen lässt und der Template-String in _render() übersichtlich bleibt.
+  _statistikModalInhalt() {
+    const { gesamt, diesesJahr, jahr, top } = this._statistikBerechnen();
+    if (gesamt === 0) {
+      return `<p style="text-align:left;">${this._t("statistik_keine_daten")}</p>`;
+    }
+    const topListe = top
+      .map((r) => `<li>${this._escape(r.title)} - ${r.anzahl}x</li>`)
+      .join("");
+    return `
+      <p style="text-align:left;">${this._t("statistik_dieses_jahr", { anzahl: diesesJahr, jahr })}</p>
+      <p style="text-align:left;">${this._t("statistik_gesamt", { anzahl: gesamt })}</p>
+      <p style="text-align:left;margin-bottom:4px;"><strong>${this._t("statistik_top_titel")}</strong></p>
+      <ol style="text-align:left;margin-top:0;padding-left:22px;">${topListe}</ol>
+    `;
   }
 
   _rezepteExportieren() {
@@ -6899,6 +7195,7 @@ class RezeptbuchCard extends HTMLElement {
             ${this._rezepte.length ? `<button class="sekundaer" id="sichern-btn">${this._t("kopf_sichern_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
+            ${this._rezepte.length && this._config.ask_cooked !== false ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
           </div>
         </div>
@@ -6931,6 +7228,29 @@ class RezeptbuchCard extends HTMLElement {
             <p style="text-align:left;">${this._t("kochbuch_info_text")}</p>
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="primaer" id="kochbuch-info-schliessen-btn">${this._t("allgemein_schliessen")}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="statistik-modal" style="display:none;">
+          <div class="modal-box modal-box-breit">
+            <h3 style="margin-top:0;">
+              ${this._t("statistik_titel")}
+              <button type="button" class="info-btn" id="statistik-info-btn" title="${this._t("statistik_info_aria")}" aria-label="${this._t("statistik_info_aria")}">?</button>
+            </h3>
+            ${this._statistikModalInhalt()}
+            <div class="modal-aktionen" style="margin-top:14px;">
+              <button type="button" class="primaer" id="statistik-schliessen-btn">${this._t("allgemein_schliessen")}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="statistik-info-modal" style="display:none;">
+          <div class="modal-box modal-box-breit">
+            <h3 style="margin-top:0;">${this._t("statistik_info_titel")}</h3>
+            <p style="text-align:left;">${this._t("statistik_info_text")}</p>
+            <div class="modal-aktionen" style="margin-top:14px;">
+              <button type="button" class="primaer" id="statistik-info-schliessen-btn">${this._t("allgemein_schliessen")}</button>
             </div>
           </div>
         </div>
@@ -7067,6 +7387,31 @@ class RezeptbuchCard extends HTMLElement {
     if (kochbuchInfoSchliessenBtn) {
       kochbuchInfoSchliessenBtn.addEventListener("click", () => {
         this.shadowRoot.getElementById("kochbuch-info-modal").style.display = "none";
+      });
+    }
+
+    const statistikBtn = this.shadowRoot.getElementById("statistik-btn");
+    if (statistikBtn) {
+      statistikBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("statistik-modal").style.display = "flex";
+      });
+    }
+    const statistikSchliessenBtn = this.shadowRoot.getElementById("statistik-schliessen-btn");
+    if (statistikSchliessenBtn) {
+      statistikSchliessenBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("statistik-modal").style.display = "none";
+      });
+    }
+    const statistikInfoBtn = this.shadowRoot.getElementById("statistik-info-btn");
+    if (statistikInfoBtn) {
+      statistikInfoBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("statistik-info-modal").style.display = "flex";
+      });
+    }
+    const statistikInfoSchliessenBtn = this.shadowRoot.getElementById("statistik-info-schliessen-btn");
+    if (statistikInfoSchliessenBtn) {
+      statistikInfoSchliessenBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("statistik-info-modal").style.display = "none";
       });
     }
 
@@ -7564,7 +7909,11 @@ class RezeptbuchCard extends HTMLElement {
     `;
 
     this.shadowRoot.getElementById("zurueck-btn").addEventListener("click", () => {
-      this._zubereitetModalAnzeigen();
+      if (this._config.ask_cooked === false) {
+        this._navigationZurueck();
+      } else {
+        this._zubereitetModalAnzeigen();
+      }
     });
     this.shadowRoot.getElementById("drucken-btn").addEventListener("click", () => this._rezeptDrucken(r));
     this.shadowRoot.getElementById("modal-nein-btn").addEventListener("click", () => this._navigationZurueck());

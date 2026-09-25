@@ -4,6 +4,22 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.1.0] - 2026-09-25
+
+### Hinzugefügt
+- **Neue Kartenoption `ask_cooked: false`**: schaltet die "Hast du
+  zubereitet?"-Abfrage beim Verlassen eines geöffneten Rezepts komplett
+  ab, für alle, die diese Nachfrage nicht möchten. Bereits erfasste
+  Zubereitungen (`cookLog`) bleiben dabei erhalten, es kommen nur keine
+  neuen mehr hinzu.
+- **Neue Statistik-Auswertung**: ein "Statistik"-Knopf im Kopfbereich der
+  Rezeptliste (nur sichtbar, solange die Abfrage oben nicht per
+  `ask_cooked: false` abgeschaltet ist) zeigt, wie oft im laufenden Jahr
+  und insgesamt zubereitet wurde, sowie die 5 meistgekochten Rezepte -
+  ein "?"-Knopf daneben erklärt kurz, was gezählt wird. Reine
+  Client-seitige Auswertung der bereits vorhandenen `cookLog`-Daten,
+  kein zusätzliches Skript, keine Datenbank, keine Automation nötig.
+
 ## [1.0.1] - 2026-09-25
 
 ### Behoben
@@ -136,7 +152,7 @@ Erste öffentliche Version.
   für den privaten Einsatz ist das Restrisiko gering.
 
 ### Tests
-- Umfangreiche automatisierte Testsuite: 211 Tests für die Karte selbst
+- Umfangreiche automatisierte Testsuite: 219 Tests für die Karte selbst
   (Playwright, echter Browser) sowie 36 + 7 Python-Tests für die optionalen
   Backup-/Import-Skripte - läuft bei jedem Push/Pull-Request automatisch
   über GitHub Actions, inklusive ESLint und HACS-Struktur-Validierung.
