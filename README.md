@@ -99,6 +99,28 @@ Reicht für den vollen Funktionsumfang der Karte selbst - kein Python, kein
    entity: todo.rezepte
    ```
 
+**Tipp bei sehr schmaler Darstellung (z. B. am PC/großen Monitor):** Die
+Karte selbst passt sich responsiv an ihre Umgebung an, kann aber nicht
+beeinflussen, wie breit Home Assistant ihr diese Umgebung zuteilt. In der
+Standard-**Sections**-Ansicht (das aktuelle Standard-Dashboard-Layout) wird
+die Karte je nach `column_span`/`max_columns`-Einstellung mitunter deutlich
+schmaler dargestellt als der Bildschirm hergibt. Abhilfe schafft eine eigene
+**Panel**-Ansicht (genau eine Karte, nutzt automatisch die volle Breite) -
+im Raw-Konfigurationseditor eines Dashboards (⋮-Menü → "Dashboard
+bearbeiten" → ⋮-Menü → "Raw-Konfigurationseditor bearbeiten") lässt sich
+diese direkt als eigener Eintrag unter `views:` ergänzen:
+
+```yaml
+views:
+  - title: Rezeptbuch
+    path: rezeptbuch
+    type: panel
+    cards:
+      - type: custom:rezeptbuch-card
+        entity: todo.rezepte
+        shopping_list_entity: todo.einkaufsliste   # optional, siehe Abschnitt 18
+```
+
 ### Optionale Python-Skripte
 
 Jede der folgenden Funktionen ist unabhängig von den anderen - nur

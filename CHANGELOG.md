@@ -31,6 +31,13 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Einstellungen → Geräte & Dienste → Integrationen → "+ Integration
   hinzufügen" → "Lokale To-do" angelegt.
 
+### Hinzugefügt
+- **Tipp zur Panel-Ansicht in der README**: Hinweis samt fertigem YAML-
+  Beispiel, wie sich die Karte über eine eigene Home-Assistant-**Panel**-
+  Ansicht (statt der schmaleren Standard-Sections-Ansicht) auf die volle
+  Bildschirmbreite bringen lässt - reine Dokumentation, keine Code-Änderung
+  an der Karte selbst.
+
 ## [1.0.0] - 2026-09-24
 
 Erste öffentliche Version.
