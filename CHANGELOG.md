@@ -4,6 +4,15 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.4] - 2026-09-25
+
+### Geändert
+- **Statistik-Text noch etwas präziser**: "Du hast in 2026 2x gekocht"
+  heißt jetzt "Du hast in 2026 2x aus deinem Rezeptbuch gekocht" bzw.
+  "Du hast insgesamt 2x aus deinem Rezeptbuch gekocht" - macht den Bezug
+  auf die Summe über alle eigenen Rezepte noch klarer. In allen 25
+  unterstützten Sprachen angepasst.
+
 ## [1.2.3] - 2026-09-25
 
 ### Geändert
