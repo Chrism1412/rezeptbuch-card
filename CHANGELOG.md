@@ -4,38 +4,31 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [1.2.4] - 2026-09-25
+## [1.0.2] - 2026-09-25
 
-### Geändert
-- **Statistik-Text noch etwas präziser**: "Du hast in 2026 2x gekocht"
-  heißt jetzt "Du hast in 2026 2x aus deinem Rezeptbuch gekocht" bzw.
-  "Du hast insgesamt 2x aus deinem Rezeptbuch gekocht" - macht den Bezug
-  auf die Summe über alle eigenen Rezepte noch klarer. In allen 25
-  unterstützten Sprachen angepasst.
-
-## [1.2.3] - 2026-09-25
-
-### Geändert
-- **Unklarer Text in der Statistik-Auswertung präzisiert**: "2x in 2026
-  zubereitet" ließ offen, WAS da eigentlich 2x zubereitet wurde (es ist
-  die Summe über alle Rezepte, nicht ein einzelnes Gericht) - heißt jetzt
-  "Du hast in 2026 2x gekocht" bzw. "Du hast insgesamt 2x gekocht", mit
-  "Du" als klarem Bezug auf die eigene Koch-Aktivität insgesamt. In allen
-  25 unterstützten Sprachen angepasst.
-
-## [1.2.2] - 2026-09-25
-
-### Geändert
-- **Grenze für die zweispaltige Detailansicht von 860px auf 700px
-  gesenkt**: dadurch greift die Zwei-Spalten-Ansicht (siehe 1.2.0) jetzt
-  auch auf einem normalen Handy im **Querformat** (typischerweise
-  650-930px breit) automatisch, ganz ohne eigens aktivierte
-  "Desktopwebseite" im mobilen Browser - genau dort war zuvor am
-  wenigsten Bildschirmhöhe übrig (siehe 1.2.1). Ein Handy im
-  **Hochformat** liegt mit seiner Breite so gut wie immer deutlich unter
-  700px und bleibt daher unverändert einspaltig.
-
-## [1.2.1] - 2026-09-25
+### Hinzugefügt
+- **Neue Kartenoption `ask_cooked: false`**: schaltet die "Hast du
+  zubereitet?"-Abfrage beim Verlassen eines geöffneten Rezepts komplett
+  ab, für alle, die diese Nachfrage nicht möchten. Bereits erfasste
+  Zubereitungen (`cookLog`) bleiben dabei erhalten, es kommen nur keine
+  neuen mehr hinzu.
+- **Neue Statistik-Auswertung**: ein "Statistik"-Knopf im Kopfbereich der
+  Rezeptliste (nur sichtbar, solange die Abfrage oben nicht per
+  `ask_cooked: false` abgeschaltet ist) zeigt "Du hast in 2026 Xx aus
+  deinem Rezeptbuch gekocht" sowie "insgesamt", dazu die 5 meistgekochten
+  Rezepte - ein "?"-Knopf daneben erklärt kurz, was gezählt wird. Reine
+  Client-seitige Auswertung der bereits vorhandenen `cookLog`-Daten,
+  kein zusätzliches Skript, keine Datenbank, keine Automation nötig.
+- **Zweispaltige Detailansicht auf breiten Bildschirmen**: ab ca. 700px
+  Breite zeigt die Rezept-Detailansicht Bild+Zutaten links und die
+  Zubereitung rechts nebeneinander an, statt wie bisher alles in einer
+  einzigen, auf schmalen Bildschirmen absichtlich schmal gehaltenen Spalte
+  untereinander - dort musste bislang lange gescrollt werden, um zwischen
+  Zutaten und Anleitung hin- und herzuspringen. Das greift dank der
+  bewusst niedrig angesetzten Grenze auch auf einem normalen Handy im
+  **Querformat** (typischerweise 650-930px breit), ganz ohne eigens
+  aktivierte "Desktopwebseite" im mobilen Browser. Auf einem Handy im
+  Hochformat bleibt die einspaltige Ansicht unverändert erhalten.
 
 ### Behoben
 - **Rezeptbild füllte auf Handys im Querformat (ohne "Desktopwebseite")
@@ -47,34 +40,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   sichtbaren Bildschirmhöhe (42vh) sorgt jetzt dafür, dass darunter immer
   noch etwas vom restlichen Inhalt sichtbar bleibt. Auf Hochformat-Handys
   (wo ohnehin genug Höhe vorhanden ist) ändert sich dadurch nichts.
-
-## [1.2.0] - 2026-09-25
-
-### Hinzugefügt
-- **Zweispaltige Detailansicht auf breiten Bildschirmen**: auf ausreichend
-  breiten Displays (ab ca. 860px, z. B. ein Wandtablet im Querformat in der
-  Küche) zeigt die Rezept-Detailansicht Bild+Zutaten links und die
-  Zubereitung rechts nebeneinander an, statt wie bisher alles in einer
-  einzigen, auf schmalen Bildschirmen absichtlich schmal gehaltenen Spalte
-  untereinander - dort musste bislang lange gescrollt werden, um zwischen
-  Zutaten und Anleitung hin- und herzuspringen. Auf schmalen Bildschirmen
-  (Handy) bleibt die einspaltige Ansicht unverändert erhalten.
-
-## [1.1.0] - 2026-09-25
-
-### Hinzugefügt
-- **Neue Kartenoption `ask_cooked: false`**: schaltet die "Hast du
-  zubereitet?"-Abfrage beim Verlassen eines geöffneten Rezepts komplett
-  ab, für alle, die diese Nachfrage nicht möchten. Bereits erfasste
-  Zubereitungen (`cookLog`) bleiben dabei erhalten, es kommen nur keine
-  neuen mehr hinzu.
-- **Neue Statistik-Auswertung**: ein "Statistik"-Knopf im Kopfbereich der
-  Rezeptliste (nur sichtbar, solange die Abfrage oben nicht per
-  `ask_cooked: false` abgeschaltet ist) zeigt, wie oft im laufenden Jahr
-  und insgesamt zubereitet wurde, sowie die 5 meistgekochten Rezepte -
-  ein "?"-Knopf daneben erklärt kurz, was gezählt wird. Reine
-  Client-seitige Auswertung der bereits vorhandenen `cookLog`-Daten,
-  kein zusätzliches Skript, keine Datenbank, keine Automation nötig.
 
 ## [1.0.1] - 2026-09-25
 
