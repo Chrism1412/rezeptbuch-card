@@ -6908,7 +6908,16 @@ class RezeptbuchCard extends HTMLElement {
         .leer { text-align:center; color: var(--secondary-text-color); padding: 32px 0; font-size:0.95em; }
         .fehler { text-align:center; color:#a8402a; padding: 24px 0; font-size:0.9em; }
 
-        .detail-bildbox { width:100%; aspect-ratio: 16 / 9; border-radius:16px; overflow:hidden;
+        /* max-height als Anteil der sichtbaren Bildschirm-HÖHE (nicht nur
+           Breite): das Bild skaliert über aspect-ratio sonst rein mit der
+           Container-Breite - auf einem Handy im Querformat (breit, aber
+           wenig Bildschirmhöhe!) oder einem breiten PC-Monitor füllte es
+           dadurch fast den ganzen sichtbaren Bereich, bevor man überhaupt
+           zu Zutaten/Zubereitung scrollt. Ein Hochformat-Handy hat dagegen
+           ohnehin genug Höhe, dort greift die Grenze praktisch nie.
+           object-fit:cover (siehe .detail-bild) schneidet dafür etwas mehr
+           vom Bildrand ab, statt das Bild zu stauchen. */
+        .detail-bildbox { width:100%; aspect-ratio: 16 / 9; max-height: 42vh; border-radius:16px; overflow:hidden;
           box-shadow: 0 3px 14px rgba(0,0,0,0.14); margin-bottom:14px; }
         .detail-bild { width:100%; height:100%; object-fit:cover; display:block; }
         /* Standardmäßig (schmaler Bildschirm) eine einzige Spalte, genau wie

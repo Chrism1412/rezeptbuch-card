@@ -4,6 +4,19 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.1] - 2026-09-25
+
+### Behoben
+- **Rezeptbild füllte auf Handys im Querformat (ohne "Desktopwebseite")
+  fast den kompletten Bildschirm, teils sogar über den sichtbaren Bereich
+  hinaus**: das Bild skalierte bisher rein über sein Seitenverhältnis
+  (16:9) mit der Container-BREITE - bei wenig Bildschirm-HÖHE (typisch für
+  Querformat auf dem Handy, aber auch auf breiten PC-Monitoren) wurde es
+  dadurch unverhältnismäßig hoch. Eine zusätzliche Begrenzung relativ zur
+  sichtbaren Bildschirmhöhe (42vh) sorgt jetzt dafür, dass darunter immer
+  noch etwas vom restlichen Inhalt sichtbar bleibt. Auf Hochformat-Handys
+  (wo ohnehin genug Höhe vorhanden ist) ändert sich dadurch nichts.
+
 ## [1.2.0] - 2026-09-25
 
 ### Hinzugefügt
