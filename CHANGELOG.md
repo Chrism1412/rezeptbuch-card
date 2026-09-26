@@ -16,6 +16,12 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   weitergegeben, wo sich die Datei normal öffnen, speichern, teilen oder
   drucken lässt. Nur falls das (z. B. durch einen Popup-Blocker) verhindert
   wird, greift weiterhin der klassische Download-Link als letzter Versuch.
+- **Rezeptbild im PDF-Export war verzerrt/seitlich gestreckt**: Die
+  70mm-Höhenbegrenzung für das Bild kappte bisher nur die Höhe, ließ die
+  Breite aber auf voller Seitenbreite stehen - dadurch wurde jedes Bild,
+  das diese Grenze erreichte (z. B. breite/querformatige Fotos), optisch
+  in die Breite gezogen. Die Breite wird jetzt proportional mit
+  verkleinert und das (dann schmalere) Bild horizontal zentriert.
 
 ## [1.0.2] - 2026-09-25
 

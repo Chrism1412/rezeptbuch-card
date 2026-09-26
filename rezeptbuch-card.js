@@ -7635,10 +7635,20 @@ class RezeptbuchCard extends HTMLElement {
     if (r.image) {
       const bild = await this._bildAlsDatenUrlLaden(r.image);
       if (bild) {
-        let bildHoehe = usableWidth * (bild.hoehe / bild.breite);
-        if (bildHoehe > 70) bildHoehe = 70;
+        let bildBreite = usableWidth;
+        let bildHoehe = bildBreite * (bild.hoehe / bild.breite);
+        const maxBildHoehe = 70;
+        if (bildHoehe > maxBildHoehe) {
+          // Bei der Höhen-Obergrenze proportional auch die Breite
+          // verkleinern (statt nur die Höhe zu kappen) - sonst würde das
+          // Bild seitlich verzerrt/gestreckt dargestellt, besonders bei
+          // breiten (querformatigen) Fotos.
+          bildHoehe = maxBildHoehe;
+          bildBreite = bildHoehe * (bild.breite / bild.hoehe);
+        }
+        const bildX = margin + (usableWidth - bildBreite) / 2;
         try {
-          doc.addImage(bild.datenUrl, "JPEG", margin, y, usableWidth, bildHoehe);
+          doc.addImage(bild.datenUrl, "JPEG", bildX, y, bildBreite, bildHoehe);
           y += bildHoehe + 8;
         } catch (e) {
           console.error("Rezeptbuch: Bild konnte nicht ins PDF eingefügt werden", e);

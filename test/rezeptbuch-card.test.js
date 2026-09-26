@@ -2408,6 +2408,74 @@ async function testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiert
   }
 }
 
+// ---------------------------------------------------------------------
+// PDF-Export: ein breites Bild wurde bisher bei der 70mm-Höhenbegrenzung
+// gestreckt/verzerrt dargestellt, weil nur die Höhe gekappt wurde, die
+// Breite aber auf voller Seitenbreite stehen blieb. Die Karte skaliert die
+// Breite jetzt proportional mit und zentriert das (dann schmalere) Bild.
+// ---------------------------------------------------------------------
+async function testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser) {
+  console.log("\nTest: PDF-Export - breites Bild wird proportional skaliert statt verzerrt gestreckt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+
+      // Bild-Laden simulieren: liefert ein breites (16:9) Bild zurück, ohne
+      // ein echtes Bild laden zu müssen.
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA",
+        breite: 1600,
+        hoehe: 900,
+      });
+
+      // jsPDF durch eine minimale Fake-Implementierung ersetzen, die nur
+      // die addImage()-Aufrufe protokolliert - kein Netzwerkzugriff nötig.
+      const aufrufe = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text() {}
+        splitTextToSize(text) { return [text]; }
+        addPage() {}
+        addImage(datenUrl, format, x, y, breite, hoehe) { aufrufe.push({ x, y, breite, hoehe }); }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      await karte._pdfErstellen(rezept);
+      return aufrufe[0];
+    }, uid);
+
+    const seitenbreiteNutzbar = 210 - 20 * 2; // margin 20mm beidseitig, wie im PDF-Code
+    assert(ergebnis.hoehe === 70, "Bildhöhe wird auf die 70mm-Obergrenze begrenzt");
+    const erwarteteBreite = 70 * (1600 / 900);
+    assert(
+      Math.abs(ergebnis.breite - erwarteteBreite) < 0.01,
+      `Bildbreite wird proportional mitverkleinert statt gestreckt (erwartet ${erwarteteBreite.toFixed(2)}, tatsächlich ${ergebnis.breite.toFixed(2)})`
+    );
+    assert(ergebnis.breite < seitenbreiteNutzbar, "verkleinertes Bild ist schmaler als die nutzbare Seitenbreite (nicht mehr gestreckt)");
+    const erwarteteX = 20 + (seitenbreiteNutzbar - erwarteteBreite) / 2;
+    assert(Math.abs(ergebnis.x - erwarteteX) < 0.01, "Bild wird horizontal zentriert, wenn es schmaler als die Seite ist");
+  } finally {
+    await page.close();
+  }
+}
+
 (async () => {
   const browser = await chromium.launch();
   try {
@@ -2462,6 +2530,7 @@ async function testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiert
     await testPlatzhalterMitDollarZeichen(browser);
     await testTeilenDruckenOhneWebShareApiOeffnetNeuesFenster(browser);
     await testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiertWird(browser);
+    await testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser);
   } finally {
     await browser.close();
   }
