@@ -2694,6 +2694,117 @@ async function testPdfWasserzeichenAufBild(browser) {
   }
 }
 
+async function testPdfWasserzeichenAuchOhneBild(browser) {
+  console.log("\nTest: PDF-Export zeigt das Wasserzeichen auch bei einem Rezept ohne Bild");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept ohne Bild",
+      payload: leererPayload(),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+
+      const texte = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text, x, y) { texte.push({ text, x, y }); }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() {}
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      await karte._pdfErstellen(rezept);
+      return { wasserzeichenText: texte.find((t) => t.text === "Rezeptbuch-Card") };
+    }, uid);
+
+    assert(!!ergebnis.wasserzeichenText, "das Wasserzeichen erscheint auch ohne Rezeptbild (kein Bild-Wasserzeichen möglich, aber der Seitenfuß trägt es trotzdem)");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testPdfWasserzeichenAufJederSeite(browser) {
+  console.log("\nTest: PDF-Export zeigt das Wasserzeichen auf JEDER Seite eines mehrseitigen Rezepts");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const vieleSchritte = Array.from({ length: 40 }, (_, i) => `Ausführlicher Zubereitungsschritt Nummer ${i + 1} mit etwas mehr Text`);
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Langes Testrezept",
+      payload: leererPayload({ steps: vieleSchritte }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+
+      const texteProSeite = {};
+      let seitenAnzahl = 1;
+      let aktuelleSeite = 1;
+      class FakeJsPdf {
+        constructor() {
+          this.internal = {
+            pageSize: { getWidth: () => 210, getHeight: () => 297 },
+            getNumberOfPages: () => seitenAnzahl,
+          };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text, x, y) {
+          (texteProSeite[aktuelleSeite] = texteProSeite[aktuelleSeite] || []).push({ text, x, y });
+        }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() { seitenAnzahl++; aktuelleSeite = seitenAnzahl; }
+        setPage(i) { aktuelleSeite = i; }
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      await karte._pdfErstellen(rezept);
+      return {
+        seitenAnzahl,
+        wasserzeichenProSeite: Object.keys(texteProSeite).map((seite) => ({
+          seite: Number(seite),
+          vorhanden: texteProSeite[seite].some((t) => t.text === "Rezeptbuch-Card"),
+        })),
+      };
+    }, uid);
+
+    assert(ergebnis.seitenAnzahl > 1, "das lange Testrezept erzeugt mehr als eine PDF-Seite");
+    assert(
+      ergebnis.wasserzeichenProSeite.length === ergebnis.seitenAnzahl,
+      `auf jeder der ${ergebnis.seitenAnzahl} Seiten wurde etwas gezeichnet (tatsächlich: ${ergebnis.wasserzeichenProSeite.length} Seiten mit Inhalt)`
+    );
+    assert(
+      ergebnis.wasserzeichenProSeite.every((s) => s.vorhanden),
+      "das Wasserzeichen 'Rezeptbuch-Card' erscheint auf JEDER Seite, nicht nur auf der ersten"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -2984,6 +3095,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testPdfZweispaltigesLayoutBeiKurzemRezept(browser);
     await testPdfEinspaltigerFallbackBeiLangemRezept(browser);
     await testPdfWasserzeichenAufBild(browser);
+    await testPdfWasserzeichenAuchOhneBild(browser);
+    await testPdfWasserzeichenAufJederSeite(browser);
     await testHtmlExportWasserzeichenAufBild(browser);
     await testPaginierungTeiltRezepteInSeitenAuf(browser);
     await testPaginierungOhneKonfigurationZeigtStandard20(browser);

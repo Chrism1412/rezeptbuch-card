@@ -7990,6 +7990,20 @@ class RezeptbuchCard extends HTMLElement {
     doc.setTextColor(20); // Textfarbe für alles Nachfolgende zurücksetzen
   }
 
+  // Zusätzlich zum Bild-Wasserzeichen oben: ein noch dezenterer
+  // "Rezeptbuch-Card"-Schriftzug im Seitenfuß JEDER PDF-Seite (auch ohne
+  // Bild bzw. auf Folgeseiten bei langen, mehrseitigen Rezepten), damit
+  // wirklich jede erzeugte PDF-Seite den Hinweis trägt.
+  _pdfSeitenfussWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin) {
+    const text = "Rezeptbuch-Card";
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7);
+    doc.setTextColor(190);
+    const textBreite = typeof doc.getTextWidth === "function" ? doc.getTextWidth(text) : text.length * 1.5;
+    doc.text(text, pageWidth - margin - textBreite, pageHeight - 8);
+    doc.setTextColor(20);
+  }
+
   async _pdfErstellen(r) {
     const jsPDFKlasse = await this._jsPdfLaden();
     const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
@@ -8202,6 +8216,21 @@ class RezeptbuchCard extends HTMLElement {
           y += 2;
         });
       }
+    }
+
+    // Seitenfuß-Wasserzeichen auf JEDER Seite anbringen - nicht nur auf der
+    // (einen) Seite mit dem Bild-Wasserzeichen. `setPage`/`getNumberOfPages`
+    // gibt es nur bei der echten jsPDF-Bibliothek, nicht bei den einfachen
+    // Fakes in den Tests - dann wird der Fuß einfach nur auf die aktuelle
+    // (einzige) Seite gezeichnet.
+    if (typeof doc.internal.getNumberOfPages === "function" && typeof doc.setPage === "function") {
+      const seitenAnzahl = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= seitenAnzahl; i++) {
+        doc.setPage(i);
+        this._pdfSeitenfussWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin);
+      }
+    } else {
+      this._pdfSeitenfussWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin);
     }
 
     const dateiname = `${r.title.replace(/[^a-zA-Z0-9äöüÄÖÜß]+/g, "_")}.pdf`;
