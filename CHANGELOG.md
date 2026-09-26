@@ -6,6 +6,23 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [1.0.3] - 2026-09-26
 
+### Hinzugefügt
+- **Seitenweise Rezeptübersicht**: bei vielen Rezepten lässt sich die
+  Übersicht jetzt über die neue Kartenoption `items_per_page` in Seiten
+  aufteilen (Standard, wenn nicht gesetzt: 20 pro Seite), mit
+  Vor-/Zurück-Navigation und Seitenanzeige. Ein Wechsel von Suche,
+  Sortierung, Kategorie-, Tag- oder Kochbuch-Filter setzt die Ansicht
+  automatisch wieder auf Seite 1 zurück.
+- **Versionshinweis in der Rezeptübersicht**: zeigt unten dezent die
+  aktuell installierte Kartenversion (`vX.Y.Z`) an.
+- **Eigener Update-Hinweis**: die Karte prüft beim Laden zusätzlich zur
+  automatischen Update-Erkennung von HACS selbst über die öffentliche
+  GitHub-API, ob eine neuere Version veröffentlicht wurde, und zeigt bei
+  Bedarf einen wegklickbaren Hinweis mit Link zur Release-Seite an - rein
+  informativ, ohne Internetzugang bleibt die Karte einfach ohne Hinweis.
+  Einmal weggeklickt, erscheint der Hinweis für dieselbe Version nicht
+  erneut.
+
 ### Behoben
 - **"Teilen / Drucken" tat in der Home-Assistant-App (bzw. anderen
   eingebetteten WebViews ohne Web-Share-API) scheinbar gar nichts**: die

@@ -313,6 +313,12 @@ const UEBERSETZUNGEN = {
     // Teilen (Text-Variante) / PDF-/HTML-Export
     teilen_ueberschrift_zutaten: "ZUTATEN",
     teilen_ueberschrift_zubereitung: "ZUBEREITUNG",
+    seite_zurueck_btn: "← Zurück",
+    seite_weiter_btn: "Weiter →",
+    seite_anzeige: "Seite {{aktuell}} von {{gesamt}}",
+    update_neue_version: "Neue Version verfügbar: {{version}}",
+    update_ansehen_btn: "Ansehen",
+    update_schliessen_aria: "Hinweis ausblenden",
   },
 
   // Schwiizerdütsch (gsw) - es git kei einheitlichi amtlichi Schriibwiis
@@ -577,6 +583,12 @@ const UEBERSETZUNGEN = {
     // Teilen (Text-Variante) / PDF-/HTML-Export
     teilen_ueberschrift_zutaten: "ZUETATE",
     teilen_ueberschrift_zubereitung: "ZUEBEREITIG",
+    seite_zurueck_btn: "← Zrugg",
+    seite_weiter_btn: "Wieter →",
+    seite_anzeige: "Siite {{aktuell}} vo {{gesamt}}",
+    update_neue_version: "Neui Version verfüegbar: {{version}}",
+    update_ansehen_btn: "Aluege",
+    update_schliessen_aria: "Hiwiis usblände",
   },
   en: {
     allgemein_zurueck: "← Back",
@@ -815,6 +827,12 @@ const UEBERSETZUNGEN = {
 
     teilen_ueberschrift_zutaten: "INGREDIENTS",
     teilen_ueberschrift_zubereitung: "INSTRUCTIONS",
+    seite_zurueck_btn: "← Back",
+    seite_weiter_btn: "Next →",
+    seite_anzeige: "Page {{aktuell}} of {{gesamt}}",
+    update_neue_version: "New version available: {{version}}",
+    update_ansehen_btn: "View",
+    update_schliessen_aria: "Dismiss notice",
   },
   bg: {
     allgemein_zurueck: "← Назад",
@@ -1011,6 +1029,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Снимката не можа да бъде обработена като изображение (неподдържан формат?).",
     teilen_ueberschrift_zutaten: "СЪСТАВКИ",
     teilen_ueberschrift_zubereitung: "ПРИГОТВЯНЕ",
+    seite_zurueck_btn: "← Назад",
+    seite_weiter_btn: "Напред →",
+    seite_anzeige: "Страница {{aktuell}} от {{gesamt}}",
+    update_neue_version: "Налична е нова версия: {{version}}",
+    update_ansehen_btn: "Преглед",
+    update_schliessen_aria: "Скриване на съобщението",
   },
   hr: {
     allgemein_zurueck: "← Natrag",
@@ -1207,6 +1231,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotografiju nije moguće obraditi kao sliku (nepodržani format?).",
     teilen_ueberschrift_zutaten: "SASTOJCI",
     teilen_ueberschrift_zubereitung: "PRIPREMA",
+    seite_zurueck_btn: "← Natrag",
+    seite_weiter_btn: "Dalje →",
+    seite_anzeige: "Stranica {{aktuell}} od {{gesamt}}",
+    update_neue_version: "Dostupna je nova verzija: {{version}}",
+    update_ansehen_btn: "Pogledaj",
+    update_schliessen_aria: "Sakrij obavijest",
   },
   cs: {
     allgemein_zurueck: "← Zpět",
@@ -1403,6 +1433,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotku se nepodařilo zpracovat jako obrázek (nepodporovaný formát?).",
     teilen_ueberschrift_zutaten: "SUROVINY",
     teilen_ueberschrift_zubereitung: "POSTUP",
+    seite_zurueck_btn: "← Zpět",
+    seite_weiter_btn: "Další →",
+    seite_anzeige: "Strana {{aktuell}} z {{gesamt}}",
+    update_neue_version: "Je dostupná nová verze: {{version}}",
+    update_ansehen_btn: "Zobrazit",
+    update_schliessen_aria: "Skrýt upozornění",
   },
   da: {
     allgemein_zurueck: "← Tilbage",
@@ -1599,6 +1635,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotoet kunne ikke behandles som et billede (ikke understøttet format?).",
     teilen_ueberschrift_zutaten: "INGREDIENSER",
     teilen_ueberschrift_zubereitung: "FREMGANGSMÅDE",
+    seite_zurueck_btn: "← Tilbage",
+    seite_weiter_btn: "Næste →",
+    seite_anzeige: "Side {{aktuell}} af {{gesamt}}",
+    update_neue_version: "Ny version tilgængelig: {{version}}",
+    update_ansehen_btn: "Vis",
+    update_schliessen_aria: "Skjul meddelelse",
   },
   nl: {
     allgemein_zurueck: "← Terug",
@@ -1795,6 +1837,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "De foto kon niet als afbeelding worden verwerkt (niet-ondersteund formaat?).",
     teilen_ueberschrift_zutaten: "INGREDIËNTEN",
     teilen_ueberschrift_zubereitung: "BEREIDING",
+    seite_zurueck_btn: "← Terug",
+    seite_weiter_btn: "Volgende →",
+    seite_anzeige: "Pagina {{aktuell}} van {{gesamt}}",
+    update_neue_version: "Nieuwe versie beschikbaar: {{version}}",
+    update_ansehen_btn: "Bekijken",
+    update_schliessen_aria: "Melding verbergen",
   },
   et: {
     allgemein_zurueck: "← Tagasi",
@@ -1991,6 +2039,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotot ei õnnestunud pildina töödelda (toetamata vorming?).",
     teilen_ueberschrift_zutaten: "KOOSTISOSAD",
     teilen_ueberschrift_zubereitung: "VALMISTAMINE",
+    seite_zurueck_btn: "← Tagasi",
+    seite_weiter_btn: "Edasi →",
+    seite_anzeige: "Lehekülg {{aktuell}} / {{gesamt}}",
+    update_neue_version: "Uus versioon saadaval: {{version}}",
+    update_ansehen_btn: "Vaata",
+    update_schliessen_aria: "Peida teavitus",
   },
   fi: {
     allgemein_zurueck: "← Takaisin",
@@ -2187,6 +2241,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Kuvaa ei voitu käsitellä kuvana (tukematon muoto?).",
     teilen_ueberschrift_zutaten: "AINEKSET",
     teilen_ueberschrift_zubereitung: "VALMISTUS",
+    seite_zurueck_btn: "← Edellinen",
+    seite_weiter_btn: "Seuraava →",
+    seite_anzeige: "Sivu {{aktuell}}/{{gesamt}}",
+    update_neue_version: "Uusi versio saatavilla: {{version}}",
+    update_ansehen_btn: "Katso",
+    update_schliessen_aria: "Piilota ilmoitus",
   },
   fr: {
     allgemein_zurueck: "← Retour",
@@ -2384,6 +2444,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Impossible de traiter la photo comme une image (format non pris en charge ?).",
     teilen_ueberschrift_zutaten: "INGRÉDIENTS",
     teilen_ueberschrift_zubereitung: "PRÉPARATION",
+    seite_zurueck_btn: "← Précédent",
+    seite_weiter_btn: "Suivant →",
+    seite_anzeige: "Page {{aktuell}} sur {{gesamt}}",
+    update_neue_version: "Nouvelle version disponible : {{version}}",
+    update_ansehen_btn: "Voir",
+    update_schliessen_aria: "Masquer la notification",
   },
   el: {
     allgemein_zurueck: "← Πίσω",
@@ -2581,6 +2647,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Δεν ήταν δυνατή η επεξεργασία της φωτογραφίας ως εικόνα (μη υποστηριζόμενη μορφή;).",
     teilen_ueberschrift_zutaten: "ΥΛΙΚΑ",
     teilen_ueberschrift_zubereitung: "ΕΚΤΕΛΕΣΗ",
+    seite_zurueck_btn: "← Πίσω",
+    seite_weiter_btn: "Επόμενο →",
+    seite_anzeige: "Σελίδα {{aktuell}} από {{gesamt}}",
+    update_neue_version: "Διατίθεται νέα έκδοση: {{version}}",
+    update_ansehen_btn: "Προβολή",
+    update_schliessen_aria: "Απόκρυψη ειδοποίησης",
   },
   hu: {
     allgemein_zurueck: "← Vissza",
@@ -2778,6 +2850,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "A fotót nem sikerült képként feldolgozni (nem támogatott formátum?).",
     teilen_ueberschrift_zutaten: "HOZZÁVALÓK",
     teilen_ueberschrift_zubereitung: "ELKÉSZÍTÉS",
+    seite_zurueck_btn: "← Vissza",
+    seite_weiter_btn: "Tovább →",
+    seite_anzeige: "{{aktuell}}. oldal / {{gesamt}}",
+    update_neue_version: "Új verzió érhető el: {{version}}",
+    update_ansehen_btn: "Megnézem",
+    update_schliessen_aria: "Értesítés elrejtése",
   },
   ga: {
     allgemein_zurueck: "← Siar",
@@ -2975,6 +3053,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Níorbh fhéidir an grianghraf a phróiseáil mar íomhá (formáid gan tacaíocht?).",
     teilen_ueberschrift_zutaten: "COMHÁBHAIR",
     teilen_ueberschrift_zubereitung: "ULLMHÚCHÁN",
+    seite_zurueck_btn: "← Siar",
+    seite_weiter_btn: "Ar Aghaidh →",
+    seite_anzeige: "Leathanach {{aktuell}} de {{gesamt}}",
+    update_neue_version: "Leagan nua ar fáil: {{version}}",
+    update_ansehen_btn: "Amharc",
+    update_schliessen_aria: "Cuir an fógra i bhfolach",
   },
   it: {
     allgemein_zurueck: "← Indietro",
@@ -3172,6 +3256,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Impossibile elaborare la foto come immagine (formato non supportato?).",
     teilen_ueberschrift_zutaten: "INGREDIENTI",
     teilen_ueberschrift_zubereitung: "PREPARAZIONE",
+    seite_zurueck_btn: "← Indietro",
+    seite_weiter_btn: "Avanti →",
+    seite_anzeige: "Pagina {{aktuell}} di {{gesamt}}",
+    update_neue_version: "Nuova versione disponibile: {{version}}",
+    update_ansehen_btn: "Visualizza",
+    update_schliessen_aria: "Nascondi avviso",
   },
   lv: {
     allgemein_zurueck: "← Atpakaļ",
@@ -3368,6 +3458,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Neizdevās apstrādāt foto kā attēlu (neatbalstīts formāts?).",
     teilen_ueberschrift_zutaten: "SASTĀVDAĻAS",
     teilen_ueberschrift_zubereitung: "PAGATAVOŠANA",
+    seite_zurueck_btn: "← Atpakaļ",
+    seite_weiter_btn: "Tālāk →",
+    seite_anzeige: "{{aktuell}}. lappuse no {{gesamt}}",
+    update_neue_version: "Pieejama jauna versija: {{version}}",
+    update_ansehen_btn: "Skatīt",
+    update_schliessen_aria: "Slēpt paziņojumu",
   },
   lt: {
     allgemein_zurueck: "← Atgal",
@@ -3564,6 +3660,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Nepavyko apdoroti nuotraukos kaip paveikslėlio (nepalaikomas formatas?).",
     teilen_ueberschrift_zutaten: "INGREDIENTAI",
     teilen_ueberschrift_zubereitung: "GAMINIMAS",
+    seite_zurueck_btn: "← Atgal",
+    seite_weiter_btn: "Kitas →",
+    seite_anzeige: "{{aktuell}} psl. iš {{gesamt}}",
+    update_neue_version: "Yra nauja versija: {{version}}",
+    update_ansehen_btn: "Žiūrėti",
+    update_schliessen_aria: "Slėpti pranešimą",
   },
   mt: {
     allgemein_zurueck: "← Lura",
@@ -3761,6 +3863,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Ir-ritratt ma setax jiġi pproċessat bħala immaġni (format mhux appoġġat?).",
     teilen_ueberschrift_zutaten: "INGREDJENTI",
     teilen_ueberschrift_zubereitung: "PREPARAZZJONI",
+    seite_zurueck_btn: "← Lura",
+    seite_weiter_btn: "Li jmiss →",
+    seite_anzeige: "Paġna {{aktuell}} minn {{gesamt}}",
+    update_neue_version: "Verżjoni ġdida disponibbli: {{version}}",
+    update_ansehen_btn: "Ara",
+    update_schliessen_aria: "Aħbi n-notifika",
   },
   pl: {
     allgemein_zurueck: "← Wstecz",
@@ -3957,6 +4065,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Nie udało się przetworzyć zdjęcia jako obrazu (nieobsługiwany format?).",
     teilen_ueberschrift_zutaten: "SKŁADNIKI",
     teilen_ueberschrift_zubereitung: "PRZYGOTOWANIE",
+    seite_zurueck_btn: "← Wstecz",
+    seite_weiter_btn: "Dalej →",
+    seite_anzeige: "Strona {{aktuell}} z {{gesamt}}",
+    update_neue_version: "Dostępna nowa wersja: {{version}}",
+    update_ansehen_btn: "Zobacz",
+    update_schliessen_aria: "Ukryj powiadomienie",
   },
   pt: {
     allgemein_zurueck: "← Voltar",
@@ -4154,6 +4268,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Não foi possível processar a foto como imagem (formato não suportado?).",
     teilen_ueberschrift_zutaten: "INGREDIENTES",
     teilen_ueberschrift_zubereitung: "PREPARAÇÃO",
+    seite_zurueck_btn: "← Anterior",
+    seite_weiter_btn: "Seguinte →",
+    seite_anzeige: "Página {{aktuell}} de {{gesamt}}",
+    update_neue_version: "Nova versão disponível: {{version}}",
+    update_ansehen_btn: "Ver",
+    update_schliessen_aria: "Ocultar aviso",
   },
   ro: {
     allgemein_zurueck: "← Înapoi",
@@ -4350,6 +4470,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotografia nu a putut fi procesată ca imagine (format neacceptat?).",
     teilen_ueberschrift_zutaten: "INGREDIENTE",
     teilen_ueberschrift_zubereitung: "PREPARARE",
+    seite_zurueck_btn: "← Înapoi",
+    seite_weiter_btn: "Înainte →",
+    seite_anzeige: "Pagina {{aktuell}} din {{gesamt}}",
+    update_neue_version: "Este disponibilă o versiune nouă: {{version}}",
+    update_ansehen_btn: "Vezi",
+    update_schliessen_aria: "Ascunde notificarea",
   },
   sk: {
     allgemein_zurueck: "← Späť",
@@ -4546,6 +4672,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotku sa nepodarilo spracovať ako obrázok (nepodporovaný formát?).",
     teilen_ueberschrift_zutaten: "SUROVINY",
     teilen_ueberschrift_zubereitung: "POSTUP",
+    seite_zurueck_btn: "← Späť",
+    seite_weiter_btn: "Ďalej →",
+    seite_anzeige: "Strana {{aktuell}} z {{gesamt}}",
+    update_neue_version: "K dispozícii je nová verzia: {{version}}",
+    update_ansehen_btn: "Zobraziť",
+    update_schliessen_aria: "Skryť upozornenie",
   },
   sl: {
     allgemein_zurueck: "← Nazaj",
@@ -4742,6 +4874,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Slike ni bilo mogoče obdelati kot sliko (nepodprta oblika?).",
     teilen_ueberschrift_zutaten: "SESTAVINE",
     teilen_ueberschrift_zubereitung: "PRIPRAVA",
+    seite_zurueck_btn: "← Nazaj",
+    seite_weiter_btn: "Naprej →",
+    seite_anzeige: "Stran {{aktuell}} od {{gesamt}}",
+    update_neue_version: "Na voljo je nova različica: {{version}}",
+    update_ansehen_btn: "Ogled",
+    update_schliessen_aria: "Skrij obvestilo",
   },
   es: {
     allgemein_zurueck: "← Volver",
@@ -4938,6 +5076,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "No se pudo procesar la foto como imagen (¿formato no compatible?).",
     teilen_ueberschrift_zutaten: "INGREDIENTES",
     teilen_ueberschrift_zubereitung: "PREPARACIÓN",
+    seite_zurueck_btn: "← Atrás",
+    seite_weiter_btn: "Siguiente →",
+    seite_anzeige: "Página {{aktuell}} de {{gesamt}}",
+    update_neue_version: "Nueva versión disponible: {{version}}",
+    update_ansehen_btn: "Ver",
+    update_schliessen_aria: "Ocultar aviso",
   },
   sv: {
     allgemein_zurueck: "← Tillbaka",
@@ -5134,6 +5278,12 @@ const UEBERSETZUNGEN = {
     fehler_bild_verarbeiten: "Fotot kunde inte behandlas som en bild (format som inte stöds?).",
     teilen_ueberschrift_zutaten: "INGREDIENSER",
     teilen_ueberschrift_zubereitung: "TILLAGNING",
+    seite_zurueck_btn: "← Tillbaka",
+    seite_weiter_btn: "Nästa →",
+    seite_anzeige: "Sida {{aktuell}} av {{gesamt}}",
+    update_neue_version: "Ny version tillgänglig: {{version}}",
+    update_ansehen_btn: "Visa",
+    update_schliessen_aria: "Dölj meddelande",
   },
 };
 
@@ -5191,6 +5341,17 @@ const SORTIER_OPTIONEN = [
 // Datensätze beim Einlesen auf den aktuellen Stand gebracht werden - so
 // bleiben auch sehr alte, nie neu gespeicherte Rezepte les- und bearbeitbar.
 const SCHEMA_VERSION = 2;
+
+// Version der Karte selbst (nicht zu verwechseln mit SCHEMA_VERSION oben,
+// die die Datenstruktur EINES Rezepts betrifft). Wird klein in der
+// Rezeptübersicht angezeigt und für den Update-Hinweis (Vergleich mit der
+// neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
+// diesem Projekt - muss bei jedem Release manuell synchron zu
+// package.json/CHANGELOG.md gepflegt werden.
+const CARD_VERSION = "1.0.3";
+// Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
+// _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v1.0.3".
+const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
 
 // Wochenplan und gespeicherte Filter ("Kochbücher") brauchen KEINE eigene
 // To-do-Liste (kein weiterer Helfer nötig) - sie werden als zwei besondere,
@@ -5741,6 +5902,17 @@ class RezeptbuchCard extends HTMLElement {
     this._wochenplanAnsicht = "diese";
     this._kochbuecherItem = null;
     this._kochbuecher = [];
+    // Paginierung der Rezeptübersicht (feature: viele Rezepte auf mehrere
+    // Seiten aufteilen statt alle auf einmal zu zeigen) - 1-basiert, wird
+    // bei jeder Filter-/Sortier-/Suchänderung auf 1 zurückgesetzt (siehe
+    // _filterZuruecksetzen), damit man nicht z.B. auf Seite 3 landet, auf
+    // der es nach dem neuen Filter gar keine Rezepte mehr gibt.
+    this._aktuelleSeite = 1;
+    // Update-Hinweis (siehe _updatePruefen): null solange nicht (fertig)
+    // geprüft, sonst die auf GitHub gefundene neuere Versionsnummer (ohne
+    // führendes "v") oder false, falls keine neuere Version existiert.
+    this._updateHinweisVersion = null;
+    this._updateHinweisAusgeblendet = false;
   }
 
   // Ermittelt die aktive Anzeigesprache: Deutsch ist Standard/Rückfall
@@ -5929,7 +6101,82 @@ class RezeptbuchCard extends HTMLElement {
       // der URL wiederherzustellen (siehe _urlHashSetzen/_rezeptAusUrlWiederherstellen)
       // - die Rezeptliste muss dafür schon vorhanden sein.
       this._rezepteLaden().then(() => this._rezeptAusUrlWiederherstellen());
+      // Bewusst NICHT abgewartet (fire-and-forget) - das Laden der Rezepte
+      // darf nicht auf einen (u.U. langsamen oder fehlschlagenden)
+      // Netzwerkzugriff auf GitHub warten. Rein informativ, siehe
+      // _updatePruefen().
+      this._updatePruefen();
     }
+  }
+
+  // Prüft einmal pro Kartenladen (nicht öfter als 1x/Tag pro Browser, siehe
+  // Zwischenspeicher unten) über die öffentliche GitHub-API, ob eine neuere
+  // Version dieser Karte veröffentlicht wurde, und zeigt bei Bedarf einen
+  // dezenten, wegklickbaren Hinweis in der Übersicht (siehe _renderListe).
+  // Ergänzt (nicht ersetzt) den Update-Hinweis, den HACS-Installationen
+  // bereits automatisch bekommen - deckt zusätzlich manuell installierte
+  // Karten ab und funktioniert unabhängig von den HACS-
+  // Benachrichtigungseinstellungen. Rein informativ: schlägt der Abruf
+  // fehl (kein Internetzugang, GitHub nicht erreichbar, API-Ratenlimit),
+  // bleibt die Karte einfach ohne Hinweis - kein Fehler für den Nutzer.
+  async _updatePruefen() {
+    try {
+      const CACHE_SCHLUESSEL = "rezeptbuch_update_check";
+      const EIN_TAG_MS = 24 * 60 * 60 * 1000;
+      let zwischengespeichert = null;
+      try {
+        zwischengespeichert = JSON.parse(localStorage.getItem(CACHE_SCHLUESSEL) || "null");
+      } catch (e) {
+        zwischengespeichert = null;
+      }
+
+      let neuesteVersion;
+      if (zwischengespeichert && Date.now() - zwischengespeichert.zeitpunkt < EIN_TAG_MS) {
+        neuesteVersion = zwischengespeichert.version;
+      } else {
+        const antwort = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/releases/latest`);
+        if (!antwort.ok) return; // z.B. 404, falls noch kein Release existiert
+        const daten = await antwort.json();
+        neuesteVersion = (daten.tag_name || "").replace(/^v/, "").trim();
+        if (!neuesteVersion) return;
+        try {
+          localStorage.setItem(CACHE_SCHLUESSEL, JSON.stringify({ version: neuesteVersion, zeitpunkt: Date.now() }));
+        } catch (e) {
+          // localStorage evtl. nicht verfügbar (z.B. privater Modus) - dann
+          // wird beim nächsten Laden einfach erneut abgefragt, kein Blocker.
+        }
+      }
+
+      if (!this._versionIstNeuer(neuesteVersion, CARD_VERSION)) return;
+
+      let bereitsAusgeblendetFuer = null;
+      try {
+        bereitsAusgeblendetFuer = localStorage.getItem("rezeptbuch_update_ausgeblendet_version");
+      } catch (e) {
+        bereitsAusgeblendetFuer = null;
+      }
+      if (bereitsAusgeblendetFuer === neuesteVersion) return; // für genau diese Version schon weggeklickt
+
+      this._updateHinweisVersion = neuesteVersion;
+      this._updateHinweisAusgeblendet = false;
+      if (this._ansicht === "liste") this._render();
+    } catch (e) {
+      console.warn("Rezeptbuch: Update-Prüfung fehlgeschlagen (kein Internetzugang o.ä.)", e);
+    }
+  }
+
+  // Einfacher Semver-Vergleich (nur "x.y.z", ohne Suffixe wie "-beta") -
+  // ausreichend für die eigenen Versionsnummern dieses Projekts.
+  _versionIstNeuer(a, b) {
+    const aTeile = String(a).split(".").map(Number);
+    const bTeile = String(b).split(".").map(Number);
+    for (let i = 0; i < Math.max(aTeile.length, bTeile.length); i++) {
+      const x = aTeile[i] || 0;
+      const y = bTeile[i] || 0;
+      if (x > y) return true;
+      if (x < y) return false;
+    }
+    return false;
   }
 
   // Home-Assistant-Begleit-Apps (iOS/Android) laden die Web-Ansicht nach
@@ -6906,6 +7153,28 @@ class RezeptbuchCard extends HTMLElement {
           border-radius:999px; padding:3px 9px;
         }
         .leer { text-align:center; color: var(--secondary-text-color); padding: 32px 0; font-size:0.95em; }
+        .seiten-navigation { display:flex; justify-content:center; align-items:center; gap:14px; margin-top:20px; }
+        .seiten-anzeige { color: var(--secondary-text-color); font-size:0.9em; }
+        /* Dezenter Versions-Vermerk unten links auf der Rezeptübersicht -
+           rein informativ (z.B. beim Melden eines Fehlers hilfreich), soll
+           optisch nicht auffallen. */
+        .versions-hinweis {
+          text-align:left; margin-top:18px; font-size:0.7em; color: var(--secondary-text-color);
+          opacity:0.55; user-select:none;
+        }
+        .update-banner {
+          display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+          background: var(--kb-terrakotta-hell); border-radius:10px; padding:10px 14px; margin-bottom:16px;
+          font-size:0.92em;
+        }
+        .update-banner .update-ansehen-link {
+          color: var(--kb-terrakotta-dunkel); font-weight:600; text-decoration:none; white-space:nowrap;
+        }
+        .update-banner .update-ansehen-link:hover { text-decoration:underline; }
+        .update-schliessen-btn {
+          margin-left:auto; background:none; border:none; cursor:pointer; font-size:1em;
+          color: var(--secondary-text-color); line-height:1; padding:2px 4px;
+        }
         .fehler { text-align:center; color:#a8402a; padding: 24px 0; font-size:0.9em; }
 
         /* max-height als Anteil der sichtbaren Bildschirm-HÖHE (nicht nur
@@ -7249,6 +7518,13 @@ class RezeptbuchCard extends HTMLElement {
             <button type="button" class="sekundaer klein" id="undo-btn">${this._t("undo_rueckgaengig_btn")}</button>
           </div>
         ` : ""}
+        ${this._updateHinweisVersion && !this._updateHinweisAusgeblendet ? `
+          <div class="update-banner" id="update-banner">
+            <span>${this._t("update_neue_version", { version: this._escape(this._updateHinweisVersion) })}</span>
+            <a href="https://github.com/${GITHUB_REPO}/releases/latest" target="_blank" rel="noopener noreferrer" class="update-ansehen-link">${this._t("update_ansehen_btn")}</a>
+            <button type="button" class="update-schliessen-btn" id="update-banner-schliessen-btn" aria-label="${this._t("update_schliessen_aria")}">✕</button>
+          </div>
+        ` : ""}
         <div id="ergebnis-bereich"></div>
 
         <div class="modal-overlay" id="kochbuch-info-modal" style="display:none;">
@@ -7283,8 +7559,24 @@ class RezeptbuchCard extends HTMLElement {
             </div>
           </div>
         </div>
+        <div class="versions-hinweis">v${CARD_VERSION}</div>
       </ha-card>
     `;
+
+    const updateBannerSchliessenBtn = this.shadowRoot.getElementById("update-banner-schliessen-btn");
+    if (updateBannerSchliessenBtn) {
+      updateBannerSchliessenBtn.addEventListener("click", () => {
+        this._updateHinweisAusgeblendet = true;
+        try {
+          localStorage.setItem("rezeptbuch_update_ausgeblendet_version", this._updateHinweisVersion);
+        } catch (e) {
+          // localStorage evtl. nicht verfügbar - dann erscheint der Hinweis
+          // nach einem Neuladen erneut, kein Blocker.
+        }
+        const banner = this.shadowRoot.getElementById("update-banner");
+        if (banner) banner.remove();
+      });
+    }
 
     this.shadowRoot.getElementById("neu-btn").addEventListener("click", () => this._neuesRezeptFormular());
     this.shadowRoot.getElementById("wochenplan-btn").addEventListener("click", () => this._wochenplanAnzeigen());
@@ -7322,6 +7614,7 @@ class RezeptbuchCard extends HTMLElement {
     if (suchFeld) {
       suchFeld.addEventListener("input", () => {
         this._suchbegriff = suchFeld.value;
+        this._aktuelleSeite = 1; // neue Suche -> zurück auf die erste Seite
         this._ergebnisAktualisieren();
       });
     }
@@ -7330,6 +7623,7 @@ class RezeptbuchCard extends HTMLElement {
     if (sortierFeld) {
       sortierFeld.addEventListener("change", () => {
         this._sortierung = sortierFeld.value;
+        this._aktuelleSeite = 1;
         this._ergebnisAktualisieren();
       });
     }
@@ -7339,6 +7633,7 @@ class RezeptbuchCard extends HTMLElement {
       btn.addEventListener("click", () => {
         this._aktiveKategorie = btn.dataset.kategorie;
         chipButtons.forEach((b) => b.classList.toggle("chip-aktiv", b === btn));
+        this._aktuelleSeite = 1;
         this._ergebnisAktualisieren();
       });
     });
@@ -7350,6 +7645,7 @@ class RezeptbuchCard extends HTMLElement {
         if (this._aktiveTags.has(tag)) this._aktiveTags.delete(tag);
         else this._aktiveTags.add(tag);
         btn.classList.toggle("chip-aktiv");
+        this._aktuelleSeite = 1;
         this._ergebnisAktualisieren();
       });
     });
@@ -7360,6 +7656,7 @@ class RezeptbuchCard extends HTMLElement {
         if (!kb) return;
         this._aktiveKategorie = kb.category || "Alle";
         this._aktiveTags = new Set(kb.tags || []);
+        this._aktuelleSeite = 1;
         this._suchbegriff = kb.suchbegriff || "";
         this._render();
       });
@@ -7452,7 +7749,22 @@ class RezeptbuchCard extends HTMLElement {
     if (!bereich) return;
 
     const rezeptListe = this._sortiereRezepte(this._gefilterteRezepte());
-    const kacheln = rezeptListe
+
+    // Paginierung (feature: viele Rezepte auf mehrere Seiten statt alle auf
+    // einmal) - über die Kartenoption "items_per_page" konfigurierbar,
+    // Standard 20. this._aktuelleSeite wird hier auf den gültigen Bereich
+    // begrenzt, statt an einer der Filter-Stellen selbst - so bleibt sie
+    // z.B. auch nach dem Löschen eines Rezepts automatisch gültig, ohne
+    // dass jede einzelne Änderungsstelle das explizit behandeln müsste.
+    const proSeite = Number(this._config.items_per_page) > 0 ? Math.floor(Number(this._config.items_per_page)) : 20;
+    const gesamtSeiten = Math.max(1, Math.ceil(rezeptListe.length / proSeite));
+    if (this._aktuelleSeite > gesamtSeiten) this._aktuelleSeite = gesamtSeiten;
+    if (this._aktuelleSeite < 1) this._aktuelleSeite = 1;
+    const seitenListe = gesamtSeiten > 1
+      ? rezeptListe.slice((this._aktuelleSeite - 1) * proSeite, this._aktuelleSeite * proSeite)
+      : rezeptListe;
+
+    const kacheln = seitenListe
       .map((r) => {
         const anzahlZutaten = (r.ingredients || []).length;
         // alt="" (statt ganz fehlendem alt-Attribut): das Foto steht direkt
@@ -7503,7 +7815,34 @@ class RezeptbuchCard extends HTMLElement {
       bereich.innerHTML = `<div class="leer">${this._t("leer_keine_treffer", { begriff: this._escape(this._suchbegriff) })}</div>`;
       return;
     }
-    bereich.innerHTML = `<div class="grid">${kacheln}</div>`;
+    const seitenNavigation = gesamtSeiten > 1
+      ? `<div class="seiten-navigation">
+          <button type="button" class="sekundaer klein" id="seite-zurueck-btn" ${this._aktuelleSeite <= 1 ? "disabled" : ""}>${this._t("seite_zurueck_btn")}</button>
+          <span class="seiten-anzeige">${this._t("seite_anzeige", { aktuell: this._aktuelleSeite, gesamt: gesamtSeiten })}</span>
+          <button type="button" class="sekundaer klein" id="seite-weiter-btn" ${this._aktuelleSeite >= gesamtSeiten ? "disabled" : ""}>${this._t("seite_weiter_btn")}</button>
+        </div>`
+      : "";
+    bereich.innerHTML = `<div class="grid">${kacheln}</div>${seitenNavigation}`;
+
+    const seiteZurueckBtn = this.shadowRoot.getElementById("seite-zurueck-btn");
+    if (seiteZurueckBtn) {
+      seiteZurueckBtn.addEventListener("click", () => {
+        this._aktuelleSeite = Math.max(1, this._aktuelleSeite - 1);
+        this._ergebnisAktualisieren();
+        // Beim Seitenwechsel nach oben scrollen - sonst bleibt der Blick auf
+        // der Stelle stehen, an der vorher die letzte Kachel der alten Seite
+        // war, was mitten in der neuen Seite landen kann.
+        bereich.scrollIntoView({ block: "start" });
+      });
+    }
+    const seiteWeiterBtn = this.shadowRoot.getElementById("seite-weiter-btn");
+    if (seiteWeiterBtn) {
+      seiteWeiterBtn.addEventListener("click", () => {
+        this._aktuelleSeite = Math.min(gesamtSeiten, this._aktuelleSeite + 1);
+        this._ergebnisAktualisieren();
+        bereich.scrollIntoView({ block: "start" });
+      });
+    }
 
     // Barrierefreiheit: die eigentliche Aktivierungslogik ist in eine
     // eigene Funktion ausgelagert, damit sie sowohl vom Maus-Klick als auch

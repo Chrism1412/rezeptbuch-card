@@ -43,7 +43,7 @@ function assert(bedingung, name) {
 // Erzeugt eine frische Seite mit der echten Karte + simuliertem hass-Objekt.
 // Jeder Test bekommt seine eigene Seite (eigener, leerer Speicher), damit
 // sich Tests nicht gegenseitig beeinflussen.
-async function neueTestUmgebung(browser) {
+async function neueTestUmgebung(browser, zusatzConfig = {}) {
   const page = await browser.newPage();
 
   // console.error/warn aus der Karte sichtbar machen, falls ein Test
@@ -52,7 +52,8 @@ async function neueTestUmgebung(browser) {
 
   await page.addScriptTag({ path: KARTEN_DATEI });
 
-  await page.evaluate(() => {
+  await page.evaluate((zusatzConfig) => {
+    window.__zusatzConfig = zusatzConfig;
     // Simulierte "Lokale To-do-Liste": ein einfaches Array, wie es die
     // echte todo.rezepte-Entität serverseitig auch verwaltet.
     window.__speicher = [];
@@ -68,6 +69,14 @@ async function neueTestUmgebung(browser) {
     // alert() in Tests abfangen statt einen echten Dialog zu blockieren -
     // wir wollen nur wissen, OB und WORÜBER gewarnt wurde.
     window.alert = (text) => window.__alertAufrufe.push(text);
+
+    // fetch() standardmäßig blockieren: die Karte prüft beim Laden einmal
+    // automatisch über die GitHub-API auf eine neuere Version
+    // (_updatePruefen) - das ist reine Zusatzinfo und darf in Tests (wie
+    // jeder andere Netzwerkzugriff in dieser Testsuite) nicht wirklich ins
+    // Netz gehen. Einzelne Tests können window.fetch gezielt überschreiben,
+    // um den Update-Hinweis selbst zu testen.
+    window.fetch = () => Promise.reject(new Error("kein Netzwerkzugriff in Tests"));
 
     function findeItem(item) {
       return window.__speicher.find((i) => i.uid === item || i.summary === item);
@@ -138,11 +147,11 @@ async function neueTestUmgebung(browser) {
     };
 
     const karte = document.createElement("rezeptbuch-card");
-    karte.setConfig({ entity: "todo.rezepte" });
+    karte.setConfig({ entity: "todo.rezepte", ...window.__zusatzConfig });
     document.body.appendChild(karte);
     karte.hass = window.__fakeHass; // löst _rezepteLaden() aus
     window.__karte = karte;
-  });
+  }, zusatzConfig);
 
   await page.waitForFunction(() => window.__karte._geladen === true && Array.isArray(window.__karte._rezepte));
   return page;
@@ -2715,6 +2724,208 @@ async function testHtmlExportWasserzeichenAufBild(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Paginierung der Rezeptübersicht: über "items_per_page" konfigurierbar,
+// Standard 20. Prüft Seitenaufteilung, Navigation vor/zurück und dass ein
+// Filterwechsel wieder auf Seite 1 zurücksetzt.
+// ---------------------------------------------------------------------
+async function testPaginierungTeiltRezepteInSeitenAuf(browser) {
+  console.log("\nTest: Paginierung teilt viele Rezepte auf mehrere Seiten auf (items_per_page)");
+  const page = await neueTestUmgebung(browser, { items_per_page: 2 });
+  try {
+    for (let i = 1; i <= 5; i++) {
+      await rezeptDirektAnlegen(page, { title: `Rezept ${i}`, payload: leererPayload() });
+    }
+    await page.evaluate(() => window.__karte._rezepteLaden());
+    await page.evaluate(() => window.__karte._render());
+
+    const zustandSeite1 = await page.evaluate(() => {
+      const kacheln = window.__karte.shadowRoot.querySelectorAll(".kachel");
+      const navigation = window.__karte.shadowRoot.getElementById("seite-zurueck-btn");
+      const anzeige = window.__karte.shadowRoot.querySelector(".seiten-anzeige");
+      return {
+        anzahlKacheln: kacheln.length,
+        zurueckDeaktiviert: navigation ? navigation.disabled : null,
+        anzeigeText: anzeige ? anzeige.textContent : null,
+      };
+    });
+    assert(zustandSeite1.anzahlKacheln === 2, "Seite 1 zeigt nur 2 von 5 Rezepten (items_per_page: 2)");
+    assert(zustandSeite1.zurueckDeaktiviert === true, "'Zurück' ist auf Seite 1 deaktiviert");
+    assert(zustandSeite1.anzeigeText === "Seite 1 von 3", `Seitenanzeige zeigt 'Seite 1 von 3' (tatsächlich: ${JSON.stringify(zustandSeite1.anzeigeText)})`);
+
+    await page.evaluate(() => window.__karte.shadowRoot.getElementById("seite-weiter-btn").click());
+    const zustandSeite2 = await page.evaluate(() => ({
+      anzahlKacheln: window.__karte.shadowRoot.querySelectorAll(".kachel").length,
+      anzeigeText: window.__karte.shadowRoot.querySelector(".seiten-anzeige").textContent,
+      zurueckDeaktiviert: window.__karte.shadowRoot.getElementById("seite-zurueck-btn").disabled,
+    }));
+    assert(zustandSeite2.anzahlKacheln === 2, "Seite 2 zeigt die nächsten 2 Rezepte");
+    assert(zustandSeite2.anzeigeText === "Seite 2 von 3", `Seitenanzeige zeigt 'Seite 2 von 3' (tatsächlich: ${JSON.stringify(zustandSeite2.anzeigeText)})`);
+    assert(zustandSeite2.zurueckDeaktiviert === false, "'Zurück' ist auf Seite 2 wieder aktiv");
+
+    await page.evaluate(() => window.__karte.shadowRoot.getElementById("seite-weiter-btn").click());
+    const zustandSeite3 = await page.evaluate(() => ({
+      anzahlKacheln: window.__karte.shadowRoot.querySelectorAll(".kachel").length,
+      weiterDeaktiviert: window.__karte.shadowRoot.getElementById("seite-weiter-btn").disabled,
+    }));
+    assert(zustandSeite3.anzahlKacheln === 1, "Seite 3 (letzte Seite) zeigt das übrig gebliebene 5. Rezept");
+    assert(zustandSeite3.weiterDeaktiviert === true, "'Weiter' ist auf der letzten Seite deaktiviert");
+
+    // Such-Eingabe soll wieder auf Seite 1 zurücksetzen, auch wenn man
+    // gerade auf Seite 3 war.
+    await page.evaluate(() => {
+      const suchFeld = window.__karte.shadowRoot.getElementById("such-feld");
+      suchFeld.value = "Rezept";
+      suchFeld.dispatchEvent(new Event("input"));
+    });
+    const seiteNachSuche = await page.evaluate(() => window.__karte._aktuelleSeite);
+    assert(seiteNachSuche === 1, "eine neue Sucheingabe setzt die aktuelle Seite auf 1 zurück");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testPaginierungOhneKonfigurationZeigtStandard20(browser) {
+  console.log("\nTest: Ohne items_per_page zeigt die Übersicht standardmäßig bis zu 20 Rezepte ohne Seitennavigation");
+  const page = await neueTestUmgebung(browser);
+  try {
+    for (let i = 1; i <= 5; i++) {
+      await rezeptDirektAnlegen(page, { title: `Rezept ${i}`, payload: leererPayload() });
+    }
+    await page.evaluate(() => window.__karte._rezepteLaden());
+    await page.evaluate(() => window.__karte._render());
+
+    const ergebnis = await page.evaluate(() => ({
+      anzahlKacheln: window.__karte.shadowRoot.querySelectorAll(".kachel").length,
+      navigationVorhanden: !!window.__karte.shadowRoot.querySelector(".seiten-navigation"),
+    }));
+    assert(ergebnis.anzahlKacheln === 5, "alle 5 Rezepte passen ohne Konfiguration auf eine Seite (Standard: 20 pro Seite)");
+    assert(!ergebnis.navigationVorhanden, "bei nur einer Seite wird gar keine Seitennavigation angezeigt");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Dezenter Versions-Vermerk unten links auf der Rezeptübersicht.
+// ---------------------------------------------------------------------
+async function testVersionsHinweisWirdAngezeigt(browser) {
+  console.log("\nTest: Versionsnummer wird klein in der Rezeptübersicht angezeigt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const text = await page.evaluate(() => {
+      const el = window.__karte.shadowRoot.querySelector(".versions-hinweis");
+      return el ? el.textContent : null;
+    });
+    assert(!!text && /^v\d+\.\d+\.\d+$/.test(text), `Versionshinweis im Format 'vX.Y.Z' vorhanden (tatsächlich: ${JSON.stringify(text)})`);
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Update-Hinweis: prüft einmalig beim Laden über die GitHub-API auf eine
+// neuere Version (window.fetch ist in Tests standardmäßig blockiert, siehe
+// neueTestUmgebung - hier gezielt mit einer kontrollierten Antwort
+// überschrieben). Ergänzt HACS' eigene Update-Erkennung, deckt aber auch
+// manuell installierte Karten ab.
+// ---------------------------------------------------------------------
+async function testUpdateHinweisBeiNeuererGithubVersion(browser) {
+  console.log("\nTest: Update-Hinweis erscheint, wenn auf GitHub eine neuere Version als die eingebaute existiert");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      window.fetch = async () => ({
+        ok: true,
+        json: async () => ({ tag_name: "v9.9.9" }),
+      });
+      await karte._updatePruefen();
+      const banner = karte.shadowRoot.getElementById("update-banner");
+      const text = banner ? banner.querySelector("span").textContent : null;
+      const link = banner ? banner.querySelector("a").getAttribute("href") : null;
+      return { bannerVorhanden: !!banner, text, link };
+    });
+
+    assert(ergebnis.bannerVorhanden, "der Update-Banner erscheint, wenn GitHub eine neuere Version meldet");
+    assert(
+      !!ergebnis.text && ergebnis.text.includes("9.9.9"),
+      `Banner-Text nennt die neue Version (tatsächlich: ${JSON.stringify(ergebnis.text)})`
+    );
+    assert(
+      ergebnis.link === "https://github.com/Chrism1412/rezeptbuch-card/releases/latest",
+      `Link zeigt auf die GitHub-Releases-Seite (tatsächlich: ${JSON.stringify(ergebnis.link)})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testUpdateHinweisKeinBannerBeiGleicherOderAelterVersion(browser) {
+  console.log("\nTest: Kein Update-Hinweis, wenn GitHub dieselbe oder eine ältere Version meldet");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const banner = await page.evaluate(async () => {
+      const karte = window.__karte;
+      window.fetch = async () => ({ ok: true, json: async () => ({ tag_name: "v1.0.0" }) });
+      await karte._updatePruefen();
+      return karte.shadowRoot.getElementById("update-banner");
+    });
+    assert(!banner, "kein Update-Banner, wenn die GitHub-Version nicht neuer als die eingebaute ist");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
+  console.log("\nTest: Update-Hinweis wegklicken blendet ihn aus und merkt sich das für diese Version");
+  const page = await neueTestUmgebung(browser);
+  try {
+    // In dieser Sandbox-Testumgebung (Seite ohne eigene Origin/"about:blank")
+    // verweigert Chromium den echten Zugriff auf window.localStorage
+    // ("SecurityError"), genau der Fall, den die Karte selbst bereits über
+    // try/catch abfängt (siehe _updatePruefen/Schliessen-Handler). Damit
+    // sich das eigentliche Speichern-und-nicht-erneut-anzeigen-Verhalten
+    // trotzdem prüfen lässt, wird hier ein simpler In-Memory-Ersatz für
+    // localStorage eingesetzt, der sich nach außen identisch verhält.
+    const ergebnis = await page.evaluate(async () => {
+      const speicher = new Map();
+      Object.defineProperty(window, "localStorage", {
+        configurable: true,
+        value: {
+          getItem: (k) => (speicher.has(k) ? speicher.get(k) : null),
+          setItem: (k, v) => speicher.set(k, String(v)),
+          removeItem: (k) => speicher.delete(k),
+        },
+      });
+
+      const karte = window.__karte;
+      window.fetch = async () => ({ ok: true, json: async () => ({ tag_name: "v9.9.9" }) });
+      await karte._updatePruefen();
+      karte.shadowRoot.getElementById("update-banner-schliessen-btn").click();
+      const bannerNachSchliessen = karte.shadowRoot.getElementById("update-banner");
+      const gemerkteVersion = window.localStorage.getItem("rezeptbuch_update_ausgeblendet_version");
+
+      // Erneute Prüfung (z.B. nach einem Neuladen) soll den Banner für
+      // dieselbe Version NICHT wieder anzeigen.
+      await karte._updatePruefen();
+      const bannerNachErneuterPruefung = karte.shadowRoot.getElementById("update-banner");
+
+      return {
+        bannerWegNachKlick: !bannerNachSchliessen,
+        gemerkteVersion,
+        bannerBleibtWegNachErneuterPruefung: !bannerNachErneuterPruefung,
+      };
+    });
+
+    assert(ergebnis.bannerWegNachKlick, "Banner verschwindet direkt nach Klick auf '✕'");
+    assert(ergebnis.gemerkteVersion === "9.9.9", "die weggeklickte Version wird lokal gemerkt");
+    assert(ergebnis.bannerBleibtWegNachErneuterPruefung, "für dieselbe Version erscheint der Banner danach nicht erneut");
+  } finally {
+    await page.close();
+  }
+}
+
 (async () => {
   const browser = await chromium.launch();
   try {
@@ -2774,6 +2985,12 @@ async function testHtmlExportWasserzeichenAufBild(browser) {
     await testPdfEinspaltigerFallbackBeiLangemRezept(browser);
     await testPdfWasserzeichenAufBild(browser);
     await testHtmlExportWasserzeichenAufBild(browser);
+    await testPaginierungTeiltRezepteInSeitenAuf(browser);
+    await testPaginierungOhneKonfigurationZeigtStandard20(browser);
+    await testVersionsHinweisWirdAngezeigt(browser);
+    await testUpdateHinweisBeiNeuererGithubVersion(browser);
+    await testUpdateHinweisKeinBannerBeiGleicherOderAelterVersion(browser);
+    await testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser);
   } finally {
     await browser.close();
   }

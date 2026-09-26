@@ -62,6 +62,14 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
   Element gerade aktiv ist
 - Automatisierte Testsuite (Playwright, echter Browser, keine Mock-Kopie
   der Kartenlogik) und Schema-Versionierung für künftige Formatänderungen
+- **Seitenweise Rezeptübersicht** bei vielen Rezepten (Seitengröße über
+  `items_per_page` konfigurierbar, siehe unten) sowie ein dezenter
+  Versionshinweis (`vX.Y.Z`) unten in der Übersicht
+- **Eigener Update-Hinweis**: die Karte prüft beim Laden zusätzlich zur
+  automatischen Update-Erkennung von HACS selbst über die öffentliche
+  GitHub-API, ob eine neuere Version veröffentlicht wurde, und zeigt bei
+  Bedarf einen wegklickbaren Hinweis mit Link zur Release-Seite - rein
+  informativ, ohne Internetzugang bleibt die Karte einfach ohne Hinweis
 - **Mehrsprachige Oberfläche (alle 24 offiziellen EU-Sprachen + Schwiizerdütsch)**:
   die Kartensprache wird automatisch anhand der in Home Assistant
   eingestellten Sprache erkannt - bei Deutsch (und wenn die Sprache nicht
@@ -315,6 +323,18 @@ jede Bestätigung der Frage "Hast du zubereitet?", unabhängig von
 Portionsgröße oder wie oft am selben Tag. Ist diese Frage über
 `ask_cooked: false` deaktiviert, wachsen die Zahlen nicht weiter -
 bereits erfasste Zubereitungen bleiben aber erhalten.
+
+**Rezeptübersicht seitenweise anzeigen:** Bei vielen Rezepten lässt sich
+die Übersicht über das Kartenfeld `items_per_page` in Seiten aufteilen
+(Standard, wenn nicht gesetzt: 20 Rezepte pro Seite). Aktive Such-,
+Sortier-, Kategorie-, Tag- oder Kochbuch-Filter setzen die Anzeige dabei
+automatisch wieder auf Seite 1 zurück:
+
+```yaml
+type: custom:rezeptbuch-card
+entity: todo.rezepte
+items_per_page: 12
+```
 
 ## Projektstruktur
 
