@@ -23,6 +23,14 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   in die Breite gezogen. Die Breite wird jetzt proportional mit
   verkleinert und das (dann schmalere) Bild horizontal zentriert.
 
+### Geändert
+- **PDF-Export zeigt jetzt, wenn es auf eine Seite passt, dieselbe
+  zweispaltige Aufteilung wie die Detailansicht der Karte auf breiten
+  Bildschirmen**: Bild und Zutaten links, Zubereitung rechts. Ist ein
+  Rezept dafür zu lang (würde nicht zweispaltig auf eine Seite passen),
+  nutzt der Export automatisch weiterhin die bisherige einspaltige, über
+  mehrere Seiten laufende Darstellung, damit nichts abgeschnitten wird.
+
 ## [1.0.2] - 2026-09-25
 
 ### Hinzugefügt

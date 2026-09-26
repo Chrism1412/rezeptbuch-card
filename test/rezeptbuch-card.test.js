@@ -2418,9 +2418,14 @@ async function testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser) {
   console.log("\nTest: PDF-Export - breites Bild wird proportional skaliert statt verzerrt gestreckt");
   const page = await neueTestUmgebung(browser);
   try {
+    // Viele Schritte, damit das Rezept NICHT zweispaltig auf eine Seite
+    // passt und stattdessen über den einspaltigen Fallback läuft - genau
+    // dessen Bild-Skalierung (Obergrenze 70mm, volle Seitenbreite) wird
+    // hier geprüft.
+    const vieleSchritte = Array.from({ length: 30 }, (_, i) => `Schritt Nummer ${i + 1}`);
     const uid = await rezeptDirektAnlegen(page, {
       title: "Testrezept",
-      payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+      payload: leererPayload({ image: "data:image/png;base64,AAAA", steps: vieleSchritte }),
     });
     await page.evaluate(() => window.__karte._rezepteLaden());
 
@@ -2471,6 +2476,143 @@ async function testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser) {
     assert(ergebnis.breite < seitenbreiteNutzbar, "verkleinertes Bild ist schmaler als die nutzbare Seitenbreite (nicht mehr gestreckt)");
     const erwarteteX = 20 + (seitenbreiteNutzbar - erwarteteBreite) / 2;
     assert(Math.abs(ergebnis.x - erwarteteX) < 0.01, "Bild wird horizontal zentriert, wenn es schmaler als die Seite ist");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// PDF-Export soll bei kurzen Rezepten (passen auf eine Seite) dieselbe
+// Aufteilung wie die Detailansicht der Karte auf breiten Bildschirmen
+// zeigen: Bild+Zutaten links, Zubereitung rechts. Bei zu langen Rezepten
+// (würde nicht zweispaltig auf eine Seite passen) bleibt es beim
+// bewährten einspaltigen, mehrseitenfähigen Layout.
+// ---------------------------------------------------------------------
+async function testPdfZweispaltigesLayoutBeiKurzemRezept(browser) {
+  console.log("\nTest: PDF-Export - kurzes Rezept wird wie die App zweispaltig dargestellt (Bild+Zutaten links, Zubereitung rechts)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ image: "data:image/png;base64,AAAA" }), // 1 Zutat, 1 Schritt (Standard aus leererPayload)
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA",
+        breite: 800,
+        hoehe: 450,
+      });
+
+      const texte = [];
+      const bilder = [];
+      let seiten = 0;
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text, x, y) { texte.push({ text, x, y }); }
+        splitTextToSize(text) { return [text]; }
+        addPage() { seiten++; }
+        addImage(datenUrl, format, x, y, breite, hoehe) { bilder.push({ x, y, breite, hoehe }); }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const zutatenLabel = karte._t("abschnitt_titel_zutaten");
+      const zubereitungLabel = karte._t("abschnitt_titel_zubereitung");
+      await karte._pdfErstellen(rezept);
+
+      return {
+        seiten,
+        bildX: bilder[0] && bilder[0].x,
+        bildY: bilder[0] && bilder[0].y,
+        zutatenHeading: texte.find((t) => t.text === zutatenLabel),
+        zubereitungHeading: texte.find((t) => t.text === zubereitungLabel),
+      };
+    }, uid);
+
+    assert(ergebnis.seiten === 0, "ein kurzes Rezept passt auf eine einzige Seite (kein addPage())");
+    assert(ergebnis.bildX < 105, "das Bild steht in der linken Spalte (linke Hälfte der Seite)");
+    assert(!!ergebnis.zutatenHeading, "die 'Zutaten'-Überschrift wird gezeichnet");
+    assert(!!ergebnis.zubereitungHeading, "die 'Zubereitung'-Überschrift wird gezeichnet");
+    assert(Math.abs(ergebnis.zutatenHeading.x - 20) < 0.01, "'Zutaten' steht in der linken Spalte (x = margin)");
+    assert(ergebnis.zubereitungHeading.x > 100, "'Zubereitung' steht sichtbar versetzt in der rechten Spalte");
+    // Die "Zutaten"-Überschrift steht wegen des Bilds darüber tiefer als die
+    // Spalten-Oberkante - "Zubereitung" (rechte Spalte, kein Bild) beginnt
+    // dagegen direkt an der Oberkante, an der auch das Bild links beginnt.
+    assert(
+      Math.abs(ergebnis.zubereitungHeading.y - ergebnis.bildY) < 0.01,
+      "die rechte Spalte ('Zubereitung') beginnt auf derselben Höhe wie das Bild oben links (gemeinsame Spalten-Oberkante)"
+    );
+    assert(
+      ergebnis.zutatenHeading.y > ergebnis.zubereitungHeading.y,
+      "'Zutaten' steht wegen des Bilds darüber tiefer als 'Zubereitung', die direkt oben beginnt"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testPdfEinspaltigerFallbackBeiLangemRezept(browser) {
+  console.log("\nTest: PDF-Export - langes Rezept (passt nicht zweispaltig auf eine Seite) nutzt einspaltigen Fallback");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const vieleSchritte = Array.from({ length: 40 }, (_, i) => `Ausführlicher Zubereitungsschritt Nummer ${i + 1} mit etwas mehr Text`);
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: vieleSchritte }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+
+      const texte = [];
+      let seiten = 0;
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text, x, y) { texte.push({ text, x, y }); }
+        splitTextToSize(text) { return [text]; }
+        addPage() { seiten++; }
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const zubereitungLabel = karte._t("abschnitt_titel_zubereitung");
+      await karte._pdfErstellen(rezept);
+
+      return {
+        seiten,
+        zubereitungHeading: texte.find((t) => t.text === zubereitungLabel),
+      };
+    }, uid);
+
+    assert(ergebnis.seiten > 0, "ein langes Rezept wird über mehrere Seiten verteilt (addPage() wird aufgerufen)");
+    assert(!!ergebnis.zubereitungHeading, "die 'Zubereitung'-Überschrift wird gezeichnet");
+    assert(
+      Math.abs(ergebnis.zubereitungHeading.x - 20) < 0.01,
+      "im Fallback steht 'Zubereitung' wie 'Zutaten' bei x = margin (einspaltig, NICHT in einer rechten Spalte)"
+    );
   } finally {
     await page.close();
   }
@@ -2531,6 +2673,8 @@ async function testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser) {
     await testTeilenDruckenOhneWebShareApiOeffnetNeuesFenster(browser);
     await testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiertWird(browser);
     await testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser);
+    await testPdfZweispaltigesLayoutBeiKurzemRezept(browser);
+    await testPdfEinspaltigerFallbackBeiLangemRezept(browser);
   } finally {
     await browser.close();
   }

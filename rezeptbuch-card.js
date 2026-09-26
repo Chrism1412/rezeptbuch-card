@@ -7623,17 +7623,131 @@ class RezeptbuchCard extends HTMLElement {
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     const usableWidth = pageWidth - margin * 2;
-    let y = margin;
+    const basisPortionen = r.servings || 1;
+    const schritte = (r.steps || []).filter((s) => s && s.trim());
+    const bild = r.image ? await this._bildAlsDatenUrlLaden(r.image) : null;
 
-    const neueSeiteFallsNoetig = (benoetigterPlatz = 8) => {
-      if (y + benoetigterPlatz > pageHeight - margin) {
-        doc.addPage();
-        y = margin;
-      }
+    // Kopfbereich (Titel + Portionen/Kategorie + Trennlinie) ist in beiden
+    // Layouts unten identisch und rückt y immer um denselben, festen Betrag
+    // vor - daher hier als Konstante statt Aufruf, um sie schon für die
+    // Platzentscheidung unten zu kennen, bevor irgendetwas gezeichnet wird.
+    const kopfZeichnen = () => {
+      let yy = margin;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(20);
+      doc.text(r.title, margin, yy);
+      yy += 8;
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      doc.setTextColor(130);
+      doc.text(`${this._portionen} ${this._t("detail_portionen_suffix")}${r.category ? " · " + this._kategorieLabel(r.category) : ""}`, margin, yy);
+      doc.setTextColor(20);
+      yy += 8;
+      doc.setDrawColor(193, 101, 47);
+      doc.setLineWidth(1);
+      doc.line(margin, yy, margin + 18, yy);
+      yy += 9;
+      return yy;
     };
+    const yNachKopf = margin + 8 + 8 + 9;
 
-    if (r.image) {
-      const bild = await this._bildAlsDatenUrlLaden(r.image);
+    // Zweispaltiges Layout wie in der Detailansicht der Karte auf breiten
+    // Bildschirmen (Bild+Zutaten links, Zubereitung rechts) - nur wenn
+    // beides zusammen auf die verbleibende Seite passt. Dafür Zutaten-/
+    // Schritt-Zeilen vorab auf Spaltenbreite umbrechen, um die benötigte
+    // Höhe zu kennen, BEVOR irgendetwas gezeichnet wird.
+    const spaltenAbstand = 10;
+    const spaltenBreite = (usableWidth - spaltenAbstand) / 2;
+    const linkeX = margin;
+    const rechteX = margin + spaltenBreite + spaltenAbstand;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    const zutatenZeilen = (r.ingredients || []).flatMap((z) => {
+      const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
+      const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
+      return doc.splitTextToSize(`•  ${mengeText ? mengeText + " " : ""}${z.name}`, spaltenBreite);
+    });
+    // "null" markiert den kleinen Zusatzabstand nach jedem einzelnen Schritt
+    // (wie im einspaltigen Layout), damit die Höhenberechnung unten exakt
+    // zur späteren Zeichnung passt.
+    const schritteZeilen = [];
+    schritte.forEach((s, i) => {
+      doc.splitTextToSize(`${i + 1}. ${s}`, spaltenBreite).forEach((zeile) => schritteZeilen.push(zeile));
+      schritteZeilen.push(null);
+    });
+
+    let bildBreiteSpalte = 0;
+    let bildHoeheSpalte = 0;
+    if (bild) {
+      bildBreiteSpalte = spaltenBreite;
+      bildHoeheSpalte = bildBreiteSpalte * (bild.hoehe / bild.breite);
+      const maxBildHoeheSpalte = 60;
+      if (bildHoeheSpalte > maxBildHoeheSpalte) {
+        bildHoeheSpalte = maxBildHoeheSpalte;
+        bildBreiteSpalte = bildHoeheSpalte * (bild.breite / bild.hoehe);
+      }
+    }
+
+    const linkeHoehe = (bild ? bildHoeheSpalte + 8 : 0) + 8 + zutatenZeilen.length * 6;
+    const rechteHoehe = schritte.length
+      ? 8 + schritteZeilen.filter((z) => z !== null).length * 6 + schritteZeilen.filter((z) => z === null).length * 2
+      : 0;
+    const verfuegbareHoehe = pageHeight - margin - yNachKopf;
+
+    if (Math.max(linkeHoehe, rechteHoehe) <= verfuegbareHoehe) {
+      // -- Zweispaltig, passt auf eine Seite --
+      const y0 = kopfZeichnen();
+      let yLinks = y0;
+      if (bild) {
+        const bildX = linkeX + (spaltenBreite - bildBreiteSpalte) / 2;
+        try {
+          doc.addImage(bild.datenUrl, "JPEG", bildX, yLinks, bildBreiteSpalte, bildHoeheSpalte);
+        } catch (e) {
+          console.error("Rezeptbuch: Bild konnte nicht ins PDF eingefügt werden", e);
+        }
+        yLinks += bildHoeheSpalte + 8;
+      }
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.text(this._t("abschnitt_titel_zutaten"), linkeX, yLinks);
+      yLinks += 8;
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      zutatenZeilen.forEach((zeile) => {
+        doc.text(zeile, linkeX, yLinks);
+        yLinks += 6;
+      });
+
+      if (schritte.length) {
+        let yRechts = y0;
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(this._t("abschnitt_titel_zubereitung"), rechteX, yRechts);
+        yRechts += 8;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        schritteZeilen.forEach((zeile) => {
+          if (zeile === null) {
+            yRechts += 2;
+            return;
+          }
+          doc.text(zeile, rechteX, yRechts);
+          yRechts += 6;
+        });
+      }
+    } else {
+      // -- Fallback: einspaltig, mehrseitenfähig (für längere Rezepte, bei
+      // denen die zweispaltige Darstellung nicht auf eine Seite passen
+      // würde - lieber zuverlässig über mehrere Seiten als abgeschnitten) --
+      let y = margin;
+      const neueSeiteFallsNoetig = (benoetigterPlatz = 8) => {
+        if (y + benoetigterPlatz > pageHeight - margin) {
+          doc.addPage();
+          y = margin;
+        }
+      };
+
       if (bild) {
         let bildBreite = usableWidth;
         let bildHoehe = bildBreite * (bild.hoehe / bild.breite);
@@ -7654,67 +7768,64 @@ class RezeptbuchCard extends HTMLElement {
           console.error("Rezeptbuch: Bild konnte nicht ins PDF eingefügt werden", e);
         }
       }
-    }
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    doc.text(r.title, margin, y);
-    y += 8;
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(11);
-    doc.setTextColor(130);
-    doc.text(`${this._portionen} ${this._t("detail_portionen_suffix")}${r.category ? " · " + this._kategorieLabel(r.category) : ""}`, margin, y);
-    doc.setTextColor(20);
-    y += 8;
-
-    doc.setDrawColor(193, 101, 47);
-    doc.setLineWidth(1);
-    doc.line(margin, y, margin + 18, y);
-    y += 9;
-
-    const basisPortionen = r.servings || 1;
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    neueSeiteFallsNoetig(10);
-    doc.text(this._t("abschnitt_titel_zutaten"), margin, y);
-    y += 8;
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(11);
-    (r.ingredients || []).forEach((z) => {
-      const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
-      const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
-      const zeile = `${mengeText ? mengeText + " " : ""}${z.name}`;
-      const zeilen = doc.splitTextToSize(`•  ${zeile}`, usableWidth);
-      zeilen.forEach((teil) => {
-        neueSeiteFallsNoetig(6);
-        doc.text(teil, margin, y);
-        y += 6;
-      });
-    });
-
-    const schritte = (r.steps || []).filter((s) => s && s.trim());
-    if (schritte.length) {
-      y += 4;
-      neueSeiteFallsNoetig(12);
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(14);
-      doc.text(this._t("abschnitt_titel_zubereitung"), margin, y);
+      doc.setFontSize(20);
+      doc.text(r.title, margin, y);
       y += 8;
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(11);
-      schritte.forEach((s, i) => {
-        const zeilen = doc.splitTextToSize(`${i + 1}. ${s}`, usableWidth);
+      doc.setTextColor(130);
+      doc.text(`${this._portionen} ${this._t("detail_portionen_suffix")}${r.category ? " · " + this._kategorieLabel(r.category) : ""}`, margin, y);
+      doc.setTextColor(20);
+      y += 8;
+
+      doc.setDrawColor(193, 101, 47);
+      doc.setLineWidth(1);
+      doc.line(margin, y, margin + 18, y);
+      y += 9;
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      neueSeiteFallsNoetig(10);
+      doc.text(this._t("abschnitt_titel_zutaten"), margin, y);
+      y += 8;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      (r.ingredients || []).forEach((z) => {
+        const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
+        const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
+        const zeile = `${mengeText ? mengeText + " " : ""}${z.name}`;
+        const zeilen = doc.splitTextToSize(`•  ${zeile}`, usableWidth);
         zeilen.forEach((teil) => {
           neueSeiteFallsNoetig(6);
           doc.text(teil, margin, y);
           y += 6;
         });
-        y += 2;
       });
+
+      if (schritte.length) {
+        y += 4;
+        neueSeiteFallsNoetig(12);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(this._t("abschnitt_titel_zubereitung"), margin, y);
+        y += 8;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        schritte.forEach((s, i) => {
+          const zeilen = doc.splitTextToSize(`${i + 1}. ${s}`, usableWidth);
+          zeilen.forEach((teil) => {
+            neueSeiteFallsNoetig(6);
+            doc.text(teil, margin, y);
+            y += 6;
+          });
+          y += 2;
+        });
+      }
     }
 
     const dateiname = `${r.title.replace(/[^a-zA-Z0-9äöüÄÖÜß]+/g, "_")}.pdf`;
