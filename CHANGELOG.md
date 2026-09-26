@@ -31,13 +31,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   nutzt der Export automatisch weiterhin die bisherige einspaltige, über
   mehrere Seiten laufende Darstellung, damit nichts abgeschnitten wird.
 
-### Hinzugefügt
-- **Dezentes "Rezeptbuch-Card"-Wasserzeichen unten rechts im Rezeptbild**
-  bei PDF- und HTML-Export (Teilen/Drucken) - ein kleiner, halbtransparenter
-  Schriftzug mit dunklem Hintergrund-Streifen, gut lesbar auf hellen wie
-  dunklen Fotos, ohne das Bild zu verdecken. Betrifft ausschließlich die
-  exportierte Datei; das Bild in der App selbst bleibt unverändert.
-
 ## [1.0.2] - 2026-09-25
 
 ### Hinzugefügt
