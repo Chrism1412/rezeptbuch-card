@@ -7616,6 +7616,41 @@ class RezeptbuchCard extends HTMLElement {
     });
   }
 
+  // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur im
+  // PDF-Export (Teilen/Drucken), nicht im normalen Bild in der App selbst.
+  // Kleiner, halbtransparenter dunkler Streifen mit weißer Schrift, damit
+  // er sowohl auf hellen als auch dunklen Fotos lesbar, aber unaufdringlich
+  // bleibt. `setGState`/`GState` (Transparenz) ist nur bei der echten
+  // jsPDF-Bibliothek vorhanden, nicht bei den einfachen Fakes in den Tests -
+  // ohne diese Funktion wird der Streifen einfach undurchsichtig gezeichnet.
+  _pdfWasserzeichenZeichnen(doc, bildX, bildY, bildBreite, bildHoehe) {
+    if (bildBreite < 25 || bildHoehe < 10) return; // Bild zu klein für ein noch dezentes Wasserzeichen
+    const text = "Rezeptbuch-Card";
+    const kannTransparenz = typeof doc.setGState === "function" && typeof doc.GState === "function";
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7);
+    const innenAbstandX = 1.8;
+    const boxHoehe = 4.2;
+    const textBreite = typeof doc.getTextWidth === "function" ? doc.getTextWidth(text) : text.length * 1.5;
+    const boxBreite = Math.min(textBreite + innenAbstandX * 2, bildBreite - 2);
+    const boxX = bildX + bildBreite - boxBreite - 1.5;
+    const boxY = bildY + bildHoehe - boxHoehe - 1.5;
+
+    if (kannTransparenz) doc.setGState(new doc.GState({ opacity: 0.55 }));
+    doc.setFillColor(20, 20, 20);
+    if (typeof doc.roundedRect === "function") {
+      doc.roundedRect(boxX, boxY, boxBreite, boxHoehe, 0.8, 0.8, "F");
+    } else {
+      doc.rect(boxX, boxY, boxBreite, boxHoehe, "F");
+    }
+    if (kannTransparenz) doc.setGState(new doc.GState({ opacity: 0.9 }));
+    doc.setTextColor(255, 255, 255);
+    doc.text(text, boxX + innenAbstandX, boxY + boxHoehe - 1.3);
+    if (kannTransparenz) doc.setGState(new doc.GState({ opacity: 1 }));
+    doc.setTextColor(20); // Textfarbe für alles Nachfolgende zurücksetzen
+  }
+
   async _pdfErstellen(r) {
     const jsPDFKlasse = await this._jsPdfLaden();
     const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
@@ -7703,6 +7738,7 @@ class RezeptbuchCard extends HTMLElement {
         const bildX = linkeX + (spaltenBreite - bildBreiteSpalte) / 2;
         try {
           doc.addImage(bild.datenUrl, "JPEG", bildX, yLinks, bildBreiteSpalte, bildHoeheSpalte);
+          this._pdfWasserzeichenZeichnen(doc, bildX, yLinks, bildBreiteSpalte, bildHoeheSpalte);
         } catch (e) {
           console.error("Rezeptbuch: Bild konnte nicht ins PDF eingefügt werden", e);
         }
@@ -7763,6 +7799,7 @@ class RezeptbuchCard extends HTMLElement {
         const bildX = margin + (usableWidth - bildBreite) / 2;
         try {
           doc.addImage(bild.datenUrl, "JPEG", bildX, y, bildBreite, bildHoehe);
+          this._pdfWasserzeichenZeichnen(doc, bildX, y, bildBreite, bildHoehe);
           y += bildHoehe + 8;
         } catch (e) {
           console.error("Rezeptbuch: Bild konnte nicht ins PDF eingefügt werden", e);
@@ -7850,7 +7887,12 @@ class RezeptbuchCard extends HTMLElement {
     // dann keinen Zugriff mehr auf die Home-Assistant-Instanz, um ein
     // "/local/..."-Bild nachzuladen.
     const bild = r.image ? await this._bildAlsDatenUrlLaden(r.image) : null;
-    const bildHtml = bild ? `<img src="${bild.datenUrl}" alt="">` : "";
+    // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur in
+    // dieser eigenständig geteilten/gedruckten Datei, nicht im normalen
+    // Bild in der App selbst.
+    const bildHtml = bild
+      ? `<div class="bild-wrapper"><img src="${bild.datenUrl}" alt=""><span class="wasserzeichen">Rezeptbuch-Card</span></div>`
+      : "";
 
     const htmlDatei = `<!DOCTYPE html>
 <html lang="${this._sprache()}">
@@ -7863,7 +7905,13 @@ class RezeptbuchCard extends HTMLElement {
     font-family: Georgia, "Times New Roman", serif; max-width: 700px; margin: 30px auto;
     padding: 0 20px; color: #2b2b2b; background: #fdfbf8;
   }
-  img { width: 100%; max-height: 340px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
+  .bild-wrapper { position: relative; margin-bottom: 20px; }
+  .bild-wrapper img { width: 100%; max-height: 340px; object-fit: cover; border-radius: 12px; display: block; }
+  .wasserzeichen {
+    position: absolute; right: 10px; bottom: 10px; background: rgba(20, 20, 20, 0.55);
+    color: rgba(255, 255, 255, 0.9); font-size: 11px; padding: 3px 8px; border-radius: 4px;
+    font-family: Georgia, "Times New Roman", serif;
+  }
   h1 { font-size: 1.9em; margin: 0 0 4px; }
   .meta { color: #8a8a8a; margin-bottom: 22px; font-size: 0.95em; }
   hr { border: none; height: 3px; width: 56px; background: #c1652f; border-radius: 2px; margin: 0 0 22px; }

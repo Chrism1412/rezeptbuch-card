@@ -2453,8 +2453,11 @@ async function testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser) {
         setTextColor() {}
         setDrawColor() {}
         setLineWidth() {}
+        setFillColor() {}
         line() {}
         text() {}
+        getTextWidth(t) { return t.length * 1.5; }
+        roundedRect() {}
         splitTextToSize(text) { return [text]; }
         addPage() {}
         addImage(datenUrl, format, x, y, breite, hoehe) { aufrufe.push({ x, y, breite, hoehe }); }
@@ -2519,8 +2522,11 @@ async function testPdfZweispaltigesLayoutBeiKurzemRezept(browser) {
         setTextColor() {}
         setDrawColor() {}
         setLineWidth() {}
+        setFillColor() {}
         line() {}
         text(text, x, y) { texte.push({ text, x, y }); }
+        getTextWidth(t) { return t.length * 1.5; }
+        roundedRect() {}
         splitTextToSize(text) { return [text]; }
         addPage() { seiten++; }
         addImage(datenUrl, format, x, y, breite, hoehe) { bilder.push({ x, y, breite, hoehe }); }
@@ -2618,6 +2624,97 @@ async function testPdfEinspaltigerFallbackBeiLangemRezept(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Dezentes "Rezeptbuch-Card"-Wasserzeichen unten rechts im Rezeptbild -
+// nur in der exportierten PDF-/HTML-Datei (Teilen/Drucken), nicht im
+// normalen Bild in der App selbst.
+// ---------------------------------------------------------------------
+async function testPdfWasserzeichenAufBild(browser) {
+  console.log("\nTest: PDF-Export zeichnet dezentes 'Rezeptbuch-Card'-Wasserzeichen auf das Bild");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA",
+        breite: 800,
+        hoehe: 450,
+      });
+
+      const texte = [];
+      const boxen = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        setFillColor() {}
+        line() {}
+        text(text, x, y) { texte.push({ text, x, y }); }
+        getTextWidth(t) { return t.length * 1.5; }
+        roundedRect(x, y, w, h) { boxen.push({ x, y, w, h }); }
+        splitTextToSize(t) { return [t]; }
+        addPage() {}
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      await karte._pdfErstellen(rezept);
+      return {
+        wasserzeichenText: texte.find((t) => t.text === "Rezeptbuch-Card"),
+        anzahlBoxen: boxen.length,
+      };
+    }, uid);
+
+    assert(!!ergebnis.wasserzeichenText, "der Schriftzug 'Rezeptbuch-Card' wird ins PDF gezeichnet");
+    assert(ergebnis.anzahlBoxen === 1, "ein dezenter Hintergrund-Streifen für die Lesbarkeit des Wasserzeichens wird gezeichnet");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testHtmlExportWasserzeichenAufBild(browser) {
+  console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const html = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA",
+        breite: 800,
+        hoehe: 450,
+      });
+      const ergebnis = await karte._htmlDateiErstellen(rezept);
+      return await ergebnis.blob.text();
+    }, uid);
+
+    assert(html.includes('class="wasserzeichen"'), "die generierte HTML-Datei enthält das Wasserzeichen-Element");
+    assert(html.includes(">Rezeptbuch-Card<"), "das Wasserzeichen zeigt den Text 'Rezeptbuch-Card'");
+    assert(html.includes('class="bild-wrapper"'), "Bild und Wasserzeichen stecken in einem gemeinsamen, relativ positionierten Wrapper");
+  } finally {
+    await page.close();
+  }
+}
+
 (async () => {
   const browser = await chromium.launch();
   try {
@@ -2675,6 +2772,8 @@ async function testPdfEinspaltigerFallbackBeiLangemRezept(browser) {
     await testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser);
     await testPdfZweispaltigesLayoutBeiKurzemRezept(browser);
     await testPdfEinspaltigerFallbackBeiLangemRezept(browser);
+    await testPdfWasserzeichenAufBild(browser);
+    await testHtmlExportWasserzeichenAufBild(browser);
   } finally {
     await browser.close();
   }
