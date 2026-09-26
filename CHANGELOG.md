@@ -4,7 +4,7 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [1.0.3] - 2026-09-26
+## [1.0.4] - 2026-09-26
 
 ### Hinzugefügt
 - **Seitenweise Rezeptübersicht**: bei vielen Rezepten lässt sich die
