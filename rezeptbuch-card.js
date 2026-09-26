@@ -7818,15 +7818,27 @@ class RezeptbuchCard extends HTMLElement {
         }
       }
 
-      // Letzte Rückfallebene: Datei herunterladen
+      // Letzte Rückfallebene: In eingebetteten WebViews ohne Web-Share-API
+      // (z. B. der Home-Assistant-App) wird ein unsichtbarer <a download>-Link
+      // oft stillschweigend ignoriert - es passiert dann scheinbar gar nichts.
+      // window.open() mit target="_blank" wird von solchen Apps hingegen meist
+      // an den System-Browser/-PDF-Betrachter weitergegeben, wo sich die Datei
+      // normal öffnen, speichern, teilen oder drucken lässt. Nur falls das vom
+      // Popup-Blocker verhindert wird (window.open liefert dann null/undefined),
+      // greift als letzter Versuch der klassische Download-Link.
       const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = dateiname;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const neuesFenster = window.open(url, "_blank");
+      if (!neuesFenster) {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = dateiname;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      // Verzögert freigeben statt sofort - das neue Fenster/Tab braucht die
+      // Blob-URL noch, um die Datei tatsächlich zu laden.
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
     } catch (fehler) {
       console.error("Rezeptbuch: Teilen/Drucken fehlgeschlagen", fehler);
       alert(this._t("fehler_teilen_drucken", { fehler: fehler.message || fehler }));

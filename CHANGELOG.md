@@ -4,6 +4,19 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.0.3] - 2026-09-26
+
+### Behoben
+- **"Teilen / Drucken" tat in der Home-Assistant-App (bzw. anderen
+  eingebetteten WebViews ohne Web-Share-API) scheinbar gar nichts**: die
+  letzte Rückfallebene (ein unsichtbarer Download-Link) wird von solchen
+  Apps oft stillschweigend ignoriert. Die Karte öffnet die erzeugte PDF-
+  bzw. HTML-Datei jetzt stattdessen über `window.open()` in einem neuen
+  Tab - das wird von der App an den System-Browser/-Betrachter
+  weitergegeben, wo sich die Datei normal öffnen, speichern, teilen oder
+  drucken lässt. Nur falls das (z. B. durch einen Popup-Blocker) verhindert
+  wird, greift weiterhin der klassische Download-Link als letzter Versuch.
+
 ## [1.0.2] - 2026-09-25
 
 ### Hinzugefügt

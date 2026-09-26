@@ -2308,6 +2308,106 @@ async function testPlatzhalterMitDollarZeichen(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Teilen/Drucken in eingebetteten WebViews ohne Web-Share-API (z. B. die
+// Home-Assistant-App): dort wurde gemeldet, dass beim Tippen auf
+// "Teilen/Drucken" scheinbar gar nichts passiert. Ursache: die alte letzte
+// Rückfallebene (unsichtbarer <a download>-Link) wird von solchen WebViews
+// oft stillschweigend ignoriert. Der Fix öffnet die Datei statt dessen über
+// window.open() in einem neuen Tab, was von der App an den System-Browser/
+// -Betrachter weitergegeben wird.
+// ---------------------------------------------------------------------
+async function testTeilenDruckenOhneWebShareApiOeffnetNeuesFenster(browser) {
+  console.log("\nTest: Teilen/Drucken ohne Web-Share-API öffnet ein neues Fenster statt nichts zu tun");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+
+      // Simuliert eine WebView ohne Web-Share-API.
+      delete navigator.share;
+      delete navigator.canShare;
+
+      // jsPDF-Laden im Test überspringen (kein Netzwerkzugriff) - die Karte
+      // fällt dann automatisch auf die eigenständige HTML-Datei zurück.
+      karte._jsPdfLaden = () => Promise.reject(new Error("kein Netzwerk im Test"));
+
+      window.__geoeffneteUrls = [];
+      window.open = (url) => {
+        window.__geoeffneteUrls.push(url);
+        return {}; // simuliert ein erfolgreich geöffnetes Fenster/Tab
+      };
+      let downloadLinkGeklickt = false;
+      const echtesCreateElement = document.createElement.bind(document);
+      document.createElement = (tag) => {
+        const el = echtesCreateElement(tag);
+        if (tag === "a") {
+          const echterClick = el.click.bind(el);
+          el.click = () => { downloadLinkGeklickt = true; echterClick(); };
+        }
+        return el;
+      };
+
+      await karte._rezeptDrucken(rezept);
+
+      return {
+        anzahlGeoeffnet: window.__geoeffneteUrls.length,
+        ersteUrlIstBlob: (window.__geoeffneteUrls[0] || "").startsWith("blob:"),
+        downloadLinkGeklickt,
+        alerts: window.__alertAufrufe,
+      };
+    }, uid);
+
+    assert(ergebnis.anzahlGeoeffnet === 1, "window.open() wird genau einmal mit der erzeugten Datei aufgerufen");
+    assert(ergebnis.ersteUrlIstBlob, "die geöffnete URL ist eine Blob-URL der erzeugten Datei");
+    assert(!ergebnis.downloadLinkGeklickt, "der klassische Download-Link wird NICHT zusätzlich geklickt, wenn window.open() erfolgreich war");
+    assert(ergebnis.alerts.length === 0, "kein Fehler-Alert, obwohl Web-Share-API und Netzwerk fehlen");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiertWird(browser) {
+  console.log("\nTest: Teilen/Drucken nutzt Download-Link, falls window.open() blockiert wird (z.B. Popup-Blocker)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+
+      delete navigator.share;
+      delete navigator.canShare;
+      karte._jsPdfLaden = () => Promise.reject(new Error("kein Netzwerk im Test"));
+
+      window.open = () => null; // simuliert einen Popup-Blocker
+      let downloadLinkGeklickt = false;
+      const echtesCreateElement = document.createElement.bind(document);
+      document.createElement = (tag) => {
+        const el = echtesCreateElement(tag);
+        if (tag === "a") {
+          const echterClick = el.click.bind(el);
+          el.click = () => { downloadLinkGeklickt = true; };
+        }
+        return el;
+      };
+
+      await karte._rezeptDrucken(rezept);
+      return { downloadLinkGeklickt };
+    }, uid);
+
+    assert(ergebnis.downloadLinkGeklickt, "wird window.open() blockiert, greift weiterhin der klassische Download-Link als letzter Versuch");
+  } finally {
+    await page.close();
+  }
+}
+
 (async () => {
   const browser = await chromium.launch();
   try {
@@ -2360,6 +2460,8 @@ async function testPlatzhalterMitDollarZeichen(browser) {
     await testSchwiizerduetsch(browser);
     await testSpracheWechseltOhneNeuzeichnen(browser);
     await testPlatzhalterMitDollarZeichen(browser);
+    await testTeilenDruckenOhneWebShareApiOeffnetNeuesFenster(browser);
+    await testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiertWird(browser);
   } finally {
     await browser.close();
   }
