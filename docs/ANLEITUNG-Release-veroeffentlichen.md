@@ -21,7 +21,8 @@ leicht durcheinandergehen:
 
 Ein einfacher Push ohne neues Release ist völlig in Ordnung für kleine
 Zwischenstände; ein Release lohnt sich, wenn genug zusammengekommen ist
-(z. B. wie jetzt bei diesem Wechsel von `v1.0.0` auf `v2.0.0`).
+(z. B. wie jetzt bei diesem Wechsel vom zuletzt veröffentlichten `v1.0.4`
+auf `v2.0.0`).
 
 ## 1. Vor dem Release: Stand prüfen
 
