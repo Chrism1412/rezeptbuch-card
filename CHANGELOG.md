@@ -27,11 +27,13 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Kartenfeld `tts_notify_service` stattdessen die TTS-Benachrichtigung der
   Companion App nutzen - liest über die native System-Sprachausgabe des
   Geräts vor, komplett an der WebView vorbei. Für Haushalte mit mehreren
-  Home-Assistant-Nutzern lässt sich zusätzlich `tts_notify_services` als
-  Zuordnung Anzeigename → Dienst hinterlegen, damit automatisch das
-  richtige Smartphone der/des gerade angemeldeten Person genutzt wird,
-  statt ein einzelnes Gerät für alle Betrachter der Karte fest
-  einzutragen. Siehe README.
+  Home-Assistant-Nutzern lässt sich zusätzlich eine Zuordnung
+  Anzeigename → Dienst hinterlegen, damit automatisch das richtige
+  Smartphone der/des gerade angemeldeten Person genutzt wird, statt ein
+  einzelnes Gerät für alle Betrachter der Karte fest einzutragen - entweder
+  bequem über den neuen Knopf **"Optionen"** in der Kopfzeile (Zuordnung
+  wird direkt in der To-do-Liste gespeichert, kein YAML-Editieren nötig)
+  oder über die YAML-Kartenoption `tts_notify_services`. Siehe README.
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen

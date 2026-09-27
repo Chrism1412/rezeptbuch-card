@@ -371,15 +371,30 @@ verschickte TTS-Benachrichtigung lässt sich technisch nicht mehr
 abbrechen - der "Vorlesen aus"-Knopf verhindert dann nur weitere,
 zukünftige Ansagen.
 
-**Mehrere Home-Assistant-Nutzer/-Geräte (`tts_notify_services`):** Nutzen
-mehrere Personen mit jeweils eigenem Home-Assistant-Konto dieselbe Karte
-(z.B. ein gemeinsames Dashboard am Küchen-Tablet), lässt sich statt eines
-einzelnen `tts_notify_service` eine Zuordnung von Home-Assistant-
-Anzeigename zu jeweiligem `notify.mobile_app_*`-Dienst hinterlegen. Die
-Karte ermittelt beim Vorlesen automatisch, wer gerade angemeldet ist, und
-wählt dementsprechend das richtige Smartphone aus - es muss also nicht
-für alle Betrachter der Karte ein einzelnes Gerät fest eingetragen
-werden:
+**Mehrere Home-Assistant-Nutzer/-Geräte:** Nutzen mehrere Personen mit
+jeweils eigenem Home-Assistant-Konto dieselbe Karte (z.B. ein gemeinsames
+Dashboard am Küchen-Tablet), lässt sich statt eines einzelnen Geräts eine
+Zuordnung von Home-Assistant-Anzeigename zu jeweiligem
+`notify.mobile_app_*`-Dienst hinterlegen. Die Karte ermittelt beim
+Vorlesen automatisch, wer gerade angemeldet ist, und wählt dementsprechend
+das richtige Smartphone aus - es muss also nicht für alle Betrachter der
+Karte ein einzelnes Gerät fest eingetragen werden.
+
+Am einfachsten geht das direkt in der Karte, ohne die YAML-Konfiguration
+anzufassen: Knopf **"Optionen"** oben in der Kopfzeile öffnet einen
+Dialog, in dem sich beliebig viele Zeilen "Home-Assistant-Anzeigename →
+notify-Dienst" hinzufügen und wieder entfernen lassen, plus ein
+Standard-Gerät für nicht aufgeführte Nutzer. Ein Klick auf "Speichern"
+reicht - die Zuordnung wird (wie Rezepte, Wochenplan & Co.) direkt in der
+verknüpften To-do-Liste abgelegt und gilt dadurch geräteübergreifend für
+alle, die dieselbe Liste nutzen. Die Anzeigenamen sind die der
+jeweiligen Home-Assistant-Benutzerkonten (zu finden unter Einstellungen →
+Personen), die notify-Dienstnamen erscheinen beim Tippen als
+Autovervollständigung, sofern Home Assistant sie kennt (der Gerätename
+ohne das führende "notify.", z.B. `mobile_app_chris_smartphone`).
+
+Alternativ (oder zusätzlich, als Fallback) lässt sich dieselbe Zuordnung
+auch über die YAML-Kartenkonfiguration hinterlegen:
 
 ```yaml
 type: custom:rezeptbuch-card
@@ -390,12 +405,13 @@ tts_notify_services:
 tts_notify_service: mobile_app_chris_smartphone
 ```
 
-Die Schlüssel in `tts_notify_services` sind die Anzeigenamen der
-jeweiligen Home-Assistant-Benutzerkonten (zu finden unter Einstellungen →
-Personen). Ist der gerade angemeldete Nutzer dort nicht eingetragen (oder
-`tts_notify_services` gar nicht gesetzt), greift `tts_notify_service` als
-Standard/Fallback; ist auch dieser nicht gesetzt, wird stattdessen wieder
-die Web-Sprachausgabe verwendet.
+Rangfolge, falls mehrere Quellen gleichzeitig etwas für den angemeldeten
+Nutzer hinterlegt haben: zuerst die im "Optionen"-Dialog gespeicherte
+Zuordnung, dann `tts_notify_services` aus der YAML-Konfiguration, dann das
+im "Optionen"-Dialog hinterlegte Standard-Gerät, zuletzt das einzelne
+`tts_notify_service` aus der YAML-Konfiguration. Ist für den angemeldeten
+Nutzer nirgends etwas hinterlegt, wird stattdessen wieder die
+Web-Sprachausgabe verwendet.
 
 ## Projektstruktur
 

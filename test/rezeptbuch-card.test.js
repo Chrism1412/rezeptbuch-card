@@ -3736,6 +3736,141 @@ async function testKochmodusVorlesenFaelltBeiUnbekanntemNutzerAufTtsNotifyServic
   }
 }
 
+async function testOptionenModalSpeichertZuordnungUndStandardgeraet(browser) {
+  console.log("\nTest: Optionen-Dialog speichert die im Dialog eingegebene Nutzer-Zuordnung und das Standard-Gerät (ohne YAML)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte.shadowRoot.getElementById("optionen-btn").click();
+
+      // Erste (einzige) Zeile ausfüllen, ohne vorher extra "+ Zeile
+      // hinzufügen" zu klicken - der Dialog startet ohne gespeicherte
+      // Zuordnung also mit einer leeren Zeilenliste.
+      karte.shadowRoot.getElementById("optionen-zeile-hinzufuegen-btn").click();
+      const nameFeld = karte.shadowRoot.querySelector('input[data-feld="name"][data-index="0"]');
+      const dienstFeld = karte.shadowRoot.querySelector('input[data-feld="dienst"][data-index="0"]');
+      nameFeld.value = "Katja";
+      nameFeld.dispatchEvent(new Event("input"));
+      dienstFeld.value = "mobile_app_katjas_handy";
+      dienstFeld.dispatchEvent(new Event("input"));
+
+      const standardFeld = karte.shadowRoot.getElementById("optionen-standard-feld");
+      standardFeld.value = "mobile_app_gemeinsames_tablet";
+      standardFeld.dispatchEvent(new Event("input"));
+
+      karte.shadowRoot.getElementById("optionen-speichern-btn").click();
+      await new Promise((r) => setTimeout(r, 10));
+
+      const modalSichtbar = karte.shadowRoot.getElementById("optionen-modal").style.display !== "none";
+      const gespeichertesItem = window.__speicher.find((i) => i.summary === "__rezeptbuch_einstellungen__");
+
+      return {
+        modalSichtbar,
+        einstellungen: karte._einstellungen,
+        rezepteEnthaeltMarker: karte._rezepte.some((r) => r.title === "__rezeptbuch_einstellungen__"),
+        gespeichertesItemVorhanden: !!gespeichertesItem,
+      };
+    });
+
+    assert(!ergebnis.modalSichtbar, "der Dialog schließt sich nach dem Speichern");
+    assert(
+      ergebnis.einstellungen.ttsNotifyServices.Katja === "mobile_app_katjas_handy",
+      `die eingegebene Zuordnung wird in this._einstellungen übernommen (tatsächlich: ${JSON.stringify(ergebnis.einstellungen.ttsNotifyServices)})`
+    );
+    assert(
+      ergebnis.einstellungen.ttsNotifyServiceStandard === "mobile_app_gemeinsames_tablet",
+      `das Standard-Gerät wird übernommen (tatsächlich: ${ergebnis.einstellungen.ttsNotifyServiceStandard})`
+    );
+    assert(ergebnis.gespeichertesItemVorhanden, "die Einstellungen werden als verstecktes Marker-Item in der To-do-Liste gespeichert (kein YAML nötig)");
+    assert(!ergebnis.rezepteEnthaeltMarker, "das Marker-Item taucht NICHT als (kaputtes) Rezept in der Übersicht auf");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testOptionenModalZuordnungWirdBeimVorlesenSofortGenutzt(browser) {
+  console.log("\nTest: Eine im Optionen-Dialog gespeicherte Zuordnung wird beim Vorlesen bevorzugt genutzt (auch ohne 'tts_notify_services' in der YAML-Konfiguration)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      // hass.user.name ist in der Testumgebung standardmäßig "Erika".
+      karte.shadowRoot.getElementById("optionen-btn").click();
+      karte.shadowRoot.getElementById("optionen-zeile-hinzufuegen-btn").click();
+      const nameFeld = karte.shadowRoot.querySelector('input[data-feld="name"][data-index="0"]');
+      const dienstFeld = karte.shadowRoot.querySelector('input[data-feld="dienst"][data-index="0"]');
+      nameFeld.value = "Erika";
+      nameFeld.dispatchEvent(new Event("input"));
+      dienstFeld.value = "mobile_app_erikas_ui_handy";
+      dienstFeld.dispatchEvent(new Event("input"));
+      karte.shadowRoot.getElementById("optionen-speichern-btn").click();
+      await new Promise((r) => setTimeout(r, 10));
+
+      return karte._kochmodusTtsNotifyServiceErmitteln();
+    });
+
+    assert(
+      ergebnis === "mobile_app_erikas_ui_handy",
+      `der Vorlesen-Resolver nutzt die per Optionen-Dialog gespeicherte Zuordnung für den angemeldeten Nutzer (tatsächlich: ${ergebnis})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testOptionenModalZeileEntfernenUndAbbrechenVerwerfenAenderungen(browser) {
+  console.log("\nTest: Zeile entfernen funktioniert, und 'Abbrechen' verwirft alle Änderungen im Optionen-Dialog");
+  const page = await neueTestUmgebung(browser, { tts_notify_service: "mobile_app_config_fallback" });
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte.shadowRoot.getElementById("optionen-btn").click();
+
+      // Zwei Zeilen anlegen, dann die erste wieder entfernen.
+      karte.shadowRoot.getElementById("optionen-zeile-hinzufuegen-btn").click();
+      karte.shadowRoot.getElementById("optionen-zeile-hinzufuegen-btn").click();
+      let zeilenNachHinzufuegen = karte.shadowRoot.querySelectorAll(".optionen-zeile").length;
+
+      karte.shadowRoot.querySelector('.optionen-zeile-entfernen[data-index="0"]').click();
+      let zeilenNachEntfernen = karte.shadowRoot.querySelectorAll(".optionen-zeile").length;
+
+      // Verbleibende Zeile ausfüllen, aber dann NICHT speichern, sondern
+      // abbrechen - die Zuordnung darf danach unverändert (leer) bleiben.
+      const nameFeld = karte.shadowRoot.querySelector('input[data-feld="name"][data-index="0"]');
+      if (nameFeld) {
+        nameFeld.value = "Sollte nicht gespeichert werden";
+        nameFeld.dispatchEvent(new Event("input"));
+      }
+      karte.shadowRoot.getElementById("optionen-abbrechen-btn").click();
+
+      const modalSichtbar = karte.shadowRoot.getElementById("optionen-modal").style.display !== "none";
+
+      return {
+        zeilenNachHinzufuegen,
+        zeilenNachEntfernen,
+        modalSichtbar,
+        einstellungenNachAbbrechen: karte._einstellungen,
+        ttsNotifyService: karte._kochmodusTtsNotifyServiceErmitteln(),
+      };
+    });
+
+    assert(ergebnis.zeilenNachHinzufuegen === 2, `zwei Zeilen wurden angelegt (tatsächlich: ${ergebnis.zeilenNachHinzufuegen})`);
+    assert(ergebnis.zeilenNachEntfernen === 1, `nach dem Entfernen bleibt genau eine Zeile übrig (tatsächlich: ${ergebnis.zeilenNachEntfernen})`);
+    assert(!ergebnis.modalSichtbar, "'Abbrechen' schließt den Dialog");
+    assert(
+      Object.keys(ergebnis.einstellungenNachAbbrechen.ttsNotifyServices).length === 0,
+      "nach 'Abbrechen' wurde KEINE Zuordnung gespeichert"
+    );
+    assert(
+      ergebnis.ttsNotifyService === "mobile_app_config_fallback",
+      `ohne gespeicherte UI-Einstellungen greift weiterhin der YAML-Fallback 'tts_notify_service' (tatsächlich: ${ergebnis.ttsNotifyService})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -4068,6 +4203,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusVorlesenNutztTtsNotifyServiceStattWebSpeech(browser);
     await testKochmodusVorlesenNutztTtsNotifyServicesFuerAngemeldetenNutzer(browser);
     await testKochmodusVorlesenFaelltBeiUnbekanntemNutzerAufTtsNotifyServiceZurueck(browser);
+    await testOptionenModalSpeichertZuordnungUndStandardgeraet(browser);
+    await testOptionenModalZuordnungWirdBeimVorlesenSofortGenutzt(browser);
+    await testOptionenModalZeileEntfernenUndAbbrechenVerwerfenAenderungen(browser);
   } finally {
     await browser.close();
   }
