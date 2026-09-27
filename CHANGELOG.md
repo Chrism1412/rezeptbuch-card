@@ -4,7 +4,14 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [1.0.5] - 2026-09-27
+## [2.0.0] - 2026-09-27
+
+Erstes veröffentlichtes Update seit `v1.0.0` - fasst alle seitdem
+angesammelten Änderungen (intern zwischenzeitlich als 1.0.1-1.0.5
+geführt, aber nie einzeln veröffentlicht) in einer Version zusammen.
+Der Sprung auf eine neue Hauptversion (statt z.B. `1.1.0`) spiegelt den
+Umfang wider: Kochmodus, Sammel-PDF-Export und Statistik sind komplett
+neue Kernfunktionen.
 
 ### Hinzugefügt
 - **Kochmodus**: neue Vollbild-Schritt-für-Schritt-Ansicht in der
@@ -34,16 +41,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   im PDF (und im Inhaltsverzeichnis) sind dabei immer nach Kategorie
   sortiert, unabhängig von Tags oder der aktuellen Sortierung der
   Übersicht.
-
-### Geändert
-- **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
-  oberhalb der Kacheln (bisher nur unterhalb) - bei vielen Rezepten muss
-  man dadurch nicht mehr erst nach unten scrollen, nur um die Seite zu
-  wechseln.
-
-## [1.0.4] - 2026-09-26
-
-### Hinzugefügt
 - **Seitenweise Rezeptübersicht**: bei vielen Rezepten lässt sich die
   Übersicht jetzt über die neue Kartenoption `items_per_page` in Seiten
   aufteilen (Standard, wenn nicht gesetzt: 20 pro Seite), mit
@@ -59,35 +56,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   informativ, ohne Internetzugang bleibt die Karte einfach ohne Hinweis.
   Einmal weggeklickt, erscheint der Hinweis für dieselbe Version nicht
   erneut.
-
-### Behoben
-- **"Teilen / Drucken" tat in der Home-Assistant-App (bzw. anderen
-  eingebetteten WebViews ohne Web-Share-API) scheinbar gar nichts**: die
-  letzte Rückfallebene (ein unsichtbarer Download-Link) wird von solchen
-  Apps oft stillschweigend ignoriert. Die Karte öffnet die erzeugte PDF-
-  bzw. HTML-Datei jetzt stattdessen über `window.open()` in einem neuen
-  Tab - das wird von der App an den System-Browser/-Betrachter
-  weitergegeben, wo sich die Datei normal öffnen, speichern, teilen oder
-  drucken lässt. Nur falls das (z. B. durch einen Popup-Blocker) verhindert
-  wird, greift weiterhin der klassische Download-Link als letzter Versuch.
-- **Rezeptbild im PDF-Export war verzerrt/seitlich gestreckt**: Die
-  70mm-Höhenbegrenzung für das Bild kappte bisher nur die Höhe, ließ die
-  Breite aber auf voller Seitenbreite stehen - dadurch wurde jedes Bild,
-  das diese Grenze erreichte (z. B. breite/querformatige Fotos), optisch
-  in die Breite gezogen. Die Breite wird jetzt proportional mit
-  verkleinert und das (dann schmalere) Bild horizontal zentriert.
-
-### Geändert
-- **PDF-Export zeigt jetzt, wenn es auf eine Seite passt, dieselbe
-  zweispaltige Aufteilung wie die Detailansicht der Karte auf breiten
-  Bildschirmen**: Bild und Zutaten links, Zubereitung rechts. Ist ein
-  Rezept dafür zu lang (würde nicht zweispaltig auf eine Seite passen),
-  nutzt der Export automatisch weiterhin die bisherige einspaltige, über
-  mehrere Seiten laufende Darstellung, damit nichts abgeschnitten wird.
-
-## [1.0.2] - 2026-09-25
-
-### Hinzugefügt
 - **Neue Kartenoption `ask_cooked: false`**: schaltet die "Hast du
   zubereitet?"-Abfrage beim Verlassen eines geöffneten Rezepts komplett
   ab, für alle, die diese Nachfrage nicht möchten. Bereits erfasste
@@ -110,8 +78,45 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   **Querformat** (typischerweise 650-930px breit), ganz ohne eigens
   aktivierte "Desktopwebseite" im mobilen Browser. Auf einem Handy im
   Hochformat bleibt die einspaltige Ansicht unverändert erhalten.
+- **Tipp zur Panel-Ansicht in der README**: Hinweis samt fertigem YAML-
+  Beispiel, wie sich die Karte über eine eigene Home-Assistant-**Panel**-
+  Ansicht (statt der schmaleren Standard-Sections-Ansicht) auf die volle
+  Bildschirmbreite bringen lässt - reine Dokumentation, keine Code-Änderung
+  an der Karte selbst.
+- **Neuer README-Abschnitt "Aktualisieren"**: Hinweis, dass nach einem
+  Update der `rezeptbuch-card.js` oft ein Versions-Parameter an der
+  Ressourcen-URL (z. B. `/local/rezeptbuch-card.js?v=2`) nötig ist, damit
+  Home Assistant die neue Version auch wirklich lädt statt eine
+  zwischengespeicherte alte Version weiterzuverwenden.
+
+### Geändert
+- **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
+  oberhalb der Kacheln (bisher nur unterhalb) - bei vielen Rezepten muss
+  man dadurch nicht mehr erst nach unten scrollen, nur um die Seite zu
+  wechseln.
+- **PDF-Export zeigt jetzt, wenn es auf eine Seite passt, dieselbe
+  zweispaltige Aufteilung wie die Detailansicht der Karte auf breiten
+  Bildschirmen**: Bild und Zutaten links, Zubereitung rechts. Ist ein
+  Rezept dafür zu lang (würde nicht zweispaltig auf eine Seite passen),
+  nutzt der Export automatisch weiterhin die bisherige einspaltige, über
+  mehrere Seiten laufende Darstellung, damit nichts abgeschnitten wird.
 
 ### Behoben
+- **"Teilen / Drucken" tat in der Home-Assistant-App (bzw. anderen
+  eingebetteten WebViews ohne Web-Share-API) scheinbar gar nichts**: die
+  letzte Rückfallebene (ein unsichtbarer Download-Link) wird von solchen
+  Apps oft stillschweigend ignoriert. Die Karte öffnet die erzeugte PDF-
+  bzw. HTML-Datei jetzt stattdessen über `window.open()` in einem neuen
+  Tab - das wird von der App an den System-Browser/-Betrachter
+  weitergegeben, wo sich die Datei normal öffnen, speichern, teilen oder
+  drucken lässt. Nur falls das (z. B. durch einen Popup-Blocker) verhindert
+  wird, greift weiterhin der klassische Download-Link als letzter Versuch.
+- **Rezeptbild im PDF-Export war verzerrt/seitlich gestreckt**: Die
+  70mm-Höhenbegrenzung für das Bild kappte bisher nur die Höhe, ließ die
+  Breite aber auf voller Seitenbreite stehen - dadurch wurde jedes Bild,
+  das diese Grenze erreichte (z. B. breite/querformatige Fotos), optisch
+  in die Breite gezogen. Die Breite wird jetzt proportional mit
+  verkleinert und das (dann schmalere) Bild horizontal zentriert.
 - **Rezeptbild füllte auf Handys im Querformat (ohne "Desktopwebseite")
   fast den kompletten Bildschirm, teils sogar über den sichtbaren Bereich
   hinaus**: das Bild skalierte bisher rein über sein Seitenverhältnis
@@ -121,10 +126,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   sichtbaren Bildschirmhöhe (42vh) sorgt jetzt dafür, dass darunter immer
   noch etwas vom restlichen Inhalt sichtbar bleibt. Auf Hochformat-Handys
   (wo ohnehin genug Höhe vorhanden ist) ändert sich dadurch nichts.
-
-## [1.0.1] - 2026-09-25
-
-### Behoben
 - **Ausgeschriebene Einheiten wie "Gramm", "Liter", "Glas"/"Gläser" wurden
   bei der automatischen Text-/JSON-Erkennung falsch erkannt**: da die
   interne Einheiten-Erkennung nur bis zur ersten passenden (kürzeren)
@@ -148,18 +149,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Ziel führt - die Lokale To-do-Liste wird dort inzwischen direkt über
   Einstellungen → Geräte & Dienste → Integrationen → "+ Integration
   hinzufügen" → "Lokale To-do" angelegt.
-
-### Hinzugefügt
-- **Tipp zur Panel-Ansicht in der README**: Hinweis samt fertigem YAML-
-  Beispiel, wie sich die Karte über eine eigene Home-Assistant-**Panel**-
-  Ansicht (statt der schmaleren Standard-Sections-Ansicht) auf die volle
-  Bildschirmbreite bringen lässt - reine Dokumentation, keine Code-Änderung
-  an der Karte selbst.
-- **Neuer README-Abschnitt "Aktualisieren"**: Hinweis, dass nach einem
-  Update der `rezeptbuch-card.js` oft ein Versions-Parameter an der
-  Ressourcen-URL (z. B. `/local/rezeptbuch-card.js?v=2`) nötig ist, damit
-  Home Assistant die neue Version auch wirklich lädt statt eine
-  zwischengespeicherte alte Version weiterzuverwenden.
 
 ## [1.0.0] - 2026-09-24
 

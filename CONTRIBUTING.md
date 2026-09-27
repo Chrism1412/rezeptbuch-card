@@ -39,8 +39,14 @@ folgende Angaben besonders:
    frühere Fixes (z. B. Attribut-Injection, Barrierefreiheit) als Vorbild.
 4. `CHANGELOG.md` um einen Eintrag unter der jeweils passenden Kategorie
    ergänzen (Hinzugefügt / Behoben / Sicherheit) und bei Bedarf die Version
-   in `package.json` anheben (Semantic Versioning: Patch für Fixes, Minor
-   für neue, abwärtskompatible Funktionen).
+   anheben (Semantic Versioning: Patch für Fixes, Minor für neue,
+   abwärtskompatible Funktionen, Major für größere/mehrere neue
+   Kernfunktionen auf einmal oder Breaking Changes) - **an zwei Stellen
+   synchron**: `package.json` (`"version"`) UND `rezeptbuch-card.js`
+   (`const CARD_VERSION = "..."`, wird für den Versionshinweis in der
+   Karte und den GitHub-Update-Check verwendet). Den eigentlichen
+   Release-Vorgang (Tag setzen, GitHub-Release erstellen) beschreibt
+   [`docs/ANLEITUNG-Release-veroeffentlichen.md`](docs/ANLEITUNG-Release-veroeffentlichen.md).
 5. Bei einer neuen Funktion, die eine Konfiguration oder Einrichtung
    erfordert: einen neuen Abschnitt in `docs/ANLEITUNG-Backup.md` sowie
    einen Stichpunkt in der README unter "Funktionen" ergänzen.

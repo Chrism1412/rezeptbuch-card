@@ -1,5 +1,14 @@
 # Anleitung: Repo auf GitHub veröffentlichen (sauberer 1.0.0-Start)
 
+> **Hinweis:** Diese Anleitung ist historisch/einmalig - sie beschreibt
+> den ursprünglichen Frischstart des Repos mit `v1.0.0` und wurde bereits
+> durchgeführt (das Repo existiert seitdem auf GitHub). Für jedes
+> **weitere** Release (Push von Änderungen, neue Versionsnummer, neuer
+> Tag/Release - z. B. das aktuelle `v2.0.0`) gilt stattdessen
+> [`ANLEITUNG-Release-veroeffentlichen.md`](ANLEITUNG-Release-veroeffentlichen.md).
+> Diese Datei bleibt nur als Referenz erhalten, falls das Repo jemals
+> wieder komplett neu aufgesetzt werden müsste.
+
 Diese Anleitung richtet sich an dich als Projekt-Verwalter (nicht an
 Nutzer:innen der Karte). Sie beschreibt den Weg zu einem **komplett neuen**
 GitHub-Repo mit einer einzigen, sauberen Startversion `1.0.0` - ohne jede
