@@ -3288,12 +3288,207 @@ async function testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(b
 
     assert(ergebnis.dateiname === "Testsammlung.pdf", "Dateiname bleibt wie übergeben");
     assert(
-      ergebnis.seitenHinzugefuegt === ergebnis.anzahlRezepte,
-      `mit Inhaltsverzeichnis bekommt jedes Rezept eine eigene neue Seite nach der Verzeichnisseite (tatsächlich: ${ergebnis.seitenHinzugefuegt} addPage()-Aufrufe bei ${ergebnis.anzahlRezepte} Rezepten)`
+      ergebnis.seitenHinzugefuegt === ergebnis.anzahlRezepte + 1,
+      `mit Inhaltsverzeichnis gibt es eine addPage() für den Wechsel vom Deckblatt zur Verzeichnisseite, plus je eine eigene neue Seite pro Rezept (tatsächlich: ${ergebnis.seitenHinzugefuegt} addPage()-Aufrufe bei ${ergebnis.anzahlRezepte} Rezepten)`
     );
     assert(ergebnis.kochbuchTitelGefunden, "der individuelle Kochbuch-Name erscheint auf der Verzeichnisseite");
     assert(ergebnis.ueberschriftGefunden, "die Überschrift 'Inhaltsverzeichnis' erscheint auf der Verzeichnisseite");
     assert(ergebnis.alleRezepttitelGefunden.every(Boolean), "alle Rezepttitel erscheinen nummeriert im Verzeichnis");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt zeigt den Kochbuch-Namen groß/zentriert und darunter eine Bildercollage aus den Rezeptbildern");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }) });
+    await rezeptDirektAnlegen(page, { title: "Zweites Rezept", payload: leererPayload({ image: "data:image/png;base64,BBBB" }) });
+    await rezeptDirektAnlegen(page, { title: "Drittes Rezept", payload: leererPayload() }); // ohne Bild
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      // Bild-Zuschnitt für die Collage simulieren, statt echte (in Tests
+      // ungültige) Bilddaten über ein <canvas> zu dekodieren - analog zum
+      // bereits etablierten Überschreiben von _bildAlsDatenUrlLaden in
+      // anderen PDF-Tests.
+      const zugeschnitteneAufrufe = [];
+      karte._bildFuerCollageZuschneiden = (src, breite, hoehe) => {
+        zugeschnitteneAufrufe.push({ src, breite, hoehe });
+        return Promise.resolve("data:image/jpeg;base64,ZUGESCHNITTEN");
+      };
+
+      const aufrufReihenfolge = [];
+      let seitenHinzugefuegt = 0;
+      const bilder = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize(groesse) { aufrufReihenfolge.push({ typ: "fontSize", groesse }); }
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() { aufrufReihenfolge.push({ typ: "linie" }); }
+        text(text, x, y, optionen) { aufrufReihenfolge.push({ typ: "text", text, optionen }); }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() { seitenHinzugefuegt++; aufrufReihenfolge.push({ typ: "seite" }); }
+        addImage(datenUrl, format, x, y, breite, hoehe) {
+          bilder.push({ datenUrl, format, x, y, breite, hoehe });
+          aufrufReihenfolge.push({ typ: "bild" });
+        }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel: "Mein Kochbuch" });
+
+      const titelIndex = aufrufReihenfolge.findIndex((a) => a.typ === "text" && a.text === "Mein Kochbuch");
+      const ersteSeitenwechselIndex = aufrufReihenfolge.findIndex((a) => a.typ === "seite");
+      const ersterBildIndex = aufrufReihenfolge.findIndex((a) => a.typ === "bild");
+      const fontSizeVorTitel = aufrufReihenfolge.slice(0, titelIndex + 1).reverse().find((a) => a.typ === "fontSize");
+
+      return {
+        titelIndex,
+        ersteSeitenwechselIndex,
+        ersterBildIndex,
+        titelOptionen: aufrufReihenfolge[titelIndex] && aufrufReihenfolge[titelIndex].optionen,
+        fontSizeVorTitel: fontSizeVorTitel && fontSizeVorTitel.groesse,
+        anzahlBilderAufrufe: zugeschnitteneAufrufe.length,
+        bilderQuellen: zugeschnitteneAufrufe.map((a) => a.src),
+        anzahlAddImageAufrufe: bilder.length,
+        seitenHinzugefuegt,
+      };
+    });
+
+    assert(ergebnis.titelIndex !== -1, "der Kochbuch-Name wird auf dem Deckblatt gezeichnet");
+    assert(ergebnis.fontSizeVorTitel === 30, `der Titel wird in großer Schrift gezeichnet (tatsächlich: ${ergebnis.fontSizeVorTitel})`);
+    assert(
+      ergebnis.titelOptionen && ergebnis.titelOptionen.align === "center",
+      "der Titel wird zentriert gezeichnet"
+    );
+    assert(
+      ergebnis.titelIndex < ergebnis.ersterBildIndex,
+      "der Titel wird VOR der Bildercollage gezeichnet (Titel oben, Collage darunter)"
+    );
+    assert(
+      ergebnis.ersterBildIndex < ergebnis.ersteSeitenwechselIndex,
+      "die Bildercollage steht noch auf dem Deckblatt, VOR dem Seitenwechsel zur Inhaltsverzeichnis-Seite"
+    );
+    assert(
+      ergebnis.anzahlBilderAufrufe === 2,
+      `nur die beiden Rezepte MIT Bild landen in der Collage, das Rezept ohne Bild wird übersprungen (tatsächlich: ${ergebnis.anzahlBilderAufrufe})`
+    );
+    assert(
+      ergebnis.bilderQuellen.includes("data:image/png;base64,AAAA") && ergebnis.bilderQuellen.includes("data:image/png;base64,BBBB"),
+      "die Collage nutzt die tatsächlichen Rezeptbilder als Quelle für den Zuschnitt"
+    );
+    assert(ergebnis.anzahlAddImageAufrufe === 2, "für jedes zugeschnittene Bild wird genau einmal addImage aufgerufen");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfDeckblattBegrenztCollageAufAchtBilder(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt zeigt maximal 8 Bilder in der Collage, auch bei mehr Rezepten mit Foto");
+  const page = await neueTestUmgebung(browser);
+  try {
+    for (let i = 1; i <= 10; i++) {
+      await rezeptDirektAnlegen(page, { title: `Rezept ${i}`, payload: leererPayload({ image: `data:image/png;base64,BILD${i}` }) });
+    }
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const zugeschnitteneAufrufe = [];
+      karte._bildFuerCollageZuschneiden = (src) => {
+        zugeschnitteneAufrufe.push(src);
+        return Promise.resolve("data:image/jpeg;base64,ZUGESCHNITTEN");
+      };
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text() {}
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() {}
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel: "Großes Kochbuch" });
+
+      return { anzahlBilderAufrufe: zugeschnitteneAufrufe.length };
+    });
+
+    assert(
+      ergebnis.anzahlBilderAufrufe === 8,
+      `die Collage begrenzt sich auf 8 Bilder, auch wenn mehr Rezepte mit Foto vorhanden sind (tatsächlich: ${ergebnis.anzahlBilderAufrufe})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt zeigt nur den Titel (ohne Collage-Fläche), wenn kein Rezept ein Bild hat");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Zweites Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      let zuschneidenAufgerufen = false;
+      karte._bildFuerCollageZuschneiden = () => {
+        zuschneidenAufgerufen = true;
+        return Promise.resolve("data:image/jpeg;base64,ZUGESCHNITTEN");
+      };
+      const texte = [];
+      const bilder = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text) { texte.push(text); }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() {}
+        addImage(datenUrl, format, x, y, breite, hoehe) { bilder.push({ x, y, breite, hoehe }); }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel: "Bildloses Kochbuch" });
+
+      return { zuschneidenAufgerufen, anzahlBilder: bilder.length, titelGefunden: texte.includes("Bildloses Kochbuch") };
+    });
+
+    assert(ergebnis.titelGefunden, "der Titel wird trotzdem auf dem Deckblatt gezeichnet");
+    assert(!ergebnis.zuschneidenAufgerufen, "ohne jegliches Rezeptbild wird gar nicht erst versucht, ein Bild zuzuschneiden");
+    assert(ergebnis.anzahlBilder === 0, "ohne jegliches Rezeptbild bleibt die Collage-Fläche schlicht leer");
   } finally {
     await page.close();
   }
@@ -3743,6 +3938,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfModalAbbrechenExportiertNichts(browser);
     await testSammelPdfModalWahlAbbrechenSchliesstOhneWeitereSchritte(browser);
     await testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser);
+    await testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser);
+    await testSammelPdfDeckblattBegrenztCollageAufAchtBilder(browser);
+    await testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser);
     await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
     await testKochmodusNavigationDurchSchritte(browser);
     await testKochmodusZutatenEinblenden(browser);

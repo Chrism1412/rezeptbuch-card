@@ -8778,6 +8778,102 @@ class RezeptbuchCard extends HTMLElement {
     });
   }
 
+  // Schneidet ein Rezeptbild randabschneidend auf das Seitenverhältnis
+  // einer Collage-Kachel zu (wie CSS "object-fit: cover") - für das
+  // Sammel-PDF-Deckblatt (siehe _sammelPdfDeckblattZeichnen), damit dort
+  // keine weißen Ränder/Streifen entstehen, wenn Bild- und Kachel-
+  // Seitenverhältnis nicht zusammenpassen. `tileBreiteMm`/`tileHoeheMm`
+  // sind die Zielmaße der Kachel in mm; das Ergebnis wird mit fester
+  // Pixeldichte gerendert (genug für gestochen scharfen Druck, ohne die
+  // Datei unnötig aufzublähen). Arbeitet wie _bildAlsDatenUrlLaden
+  // clientseitig über ein <canvas> und braucht daher eine echte
+  // Browser-Umgebung (in Tests wird diese Methode deshalb wie
+  // _bildAlsDatenUrlLaden direkt überschrieben, statt echte Bilder zu
+  // dekodieren).
+  _bildFuerCollageZuschneiden(src, tileBreiteMm, tileHoeheMm) {
+    return new Promise((resolve) => {
+      if (!src) { resolve(null); return; }
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const PX_PRO_MM = 6;
+          const zielBreite = Math.max(1, Math.round(tileBreiteMm * PX_PRO_MM));
+          const zielHoehe = Math.max(1, Math.round(tileHoeheMm * PX_PRO_MM));
+          const canvas = document.createElement("canvas");
+          canvas.width = zielBreite;
+          canvas.height = zielHoehe;
+          const ctx = canvas.getContext("2d");
+          const skalierung = Math.max(zielBreite / img.naturalWidth, zielHoehe / img.naturalHeight);
+          const zeichenBreite = img.naturalWidth * skalierung;
+          const zeichenHoehe = img.naturalHeight * skalierung;
+          const x = (zielBreite - zeichenBreite) / 2;
+          const y = (zielHoehe - zeichenHoehe) / 2;
+          ctx.drawImage(img, x, y, zeichenBreite, zeichenHoehe);
+          resolve(canvas.toDataURL("image/jpeg", 0.85));
+        } catch (e) {
+          console.error("Rezeptbuch: Bild konnte nicht für die Deckblatt-Collage zugeschnitten werden", e);
+          resolve(null);
+        }
+      };
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  }
+
+  // Zeichnet ein eigenes Deckblatt (Seite 1, VOR der Inhaltsverzeichnis-
+  // Seite, siehe _sammelPdfErstellen) für das Sammel-PDF: der individuelle
+  // Kochbuch-Name groß, fett und zentriert oben, darunter eine dezente
+  // Akzentlinie in der Terrakotta-Farbe der Karte, und darunter eine
+  // Bildercollage aus bis zu 8 Fotos der enthaltenen Rezepte (die ersten
+  // Rezepte MIT Foto aus der übergebenen - bereits nach Kategorie
+  // sortierten - Liste; Rezepte ganz ohne Foto werden dabei übersprungen,
+  // nicht durch einen Platzhalter ersetzt). Die Collage nutzt ein 2-
+  // spaltiges Raster und schneidet jedes Bild randabschneidend auf seine
+  // Kachelgröße zu (siehe _bildFuerCollageZuschneiden), damit ein
+  // geschlossenes Mosaik ohne weiße Ränder entsteht. Gibt es kein einziges
+  // Foto, bleibt die Fläche schlicht leer - nur der Titel steht dann auf
+  // der Seite.
+  async _sammelPdfDeckblattZeichnen(doc, titel, rezepte, margin, pageWidth, pageHeight) {
+    const usableWidth = pageWidth - margin * 2;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(30);
+    doc.setTextColor(20);
+    const titelZeilen = doc.splitTextToSize(titel, usableWidth);
+    let y = margin + 20;
+    titelZeilen.forEach((zeile) => {
+      doc.text(zeile, pageWidth / 2, y, { align: "center" });
+      y += 13;
+    });
+
+    y += 4;
+    doc.setDrawColor(178, 93, 43);
+    doc.setLineWidth(0.8);
+    doc.line(pageWidth / 2 - 25, y, pageWidth / 2 + 25, y);
+    y += 14;
+
+    const bildQuellen = rezepte.map((r) => r.image).filter(Boolean).slice(0, 8);
+    if (!bildQuellen.length) return;
+
+    const spalten = bildQuellen.length === 1 ? 1 : 2;
+    const zeilenAnzahl = Math.ceil(bildQuellen.length / spalten);
+    const luecke = 3;
+    const collageHoehe = pageHeight - margin - y;
+    const tileBreite = (usableWidth - luecke * (spalten - 1)) / spalten;
+    const tileHoehe = (collageHoehe - luecke * (zeilenAnzahl - 1)) / zeilenAnzahl;
+
+    for (let i = 0; i < bildQuellen.length; i++) {
+      const spalte = i % spalten;
+      const zeile = Math.floor(i / spalten);
+      const x = margin + spalte * (tileBreite + luecke);
+      const tileY = y + zeile * (tileHoehe + luecke);
+      const zugeschnitten = await this._bildFuerCollageZuschneiden(bildQuellen[i], tileBreite, tileHoehe);
+      if (zugeschnitten) {
+        doc.addImage(zugeschnitten, "JPEG", x, tileY, tileBreite, tileHoehe);
+      }
+    }
+  }
+
   // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur im
   // PDF-Export (Teilen/Drucken), nicht im normalen Bild in der App selbst.
   // Kleiner, halbtransparenter dunkler Streifen mit weißer Schrift, damit
@@ -9079,11 +9175,12 @@ class RezeptbuchCard extends HTMLElement {
     return { blob: doc.output("blob"), dateiname, mimeType: "application/pdf" };
   }
 
-  // Zeichnet eine Inhaltsverzeichnis-/Deckblatt-Seite (Seite 1) für das
-  // Sammel-PDF: individueller Kochbuch-Name groß oben, darunter die
-  // Überschrift "Inhaltsverzeichnis" und eine nummerierte Liste der
-  // enthaltenen Rezepttitel. Erwartet, dass `doc` bereits auf der Seite
-  // steht, auf der das Verzeichnis erscheinen soll (der Aufrufer legt
+  // Zeichnet die Inhaltsverzeichnis-Seite (Seite 2, NACH dem separaten
+  // Deckblatt - siehe _sammelPdfDeckblattZeichnen/_sammelPdfErstellen) für
+  // das Sammel-PDF: individueller Kochbuch-Name nochmal (kleiner) oben,
+  // darunter die Überschrift "Inhaltsverzeichnis" und eine nummerierte
+  // Liste der enthaltenen Rezepttitel. Erwartet, dass `doc` bereits auf der
+  // Seite steht, auf der das Verzeichnis erscheinen soll (der Aufrufer legt
   // danach selbst eine neue Seite für das erste Rezept an).
   _sammelPdfInhaltsverzeichnisZeichnen(doc, titel, rezepte, margin, pageWidth) {
     const usableWidth = pageWidth - margin * 2;
@@ -9119,9 +9216,12 @@ class RezeptbuchCard extends HTMLElement {
   // Einzel-Export. Die Portionenzahl wird dabei je Rezept auf dessen
   // Standardportionen zurückgesetzt (die Übersicht hat keine
   // rezeptspezifische Portionenwahl wie die Detailansicht) und danach
-  // wiederhergestellt. `optionen.inhaltsverzeichnis` fügt optional eine
-  // Deckblatt-/Inhaltsverzeichnis-Seite als Seite 1 ein, mit
-  // `optionen.titel` als individuellem Kochbuch-Namen. Die Rezepte werden
+  // wiederhergestellt. `optionen.inhaltsverzeichnis` fügt optional zwei
+  // Seiten vorne ein: zuerst ein Deckblatt (großer Titel + Bildercollage,
+  // siehe _sammelPdfDeckblattZeichnen), danach die Inhaltsverzeichnis-Seite
+  // mit der nummerierten Rezeptliste (siehe
+  // _sammelPdfInhaltsverzeichnisZeichnen), mit `optionen.titel` als
+  // individuellem Kochbuch-Namen auf beiden Seiten. Die Rezepte werden
   // dabei IMMER nach Kategorie (nicht Tag) sortiert, unabhängig von der
   // übergebenen Reihenfolge bzw. der aktuellen Sortierung der Übersicht -
   // siehe _sortiereNachKategorie.
@@ -9134,6 +9234,8 @@ class RezeptbuchCard extends HTMLElement {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     if (optionen.inhaltsverzeichnis) {
+      await this._sammelPdfDeckblattZeichnen(doc, optionen.titel || dateinameBasis, rezepteSortiert, margin, pageWidth, pageHeight);
+      doc.addPage();
       this._sammelPdfInhaltsverzeichnisZeichnen(doc, optionen.titel || dateinameBasis, rezepteSortiert, margin, pageWidth);
     }
 
