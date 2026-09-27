@@ -3652,6 +3652,90 @@ async function testKochmodusVorlesenNutztTtsNotifyServiceStattWebSpeech(browser)
   }
 }
 
+async function testKochmodusVorlesenNutztTtsNotifyServicesFuerAngemeldetenNutzer(browser) {
+  console.log("\nTest: Mit 'tts_notify_services' wird der Dienst des GERADE angemeldeten Nutzers verwendet (nicht der einzelne 'tts_notify_service')");
+  const page = await neueTestUmgebung(browser, {
+    tts_notify_service: "mobile_app_fallback_geraet",
+    tts_notify_services: {
+      Erika: "mobile_app_erikas_handy",
+      Chris: "mobile_app_chris_handy",
+    },
+  });
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Wasser aufkochen"] }),
+    });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const serviceAufrufe = [];
+      // hass.user.name ist in der Testumgebung standardmäßig "Erika" -
+      // genau der Name, der in "tts_notify_services" eingetragen ist.
+      karte._hass.callService = async (domain, service, daten) => {
+        serviceAufrufe.push({ domain, service, daten });
+      };
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+      await new Promise((r) => setTimeout(r, 10));
+
+      return { serviceAufrufe };
+    });
+
+    assert(ergebnis.serviceAufrufe.length === 1, `genau ein Service-Aufruf wird ausgelöst (tatsächlich: ${ergebnis.serviceAufrufe.length})`);
+    assert(
+      ergebnis.serviceAufrufe[0].service === "mobile_app_erikas_handy",
+      `es wird der zum angemeldeten Nutzer ("Erika") passende Dienst aus 'tts_notify_services' verwendet statt des einzelnen 'tts_notify_service' (tatsächlich: ${ergebnis.serviceAufrufe[0].service})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusVorlesenFaelltBeiUnbekanntemNutzerAufTtsNotifyServiceZurueck(browser) {
+  console.log("\nTest: Ist der angemeldete Nutzer NICHT in 'tts_notify_services' eingetragen, wird auf 'tts_notify_service' zurückgefallen");
+  const page = await neueTestUmgebung(browser, {
+    tts_notify_service: "mobile_app_fallback_geraet",
+    tts_notify_services: {
+      Chris: "mobile_app_chris_handy",
+      Katja: "mobile_app_katjas_handy",
+    },
+  });
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Wasser aufkochen"] }),
+    });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const serviceAufrufe = [];
+      // hass.user.name ist standardmäßig "Erika" - taucht in der obigen
+      // Zuordnung absichtlich NICHT auf.
+      karte._hass.callService = async (domain, service, daten) => {
+        serviceAufrufe.push({ domain, service, daten });
+      };
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+      await new Promise((r) => setTimeout(r, 10));
+
+      return { serviceAufrufe };
+    });
+
+    assert(ergebnis.serviceAufrufe.length === 1, `genau ein Service-Aufruf wird ausgelöst (tatsächlich: ${ergebnis.serviceAufrufe.length})`);
+    assert(
+      ergebnis.serviceAufrufe[0].service === "mobile_app_fallback_geraet",
+      `ohne Eintrag für den angemeldeten Nutzer wird der einzelne 'tts_notify_service' als Fallback verwendet (tatsächlich: ${ergebnis.serviceAufrufe[0].service})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -3982,6 +4066,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusVorlesenNutztVollenSprachcodeDerInstalliertenStimme(browser);
     await testKochmodusVorlesenWartetKurzAufNachladendeStimmenliste(browser);
     await testKochmodusVorlesenNutztTtsNotifyServiceStattWebSpeech(browser);
+    await testKochmodusVorlesenNutztTtsNotifyServicesFuerAngemeldetenNutzer(browser);
+    await testKochmodusVorlesenFaelltBeiUnbekanntemNutzerAufTtsNotifyServiceZurueck(browser);
   } finally {
     await browser.close();
   }

@@ -7454,6 +7454,26 @@ class RezeptbuchCard extends HTMLElement {
     this._render();
   }
 
+  // Ermittelt, welcher notify.mobile_app_*-Dienst (falls überhaupt einer)
+  // für das Vorlesen per Benachrichtigung genutzt werden soll (siehe
+  // _kochmodusAktuellenSchrittVorlesen, Weg 2). Zwei Kartenoptionen dafür:
+  // - "tts_notify_services": Zuordnung HA-Anzeigename -> notify-Dienst, für
+  //   Haushalte mit MEHREREN Home-Assistant-Nutzern (jede/r hat ihr/sein
+  //   eigenes Handy) - wird anhand des GERADE angemeldeten Nutzers
+  //   (hass.user.name) automatisch aufgelöst, damit nicht fest ein
+  //   einzelnes Gerät für alle Betrachter der Karte hinterlegt werden muss.
+  // - "tts_notify_service": einzelner Dienst als Standard/Fallback, z.B.
+  //   für Ein-Personen-Haushalte oder falls der angemeldete Nutzer in
+  //   "tts_notify_services" (noch) nicht aufgeführt ist.
+  _kochmodusTtsNotifyServiceErmitteln() {
+    const zuordnung = this._config.tts_notify_services;
+    const nutzername = this._hass && this._hass.user && this._hass.user.name;
+    if (zuordnung && nutzername && zuordnung[nutzername]) {
+      return zuordnung[nutzername];
+    }
+    return this._config.tts_notify_service || null;
+  }
+
   // Liest den aktuellen Kochmodus-Schritt vor. Zwei Wege, je nach
   // Kartenkonfiguration:
   //
@@ -7465,24 +7485,25 @@ class RezeptbuchCard extends HTMLElement {
   //    dieser Weg trotz funktionierender System-Sprachausgabe aber KEINEN
   //    Ton, ohne dass ein Fehler auftritt - eine bekannte Einschränkung
   //    dieser WebViews, die sich von hier aus nicht umgehen lässt.
-  // 2. Fallback für genau diesen Fall: ist die Kartenoption
-  //    "tts_notify_service" gesetzt (Name des notify.mobile_app_*-Dienstes
-  //    des Geräts, siehe README), wird STATTDESSEN eine
+  // 2. Fallback für genau diesen Fall: ist eine der Kartenoptionen
+  //    "tts_notify_service"/"tts_notify_services" gesetzt (siehe
+  //    _kochmodusTtsNotifyServiceErmitteln), wird STATTDESSEN eine
   //    Home-Assistant-Benachrichtigung mit TTS-Befehl an die
   //    Companion-App geschickt - die liest den Text über die NATIVE
   //    System-Sprachausgabe des Geräts vor, komplett an der WebView vorbei.
   //    Bewusst weiterhin kein media_player/TTS-Backend nötig - es wird
   //    nach wie vor nur die Sprachausgabe des Geräts selbst genutzt, auf
   //    dem die Karte offen ist, nur eben über einen anderen technischen
-  //    Weg. Ohne "tts_notify_service" bleibt Weg 1 aktiv.
+  //    Weg. Ohne diese Optionen bleibt Weg 1 aktiv.
   _kochmodusAktuellenSchrittVorlesen() {
     const schritte = (this._aktivesRezept.steps || []).filter((s) => s && s.trim());
     const text = schritte[this._kochmodusSchrittIndex];
     if (!text) return;
 
-    if (this._config.tts_notify_service && this._hass) {
+    const ttsNotifyService = this._kochmodusTtsNotifyServiceErmitteln();
+    if (ttsNotifyService && this._hass) {
       this._hass
-        .callService("notify", this._config.tts_notify_service, {
+        .callService("notify", ttsNotifyService, {
           message: "TTS",
           data: { tts_text: text },
         })
