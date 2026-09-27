@@ -8849,10 +8849,44 @@ class RezeptbuchCard extends HTMLElement {
     }
   }
 
+  // Ermittelt die Zeilen für den Deckblatt-Titel (siehe
+  // _sammelPdfDeckblattZeichnen), begrenzt auf MAXIMAL 2 ZEILEN: passt
+  // dafür die Schriftgröße schrittweise nach unten an (bis `minGroesse`),
+  // solange der Titel bei `startGroesse` mehr als 2 Zeilen braucht. Passt
+  // der Titel auch bei kleinster Schriftgröße nicht in 2 Zeilen, wird die
+  // 2. Zeile hart gekürzt und mit "…" abgeschlossen - so werden garantiert
+  // nie mehr als 2 Zeilen gezeichnet, auch bei einem sehr langen
+  // Kochbuch-Namen. Gibt die fertigen Zeilen UND die tatsächlich genutzte
+  // Schriftgröße zurück (für den Zeilenabstand beim Zeichnen).
+  _sammelPdfDeckblattTitelZeilenErmitteln(doc, titel, maxBreite, startGroesse, minGroesse) {
+    let groesse = startGroesse;
+    let zeilen;
+    for (;;) {
+      doc.setFontSize(groesse);
+      zeilen = doc.splitTextToSize(titel, maxBreite);
+      if (zeilen.length <= 2 || groesse <= minGroesse) break;
+      groesse -= 2;
+    }
+
+    if (zeilen.length > 2) {
+      const breiteVon = typeof doc.getTextWidth === "function" ? (t) => doc.getTextWidth(t) : (t) => t.length * (groesse * 0.13);
+      let rest = zeilen.slice(1).join(" ");
+      while (rest.length > 1 && breiteVon(rest + "…") > maxBreite) {
+        rest = rest.slice(0, -1).trimEnd();
+      }
+      zeilen = [zeilen[0], (rest || zeilen[1].slice(0, 1)) + "…"];
+    }
+
+    return { zeilen, groesse };
+  }
+
   // Zeichnet ein eigenes Deckblatt (Seite 1, VOR der Inhaltsverzeichnis-
   // Seite, siehe _sammelPdfErstellen) für das Sammel-PDF: der individuelle
-  // Kochbuch-Name groß, fett und zentriert oben, darunter eine dezente
-  // Akzentlinie in der Terrakotta-Farbe der Karte, und darunter eine
+  // Kochbuch-Name groß, zentriert, schräg von links unten nach rechts oben
+  // und auf maximal 2 Zeilen begrenzt (siehe
+  // _sammelPdfDeckblattTitelZeilenErmitteln) oben auf der Seite, darunter
+  // eine dezente Akzentlinie in der Terrakotta-Farbe der Karte, und darunter
+  // eine
   // "Foto-Collage" aus bis zu 6 Rezeptbildern (die ersten Rezepte MIT Foto
   // aus der übergebenen - bereits nach Kategorie sortierten - Liste;
   // Rezepte ganz ohne Foto werden dabei übersprungen). Die Fotos werden wie
@@ -8874,19 +8908,28 @@ class RezeptbuchCard extends HTMLElement {
     // gleicher Punktgröße optisch deutlich zierlicher als serifenlose/
     // Serifen-Schriften, daher die größere Schriftgröße dafür.
     const schriftEingebettet = this._sammelPdfDeckblattSchriftEinbetten(doc);
-    let zeilenHoehe;
-    if (schriftEingebettet) {
-      doc.setFont("GreatVibes", "normal");
-      doc.setFontSize(44);
-      zeilenHoehe = 17;
-    } else {
-      doc.setFont("times", "bolditalic");
-      doc.setFontSize(32);
-      zeilenHoehe = 13;
-    }
+    if (schriftEingebettet) doc.setFont("GreatVibes", "normal");
+    else doc.setFont("times", "bolditalic");
     doc.setTextColor(20);
-    const titelZeilen = doc.splitTextToSize(titel, usableWidth);
-    const titelWinkel = -4;
+
+    // Durch die Schrägstellung (siehe `titelWinkel` unten) ragt eine Zeile
+    // etwas weiter nach links/rechts hinaus als bei waagerechtem Text -
+    // deshalb wird beim Umbrechen mit einer schmaleren Breite gerechnet als
+    // tatsächlich zur Verfügung steht, damit ausreichend Abstand zu den
+    // Seitenrändern bleibt.
+    const titelSicherheitsrand = 16;
+    const titelMaxBreite = Math.max(40, usableWidth - titelSicherheitsrand * 2);
+    const { zeilen: titelZeilen, groesse: titelGroesse } = this._sammelPdfDeckblattTitelZeilenErmitteln(
+      doc,
+      titel,
+      titelMaxBreite,
+      schriftEingebettet ? 44 : 32,
+      schriftEingebettet ? 24 : 18
+    );
+    const zeilenHoehe = titelGroesse * 0.42;
+
+    // Schräg von links unten nach rechts oben (positiver Winkel).
+    const titelWinkel = 4;
     let y = margin + 22;
     titelZeilen.forEach((zeile) => {
       doc.text(zeile, pageWidth / 2, y, { align: "center", angle: titelWinkel });

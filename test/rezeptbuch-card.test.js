@@ -3373,8 +3373,8 @@ async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) 
       "der Titel wird zentriert gezeichnet"
     );
     assert(
-      ergebnis.titelOptionen && typeof ergebnis.titelOptionen.angle === "number" && ergebnis.titelOptionen.angle !== 0,
-      "der Titel wird leicht diagonal gedreht gezeichnet"
+      ergebnis.titelOptionen && typeof ergebnis.titelOptionen.angle === "number" && ergebnis.titelOptionen.angle > 0,
+      "der Titel wird schräg von links unten nach rechts oben gezeichnet (positiver Winkel)"
     );
     assert(
       ergebnis.titelIndex < ergebnis.ersterBildIndex,
@@ -3618,6 +3618,130 @@ async function testSammelPdfDeckblattBettetHandschriftSchriftartEin(browser) {
     assert(
       typeof ergebnis.groesseGesetzt === "number" && ergebnis.groesseGesetzt > 32,
       `die Handschrift-Schriftart wird größer gesetzt als die Times-Rückfalllösung, damit sie optisch nicht zu zierlich wirkt (tatsächlich: ${ergebnis.groesseGesetzt})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// Fake-jsPDF-Quelltext für die beiden folgenden Tests: simuliert einen
+// echten Zeilenumbruch, dessen Ergebnis von der GERADE gesetzten
+// Schriftgröße abhängt (wie bei echtem jsPDF) - nötig, um zu prüfen, dass
+// _sammelPdfDeckblattTitelZeilenErmitteln die Schrift verkleinert, bis der
+// Titel in maximal 2 Zeilen passt. Wird als <script> in die Testseite
+// injiziert (siehe fakeJsPdfMitZeilenumbruchEinbinden), da eine Klasse
+// nicht direkt von Node in den Browser-Kontext von page.evaluate
+// übergeben werden kann.
+const FAKE_JSPDF_ZEILENUMBRUCH_QUELLE = `
+  window.__fakeJsPdfMitZeilenumbruchKlasse = function (aufrufReihenfolge) {
+    return class FakeJsPdfMitZeilenumbruch {
+      constructor() {
+        this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        this._groesse = 12;
+      }
+      setFont() {}
+      setFontSize(g) { this._groesse = g; }
+      setTextColor() {}
+      setDrawColor() {}
+      setFillColor() {}
+      setLineWidth() {}
+      line() {}
+      getTextWidth(t) { return t.length * this._groesse * 0.5; }
+      splitTextToSize(t, maxBreite) {
+        const woerter = t.split(" ");
+        const zeilen = [];
+        let aktuell = "";
+        woerter.forEach((w) => {
+          const kandidat = aktuell ? aktuell + " " + w : w;
+          if (this.getTextWidth(kandidat) <= maxBreite || !aktuell) {
+            aktuell = kandidat;
+          } else {
+            zeilen.push(aktuell);
+            aktuell = w;
+          }
+        });
+        if (aktuell) zeilen.push(aktuell);
+        return zeilen;
+      }
+      text(text, x, y, optionen) { aufrufReihenfolge.push({ typ: "text", text, optionen, groesse: this._groesse }); }
+      addPage() {}
+      addImage() {}
+      output() { return new Blob(); }
+    };
+  };
+`;
+
+async function fakeJsPdfMitZeilenumbruchEinbinden(page) {
+  await page.addScriptTag({ content: FAKE_JSPDF_ZEILENUMBRUCH_QUELLE });
+}
+
+async function testSammelPdfDeckblattTitelWirdAufZweiZeilenBegrenzt(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt verkleinert einen langen Kochbuch-Namen, statt ihn auf mehr als 2 Zeilen umzubrechen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await fakeJsPdfMitZeilenumbruchEinbinden(page);
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const langerTitel = "Die Sonntagsküche der ganzen Familie Musterfrau-Beispielhausen";
+
+    const ergebnis = await page.evaluate(async (titel) => {
+      const karte = window.__karte;
+      const aufrufReihenfolge = [];
+      karte._jsPdfLaden = () => Promise.resolve(window.__fakeJsPdfMitZeilenumbruchKlasse(aufrufReihenfolge));
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel });
+
+      const titelAufrufe = aufrufReihenfolge.filter((a) => a.typ === "text" && a.optionen && a.optionen.align === "center");
+      return {
+        anzahlTitelZeilen: titelAufrufe.length,
+        gesamtText: titelAufrufe.map((a) => a.text).join(" "),
+      };
+    }, langerTitel);
+
+    assert(
+      ergebnis.anzahlTitelZeilen <= 2,
+      `ein langer Kochbuch-Name wird auf maximal 2 Zeilen begrenzt, auch wenn er ohne Verkleinern mehr Zeilen bräuchte (tatsächlich: ${ergebnis.anzahlTitelZeilen})`
+    );
+    assert(ergebnis.anzahlTitelZeilen >= 1, "der Titel wird trotzdem mindestens einzeilig gezeichnet");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfDeckblattExtremLangerTitelBekommtAuslassungspunkte(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt kürzt einen extrem langen Kochbuch-Namen hart auf 2 Zeilen mit Auslassungspunkten");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await fakeJsPdfMitZeilenumbruchEinbinden(page);
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const extremLangerTitel = Array.from({ length: 40 }, (_, i) => `Lieblingswort${i}`).join(" ");
+
+    const ergebnis = await page.evaluate(async (titel) => {
+      const karte = window.__karte;
+      const aufrufReihenfolge = [];
+      karte._jsPdfLaden = () => Promise.resolve(window.__fakeJsPdfMitZeilenumbruchKlasse(aufrufReihenfolge));
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel });
+
+      const titelAufrufe = aufrufReihenfolge.filter((a) => a.typ === "text" && a.optionen && a.optionen.align === "center");
+      return {
+        anzahlTitelZeilen: titelAufrufe.length,
+        letzteZeile: titelAufrufe.length ? titelAufrufe[titelAufrufe.length - 1].text : "",
+      };
+    }, extremLangerTitel);
+
+    assert(
+      ergebnis.anzahlTitelZeilen === 2,
+      `selbst ein extrem langer Kochbuch-Name wird auf genau 2 Zeilen begrenzt (tatsächlich: ${ergebnis.anzahlTitelZeilen})`
+    );
+    assert(
+      ergebnis.letzteZeile.endsWith("…"),
+      `die 2. Zeile wird mit Auslassungspunkten abgeschlossen, wenn selbst die kleinste Schriftgröße nicht ausreicht (tatsächlich: "${ergebnis.letzteZeile}")`
     );
   } finally {
     await page.close();
@@ -4073,6 +4197,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser);
     await testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser);
     await testSammelPdfDeckblattBettetHandschriftSchriftartEin(browser);
+    await testSammelPdfDeckblattTitelWirdAufZweiZeilenBegrenzt(browser);
+    await testSammelPdfDeckblattExtremLangerTitelBekommtAuslassungspunkte(browser);
     await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
     await testKochmodusNavigationDurchSchritte(browser);
     await testKochmodusZutatenEinblenden(browser);
