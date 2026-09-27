@@ -29,10 +29,8 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   groß, in einer eleganten, leicht schräg gestellten Handschrift-
   Schriftart und zentriert, darunter eine Foto-Collage aus bis zu 6 Fotos
   der enthaltenen Rezepte, wie locker hingelegte Polaroids in
-  unterschiedlichen Größen überlappend angeordnet, mit vier illustrierten
-  Küchen-Symbolen in den Lücken rundherum - Tomate, Karotten-Bund,
-  Kochlöffel, Rührbesen), danach eine Inhaltsverzeichnis-Seite mit der
-  nummerierten Rezeptliste. Die Rezepte
+  unterschiedlichen Größen überlappend angeordnet), danach eine
+  Inhaltsverzeichnis-Seite mit der nummerierten Rezeptliste. Die Rezepte
   im PDF (und im Inhaltsverzeichnis) sind dabei immer nach Kategorie
   sortiert, unabhängig von Tags oder der aktuellen Sortierung der
   Übersicht.

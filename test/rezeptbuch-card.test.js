@@ -3361,11 +3361,8 @@ async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) 
         fontSizeVorTitel: fontSizeVorTitel && fontSizeVorTitel.groesse,
         anzahlBilderAufrufe: zugeschnitteneAufrufe.length,
         bilderQuellen: zugeschnitteneAufrufe.map((a) => a.src),
-        // Fotos werden als JPEG eingefügt (siehe _bildFuerCollageZuschneiden),
-        // die vier Deko-Icons als PNG (siehe DEKO_ICON_*_BASE64) - beide
-        // zusammen landen in addImage(), deshalb hier nach Format getrennt.
+        // Fotos werden als JPEG eingefügt (siehe _bildFuerCollageZuschneiden).
         anzahlFotoAddImageAufrufe: bilder.filter((b) => b.format === "JPEG").length,
-        anzahlIconAddImageAufrufe: bilder.filter((b) => b.format === "PNG").length,
         seitenHinzugefuegt,
       };
     });
@@ -3397,10 +3394,6 @@ async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) 
       "die Collage nutzt die tatsächlichen Rezeptbilder als Quelle für den Zuschnitt"
     );
     assert(ergebnis.anzahlFotoAddImageAufrufe === 2, "für jedes zugeschnittene Bild wird genau einmal addImage aufgerufen");
-    assert(
-      ergebnis.anzahlIconAddImageAufrufe === 4,
-      `die vier Deko-Icons (Tomate, Karotten, Kochlöffel, Rührbesen) werden zusätzlich als Bilder eingefügt (tatsächlich: ${ergebnis.anzahlIconAddImageAufrufe})`
-    );
   } finally {
     await page.close();
   }
@@ -3497,12 +3490,7 @@ async function testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser) {
 
       return {
         zuschneidenAufgerufen,
-        // Fotos (JPEG) und die vier Deko-Icons (PNG, siehe
-        // DEKO_ICON_*_BASE64) werden hier getrennt gezählt: die Deko-Icons
-        // rahmen das Deckblatt unabhängig davon, ob es überhaupt
-        // Rezeptfotos gibt - nur die Foto-Collage selbst bleibt leer.
         anzahlFotoBilder: bilder.filter((b) => b.format === "JPEG").length,
-        anzahlIconBilder: bilder.filter((b) => b.format === "PNG").length,
         titelGefunden: texte.includes("Bildloses Kochbuch"),
       };
     });
@@ -3510,17 +3498,13 @@ async function testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser) {
     assert(ergebnis.titelGefunden, "der Titel wird trotzdem auf dem Deckblatt gezeichnet");
     assert(!ergebnis.zuschneidenAufgerufen, "ohne jegliches Rezeptbild wird gar nicht erst versucht, ein Bild zuzuschneiden");
     assert(ergebnis.anzahlFotoBilder === 0, "ohne jegliches Rezeptbild bleibt die Foto-Collage schlicht leer");
-    assert(
-      ergebnis.anzahlIconBilder === 4,
-      `die vier Deko-Icons rahmen das Deckblatt trotzdem, auch ganz ohne Rezeptfotos (tatsächlich: ${ergebnis.anzahlIconBilder})`
-    );
   } finally {
     await page.close();
   }
 }
 
-async function testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser) {
-  console.log("\nTest: Sammel-PDF-Deckblatt zeichnet überlappende 'Polaroid'-Fotos plus vier Küchen-Deko-Icons in den Lücken rundherum");
+async function testSammelPdfDeckblattZeichnetPolaroidCollage(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt zeichnet überlappende 'Polaroid'-Fotos in der Collage");
   const page = await neueTestUmgebung(browser);
   try {
     await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }) });
@@ -3558,27 +3542,19 @@ async function testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser
       await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel: "Mein Kochbuch" });
 
       const fotos = bilder.filter((b) => b.format === "JPEG");
-      const icons = bilder.filter((b) => b.format === "PNG");
       return {
         rectAufrufe,
         anzahlFotos: fotos.length,
-        anzahlIcons: icons.length,
         fotosInnerhalbDerSeite: fotos.every((b) => b.x >= 0 && b.y >= 0 && b.x + b.breite <= 210 && b.y + b.hoehe <= 297),
-        iconsInnerhalbDerSeite: icons.every((b) => b.x >= 0 && b.y >= 0 && b.x + b.breite <= 210 && b.y + b.hoehe <= 297),
       };
     });
 
     assert(ergebnis.rectAufrufe > 0, "die Polaroid-Rahmen hinter den Collage-Fotos werden gezeichnet");
     assert(ergebnis.anzahlFotos === 2, `beide Rezeptfotos werden weiterhin in die Collage gezeichnet (tatsächlich: ${ergebnis.anzahlFotos})`);
     assert(
-      ergebnis.anzahlIcons === 4,
-      `alle vier Deko-Icons werden als fertige Bilder in die Lücken zwischen den Fotos eingefügt (tatsächlich: ${ergebnis.anzahlIcons})`
-    );
-    assert(
       ergebnis.fotosInnerhalbDerSeite,
       "auch überlappend/unterschiedlich groß angeordnet bleiben alle Collage-Fotos innerhalb der Seite"
     );
-    assert(ergebnis.iconsInnerhalbDerSeite, "auch alle Deko-Icons bleiben innerhalb der Seite");
   } finally {
     await page.close();
   }
@@ -4337,7 +4313,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser);
     await testSammelPdfDeckblattBegrenztCollageAufSechsBilder(browser);
     await testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser);
-    await testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser);
+    await testSammelPdfDeckblattZeichnetPolaroidCollage(browser);
     await testSammelPdfDeckblattBettetHandschriftSchriftartEin(browser);
     await testSammelPdfDeckblattTitelWirdAufZweiZeilenBegrenzt(browser);
     await testSammelPdfDeckblattExtremLangerTitelBekommtAuslassungspunkte(browser);
