@@ -33,8 +33,8 @@ komplett neue Kernfunktionen.
   Rezepte aus einer Checkliste ins PDF sollen. Danach wird optional
   gefragt, ob zusätzlich zwei Seiten mit einem selbst gewählten
   Kochbuch-Namen vorangestellt werden sollen: zuerst ein Deckblatt (Name
-  groß, in einer eleganten, leicht schräg gestellten Handschrift-
-  Schriftart und zentriert, darunter eine Foto-Collage aus bis zu 6 Fotos
+  groß, in einer eleganten, leicht schräg gestellten Schrift und
+  zentriert, darunter eine Foto-Collage aus bis zu 6 Fotos
   der enthaltenen Rezepte, wie locker hingelegte Polaroids in
   unterschiedlichen Größen überlappend angeordnet), danach eine
   Inhaltsverzeichnis-Seite mit der nummerierten Rezeptliste. Die Rezepte

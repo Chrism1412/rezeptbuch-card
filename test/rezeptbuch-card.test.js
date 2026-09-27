@@ -3560,68 +3560,6 @@ async function testSammelPdfDeckblattZeichnetPolaroidCollage(browser) {
   }
 }
 
-async function testSammelPdfDeckblattBettetHandschriftSchriftartEin(browser) {
-  console.log("\nTest: Sammel-PDF-Deckblatt bettet die Handschrift-Schriftart für den Kochbuch-Namen ein, wenn jsPDF das unterstützt");
-  const page = await neueTestUmgebung(browser);
-  try {
-    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
-    await page.evaluate(() => window.__karte._rezepteLaden());
-
-    const ergebnis = await page.evaluate(async () => {
-      const karte = window.__karte;
-      const vfsDateien = {};
-      const eingebundeneSchriften = [];
-      const schriftAufrufe = [];
-      class FakeJsPdf {
-        constructor() {
-          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
-        }
-        addFileToVFS(dateiname, inhalt) { vfsDateien[dateiname] = inhalt; }
-        addFont(dateiname, id, stil) { eingebundeneSchriften.push({ dateiname, id, stil }); }
-        setFont(name, stil) { schriftAufrufe.push({ name, stil }); }
-        setFontSize(groesse) { schriftAufrufe.push({ groesse }); }
-        setTextColor() {}
-        setDrawColor() {}
-        setFillColor() {}
-        setLineWidth() {}
-        line() {}
-        text() {}
-        getTextWidth(t) { return t.length * 1.5; }
-        splitTextToSize(t) { return [t]; }
-        addPage() {}
-        addImage() {}
-        output() { return new Blob(); }
-      }
-      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
-
-      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
-      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel: "Mein Kochbuch" });
-
-      const groesseGesetzt = schriftAufrufe.map((a) => a.groesse).find((g) => g !== undefined);
-
-      return {
-        vfsEnthaeltTtf: Object.keys(vfsDateien).some((k) => k.endsWith(".ttf") && vfsDateien[k].length > 1000),
-        eingebundeneSchriften,
-        schriftName: schriftAufrufe.map((a) => a.name).find((n) => n),
-        groesseGesetzt,
-      };
-    });
-
-    assert(ergebnis.vfsEnthaeltTtf, "die Handschrift-Schriftdatei wird als Base64-Inhalt in jsPDFs VFS eingebunden");
-    assert(
-      ergebnis.eingebundeneSchriften.length > 0 && ergebnis.eingebundeneSchriften[0].id === "GreatVibes",
-      "addFont() registriert die eingebundene Schriftdatei unter dem Namen 'GreatVibes'"
-    );
-    assert(ergebnis.schriftName === "GreatVibes", "der Titel wird tatsächlich mit der eingebundenen Handschrift-Schriftart gezeichnet");
-    assert(
-      typeof ergebnis.groesseGesetzt === "number" && ergebnis.groesseGesetzt > 32,
-      `die Handschrift-Schriftart wird größer gesetzt als die Times-Rückfalllösung, damit sie optisch nicht zu zierlich wirkt (tatsächlich: ${ergebnis.groesseGesetzt})`
-    );
-  } finally {
-    await page.close();
-  }
-}
-
 // Fake-jsPDF-Quelltext für die beiden folgenden Tests: simuliert einen
 // echten Zeilenumbruch, dessen Ergebnis von der GERADE gesetzten
 // Schriftgröße abhängt (wie bei echtem jsPDF) - nötig, um zu prüfen, dass
@@ -4314,7 +4252,6 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfDeckblattBegrenztCollageAufSechsBilder(browser);
     await testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser);
     await testSammelPdfDeckblattZeichnetPolaroidCollage(browser);
-    await testSammelPdfDeckblattBettetHandschriftSchriftartEin(browser);
     await testSammelPdfDeckblattTitelWirdAufZweiZeilenBegrenzt(browser);
     await testSammelPdfDeckblattExtremLangerTitelBekommtAuslassungspunkte(browser);
     await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
