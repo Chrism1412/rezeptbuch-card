@@ -352,6 +352,16 @@ dagegen NUR den Knopf aus, die Abfrage und Zählung laufen im Hintergrund
 normal weiter - praktisch, wenn man die Auswertung später doch wieder
 einblenden möchte, ohne die bereits gesammelte Historie zu verlieren.
 
+**Statistik per Schalter direkt in der Karte ein-/ausschalten:** Wer
+`show_statistics` nicht in der YAML-Konfiguration setzt, bekommt neben
+dem Statistik-Knopf ein kleines ⚙️-Symbol. Ein Klick darauf öffnet ein
+Fenster mit einem echten Ein-/Ausschalter - kein Code-Editieren nötig.
+Die Einstellung wird genau wie Wochenplan, Kochbücher und Kategorien im
+selben To-do-Eintrag gespeichert und bleibt daher dauerhaft erhalten.
+Ist `show_statistics` dagegen explizit in der YAML gesetzt (`true` oder
+`false`), hat das immer Vorrang: Der ⚙️-Schalter wird dann gar nicht erst
+angezeigt, damit es nicht zwei widersprüchliche Schalter gibt.
+
 **Rezeptübersicht seitenweise anzeigen:** Bei vielen Rezepten lässt sich
 die Übersicht über das Kartenfeld `items_per_page` in Seiten aufteilen
 (Standard, wenn nicht gesetzt: 20 Rezepte pro Seite). Aktive Such-,

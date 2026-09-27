@@ -1431,6 +1431,123 @@ async function testShowStatisticsDeaktiviert(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Statistik-Einstellungen: ein richtiger Ein-/Ausschalter (kein manuelles
+// Editieren der Konfiguration) erscheint als Zahnrad-Knopf, solange
+// show_statistics NICHT explizit in der YAML-Konfiguration gesetzt ist.
+// Der Schalter wird persistent (Marker-Item) gespeichert und übersteht
+// ein Neuladen der Rezepte. Eine explizit gesetzte YAML-Option hat immer
+// Vorrang und blendet den Zahnrad-Knopf komplett aus.
+// ---------------------------------------------------------------------
+async function testStatistikEinstellungenSchalter(browser) {
+  console.log("\nTest: Statistik-Einstellungen-Schalter (echter Ein-/Ausschalter, kein manuelles Editieren)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+
+    // Ohne explizite YAML-Option ist das Zahnrad sichtbar und der
+    // Statistik-Knopf standardmäßig eingeschaltet.
+    const anfangsZustand = await page.evaluate(() => {
+      window.__karte._render();
+      return {
+        zahnradSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn"),
+        statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
+      };
+    });
+    assert(anfangsZustand.zahnradSichtbar, "Ohne explizite show_statistics-Option ist der Zahnrad-Knopf sichtbar");
+    assert(anfangsZustand.statistikBtnSichtbar, "Standardmäßig ist die Statistik eingeschaltet");
+
+    // Zahnrad öffnet die Einstellungen, Schalter ist ein echter Toggle
+    // (Checkbox als Slider gestylt) - kein Freitext-/Code-Feld.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+    });
+    const modalOffen = await page.evaluate(() => {
+      const modal = window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal");
+      return !!modal && modal.style.display === "flex";
+    });
+    assert(modalOffen, "Klick auf das Zahnrad öffnet das Einstellungen-Modal");
+
+    const schalterAnfangsZustand = await page.evaluate(() => {
+      const schalter = window.__karte.shadowRoot.getElementById("statistik-einstellungen-schalter");
+      return schalter && schalter.tagName === "INPUT" && schalter.type === "checkbox" && schalter.checked;
+    });
+    assert(schalterAnfangsZustand, "Der Schalter ist eine Checkbox (als Toggle gestylt) und initial eingeschaltet");
+
+    // Schalter ausschalten -> Statistik-Knopf verschwindet, Einstellung
+    // wird im Marker-Item gespeichert (übersteht ein Neuladen).
+    await page.evaluate(() => {
+      const schalter = window.__karte.shadowRoot.getElementById("statistik-einstellungen-schalter");
+      schalter.checked = false;
+      schalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !window.__karte.shadowRoot.getElementById("statistik-btn"), { timeout: 2000 });
+    const nachAusschalten = await page.evaluate(() => ({
+      statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
+      modalNochOffen: window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal").style.display === "flex",
+      askCookedAktiv: window.__karte._config.ask_cooked !== false,
+    }));
+    assert(!nachAusschalten.statistikBtnSichtbar, "Nach dem Ausschalten ist der Statistik-Knopf ausgeblendet");
+    assert(nachAusschalten.modalNochOffen, "Das Modal bleibt nach dem Umschalten weiterhin offen");
+    assert(nachAusschalten.askCookedAktiv, "Der Schalter betrifft nur die Statistik-Anzeige, nicht die Zubereitet-Zählung");
+
+    // Neu laden simulieren (z.B. Seiten-Reload) - die Einstellung ist
+    // persistent im Marker-Item gespeichert, nicht nur im Speicher.
+    await page.evaluate(async () => {
+      await window.__karte._rezepteLaden();
+      window.__karte._render();
+    });
+    const nachNeuLaden = await page.evaluate(() => !!window.__karte.shadowRoot.getElementById("statistik-btn"));
+    assert(!nachNeuLaden, "Die ausgeschaltete Statistik bleibt nach dem Neuladen der Rezepte ausgeschaltet (persistent)");
+
+    // Schalter wieder einschalten -> Statistik-Knopf kommt zurück.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const schalter = window.__karte.shadowRoot.getElementById("statistik-einstellungen-schalter");
+      schalter.checked = true;
+      schalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !!window.__karte.shadowRoot.getElementById("statistik-btn"), { timeout: 2000 });
+
+    // Schließen-Knopf blendet das Modal wieder aus.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-schliessen-btn").click();
+    });
+    const modalGeschlossen = await page.evaluate(() => {
+      const modal = window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal");
+      return !!modal && modal.style.display === "none";
+    });
+    assert(modalGeschlossen, "Der Schließen-Knopf blendet das Einstellungen-Modal wieder aus");
+
+    // Eine explizit gesetzte YAML-Option hat immer Vorrang und blendet
+    // das Zahnrad komplett aus (kein widersprüchlicher doppelter Schalter).
+    const mitExpliziterOptionFalse = await page.evaluate(() => {
+      window.__karte.setConfig({ entity: "todo.rezepte", show_statistics: false });
+      window.__karte._render();
+      return {
+        zahnradSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn"),
+        statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
+      };
+    });
+    assert(!mitExpliziterOptionFalse.zahnradSichtbar, "Mit explizitem show_statistics: false ist das Zahnrad ausgeblendet");
+    assert(!mitExpliziterOptionFalse.statistikBtnSichtbar, "Mit explizitem show_statistics: false bleibt die Statistik ausgeblendet");
+
+    const mitExpliziterOptionTrue = await page.evaluate(() => {
+      window.__karte.setConfig({ entity: "todo.rezepte", show_statistics: true });
+      window.__karte._render();
+      return {
+        zahnradSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn"),
+        statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
+      };
+    });
+    assert(!mitExpliziterOptionTrue.zahnradSichtbar, "Mit explizitem show_statistics: true ist das Zahnrad ebenfalls ausgeblendet");
+    assert(mitExpliziterOptionTrue.statistikBtnSichtbar, "Mit explizitem show_statistics: true ist die Statistik trotz zuvor gespeichertem Aus-Schalter sichtbar (YAML gewinnt)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Eigene Kategorien: anlegen, im Formular/Filter erscheinen, Duplikate
 // abweisen, nicht löschbar solange verwendet, sonst löschbar.
 // ---------------------------------------------------------------------
@@ -4423,6 +4540,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testStatistikBerechnung(browser);
     await testAskCookedDeaktiviert(browser);
     await testShowStatisticsDeaktiviert(browser);
+    await testStatistikEinstellungenSchalter(browser);
     await testEigeneKategorieAnlegen(browser);
     await testEigeneKategorieDuplikatUndLeer(browser);
     await testEigeneKategorieLoeschen(browser);
