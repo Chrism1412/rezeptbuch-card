@@ -19,12 +19,13 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Assistant-TTS-Setup oder Lautsprecher-Entity nötig, funktioniert direkt
   auf dem Gerät, auf dem die Karte gerade offen ist.
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
-  exportiert alle aktuell gefilterten/gesuchten Rezepte (unabhängig von der
-  Seiten-Paginierung) als ein einziges PDF, ein Rezept pro (mindestens
+  exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen
-  wird optional gefragt, ob zusätzlich eine Inhaltsverzeichnis-Seite mit
-  einem selbst gewählten Kochbuch-Namen als erste Seite eingefügt werden
-  soll.
+  lässt sich wählen, ob alle aktuell gefilterten/gesuchten Rezepte
+  (unabhängig von der Seiten-Paginierung) oder nur einzeln angehakte
+  Rezepte aus einer Checkliste ins PDF sollen. Danach wird optional
+  gefragt, ob zusätzlich eine Inhaltsverzeichnis-Seite mit einem selbst
+  gewählten Kochbuch-Namen als erste Seite eingefügt werden soll.
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
