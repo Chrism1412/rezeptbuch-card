@@ -1431,6 +1431,131 @@ async function testShowStatisticsDeaktiviert(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Eigene Kategorien: anlegen, im Formular/Filter erscheinen, Duplikate
+// abweisen, nicht löschbar solange verwendet, sonst löschbar.
+// ---------------------------------------------------------------------
+async function testEigeneKategorieAnlegen(browser) {
+  console.log("\nTest: Eigene Kategorie anlegen - erscheint als Filter-Chip und im Formular-Dropdown");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._render();
+      karte.shadowRoot.getElementById("kategorie-neu-btn").click();
+      karte.shadowRoot.getElementById("kategorie-name-feld").value = "Grillrezepte";
+      karte.shadowRoot.getElementById("kategorie-speichern-bestaetigen-btn").click();
+      // _eigeneKategorienSpeichern() ist async (Service-Aufruf) - kurz warten.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const chipVorhanden = !!karte.shadowRoot.querySelector('.kategorie-filter [data-kategorie="Grillrezepte"]');
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("bearbeiten-btn").click();
+      const optionVorhanden = Array.from(karte.shadowRoot.getElementById("kategorie-feld").options).some((o) => o.value === "Grillrezepte");
+
+      return { eigeneKategorien: karte._eigeneKategorien, chipVorhanden, optionVorhanden };
+    });
+
+    assert(ergebnis.eigeneKategorien.includes("Grillrezepte"), "die neue Kategorie landet in _eigeneKategorien (tatsächlich: " + JSON.stringify(ergebnis.eigeneKategorien) + ")");
+    assert(ergebnis.chipVorhanden, "die neue Kategorie erscheint als eigener Filter-Chip");
+    assert(ergebnis.optionVorhanden, "die neue Kategorie erscheint als Option im Formular-Dropdown");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testEigeneKategorieDuplikatUndLeer(browser) {
+  console.log("\nTest: Eigene Kategorie - leerer Name und Duplikate werden abgewiesen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._render();
+
+      const speichernKlicken = async (name) => {
+        karte.shadowRoot.getElementById("kategorie-neu-btn").click();
+        karte.shadowRoot.getElementById("kategorie-name-feld").value = name;
+        karte.shadowRoot.getElementById("kategorie-speichern-bestaetigen-btn").click();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        karte._render();
+      };
+
+      window.__alertAufrufe.length = 0;
+      await speichernKlicken("");
+      const leerAbgewiesen = window.__alertAufrufe.length === 1 && (karte._eigeneKategorien || []).length === 0;
+
+      window.__alertAufrufe.length = 0;
+      // "Hauptgericht" ist eine fest eingebaute Kategorie - Groß-/
+      // Kleinschreibung darf beim Duplikat-Check keine Rolle spielen.
+      await speichernKlicken("hauptgericht");
+      const gegenFestAbgewiesen = window.__alertAufrufe.length === 1 && (karte._eigeneKategorien || []).length === 0;
+
+      window.__alertAufrufe.length = 0;
+      await speichernKlicken("Grillrezepte");
+      await speichernKlicken("Grillrezepte");
+      const gegenEigeneAbgewiesen = window.__alertAufrufe.length === 1 && (karte._eigeneKategorien || []).filter((k) => k === "Grillrezepte").length === 1;
+
+      return { leerAbgewiesen, gegenFestAbgewiesen, gegenEigeneAbgewiesen };
+    });
+
+    assert(ergebnis.leerAbgewiesen, "ein leerer Name wird abgewiesen, ohne eine Kategorie anzulegen");
+    assert(ergebnis.gegenFestAbgewiesen, "ein Name, der (unabhängig von Groß-/Kleinschreibung) einer fest eingebauten Kategorie entspricht, wird abgewiesen");
+    assert(ergebnis.gegenEigeneAbgewiesen, "ein zweiter Versuch mit demselben eigenen Namen wird abgewiesen, es entsteht kein Duplikat");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testEigeneKategorieLoeschen(browser) {
+  console.log("\nTest: Eigene Kategorie löschen - blockiert solange verwendet, sonst entfernt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Grillrezept", payload: leererPayload({ category: "Grillrezepte" }) });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      // Kategorie direkt anlegen (ohne Umweg über die UI, siehe
+      // testEigeneKategorieAnlegen für den UI-Weg).
+      await karte._eigeneKategorienSpeichern(["Grillrezepte"]);
+      karte._render();
+
+      window.__alertAufrufe.length = 0;
+      karte.shadowRoot.querySelector('.kategorie-loeschen[data-kategorie="Grillrezepte"]').click();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      const blockiertSolangeVerwendet = window.__alertAufrufe.length === 1 && (karte._eigeneKategorien || []).includes("Grillrezepte");
+
+      // Rezept umkategorisieren, dann sollte sich die Kategorie löschen lassen.
+      const rezept = karte._rezepte[0];
+      await karte._serviceAufrufen("update_item", {
+        item: rezept.uid,
+        description: JSON.stringify({ ...karte._rezeptPayload(rezept), category: "Sonstiges" }),
+      });
+      await karte._rezepteLaden();
+      karte._render();
+
+      window.__alertAufrufe.length = 0;
+      karte.shadowRoot.querySelector('.kategorie-loeschen[data-kategorie="Grillrezepte"]').click();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      const geloescht = window.__alertAufrufe.length === 0 && !(karte._eigeneKategorien || []).includes("Grillrezepte");
+
+      return { blockiertSolangeVerwendet, geloescht };
+    });
+
+    assert(ergebnis.blockiertSolangeVerwendet, "eine noch verwendete eigene Kategorie lässt sich nicht löschen (Warnung statt stillem Datenverlust)");
+    assert(ergebnis.geloescht, "nach dem Umkategorisieren des letzten Rezepts lässt sich die Kategorie löschen");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 25e: Detailansicht - auf breiten Bildschirmen (z.B. Wandtablet im
 // Querformat) stehen Zutaten/Bild und Zubereitung nebeneinander (zwei
 // Spalten) statt wie auf schmalen Bildschirmen untereinander (eine Spalte).
@@ -3969,6 +4094,56 @@ async function testKochmodusTimerWirdBeimVerlassenDesRezeptsZurueckgesetzt(brows
   }
 }
 
+async function testKochmodusWakeLock(browser) {
+  console.log("\nTest: Kochmodus fordert eine Screen-Wake-Lock an und gibt sie beim Schließen/Verlassen wieder frei");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload({ steps: ["Kochen"] }) });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+
+      // Echtes navigator.wakeLock durch einen Fake ersetzen, damit der
+      // Test unabhängig davon läuft, ob der Test-Browser die API selbst
+      // unterstützt/erlaubt (z.B. Berechtigungen im Headless-Modus).
+      const anforderungen = [];
+      let freigegeben = 0;
+      const fakeSperre = { released: false, release: async () => { freigegeben++; fakeSperre.released = true; } };
+      Object.defineProperty(navigator, "wakeLock", {
+        configurable: true,
+        value: { request: async (typ) => { anforderungen.push(typ); return fakeSperre; } },
+      });
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      // _kochmodusWakeLockAnfordern() ist async (await navigator.wakeLock.request) -
+      // kurz auf den Mikrotask-Abschluss warten, bevor der Zustand geprüft wird.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      const angefordertNachOeffnen = anforderungen.length === 1 && anforderungen[0] === "screen";
+      const gehaltenNachOeffnen = karte._kochmodusWakeLock === fakeSperre;
+
+      karte.shadowRoot.getElementById("kochmodus-schliessen-btn").click();
+      const freigegebenNachSchliessen = freigegeben === 1 && karte._kochmodusWakeLock === null;
+
+      // Erneutes Öffnen + diesmal über _zurListe() (Rezept verlassen) wieder
+      // freigeben, statt nur das Overlay zu schließen.
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await karte._zurListe();
+      const freigegebenNachVerlassen = freigegeben === 2 && karte._kochmodusWakeLock === null;
+
+      return { angefordertNachOeffnen, gehaltenNachOeffnen, freigegebenNachSchliessen, freigegebenNachVerlassen };
+    });
+
+    assert(ergebnis.angefordertNachOeffnen, "beim Öffnen des Kochmodus wird eine 'screen'-Wake-Lock angefordert");
+    assert(ergebnis.gehaltenNachOeffnen, "die angeforderte Wake Lock wird gespeichert");
+    assert(ergebnis.freigegebenNachSchliessen, "beim Schließen des Kochmodus-Overlays wird die Wake Lock wieder freigegeben");
+    assert(ergebnis.freigegebenNachVerlassen, "beim Verlassen des Rezepts wird eine erneut gehaltene Wake Lock ebenfalls freigegeben");
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -4248,6 +4423,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testStatistikBerechnung(browser);
     await testAskCookedDeaktiviert(browser);
     await testShowStatisticsDeaktiviert(browser);
+    await testEigeneKategorieAnlegen(browser);
+    await testEigeneKategorieDuplikatUndLeer(browser);
+    await testEigeneKategorieLoeschen(browser);
     await testDetailZweiSpaltenAufBreitemBildschirm(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);
@@ -4305,6 +4483,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusTimerStartenUndAbbrechen(browser);
     await testKochmodusTimerLaeuftAbUndUeberlebtSchliessen(browser);
     await testKochmodusTimerWirdBeimVerlassenDesRezeptsZurueckgesetzt(browser);
+    await testKochmodusWakeLock(browser);
   } finally {
     await browser.close();
   }

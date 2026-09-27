@@ -24,7 +24,11 @@ komplett neue Kernfunktionen.
   man das Kochmodus-Overlay zwischendurch schließt (z.B. um kurz die
   Zutatenliste zu prüfen) - erst beim Verlassen des Rezepts wird er
   zurückgesetzt. Praktisch am Tablet in der Küche, ohne beim Kochen lange
-  scrollen zu müssen.
+  scrollen zu müssen. Zusätzlich hält die Karte über die Screen-Wake-Lock-
+  API des Browsers den Bildschirm wach, solange der Kochmodus offen ist -
+  kein ständiges Neu-Entsperren mehr beim Kochen (Browser ohne
+  Unterstützung dieser API: der Kochmodus funktioniert unverändert, nur
+  ohne diesen Zusatzkomfort).
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen
@@ -47,6 +51,16 @@ komplett neue Kernfunktionen.
   Zubereitungs-Zählung je Rezept laufen dabei im Hintergrund normal
   weiter - praktisch, wenn nur die Auswertung selbst nicht angezeigt
   werden soll, die Historie aber weiter mitgesammelt wird.
+- **Eigene Kategorien**: über einen neuen "+ Neue Kategorie"-Knopf im
+  Filterbereich der Übersicht lassen sich zusätzlich zu den elf fest
+  eingebauten Kategorien beliebig eigene anlegen - sie erscheinen sofort
+  als Filter-Chip und als Option im Formular-Dropdown. Eine eigene
+  Kategorie lässt sich per "✕" am Chip wieder löschen, aber erst, wenn
+  kein Rezept sie mehr verwendet (sonst erscheint ein Hinweis mit der
+  Anzahl der betroffenen Rezepte) - so geht beim Löschen nie unbemerkt
+  die Kategorie-Zuordnung eines Rezepts verloren. Gespeichert werden die
+  eigenen Kategorien analog zu Wochenplan/Kochbüchern als verstecktes
+  Item in derselben To-do-Liste.
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich

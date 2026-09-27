@@ -84,6 +84,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Getränk",
     kategorie_sonstiges: "Sonstiges",
     kategorie_filter_alle: "Alle",
+    kategorie_neu_btn: "+ Neue Kategorie",
+    kategorie_name_placeholder: "Name der Kategorie",
+    fehler_kategorie_name_fehlt: "Bitte einen Namen für die Kategorie eingeben.",
+    fehler_kategorie_existiert_bereits: "Diese Kategorie gibt es schon.",
+    kategorie_loeschen_title: "Kategorie löschen",
+    kategorie_loeschen_aria: "Kategorie {{name}} löschen",
+    fehler_kategorie_wird_verwendet: "Diese Kategorie wird noch von {{anzahl}}x verwendet - bitte zuerst eine andere Kategorie zuweisen.",
 
     // Wochentage (Anzeige - der interne Schlüssel in WOCHENTAGE bleibt
     // sprachunabhängig "montag" usw., siehe _wochentagLabel()).
@@ -385,6 +392,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Getränk",
     kategorie_sonstiges: "Anders",
     kategorie_filter_alle: "Alli",
+    kategorie_neu_btn: "+ Nöi Kategorie",
+    kategorie_name_placeholder: "Name vo de Kategorie",
+    fehler_kategorie_name_fehlt: "Bitte gib en Name für d'Kategorie i.",
+    fehler_kategorie_existiert_bereits: "Die Kategorie gits scho.",
+    kategorie_loeschen_title: "Kategorie lösche",
+    kategorie_loeschen_aria: "Kategorie {{name}} lösche",
+    fehler_kategorie_wird_verwendet: "Die Kategorie wird no vo {{anzahl}}x bruucht - bitte zersch en anderi Kategorie zuedeile.",
 
     // Wochentage (Anzeige - der interne Schlüssel in WOCHENTAGE bleibt
     // sprachunabhängig "montag" usw., siehe _wochentagLabel()).
@@ -677,6 +691,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Drink",
     kategorie_sonstiges: "Other",
     kategorie_filter_alle: "All",
+    kategorie_neu_btn: "+ New category",
+    kategorie_name_placeholder: "Category name",
+    fehler_kategorie_name_fehlt: "Please enter a name for the category.",
+    fehler_kategorie_existiert_bereits: "This category already exists.",
+    kategorie_loeschen_title: "Delete category",
+    kategorie_loeschen_aria: "Delete category {{name}}",
+    fehler_kategorie_wird_verwendet: "This category is still used by {{anzahl}}x recipes - please reassign them to another category first.",
 
     wochentag_montag: "Monday",
     wochentag_dienstag: "Tuesday",
@@ -951,6 +972,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Напитка",
     kategorie_sonstiges: "Друго",
     kategorie_filter_alle: "Всички",
+    kategorie_neu_btn: "+ Нова категория",
+    kategorie_name_placeholder: "Име на категорията",
+    fehler_kategorie_name_fehlt: "Моля, въведете име за категорията.",
+    fehler_kategorie_existiert_bereits: "Тази категория вече съществува.",
+    kategorie_loeschen_title: "Изтриване на категория",
+    kategorie_loeschen_aria: "Изтриване на категория {{name}}",
+    fehler_kategorie_wird_verwendet: "Тази категория все още се използва от {{anzahl}}x рецепти - моля, първо им задайте друга категория.",
     wochentag_montag: "Понеделник",
     wochentag_dienstag: "Вторник",
     wochentag_mittwoch: "Сряда",
@@ -1184,6 +1212,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Piće",
     kategorie_sonstiges: "Ostalo",
     kategorie_filter_alle: "Sve",
+    kategorie_neu_btn: "+ Nova kategorija",
+    kategorie_name_placeholder: "Naziv kategorije",
+    fehler_kategorie_name_fehlt: "Unesite naziv kategorije.",
+    fehler_kategorie_existiert_bereits: "Ova kategorija već postoji.",
+    kategorie_loeschen_title: "Izbriši kategoriju",
+    kategorie_loeschen_aria: "Izbriši kategoriju {{name}}",
+    fehler_kategorie_wird_verwendet: "Ovu kategoriju još uvijek koristi {{anzahl}}x recepata - prvo im dodijelite drugu kategoriju.",
     wochentag_montag: "Ponedjeljak",
     wochentag_dienstag: "Utorak",
     wochentag_mittwoch: "Srijeda",
@@ -1417,6 +1452,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Nápoj",
     kategorie_sonstiges: "Ostatní",
     kategorie_filter_alle: "Vše",
+    kategorie_neu_btn: "+ Nová kategorie",
+    kategorie_name_placeholder: "Název kategorie",
+    fehler_kategorie_name_fehlt: "Zadejte prosím název kategorie.",
+    fehler_kategorie_existiert_bereits: "Tato kategorie již existuje.",
+    kategorie_loeschen_title: "Smazat kategorii",
+    kategorie_loeschen_aria: "Smazat kategorii {{name}}",
+    fehler_kategorie_wird_verwendet: "Tuto kategorii stále používá {{anzahl}}x receptů - nejprve jim přiřaďte jinou kategorii.",
     wochentag_montag: "Pondělí",
     wochentag_dienstag: "Úterý",
     wochentag_mittwoch: "Středa",
@@ -1650,6 +1692,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Drikkevare",
     kategorie_sonstiges: "Andet",
     kategorie_filter_alle: "Alle",
+    kategorie_neu_btn: "+ Ny kategori",
+    kategorie_name_placeholder: "Kategorinavn",
+    fehler_kategorie_name_fehlt: "Angiv venligst et navn til kategorien.",
+    fehler_kategorie_existiert_bereits: "Denne kategori findes allerede.",
+    kategorie_loeschen_title: "Slet kategori",
+    kategorie_loeschen_aria: "Slet kategori {{name}}",
+    fehler_kategorie_wird_verwendet: "Denne kategori bruges stadig af {{anzahl}}x opskrifter - tildel dem venligst en anden kategori først.",
     wochentag_montag: "Mandag",
     wochentag_dienstag: "Tirsdag",
     wochentag_mittwoch: "Onsdag",
@@ -1883,6 +1932,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Drankje",
     kategorie_sonstiges: "Overig",
     kategorie_filter_alle: "Alle",
+    kategorie_neu_btn: "+ Nieuwe categorie",
+    kategorie_name_placeholder: "Categorienaam",
+    fehler_kategorie_name_fehlt: "Voer een naam voor de categorie in.",
+    fehler_kategorie_existiert_bereits: "Deze categorie bestaat al.",
+    kategorie_loeschen_title: "Categorie verwijderen",
+    kategorie_loeschen_aria: "Categorie {{name}} verwijderen",
+    fehler_kategorie_wird_verwendet: "Deze categorie wordt nog gebruikt door {{anzahl}}x recepten - wijs ze eerst een andere categorie toe.",
     wochentag_montag: "Maandag",
     wochentag_dienstag: "Dinsdag",
     wochentag_mittwoch: "Woensdag",
@@ -2116,6 +2172,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Jook",
     kategorie_sonstiges: "Muu",
     kategorie_filter_alle: "Kõik",
+    kategorie_neu_btn: "+ Uus kategooria",
+    kategorie_name_placeholder: "Kategooria nimi",
+    fehler_kategorie_name_fehlt: "Palun sisesta kategooria nimi.",
+    fehler_kategorie_existiert_bereits: "See kategooria on juba olemas.",
+    kategorie_loeschen_title: "Kustuta kategooria",
+    kategorie_loeschen_aria: "Kustuta kategooria {{name}}",
+    fehler_kategorie_wird_verwendet: "Seda kategooriat kasutab veel {{anzahl}}x retsepti - määra neile kõigepealt teine kategooria.",
     wochentag_montag: "Esmaspäev",
     wochentag_dienstag: "Teisipäev",
     wochentag_mittwoch: "Kolmapäev",
@@ -2349,6 +2412,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Juoma",
     kategorie_sonstiges: "Muu",
     kategorie_filter_alle: "Kaikki",
+    kategorie_neu_btn: "+ Uusi kategoria",
+    kategorie_name_placeholder: "Kategorian nimi",
+    fehler_kategorie_name_fehlt: "Anna kategorialle nimi.",
+    fehler_kategorie_existiert_bereits: "Tämä kategoria on jo olemassa.",
+    kategorie_loeschen_title: "Poista kategoria",
+    kategorie_loeschen_aria: "Poista kategoria {{name}}",
+    fehler_kategorie_wird_verwendet: "Tätä kategoriaa käyttää vielä {{anzahl}}x reseptiä - anna niille ensin toinen kategoria.",
     wochentag_montag: "Maanantai",
     wochentag_dienstag: "Tiistai",
     wochentag_mittwoch: "Keskiviikko",
@@ -2582,6 +2652,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Boisson",
     kategorie_sonstiges: "Autre",
     kategorie_filter_alle: "Tous",
+    kategorie_neu_btn: "+ Nouvelle catégorie",
+    kategorie_name_placeholder: "Nom de la catégorie",
+    fehler_kategorie_name_fehlt: "Veuillez saisir un nom pour la catégorie.",
+    fehler_kategorie_existiert_bereits: "Cette catégorie existe déjà.",
+    kategorie_loeschen_title: "Supprimer la catégorie",
+    kategorie_loeschen_aria: "Supprimer la catégorie {{name}}",
+    fehler_kategorie_wird_verwendet: "Cette catégorie est encore utilisée par {{anzahl}}x recettes - veuillez d'abord leur attribuer une autre catégorie.",
     wochentag_montag: "Lundi",
     wochentag_dienstag: "Mardi",
     wochentag_mittwoch: "Mercredi",
@@ -2816,6 +2893,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Ρόφημα",
     kategorie_sonstiges: "Άλλο",
     kategorie_filter_alle: "Όλα",
+    kategorie_neu_btn: "+ Νέα κατηγορία",
+    kategorie_name_placeholder: "Όνομα κατηγορίας",
+    fehler_kategorie_name_fehlt: "Παρακαλώ εισάγετε ένα όνομα για την κατηγορία.",
+    fehler_kategorie_existiert_bereits: "Αυτή η κατηγορία υπάρχει ήδη.",
+    kategorie_loeschen_title: "Διαγραφή κατηγορίας",
+    kategorie_loeschen_aria: "Διαγραφή κατηγορίας {{name}}",
+    fehler_kategorie_wird_verwendet: "Αυτή η κατηγορία χρησιμοποιείται ακόμα από {{anzahl}}x συνταγές - παρακαλώ δώστε τους πρώτα άλλη κατηγορία.",
     wochentag_montag: "Δευτέρα",
     wochentag_dienstag: "Τρίτη",
     wochentag_mittwoch: "Τετάρτη",
@@ -3050,6 +3134,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Ital",
     kategorie_sonstiges: "Egyéb",
     kategorie_filter_alle: "Összes",
+    kategorie_neu_btn: "+ Új kategória",
+    kategorie_name_placeholder: "Kategória neve",
+    fehler_kategorie_name_fehlt: "Kérjük, adjon meg egy nevet a kategóriának.",
+    fehler_kategorie_existiert_bereits: "Ez a kategória már létezik.",
+    kategorie_loeschen_title: "Kategória törlése",
+    kategorie_loeschen_aria: "{{name}} kategória törlése",
+    fehler_kategorie_wird_verwendet: "Ezt a kategóriát még {{anzahl}}x recept használja - kérjük, először rendeljen hozzájuk másik kategóriát.",
     wochentag_montag: "Hétfő",
     wochentag_dienstag: "Kedd",
     wochentag_mittwoch: "Szerda",
@@ -3284,6 +3375,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Deoch",
     kategorie_sonstiges: "Eile",
     kategorie_filter_alle: "Uile",
+    kategorie_neu_btn: "+ Catagóir nua",
+    kategorie_name_placeholder: "Ainm na catagóire",
+    fehler_kategorie_name_fehlt: "Cuir isteach ainm don chatagóir le do thoil.",
+    fehler_kategorie_existiert_bereits: "Tá an chatagóir seo ann cheana féin.",
+    kategorie_loeschen_title: "Scrios catagóir",
+    kategorie_loeschen_aria: "Scrios catagóir {{name}}",
+    fehler_kategorie_wird_verwendet: "Tá an chatagóir seo fós á húsáid ag {{anzahl}}x oideas - sann catagóir eile dóibh ar dtús le do thoil.",
     wochentag_montag: "Dé Luain",
     wochentag_dienstag: "Dé Máirt",
     wochentag_mittwoch: "Dé Céadaoin",
@@ -3518,6 +3616,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Bevanda",
     kategorie_sonstiges: "Altro",
     kategorie_filter_alle: "Tutti",
+    kategorie_neu_btn: "+ Nuova categoria",
+    kategorie_name_placeholder: "Nome della categoria",
+    fehler_kategorie_name_fehlt: "Inserisci un nome per la categoria.",
+    fehler_kategorie_existiert_bereits: "Questa categoria esiste già.",
+    kategorie_loeschen_title: "Elimina categoria",
+    kategorie_loeschen_aria: "Elimina categoria {{name}}",
+    fehler_kategorie_wird_verwendet: "Questa categoria è ancora usata da {{anzahl}}x ricette - assegna prima loro un'altra categoria.",
     wochentag_montag: "Lunedì",
     wochentag_dienstag: "Martedì",
     wochentag_mittwoch: "Mercoledì",
@@ -3752,6 +3857,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Dzēriens",
     kategorie_sonstiges: "Cits",
     kategorie_filter_alle: "Visi",
+    kategorie_neu_btn: "+ Jauna kategorija",
+    kategorie_name_placeholder: "Kategorijas nosaukums",
+    fehler_kategorie_name_fehlt: "Lūdzu, ievadiet kategorijas nosaukumu.",
+    fehler_kategorie_existiert_bereits: "Šī kategorija jau pastāv.",
+    kategorie_loeschen_title: "Dzēst kategoriju",
+    kategorie_loeschen_aria: "Dzēst kategoriju {{name}}",
+    fehler_kategorie_wird_verwendet: "Šo kategoriju joprojām izmanto {{anzahl}}x receptes - vispirms piešķiriet tām citu kategoriju.",
     wochentag_montag: "Pirmdiena",
     wochentag_dienstag: "Otrdiena",
     wochentag_mittwoch: "Trešdiena",
@@ -3985,6 +4097,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Gėrimas",
     kategorie_sonstiges: "Kita",
     kategorie_filter_alle: "Visi",
+    kategorie_neu_btn: "+ Nauja kategorija",
+    kategorie_name_placeholder: "Kategorijos pavadinimas",
+    fehler_kategorie_name_fehlt: "Įveskite kategorijos pavadinimą.",
+    fehler_kategorie_existiert_bereits: "Tokia kategorija jau yra.",
+    kategorie_loeschen_title: "Ištrinti kategoriją",
+    kategorie_loeschen_aria: "Ištrinti kategoriją {{name}}",
+    fehler_kategorie_wird_verwendet: "Šią kategoriją vis dar naudoja {{anzahl}}x receptų - pirmiausia priskirkite jiems kitą kategoriją.",
     wochentag_montag: "Pirmadienis",
     wochentag_dienstag: "Antradienis",
     wochentag_mittwoch: "Trečiadienis",
@@ -4218,6 +4337,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Xarba",
     kategorie_sonstiges: "Oħrajn",
     kategorie_filter_alle: "Kollha",
+    kategorie_neu_btn: "+ Kategorija ġdida",
+    kategorie_name_placeholder: "Isem tal-kategorija",
+    fehler_kategorie_name_fehlt: "Jekk jogħġbok daħħal isem għall-kategorija.",
+    fehler_kategorie_existiert_bereits: "Din il-kategorija diġà teżisti.",
+    kategorie_loeschen_title: "Ħassar il-kategorija",
+    kategorie_loeschen_aria: "Ħassar il-kategorija {{name}}",
+    fehler_kategorie_wird_verwendet: "Din il-kategorija għadha tintuża minn {{anzahl}}x riċetti - jekk jogħġbok assenjalhom kategorija oħra l-ewwel.",
     wochentag_montag: "It-Tnejn",
     wochentag_dienstag: "It-Tlieta",
     wochentag_mittwoch: "L-Erbgħa",
@@ -4452,6 +4578,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Napój",
     kategorie_sonstiges: "Inne",
     kategorie_filter_alle: "Wszystkie",
+    kategorie_neu_btn: "+ Nowa kategoria",
+    kategorie_name_placeholder: "Nazwa kategorii",
+    fehler_kategorie_name_fehlt: "Podaj nazwę kategorii.",
+    fehler_kategorie_existiert_bereits: "Ta kategoria już istnieje.",
+    kategorie_loeschen_title: "Usuń kategorię",
+    kategorie_loeschen_aria: "Usuń kategorię {{name}}",
+    fehler_kategorie_wird_verwendet: "Ta kategoria jest nadal używana przez {{anzahl}}x przepisów - najpierw przypisz im inną kategorię.",
     wochentag_montag: "Poniedziałek",
     wochentag_dienstag: "Wtorek",
     wochentag_mittwoch: "Środa",
@@ -4685,6 +4818,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Bebida",
     kategorie_sonstiges: "Outro",
     kategorie_filter_alle: "Todas",
+    kategorie_neu_btn: "+ Nova categoria",
+    kategorie_name_placeholder: "Nome da categoria",
+    fehler_kategorie_name_fehlt: "Introduza um nome para a categoria.",
+    fehler_kategorie_existiert_bereits: "Esta categoria já existe.",
+    kategorie_loeschen_title: "Eliminar categoria",
+    kategorie_loeschen_aria: "Eliminar categoria {{name}}",
+    fehler_kategorie_wird_verwendet: "Esta categoria ainda é usada por {{anzahl}}x receitas - atribua-lhes primeiro outra categoria.",
     wochentag_montag: "Segunda-feira",
     wochentag_dienstag: "Terça-feira",
     wochentag_mittwoch: "Quarta-feira",
@@ -4919,6 +5059,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Băutură",
     kategorie_sonstiges: "Altele",
     kategorie_filter_alle: "Toate",
+    kategorie_neu_btn: "+ Categorie nouă",
+    kategorie_name_placeholder: "Numele categoriei",
+    fehler_kategorie_name_fehlt: "Introduceți un nume pentru categorie.",
+    fehler_kategorie_existiert_bereits: "Această categorie există deja.",
+    kategorie_loeschen_title: "Șterge categoria",
+    kategorie_loeschen_aria: "Șterge categoria {{name}}",
+    fehler_kategorie_wird_verwendet: "Această categorie este încă folosită de {{anzahl}}x rețete - atribuiți-le mai întâi o altă categorie.",
     wochentag_montag: "Luni",
     wochentag_dienstag: "Marți",
     wochentag_mittwoch: "Miercuri",
@@ -5152,6 +5299,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Nápoj",
     kategorie_sonstiges: "Ostatné",
     kategorie_filter_alle: "Všetky",
+    kategorie_neu_btn: "+ Nová kategória",
+    kategorie_name_placeholder: "Názov kategórie",
+    fehler_kategorie_name_fehlt: "Zadajte názov kategórie.",
+    fehler_kategorie_existiert_bereits: "Táto kategória už existuje.",
+    kategorie_loeschen_title: "Odstrániť kategóriu",
+    kategorie_loeschen_aria: "Odstrániť kategóriu {{name}}",
+    fehler_kategorie_wird_verwendet: "Túto kategóriu stále používa {{anzahl}}x receptov - najprv im priraďte inú kategóriu.",
     wochentag_montag: "Pondelok",
     wochentag_dienstag: "Utorok",
     wochentag_mittwoch: "Streda",
@@ -5385,6 +5539,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Pijača",
     kategorie_sonstiges: "Drugo",
     kategorie_filter_alle: "Vse",
+    kategorie_neu_btn: "+ Nova kategorija",
+    kategorie_name_placeholder: "Ime kategorije",
+    fehler_kategorie_name_fehlt: "Vnesite ime kategorije.",
+    fehler_kategorie_existiert_bereits: "Ta kategorija že obstaja.",
+    kategorie_loeschen_title: "Izbriši kategorijo",
+    kategorie_loeschen_aria: "Izbriši kategorijo {{name}}",
+    fehler_kategorie_wird_verwendet: "To kategorijo še vedno uporablja {{anzahl}}x receptov - najprej jim dodelite drugo kategorijo.",
     wochentag_montag: "Ponedeljek",
     wochentag_dienstag: "Torek",
     wochentag_mittwoch: "Sreda",
@@ -5618,6 +5779,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Bebida",
     kategorie_sonstiges: "Otro",
     kategorie_filter_alle: "Todas",
+    kategorie_neu_btn: "+ Nueva categoría",
+    kategorie_name_placeholder: "Nombre de la categoría",
+    fehler_kategorie_name_fehlt: "Introduce un nombre para la categoría.",
+    fehler_kategorie_existiert_bereits: "Esta categoría ya existe.",
+    kategorie_loeschen_title: "Eliminar categoría",
+    kategorie_loeschen_aria: "Eliminar categoría {{name}}",
+    fehler_kategorie_wird_verwendet: "Esta categoría todavía la usan {{anzahl}}x recetas - asígnales primero otra categoría.",
     wochentag_montag: "Lunes",
     wochentag_dienstag: "Martes",
     wochentag_mittwoch: "Miércoles",
@@ -5851,6 +6019,13 @@ const UEBERSETZUNGEN = {
     kategorie_getraenk: "Dryck",
     kategorie_sonstiges: "Övrigt",
     kategorie_filter_alle: "Alla",
+    kategorie_neu_btn: "+ Ny kategori",
+    kategorie_name_placeholder: "Kategorinamn",
+    fehler_kategorie_name_fehlt: "Ange ett namn för kategorin.",
+    fehler_kategorie_existiert_bereits: "Den här kategorin finns redan.",
+    kategorie_loeschen_title: "Ta bort kategori",
+    kategorie_loeschen_aria: "Ta bort kategori {{name}}",
+    fehler_kategorie_wird_verwendet: "Den här kategorin används fortfarande av {{anzahl}}x recept - tilldela dem först en annan kategori.",
     wochentag_montag: "Måndag",
     wochentag_dienstag: "Tisdag",
     wochentag_mittwoch: "Onsdag",
@@ -6136,6 +6311,13 @@ const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
 // Marker herausgefiltert, statt als (kaputtes) Rezept angezeigt zu werden.
 const WOCHENPLAN_MARKER = "__rezeptbuch_wochenplan__";
 const KOCHBUECHER_MARKER = "__rezeptbuch_kochbuecher__";
+// Versteckt gespeicherte, selbst angelegte Kategorien (siehe KATEGORIEN
+// oben) - analog zu WOCHENPLAN_MARKER/KOCHBUECHER_MARKER als eigenes,
+// verstecktes Item in derselben To-do-Liste. Die fest eingebauten
+// KATEGORIEN bleiben Deutsch+übersetzt (KATEGORIE_SCHLUESSEL); eigene
+// Kategorien werden dagegen so gespeichert/angezeigt, wie der Nutzer sie
+// eingetippt hat - ohne automatische Übersetzung in andere Sprachen.
+const KATEGORIEN_MARKER = "__rezeptbuch_kategorien__";
 
 // "schluessel" bleibt der interne, sprachunabhängige Speicherschlüssel
 // (siehe _leereWochentage() usw.) - das Anzeige-Label kommt erst zur
@@ -6677,6 +6859,10 @@ class RezeptbuchCard extends HTMLElement {
     this._wochenplanAnsicht = "diese";
     this._kochbuecherItem = null;
     this._kochbuecher = [];
+    // Selbst angelegte Kategorien (siehe KATEGORIEN_MARKER/_alleKategorien) -
+    // reine Liste von Namen, on top of den fest eingebauten KATEGORIEN.
+    this._kategorienItem = null;
+    this._eigeneKategorien = [];
     // Paginierung der Rezeptübersicht (feature: viele Rezepte auf mehrere
     // Seiten aufteilen statt alle auf einmal zu zeigen) - 1-basiert, wird
     // bei jeder Filter-/Sortier-/Suchänderung auf 1 zurückgesetzt (siehe
@@ -6707,6 +6893,16 @@ class RezeptbuchCard extends HTMLElement {
     this._kochmodusTimerEndeZeitpunkt = null;
     this._kochmodusTimerAbgelaufen = false;
     this._kochmodusTimerIntervallId = null;
+
+    // Screen Wake Lock (siehe _kochmodusWakeLock*): hält den Bildschirm
+    // hell, solange der Kochmodus offen ist, damit man beim Kochen nicht
+    // ständig neu entsperren muss. Das Wake-Lock-Objekt selbst (null,
+    // solange keins gehalten wird) sowie der Handler für "sichtbar
+    // geworden" (die Sperre wird vom Browser automatisch freigegeben,
+    // sobald der Tab in den Hintergrund wechselt, und muss beim
+    // Zurückkommen erneut angefordert werden).
+    this._kochmodusWakeLock = null;
+    this._kochmodusSichtbarkeitsHandler = null;
 
     // Sammel-PDF-Modal (siehe _sammelPdfModalOeffnen/_sammelPdf*): merkt
     // sich zwischen den Modal-Schritten die aktuell gefilterte Rezeptliste,
@@ -6767,10 +6963,14 @@ class RezeptbuchCard extends HTMLElement {
   // Übersetzte Anzeige-Bezeichnung einer Kategorie - der intern
   // gespeicherte/verglichene Wert (this._aktiveKategorie, r.category usw.)
   // bleibt davon unberührt immer der deutsche String aus KATEGORIEN (siehe
-  // KATEGORIE_SCHLUESSEL).
+  // KATEGORIE_SCHLUESSEL). Für eine selbst angelegte Kategorie (nicht in
+  // KATEGORIE_SCHLUESSEL enthalten) gibt es keine Übersetzung - dort wird
+  // der Name unverändert angezeigt, so wie der Nutzer ihn eingetippt hat,
+  // statt ihn fälschlich als "Sonstiges" zu beschriften.
   _kategorieLabel(kategorie) {
-    const schluessel = KATEGORIE_SCHLUESSEL[kategorie] || KATEGORIE_SCHLUESSEL["Sonstiges"];
-    return this._t(schluessel);
+    const schluessel = KATEGORIE_SCHLUESSEL[kategorie];
+    if (schluessel) return this._t(schluessel);
+    return kategorie || this._t(KATEGORIE_SCHLUESSEL["Sonstiges"]);
   }
 
   // Übersetzte Anzeige-Bezeichnung eines Wochentags - siehe WOCHENTAGE.
@@ -6810,6 +7010,16 @@ class RezeptbuchCard extends HTMLElement {
       }
     };
     window.addEventListener("popstate", this._popstateHandler);
+
+    // Wake Lock wird vom Browser automatisch aufgehoben, sobald der Tab
+    // in den Hintergrund wechselt (z.B. Bildschirm gesperrt, App-Wechsel)
+    // - bei Rückkehr und weiterhin aktivem Kochmodus hier erneut anfordern.
+    this._kochmodusSichtbarkeitsHandler = () => {
+      if (document.visibilityState === "visible" && this._kochmodusAktiv) {
+        this._kochmodusWakeLockAnfordern();
+      }
+    };
+    document.addEventListener("visibilitychange", this._kochmodusSichtbarkeitsHandler);
   }
 
   disconnectedCallback() {
@@ -6817,7 +7027,12 @@ class RezeptbuchCard extends HTMLElement {
       window.removeEventListener("popstate", this._popstateHandler);
       this._popstateHandler = null;
     }
+    if (this._kochmodusSichtbarkeitsHandler) {
+      document.removeEventListener("visibilitychange", this._kochmodusSichtbarkeitsHandler);
+      this._kochmodusSichtbarkeitsHandler = null;
+    }
     this._kochmodusTimerIntervallStoppen();
+    this._kochmodusWakeLockFreigeben();
   }
 
   _zubereitetModalAnzeigen() {
@@ -7031,16 +7246,18 @@ class RezeptbuchCard extends HTMLElement {
         entity_id: this._config.entity,
       });
       const items = (antwort && antwort.items) || [];
-      // Versteckte Wochenplan-/Kochbücher-Items herausfiltern, BEVOR aus dem
-      // Rest die normale Rezeptliste gebildet wird - sie dürfen nirgends
-      // (Liste, Suche, Kategorie-/Tag-Filter, Sortierung, Export) als
-      // (kaputtes) Rezept auftauchen.
+      // Versteckte Wochenplan-/Kochbücher-/Kategorien-Items herausfiltern,
+      // BEVOR aus dem Rest die normale Rezeptliste gebildet wird - sie
+      // dürfen nirgends (Liste, Suche, Kategorie-/Tag-Filter, Sortierung,
+      // Export) als (kaputtes) Rezept auftauchen.
       this._wochenplanItem = items.find((i) => i.summary === WOCHENPLAN_MARKER) || null;
       this._kochbuecherItem = items.find((i) => i.summary === KOCHBUECHER_MARKER) || null;
+      this._kategorienItem = items.find((i) => i.summary === KATEGORIEN_MARKER) || null;
       this._wochenplan = this._wochenplanAusItem(this._wochenplanItem);
       this._kochbuecher = this._kochbuecherAusItem(this._kochbuecherItem);
+      this._eigeneKategorien = this._eigeneKategorienAusItem(this._kategorienItem);
       this._rezepte = items
-        .filter((item) => item.summary !== WOCHENPLAN_MARKER && item.summary !== KOCHBUECHER_MARKER)
+        .filter((item) => item.summary !== WOCHENPLAN_MARKER && item.summary !== KOCHBUECHER_MARKER && item.summary !== KATEGORIEN_MARKER)
         .map((item) => this._itemZuRezept(item));
     } catch (fehler) {
       console.error("Rezeptbuch: Laden fehlgeschlagen", fehler);
@@ -7133,6 +7350,45 @@ class RezeptbuchCard extends HTMLElement {
     const erfolg = await this._serviceAufrufen("add_item", { item: KOCHBUECHER_MARKER, description: beschreibung });
     if (erfolg) await this._rezepteLaden();
     return erfolg;
+  }
+
+  // Selbst angelegte Kategorien aus dem versteckten Marker-Item parsen
+  // (siehe KATEGORIEN_MARKER) - analog zu _kochbuecherAusItem.
+  _eigeneKategorienAusItem(item) {
+    if (!item || !item.description) return [];
+    try {
+      const geparst = JSON.parse(item.description);
+      return Array.isArray(geparst.eigene) ? geparst.eigene : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // Schreibt die Liste eigener Kategorien zurück in ihr Marker-Item
+  // (analog zu _kochbuecherSpeichern).
+  async _eigeneKategorienSpeichern(neueListe) {
+    const beschreibung = JSON.stringify({ schemaVersion: 1, eigene: neueListe });
+    if (this._kategorienItem) {
+      const erfolg = await this._serviceAufrufen("update_item", { item: this._kategorienItem.uid, description: beschreibung });
+      if (erfolg) {
+        this._kategorienItem = { ...this._kategorienItem, description: beschreibung };
+        this._eigeneKategorien = neueListe;
+      }
+      return erfolg;
+    }
+    const erfolg = await this._serviceAufrufen("add_item", { item: KATEGORIEN_MARKER, description: beschreibung });
+    if (erfolg) await this._rezepteLaden();
+    return erfolg;
+  }
+
+  // Alle wählbaren Kategorien: die fest eingebauten (ohne den letzten
+  // Eintrag "Sonstiges") + eigene, selbst angelegte + "Sonstiges" ganz am
+  // Ende als dauerhafter Auffangwert (siehe _rezeptSchemaMigrieren, das
+  // jedem Rezept ohne Kategorie "Sonstiges" zuweist).
+  _alleKategorien() {
+    const fest = KATEGORIEN.slice(0, -1);
+    const eigene = (this._eigeneKategorien || []).filter((k) => !KATEGORIEN.includes(k));
+    return [...fest, ...eigene, "Sonstiges"];
   }
 
   // Zentrale Stelle für Schema-Migrationen: bringt ein aus dem JSON
@@ -7575,21 +7831,55 @@ class RezeptbuchCard extends HTMLElement {
     this._kochmodusTimerAbgelaufen = false;
     this._kochmodusTimerEndeZeitpunkt = null;
     this._kochmodusTimerIntervallStoppen();
+    this._kochmodusWakeLockFreigeben();
   }
 
   _kochmodusOeffnen() {
     this._kochmodusAktiv = true;
     this._kochmodusSchrittIndex = 0;
+    this._kochmodusWakeLockAnfordern();
     this._render();
   }
 
   // Schließt nur das Kochmodus-Overlay - ein evtl. laufender Timer läuft
   // bewusst im Hintergrund weiter (z.B. "20 Min. im Ofen"), damit er auch
   // dann noch klingelt, wenn man zwischendurch die Zutatenliste oder ein
-  // anderes Rezept ansieht.
+  // anderes Rezept ansieht. Der Bildschirm darf dabei aber wieder normal
+  // abdunkeln - die Wake Lock gehört nur zur eigentlichen Vollbildansicht.
   _kochmodusSchliessen() {
     this._kochmodusAktiv = false;
+    this._kochmodusWakeLockFreigeben();
     this._render();
+  }
+
+  // Fordert eine Screen-Wake-Lock an, damit der Bildschirm im Kochmodus
+  // nicht abdunkelt/sperrt - rein additiv: die `navigator.wakeLock`-API
+  // fehlt in den Test-Fakes und in manchen (älteren/Desktop-)Browsern,
+  // daher großzügig mit typeof/try-catch abgesichert, statt den Kochmodus
+  // selbst davon abhängig zu machen.
+  async _kochmodusWakeLockAnfordern() {
+    try {
+      if (typeof navigator !== "undefined" && navigator.wakeLock && typeof navigator.wakeLock.request === "function") {
+        this._kochmodusWakeLock = await navigator.wakeLock.request("screen");
+      }
+    } catch (fehler) {
+      // Wake Lock ist reine Komfortfunktion - der Kochmodus funktioniert
+      // auch ohne (z.B. wenn der Tab gerade nicht sichtbar ist oder der
+      // Browser die Anfrage aus anderen Gründen ablehnt).
+      this._kochmodusWakeLock = null;
+    }
+  }
+
+  _kochmodusWakeLockFreigeben() {
+    if (this._kochmodusWakeLock) {
+      try {
+        this._kochmodusWakeLock.release();
+      } catch (fehler) {
+        // Ignorieren - z.B. wenn die Sperre vom Browser bereits von selbst
+        // aufgehoben wurde (siehe _kochmodusSichtbarkeitsHandler).
+      }
+      this._kochmodusWakeLock = null;
+    }
   }
 
   // --- Kochmodus-Timer ---
@@ -8295,6 +8585,14 @@ class RezeptbuchCard extends HTMLElement {
           cursor:pointer; font-weight:600;
         }
         .chip-aktiv { background: var(--kb-terrakotta); color:#fff; border-color: var(--kb-terrakotta); }
+        .kategorie-eigen-chip { display:inline-flex; align-items:center; gap:2px; padding-right:6px; }
+        .kategorie-loeschen {
+          border:none; background:transparent; color:inherit; cursor:pointer; font-size:0.9em;
+          padding:0 2px; opacity:0.75; line-height:1;
+        }
+        .kategorie-loeschen:hover { opacity:1; }
+        #kategorie-speichern-bereich input { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
+          border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); }
         .kochbuecher-zeile { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:16px; }
         .kochbuch-chip { cursor:pointer; }
         .kochbuch-loeschen {
@@ -8481,10 +8779,19 @@ class RezeptbuchCard extends HTMLElement {
   _renderListe(stil) {
     const titel = this._config.title || this._t("kopf_titel_standard");
 
+    const eigeneKategorienSet = new Set(this._eigeneKategorien || []);
     const kategorieChips = this._rezepte.length
       ? `<div class="kategorie-filter" id="kategorie-filter">
           <button type="button" class="chip ${this._aktiveKategorie === "Alle" ? "chip-aktiv" : ""}" data-kategorie="Alle">${this._t("kategorie_filter_alle")}</button>
-          ${KATEGORIEN.map((k) => `<button type="button" class="chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))}</button>`).join("")}
+          ${this._alleKategorien().map((k) => eigeneKategorienSet.has(k)
+            ? `<span class="chip kategorie-eigen-chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))} <button type="button" class="kategorie-loeschen" data-kategorie="${this._escape(k)}" title="${this._t("kategorie_loeschen_title")}" aria-label="${this._t("kategorie_loeschen_aria", { name: this._escape(k) })}">✕</button></span>`
+            : `<button type="button" class="chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))}</button>`
+          ).join("")}
+          <button type="button" class="chip" id="kategorie-neu-btn">${this._t("kategorie_neu_btn")}</button>
+          <div id="kategorie-speichern-bereich" style="display:none; width:100%; margin-top:8px;">
+            <input type="text" id="kategorie-name-feld" placeholder="${this._t("kategorie_name_placeholder")}">
+            <button type="button" class="primaer klein" id="kategorie-speichern-bestaetigen-btn" style="margin-top:6px;">${this._t("allgemein_speichern")}</button>
+          </div>
         </div>`
       : "";
 
@@ -8797,13 +9104,69 @@ class RezeptbuchCard extends HTMLElement {
       });
     }
 
-    const chipButtons = this.shadowRoot.querySelectorAll(".kategorie-filter .chip");
+    // Nur Elemente MIT data-kategorie sind echte Filter-Chips - schließt den
+    // "+ Neue Kategorie"-Knopf (kein data-kategorie) automatisch aus, auch
+    // wenn er dieselbe "chip"-Klasse für die Optik trägt.
+    const chipButtons = this.shadowRoot.querySelectorAll(".kategorie-filter .chip[data-kategorie]");
     chipButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         this._aktiveKategorie = btn.dataset.kategorie;
         chipButtons.forEach((b) => b.classList.toggle("chip-aktiv", b === btn));
         this._aktuelleSeite = 1;
         this._ergebnisAktualisieren();
+      });
+    });
+
+    const kategorieNeuBtn = this.shadowRoot.getElementById("kategorie-neu-btn");
+    if (kategorieNeuBtn) {
+      kategorieNeuBtn.addEventListener("click", () => {
+        const bereich = this.shadowRoot.getElementById("kategorie-speichern-bereich");
+        bereich.style.display = bereich.style.display === "none" ? "block" : "none";
+        if (bereich.style.display === "block") {
+          this.shadowRoot.getElementById("kategorie-name-feld").focus();
+        }
+      });
+    }
+
+    const kategorieBestaetigenBtn = this.shadowRoot.getElementById("kategorie-speichern-bestaetigen-btn");
+    if (kategorieBestaetigenBtn) {
+      kategorieBestaetigenBtn.addEventListener("click", async () => {
+        const nameFeld = this.shadowRoot.getElementById("kategorie-name-feld");
+        const name = nameFeld.value.trim();
+        if (!name) { alert(this._t("fehler_kategorie_name_fehlt")); return; }
+        // Groß-/Kleinschreibung ignorierend gegen ALLE wählbaren Kategorien
+        // prüfen (fest eingebaute, übersetzt UND deutsch, sowie eigene) -
+        // sonst könnte z.B. "hauptgericht" unbemerkt neben "Hauptgericht"
+        // entstehen.
+        const existiertBereits = this._alleKategorien().some((k) =>
+          k.toLowerCase() === name.toLowerCase() || this._kategorieLabel(k).toLowerCase() === name.toLowerCase()
+        );
+        if (existiertBereits) { alert(this._t("fehler_kategorie_existiert_bereits")); return; }
+        kategorieBestaetigenBtn.disabled = true;
+        await this._eigeneKategorienSpeichern([...(this._eigeneKategorien || []), name]);
+        this._render();
+      });
+    }
+
+    this.shadowRoot.querySelectorAll(".kategorie-loeschen").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        const kategorie = btn.dataset.kategorie;
+        // Eine Kategorie, die noch von mindestens einem Rezept verwendet
+        // wird, lässt sich bewusst NICHT löschen (anders als ein
+        // Kochbuch, das nur eine gespeicherte Filter-Kombination ist) -
+        // sonst würden Rezepte unbemerkt ihre Kategorie verlieren. Erst
+        // müssen die betroffenen Rezepte umkategorisiert werden.
+        const anzahlVerwendet = this._rezepte.filter((r) => (r.category || "Sonstiges") === kategorie).length;
+        if (anzahlVerwendet > 0) {
+          alert(this._t("fehler_kategorie_wird_verwendet", { anzahl: anzahlVerwendet }));
+          return;
+        }
+        btn.disabled = true;
+        const neueListe = (this._eigeneKategorien || []).filter((k) => k !== kategorie);
+        if (this._aktiveKategorie === kategorie) this._aktiveKategorie = "Alle";
+        await this._eigeneKategorienSpeichern(neueListe);
+        this._render();
       });
     });
 
@@ -10431,7 +10794,7 @@ class RezeptbuchCard extends HTMLElement {
 
           <label>${this._t("formular_label_kategorie")}</label>
           <select id="kategorie-feld">
-            ${KATEGORIEN.map((k) => `<option value="${this._escape(k)}" ${((r.category || "Sonstiges") === k) ? "selected" : ""}>${this._escape(this._kategorieLabel(k))}</option>`).join("")}
+            ${this._alleKategorien().map((k) => `<option value="${this._escape(k)}" ${((r.category || "Sonstiges") === k) ? "selected" : ""}>${this._escape(this._kategorieLabel(k))}</option>`).join("")}
           </select>
 
           <label>${this._t("formular_label_tags")}</label>
@@ -10675,9 +11038,11 @@ class RezeptbuchCard extends HTMLElement {
     // Prompt-Hilfe zum "JSON einfügen"-Bereich: zeigt einen fertigen,
     // vorformulierten Text zum Kopieren in eine beliebige externe KI (siehe
     // json_info_prompt oben). Der Kategorie-Platzhalter wird IMMER mit den
-    // deutschen internen KATEGORIEN-Werten befüllt (nicht den übersetzten
-    // Anzeige-Namen), weil genau diese Werte im "category"-Feld des JSON
-    // erwartet werden - unabhängig von der UI-Sprache, siehe _kategorieLabel().
+    // intern gespeicherten Werten befüllt (fest eingebaute KATEGORIEN auf
+    // Deutsch + eigene, selbst angelegte Kategorien unverändert, siehe
+    // _alleKategorien) - nicht den übersetzten Anzeige-Namen -, weil genau
+    // diese Werte im "category"-Feld des JSON erwartet werden - unabhängig
+    // von der UI-Sprache, siehe _kategorieLabel().
     // Den Prompt-Text bewusst HIER (einmal pro _render()-Durchlauf) statt
     // erst im Klick-Handler befüllen: this._t() liest _hass.language IMMER
     // live, unabhängig davon, wann zuletzt neu gezeichnet wurde. Bliebe die
@@ -10691,7 +11056,7 @@ class RezeptbuchCard extends HTMLElement {
     // nächsten tatsächlichen Neuzeichnen sichtbar (z.B. Formular schließen
     // und neu öffnen) - kein Teil-Update, das mit dem Rest nicht zusammenpasst.
     this.shadowRoot.getElementById("json-info-prompt-text").value = this._t("json_info_prompt", {
-      kategorien: KATEGORIEN.join(", "),
+      kategorien: this._alleKategorien().join(", "),
     });
     this.shadowRoot.getElementById("json-info-btn").addEventListener("click", () => {
       this.shadowRoot.getElementById("json-info-modal").style.display = "flex";

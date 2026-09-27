@@ -23,13 +23,19 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
 ## Funktionen
 
 - Rezepte anlegen, bearbeiten, löschen, nach Kategorie/Suchbegriff filtern
+- **Eigene Kategorien**: über den "+ Neue Kategorie"-Knopf im Filterbereich
+  lassen sich zusätzlich zu den elf fest eingebauten Kategorien beliebig
+  eigene anlegen (erscheinen sofort als Filter-Chip und im Formular-
+  Dropdown) - eine noch verwendete eigene Kategorie lässt sich erst
+  löschen, nachdem die betroffenen Rezepte umkategorisiert wurden, damit
+  dabei nie unbemerkt Daten verloren gehen
 - Portionen-Rechner (Zutatenmengen skalieren automatisch)
 - Bewertungen, Kommentare, Koch-Historie ("zubereitet am ...")
 - Rezeptfotos (werden automatisch als echte Dateien statt Base64-Text
   gespeichert, um die To-do-Liste schlank zu halten)
 - PDF-Export eines Rezepts, auch ganz ohne Internetzugang
 - **Sammel-PDF**: exportiert mehrere Rezepte auf einmal als ein gemeinsames PDF (Knopf "Sammel-PDF" in der Übersicht) - wahlweise alle aktuell gefilterten/gesuchten Rezepte oder nur einzeln angehakte Rezepte aus einer Checkliste, optional mit einem selbst benannten Deckblatt (großer Titel in einer eleganten, fetten Schrift plus einer Foto-Collage aus bis zu 6 Rezeptfotos im Polaroid-Stil) und einer Inhaltsverzeichnis-Seite direkt danach; die Reihenfolge im PDF richtet sich immer nach Kategorie
-- **Kochmodus**: Vollbild-Schritt-für-Schritt-Ansicht mit großen, gut lesbaren Schritten, Vor-/Zurück-Navigation, einblendbarer Zutatenliste und eingebautem Timer (Minuten-Schnellauswahl, Restzeit-Anzeige, Signal bei Ablauf) - praktisch am Tablet in der Küche
+- **Kochmodus**: Vollbild-Schritt-für-Schritt-Ansicht mit großen, gut lesbaren Schritten, Vor-/Zurück-Navigation, einblendbarer Zutatenliste und eingebautem Timer (Minuten-Schnellauswahl, Restzeit-Anzeige, Signal bei Ablauf) - praktisch am Tablet in der Küche. Solange der Kochmodus offen ist, hält die Karte den Bildschirm über die Screen-Wake-Lock-API des Browsers zusätzlich wach, damit er beim Kochen nicht ständig neu entsperrt werden muss (unterstützt der Browser das nicht, funktioniert der Kochmodus trotzdem ganz normal, nur eben ohne diesen Komfort)
 - **Automatische Rezepterkennung** aus eingefügtem Text (reine
   Offline-Mustererkennung, keine KI-API, kein API-Key nötig)
 - **JSON-Import mit Prompt-Hilfe**: ein Klick auf "?" neben "Von KI erzeugtes
