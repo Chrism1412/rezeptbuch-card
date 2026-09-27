@@ -41,6 +41,12 @@ komplett neue Kernfunktionen.
   im PDF (und im Inhaltsverzeichnis) sind dabei immer nach Kategorie
   sortiert, unabhängig von Tags oder der aktuellen Sortierung der
   Übersicht.
+- Neue Kartenoption `show_statistics: false` blendet ausschließlich den
+  "Statistik"-Knopf im Kopfbereich der Rezeptübersicht aus, unabhängig
+  von `ask_cooked`. Die "Hast du zubereitet?"-Abfrage und die
+  Zubereitungs-Zählung je Rezept laufen dabei im Hintergrund normal
+  weiter - praktisch, wenn nur die Auswertung selbst nicht angezeigt
+  werden soll, die Historie aber weiter mitgesammelt wird.
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich

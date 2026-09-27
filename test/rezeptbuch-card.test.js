@@ -1387,6 +1387,50 @@ async function testAskCookedDeaktiviert(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test 25d-2: show_statistics: false blendet NUR den Statistik-Knopf aus -
+// unabhängig von ask_cooked, d.h. die "Hast du zubereitet?"-Abfrage und die
+// Zubereitungs-Zählung je Rezept laufen dabei ganz normal weiter.
+// ---------------------------------------------------------------------
+async function testShowStatisticsDeaktiviert(browser) {
+  console.log("\nTest: Kartenoption show_statistics: false blendet nur den Statistik-Knopf aus, ask_cooked bleibt unberührt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+
+    const mitStatistik = await page.evaluate(() => {
+      window.__karte._render();
+      return !!window.__karte.shadowRoot.getElementById("statistik-btn");
+    });
+    assert(mitStatistik, "Ohne show_statistics-Option (Standard) ist der Statistik-Knopf sichtbar");
+
+    const ergebnis = await page.evaluate(() => {
+      window.__karte.setConfig({ entity: "todo.rezepte", show_statistics: false });
+      window.__karte._render();
+      return {
+        statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
+        askCookedAktiv: window.__karte._config.ask_cooked !== false,
+      };
+    });
+    assert(!ergebnis.statistikBtnSichtbar, "Mit show_statistics: false ist der Statistik-Knopf ausgeblendet");
+    assert(ergebnis.askCookedAktiv, "show_statistics: false lässt ask_cooked unberührt (weiterhin aktiv)");
+
+    // Die "Hast du zubereitet?"-Abfrage erscheint trotz ausgeblendeter
+    // Statistik weiterhin, die Zubereitung wird also nach wie vor gezählt.
+    await page.evaluate(() => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte[0]);
+      window.__karte.shadowRoot.getElementById("zurueck-btn").click();
+    });
+    const modalSichtbar = await page.evaluate(() => {
+      const modal = window.__karte.shadowRoot.getElementById("zubereitet-modal");
+      return !!modal && modal.style.display === "flex";
+    });
+    assert(modalSichtbar, "Mit show_statistics: false erscheint die 'Hast du zubereitet?'-Abfrage weiterhin (Zählung bleibt aktiv)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 25e: Detailansicht - auf breiten Bildschirmen (z.B. Wandtablet im
 // Querformat) stehen Zutaten/Bild und Zubereitung nebeneinander (zwei
 // Spalten) statt wie auf schmalen Bildschirmen untereinander (eine Spalte).
@@ -4203,6 +4247,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testEinkaufslisteEinheitenSynonyme(browser);
     await testStatistikBerechnung(browser);
     await testAskCookedDeaktiviert(browser);
+    await testShowStatisticsDeaktiviert(browser);
     await testDetailZweiSpaltenAufBreitemBildschirm(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);

@@ -8529,7 +8529,7 @@ class RezeptbuchCard extends HTMLElement {
             ${this._rezepte.length ? `<button class="sekundaer" id="sammel-pdf-btn">${this._t("kopf_sammel_pdf_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
-            ${this._rezepte.length && this._config.ask_cooked !== false ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
+            ${this._rezepte.length && this._config.ask_cooked !== false && this._config.show_statistics !== false ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
           </div>
         </div>

@@ -326,6 +326,26 @@ Portionsgröße oder wie oft am selben Tag. Ist diese Frage über
 `ask_cooked: false` deaktiviert, wachsen die Zahlen nicht weiter -
 bereits erfasste Zubereitungen bleiben aber erhalten.
 
+Wer die Abfrage (und damit die Zählung) behalten, aber nur den
+**Statistik-Knopf selbst** ausblenden möchte - z.B. weil die Auswertung
+auf dem Küchen-Tablet niemanden interessiert, die Zubereitungen im
+Hintergrund aber trotzdem mitgezählt werden sollen -, kann das separat
+über das Kartenfeld `show_statistics: false` tun, unabhängig von
+`ask_cooked`:
+
+```yaml
+type: custom:rezeptbuch-card
+entity: todo.rezepte
+show_statistics: false
+```
+
+Die beiden Felder lassen sich beliebig kombinieren: `ask_cooked: false`
+schaltet die Abfrage UND automatisch auch die Statistik ab (ohne neue
+Daten gibt es ja nichts auszuwerten); `show_statistics: false` blendet
+dagegen NUR den Knopf aus, die Abfrage und Zählung laufen im Hintergrund
+normal weiter - praktisch, wenn man die Auswertung später doch wieder
+einblenden möchte, ohne die bereits gesammelte Historie zu verlieren.
+
 **Rezeptübersicht seitenweise anzeigen:** Bei vielen Rezepten lässt sich
 die Übersicht über das Kartenfeld `items_per_page` in Seiten aufteilen
 (Standard, wenn nicht gesetzt: 20 Rezepte pro Seite). Aktive Such-,
