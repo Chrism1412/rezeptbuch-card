@@ -9218,15 +9218,10 @@ class RezeptbuchCard extends HTMLElement {
   async _sammelPdfDeckblattZeichnen(doc, titel, rezepte, margin, pageWidth, pageHeight) {
     const usableWidth = pageWidth - margin * 2;
 
-    // Für den Kochbuch-Namen wird eine kursive Times-Schrift genutzt.
-    doc.setFont("times", "bolditalic");
+    // Für den Kochbuch-Namen wird eine gerade, fette Times-Schrift genutzt.
+    doc.setFont("times", "bold");
     doc.setTextColor(20);
 
-    // Durch die Schrägstellung (siehe `titelWinkel` unten) ragt eine Zeile
-    // etwas weiter nach links/rechts hinaus als bei waagerechtem Text -
-    // deshalb wird beim Umbrechen mit einer schmaleren Breite gerechnet als
-    // tatsächlich zur Verfügung steht, damit ausreichend Abstand zu den
-    // Seitenrändern bleibt.
     const titelSicherheitsrand = 16;
     const titelMaxBreite = Math.max(40, usableWidth - titelSicherheitsrand * 2);
     const { zeilen: titelZeilen, groesse: titelGroesse } = this._sammelPdfDeckblattTitelZeilenErmitteln(
@@ -9238,11 +9233,9 @@ class RezeptbuchCard extends HTMLElement {
     );
     const zeilenHoehe = titelGroesse * 0.42;
 
-    // Schräg von links unten nach rechts oben (positiver Winkel).
-    const titelWinkel = 4;
     let y = margin + 22;
     titelZeilen.forEach((zeile) => {
-      doc.text(zeile, pageWidth / 2, y, { align: "center", angle: titelWinkel });
+      doc.text(zeile, pageWidth / 2, y, { align: "center" });
       y += zeilenHoehe;
     });
 

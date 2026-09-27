@@ -3374,8 +3374,8 @@ async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) 
       "der Titel wird zentriert gezeichnet"
     );
     assert(
-      ergebnis.titelOptionen && typeof ergebnis.titelOptionen.angle === "number" && ergebnis.titelOptionen.angle > 0,
-      "der Titel wird schräg von links unten nach rechts oben gezeichnet (positiver Winkel)"
+      ergebnis.titelOptionen && ergebnis.titelOptionen.angle === undefined,
+      "der Titel wird gerade (ohne Schrägstellung) gezeichnet"
     );
     assert(
       ergebnis.titelIndex < ergebnis.ersterBildIndex,

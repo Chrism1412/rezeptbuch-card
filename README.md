@@ -28,7 +28,7 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
 - Rezeptfotos (werden automatisch als echte Dateien statt Base64-Text
   gespeichert, um die To-do-Liste schlank zu halten)
 - PDF-Export eines Rezepts, auch ganz ohne Internetzugang
-- **Sammel-PDF**: exportiert mehrere Rezepte auf einmal als ein gemeinsames PDF (Knopf "Sammel-PDF" in der Übersicht) - wahlweise alle aktuell gefilterten/gesuchten Rezepte oder nur einzeln angehakte Rezepte aus einer Checkliste, optional mit einem selbst benannten Deckblatt (großer Titel in einer eleganten, leicht schräg gestellten Schrift plus einer Foto-Collage aus bis zu 6 Rezeptfotos im Polaroid-Stil) und einer Inhaltsverzeichnis-Seite direkt danach; die Reihenfolge im PDF richtet sich immer nach Kategorie
+- **Sammel-PDF**: exportiert mehrere Rezepte auf einmal als ein gemeinsames PDF (Knopf "Sammel-PDF" in der Übersicht) - wahlweise alle aktuell gefilterten/gesuchten Rezepte oder nur einzeln angehakte Rezepte aus einer Checkliste, optional mit einem selbst benannten Deckblatt (großer Titel in einer eleganten, fetten Schrift plus einer Foto-Collage aus bis zu 6 Rezeptfotos im Polaroid-Stil) und einer Inhaltsverzeichnis-Seite direkt danach; die Reihenfolge im PDF richtet sich immer nach Kategorie
 - **Kochmodus**: Vollbild-Schritt-für-Schritt-Ansicht mit großen, gut lesbaren Schritten, Vor-/Zurück-Navigation, einblendbarer Zutatenliste und eingebautem Timer (Minuten-Schnellauswahl, Restzeit-Anzeige, Signal bei Ablauf) - praktisch am Tablet in der Küche
 - **Automatische Rezepterkennung** aus eingefügtem Text (reine
   Offline-Mustererkennung, keine KI-API, kein API-Key nötig)
