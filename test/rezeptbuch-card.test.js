@@ -3394,8 +3394,8 @@ async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) 
   }
 }
 
-async function testSammelPdfDeckblattBegrenztCollageAufAchtBilder(browser) {
-  console.log("\nTest: Sammel-PDF-Deckblatt zeigt maximal 8 Bilder in der Collage, auch bei mehr Rezepten mit Foto");
+async function testSammelPdfDeckblattBegrenztCollageAufSechsBilder(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt zeigt maximal 6 Bilder in der Collage, auch bei mehr Rezepten mit Foto");
   const page = await neueTestUmgebung(browser);
   try {
     for (let i = 1; i <= 10; i++) {
@@ -3436,8 +3436,8 @@ async function testSammelPdfDeckblattBegrenztCollageAufAchtBilder(browser) {
     });
 
     assert(
-      ergebnis.anzahlBilderAufrufe === 8,
-      `die Collage begrenzt sich auf 8 Bilder, auch wenn mehr Rezepte mit Foto vorhanden sind (tatsächlich: ${ergebnis.anzahlBilderAufrufe})`
+      ergebnis.anzahlBilderAufrufe === 6,
+      `die Collage begrenzt sich auf 6 Bilder, auch wenn mehr Rezepte mit Foto vorhanden sind (tatsächlich: ${ergebnis.anzahlBilderAufrufe})`
     );
   } finally {
     await page.close();
@@ -3489,6 +3489,70 @@ async function testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser) {
     assert(ergebnis.titelGefunden, "der Titel wird trotzdem auf dem Deckblatt gezeichnet");
     assert(!ergebnis.zuschneidenAufgerufen, "ohne jegliches Rezeptbild wird gar nicht erst versucht, ein Bild zuzuschneiden");
     assert(ergebnis.anzahlBilder === 0, "ohne jegliches Rezeptbild bleibt die Collage-Fläche schlicht leer");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser) {
+  console.log("\nTest: Sammel-PDF-Deckblatt zeichnet überlappende 'Polaroid'-Fotos plus vier Küchen-Deko-Icons in den Ecken");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }) });
+    await rezeptDirektAnlegen(page, { title: "Zweites Rezept", payload: leererPayload({ image: "data:image/png;base64,BBBB" }) });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._bildFuerCollageZuschneiden = () => Promise.resolve("data:image/jpeg;base64,ZUGESCHNITTEN");
+
+      let ellipseAufrufe = 0;
+      let triangleAufrufe = 0;
+      let rectAufrufe = 0;
+      const bilder = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setFillColor() {}
+        setLineWidth() {}
+        line() {}
+        text() {}
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        ellipse() { ellipseAufrufe++; }
+        triangle() { triangleAufrufe++; }
+        rect() { rectAufrufe++; }
+        addPage() {}
+        addImage(datenUrl, format, x, y, breite, hoehe) { bilder.push({ x, y, breite, hoehe }); }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      await karte._sammelPdfErstellen(liste, "Testsammlung", { inhaltsverzeichnis: true, titel: "Mein Kochbuch" });
+
+      return {
+        ellipseAufrufe,
+        triangleAufrufe,
+        rectAufrufe,
+        anzahlBilder: bilder.length,
+        bilderInnerhalbDerSeite: bilder.every((b) => b.x >= 0 && b.y >= 0 && b.x + b.breite <= 210 && b.y + b.hoehe <= 297),
+      };
+    });
+
+    assert(ergebnis.ellipseAufrufe > 0, "die Deko-Icons zeichnen mindestens eine Ellipse (Tomate/Kochlöffel/Rührbesen)");
+    assert(ergebnis.triangleAufrufe > 0, "die Deko-Icons zeichnen mindestens ein Dreieck (Tomatenblatt/Karotten)");
+    assert(ergebnis.rectAufrufe > 0, "die Polaroid-Rahmen hinter den Collage-Fotos werden gezeichnet");
+    assert(ergebnis.anzahlBilder === 2, `beide Rezeptfotos werden weiterhin in die Collage gezeichnet (tatsächlich: ${ergebnis.anzahlBilder})`);
+    assert(
+      ergebnis.bilderInnerhalbDerSeite,
+      "auch überlappend/unterschiedlich groß angeordnet bleiben alle Collage-Fotos innerhalb der Seite"
+    );
   } finally {
     await page.close();
   }
@@ -3939,8 +4003,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfModalWahlAbbrechenSchliesstOhneWeitereSchritte(browser);
     await testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser);
     await testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser);
-    await testSammelPdfDeckblattBegrenztCollageAufAchtBilder(browser);
+    await testSammelPdfDeckblattBegrenztCollageAufSechsBilder(browser);
     await testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser);
+    await testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser);
     await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
     await testKochmodusNavigationDurchSchritte(browser);
     await testKochmodusZutatenEinblenden(browser);
