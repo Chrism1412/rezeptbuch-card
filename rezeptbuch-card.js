@@ -326,6 +326,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Nächster Schritt",
     kochmodus_zutaten_ein_aria: "Zutaten einblenden",
     kochmodus_zutaten_aus_aria: "Zutaten ausblenden",
+    kochmodus_timer_ein_aria: "Timer einblenden",
+    kochmodus_timer_aus_aria: "Timer ausblenden",
+    kochmodus_timer_minuten_aria: "Minuten",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Abbrechen",
+    kochmodus_timer_abgelaufen_text: "⏰ Timer abgelaufen!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "{{minuten}} Min. Timer starten",
     kopf_sammel_pdf_btn: "📚 Sammel-PDF",
     sammel_pdf_keine_rezepte: "Keine Rezepte zum Exportieren gefunden.",
     sammel_pdf_frage_toc: "Inhaltsverzeichnis der gewählten Rezepte erstellen?",
@@ -619,6 +627,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Nächschte Schritt",
     kochmodus_zutaten_ein_aria: "Zuetate iblände",
     kochmodus_zutaten_aus_aria: "Zuetate usblände",
+    kochmodus_timer_ein_aria: "Timer iblände",
+    kochmodus_timer_aus_aria: "Timer usblände",
+    kochmodus_timer_minuten_aria: "Minute",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Abbräche",
+    kochmodus_timer_abgelaufen_text: "⏰ Timer isch fertig!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "{{minuten}} Min.-Timer starte",
     kopf_sammel_pdf_btn: "📚 Sammel-PDF",
     sammel_pdf_keine_rezepte: "Kei Rezept zum Exportiere gfunde.",
     sammel_pdf_frage_toc: "Sölled mer es Inhaltsverzeichnis vo de usgwählte Rezept erstelle?",
@@ -886,6 +902,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Next step",
     kochmodus_zutaten_ein_aria: "Show ingredients",
     kochmodus_zutaten_aus_aria: "Hide ingredients",
+    kochmodus_timer_ein_aria: "Show timer",
+    kochmodus_timer_aus_aria: "Hide timer",
+    kochmodus_timer_minuten_aria: "Minutes",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Cancel",
+    kochmodus_timer_abgelaufen_text: "⏰ Timer finished!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Start {{minuten}} min timer",
     kopf_sammel_pdf_btn: "📚 Collected PDF",
     sammel_pdf_keine_rezepte: "No recipes found to export.",
     sammel_pdf_frage_toc: "Create a table of contents for the selected recipes?",
@@ -1111,6 +1135,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Следваща стъпка",
     kochmodus_zutaten_ein_aria: "Покажи съставките",
     kochmodus_zutaten_aus_aria: "Скрий съставките",
+    kochmodus_timer_ein_aria: "Покажи таймер",
+    kochmodus_timer_aus_aria: "Скрий таймер",
+    kochmodus_timer_minuten_aria: "Минути",
+    kochmodus_timer_start_btn: "Старт",
+    kochmodus_timer_abbrechen_btn: "Отказ",
+    kochmodus_timer_abgelaufen_text: "⏰ Таймерът изтече!",
+    kochmodus_timer_ok_btn: "ОК",
+    kochmodus_timer_preset_aria: "Стартирай таймер за {{minuten}} мин",
     kopf_sammel_pdf_btn: "📚 Общ PDF",
     sammel_pdf_keine_rezepte: "Няма намерени рецепти за експортиране.",
     sammel_pdf_frage_toc: "Да се създаде ли съдържание на избраните рецепти?",
@@ -1336,6 +1368,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Sljedeći korak",
     kochmodus_zutaten_ein_aria: "Prikaži sastojke",
     kochmodus_zutaten_aus_aria: "Sakrij sastojke",
+    kochmodus_timer_ein_aria: "Prikaži mjerač vremena",
+    kochmodus_timer_aus_aria: "Sakrij mjerač vremena",
+    kochmodus_timer_minuten_aria: "Minute",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Odustani",
+    kochmodus_timer_abgelaufen_text: "⏰ Vrijeme je isteklo!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Pokreni mjerač za {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 Zbirni PDF",
     sammel_pdf_keine_rezepte: "Nema recepata za izvoz.",
     sammel_pdf_frage_toc: "Želite li izraditi sadržaj odabranih recepata?",
@@ -1561,6 +1601,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Další krok",
     kochmodus_zutaten_ein_aria: "Zobrazit suroviny",
     kochmodus_zutaten_aus_aria: "Skrýt suroviny",
+    kochmodus_timer_ein_aria: "Zobrazit časovač",
+    kochmodus_timer_aus_aria: "Skrýt časovač",
+    kochmodus_timer_minuten_aria: "Minuty",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Zrušit",
+    kochmodus_timer_abgelaufen_text: "⏰ Čas vypršel!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Spustit časovač na {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 Souhrnné PDF",
     sammel_pdf_keine_rezepte: "Nebyly nalezeny žádné recepty k exportu.",
     sammel_pdf_frage_toc: "Vytvořit obsah vybraných receptů?",
@@ -1786,6 +1834,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Næste trin",
     kochmodus_zutaten_ein_aria: "Vis ingredienser",
     kochmodus_zutaten_aus_aria: "Skjul ingredienser",
+    kochmodus_timer_ein_aria: "Vis timer",
+    kochmodus_timer_aus_aria: "Skjul timer",
+    kochmodus_timer_minuten_aria: "Minutter",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Annuller",
+    kochmodus_timer_abgelaufen_text: "⏰ Timeren er færdig!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Start {{minuten}} min. timer",
     kopf_sammel_pdf_btn: "📚 Samlet PDF",
     sammel_pdf_keine_rezepte: "Ingen opskrifter fundet til eksport.",
     sammel_pdf_frage_toc: "Vil du oprette en indholdsfortegnelse for de valgte opskrifter?",
@@ -2011,6 +2067,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Volgende stap",
     kochmodus_zutaten_ein_aria: "Ingrediënten tonen",
     kochmodus_zutaten_aus_aria: "Ingrediënten verbergen",
+    kochmodus_timer_ein_aria: "Timer tonen",
+    kochmodus_timer_aus_aria: "Timer verbergen",
+    kochmodus_timer_minuten_aria: "Minuten",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Annuleren",
+    kochmodus_timer_abgelaufen_text: "⏰ Timer afgelopen!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Timer van {{minuten}} min. starten",
     kopf_sammel_pdf_btn: "📚 Verzamel-PDF",
     sammel_pdf_keine_rezepte: "Geen recepten gevonden om te exporteren.",
     sammel_pdf_frage_toc: "Inhoudsopgave maken voor de geselecteerde recepten?",
@@ -2236,6 +2300,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Järgmine samm",
     kochmodus_zutaten_ein_aria: "Näita koostisosi",
     kochmodus_zutaten_aus_aria: "Peida koostisosad",
+    kochmodus_timer_ein_aria: "Näita taimerit",
+    kochmodus_timer_aus_aria: "Peida taimer",
+    kochmodus_timer_minuten_aria: "Minutit",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Tühista",
+    kochmodus_timer_abgelaufen_text: "⏰ Taimer lõppes!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Käivita {{minuten}} min taimer",
     kopf_sammel_pdf_btn: "📚 Koond-PDF",
     sammel_pdf_keine_rezepte: "Eksportimiseks retsepte ei leitud.",
     sammel_pdf_frage_toc: "Kas luua valitud retseptide sisukord?",
@@ -2461,6 +2533,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Seuraava vaihe",
     kochmodus_zutaten_ein_aria: "Näytä ainekset",
     kochmodus_zutaten_aus_aria: "Piilota ainekset",
+    kochmodus_timer_ein_aria: "Näytä ajastin",
+    kochmodus_timer_aus_aria: "Piilota ajastin",
+    kochmodus_timer_minuten_aria: "Minuuttia",
+    kochmodus_timer_start_btn: "Käynnistä",
+    kochmodus_timer_abbrechen_btn: "Peruuta",
+    kochmodus_timer_abgelaufen_text: "⏰ Ajastin päättyi!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Käynnistä {{minuten}} min ajastin",
     kopf_sammel_pdf_btn: "📚 Kokoelma-PDF",
     sammel_pdf_keine_rezepte: "Vietäviä reseptejä ei löytynyt.",
     sammel_pdf_frage_toc: "Luodaanko sisällysluettelo valituille resepteille?",
@@ -2687,6 +2767,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Étape suivante",
     kochmodus_zutaten_ein_aria: "Afficher les ingrédients",
     kochmodus_zutaten_aus_aria: "Masquer les ingrédients",
+    kochmodus_timer_ein_aria: "Afficher le minuteur",
+    kochmodus_timer_aus_aria: "Masquer le minuteur",
+    kochmodus_timer_minuten_aria: "Minutes",
+    kochmodus_timer_start_btn: "Démarrer",
+    kochmodus_timer_abbrechen_btn: "Annuler",
+    kochmodus_timer_abgelaufen_text: "⏰ Le minuteur est terminé !",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Démarrer un minuteur de {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 PDF groupé",
     sammel_pdf_keine_rezepte: "Aucune recette trouvée à exporter.",
     sammel_pdf_frage_toc: "Créer une table des matières pour les recettes sélectionnées ?",
@@ -2913,6 +3001,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Επόμενο βήμα",
     kochmodus_zutaten_ein_aria: "Εμφάνιση υλικών",
     kochmodus_zutaten_aus_aria: "Απόκρυψη υλικών",
+    kochmodus_timer_ein_aria: "Εμφάνιση χρονομέτρου",
+    kochmodus_timer_aus_aria: "Απόκρυψη χρονομέτρου",
+    kochmodus_timer_minuten_aria: "Λεπτά",
+    kochmodus_timer_start_btn: "Έναρξη",
+    kochmodus_timer_abbrechen_btn: "Ακύρωση",
+    kochmodus_timer_abgelaufen_text: "⏰ Ο χρόνος έληξε!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Έναρξη χρονομέτρου {{minuten}} λεπτών",
     kopf_sammel_pdf_btn: "📚 Συγκεντρωτικό PDF",
     sammel_pdf_keine_rezepte: "Δεν βρέθηκαν συνταγές για εξαγωγή.",
     sammel_pdf_frage_toc: "Δημιουργία πίνακα περιεχομένων για τις επιλεγμένες συνταγές;",
@@ -3139,6 +3235,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Következő lépés",
     kochmodus_zutaten_ein_aria: "Hozzávalók megjelenítése",
     kochmodus_zutaten_aus_aria: "Hozzávalók elrejtése",
+    kochmodus_timer_ein_aria: "Időzítő megjelenítése",
+    kochmodus_timer_aus_aria: "Időzítő elrejtése",
+    kochmodus_timer_minuten_aria: "Perc",
+    kochmodus_timer_start_btn: "Indítás",
+    kochmodus_timer_abbrechen_btn: "Mégse",
+    kochmodus_timer_abgelaufen_text: "⏰ Lejárt az idő!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "{{minuten}} perces időzítő indítása",
     kopf_sammel_pdf_btn: "📚 Gyűjtő PDF",
     sammel_pdf_keine_rezepte: "Nem található exportálható recept.",
     sammel_pdf_frage_toc: "Létrehozzunk tartalomjegyzéket a kiválasztott receptekhez?",
@@ -3365,6 +3469,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "An chéad chéim eile",
     kochmodus_zutaten_ein_aria: "Taispeáin comhábhair",
     kochmodus_zutaten_aus_aria: "Folaigh comhábhair",
+    kochmodus_timer_ein_aria: "Taispeáin an t-amadóir",
+    kochmodus_timer_aus_aria: "Folaigh an t-amadóir",
+    kochmodus_timer_minuten_aria: "Nóiméad",
+    kochmodus_timer_start_btn: "Tosaigh",
+    kochmodus_timer_abbrechen_btn: "Cealaigh",
+    kochmodus_timer_abgelaufen_text: "⏰ Tá an t-am istigh!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Tosaigh amadóir {{minuten}} nóiméad",
     kopf_sammel_pdf_btn: "📚 PDF Bailithe",
     sammel_pdf_keine_rezepte: "Níor aimsíodh aon oideas le heaspórtáil.",
     sammel_pdf_frage_toc: "Ar mhaith leat clár ábhair a chruthú do na hoidis roghnaithe?",
@@ -3591,6 +3703,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Passo successivo",
     kochmodus_zutaten_ein_aria: "Mostra ingredienti",
     kochmodus_zutaten_aus_aria: "Nascondi ingredienti",
+    kochmodus_timer_ein_aria: "Mostra timer",
+    kochmodus_timer_aus_aria: "Nascondi timer",
+    kochmodus_timer_minuten_aria: "Minuti",
+    kochmodus_timer_start_btn: "Avvia",
+    kochmodus_timer_abbrechen_btn: "Annulla",
+    kochmodus_timer_abgelaufen_text: "⏰ Timer scaduto!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Avvia timer di {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 PDF raccolta",
     sammel_pdf_keine_rezepte: "Nessuna ricetta trovata da esportare.",
     sammel_pdf_frage_toc: "Creare un indice per le ricette selezionate?",
@@ -3816,6 +3936,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Nākamais solis",
     kochmodus_zutaten_ein_aria: "Rādīt sastāvdaļas",
     kochmodus_zutaten_aus_aria: "Slēpt sastāvdaļas",
+    kochmodus_timer_ein_aria: "Rādīt taimeri",
+    kochmodus_timer_aus_aria: "Slēpt taimeri",
+    kochmodus_timer_minuten_aria: "Minūtes",
+    kochmodus_timer_start_btn: "Sākt",
+    kochmodus_timer_abbrechen_btn: "Atcelt",
+    kochmodus_timer_abgelaufen_text: "⏰ Laiks beidzies!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Sākt {{minuten}} min taimeri",
     kopf_sammel_pdf_btn: "📚 Kopīgais PDF",
     sammel_pdf_keine_rezepte: "Netika atrasta neviena recepte eksportēšanai.",
     sammel_pdf_frage_toc: "Vai izveidot izvēlēto recepšu satura rādītāju?",
@@ -4041,6 +4169,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Kitas veiksmas",
     kochmodus_zutaten_ein_aria: "Rodyti ingredientus",
     kochmodus_zutaten_aus_aria: "Slėpti ingredientus",
+    kochmodus_timer_ein_aria: "Rodyti laikmatį",
+    kochmodus_timer_aus_aria: "Slėpti laikmatį",
+    kochmodus_timer_minuten_aria: "Minutės",
+    kochmodus_timer_start_btn: "Pradėti",
+    kochmodus_timer_abbrechen_btn: "Atšaukti",
+    kochmodus_timer_abgelaufen_text: "⏰ Laikas baigėsi!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Paleisti {{minuten}} min. laikmatį",
     kopf_sammel_pdf_btn: "📚 Bendras PDF",
     sammel_pdf_keine_rezepte: "Nerasta receptų eksportavimui.",
     sammel_pdf_frage_toc: "Ar sukurti pasirinktų receptų turinį?",
@@ -4267,6 +4403,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Pass li jmiss",
     kochmodus_zutaten_ein_aria: "Uri l-ingredjenti",
     kochmodus_zutaten_aus_aria: "Aħbi l-ingredjenti",
+    kochmodus_timer_ein_aria: "Uri l-timer",
+    kochmodus_timer_aus_aria: "Aħbi t-timer",
+    kochmodus_timer_minuten_aria: "Minuti",
+    kochmodus_timer_start_btn: "Ibda",
+    kochmodus_timer_abbrechen_btn: "Ikkanċella",
+    kochmodus_timer_abgelaufen_text: "⏰ Il-ħin spiċċa!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Ibda timer ta' {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 PDF Miġbura",
     sammel_pdf_keine_rezepte: "Ma nstab l-ebda riċetta biex tiġi esportata.",
     sammel_pdf_frage_toc: "Toħloq werrej għar-riċetti magħżula?",
@@ -4492,6 +4636,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Następny krok",
     kochmodus_zutaten_ein_aria: "Pokaż składniki",
     kochmodus_zutaten_aus_aria: "Ukryj składniki",
+    kochmodus_timer_ein_aria: "Pokaż minutnik",
+    kochmodus_timer_aus_aria: "Ukryj minutnik",
+    kochmodus_timer_minuten_aria: "Minuty",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Anuluj",
+    kochmodus_timer_abgelaufen_text: "⏰ Czas minął!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Uruchom minutnik na {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 Zbiorczy PDF",
     sammel_pdf_keine_rezepte: "Nie znaleziono przepisów do eksportu.",
     sammel_pdf_frage_toc: "Utworzyć spis treści dla wybranych przepisów?",
@@ -4718,6 +4870,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Próximo passo",
     kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
     kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
+    kochmodus_timer_ein_aria: "Mostrar temporizador",
+    kochmodus_timer_aus_aria: "Ocultar temporizador",
+    kochmodus_timer_minuten_aria: "Minutos",
+    kochmodus_timer_start_btn: "Iniciar",
+    kochmodus_timer_abbrechen_btn: "Cancelar",
+    kochmodus_timer_abgelaufen_text: "⏰ Tempo esgotado!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Iniciar temporizador de {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 PDF coletivo",
     sammel_pdf_keine_rezepte: "Nenhuma receita encontrada para exportar.",
     sammel_pdf_frage_toc: "Criar um índice para as receitas selecionadas?",
@@ -4943,6 +5103,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Pasul următor",
     kochmodus_zutaten_ein_aria: "Afișează ingredientele",
     kochmodus_zutaten_aus_aria: "Ascunde ingredientele",
+    kochmodus_timer_ein_aria: "Afișează cronometrul",
+    kochmodus_timer_aus_aria: "Ascunde cronometrul",
+    kochmodus_timer_minuten_aria: "Minute",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Anulează",
+    kochmodus_timer_abgelaufen_text: "⏰ Timpul a expirat!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Pornește un cronometru de {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 PDF colectiv",
     sammel_pdf_keine_rezepte: "Nu s-a găsit nicio rețetă de exportat.",
     sammel_pdf_frage_toc: "Se creează un cuprins pentru rețetele selectate?",
@@ -5168,6 +5336,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Ďalší krok",
     kochmodus_zutaten_ein_aria: "Zobraziť suroviny",
     kochmodus_zutaten_aus_aria: "Skryť suroviny",
+    kochmodus_timer_ein_aria: "Zobraziť časovač",
+    kochmodus_timer_aus_aria: "Skryť časovač",
+    kochmodus_timer_minuten_aria: "Minúty",
+    kochmodus_timer_start_btn: "Štart",
+    kochmodus_timer_abbrechen_btn: "Zrušiť",
+    kochmodus_timer_abgelaufen_text: "⏰ Čas vypršal!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Spustiť časovač na {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 Súhrnné PDF",
     sammel_pdf_keine_rezepte: "Nenašli sa žiadne recepty na export.",
     sammel_pdf_frage_toc: "Vytvoriť obsah pre vybrané recepty?",
@@ -5393,6 +5569,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Naslednji korak",
     kochmodus_zutaten_ein_aria: "Prikaži sestavine",
     kochmodus_zutaten_aus_aria: "Skrij sestavine",
+    kochmodus_timer_ein_aria: "Prikaži časovnik",
+    kochmodus_timer_aus_aria: "Skrij časovnik",
+    kochmodus_timer_minuten_aria: "Minute",
+    kochmodus_timer_start_btn: "Začni",
+    kochmodus_timer_abbrechen_btn: "Prekliči",
+    kochmodus_timer_abgelaufen_text: "⏰ Čas je potekel!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Zaženi {{minuten}} min. časovnik",
     kopf_sammel_pdf_btn: "📚 Zbirni PDF",
     sammel_pdf_keine_rezepte: "Ni najdenih receptov za izvoz.",
     sammel_pdf_frage_toc: "Želite ustvariti kazalo za izbrane recepte?",
@@ -5618,6 +5802,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Paso siguiente",
     kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
     kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
+    kochmodus_timer_ein_aria: "Mostrar temporizador",
+    kochmodus_timer_aus_aria: "Ocultar temporizador",
+    kochmodus_timer_minuten_aria: "Minutos",
+    kochmodus_timer_start_btn: "Iniciar",
+    kochmodus_timer_abbrechen_btn: "Cancelar",
+    kochmodus_timer_abgelaufen_text: "⏰ ¡Tiempo terminado!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Iniciar temporizador de {{minuten}} min",
     kopf_sammel_pdf_btn: "📚 PDF conjunto",
     sammel_pdf_keine_rezepte: "No se encontraron recetas para exportar.",
     sammel_pdf_frage_toc: "¿Crear un índice para las recetas seleccionadas?",
@@ -5843,6 +6035,14 @@ const UEBERSETZUNGEN = {
     kochmodus_schritt_weiter_aria: "Nästa steg",
     kochmodus_zutaten_ein_aria: "Visa ingredienser",
     kochmodus_zutaten_aus_aria: "Dölj ingredienser",
+    kochmodus_timer_ein_aria: "Visa timer",
+    kochmodus_timer_aus_aria: "Dölj timer",
+    kochmodus_timer_minuten_aria: "Minuter",
+    kochmodus_timer_start_btn: "Starta",
+    kochmodus_timer_abbrechen_btn: "Avbryt",
+    kochmodus_timer_abgelaufen_text: "⏰ Timern är slut!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Starta {{minuten}} min timer",
     kopf_sammel_pdf_btn: "📚 Samlings-PDF",
     sammel_pdf_keine_rezepte: "Inga recept hittades att exportera.",
     sammel_pdf_frage_toc: "Vill du skapa en innehållsförteckning för de valda recepten?",
@@ -6518,6 +6718,18 @@ class RezeptbuchCard extends HTMLElement {
     this._kochmodusSchrittIndex = 0;
     this._kochmodusZutatenSichtbar = false;
 
+    // Kochmodus-Timer (siehe _kochmodusTimer*): läuft unabhängig vom
+    // aktuellen Schritt weiter (z.B. "20 Min. im Ofen", während man schon
+    // im Text weiterliest) - wird daher NICHT bei _kochmodusSchrittWechseln
+    // zurückgesetzt, sondern nur beim Verlassen des Kochmodus/Rezepts.
+    // _kochmodusTimerEndeZeitpunkt ist ein absoluter Date.now()-Zeitstempel
+    // (nicht die verbleibende Dauer) - so bleibt die Anzeige auch dann
+    // korrekt, wenn der Tab zwischenzeitlich gedrosselt/inaktiv war.
+    this._kochmodusTimerPanelSichtbar = false;
+    this._kochmodusTimerEndeZeitpunkt = null;
+    this._kochmodusTimerAbgelaufen = false;
+    this._kochmodusTimerIntervallId = null;
+
     // Sammel-PDF-Modal (siehe _sammelPdfModalOeffnen/_sammelPdf*): merkt
     // sich zwischen den Modal-Schritten die aktuell gefilterte Rezeptliste,
     // die vom Nutzer angehakten UIDs sowie ob "alle" oder eine "auswahl"
@@ -6627,6 +6839,7 @@ class RezeptbuchCard extends HTMLElement {
       window.removeEventListener("popstate", this._popstateHandler);
       this._popstateHandler = null;
     }
+    this._kochmodusTimerIntervallStoppen();
   }
 
   _zubereitetModalAnzeigen() {
@@ -7373,11 +7586,17 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   // Setzt den Kochmodus-Zustand zurück (u.a. beim Verlassen der
-  // Detailansicht).
+  // Detailansicht) - inklusive eines eventuell noch laufenden Timers, denn
+  // der gehört zu diesem Rezept/Kochvorgang und soll nicht in ein anderes
+  // Rezept "mitlaufen".
   _kochmodusZuruecksetzen() {
     this._kochmodusAktiv = false;
     this._kochmodusSchrittIndex = 0;
     this._kochmodusZutatenSichtbar = false;
+    this._kochmodusTimerPanelSichtbar = false;
+    this._kochmodusTimerAbgelaufen = false;
+    this._kochmodusTimerEndeZeitpunkt = null;
+    this._kochmodusTimerIntervallStoppen();
   }
 
   _kochmodusOeffnen() {
@@ -7386,9 +7605,117 @@ class RezeptbuchCard extends HTMLElement {
     this._render();
   }
 
+  // Schließt nur das Kochmodus-Overlay - ein evtl. laufender Timer läuft
+  // bewusst im Hintergrund weiter (z.B. "20 Min. im Ofen"), damit er auch
+  // dann noch klingelt, wenn man zwischendurch die Zutatenliste oder ein
+  // anderes Rezept ansieht.
   _kochmodusSchliessen() {
     this._kochmodusAktiv = false;
     this._render();
+  }
+
+  // --- Kochmodus-Timer ---
+  // Startet einen Countdown über `minuten` Minuten. Gespeichert wird der
+  // absolute Ziel-Zeitpunkt (Date.now() + Dauer), nicht die verbleibende
+  // Sekundenzahl - so zeigt der Timer auch nach einer gedrosselten/
+  // inaktiven Browser-Tab-Phase weiterhin die korrekte Restzeit.
+  _kochmodusTimerStarten(minuten) {
+    const sekunden = Math.max(1, Math.round(Number(minuten) * 60));
+    if (!Number.isFinite(sekunden) || sekunden <= 0) return;
+    this._kochmodusTimerEndeZeitpunkt = Date.now() + sekunden * 1000;
+    this._kochmodusTimerAbgelaufen = false;
+    this._kochmodusTimerIntervallStarten();
+    this._render();
+  }
+
+  _kochmodusTimerAbbrechen() {
+    this._kochmodusTimerEndeZeitpunkt = null;
+    this._kochmodusTimerAbgelaufen = false;
+    this._kochmodusTimerIntervallStoppen();
+    this._render();
+  }
+
+  // Blendet die "Timer abgelaufen"-Meldung wieder aus, ohne das Panel zu
+  // schließen - danach kann direkt der nächste Timer gestartet werden.
+  _kochmodusTimerBestaetigen() {
+    this._kochmodusTimerAbgelaufen = false;
+    this._render();
+  }
+
+  _kochmodusTimerIntervallStarten() {
+    this._kochmodusTimerIntervallStoppen();
+    this._kochmodusTimerIntervallId = setInterval(() => this._kochmodusTimerTick(), 1000);
+  }
+
+  _kochmodusTimerIntervallStoppen() {
+    if (this._kochmodusTimerIntervallId) {
+      clearInterval(this._kochmodusTimerIntervallId);
+      this._kochmodusTimerIntervallId = null;
+    }
+  }
+
+  _kochmodusTimerTick() {
+    if (!this._kochmodusTimerEndeZeitpunkt) {
+      this._kochmodusTimerIntervallStoppen();
+      return;
+    }
+    if (Date.now() >= this._kochmodusTimerEndeZeitpunkt) {
+      this._kochmodusTimerEndeZeitpunkt = null;
+      this._kochmodusTimerAbgelaufen = true;
+      this._kochmodusTimerIntervallStoppen();
+      this._kochmodusTimerSignalGeben();
+    }
+    this._render();
+  }
+
+  // Akustisches/haptisches Signal, wenn der Timer abläuft - rein additiv:
+  // AudioContext/vibrate fehlen in den Test-Fakes und in manchen Browsern,
+  // daher großzügig mit typeof/try-catch abgesichert, statt die Anzeige
+  // der "abgelaufen"-Meldung davon abhängig zu machen.
+  _kochmodusTimerSignalGeben() {
+    try {
+      const AudioContextKlasse = window.AudioContext || window.webkitAudioContext;
+      if (typeof AudioContextKlasse === "function") {
+        const kontext = new AudioContextKlasse();
+        const jetzt = kontext.currentTime;
+        // Drei kurze Pieptöne statt eines Dauertons - deutlich hörbar,
+        // aber nicht so unangenehm wie ein Alarm.
+        [0, 0.35, 0.7].forEach((versatz) => {
+          const oszillator = kontext.createOscillator();
+          const lautstaerke = kontext.createGain();
+          oszillator.type = "sine";
+          oszillator.frequency.value = 880;
+          lautstaerke.gain.setValueAtTime(0.0001, jetzt + versatz);
+          lautstaerke.gain.exponentialRampToValueAtTime(0.3, jetzt + versatz + 0.02);
+          lautstaerke.gain.exponentialRampToValueAtTime(0.0001, jetzt + versatz + 0.25);
+          oszillator.connect(lautstaerke);
+          lautstaerke.connect(kontext.destination);
+          oszillator.start(jetzt + versatz);
+          oszillator.stop(jetzt + versatz + 0.3);
+        });
+        setTimeout(() => kontext.close().catch(() => {}), 1200);
+      }
+    } catch (fehler) {
+      // Ton ist reine Zusatzfunktion - die visuelle Meldung reicht notfalls.
+    }
+    try {
+      if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+        navigator.vibrate([250, 100, 250, 100, 250]);
+      }
+    } catch (fehler) {
+      // Vibration ist optional (z.B. auf Desktop nicht verfügbar).
+    }
+  }
+
+  // Restzeit als "MM:SS" für die Anzeige - rundet auf ganze Sekunden auf,
+  // damit die Anzeige nicht bei "0:00" hängen bleibt, während der Tick
+  // noch nicht gefeuert hat.
+  _kochmodusTimerRestAnzeige() {
+    if (!this._kochmodusTimerEndeZeitpunkt) return "0:00";
+    const restSekunden = Math.max(0, Math.ceil((this._kochmodusTimerEndeZeitpunkt - Date.now()) / 1000));
+    const minuten = Math.floor(restSekunden / 60);
+    const sekunden = restSekunden % 60;
+    return `${minuten}:${String(sekunden).padStart(2, "0")}`;
   }
 
   _kochmodusSchrittWechseln(richtung) {
@@ -8080,6 +8407,30 @@ class RezeptbuchCard extends HTMLElement {
         }
         .kochmodus-zutaten-panel h4 { margin:0 0 6px; color: var(--kb-terrakotta-dunkel); }
         .kochmodus-zutaten-panel ul { margin:0; padding-left:20px; }
+        .kochmodus-timer-badge { font-variant-numeric: tabular-nums; }
+        .kochmodus-timer-panel {
+          background: var(--kb-terrakotta-hell); border-radius:12px; padding:12px 16px;
+          margin-bottom:10px; flex-shrink:0; display:flex; flex-direction:column; gap:10px;
+        }
+        .kochmodus-timer-presets { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+        .kochmodus-timer-presets button { padding:6px 12px; }
+        .kochmodus-timer-eigene { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+        .kochmodus-timer-eigene input[type="number"] {
+          width:64px; padding:6px 8px; border-radius:8px; border:1px solid var(--divider-color, #ccc);
+          font-size:1em; background: var(--card-background-color, #fff); color: var(--primary-text-color);
+        }
+        .kochmodus-timer-laufend {
+          display:flex; align-items:center; justify-content:space-between; gap:12px;
+        }
+        .kochmodus-timer-rest {
+          font-size:2em; font-weight:600; color: var(--kb-terrakotta-dunkel); font-variant-numeric: tabular-nums;
+        }
+        .kochmodus-timer-abgelaufen {
+          display:flex; align-items:center; justify-content:space-between; gap:12px;
+          font-size:1.15em; font-weight:600; color: var(--kb-terrakotta-dunkel);
+          animation: kochmodus-timer-blinken 1s ease-in-out infinite;
+        }
+        @keyframes kochmodus-timer-blinken { 0%, 100% { opacity:1; } 50% { opacity:0.55; } }
         .kochmodus-body {
           flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
           text-align:center; overflow-y:auto; padding:10px 4px; min-height:0;
@@ -9063,15 +9414,23 @@ class RezeptbuchCard extends HTMLElement {
   // PNG-Bilder (siehe DEKO_ICON_*_BASE64 oben in der Datei) statt live mit
   // jsPDF-Grundformen gezeichnet - jsPDF selbst kann nur einfache
   // Ellipsen/Dreiecke/Linien, keine derart plastischen Illustrationen.
+  // Die vier Positionen sind rechnerisch aus den Foto-Slots in
+  // _sammelPdfDeckblattCollageZeichnen abgeleitet (nicht mehr am äußeren
+  // Rand): jeweils der Mittelpunkt zwischen den zwei benachbarten Fotos
+  // (oben: Slot 1+2, unten: Slot 3+4, links: Slot 1+3, rechts: Slot 2+4) -
+  // sowohl in der Breite als auch in der Höhe -, ein Stück (20%) in
+  // Richtung der mittleren, größten Kachel (Slot 0) verschoben. So sitzen
+  // die Icons sichtbar in den Lücken *zwischen* den Fotos statt am
+  // Seitenrand, peeken aber am Rand der mittleren Kachel noch hervor.
   _sammelPdfDeckblattDekorationZeichnen(doc, x, y, breite, hoehe) {
     const groesse = Math.min(24, Math.max(14, Math.min(breite, hoehe) * 0.16));
     const icon = (datenUrl, cx, cy) => {
       doc.addImage(datenUrl, "PNG", cx - groesse / 2, cy - groesse / 2, groesse, groesse);
     };
-    icon(DEKO_ICON_TOMATE_BASE64, x + breite * 0.5, y + hoehe * 0.07);
-    icon(DEKO_ICON_KAROTTEN_BASE64, x + breite * 0.04, y + hoehe * 0.52);
-    icon(DEKO_ICON_KOCHLOEFFEL_BASE64, x + breite * 0.96, y + hoehe * 0.5);
-    icon(DEKO_ICON_RUEHRBESEN_BASE64, x + breite * 0.5, y + hoehe * 0.95);
+    icon(DEKO_ICON_TOMATE_BASE64, x + breite * 0.5, y + hoehe * 0.29);
+    icon(DEKO_ICON_KAROTTEN_BASE64, x + breite * 0.22, y + hoehe * 0.49);
+    icon(DEKO_ICON_KOCHLOEFFEL_BASE64, x + breite * 0.78, y + hoehe * 0.49);
+    icon(DEKO_ICON_RUEHRBESEN_BASE64, x + breite * 0.5, y + hoehe * 0.69);
   }
 
   // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur im
@@ -9847,11 +10206,35 @@ class RezeptbuchCard extends HTMLElement {
           </div>
           <div class="kochmodus-werkzeuge">
             <button class="sekundaer klein${this._kochmodusZutatenSichtbar ? " aktiv" : ""}" id="kochmodus-zutaten-btn" aria-label="${this._t(this._kochmodusZutatenSichtbar ? "kochmodus_zutaten_aus_aria" : "kochmodus_zutaten_ein_aria")}">🥕 ${this._t("abschnitt_titel_zutaten")}</button>
+            <button class="sekundaer klein${this._kochmodusTimerPanelSichtbar ? " aktiv" : ""}" id="kochmodus-timer-btn" aria-label="${this._t(this._kochmodusTimerPanelSichtbar ? "kochmodus_timer_aus_aria" : "kochmodus_timer_ein_aria")}">⏱${this._kochmodusTimerEndeZeitpunkt ? ` <span class="kochmodus-timer-badge">${this._kochmodusTimerRestAnzeige()}</span>` : this._kochmodusTimerAbgelaufen ? " ⏰" : ""}</button>
           </div>
           ${this._kochmodusZutatenSichtbar ? `
             <div class="kochmodus-zutaten-panel">
               <h4>${this._t("abschnitt_titel_zutaten")}</h4>
               <ul>${zeilen || `<li>${this._t("keine_zutaten")}</li>`}</ul>
+            </div>
+          ` : ""}
+          ${this._kochmodusTimerPanelSichtbar ? `
+            <div class="kochmodus-timer-panel">
+              ${this._kochmodusTimerAbgelaufen ? `
+                <div class="kochmodus-timer-abgelaufen">
+                  <span>${this._t("kochmodus_timer_abgelaufen_text")}</span>
+                  <button class="primaer klein" id="kochmodus-timer-ok-btn">${this._t("kochmodus_timer_ok_btn")}</button>
+                </div>
+              ` : this._kochmodusTimerEndeZeitpunkt ? `
+                <div class="kochmodus-timer-laufend">
+                  <span class="kochmodus-timer-rest" aria-live="polite">${this._kochmodusTimerRestAnzeige()}</span>
+                  <button class="sekundaer klein" id="kochmodus-timer-abbrechen-btn">${this._t("kochmodus_timer_abbrechen_btn")}</button>
+                </div>
+              ` : `
+                <div class="kochmodus-timer-presets">
+                  ${[1, 5, 10, 15, 20].map((m) => `<button class="sekundaer klein kochmodus-timer-preset-btn" data-minuten="${m}" aria-label="${this._t("kochmodus_timer_preset_aria", { minuten: m })}">${m} min</button>`).join("")}
+                </div>
+                <div class="kochmodus-timer-eigene">
+                  <input type="number" id="kochmodus-timer-minuten-input" min="1" step="1" value="5" aria-label="${this._t("kochmodus_timer_minuten_aria")}">
+                  <button class="primaer klein" id="kochmodus-timer-start-btn">${this._t("kochmodus_timer_start_btn")}</button>
+                </div>
+              `}
             </div>
           ` : ""}
           <div class="kochmodus-body">
@@ -9889,6 +10272,31 @@ class RezeptbuchCard extends HTMLElement {
         this._kochmodusZutatenSichtbar = !this._kochmodusZutatenSichtbar;
         this._render();
       });
+    }
+    const kochmodusTimerBtn = this.shadowRoot.getElementById("kochmodus-timer-btn");
+    if (kochmodusTimerBtn) {
+      kochmodusTimerBtn.addEventListener("click", () => {
+        this._kochmodusTimerPanelSichtbar = !this._kochmodusTimerPanelSichtbar;
+        this._render();
+      });
+    }
+    const kochmodusTimerStartBtn = this.shadowRoot.getElementById("kochmodus-timer-start-btn");
+    if (kochmodusTimerStartBtn) {
+      kochmodusTimerStartBtn.addEventListener("click", () => {
+        const eingabe = this.shadowRoot.getElementById("kochmodus-timer-minuten-input");
+        this._kochmodusTimerStarten(eingabe ? eingabe.value : 5);
+      });
+    }
+    this.shadowRoot.querySelectorAll(".kochmodus-timer-preset-btn").forEach((btn) => {
+      btn.addEventListener("click", () => this._kochmodusTimerStarten(btn.dataset.minuten));
+    });
+    const kochmodusTimerAbbrechenBtn = this.shadowRoot.getElementById("kochmodus-timer-abbrechen-btn");
+    if (kochmodusTimerAbbrechenBtn) {
+      kochmodusTimerAbbrechenBtn.addEventListener("click", () => this._kochmodusTimerAbbrechen());
+    }
+    const kochmodusTimerOkBtn = this.shadowRoot.getElementById("kochmodus-timer-ok-btn");
+    if (kochmodusTimerOkBtn) {
+      kochmodusTimerOkBtn.addEventListener("click", () => this._kochmodusTimerBestaetigen());
     }
     const kochmodusZurueckBtn = this.shadowRoot.getElementById("kochmodus-zurueck-btn");
     if (kochmodusZurueckBtn) {

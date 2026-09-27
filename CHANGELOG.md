@@ -10,9 +10,14 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 - **Kochmodus**: neue Vollbild-Schritt-für-Schritt-Ansicht in der
   Detailansicht (Knopf "Kochmodus", nur sichtbar wenn Zubereitungsschritte
   vorhanden sind) - zeigt jeweils einen Schritt groß und gut lesbar an, mit
-  Vor-/Zurück-Navigation und einer optional einblendbaren Zutatenliste.
-  Praktisch am Tablet in der Küche, ohne beim Kochen lange scrollen zu
-  müssen.
+  Vor-/Zurück-Navigation, einer optional einblendbaren Zutatenliste sowie
+  einem eingebauten Timer (Minuten-Schnellauswahl oder eigene Minutenzahl,
+  Restzeit-Anzeige auch direkt am Timer-Knopf, akustisches Signal plus
+  Vibration bei Ablauf). Der Timer läuft dabei bewusst auch weiter, wenn
+  man das Kochmodus-Overlay zwischendurch schließt (z.B. um kurz die
+  Zutatenliste zu prüfen) - erst beim Verlassen des Rezepts wird er
+  zurückgesetzt. Praktisch am Tablet in der Küche, ohne beim Kochen lange
+  scrollen zu müssen.
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen

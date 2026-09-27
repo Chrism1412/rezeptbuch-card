@@ -3891,6 +3891,126 @@ async function testKochmodusZutatenEinblenden(browser) {
   }
 }
 
+async function testKochmodusTimerStartenUndAbbrechen(browser) {
+  console.log("\nTest: Kochmodus-Timer lässt sich per Preset oder eigener Minutenzahl starten und wieder abbrechen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload({ steps: ["Kochen"] }) });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+
+      const vorher = !!karte.shadowRoot.querySelector(".kochmodus-timer-panel");
+      karte.shadowRoot.getElementById("kochmodus-timer-btn").click();
+      const presetsVorhanden = karte.shadowRoot.querySelectorAll(".kochmodus-timer-preset-btn").length;
+
+      karte.shadowRoot.querySelector('.kochmodus-timer-preset-btn[data-minuten="5"]').click();
+      const laufendNachPreset = {
+        restAnzeige: karte.shadowRoot.querySelector(".kochmodus-timer-rest")?.textContent,
+        badge: karte.shadowRoot.querySelector(".kochmodus-timer-badge")?.textContent,
+        presetsWeg: !karte.shadowRoot.querySelector(".kochmodus-timer-presets"),
+      };
+
+      karte.shadowRoot.getElementById("kochmodus-timer-abbrechen-btn").click();
+      const nachAbbruch = {
+        presetsWieder: !!karte.shadowRoot.querySelector(".kochmodus-timer-presets"),
+        keinBadgeMehr: !karte.shadowRoot.querySelector(".kochmodus-timer-badge"),
+      };
+
+      const minutenInput = karte.shadowRoot.getElementById("kochmodus-timer-minuten-input");
+      minutenInput.value = "2";
+      karte.shadowRoot.getElementById("kochmodus-timer-start-btn").click();
+      const laufendNachEigenerZahl = karte.shadowRoot.querySelector(".kochmodus-timer-rest")?.textContent;
+
+      return { vorher, presetsVorhanden, laufendNachPreset, nachAbbruch, laufendNachEigenerZahl };
+    });
+
+    assert(!ergebnis.vorher, "das Timer-Panel ist zunächst ausgeblendet");
+    assert(ergebnis.presetsVorhanden >= 4, "nach Klick auf den Timer-Knopf erscheinen mehrere Minuten-Presets");
+    assert(ergebnis.laufendNachPreset.restAnzeige === "5:00", `nach Klick auf das 5-Minuten-Preset läuft ein 5:00-Countdown (tatsächlich: ${JSON.stringify(ergebnis.laufendNachPreset.restAnzeige)})`);
+    assert(ergebnis.laufendNachPreset.badge === "5:00", "der Timer-Knopf selbst zeigt die Restzeit als Badge an");
+    assert(ergebnis.laufendNachPreset.presetsWeg, "während der Timer läuft werden die Presets nicht mehr angezeigt");
+    assert(ergebnis.nachAbbruch.presetsWieder, "nach 'Abbrechen' erscheinen wieder die Presets");
+    assert(ergebnis.nachAbbruch.keinBadgeMehr, "nach 'Abbrechen' verschwindet die Restzeit-Badge vom Timer-Knopf");
+    assert(ergebnis.laufendNachEigenerZahl === "2:00", `ein Start mit eigener Minutenzahl (2) zeigt einen 2:00-Countdown (tatsächlich: ${JSON.stringify(ergebnis.laufendNachEigenerZahl)})`);
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusTimerLaeuftAbUndUeberlebtSchliessen(browser) {
+  console.log("\nTest: Kochmodus-Timer meldet sich beim Ablauf und läuft im Hintergrund weiter, wenn das Overlay geschlossen wird");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload({ steps: ["Kochen"] }) });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-timer-btn").click();
+      karte._kochmodusTimerStarten(1);
+
+      // Schließen des Overlays soll den Timer NICHT zurücksetzen (er soll
+      // im Hintergrund weiterlaufen, siehe _kochmodusSchliessen).
+      karte.shadowRoot.getElementById("kochmodus-schliessen-btn").click();
+      const laeuftNochNachSchliessen = karte._kochmodusTimerEndeZeitpunkt !== null;
+
+      // Ablauf simulieren, statt in Echtzeit zu warten.
+      karte._kochmodusTimerEndeZeitpunkt = Date.now() - 1000;
+      karte._kochmodusTimerTick();
+      const abgelaufenNachTick = karte._kochmodusTimerAbgelaufen === true && karte._kochmodusTimerEndeZeitpunkt === null;
+
+      // Overlay wieder öffnen - das Timer-Panel war noch offen (siehe
+      // oben), die "abgelaufen"-Meldung soll direkt sichtbar sein.
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      const meldungSichtbar = !!karte.shadowRoot.querySelector(".kochmodus-timer-abgelaufen");
+
+      karte.shadowRoot.getElementById("kochmodus-timer-ok-btn").click();
+      const meldungWeg = !karte.shadowRoot.querySelector(".kochmodus-timer-abgelaufen");
+      const presetsWiederDa = !!karte.shadowRoot.querySelector(".kochmodus-timer-presets");
+
+      return { laeuftNochNachSchliessen, abgelaufenNachTick, meldungSichtbar, meldungWeg, presetsWiederDa };
+    });
+
+    assert(ergebnis.laeuftNochNachSchliessen, "der Timer läuft nach Schließen des Kochmodus-Overlays im Hintergrund weiter");
+    assert(ergebnis.abgelaufenNachTick, "nach Ablauf der Zeit wird der Timer als abgelaufen markiert");
+    assert(ergebnis.meldungSichtbar, "die 'Timer abgelaufen'-Meldung wird im Timer-Panel angezeigt");
+    assert(ergebnis.meldungWeg, "'OK' blendet die Meldung wieder aus");
+    assert(ergebnis.presetsWiederDa, "nach dem Bestätigen kann direkt ein neuer Timer gestartet werden");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusTimerWirdBeimVerlassenDesRezeptsZurueckgesetzt(browser) {
+  console.log("\nTest: Kochmodus-Timer wird zurückgesetzt, wenn das Rezept verlassen wird");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload({ steps: ["Kochen"] }) });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte._kochmodusTimerStarten(3);
+      const laeuftVorher = karte._kochmodusTimerEndeZeitpunkt !== null;
+
+      await karte._zurListe();
+      const zurueckgesetzt = karte._kochmodusTimerEndeZeitpunkt === null && karte._kochmodusTimerAbgelaufen === false;
+
+      return { laeuftVorher, zurueckgesetzt };
+    });
+
+    assert(ergebnis.laeuftVorher, "der Timer läuft vor dem Verlassen des Rezepts");
+    assert(ergebnis.zurueckgesetzt, "beim Zurückgehen zur Liste wird der Timer zurückgesetzt");
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -4224,6 +4344,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
     await testKochmodusNavigationDurchSchritte(browser);
     await testKochmodusZutatenEinblenden(browser);
+    await testKochmodusTimerStartenUndAbbrechen(browser);
+    await testKochmodusTimerLaeuftAbUndUeberlebtSchliessen(browser);
+    await testKochmodusTimerWirdBeimVerlassenDesRezeptsZurueckgesetzt(browser);
   } finally {
     await browser.close();
   }
