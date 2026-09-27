@@ -21,8 +21,9 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Rezepte aus einer Checkliste ins PDF sollen. Danach wird optional
   gefragt, ob zusätzlich zwei Seiten mit einem selbst gewählten
   Kochbuch-Namen vorangestellt werden sollen: zuerst ein Deckblatt (Name
-  groß, leicht schräg und zentriert, darunter eine Foto-Collage aus bis zu
-  6 Fotos der enthaltenen Rezepte, wie locker hingelegte Polaroids in
+  groß, in einer eleganten, leicht schräg gestellten Handschrift-
+  Schriftart und zentriert, darunter eine Foto-Collage aus bis zu 6 Fotos
+  der enthaltenen Rezepte, wie locker hingelegte Polaroids in
   unterschiedlichen Größen überlappend angeordnet, mit vier illustrierten
   Küchen-Symbolen in den Lücken rundherum - Tomate, Karotten-Bund,
   Kochlöffel, Rührbesen), danach eine Inhaltsverzeichnis-Seite mit der
