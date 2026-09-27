@@ -3367,10 +3367,14 @@ async function testSammelPdfDeckblattZeigtGrossenTitelUndBildercollage(browser) 
     });
 
     assert(ergebnis.titelIndex !== -1, "der Kochbuch-Name wird auf dem Deckblatt gezeichnet");
-    assert(ergebnis.fontSizeVorTitel === 30, `der Titel wird in großer Schrift gezeichnet (tatsächlich: ${ergebnis.fontSizeVorTitel})`);
+    assert(ergebnis.fontSizeVorTitel === 32, `der Titel wird in großer Schrift gezeichnet (tatsächlich: ${ergebnis.fontSizeVorTitel})`);
     assert(
       ergebnis.titelOptionen && ergebnis.titelOptionen.align === "center",
       "der Titel wird zentriert gezeichnet"
+    );
+    assert(
+      ergebnis.titelOptionen && typeof ergebnis.titelOptionen.angle === "number" && ergebnis.titelOptionen.angle !== 0,
+      "der Titel wird leicht diagonal gedreht gezeichnet"
     );
     assert(
       ergebnis.titelIndex < ergebnis.ersterBildIndex,
@@ -3495,7 +3499,7 @@ async function testSammelPdfDeckblattOhneBilderZeigtNurTitel(browser) {
 }
 
 async function testSammelPdfDeckblattZeichnetPolaroidCollageUndDekoIcons(browser) {
-  console.log("\nTest: Sammel-PDF-Deckblatt zeichnet überlappende 'Polaroid'-Fotos plus vier Küchen-Deko-Icons in den Ecken");
+  console.log("\nTest: Sammel-PDF-Deckblatt zeichnet überlappende 'Polaroid'-Fotos plus vier Küchen-Deko-Icons in den Lücken rundherum");
   const page = await neueTestUmgebung(browser);
   try {
     await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }) });

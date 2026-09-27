@@ -8829,24 +8829,32 @@ class RezeptbuchCard extends HTMLElement {
   // Rezepte ganz ohne Foto werden dabei übersprungen). Die Fotos werden wie
   // lose hingelegte Polaroids in unterschiedlichen Größen überlappend
   // angeordnet (siehe _sammelPdfDeckblattCollageZeichnen), umrahmt von
-  // vier flach gezeichneten Küchen-Symbolen in den Ecken (Tomate, Karotten-
-  // Bund, Kochlöffel, Rührbesen - siehe _sammelPdfDeckblattDekorationZeichnen).
+  // vier illustrierten Küchen-Symbolen in den Lücken rund um die Fotos
+  // (Tomate, Karotten-Bund, Kochlöffel, Rührbesen - siehe
+  // _sammelPdfDeckblattDekorationZeichnen).
   // Gibt es kein einziges Foto, bleiben nur die Deko-Symbole und der Titel
   // auf der Seite.
   async _sammelPdfDeckblattZeichnen(doc, titel, rezepte, margin, pageWidth, pageHeight) {
     const usableWidth = pageWidth - margin * 2;
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(30);
+    // jsPDF bringt von sich aus nur Helvetica/Times/Courier mit, keine
+    // Handschrift-Schriftart - eine echte Handschrift müsste als Font-
+    // Datei eingebettet werden. Times kursiv-fett mit einer leichten
+    // Diagonal-Neigung (siehe `angle` unten) ist die schriftartlich
+    // nächstliegende Annäherung an "elegante, leicht schräge Handschrift",
+    // die ohne eingebettete Zusatz-Schriftart möglich ist.
+    doc.setFont("times", "bolditalic");
+    doc.setFontSize(32);
     doc.setTextColor(20);
     const titelZeilen = doc.splitTextToSize(titel, usableWidth);
+    const titelWinkel = -4;
     let y = margin + 20;
     titelZeilen.forEach((zeile) => {
-      doc.text(zeile, pageWidth / 2, y, { align: "center" });
+      doc.text(zeile, pageWidth / 2, y, { align: "center", angle: titelWinkel });
       y += 13;
     });
 
-    y += 4;
+    y += 6;
     doc.setDrawColor(178, 93, 43);
     doc.setLineWidth(0.8);
     doc.line(pageWidth / 2 - 25, y, pageWidth / 2 + 25, y);
@@ -8858,16 +8866,21 @@ class RezeptbuchCard extends HTMLElement {
     const flaecheHoehe = pageHeight - margin - y;
     if (flaecheHoehe <= 0) return;
 
-    const iconGroesse = this._sammelPdfDeckblattDekorationZeichnen(doc, flaecheX, flaecheY, flaecheBreite, flaecheHoehe);
+    // Die Deko-Symbole werden VOR den Fotos gezeichnet, liegen also
+    // optisch dahinter: sie sitzen in den Lücken zwischen und rund um die
+    // Collage-Kacheln (siehe _sammelPdfDeckblattDekorationZeichnen) und
+    // werden dort, wo sich ein Foto darüberlegt, einfach überdeckt - wie
+    // Deko, die zwischen echten, lose hingelegten Fotos hervorschaut.
+    this._sammelPdfDeckblattDekorationZeichnen(doc, flaecheX, flaecheY, flaecheBreite, flaecheHoehe);
 
     const bildQuellen = rezepte.map((r) => r.image).filter(Boolean).slice(0, 6);
     if (!bildQuellen.length) return;
 
-    const innenRand = iconGroesse * 1.3;
-    const innenX = flaecheX + innenRand;
-    const innenY = flaecheY + innenRand;
-    const innenBreite = Math.max(10, flaecheBreite - innenRand * 2);
-    const innenHoehe = Math.max(10, flaecheHoehe - innenRand * 2);
+    const rand = Math.min(flaecheBreite, flaecheHoehe) * 0.04;
+    const innenX = flaecheX + rand;
+    const innenY = flaecheY + rand;
+    const innenBreite = Math.max(10, flaecheBreite - rand * 2);
+    const innenHoehe = Math.max(10, flaecheHoehe - rand * 2);
 
     await this._sammelPdfDeckblattCollageZeichnen(doc, bildQuellen, innenX, innenY, innenBreite, innenHoehe);
   }
@@ -8943,93 +8956,146 @@ class RezeptbuchCard extends HTMLElement {
     }
   }
 
-  // Zeichnet vier kleine, flach gezeichnete Küchen-Symbole (Tomate,
-  // Karotten-Bund, Kochlöffel, Rührbesen) in den Ecken der übergebenen
-  // Deckblatt-Fläche - als dezente Deko rund um die Foto-Collage, in den
-  // Farben der Karte. Alle Symbole nutzen nur einfache jsPDF-Grundformen
-  // (Ellipsen/Dreiecke/Linien); `ellipse`/`triangle` sind nur bei der
-  // echten jsPDF-Bibliothek vorhanden, nicht bei den einfachen Fakes in
-  // den Tests - dort wird die Deko einfach übersprungen (Rückgabewert 0,
-  // sodass die Collage-Fläche dann die volle Breite/Höhe nutzt). Gibt die
-  // tatsächlich genutzte Icon-Größe zurück (für den Innenabstand der
-  // Foto-Collage, siehe _sammelPdfDeckblattZeichnen).
+  // Zeichnet vier kleine Küchen-Symbole (Tomate, Karotten-Bund, Kochlöffel,
+  // Rührbesen) in den LÜCKEN rund um die Foto-Collage (oben/unten/links/
+  // rechts der Mitte, nicht in den reinen Ecken) - als Deko, die zwischen
+  // den lose hingelegten Fotos hervorschaut. Wird VOR den Fotos gezeichnet
+  // (siehe _sammelPdfDeckblattZeichnen), sodass eine später darüberliegende
+  // Foto-Kachel die Deko an dieser Stelle einfach überdeckt. Alle Symbole
+  // nutzen nur jsPDF-Grundformen (Ellipsen/Dreiecke/Linien), aber mit
+  // Umriss UND Füllung ("FD") sowie kleinen Glanzlichtern/Schattierungen
+  // für einen etwas plastischeren, illustrierten statt rein flachen Look.
+  // `ellipse`/`triangle` sind nur bei der echten jsPDF-Bibliothek
+  // vorhanden, nicht bei den einfachen Fakes in den Tests - dort wird die
+  // Deko einfach übersprungen.
   _sammelPdfDeckblattDekorationZeichnen(doc, x, y, breite, hoehe) {
-    if (typeof doc.ellipse !== "function" || typeof doc.triangle !== "function") return 0;
+    if (typeof doc.ellipse !== "function" || typeof doc.triangle !== "function") return;
 
-    const groesse = Math.min(24, Math.max(14, Math.min(breite, hoehe) * 0.16));
-    const inset = groesse * 0.65;
-    this._pdfIconTomateZeichnen(doc, x + inset, y + inset, groesse);
-    this._pdfIconKarottenZeichnen(doc, x + breite - inset, y + inset, groesse);
-    this._pdfIconKochloeffelZeichnen(doc, x + inset, y + hoehe - inset, groesse);
-    this._pdfIconRuehrbesenZeichnen(doc, x + breite - inset, y + hoehe - inset, groesse);
-    return groesse;
+    const groesse = Math.min(22, Math.max(13, Math.min(breite, hoehe) * 0.15));
+    this._pdfIconTomateZeichnen(doc, x + breite * 0.5, y + hoehe * 0.07, groesse);
+    this._pdfIconKarottenZeichnen(doc, x + breite * 0.04, y + hoehe * 0.52, groesse);
+    this._pdfIconKochloeffelZeichnen(doc, x + breite * 0.96, y + hoehe * 0.5, groesse);
+    this._pdfIconRuehrbesenZeichnen(doc, x + breite * 0.5, y + hoehe * 0.95, groesse);
   }
 
-  // Einfaches, flach gezeichnetes Tomaten-Symbol (Ellipse plus kleinem
-  // Blattkranz oben) für die Deckblatt-Deko, siehe
+  // Kleines, illustriertes Tomaten-Symbol (Körper mit Umriss, Glanzlicht
+  // und Blattkranz oben) für die Deckblatt-Deko, siehe
   // _sammelPdfDeckblattDekorationZeichnen. `cx`/`cy` sind der Mittelpunkt,
   // `groesse` die ungefähre Gesamtgröße in mm.
   _pdfIconTomateZeichnen(doc, cx, cy, groesse) {
     const r = groesse / 2.4;
     doc.setFillColor(196, 62, 48);
-    doc.ellipse(cx, cy + r * 0.15, r, r * 0.92, "F");
-    doc.setFillColor(120, 148, 74);
+    doc.setDrawColor(140, 38, 30);
+    doc.setLineWidth(groesse * 0.03);
+    doc.ellipse(cx, cy + r * 0.15, r, r * 0.92, "FD");
+    // dezente Segment-Linien für etwas Volumen
+    doc.setDrawColor(160, 45, 35);
+    doc.setLineWidth(groesse * 0.018);
+    doc.line(cx, cy + r * 0.15 - r * 0.85, cx, cy + r * 0.15 + r * 0.85);
+    doc.line(cx - r * 0.55, cy + r * 0.15 - r * 0.72, cx - r * 0.4, cy + r * 0.15 + r * 0.8);
+    // Glanzlicht
+    doc.setFillColor(224, 128, 110);
+    doc.ellipse(cx - r * 0.4, cy - r * 0.1, r * 0.28, r * 0.4, "F");
+    // Blattkranz
+    doc.setFillColor(112, 142, 68);
+    doc.setDrawColor(76, 100, 44);
+    doc.setLineWidth(groesse * 0.02);
     const blatt = r * 0.5;
     [-1, 0, 1].forEach((i) => {
       const bx = cx + i * blatt * 0.55;
       const by = cy - r * 0.75;
-      doc.triangle(bx, by, bx - blatt * 0.4, by - blatt * 0.9, bx + blatt * 0.4, by - blatt * 0.9, "F");
+      doc.triangle(bx, by, bx - blatt * 0.4, by - blatt * 0.9, bx + blatt * 0.4, by - blatt * 0.9, "FD");
     });
   }
 
-  // Einfaches, flach gezeichnetes Symbol für einen kleinen Karotten-Bund
-  // (drei Dreiecke mit Blattgrün, durch eine dünne Linie "zusammengebunden")
-  // für die Deckblatt-Deko, siehe _sammelPdfDeckblattDekorationZeichnen.
+  // Kleines, illustriertes Symbol für einen Karotten-Bund (drei Karotten
+  // mit Umriss, Textur-Linien und Blattgrün, durch eine dünne Schnur
+  // "zusammengebunden") für die Deckblatt-Deko, siehe
+  // _sammelPdfDeckblattDekorationZeichnen.
   _pdfIconKarottenZeichnen(doc, cx, cy, groesse) {
-    const karottenBreite = groesse * 0.9 / 3.4;
+    const karottenBreite = (groesse * 0.9) / 3.4;
     const laenge = groesse * 0.85;
     doc.setFillColor(224, 142, 60);
+    doc.setDrawColor(178, 103, 40);
+    doc.setLineWidth(groesse * 0.025);
     [-1, 0, 1].forEach((i) => {
       const bx = cx + i * karottenBreite * 1.3;
       const kopfY = cy - laenge * 0.45 - Math.abs(i) * 2;
       const spitzeY = cy + laenge * 0.5;
-      doc.triangle(bx - karottenBreite / 2, kopfY, bx + karottenBreite / 2, kopfY, bx, spitzeY, "F");
+      doc.triangle(bx - karottenBreite / 2, kopfY, bx + karottenBreite / 2, kopfY, bx, spitzeY, "FD");
+      // kurze Textur-Striche auf jeder Karotte
+      doc.setDrawColor(190, 118, 48);
+      doc.setLineWidth(groesse * 0.012);
+      doc.line(bx - karottenBreite * 0.18, kopfY + laenge * 0.22, bx + karottenBreite * 0.1, kopfY + laenge * 0.22);
+      doc.line(bx - karottenBreite * 0.12, kopfY + laenge * 0.42, bx + karottenBreite * 0.06, kopfY + laenge * 0.42);
+      doc.setDrawColor(178, 103, 40);
+      doc.setLineWidth(groesse * 0.025);
     });
     doc.setFillColor(110, 140, 70);
+    doc.setDrawColor(76, 100, 44);
+    doc.setLineWidth(groesse * 0.02);
     [-1, 0, 1].forEach((i) => {
       const bx = cx + i * karottenBreite * 1.3;
       const kopfY = cy - laenge * 0.45 - Math.abs(i) * 2;
-      doc.triangle(bx, kopfY, bx - karottenBreite * 0.35, kopfY - groesse * 0.3, bx + karottenBreite * 0.1, kopfY - groesse * 0.22, "F");
+      doc.triangle(bx, kopfY, bx - karottenBreite * 0.35, kopfY - groesse * 0.3, bx + karottenBreite * 0.1, kopfY - groesse * 0.22, "FD");
     });
     doc.setDrawColor(150, 105, 60);
     doc.setLineWidth(0.6);
     doc.line(cx - groesse * 0.29, cy - laenge * 0.32, cx + groesse * 0.29, cy - laenge * 0.38);
   }
 
-  // Einfaches, flach gezeichnetes Kochlöffel-Symbol (Ellipse als Kopf, dicke
-  // Linie als Stiel) für die Deckblatt-Deko, siehe
+  // Kleines, illustriertes Kochlöffel-Symbol (Löffelkopf mit Umriss und
+  // Glanzlicht, Stiel mit Maserungslinie) für die Deckblatt-Deko, siehe
   // _sammelPdfDeckblattDekorationZeichnen.
   _pdfIconKochloeffelZeichnen(doc, cx, cy, groesse) {
-    doc.setFillColor(150, 105, 60);
+    const stielX1 = cx - groesse * 0.28;
+    const stielY1 = cy + groesse * 0.4;
+    const stielX2 = cx + groesse * 0.22;
+    const stielY2 = cy - groesse * 0.42;
+
     doc.setDrawColor(150, 105, 60);
-    doc.setLineWidth(groesse * 0.14);
-    doc.line(cx - groesse * 0.28, cy + groesse * 0.4, cx + groesse * 0.22, cy - groesse * 0.42);
-    doc.ellipse(cx + groesse * 0.3, cy - groesse * 0.42, groesse * 0.22, groesse * 0.3, "F");
+    doc.setLineWidth(groesse * 0.16);
+    doc.line(stielX1, stielY1, stielX2, stielY2);
+    // hellere Maserungslinie mittig auf dem Stiel für etwas Tiefe
+    doc.setDrawColor(178, 132, 84);
+    doc.setLineWidth(groesse * 0.05);
+    doc.line(stielX1, stielY1, stielX2, stielY2);
+
+    doc.setFillColor(150, 105, 60);
+    doc.setDrawColor(112, 76, 40);
+    doc.setLineWidth(groesse * 0.025);
+    doc.ellipse(cx + groesse * 0.3, cy - groesse * 0.42, groesse * 0.22, groesse * 0.3, "FD");
+    doc.setFillColor(184, 142, 96);
+    doc.ellipse(cx + groesse * 0.24, cy - groesse * 0.52, groesse * 0.08, groesse * 0.13, "F");
   }
 
-  // Einfaches, flach gezeichnetes Rührbesen-Symbol (Stiel plus mehreren
-  // ineinander verschachtelten Ellipsen-Umrissen als "Drahtkorb") für die
-  // Deckblatt-Deko, siehe _sammelPdfDeckblattDekorationZeichnen.
+  // Kleines, illustriertes Rührbesen-Symbol (Holzgriff mit Metallkappe,
+  // mehrere ineinander verschachtelte Draht-Ellipsen in zwei Grautönen für
+  // einen metallischen Eindruck) für die Deckblatt-Deko, siehe
+  // _sammelPdfDeckblattDekorationZeichnen.
   _pdfIconRuehrbesenZeichnen(doc, cx, cy, groesse) {
     doc.setFillColor(150, 105, 60);
-    doc.setDrawColor(150, 105, 60);
-    doc.setLineWidth(groesse * 0.14);
-    doc.line(cx, cy + groesse * 0.5, cx, cy + groesse * 0.15);
-    doc.setDrawColor(170, 170, 170);
-    doc.setLineWidth(groesse * 0.035);
-    [0.55, 0.38, 0.2].forEach((breiteFaktor) => {
+    doc.setDrawColor(112, 76, 40);
+    doc.setLineWidth(groesse * 0.03);
+    if (typeof doc.roundedRect === "function") {
+      doc.roundedRect(cx - groesse * 0.09, cy + groesse * 0.12, groesse * 0.18, groesse * 0.4, groesse * 0.05, groesse * 0.05, "FD");
+    } else {
+      doc.rect(cx - groesse * 0.09, cy + groesse * 0.12, groesse * 0.18, groesse * 0.4, "FD");
+    }
+    // Metallkappe zwischen Griff und Draht
+    doc.setFillColor(190, 190, 195);
+    doc.setDrawColor(140, 140, 145);
+    doc.setLineWidth(groesse * 0.02);
+    doc.ellipse(cx, cy + groesse * 0.1, groesse * 0.12, groesse * 0.06, "FD");
+
+    doc.setDrawColor(160, 160, 165);
+    doc.setLineWidth(groesse * 0.04);
+    [0.55, 0.2].forEach((breiteFaktor) => {
       doc.ellipse(cx, cy - groesse * 0.15, groesse * breiteFaktor, groesse * 0.42, "S");
     });
+    doc.setDrawColor(210, 210, 214);
+    doc.setLineWidth(groesse * 0.025);
+    doc.ellipse(cx, cy - groesse * 0.15, groesse * 0.38, groesse * 0.42, "S");
   }
 
   // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur im
