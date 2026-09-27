@@ -330,6 +330,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Zutaten ausblenden",
     kopf_sammel_pdf_btn: "📚 Sammel-PDF",
     sammel_pdf_keine_rezepte: "Keine Rezepte zum Exportieren gefunden.",
+    sammel_pdf_frage_toc: "Inhaltsverzeichnis der gewählten Rezepte erstellen?",
+    sammel_pdf_ja_toc_btn: "Ja, Inhaltsverzeichnis erstellen",
+    sammel_pdf_nein_toc_btn: "Nein, kein Inhaltsverzeichnis",
+    sammel_pdf_name_placeholder: "Name des Kochbuchs",
+    sammel_pdf_erstellen_btn: "PDF erstellen",
+    abschnitt_titel_inhaltsverzeichnis: "Inhaltsverzeichnis",
   },
 
   // Schwiizerdütsch (gsw) - es git kei einheitlichi amtlichi Schriibwiis
@@ -611,6 +617,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Zuetate usblände",
     kopf_sammel_pdf_btn: "📚 Sammel-PDF",
     sammel_pdf_keine_rezepte: "Kei Rezept zum Exportiere gfunde.",
+    sammel_pdf_frage_toc: "Sölled mer es Inhaltsverzeichnis vo de usgwählte Rezept erstelle?",
+    sammel_pdf_ja_toc_btn: "Ja, Inhaltsverzeichnis erstelle",
+    sammel_pdf_nein_toc_btn: "Nei, kes Inhaltsverzeichnis",
+    sammel_pdf_name_placeholder: "Name vom Kochbuech",
+    sammel_pdf_erstellen_btn: "PDF erstelle",
+    abschnitt_titel_inhaltsverzeichnis: "Inhaltsverzeichnis",
   },
   en: {
     allgemein_zurueck: "← Back",
@@ -866,6 +878,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Hide ingredients",
     kopf_sammel_pdf_btn: "📚 Collected PDF",
     sammel_pdf_keine_rezepte: "No recipes found to export.",
+    sammel_pdf_frage_toc: "Create a table of contents for the selected recipes?",
+    sammel_pdf_ja_toc_btn: "Yes, create a table of contents",
+    sammel_pdf_nein_toc_btn: "No, no table of contents",
+    sammel_pdf_name_placeholder: "Cookbook name",
+    sammel_pdf_erstellen_btn: "Create PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Table of Contents",
   },
   bg: {
     allgemein_zurueck: "← Назад",
@@ -1079,6 +1097,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Скрий съставките",
     kopf_sammel_pdf_btn: "📚 Общ PDF",
     sammel_pdf_keine_rezepte: "Няма намерени рецепти за експортиране.",
+    sammel_pdf_frage_toc: "Да се създаде ли съдържание на избраните рецепти?",
+    sammel_pdf_ja_toc_btn: "Да, създай съдържание",
+    sammel_pdf_nein_toc_btn: "Не, без съдържание",
+    sammel_pdf_name_placeholder: "Име на готварската книга",
+    sammel_pdf_erstellen_btn: "Създай PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Съдържание",
   },
   hr: {
     allgemein_zurueck: "← Natrag",
@@ -1292,6 +1316,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Sakrij sastojke",
     kopf_sammel_pdf_btn: "📚 Zbirni PDF",
     sammel_pdf_keine_rezepte: "Nema recepata za izvoz.",
+    sammel_pdf_frage_toc: "Želite li izraditi sadržaj odabranih recepata?",
+    sammel_pdf_ja_toc_btn: "Da, izradi sadržaj",
+    sammel_pdf_nein_toc_btn: "Ne, bez sadržaja",
+    sammel_pdf_name_placeholder: "Naziv kuharice",
+    sammel_pdf_erstellen_btn: "Izradi PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Sadržaj",
   },
   cs: {
     allgemein_zurueck: "← Zpět",
@@ -1505,6 +1535,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Skrýt suroviny",
     kopf_sammel_pdf_btn: "📚 Souhrnné PDF",
     sammel_pdf_keine_rezepte: "Nebyly nalezeny žádné recepty k exportu.",
+    sammel_pdf_frage_toc: "Vytvořit obsah vybraných receptů?",
+    sammel_pdf_ja_toc_btn: "Ano, vytvořit obsah",
+    sammel_pdf_nein_toc_btn: "Ne, bez obsahu",
+    sammel_pdf_name_placeholder: "Název kuchařky",
+    sammel_pdf_erstellen_btn: "Vytvořit PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Obsah",
   },
   da: {
     allgemein_zurueck: "← Tilbage",
@@ -1718,6 +1754,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Skjul ingredienser",
     kopf_sammel_pdf_btn: "📚 Samlet PDF",
     sammel_pdf_keine_rezepte: "Ingen opskrifter fundet til eksport.",
+    sammel_pdf_frage_toc: "Vil du oprette en indholdsfortegnelse for de valgte opskrifter?",
+    sammel_pdf_ja_toc_btn: "Ja, opret indholdsfortegnelse",
+    sammel_pdf_nein_toc_btn: "Nej, ingen indholdsfortegnelse",
+    sammel_pdf_name_placeholder: "Navn på kogebogen",
+    sammel_pdf_erstellen_btn: "Opret PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Indholdsfortegnelse",
   },
   nl: {
     allgemein_zurueck: "← Terug",
@@ -1931,6 +1973,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Ingrediënten verbergen",
     kopf_sammel_pdf_btn: "📚 Verzamel-PDF",
     sammel_pdf_keine_rezepte: "Geen recepten gevonden om te exporteren.",
+    sammel_pdf_frage_toc: "Inhoudsopgave maken voor de geselecteerde recepten?",
+    sammel_pdf_ja_toc_btn: "Ja, inhoudsopgave maken",
+    sammel_pdf_nein_toc_btn: "Nee, geen inhoudsopgave",
+    sammel_pdf_name_placeholder: "Naam van het kookboek",
+    sammel_pdf_erstellen_btn: "PDF maken",
+    abschnitt_titel_inhaltsverzeichnis: "Inhoudsopgave",
   },
   et: {
     allgemein_zurueck: "← Tagasi",
@@ -2144,6 +2192,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Peida koostisosad",
     kopf_sammel_pdf_btn: "📚 Koond-PDF",
     sammel_pdf_keine_rezepte: "Eksportimiseks retsepte ei leitud.",
+    sammel_pdf_frage_toc: "Kas luua valitud retseptide sisukord?",
+    sammel_pdf_ja_toc_btn: "Jah, loo sisukord",
+    sammel_pdf_nein_toc_btn: "Ei, ilma sisukorrata",
+    sammel_pdf_name_placeholder: "Kokaraamatu nimi",
+    sammel_pdf_erstellen_btn: "Loo PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Sisukord",
   },
   fi: {
     allgemein_zurueck: "← Takaisin",
@@ -2357,6 +2411,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Piilota ainekset",
     kopf_sammel_pdf_btn: "📚 Kokoelma-PDF",
     sammel_pdf_keine_rezepte: "Vietäviä reseptejä ei löytynyt.",
+    sammel_pdf_frage_toc: "Luodaanko sisällysluettelo valituille resepteille?",
+    sammel_pdf_ja_toc_btn: "Kyllä, luo sisällysluettelo",
+    sammel_pdf_nein_toc_btn: "Ei, ilman sisällysluetteloa",
+    sammel_pdf_name_placeholder: "Keittokirjan nimi",
+    sammel_pdf_erstellen_btn: "Luo PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Sisällysluettelo",
   },
   fr: {
     allgemein_zurueck: "← Retour",
@@ -2571,6 +2631,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Masquer les ingrédients",
     kopf_sammel_pdf_btn: "📚 PDF groupé",
     sammel_pdf_keine_rezepte: "Aucune recette trouvée à exporter.",
+    sammel_pdf_frage_toc: "Créer une table des matières pour les recettes sélectionnées ?",
+    sammel_pdf_ja_toc_btn: "Oui, créer une table des matières",
+    sammel_pdf_nein_toc_btn: "Non, sans table des matières",
+    sammel_pdf_name_placeholder: "Nom du livre de cuisine",
+    sammel_pdf_erstellen_btn: "Créer le PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Table des matières",
   },
   el: {
     allgemein_zurueck: "← Πίσω",
@@ -2785,6 +2851,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Απόκρυψη υλικών",
     kopf_sammel_pdf_btn: "📚 Συγκεντρωτικό PDF",
     sammel_pdf_keine_rezepte: "Δεν βρέθηκαν συνταγές για εξαγωγή.",
+    sammel_pdf_frage_toc: "Δημιουργία πίνακα περιεχομένων για τις επιλεγμένες συνταγές;",
+    sammel_pdf_ja_toc_btn: "Ναι, δημιουργία πίνακα περιεχομένων",
+    sammel_pdf_nein_toc_btn: "Όχι, χωρίς πίνακα περιεχομένων",
+    sammel_pdf_name_placeholder: "Όνομα βιβλίου μαγειρικής",
+    sammel_pdf_erstellen_btn: "Δημιουργία PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Πίνακας περιεχομένων",
   },
   hu: {
     allgemein_zurueck: "← Vissza",
@@ -2999,6 +3071,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Hozzávalók elrejtése",
     kopf_sammel_pdf_btn: "📚 Gyűjtő PDF",
     sammel_pdf_keine_rezepte: "Nem található exportálható recept.",
+    sammel_pdf_frage_toc: "Létrehozzunk tartalomjegyzéket a kiválasztott receptekhez?",
+    sammel_pdf_ja_toc_btn: "Igen, tartalomjegyzék létrehozása",
+    sammel_pdf_nein_toc_btn: "Nem, tartalomjegyzék nélkül",
+    sammel_pdf_name_placeholder: "A szakácskönyv neve",
+    sammel_pdf_erstellen_btn: "PDF létrehozása",
+    abschnitt_titel_inhaltsverzeichnis: "Tartalomjegyzék",
   },
   ga: {
     allgemein_zurueck: "← Siar",
@@ -3213,6 +3291,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Folaigh comhábhair",
     kopf_sammel_pdf_btn: "📚 PDF Bailithe",
     sammel_pdf_keine_rezepte: "Níor aimsíodh aon oideas le heaspórtáil.",
+    sammel_pdf_frage_toc: "Ar mhaith leat clár ábhair a chruthú do na hoidis roghnaithe?",
+    sammel_pdf_ja_toc_btn: "Tá, cruthaigh clár ábhair",
+    sammel_pdf_nein_toc_btn: "Níl, gan clár ábhair",
+    sammel_pdf_name_placeholder: "Ainm an leabhair chócaireachta",
+    sammel_pdf_erstellen_btn: "Cruthaigh PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Clár Ábhair",
   },
   it: {
     allgemein_zurueck: "← Indietro",
@@ -3427,6 +3511,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Nascondi ingredienti",
     kopf_sammel_pdf_btn: "📚 PDF raccolta",
     sammel_pdf_keine_rezepte: "Nessuna ricetta trovata da esportare.",
+    sammel_pdf_frage_toc: "Creare un indice per le ricette selezionate?",
+    sammel_pdf_ja_toc_btn: "Sì, crea indice",
+    sammel_pdf_nein_toc_btn: "No, senza indice",
+    sammel_pdf_name_placeholder: "Nome del ricettario",
+    sammel_pdf_erstellen_btn: "Crea PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Indice",
   },
   lv: {
     allgemein_zurueck: "← Atpakaļ",
@@ -3640,6 +3730,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Slēpt sastāvdaļas",
     kopf_sammel_pdf_btn: "📚 Kopīgais PDF",
     sammel_pdf_keine_rezepte: "Netika atrasta neviena recepte eksportēšanai.",
+    sammel_pdf_frage_toc: "Vai izveidot izvēlēto recepšu satura rādītāju?",
+    sammel_pdf_ja_toc_btn: "Jā, izveidot satura rādītāju",
+    sammel_pdf_nein_toc_btn: "Nē, bez satura rādītāja",
+    sammel_pdf_name_placeholder: "Pavārgrāmatas nosaukums",
+    sammel_pdf_erstellen_btn: "Izveidot PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Satura rādītājs",
   },
   lt: {
     allgemein_zurueck: "← Atgal",
@@ -3853,6 +3949,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Slėpti ingredientus",
     kopf_sammel_pdf_btn: "📚 Bendras PDF",
     sammel_pdf_keine_rezepte: "Nerasta receptų eksportavimui.",
+    sammel_pdf_frage_toc: "Ar sukurti pasirinktų receptų turinį?",
+    sammel_pdf_ja_toc_btn: "Taip, sukurti turinį",
+    sammel_pdf_nein_toc_btn: "Ne, be turinio",
+    sammel_pdf_name_placeholder: "Receptų knygos pavadinimas",
+    sammel_pdf_erstellen_btn: "Sukurti PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Turinys",
   },
   mt: {
     allgemein_zurueck: "← Lura",
@@ -4067,6 +4169,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Aħbi l-ingredjenti",
     kopf_sammel_pdf_btn: "📚 PDF Miġbura",
     sammel_pdf_keine_rezepte: "Ma nstab l-ebda riċetta biex tiġi esportata.",
+    sammel_pdf_frage_toc: "Toħloq werrej għar-riċetti magħżula?",
+    sammel_pdf_ja_toc_btn: "Iva, oħloq werrej",
+    sammel_pdf_nein_toc_btn: "Le, mingħajr werrej",
+    sammel_pdf_name_placeholder: "Isem tal-ktieb tat-tisjir",
+    sammel_pdf_erstellen_btn: "Oħloq PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Werrej",
   },
   pl: {
     allgemein_zurueck: "← Wstecz",
@@ -4280,6 +4388,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Ukryj składniki",
     kopf_sammel_pdf_btn: "📚 Zbiorczy PDF",
     sammel_pdf_keine_rezepte: "Nie znaleziono przepisów do eksportu.",
+    sammel_pdf_frage_toc: "Utworzyć spis treści dla wybranych przepisów?",
+    sammel_pdf_ja_toc_btn: "Tak, utwórz spis treści",
+    sammel_pdf_nein_toc_btn: "Nie, bez spisu treści",
+    sammel_pdf_name_placeholder: "Nazwa książki kucharskiej",
+    sammel_pdf_erstellen_btn: "Utwórz PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Spis treści",
   },
   pt: {
     allgemein_zurueck: "← Voltar",
@@ -4494,6 +4608,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
     kopf_sammel_pdf_btn: "📚 PDF coletivo",
     sammel_pdf_keine_rezepte: "Nenhuma receita encontrada para exportar.",
+    sammel_pdf_frage_toc: "Criar um índice para as receitas selecionadas?",
+    sammel_pdf_ja_toc_btn: "Sim, criar índice",
+    sammel_pdf_nein_toc_btn: "Não, sem índice",
+    sammel_pdf_name_placeholder: "Nome do livro de receitas",
+    sammel_pdf_erstellen_btn: "Criar PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Índice",
   },
   ro: {
     allgemein_zurueck: "← Înapoi",
@@ -4707,6 +4827,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Ascunde ingredientele",
     kopf_sammel_pdf_btn: "📚 PDF colectiv",
     sammel_pdf_keine_rezepte: "Nu s-a găsit nicio rețetă de exportat.",
+    sammel_pdf_frage_toc: "Se creează un cuprins pentru rețetele selectate?",
+    sammel_pdf_ja_toc_btn: "Da, creează cuprins",
+    sammel_pdf_nein_toc_btn: "Nu, fără cuprins",
+    sammel_pdf_name_placeholder: "Numele cărții de bucate",
+    sammel_pdf_erstellen_btn: "Creează PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Cuprins",
   },
   sk: {
     allgemein_zurueck: "← Späť",
@@ -4920,6 +5046,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Skryť suroviny",
     kopf_sammel_pdf_btn: "📚 Súhrnné PDF",
     sammel_pdf_keine_rezepte: "Nenašli sa žiadne recepty na export.",
+    sammel_pdf_frage_toc: "Vytvoriť obsah pre vybrané recepty?",
+    sammel_pdf_ja_toc_btn: "Áno, vytvoriť obsah",
+    sammel_pdf_nein_toc_btn: "Nie, bez obsahu",
+    sammel_pdf_name_placeholder: "Názov kuchárskej knihy",
+    sammel_pdf_erstellen_btn: "Vytvoriť PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Obsah",
   },
   sl: {
     allgemein_zurueck: "← Nazaj",
@@ -5133,6 +5265,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Skrij sestavine",
     kopf_sammel_pdf_btn: "📚 Zbirni PDF",
     sammel_pdf_keine_rezepte: "Ni najdenih receptov za izvoz.",
+    sammel_pdf_frage_toc: "Želite ustvariti kazalo za izbrane recepte?",
+    sammel_pdf_ja_toc_btn: "Da, ustvari kazalo",
+    sammel_pdf_nein_toc_btn: "Ne, brez kazala",
+    sammel_pdf_name_placeholder: "Ime kuharske knjige",
+    sammel_pdf_erstellen_btn: "Ustvari PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Kazalo",
   },
   es: {
     allgemein_zurueck: "← Volver",
@@ -5346,6 +5484,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
     kopf_sammel_pdf_btn: "📚 PDF conjunto",
     sammel_pdf_keine_rezepte: "No se encontraron recetas para exportar.",
+    sammel_pdf_frage_toc: "¿Crear un índice para las recetas seleccionadas?",
+    sammel_pdf_ja_toc_btn: "Sí, crear índice",
+    sammel_pdf_nein_toc_btn: "No, sin índice",
+    sammel_pdf_name_placeholder: "Nombre del recetario",
+    sammel_pdf_erstellen_btn: "Crear PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Índice",
   },
   sv: {
     allgemein_zurueck: "← Tillbaka",
@@ -5559,6 +5703,12 @@ const UEBERSETZUNGEN = {
     kochmodus_zutaten_aus_aria: "Dölj ingredienser",
     kopf_sammel_pdf_btn: "📚 Samlings-PDF",
     sammel_pdf_keine_rezepte: "Inga recept hittades att exportera.",
+    sammel_pdf_frage_toc: "Vill du skapa en innehållsförteckning för de valda recepten?",
+    sammel_pdf_ja_toc_btn: "Ja, skapa innehållsförteckning",
+    sammel_pdf_nein_toc_btn: "Nej, ingen innehållsförteckning",
+    sammel_pdf_name_placeholder: "Namn på kokboken",
+    sammel_pdf_erstellen_btn: "Skapa PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Innehållsförteckning",
   },
 };
 
@@ -7695,6 +7845,9 @@ class RezeptbuchCard extends HTMLElement {
         }
         #kochbuch-speichern-bereich input { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
           border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); }
+        #sammel-pdf-name-box input { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
+          border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color);
+          margin-bottom:14px; font-size:1em; }
         .tags-liste { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
         .tag-chip {
           display:inline-flex; align-items:center; gap:4px; background: var(--kb-terrakotta-hell);
@@ -7952,6 +8105,22 @@ class RezeptbuchCard extends HTMLElement {
             </div>
           </div>
         </div>
+        <div class="modal-overlay" id="sammel-pdf-modal" style="display:none;">
+          <div class="modal-box" id="sammel-pdf-frage-box">
+            <p style="margin-top:0;">${this._t("sammel_pdf_frage_toc")}</p>
+            <div class="modal-aktionen" style="margin-top:14px;">
+              <button type="button" class="sekundaer" id="sammel-pdf-nein-toc-btn">${this._t("sammel_pdf_nein_toc_btn")}</button>
+              <button type="button" class="primaer" id="sammel-pdf-ja-toc-btn">${this._t("sammel_pdf_ja_toc_btn")}</button>
+            </div>
+          </div>
+          <div class="modal-box" id="sammel-pdf-name-box" style="display:none;">
+            <input type="text" id="sammel-pdf-name-feld" placeholder="${this._t("sammel_pdf_name_placeholder")}">
+            <div class="modal-aktionen">
+              <button type="button" class="sekundaer" id="sammel-pdf-abbrechen-btn">${this._t("allgemein_abbrechen")}</button>
+              <button type="button" class="primaer" id="sammel-pdf-name-erstellen-btn">${this._t("sammel_pdf_erstellen_btn")}</button>
+            </div>
+          </div>
+        </div>
         <div class="versions-hinweis">v${CARD_VERSION}</div>
       </ha-card>
     `;
@@ -7981,7 +8150,42 @@ class RezeptbuchCard extends HTMLElement {
 
     const sammelPdfBtn = this.shadowRoot.getElementById("sammel-pdf-btn");
     if (sammelPdfBtn) {
-      sammelPdfBtn.addEventListener("click", () => this._sammelPdfExport());
+      sammelPdfBtn.addEventListener("click", () => this._sammelPdfModalOeffnen());
+    }
+
+    const sammelPdfNeinTocBtn = this.shadowRoot.getElementById("sammel-pdf-nein-toc-btn");
+    if (sammelPdfNeinTocBtn) {
+      sammelPdfNeinTocBtn.addEventListener("click", () => {
+        this._sammelPdfModalSchliessen();
+        this._sammelPdfExport({ inhaltsverzeichnis: false });
+      });
+    }
+
+    const sammelPdfJaTocBtn = this.shadowRoot.getElementById("sammel-pdf-ja-toc-btn");
+    if (sammelPdfJaTocBtn) {
+      sammelPdfJaTocBtn.addEventListener("click", () => {
+        const frageBox = this.shadowRoot.getElementById("sammel-pdf-frage-box");
+        const nameBox = this.shadowRoot.getElementById("sammel-pdf-name-box");
+        if (frageBox) frageBox.style.display = "none";
+        if (nameBox) nameBox.style.display = "block";
+        const nameFeld = this.shadowRoot.getElementById("sammel-pdf-name-feld");
+        if (nameFeld) nameFeld.focus();
+      });
+    }
+
+    const sammelPdfAbbrechenBtn = this.shadowRoot.getElementById("sammel-pdf-abbrechen-btn");
+    if (sammelPdfAbbrechenBtn) {
+      sammelPdfAbbrechenBtn.addEventListener("click", () => this._sammelPdfModalSchliessen());
+    }
+
+    const sammelPdfNameErstellenBtn = this.shadowRoot.getElementById("sammel-pdf-name-erstellen-btn");
+    if (sammelPdfNameErstellenBtn) {
+      sammelPdfNameErstellenBtn.addEventListener("click", () => {
+        const nameFeld = this.shadowRoot.getElementById("sammel-pdf-name-feld");
+        const titel = (nameFeld && nameFeld.value.trim()) || this._t("sammel_pdf_name_placeholder");
+        this._sammelPdfModalSchliessen();
+        this._sammelPdfExport({ inhaltsverzeichnis: true, titel });
+      });
     }
 
     const einkaufsmodusBtn = this.shadowRoot.getElementById("einkaufsmodus-btn");
@@ -8654,24 +8858,64 @@ class RezeptbuchCard extends HTMLElement {
     return { blob: doc.output("blob"), dateiname, mimeType: "application/pdf" };
   }
 
+  // Zeichnet eine Inhaltsverzeichnis-/Deckblatt-Seite (Seite 1) für das
+  // Sammel-PDF: individueller Kochbuch-Name groß oben, darunter die
+  // Überschrift "Inhaltsverzeichnis" und eine nummerierte Liste der
+  // enthaltenen Rezepttitel. Erwartet, dass `doc` bereits auf der Seite
+  // steht, auf der das Verzeichnis erscheinen soll (der Aufrufer legt
+  // danach selbst eine neue Seite für das erste Rezept an).
+  _sammelPdfInhaltsverzeichnisZeichnen(doc, titel, rezepte, margin, pageWidth) {
+    const usableWidth = pageWidth - margin * 2;
+    let y = margin + 20;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(24);
+    doc.splitTextToSize(titel, usableWidth).forEach((zeile) => {
+      doc.text(zeile, margin, y);
+      y += 10;
+    });
+
+    y += 10;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text(this._t("abschnitt_titel_inhaltsverzeichnis"), margin, y);
+    y += 12;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    rezepte.forEach((r, i) => {
+      const zeilen = doc.splitTextToSize(`${i + 1}. ${r.title}`, usableWidth);
+      zeilen.forEach((zeile) => {
+        doc.text(zeile, margin, y);
+        y += 8;
+      });
+    });
+  }
+
   // Sammel-PDF: exportiert mehrere Rezepte (z.B. die aktuell gefilterte
   // Liste aus der Übersicht) als EIN gemeinsames PDF, ein Rezept pro
   // (mindestens einer) Seite - nutzt dieselbe Zeichenlogik wie der
   // Einzel-Export. Die Portionenzahl wird dabei je Rezept auf dessen
   // Standardportionen zurückgesetzt (die Übersicht hat keine
   // rezeptspezifische Portionenwahl wie die Detailansicht) und danach
-  // wiederhergestellt.
-  async _sammelPdfErstellen(rezepte, dateinameBasis) {
+  // wiederhergestellt. `optionen.inhaltsverzeichnis` fügt optional eine
+  // Deckblatt-/Inhaltsverzeichnis-Seite als Seite 1 ein, mit
+  // `optionen.titel` als individuellem Kochbuch-Namen.
+  async _sammelPdfErstellen(rezepte, dateinameBasis, optionen = {}) {
     const jsPDFKlasse = await this._jsPdfLaden();
     const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
     const margin = 20;
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
 
+    if (optionen.inhaltsverzeichnis) {
+      this._sammelPdfInhaltsverzeichnisZeichnen(doc, optionen.titel || dateinameBasis, rezepte, margin, pageWidth);
+    }
+
     const portionenVorher = this._portionen;
     try {
       for (let i = 0; i < rezepte.length; i++) {
-        if (i > 0) doc.addPage();
+        if (i > 0 || optionen.inhaltsverzeichnis) doc.addPage();
         this._portionen = rezepte[i].servings || 1;
         await this._rezeptContentInPdfZeichnen(doc, rezepte[i]);
       }
@@ -8830,6 +9074,31 @@ class RezeptbuchCard extends HTMLElement {
     }
   }
 
+  // Öffnet das Sammel-PDF-Modal (Frage: Inhaltsverzeichnis ja/nein, danach
+  // ggf. Eingabe des Kochbuch-Namens) - aber nur, wenn es überhaupt
+  // Rezepte zu exportieren gibt; sonst wie beim direkten Export der
+  // Hinweis "keine Rezepte" statt eines Modals ohne Inhalt.
+  _sammelPdfModalOeffnen() {
+    const liste = this._sortiereRezepte(this._gefilterteRezepte());
+    if (!liste.length) {
+      alert(this._t("sammel_pdf_keine_rezepte"));
+      return;
+    }
+    const frageBox = this.shadowRoot.getElementById("sammel-pdf-frage-box");
+    const nameBox = this.shadowRoot.getElementById("sammel-pdf-name-box");
+    const nameFeld = this.shadowRoot.getElementById("sammel-pdf-name-feld");
+    if (frageBox) frageBox.style.display = "block";
+    if (nameBox) nameBox.style.display = "none";
+    if (nameFeld) nameFeld.value = "";
+    const modal = this.shadowRoot.getElementById("sammel-pdf-modal");
+    if (modal) modal.style.display = "flex";
+  }
+
+  _sammelPdfModalSchliessen() {
+    const modal = this.shadowRoot.getElementById("sammel-pdf-modal");
+    if (modal) modal.style.display = "none";
+  }
+
   // Sammel-PDF: exportiert alle AKTUELL GEFILTERTEN Rezepte (Suche/
   // Kategorie/Tags/Kochbuch aus der Übersicht, aber unabhängig von der
   // Seiten-Paginierung) als ein einziges PDF - z.B. für einen Ausdruck
@@ -8837,7 +9106,9 @@ class RezeptbuchCard extends HTMLElement {
   // beim Teilen/Drucken eines einzelnen Rezepts (siehe dort für die
   // Begründung: zuverlässiger als ein unsichtbarer Download-Link,
   // besonders in eingebetteten WebViews wie der Home-Assistant-App).
-  async _sammelPdfExport() {
+  // `optionen.inhaltsverzeichnis`/`optionen.titel` steuern die optionale
+  // Deckblatt-/Inhaltsverzeichnis-Seite (siehe _sammelPdfModalOeffnen).
+  async _sammelPdfExport(optionen = {}) {
     const liste = this._sortiereRezepte(this._gefilterteRezepte());
     if (!liste.length) {
       alert(this._t("sammel_pdf_keine_rezepte"));
@@ -8845,7 +9116,7 @@ class RezeptbuchCard extends HTMLElement {
     }
     try {
       const datum = new Date().toISOString().slice(0, 10);
-      const { blob, dateiname } = await this._sammelPdfErstellen(liste, `Rezeptbuch_${datum}`);
+      const { blob, dateiname } = await this._sammelPdfErstellen(liste, `Rezeptbuch_${datum}`, optionen);
       const url = URL.createObjectURL(blob);
       const neuesFenster = window.open(url, "_blank");
       if (!neuesFenster) {

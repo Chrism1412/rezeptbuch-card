@@ -2887,6 +2887,193 @@ async function testSammelPdfOhneRezepteZeigtHinweisOhnePdfErstellung(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Sammel-PDF: optionales Inhaltsverzeichnis/Deckblatt als Seite 1.
+// ---------------------------------------------------------------------
+async function testSammelPdfModalFrageErscheintUndNeinExportiertOhneToc(browser) {
+  console.log("\nTest: Sammel-PDF-Modal zeigt zunächst die Inhaltsverzeichnis-Frage; 'Nein' exportiert ohne Verzeichnisseite");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Zweites Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const aufrufe = [];
+      karte._sammelPdfErstellen = (rezepte, basis, optionen) => {
+        aufrufe.push({ anzahlRezepte: rezepte.length, basis, optionen });
+        return Promise.resolve({ blob: new Blob(), dateiname: "x.pdf", mimeType: "application/pdf" });
+      };
+      window.open = () => ({});
+
+      karte.shadowRoot.getElementById("sammel-pdf-btn").click();
+      const modalSichtbar = karte.shadowRoot.getElementById("sammel-pdf-modal").style.display === "flex";
+      const frageSichtbar = karte.shadowRoot.getElementById("sammel-pdf-frage-box").style.display !== "none";
+
+      karte.shadowRoot.getElementById("sammel-pdf-nein-toc-btn").click();
+      await new Promise((r) => setTimeout(r, 20));
+
+      return {
+        modalSichtbar,
+        frageSichtbar,
+        modalNachKlickSichtbar: karte.shadowRoot.getElementById("sammel-pdf-modal").style.display === "flex",
+        aufrufe,
+      };
+    });
+
+    assert(ergebnis.modalSichtbar, "Modal wird nach Klick auf 'Sammel-PDF' angezeigt");
+    assert(ergebnis.frageSichtbar, "die Frage nach dem Inhaltsverzeichnis ist der erste Schritt");
+    assert(!ergebnis.modalNachKlickSichtbar, "Modal schließt sich nach der Wahl");
+    assert(ergebnis.aufrufe.length === 1, "der Export wird genau einmal ausgelöst");
+    assert(ergebnis.aufrufe[0].anzahlRezepte === 2, "beide Rezepte werden exportiert");
+    assert(ergebnis.aufrufe[0].optionen.inhaltsverzeichnis === false, "ohne Inhaltsverzeichnis, wenn 'Nein' gewählt wurde");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfModalJaZeigtNameEingabeUndErstelltMitToc(browser) {
+  console.log("\nTest: Sammel-PDF-Modal 'Ja' zeigt die Namenseingabe und exportiert mit individuellem Kochbuch-Namen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const aufrufe = [];
+      karte._sammelPdfErstellen = (rezepte, basis, optionen) => {
+        aufrufe.push({ anzahlRezepte: rezepte.length, basis, optionen });
+        return Promise.resolve({ blob: new Blob(), dateiname: "x.pdf", mimeType: "application/pdf" });
+      };
+      window.open = () => ({});
+
+      karte.shadowRoot.getElementById("sammel-pdf-btn").click();
+      karte.shadowRoot.getElementById("sammel-pdf-ja-toc-btn").click();
+
+      const frageVersteckt = karte.shadowRoot.getElementById("sammel-pdf-frage-box").style.display === "none";
+      const nameSichtbar = karte.shadowRoot.getElementById("sammel-pdf-name-box").style.display !== "none";
+
+      const nameFeld = karte.shadowRoot.getElementById("sammel-pdf-name-feld");
+      nameFeld.value = "Mein Kochbuch";
+      karte.shadowRoot.getElementById("sammel-pdf-name-erstellen-btn").click();
+      await new Promise((r) => setTimeout(r, 20));
+
+      return {
+        frageVersteckt,
+        nameSichtbar,
+        modalNachKlickSichtbar: karte.shadowRoot.getElementById("sammel-pdf-modal").style.display === "flex",
+        aufrufe,
+      };
+    });
+
+    assert(ergebnis.frageVersteckt, "nach 'Ja' wird die Frage ausgeblendet");
+    assert(ergebnis.nameSichtbar, "nach 'Ja' erscheint die Eingabe für den Kochbuch-Namen");
+    assert(!ergebnis.modalNachKlickSichtbar, "Modal schließt sich nach 'PDF erstellen'");
+    assert(ergebnis.aufrufe.length === 1, "der Export wird genau einmal ausgelöst");
+    assert(ergebnis.aufrufe[0].optionen.inhaltsverzeichnis === true, "mit Inhaltsverzeichnis, wenn 'Ja' gewählt wurde");
+    assert(ergebnis.aufrufe[0].optionen.titel === "Mein Kochbuch", "der eingegebene Kochbuch-Name wird übergeben");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfModalAbbrechenExportiertNichts(browser) {
+  console.log("\nTest: Sammel-PDF-Modal 'Abbrechen' bei der Namenseingabe exportiert nichts");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      let jsPdfAngefragt = false;
+      karte._jsPdfLaden = () => {
+        jsPdfAngefragt = true;
+        return Promise.reject(new Error("sollte hier nicht aufgerufen werden"));
+      };
+
+      karte.shadowRoot.getElementById("sammel-pdf-btn").click();
+      karte.shadowRoot.getElementById("sammel-pdf-ja-toc-btn").click();
+      karte.shadowRoot.getElementById("sammel-pdf-abbrechen-btn").click();
+      await new Promise((r) => setTimeout(r, 20));
+
+      return {
+        modalSichtbar: karte.shadowRoot.getElementById("sammel-pdf-modal").style.display === "flex",
+        jsPdfAngefragt,
+      };
+    });
+
+    assert(!ergebnis.modalSichtbar, "Modal wird nach 'Abbrechen' wieder ausgeblendet");
+    assert(!ergebnis.jsPdfAngefragt, "beim Abbrechen wird gar nicht erst versucht, ein PDF zu erzeugen");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser) {
+  console.log("\nTest: Inhaltsverzeichnis-Seite des Sammel-PDFs enthält Kochbuch-Namen, Überschrift und Rezepttitel");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Zweites Rezept", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Drittes Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const texte = [];
+      let seitenHinzugefuegt = 0;
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text, x, y) { texte.push({ text, x, y }); }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() { seitenHinzugefuegt++; }
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      const ergebnisPdf = await karte._sammelPdfErstellen(liste, "Testsammlung", {
+        inhaltsverzeichnis: true,
+        titel: "Mein Kochbuch",
+      });
+      return {
+        dateiname: ergebnisPdf.dateiname,
+        seitenHinzugefuegt,
+        anzahlRezepte: liste.length,
+        kochbuchTitelGefunden: texte.some((t) => t.text === "Mein Kochbuch"),
+        ueberschriftGefunden: texte.some((t) => t.text === karte._t("abschnitt_titel_inhaltsverzeichnis")),
+        alleRezepttitelGefunden: liste.map(
+          (r, i) => texte.some((t) => t.text === `${i + 1}. ${r.title}`)
+        ),
+      };
+    });
+
+    assert(ergebnis.dateiname === "Testsammlung.pdf", "Dateiname bleibt wie übergeben");
+    assert(
+      ergebnis.seitenHinzugefuegt === ergebnis.anzahlRezepte,
+      `mit Inhaltsverzeichnis bekommt jedes Rezept eine eigene neue Seite nach der Verzeichnisseite (tatsächlich: ${ergebnis.seitenHinzugefuegt} addPage()-Aufrufe bei ${ergebnis.anzahlRezepte} Rezepten)`
+    );
+    assert(ergebnis.kochbuchTitelGefunden, "der individuelle Kochbuch-Name erscheint auf der Verzeichnisseite");
+    assert(ergebnis.ueberschriftGefunden, "die Überschrift 'Inhaltsverzeichnis' erscheint auf der Verzeichnisseite");
+    assert(ergebnis.alleRezepttitelGefunden.every(Boolean), "alle Rezepttitel erscheinen nummeriert im Verzeichnis");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Kochmodus: Vollbild-Schritt-für-Schritt-Ansicht in der Detailansicht.
 // ---------------------------------------------------------------------
 async function testKochmodusButtonNurBeiVorhandenenSchritten(browser) {
@@ -3376,6 +3563,10 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser);
     await testSammelPdfEnthaeltAlleRezepteAufEigenenSeiten(browser);
     await testSammelPdfOhneRezepteZeigtHinweisOhnePdfErstellung(browser);
+    await testSammelPdfModalFrageErscheintUndNeinExportiertOhneToc(browser);
+    await testSammelPdfModalJaZeigtNameEingabeUndErstelltMitToc(browser);
+    await testSammelPdfModalAbbrechenExportiertNichts(browser);
+    await testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser);
     await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
     await testKochmodusNavigationDurchSchritte(browser);
     await testKochmodusZutatenEinblenden(browser);

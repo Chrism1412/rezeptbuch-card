@@ -21,7 +21,10 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert alle aktuell gefilterten/gesuchten Rezepte (unabhängig von der
   Seiten-Paginierung) als ein einziges PDF, ein Rezept pro (mindestens
-  einer) Seite - z.B. praktisch für einen Sammelausdruck.
+  einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen
+  wird optional gefragt, ob zusätzlich eine Inhaltsverzeichnis-Seite mit
+  einem selbst gewählten Kochbuch-Namen als erste Seite eingefügt werden
+  soll.
 
 ## [1.0.4] - 2026-09-26
 
