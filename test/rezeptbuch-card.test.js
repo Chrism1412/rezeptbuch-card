@@ -1439,7 +1439,7 @@ async function testShowStatisticsDeaktiviert(browser) {
 // Vorrang und blendet den Zahnrad-Knopf komplett aus.
 // ---------------------------------------------------------------------
 async function testStatistikEinstellungenSchalter(browser) {
-  console.log("\nTest: Statistik-Einstellungen-Schalter (echter Ein-/Ausschalter, kein manuelles Editieren)");
+  console.log("\nTest: Statistik-Einstellungen-Schalter (echter Ein-/Ausschalter, steuert Abfrage UND Statistik zusammen)");
   const page = await neueTestUmgebung(browser);
   try {
     await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
@@ -1455,6 +1455,14 @@ async function testStatistikEinstellungenSchalter(browser) {
     });
     assert(anfangsZustand.zahnradSichtbar, "Ohne explizite show_statistics-Option ist der Zahnrad-Knopf sichtbar");
     assert(anfangsZustand.statistikBtnSichtbar, "Standardmäßig ist die Statistik eingeschaltet");
+
+    // Das Zahnrad steht immer ganz rechts, nach allen anderen Knöpfen im
+    // Kopfbereich (auch nach dem primären "+ Neues Rezept"-Knopf).
+    const zahnradIstLetzterKnopf = await page.evaluate(() => {
+      const alleKnoepfe = Array.from(window.__karte.shadowRoot.querySelectorAll(".kopf-aktionen button"));
+      return alleKnoepfe.length > 0 && alleKnoepfe[alleKnoepfe.length - 1].id === "statistik-einstellungen-btn";
+    });
+    assert(zahnradIstLetzterKnopf, "Das Zahnrad-Symbol steht immer als letzter (am weitesten rechts stehender) Knopf im Kopfbereich");
 
     // Zahnrad öffnet die Einstellungen, Schalter ist ein echter Toggle
     // (Checkbox als Slider gestylt) - kein Freitext-/Code-Feld.
@@ -1484,11 +1492,25 @@ async function testStatistikEinstellungenSchalter(browser) {
     const nachAusschalten = await page.evaluate(() => ({
       statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
       modalNochOffen: window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal").style.display === "flex",
-      askCookedAktiv: window.__karte._config.ask_cooked !== false,
+      abfrageAktiv: window.__karte._zubereitetAbfrageAktiv(),
     }));
     assert(!nachAusschalten.statistikBtnSichtbar, "Nach dem Ausschalten ist der Statistik-Knopf ausgeblendet");
     assert(nachAusschalten.modalNochOffen, "Das Modal bleibt nach dem Umschalten weiterhin offen");
-    assert(nachAusschalten.askCookedAktiv, "Der Schalter betrifft nur die Statistik-Anzeige, nicht die Zubereitet-Zählung");
+    assert(!nachAusschalten.abfrageAktiv, "Der Schalter schaltet zusammen mit der Statistik auch die 'Hast du zubereitet?'-Abfrage ab");
+
+    // Mit ausgeschaltetem Schalter springt der Zurück-Knopf in der
+    // Detailansicht direkt zur Liste, ohne die Abfrage zu zeigen.
+    await page.evaluate(() => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte[0]);
+      window.__karte.shadowRoot.getElementById("zurueck-btn").click();
+    });
+    await page.waitForFunction(() => window.__karte._ansicht === "liste", { timeout: 2000 });
+    const ohneAbfrageBeimZurueck = await page.evaluate(() => {
+      const modal = window.__karte.shadowRoot.getElementById("zubereitet-modal");
+      return { ansicht: window.__karte._ansicht, modalSichtbar: !!modal && modal.style.display === "flex" };
+    });
+    assert(ohneAbfrageBeimZurueck.ansicht === "liste", "Mit ausgeschaltetem Schalter springt der Zurück-Knopf direkt zur Liste");
+    assert(!ohneAbfrageBeimZurueck.modalSichtbar, "Mit ausgeschaltetem Schalter erscheint die 'Hast du zubereitet?'-Abfrage nicht");
 
     // Neu laden simulieren (z.B. Seiten-Reload) - die Einstellung ist
     // persistent im Marker-Item gespeichert, nicht nur im Speicher.
@@ -1507,6 +1529,8 @@ async function testStatistikEinstellungenSchalter(browser) {
       schalter.dispatchEvent(new Event("change"));
     });
     await page.waitForFunction(() => !!window.__karte.shadowRoot.getElementById("statistik-btn"), { timeout: 2000 });
+    const abfrageNachWiederEinschalten = await page.evaluate(() => window.__karte._zubereitetAbfrageAktiv());
+    assert(abfrageNachWiederEinschalten, "Nach dem Wiedereinschalten ist die 'Hast du zubereitet?'-Abfrage wieder aktiv");
 
     // Schließen-Knopf blendet das Modal wieder aus.
     await page.evaluate(() => {
@@ -1531,6 +1555,8 @@ async function testStatistikEinstellungenSchalter(browser) {
     });
     assert(!mitExpliziterOptionFalse.zahnradSichtbar, "Mit explizitem show_statistics: false ist das Zahnrad ausgeblendet");
     assert(!mitExpliziterOptionFalse.statistikBtnSichtbar, "Mit explizitem show_statistics: false bleibt die Statistik ausgeblendet");
+    const abfrageMitShowStatisticsFalse = await page.evaluate(() => window.__karte._zubereitetAbfrageAktiv());
+    assert(abfrageMitShowStatisticsFalse, "show_statistics: false betrifft (unverändert) nur den Statistik-Knopf, nicht die Abfrage - dafür bleibt weiterhin ask_cooked: false zuständig");
 
     const mitExpliziterOptionTrue = await page.evaluate(() => {
       window.__karte.setConfig({ entity: "todo.rezepte", show_statistics: true });

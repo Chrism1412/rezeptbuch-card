@@ -352,15 +352,22 @@ dagegen NUR den Knopf aus, die Abfrage und Zählung laufen im Hintergrund
 normal weiter - praktisch, wenn man die Auswertung später doch wieder
 einblenden möchte, ohne die bereits gesammelte Historie zu verlieren.
 
-**Statistik per Schalter direkt in der Karte ein-/ausschalten:** Wer
-`show_statistics` nicht in der YAML-Konfiguration setzt, bekommt neben
-dem Statistik-Knopf ein kleines ⚙️-Symbol. Ein Klick darauf öffnet ein
-Fenster mit einem echten Ein-/Ausschalter - kein Code-Editieren nötig.
-Die Einstellung wird genau wie Wochenplan, Kochbücher und Kategorien im
-selben To-do-Eintrag gespeichert und bleibt daher dauerhaft erhalten.
-Ist `show_statistics` dagegen explizit in der YAML gesetzt (`true` oder
-`false`), hat das immer Vorrang: Der ⚙️-Schalter wird dann gar nicht erst
-angezeigt, damit es nicht zwei widersprüchliche Schalter gibt.
+**Abfrage & Statistik per Schalter direkt in der Karte ein-/ausschalten:**
+Wer `show_statistics` nicht in der YAML-Konfiguration setzt, bekommt ganz
+rechts im Kopfbereich (nach allen anderen Knöpfen) ein kleines ⚙️-Symbol.
+Ein Klick darauf öffnet ein Fenster mit einem echten Ein-/Ausschalter -
+kein Code-Editieren nötig. Anders als die beiden YAML-Felder oben regelt
+dieser eine Schalter bewusst BEIDES zusammen: ausgeschaltet blendet er
+sowohl den Statistik-Knopf aus als auch die "Hast du zubereitet?"-Abfrage
+selbst - praktisch, wenn man beides einfach komplett abschalten will,
+ohne sich mit zwei getrennten Optionen zu befassen. Die Einstellung wird
+genau wie Wochenplan, Kochbücher und Kategorien im selben To-do-Eintrag
+gespeichert und bleibt daher dauerhaft erhalten. Ist `ask_cooked` oder
+`show_statistics` dagegen explizit in der YAML gesetzt, hat das weiterhin
+Vorrang: `ask_cooked: false` schaltet die Abfrage fest ab (unabhängig vom
+Schalter), und ist `show_statistics` explizit gesetzt (`true` oder
+`false`), wird der ⚙️-Schalter gar nicht erst angezeigt, damit es nicht
+zwei widersprüchliche Schalter gibt.
 
 **Rezeptübersicht seitenweise anzeigen:** Bei vielen Rezepten lässt sich
 die Übersicht über das Kartenfeld `items_per_page` in Seiten aufteilen

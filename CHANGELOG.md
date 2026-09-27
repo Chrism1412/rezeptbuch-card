@@ -61,16 +61,19 @@ komplett neue Kernfunktionen.
   die Kategorie-Zuordnung eines Rezepts verloren. Gespeichert werden die
   eigenen Kategorien analog zu Wochenplan/Kochbüchern als verstecktes
   Item in derselben To-do-Liste.
-- **Statistik per Schalter direkt in der Karte ein-/ausschalten**: ist
-  `show_statistics` nicht in der YAML-Konfiguration gesetzt, erscheint
-  neben dem Statistik-Knopf ein ⚙️-Symbol. Ein Klick darauf öffnet ein
-  Fenster mit einem echten Ein-/Ausschalter (kein manuelles Bearbeiten
-  der Konfiguration mehr nötig) - die Einstellung wird analog zu
+- **Abfrage & Statistik per Schalter direkt in der Karte ein-/ausschalten**:
+  ist `show_statistics` nicht in der YAML-Konfiguration gesetzt, erscheint
+  ganz rechts im Kopfbereich (nach allen anderen Knöpfen) ein ⚙️-Symbol.
+  Ein Klick darauf öffnet ein Fenster mit einem echten Ein-/Ausschalter
+  (kein manuelles Bearbeiten der Konfiguration mehr nötig), der bewusst
+  BEIDES zusammen regelt: die "Hast du zubereitet?"-Abfrage UND den
+  Statistik-Knopf. Die Einstellung wird analog zu
   Wochenplan/Kochbüchern/Kategorien als verstecktes Item in derselben
-  To-do-Liste gespeichert und bleibt damit dauerhaft erhalten. Ist
-  `show_statistics` dagegen weiterhin explizit in der YAML gesetzt
-  (`true` oder `false`), hat das unverändert Vorrang, und der
-  ⚙️-Schalter wird dann gar nicht erst angezeigt.
+  To-do-Liste gespeichert und bleibt damit dauerhaft erhalten. Sind
+  `ask_cooked` bzw. `show_statistics` dagegen weiterhin explizit in der
+  YAML gesetzt, hat das unverändert Vorrang (`ask_cooked: false` schaltet
+  die Abfrage fest ab; ein explizit gesetztes `show_statistics` blendet
+  den ⚙️-Schalter dann gar nicht erst ein).
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich

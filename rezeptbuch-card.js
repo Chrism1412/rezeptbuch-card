@@ -198,10 +198,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistik",
     statistik_titel: "Koch-Statistik",
     statistik_info_aria: "Erklärung zur Statistik anzeigen",
-    statistik_einstellungen_btn_title: "Statistik-Einstellungen",
-    statistik_einstellungen_titel: "Statistik-Einstellungen",
-    statistik_einstellungen_text: "Hier kannst du festlegen, ob die Koch-Statistik in dieser Karte angezeigt wird.",
-    statistik_einstellungen_schalter_label: "Statistik anzeigen",
+    statistik_einstellungen_btn_title: "Zubereitungs-Erfassung",
+    statistik_einstellungen_titel: "Zubereitungs-Erfassung",
+    statistik_einstellungen_text: "Hier kannst du festlegen, ob nach dem Verlassen eines Rezepts gefragt wird, ob du es zubereitet hast, und ob die daraus entstehende Statistik in dieser Karte angezeigt wird.",
+    statistik_einstellungen_schalter_label: "Abfrage & Statistik aktivieren",
     statistik_info_titel: "Wie wird diese Statistik berechnet?",
     statistik_info_text:
       "Diese Auswertung zählt jede Bestätigung der Frage „Hast du zubereitet?“ - unabhängig von Portionsgröße oder Häufigkeit am selben Tag. Ist diese Frage über die Kartenoption ask_cooked: false deaktiviert, wachsen die Zahlen nicht weiter, bereits erfasste Zubereitungen bleiben aber erhalten.",
@@ -510,10 +510,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistik",
     statistik_titel: "Koch-Statistik",
     statistik_info_aria: "Erklärig zur Statistik zeige",
-    statistik_einstellungen_btn_title: "Statistik-Iistellige",
-    statistik_einstellungen_titel: "Statistik-Iistellige",
-    statistik_einstellungen_text: "Da chasch feschtlege, ob d Koch-Statistik i dere Charte azeigt wird.",
-    statistik_einstellungen_schalter_label: "Statistik zeige",
+    statistik_einstellungen_btn_title: "Zubereitigs-Erfassig",
+    statistik_einstellungen_titel: "Zubereitigs-Erfassig",
+    statistik_einstellungen_text: "Da chasch feschtlege, ob nach em Verlaa vomene Rezept gfrogt wird, ob de's zubereitet hesch, und ob die Statistik i dere Charte azeigt wird.",
+    statistik_einstellungen_schalter_label: "Abfrag & Statistik ischalte",
     statistik_info_titel: "Wie wird die Statistik berechnet?",
     statistik_info_text:
       "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über d'Charte-Option ask_cooked: false deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
@@ -802,10 +802,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistics",
     statistik_titel: "Cooking statistics",
     statistik_info_aria: "Show explanation of the statistics",
-    statistik_einstellungen_btn_title: "Statistics settings",
-    statistik_einstellungen_titel: "Statistics settings",
-    statistik_einstellungen_text: "Here you can choose whether the cooking statistics are shown on this card.",
-    statistik_einstellungen_schalter_label: "Show statistics",
+    statistik_einstellungen_btn_title: "Cooking log settings",
+    statistik_einstellungen_titel: "Cooking log settings",
+    statistik_einstellungen_text: "Here you can choose whether you're asked, after leaving a recipe, if you cooked it, and whether the resulting statistics are shown on this card.",
+    statistik_einstellungen_schalter_label: "Enable question & statistics",
     statistik_info_titel: "How is this statistic calculated?",
     statistik_info_text:
       "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the ask_cooked: false card option, the numbers stop growing, but already recorded preparations are kept.",
@@ -1073,10 +1073,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Статистика",
     statistik_titel: "Статистика за готвене",
     statistik_info_aria: "Показване на обяснение за статистиката",
-    statistik_einstellungen_btn_title: "Настройки на статистиката",
-    statistik_einstellungen_titel: "Настройки на статистиката",
-    statistik_einstellungen_text: "Тук можете да зададете дали статистиката за готвене да се показва в тази карта.",
-    statistik_einstellungen_schalter_label: "Показване на статистика",
+    statistik_einstellungen_btn_title: "Настройки на записа за готвене",
+    statistik_einstellungen_titel: "Настройки на записа за готвене",
+    statistik_einstellungen_text: "Тук можете да зададете дали да бъдете питани, след като напуснете рецепта, дали сте я приготвили, и дали получената статистика да се показва в тази карта.",
+    statistik_einstellungen_schalter_label: "Активиране на въпрос и статистика",
     statistik_info_titel: "Как се изчислява тази статистика?",
     statistik_info_text:
       "Тази статистика брои всяко потвърждение на въпроса „Приготви ли го?“ - независимо от размера на порцията или колко пъти в един и същи ден. Ако този въпрос е деактивиран чрез опцията ask_cooked: false, числата спират да растат, но вече записаните приготвяния се запазват.",
@@ -1317,10 +1317,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika kuhanja",
     statistik_info_aria: "Prikaži objašnjenje statistike",
-    statistik_einstellungen_btn_title: "Postavke statistike",
-    statistik_einstellungen_titel: "Postavke statistike",
-    statistik_einstellungen_text: "Ovdje možeš odrediti hoće li se statistika kuhanja prikazivati na ovoj kartici.",
-    statistik_einstellungen_schalter_label: "Prikaži statistiku",
+    statistik_einstellungen_btn_title: "Postavke evidencije kuhanja",
+    statistik_einstellungen_titel: "Postavke evidencije kuhanja",
+    statistik_einstellungen_text: "Ovdje možeš odrediti hoće li te se, nakon napuštanja recepta, pitati jesi li ga pripremio/la, i hoće li se prikazivati statistika koja iz toga proizlazi.",
+    statistik_einstellungen_schalter_label: "Uključi pitanje i statistiku",
     statistik_info_titel: "Kako se izračunava ova statistika?",
     statistik_info_text:
       "Ova statistika broji svaku potvrdu pitanja „Jesi li pripremio/la?“ - bez obzira na veličinu porcije ili koliko puta istog dana. Ako je to pitanje onemogućeno putem opcije kartice ask_cooked: false, brojevi prestaju rasti, ali već zabilježene pripreme ostaju sačuvane.",
@@ -1561,10 +1561,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika vaření",
     statistik_info_aria: "Zobrazit vysvětlení statistiky",
-    statistik_einstellungen_btn_title: "Nastavení statistiky",
-    statistik_einstellungen_titel: "Nastavení statistiky",
-    statistik_einstellungen_text: "Zde můžeš nastavit, zda se statistika vaření zobrazuje na této kartě.",
-    statistik_einstellungen_schalter_label: "Zobrazit statistiku",
+    statistik_einstellungen_btn_title: "Nastavení zaznamenávání vaření",
+    statistik_einstellungen_titel: "Nastavení zaznamenávání vaření",
+    statistik_einstellungen_text: "Zde můžeš nastavit, zda se tě po opuštění receptu zeptáme, jestli jsi ho připravil(a), a zda se zobrazuje statistika, která z toho vzniká.",
+    statistik_einstellungen_schalter_label: "Zapnout otázku a statistiku",
     statistik_info_titel: "Jak se tato statistika počítá?",
     statistik_info_text:
       "Toto vyhodnocení počítá každé potvrzení otázky „Připravil(a) jste?“ - bez ohledu na velikost porce nebo počet za stejný den. Pokud je tato otázka vypnuta pomocí volby karty ask_cooked: false, čísla dál nerostou, ale již zaznamenané přípravy zůstávají zachovány.",
@@ -1805,10 +1805,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistik",
     statistik_titel: "Madlavningsstatistik",
     statistik_info_aria: "Vis forklaring af statistikken",
-    statistik_einstellungen_btn_title: "Statistikindstillinger",
-    statistik_einstellungen_titel: "Statistikindstillinger",
-    statistik_einstellungen_text: "Her kan du vælge, om madlavningsstatistikken vises på dette kort.",
-    statistik_einstellungen_schalter_label: "Vis statistik",
+    statistik_einstellungen_btn_title: "Indstillinger for tilberedningslog",
+    statistik_einstellungen_titel: "Indstillinger for tilberedningslog",
+    statistik_einstellungen_text: "Her kan du vælge, om du bliver spurgt, når du forlader en opskrift, om du tilberedte den, og om den resulterende statistik vises på dette kort.",
+    statistik_einstellungen_schalter_label: "Aktivér spørgsmål og statistik",
     statistik_info_titel: "Hvordan beregnes denne statistik?",
     statistik_info_text:
       "Denne opgørelse tæller hver bekræftelse af spørgsmålet „Tilberedte du den?“ - uanset portionsstørrelse eller hvor mange gange samme dag. Hvis spørgsmålet er deaktiveret via kortindstillingen ask_cooked: false, holder tallene op med at stige, men allerede registrerede tilberedninger bevares.",
@@ -2049,10 +2049,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistiek",
     statistik_titel: "Kookstatistiek",
     statistik_info_aria: "Uitleg over de statistiek tonen",
-    statistik_einstellungen_btn_title: "Statistiekinstellingen",
-    statistik_einstellungen_titel: "Statistiekinstellingen",
-    statistik_einstellungen_text: "Hier kun je instellen of de kookstatistiek op deze kaart wordt weergegeven.",
-    statistik_einstellungen_schalter_label: "Statistiek weergeven",
+    statistik_einstellungen_btn_title: "Instellingen bereidingsregistratie",
+    statistik_einstellungen_titel: "Instellingen bereidingsregistratie",
+    statistik_einstellungen_text: "Hier kun je instellen of je, na het verlaten van een recept, wordt gevraagd of je het hebt bereid, en of de bijbehorende statistiek op deze kaart wordt weergegeven.",
+    statistik_einstellungen_schalter_label: "Vraag & statistiek inschakelen",
     statistik_info_titel: "Hoe wordt deze statistiek berekend?",
     statistik_info_text:
       "Deze weergave telt elke bevestiging van de vraag „Heb je het bereid?“ - ongeacht portiegrootte of hoe vaak op dezelfde dag. Als deze vraag is uitgeschakeld via de kaartoptie ask_cooked: false, groeien de aantallen niet meer, maar al geregistreerde bereidingen blijven behouden.",
@@ -2293,10 +2293,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Toiduvalmistamise statistika",
     statistik_info_aria: "Näita statistika selgitust",
-    statistik_einstellungen_btn_title: "Statistika seaded",
-    statistik_einstellungen_titel: "Statistika seaded",
-    statistik_einstellungen_text: "Siin saad valida, kas toiduvalmistamise statistikat sellel kaardil kuvatakse.",
-    statistik_einstellungen_schalter_label: "Näita statistikat",
+    statistik_einstellungen_btn_title: "Valmistamise jälgimise seaded",
+    statistik_einstellungen_titel: "Valmistamise jälgimise seaded",
+    statistik_einstellungen_text: "Siin saad valida, kas retseptist väljumisel küsitakse, kas valmistasid selle, ja kas sellest tekkiv statistika kuvatakse sellel kaardil.",
+    statistik_einstellungen_schalter_label: "Luba küsimus ja statistika",
     statistik_info_titel: "Kuidas seda statistikat arvutatakse?",
     statistik_info_text:
       "See ülevaade loeb kokku iga kinnituse küsimusele „Kas valmistasid?“ - sõltumata portsjoni suurusest või sellest, mitu korda samal päeval. Kui see küsimus on kaardi valikuga ask_cooked: false välja lülitatud, arvud enam ei kasva, kuid juba salvestatud valmistamised säilivad.",
@@ -2537,10 +2537,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Tilastot",
     statistik_titel: "Ruoanlaittotilastot",
     statistik_info_aria: "Näytä selitys tilastoista",
-    statistik_einstellungen_btn_title: "Tilastoasetukset",
-    statistik_einstellungen_titel: "Tilastoasetukset",
-    statistik_einstellungen_text: "Tässä voit valita, näytetäänkö ruoanlaittotilastot tällä kortilla.",
-    statistik_einstellungen_schalter_label: "Näytä tilastot",
+    statistik_einstellungen_btn_title: "Valmistuksen kirjaamisen asetukset",
+    statistik_einstellungen_titel: "Valmistuksen kirjaamisen asetukset",
+    statistik_einstellungen_text: "Tässä voit valita, kysytäänkö reseptistä poistuttaessa, valmistitko sen, ja näytetäänkö siitä syntyvä tilasto tällä kortilla.",
+    statistik_einstellungen_schalter_label: "Ota kysymys ja tilastot käyttöön",
     statistik_info_titel: "Miten tämä tilasto lasketaan?",
     statistik_info_text:
       "Tämä yhteenveto laskee jokaisen vahvistuksen kysymykseen „Valmistitko sen?“ - annoskoosta tai saman päivän toistokerroista riippumatta. Jos tämä kysymys on poistettu käytöstä kortin asetuksella ask_cooked: false, luvut eivät enää kasva, mutta jo tallennetut valmistuskerrat säilyvät.",
@@ -2782,10 +2782,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistiques",
     statistik_titel: "Statistiques de cuisine",
     statistik_info_aria: "Afficher l'explication des statistiques",
-    statistik_einstellungen_btn_title: "Paramètres des statistiques",
-    statistik_einstellungen_titel: "Paramètres des statistiques",
-    statistik_einstellungen_text: "Ici, tu peux choisir si les statistiques de cuisine sont affichées sur cette carte.",
-    statistik_einstellungen_schalter_label: "Afficher les statistiques",
+    statistik_einstellungen_btn_title: "Paramètres du suivi de préparation",
+    statistik_einstellungen_titel: "Paramètres du suivi de préparation",
+    statistik_einstellungen_text: "Ici, tu peux choisir si on te demande, en quittant une recette, si tu l'as préparée, et si les statistiques qui en résultent sont affichées sur cette carte.",
+    statistik_einstellungen_schalter_label: "Activer la question et les statistiques",
     statistik_info_titel: "Comment cette statistique est-elle calculée ?",
     statistik_info_text:
       "Ce bilan comptabilise chaque confirmation de la question « As-tu préparé ? » - quelle que soit la taille des portions ou le nombre de fois le même jour. Si cette question est désactivée via l'option de carte ask_cooked: false, les chiffres cessent d'augmenter, mais les préparations déjà enregistrées sont conservées.",
@@ -3027,10 +3027,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Στατιστικά",
     statistik_titel: "Στατιστικά μαγειρικής",
     statistik_info_aria: "Εμφάνιση επεξήγησης των στατιστικών",
-    statistik_einstellungen_btn_title: "Ρυθμίσεις στατιστικών",
-    statistik_einstellungen_titel: "Ρυθμίσεις στατιστικών",
-    statistik_einstellungen_text: "Εδώ μπορείς να ορίσεις αν θα εμφανίζονται τα στατιστικά μαγειρικής σε αυτήν την κάρτα.",
-    statistik_einstellungen_schalter_label: "Εμφάνιση στατιστικών",
+    statistik_einstellungen_btn_title: "Ρυθμίσεις καταγραφής μαγειρέματος",
+    statistik_einstellungen_titel: "Ρυθμίσεις καταγραφής μαγειρέματος",
+    statistik_einstellungen_text: "Εδώ μπορείς να ορίσεις αν θα σε ρωτά, όταν βγαίνεις από μια συνταγή, αν τη μαγείρεψες, και αν θα εμφανίζονται τα στατιστικά που προκύπτουν σε αυτήν την κάρτα.",
+    statistik_einstellungen_schalter_label: "Ενεργοποίηση ερώτησης & στατιστικών",
     statistik_info_titel: "Πώς υπολογίζεται αυτή η στατιστική;",
     statistik_info_text:
       "Αυτή η αξιολόγηση μετρά κάθε επιβεβαίωση της ερώτησης «Το παρασκεύασες;» - ανεξάρτητα από το μέγεθος της μερίδας ή το πόσες φορές την ίδια ημέρα. Αν αυτή η ερώτηση είναι απενεργοποιημένη μέσω της επιλογής κάρτας ask_cooked: false, οι αριθμοί σταματούν να αυξάνονται, αλλά οι ήδη καταγεγραμμένες παρασκευές διατηρούνται.",
@@ -3272,10 +3272,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statisztika",
     statistik_titel: "Főzési statisztika",
     statistik_info_aria: "A statisztika magyarázatának megjelenítése",
-    statistik_einstellungen_btn_title: "Statisztika beállításai",
-    statistik_einstellungen_titel: "Statisztika beállításai",
-    statistik_einstellungen_text: "Itt állíthatod be, hogy a főzési statisztika megjelenjen-e ezen a kártyán.",
-    statistik_einstellungen_schalter_label: "Statisztika megjelenítése",
+    statistik_einstellungen_btn_title: "Elkészítés-naplózás beállításai",
+    statistik_einstellungen_titel: "Elkészítés-naplózás beállításai",
+    statistik_einstellungen_text: "Itt állíthatod be, hogy egy recept elhagyásakor megkérdezzük-e, elkészítetted-e, és hogy megjelenjen-e az ebből született statisztika ezen a kártyán.",
+    statistik_einstellungen_schalter_label: "Kérdés és statisztika bekapcsolása",
     statistik_info_titel: "Hogyan számítjuk ki ezt a statisztikát?",
     statistik_info_text:
       "Ez a kiértékelés minden megerősítést számol az „Elkészítetted?“ kérdésre - függetlenül az adag méretétől vagy attól, hányszor ugyanazon a napon. Ha ez a kérdés ki van kapcsolva az ask_cooked: false kártyabeállítással, a számok nem nőnek tovább, de a már rögzített elkészítések megmaradnak.",
@@ -3517,10 +3517,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Staitisticí",
     statistik_titel: "Staitisticí cócaireachta",
     statistik_info_aria: "Taispeáin míniú na staitisticí",
-    statistik_einstellungen_btn_title: "Socruithe staitisticí",
-    statistik_einstellungen_titel: "Socruithe staitisticí",
-    statistik_einstellungen_text: "Is féidir leat anseo a shocrú an dtaispeánfar staitisticí cócaireachta ar an gcárta seo.",
-    statistik_einstellungen_schalter_label: "Taispeáin staitisticí",
+    statistik_einstellungen_btn_title: "Socruithe logála cócaireachta",
+    statistik_einstellungen_titel: "Socruithe logála cócaireachta",
+    statistik_einstellungen_text: "Is féidir leat anseo a shocrú an bhfiafrófar díot, tar éis duit oideas a fhágáil, an ndearna tú é, agus an dtaispeánfar an staitisticí a eascraíonn as sin ar an gcárta seo.",
+    statistik_einstellungen_schalter_label: "Cumasaigh an cheist agus staitisticí",
     statistik_info_titel: "Conas a ríomhtar an staitistic seo?",
     statistik_info_text:
       "Áirítear sa mheasúnú seo gach deimhniú ar an gceist „Ar ullmhaigh tú é?“ - beag beann ar mhéid an fhreastail nó cé mhéad uair an lá céanna. Má tá an cheist seo díchumasaithe tríd an rogha cárta ask_cooked: false, ní fhásfaidh na huimhreacha a thuilleadh, ach coinneofar na hullmhúcháin atá taifeadta cheana.",
@@ -3762,10 +3762,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistiche",
     statistik_titel: "Statistiche di cucina",
     statistik_info_aria: "Mostra la spiegazione delle statistiche",
-    statistik_einstellungen_btn_title: "Impostazioni statistiche",
-    statistik_einstellungen_titel: "Impostazioni statistiche",
-    statistik_einstellungen_text: "Qui puoi stabilire se le statistiche di cucina vengono mostrate su questa scheda.",
-    statistik_einstellungen_schalter_label: "Mostra statistiche",
+    statistik_einstellungen_btn_title: "Impostazioni registro preparazioni",
+    statistik_einstellungen_titel: "Impostazioni registro preparazioni",
+    statistik_einstellungen_text: "Qui puoi stabilire se, uscendo da una ricetta, ti viene chiesto se l'hai preparata, e se le statistiche che ne derivano vengono mostrate su questa scheda.",
+    statistik_einstellungen_schalter_label: "Attiva domanda e statistiche",
     statistik_info_titel: "Come viene calcolata questa statistica?",
     statistik_info_text:
       "Questo riepilogo conta ogni conferma alla domanda «Hai preparato?» - indipendentemente dalla dimensione delle porzioni o da quante volte nello stesso giorno. Se questa domanda è disattivata tramite l'opzione della scheda ask_cooked: false, i numeri smettono di crescere, ma le preparazioni già registrate vengono mantenute.",
@@ -4006,10 +4006,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Gatavošanas statistika",
     statistik_info_aria: "Rādīt statistikas skaidrojumu",
-    statistik_einstellungen_btn_title: "Statistikas iestatījumi",
-    statistik_einstellungen_titel: "Statistikas iestatījumi",
-    statistik_einstellungen_text: "Šeit vari iestatīt, vai šajā kartītē tiek rādīta gatavošanas statistika.",
-    statistik_einstellungen_schalter_label: "Rādīt statistiku",
+    statistik_einstellungen_btn_title: "Gatavošanas žurnāla iestatījumi",
+    statistik_einstellungen_titel: "Gatavošanas žurnāla iestatījumi",
+    statistik_einstellungen_text: "Šeit vari iestatīt, vai, pametot recepti, tiek jautāts, vai to pagatavoji, un vai no tā izrietošā statistika tiek rādīta šajā kartītē.",
+    statistik_einstellungen_schalter_label: "Iespējot jautājumu un statistiku",
     statistik_info_titel: "Kā tiek aprēķināta šī statistika?",
     statistik_info_text:
       "Šis apkopojums saskaita katru apstiprinājumu jautājumam „Vai pagatavoji?“ - neatkarīgi no porcijas lieluma vai reižu skaita tajā pašā dienā. Ja šis jautājums ir atspējots ar kartītes opciju ask_cooked: false, skaitļi vairs nepieaug, bet jau reģistrētās gatavošanas reizes saglabājas.",
@@ -4250,10 +4250,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Gaminimo statistika",
     statistik_info_aria: "Rodyti statistikos paaiškinimą",
-    statistik_einstellungen_btn_title: "Statistikos nustatymai",
-    statistik_einstellungen_titel: "Statistikos nustatymai",
-    statistik_einstellungen_text: "Čia gali nustatyti, ar šioje kortelėje rodoma gaminimo statistika.",
-    statistik_einstellungen_schalter_label: "Rodyti statistiką",
+    statistik_einstellungen_btn_title: "Gaminimo žurnalo nustatymai",
+    statistik_einstellungen_titel: "Gaminimo žurnalo nustatymai",
+    statistik_einstellungen_text: "Čia gali nustatyti, ar išeinant iš recepto bus klausiama, ar jį paruošei, ir ar bus rodoma iš to atsirandanti statistika šioje kortelėje.",
+    statistik_einstellungen_schalter_label: "Įjungti klausimą ir statistiką",
     statistik_info_titel: "Kaip skaičiuojama ši statistika?",
     statistik_info_text:
       "Šioje apžvalgoje skaičiuojamas kiekvienas patvirtinimas į klausimą „Ar paruošei?“ - nepriklausomai nuo porcijos dydžio ar kartų skaičiaus tą pačią dieną. Jei šis klausimas išjungtas naudojant kortelės parinktį ask_cooked: false, skaičiai nebeauga, tačiau jau užfiksuoti gaminimai išlieka.",
@@ -4495,10 +4495,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika tat-tisjir",
     statistik_info_aria: "Uri spjegazzjoni tal-istatistika",
-    statistik_einstellungen_btn_title: "Settings tal-istatistika",
-    statistik_einstellungen_titel: "Settings tal-istatistika",
-    statistik_einstellungen_text: "Hawnhekk tista' tiddeċiedi jekk l-istatistika tat-tisjir tintweriex f'din il-karta.",
-    statistik_einstellungen_schalter_label: "Uri l-istatistika",
+    statistik_einstellungen_btn_title: "Settings tar-reġistrazzjoni tat-tisjir",
+    statistik_einstellungen_titel: "Settings tar-reġistrazzjoni tat-tisjir",
+    statistik_einstellungen_text: "Hawnhekk tista' tiddeċiedi jekk, wara li toħroġ minn riċetta, tintalabx tgħid jekk ħejjejtiex, u jekk l-istatistika li tirriżulta tintweriex f'din il-karta.",
+    statistik_einstellungen_schalter_label: "Ixgħel il-mistoqsija u l-istatistika",
     statistik_info_titel: "Kif tiġi kkalkulata din l-istatistika?",
     statistik_info_text:
       "Din il-valutazzjoni tgħodd kull konferma tal-mistoqsija „Ħejjejtu?“ - irrispettivament mid-daqs tal-porzjon jew kemm-il darba fl-istess jum. Jekk din il-mistoqsija tkun diżattivata permezz tal-għażla tal-karta ask_cooked: false, in-numri jieqfu jikbru, iżda t-tħejjijiet diġà rreġistrati jibqgħu.",
@@ -4739,10 +4739,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statystyki",
     statistik_titel: "Statystyki gotowania",
     statistik_info_aria: "Pokaż wyjaśnienie statystyk",
-    statistik_einstellungen_btn_title: "Ustawienia statystyk",
-    statistik_einstellungen_titel: "Ustawienia statystyk",
-    statistik_einstellungen_text: "Tutaj możesz ustawić, czy statystyki gotowania są wyświetlane na tej karcie.",
-    statistik_einstellungen_schalter_label: "Pokaż statystyki",
+    statistik_einstellungen_btn_title: "Ustawienia rejestrowania gotowania",
+    statistik_einstellungen_titel: "Ustawienia rejestrowania gotowania",
+    statistik_einstellungen_text: "Tutaj możesz ustawić, czy po wyjściu z przepisu masz być pytany, czy go przygotowałeś/aś, i czy wynikające z tego statystyki są wyświetlane na tej karcie.",
+    statistik_einstellungen_schalter_label: "Włącz pytanie i statystyki",
     statistik_info_titel: "Jak obliczana jest ta statystyka?",
     statistik_info_text:
       "To zestawienie liczy każde potwierdzenie pytania „Czy przygotowałeś/aś?“ - niezależnie od wielkości porcji czy liczby powtórzeń tego samego dnia. Jeśli to pytanie jest wyłączone opcją karty ask_cooked: false, liczby przestają rosnąć, ale już zapisane przygotowania pozostają zachowane.",
@@ -4984,10 +4984,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Estatísticas",
     statistik_titel: "Estatísticas de cozinha",
     statistik_info_aria: "Mostrar explicação das estatísticas",
-    statistik_einstellungen_btn_title: "Configurações de estatísticas",
-    statistik_einstellungen_titel: "Configurações de estatísticas",
-    statistik_einstellungen_text: "Aqui podes definir se as estatísticas de cozinha são exibidas neste cartão.",
-    statistik_einstellungen_schalter_label: "Mostrar estatísticas",
+    statistik_einstellungen_btn_title: "Configurações do registo de preparação",
+    statistik_einstellungen_titel: "Configurações do registo de preparação",
+    statistik_einstellungen_text: "Aqui podes definir se, ao saíres de uma receita, te é perguntado se a preparaste, e se as estatísticas resultantes são exibidas neste cartão.",
+    statistik_einstellungen_schalter_label: "Ativar pergunta e estatísticas",
     statistik_info_titel: "Como é calculada esta estatística?",
     statistik_info_text:
       "Esta avaliação conta cada confirmação da pergunta «Preparaste?» - independentemente do tamanho da porção ou de quantas vezes no mesmo dia. Se esta pergunta estiver desativada através da opção do cartão ask_cooked: false, os números deixam de aumentar, mas as preparações já registadas são mantidas.",
@@ -5228,10 +5228,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistici",
     statistik_titel: "Statistici de gătit",
     statistik_info_aria: "Afișează explicația statisticii",
-    statistik_einstellungen_btn_title: "Setări statistici",
-    statistik_einstellungen_titel: "Setări statistici",
-    statistik_einstellungen_text: "Aici poți stabili dacă statisticile de gătit sunt afișate pe acest card.",
-    statistik_einstellungen_schalter_label: "Afișează statisticile",
+    statistik_einstellungen_btn_title: "Setări jurnal de gătit",
+    statistik_einstellungen_titel: "Setări jurnal de gătit",
+    statistik_einstellungen_text: "Aici poți stabili dacă, la părăsirea unei rețete, ești întrebat dacă ai preparat-o, și dacă statisticile rezultate sunt afișate pe acest card.",
+    statistik_einstellungen_schalter_label: "Activează întrebarea și statisticile",
     statistik_info_titel: "Cum se calculează această statistică?",
     statistik_info_text:
       "Această evaluare numără fiecare confirmare a întrebării „Ai preparat?“ - indiferent de dimensiunea porției sau de câte ori în aceeași zi. Dacă această întrebare este dezactivată prin opțiunea de card ask_cooked: false, numerele nu mai cresc, dar preparările deja înregistrate rămân păstrate.",
@@ -5472,10 +5472,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Štatistika",
     statistik_titel: "Štatistika varenia",
     statistik_info_aria: "Zobraziť vysvetlenie štatistiky",
-    statistik_einstellungen_btn_title: "Nastavenia štatistiky",
-    statistik_einstellungen_titel: "Nastavenia štatistiky",
-    statistik_einstellungen_text: "Tu môžeš nastaviť, či sa štatistika varenia zobrazuje na tejto karte.",
-    statistik_einstellungen_schalter_label: "Zobraziť štatistiku",
+    statistik_einstellungen_btn_title: "Nastavenia zaznamenávania varenia",
+    statistik_einstellungen_titel: "Nastavenia zaznamenávania varenia",
+    statistik_einstellungen_text: "Tu môžeš nastaviť, či sa ťa po opustení receptu spýtame, či si ho pripravil(a), a či sa zobrazuje z toho vzniknutá štatistika na tejto karte.",
+    statistik_einstellungen_schalter_label: "Zapnúť otázku a štatistiku",
     statistik_info_titel: "Ako sa táto štatistika počíta?",
     statistik_info_text:
       "Toto vyhodnotenie počíta každé potvrdenie otázky „Pripravil(a) si?“ - bez ohľadu na veľkosť porcie alebo počet za rovnaký deň. Ak je táto otázka vypnutá pomocou voľby karty ask_cooked: false, čísla ďalej nerastú, ale už zaznamenané prípravy zostávajú zachované.",
@@ -5716,10 +5716,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika kuhanja",
     statistik_info_aria: "Prikaži razlago statistike",
-    statistik_einstellungen_btn_title: "Nastavitve statistike",
-    statistik_einstellungen_titel: "Nastavitve statistike",
-    statistik_einstellungen_text: "Tukaj lahko določiš, ali se statistika kuhanja prikazuje na tej kartici.",
-    statistik_einstellungen_schalter_label: "Prikaži statistiko",
+    statistik_einstellungen_btn_title: "Nastavitve beleženja kuhanja",
+    statistik_einstellungen_titel: "Nastavitve beleženja kuhanja",
+    statistik_einstellungen_text: "Tukaj lahko določiš, ali te bo ob zapustitvi recepta vprašalo, ali si ga pripravil/a, in ali se prikazuje statistika, ki iz tega izhaja, na tej kartici.",
+    statistik_einstellungen_schalter_label: "Vklopi vprašanje in statistiko",
     statistik_info_titel: "Kako se izračuna ta statistika?",
     statistik_info_text:
       "Ta pregled šteje vsako potrditev vprašanja „Si pripravil/a?“ - ne glede na velikost porcije ali kolikokrat isti dan. Če je to vprašanje onemogočeno z možnostjo kartice ask_cooked: false, se števila ne povečujejo več, že zabeležene priprave pa ostanejo ohranjene.",
@@ -5960,10 +5960,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Estadísticas",
     statistik_titel: "Estadísticas de cocina",
     statistik_info_aria: "Mostrar explicación de las estadísticas",
-    statistik_einstellungen_btn_title: "Ajustes de estadísticas",
-    statistik_einstellungen_titel: "Ajustes de estadísticas",
-    statistik_einstellungen_text: "Aquí puedes elegir si las estadísticas de cocina se muestran en esta tarjeta.",
-    statistik_einstellungen_schalter_label: "Mostrar estadísticas",
+    statistik_einstellungen_btn_title: "Ajustes del registro de cocina",
+    statistik_einstellungen_titel: "Ajustes del registro de cocina",
+    statistik_einstellungen_text: "Aquí puedes elegir si, al salir de una receta, se te pregunta si la preparaste, y si las estadísticas resultantes se muestran en esta tarjeta.",
+    statistik_einstellungen_schalter_label: "Activar pregunta y estadísticas",
     statistik_info_titel: "¿Cómo se calcula esta estadística?",
     statistik_info_text:
       "Este resumen cuenta cada confirmación de la pregunta «¿Lo preparaste?» - independientemente del tamaño de la porción o de cuántas veces el mismo día. Si esta pregunta está desactivada mediante la opción de tarjeta ask_cooked: false, los números dejan de aumentar, pero las preparaciones ya registradas se conservan.",
@@ -6204,10 +6204,10 @@ const UEBERSETZUNGEN = {
     statistik_btn: "📊 Statistik",
     statistik_titel: "Matlagningsstatistik",
     statistik_info_aria: "Visa förklaring av statistiken",
-    statistik_einstellungen_btn_title: "Statistikinställningar",
-    statistik_einstellungen_titel: "Statistikinställningar",
-    statistik_einstellungen_text: "Här kan du välja om matlagningsstatistiken visas på det här kortet.",
-    statistik_einstellungen_schalter_label: "Visa statistik",
+    statistik_einstellungen_btn_title: "Inställningar för tillagningsloggen",
+    statistik_einstellungen_titel: "Inställningar för tillagningsloggen",
+    statistik_einstellungen_text: "Här kan du välja om du blir tillfrågad, när du lämnar ett recept, om du lagade det, och om den resulterande statistiken visas på det här kortet.",
+    statistik_einstellungen_schalter_label: "Aktivera fråga och statistik",
     statistik_info_titel: "Hur beräknas denna statistik?",
     statistik_info_text:
       "Den här sammanställningen räknar varje bekräftelse av frågan „Lagade du den?“ - oavsett portionsstorlek eller hur många gånger samma dag. Om frågan är inaktiverad via kortalternativet ask_cooked: false slutar siffrorna att öka, men redan registrerade tillagningar behålls.",
@@ -6988,7 +6988,7 @@ class RezeptbuchCard extends HTMLElement {
     // nur der Statistik-Ein-/Ausschalter, showStatistics: true ist der
     // Standard (Statistik sichtbar), solange nichts anderes gespeichert ist.
     this._einstellungenItem = null;
-    this._einstellungen = { showStatistics: true };
+    this._einstellungen = { erfassungAktiv: true };
     this._einstellungenModalSichtbar = false;
     // Paginierung der Rezeptübersicht (feature: viele Rezepte auf mehrere
     // Seiten aufteilen statt alle auf einmal zu zeigen) - 1-basiert, wird
@@ -7119,12 +7119,13 @@ class RezeptbuchCard extends HTMLElement {
       }
 
       // Ab hier: ein ECHTER Zurück-Tastendruck/-Wisch des Geräts.
-      if (this._ansicht === "detail" && this._config.ask_cooked !== false) {
+      if (this._ansicht === "detail" && this._zubereitetAbfrageAktiv()) {
         // Bei einer offenen Rezept-Detailansicht zuerst fragen, ob
         // zubereitet wurde - dazu den soeben verbrauchten History-Eintrag
         // wiederherstellen, statt direkt zur Liste zu springen. Per
-        // Kartenoption "ask_cooked: false" lässt sich diese Abfrage
-        // komplett abschalten (siehe _zurueck-btn-Handler und README).
+        // Kartenoption "ask_cooked: false" oder über den Schalter in den
+        // Statistik-Einstellungen lässt sich diese Abfrage komplett
+        // abschalten (siehe _zurueck-btn-Handler und README).
         history.pushState({ rezeptbuchOffen: true }, "", location.href);
         this._historyGeschoben = true;
         this._zubereitetModalAnzeigen();
@@ -7522,14 +7523,21 @@ class RezeptbuchCard extends HTMLElement {
 
   // Gespeicherte Nutzer-Einstellungen aus dem versteckten Marker-Item
   // parsen (siehe EINSTELLUNGEN_MARKER) - analog zu _eigeneKategorienAusItem.
-  // showStatistics fehlt/ist kein Boolean -> Standard "sichtbar" (true).
+  // erfassungAktiv fehlt/ist kein Boolean -> Standard "aktiv" (true). Das
+  // eine Feld steuert bewusst BEIDES zusammen: die "Hast du zubereitet?"-
+  // Abfrage UND die daraus entstehende Statistik - ein echter Schalter
+  // soll nicht zwei halb-unabhängige Dinge gleichzeitig regeln müssen.
+  // (Fallback auf den alten Feldnamen "showStatistics" schadet nicht,
+  // falls irgendwo noch ein Item aus einem früheren Zwischenstand liegt.)
   _einstellungenAusItem(item) {
-    if (!item || !item.description) return { showStatistics: true };
+    if (!item || !item.description) return { erfassungAktiv: true };
     try {
       const geparst = JSON.parse(item.description);
-      return { showStatistics: geparst.showStatistics !== false };
+      if (typeof geparst.erfassungAktiv === "boolean") return { erfassungAktiv: geparst.erfassungAktiv };
+      if (typeof geparst.showStatistics === "boolean") return { erfassungAktiv: geparst.showStatistics };
+      return { erfassungAktiv: true };
     } catch {
-      return { showStatistics: true };
+      return { erfassungAktiv: true };
     }
   }
 
@@ -7557,12 +7565,28 @@ class RezeptbuchCard extends HTMLElement {
   // gespeicherten Einstellung - der Schalter in der Oberfläche (siehe
   // _einstellungenModal*) wird dann auch gar nicht erst angeboten (siehe
   // _renderListe). Ist `show_statistics` NICHT gesetzt, entscheidet die per
-  // Schalter gespeicherte Einstellung (Standard: sichtbar).
+  // Schalter gespeicherte Einstellung (Standard: sichtbar) - derselbe
+  // Schalter, der auch die "Hast du zubereitet?"-Abfrage steuert (siehe
+  // _zubereitetAbfrageAktiv).
   _statistikAktiv() {
     if (this._config.ask_cooked === false) return false;
     if (this._config.show_statistics === false) return false;
     if (this._config.show_statistics === true) return true;
-    return this._einstellungen.showStatistics !== false;
+    return this._einstellungen.erfassungAktiv !== false;
+  }
+
+  // Ob die "Hast du zubereitet?"-Abfrage beim Verlassen eines Rezepts
+  // erscheint: `ask_cooked: false` in der YAML deaktiviert sie (wie
+  // bisher) fest und hat Vorrang. Ist `ask_cooked` NICHT explizit
+  // gesetzt, entscheidet derselbe per Schalter gespeicherte Wert wie bei
+  // der Statistik (_statistikAktiv) - ein einziger echter Ein-/
+  // Ausschalter in der Oberfläche für beides zusammen, statt zwei
+  // halb-unabhängiger Einstellungen. `show_statistics` wirkt bewusst
+  // NICHT auf die Abfrage selbst - wer nur den Statistik-Knopf per YAML
+  // ausblenden will, soll die Zubereitungen weiterhin mitzählen können.
+  _zubereitetAbfrageAktiv() {
+    if (this._config.ask_cooked === false) return false;
+    return this._einstellungen.erfassungAktiv !== false;
   }
 
   // Zentrale Stelle für Schema-Migrationen: bringt ein aus dem JSON
@@ -9026,8 +9050,8 @@ class RezeptbuchCard extends HTMLElement {
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
             ${this._rezepte.length && this._statistikAktiv() ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
-            ${this._rezepte.length && this._config.ask_cooked !== false && this._config.show_statistics === undefined ? `<button class="info-btn" id="statistik-einstellungen-btn" title="${this._t("statistik_einstellungen_btn_title")}" aria-label="${this._t("statistik_einstellungen_btn_title")}">⚙️</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
+            ${this._rezepte.length && this._config.ask_cooked !== false && this._config.show_statistics === undefined ? `<button class="info-btn" id="statistik-einstellungen-btn" title="${this._t("statistik_einstellungen_btn_title")}" aria-label="${this._t("statistik_einstellungen_btn_title")}">⚙️</button>` : ""}
           </div>
         </div>
         ${this._rezepte.length ? `
@@ -9090,7 +9114,7 @@ class RezeptbuchCard extends HTMLElement {
             <div class="schalter-zeile">
               <span class="schalter-label">${this._t("statistik_einstellungen_schalter_label")}</span>
               <label class="schalter">
-                <input type="checkbox" id="statistik-einstellungen-schalter" ${this._einstellungen.showStatistics !== false ? "checked" : ""}>
+                <input type="checkbox" id="statistik-einstellungen-schalter" ${this._einstellungen.erfassungAktiv !== false ? "checked" : ""}>
                 <span class="schalter-slider"></span>
               </label>
             </div>
@@ -9497,7 +9521,7 @@ class RezeptbuchCard extends HTMLElement {
     if (statistikEinstellungenSchalter) {
       statistikEinstellungenSchalter.addEventListener("change", async (ev) => {
         const aktiv = ev.target.checked;
-        await this._einstellungenSpeichern({ ...this._einstellungen, showStatistics: aktiv });
+        await this._einstellungenSpeichern({ ...this._einstellungen, erfassungAktiv: aktiv });
         this._render();
       });
     }
@@ -10745,10 +10769,10 @@ class RezeptbuchCard extends HTMLElement {
     `;
 
     this.shadowRoot.getElementById("zurueck-btn").addEventListener("click", () => {
-      if (this._config.ask_cooked === false) {
-        this._navigationZurueck();
-      } else {
+      if (this._zubereitetAbfrageAktiv()) {
         this._zubereitetModalAnzeigen();
+      } else {
+        this._navigationZurueck();
       }
     });
     this.shadowRoot.getElementById("drucken-btn").addEventListener("click", () => this._rezeptDrucken(r));
