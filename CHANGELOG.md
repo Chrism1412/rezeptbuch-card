@@ -13,27 +13,6 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Vor-/Zurück-Navigation und einer optional einblendbaren Zutatenliste.
   Praktisch am Tablet in der Küche, ohne beim Kochen lange scrollen zu
   müssen.
-- **Vorlesen per Sprachausgabe**: im Kochmodus lässt sich das automatische
-  Vorlesen des jeweils aktuellen Schritts über die im Browser eingebaute
-  Sprachausgabe (Web Speech API) ein- und ausschalten - kein Home-
-  Assistant-TTS-Setup oder Lautsprecher-Entity nötig, funktioniert direkt
-  auf dem Gerät, auf dem die Karte gerade offen ist. Sucht dabei aktiv nach
-  einer installierten Stimme mit vollem Sprachcode (z.B. "de-DE" statt nur
-  "de") und wartet nötigenfalls kurz auf eine asynchron nachladende
-  Stimmenliste - beides Fälle, in denen die Ausgabe in eingebetteten
-  WebViews (u.a. der Home-Assistant-App) sonst lautlos bleiben kann.
-  Bleibt die Web-Sprachausgabe in der Companion-App trotzdem lautlos
-  (bekannte Einschränkung mancher WebViews), lässt sich über das neue
-  Kartenfeld `tts_notify_service` stattdessen die TTS-Benachrichtigung der
-  Companion App nutzen - liest über die native System-Sprachausgabe des
-  Geräts vor, komplett an der WebView vorbei. Für Haushalte mit mehreren
-  Home-Assistant-Nutzern lässt sich zusätzlich eine Zuordnung
-  Anzeigename → Dienst hinterlegen, damit automatisch das richtige
-  Smartphone der/des gerade angemeldeten Person genutzt wird, statt ein
-  einzelnes Gerät für alle Betrachter der Karte fest einzutragen - entweder
-  bequem über den neuen Knopf **"Optionen"** in der Kopfzeile (Zuordnung
-  wird direkt in der To-do-Liste gespeichert, kein YAML-Editieren nötig)
-  oder über die YAML-Kartenoption `tts_notify_services`. Siehe README.
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen

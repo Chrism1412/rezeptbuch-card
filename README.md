@@ -30,7 +30,6 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
 - PDF-Export eines Rezepts, auch ganz ohne Internetzugang
 - **Sammel-PDF**: exportiert mehrere Rezepte auf einmal als ein gemeinsames PDF (Knopf "Sammel-PDF" in der Übersicht) - wahlweise alle aktuell gefilterten/gesuchten Rezepte oder nur einzeln angehakte Rezepte aus einer Checkliste, optional mit einer selbst benannten Inhaltsverzeichnis-Seite als erster Seite; die Reihenfolge im PDF richtet sich immer nach Kategorie
 - **Kochmodus**: Vollbild-Schritt-für-Schritt-Ansicht mit großen, gut lesbaren Schritten, Vor-/Zurück-Navigation und einblendbarer Zutatenliste - praktisch am Tablet in der Küche
-- **Vorlesen per Sprachausgabe**: im Kochmodus lässt sich jeder Schritt automatisch über die im Browser eingebaute Sprachausgabe vorlesen (kein Home-Assistant-TTS-Setup nötig)
 - **Automatische Rezepterkennung** aus eingefügtem Text (reine
   Offline-Mustererkennung, keine KI-API, kein API-Key nötig)
 - **JSON-Import mit Prompt-Hilfe**: ein Klick auf "?" neben "Von KI erzeugtes
@@ -338,80 +337,6 @@ type: custom:rezeptbuch-card
 entity: todo.rezepte
 items_per_page: 12
 ```
-
-**Vorlesen im Kochmodus funktioniert nicht in der Home-Assistant-App:**
-Der Vorlesen-Knopf im Kochmodus nutzt standardmäßig die im Browser
-eingebaute Sprachausgabe (Web Speech API) - kein zusätzliches Setup
-nötig, funktioniert in normalen Browsern zuverlässig. In der
-eingebetteten WebView der Home-Assistant-Companion-App (Android und/oder
-iOS, je nach Geräte-/App-Version) kann diese Web-Sprachausgabe jedoch
-lautlos bleiben, obwohl die System-Sprachausgabe des Geräts selbst
-einwandfrei funktioniert - eine bekannte Einschränkung dieser WebView,
-die sich von der Karte aus nicht direkt beheben lässt.
-
-Als Alternative nutzt die Karte dann optional die **TTS-Benachrichtigung
-der Companion App** (offizielle App-Funktion, siehe
-[Companion-App-Dokumentation](https://companion.home-assistant.io/docs/notifications/notifications-basic/)):
-die App liest den Text über die native System-Sprachausgabe des Geräts
-vor, komplett an der WebView vorbei. Dafür das Kartenfeld
-`tts_notify_service` auf den Namen des eigenen `notify.mobile_app_*`-
-Dienstes setzen (zu finden unter Entwicklerwerkzeuge → Aktionen/Dienste,
-Suche nach "notify" - der Gerätename ohne das führende "notify."):
-
-```yaml
-type: custom:rezeptbuch-card
-entity: todo.rezepte
-tts_notify_service: mobile_app_chris_smartphone
-```
-
-Ist `tts_notify_service` gesetzt, wird AUSSCHLIESSLICH dieser Weg
-genutzt (kein Doppel-Vorlesen über beide Wege gleichzeitig). Ohne diese
-Option bleibt es bei der Web-Sprachausgabe wie bisher. Eine bereits
-verschickte TTS-Benachrichtigung lässt sich technisch nicht mehr
-abbrechen - der "Vorlesen aus"-Knopf verhindert dann nur weitere,
-zukünftige Ansagen.
-
-**Mehrere Home-Assistant-Nutzer/-Geräte:** Nutzen mehrere Personen mit
-jeweils eigenem Home-Assistant-Konto dieselbe Karte (z.B. ein gemeinsames
-Dashboard am Küchen-Tablet), lässt sich statt eines einzelnen Geräts eine
-Zuordnung von Home-Assistant-Anzeigename zu jeweiligem
-`notify.mobile_app_*`-Dienst hinterlegen. Die Karte ermittelt beim
-Vorlesen automatisch, wer gerade angemeldet ist, und wählt dementsprechend
-das richtige Smartphone aus - es muss also nicht für alle Betrachter der
-Karte ein einzelnes Gerät fest eingetragen werden.
-
-Am einfachsten geht das direkt in der Karte, ohne die YAML-Konfiguration
-anzufassen: Knopf **"Optionen"** oben in der Kopfzeile öffnet einen
-Dialog, in dem sich beliebig viele Zeilen "Home-Assistant-Anzeigename →
-notify-Dienst" hinzufügen und wieder entfernen lassen, plus ein
-Standard-Gerät für nicht aufgeführte Nutzer. Ein Klick auf "Speichern"
-reicht - die Zuordnung wird (wie Rezepte, Wochenplan & Co.) direkt in der
-verknüpften To-do-Liste abgelegt und gilt dadurch geräteübergreifend für
-alle, die dieselbe Liste nutzen. Die Anzeigenamen sind die der
-jeweiligen Home-Assistant-Benutzerkonten (zu finden unter Einstellungen →
-Personen), die notify-Dienstnamen erscheinen beim Tippen als
-Autovervollständigung, sofern Home Assistant sie kennt (der Gerätename
-ohne das führende "notify.", z.B. `mobile_app_chris_smartphone`).
-
-Alternativ (oder zusätzlich, als Fallback) lässt sich dieselbe Zuordnung
-auch über die YAML-Kartenkonfiguration hinterlegen:
-
-```yaml
-type: custom:rezeptbuch-card
-entity: todo.rezepte
-tts_notify_services:
-  Chris: mobile_app_chris_smartphone
-  Katja: mobile_app_katjas_smartphone
-tts_notify_service: mobile_app_chris_smartphone
-```
-
-Rangfolge, falls mehrere Quellen gleichzeitig etwas für den angemeldeten
-Nutzer hinterlegt haben: zuerst die im "Optionen"-Dialog gespeicherte
-Zuordnung, dann `tts_notify_services` aus der YAML-Konfiguration, dann das
-im "Optionen"-Dialog hinterlegte Standard-Gerät, zuletzt das einzelne
-`tts_notify_service` aus der YAML-Konfiguration. Ist für den angemeldeten
-Nutzer nirgends etwas hinterlegt, wird stattdessen wieder die
-Web-Sprachausgabe verwendet.
 
 ## Projektstruktur
 

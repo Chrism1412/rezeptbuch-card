@@ -324,8 +324,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Kochmodus schließen",
     kochmodus_schritt_zurueck_aria: "Vorheriger Schritt",
     kochmodus_schritt_weiter_aria: "Nächster Schritt",
-    kochmodus_vorlesen_ein_aria: "Automatisches Vorlesen einschalten",
-    kochmodus_vorlesen_aus_aria: "Automatisches Vorlesen ausschalten",
     kochmodus_zutaten_ein_aria: "Zutaten einblenden",
     kochmodus_zutaten_aus_aria: "Zutaten ausblenden",
     kopf_sammel_pdf_btn: "📚 Sammel-PDF",
@@ -336,14 +334,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Name des Kochbuchs",
     sammel_pdf_erstellen_btn: "PDF erstellen",
     abschnitt_titel_inhaltsverzeichnis: "Inhaltsverzeichnis",
-    kopf_optionen_btn: "Optionen",
-    optionen_titel: "Optionen",
-    optionen_vorlesen_erklaerung: "Vorlesen im Kochmodus: welches Gerät welchen Home-Assistant-Nutzer per Benachrichtigung vorlesen lassen soll (siehe README). Ohne Eintrag wird die Sprachausgabe des Browsers genutzt.",
-    optionen_zeile_hinzufuegen_btn: "+ Zeile hinzufügen",
-    optionen_standard_label: "Standard-Gerät (für nicht aufgeführte Nutzer)",
-    optionen_name_placeholder: "Home-Assistant-Anzeigename",
-    optionen_dienst_placeholder: "notify-Dienst, z.B. mobile_app_handy",
-    optionen_zeile_entfernen_title: "Zeile entfernen",
     sammel_pdf_frage_umfang: "Welche Rezepte sollen ins Sammel-PDF?",
     sammel_pdf_alle_rezepte_btn: "Alle angezeigten Rezepte",
     sammel_pdf_auswahl_btn: "Bestimmte Rezepte auswählen",
@@ -627,8 +617,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Kochmodus schliesse",
     kochmodus_schritt_zurueck_aria: "Vorherige Schritt",
     kochmodus_schritt_weiter_aria: "Nächschte Schritt",
-    kochmodus_vorlesen_ein_aria: "Automatischs Vorläse ischalte",
-    kochmodus_vorlesen_aus_aria: "Automatischs Vorläse usschalte",
     kochmodus_zutaten_ein_aria: "Zuetate iblände",
     kochmodus_zutaten_aus_aria: "Zuetate usblände",
     kopf_sammel_pdf_btn: "📚 Sammel-PDF",
@@ -639,14 +627,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Name vom Kochbuech",
     sammel_pdf_erstellen_btn: "PDF erstelle",
     abschnitt_titel_inhaltsverzeichnis: "Inhaltsverzeichnis",
-    kopf_optionen_btn: "Optione",
-    optionen_titel: "Optione",
-    optionen_vorlesen_erklaerung: "Vorläse im Kochmodus: wells Gerät wele Home-Assistant-Benutzer per Benachrichtigung vorläse söll (gsehsch README). Ohni Eitrag wird d'Sprochusgob vom Browser bruucht.",
-    optionen_zeile_hinzufuegen_btn: "+ Zeile derzuefüege",
-    optionen_standard_label: "Standard-Gerät (für Benutzer wo nid ufgführt sind)",
-    optionen_name_placeholder: "Home-Assistant-Anzeigename",
-    optionen_dienst_placeholder: "notify-Dienst, z.B. mobile_app_handy",
-    optionen_zeile_entfernen_title: "Zeile entferne",
     sammel_pdf_frage_umfang: "Weli Rezept sölled ins Sammel-PDF?",
     sammel_pdf_alle_rezepte_btn: "Alli aazeigte Rezept",
     sammel_pdf_auswahl_btn: "Bstimmti Rezept uswähle",
@@ -904,8 +884,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Close cook mode",
     kochmodus_schritt_zurueck_aria: "Previous step",
     kochmodus_schritt_weiter_aria: "Next step",
-    kochmodus_vorlesen_ein_aria: "Turn on automatic read-aloud",
-    kochmodus_vorlesen_aus_aria: "Turn off automatic read-aloud",
     kochmodus_zutaten_ein_aria: "Show ingredients",
     kochmodus_zutaten_aus_aria: "Hide ingredients",
     kopf_sammel_pdf_btn: "📚 Collected PDF",
@@ -916,14 +894,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Cookbook name",
     sammel_pdf_erstellen_btn: "Create PDF",
     abschnitt_titel_inhaltsverzeichnis: "Table of Contents",
-    kopf_optionen_btn: "Options",
-    optionen_titel: "Options",
-    optionen_vorlesen_erklaerung: "Read-aloud in cooking mode: which device (per Home Assistant user) should be notified to read steps aloud (see README). Without an entry, the browser's own speech synthesis is used.",
-    optionen_zeile_hinzufuegen_btn: "+ Add row",
-    optionen_standard_label: "Default device (for users not listed)",
-    optionen_name_placeholder: "Home Assistant display name",
-    optionen_dienst_placeholder: "notify service, e.g. mobile_app_phone",
-    optionen_zeile_entfernen_title: "Remove row",
     sammel_pdf_frage_umfang: "Which recipes should go into the combined PDF?",
     sammel_pdf_alle_rezepte_btn: "All shown recipes",
     sammel_pdf_auswahl_btn: "Select specific recipes",
@@ -1139,8 +1109,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Затвори режим готвене",
     kochmodus_schritt_zurueck_aria: "Предишна стъпка",
     kochmodus_schritt_weiter_aria: "Следваща стъпка",
-    kochmodus_vorlesen_ein_aria: "Включи автоматично четене",
-    kochmodus_vorlesen_aus_aria: "Изключи автоматично четене",
     kochmodus_zutaten_ein_aria: "Покажи съставките",
     kochmodus_zutaten_aus_aria: "Скрий съставките",
     kopf_sammel_pdf_btn: "📚 Общ PDF",
@@ -1151,14 +1119,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Име на готварската книга",
     sammel_pdf_erstellen_btn: "Създай PDF",
     abschnitt_titel_inhaltsverzeichnis: "Съдържание",
-    kopf_optionen_btn: "Опции",
-    optionen_titel: "Опции",
-    optionen_vorlesen_erklaerung: "Изчитане на глас в режим готвене: кое устройство (за кой потребител на Home Assistant) да получава известие за изчитане на стъпките (вижте README). Без запис се използва вграденият синтезатор на речта на браузъра.",
-    optionen_zeile_hinzufuegen_btn: "+ Добавяне на ред",
-    optionen_standard_label: "Устройство по подразбиране (за неупоменати потребители)",
-    optionen_name_placeholder: "Показвано име в Home Assistant",
-    optionen_dienst_placeholder: "notify-услуга, напр. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Премахване на реда",
     sammel_pdf_frage_umfang: "Кои рецепти да влязат в общия PDF?",
     sammel_pdf_alle_rezepte_btn: "Всички показани рецепти",
     sammel_pdf_auswahl_btn: "Избор на определени рецепти",
@@ -1374,8 +1334,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Zatvori način kuhanja",
     kochmodus_schritt_zurueck_aria: "Prethodni korak",
     kochmodus_schritt_weiter_aria: "Sljedeći korak",
-    kochmodus_vorlesen_ein_aria: "Uključi automatsko čitanje",
-    kochmodus_vorlesen_aus_aria: "Isključi automatsko čitanje",
     kochmodus_zutaten_ein_aria: "Prikaži sastojke",
     kochmodus_zutaten_aus_aria: "Sakrij sastojke",
     kopf_sammel_pdf_btn: "📚 Zbirni PDF",
@@ -1386,14 +1344,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Naziv kuharice",
     sammel_pdf_erstellen_btn: "Izradi PDF",
     abschnitt_titel_inhaltsverzeichnis: "Sadržaj",
-    kopf_optionen_btn: "Opcije",
-    optionen_titel: "Opcije",
-    optionen_vorlesen_erklaerung: "Čitanje naglas u načinu kuhanja: koji uređaj (po korisniku Home Assistanta) treba primiti obavijest za čitanje koraka naglas (vidi README). Bez unosa koristi se ugrađena sinteza govora preglednika.",
-    optionen_zeile_hinzufuegen_btn: "+ Dodaj redak",
-    optionen_standard_label: "Zadani uređaj (za nenavedene korisnike)",
-    optionen_name_placeholder: "Prikazano ime u Home Assistantu",
-    optionen_dienst_placeholder: "notify-usluga, npr. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Ukloni redak",
     sammel_pdf_frage_umfang: "Koji recepti trebaju u zbirni PDF?",
     sammel_pdf_alle_rezepte_btn: "Svi prikazani recepti",
     sammel_pdf_auswahl_btn: "Odabir određenih recepata",
@@ -1609,8 +1559,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Zavřít režim vaření",
     kochmodus_schritt_zurueck_aria: "Předchozí krok",
     kochmodus_schritt_weiter_aria: "Další krok",
-    kochmodus_vorlesen_ein_aria: "Zapnout automatické čtení",
-    kochmodus_vorlesen_aus_aria: "Vypnout automatické čtení",
     kochmodus_zutaten_ein_aria: "Zobrazit suroviny",
     kochmodus_zutaten_aus_aria: "Skrýt suroviny",
     kopf_sammel_pdf_btn: "📚 Souhrnné PDF",
@@ -1621,14 +1569,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Název kuchařky",
     sammel_pdf_erstellen_btn: "Vytvořit PDF",
     abschnitt_titel_inhaltsverzeichnis: "Obsah",
-    kopf_optionen_btn: "Možnosti",
-    optionen_titel: "Možnosti",
-    optionen_vorlesen_erklaerung: "Předčítání v režimu vaření: které zařízení (podle uživatele Home Assistant) má dostávat oznámení s předčítáním kroků (viz README). Bez záznamu se použije vestavěná hlasová syntéza prohlížeče.",
-    optionen_zeile_hinzufuegen_btn: "+ Přidat řádek",
-    optionen_standard_label: "Výchozí zařízení (pro neuvedené uživatele)",
-    optionen_name_placeholder: "Zobrazované jméno v Home Assistant",
-    optionen_dienst_placeholder: "notify-služba, např. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Odstranit řádek",
     sammel_pdf_frage_umfang: "Které recepty mají být ve společném PDF?",
     sammel_pdf_alle_rezepte_btn: "Všechny zobrazené recepty",
     sammel_pdf_auswahl_btn: "Vybrat konkrétní recepty",
@@ -1844,8 +1784,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Luk tilberedningstilstand",
     kochmodus_schritt_zurueck_aria: "Forrige trin",
     kochmodus_schritt_weiter_aria: "Næste trin",
-    kochmodus_vorlesen_ein_aria: "Slå automatisk oplæsning til",
-    kochmodus_vorlesen_aus_aria: "Slå automatisk oplæsning fra",
     kochmodus_zutaten_ein_aria: "Vis ingredienser",
     kochmodus_zutaten_aus_aria: "Skjul ingredienser",
     kopf_sammel_pdf_btn: "📚 Samlet PDF",
@@ -1856,14 +1794,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Navn på kogebogen",
     sammel_pdf_erstellen_btn: "Opret PDF",
     abschnitt_titel_inhaltsverzeichnis: "Indholdsfortegnelse",
-    kopf_optionen_btn: "Indstillinger",
-    optionen_titel: "Indstillinger",
-    optionen_vorlesen_erklaerung: "Oplæsning i lavetilstand: hvilken enhed (pr. Home Assistant-bruger) der skal have en notifikation med oplæsning af trinnene (se README). Uden en post bruges browserens egen talesyntese.",
-    optionen_zeile_hinzufuegen_btn: "+ Tilføj linje",
-    optionen_standard_label: "Standardenhed (for brugere, der ikke er angivet)",
-    optionen_name_placeholder: "Home Assistant-visningsnavn",
-    optionen_dienst_placeholder: "notify-tjeneste, f.eks. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Fjern linje",
     sammel_pdf_frage_umfang: "Hvilke opskrifter skal med i den samlede PDF?",
     sammel_pdf_alle_rezepte_btn: "Alle viste opskrifter",
     sammel_pdf_auswahl_btn: "Vælg bestemte opskrifter",
@@ -2079,8 +2009,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Kookmodus sluiten",
     kochmodus_schritt_zurueck_aria: "Vorige stap",
     kochmodus_schritt_weiter_aria: "Volgende stap",
-    kochmodus_vorlesen_ein_aria: "Automatisch voorlezen inschakelen",
-    kochmodus_vorlesen_aus_aria: "Automatisch voorlezen uitschakelen",
     kochmodus_zutaten_ein_aria: "Ingrediënten tonen",
     kochmodus_zutaten_aus_aria: "Ingrediënten verbergen",
     kopf_sammel_pdf_btn: "📚 Verzamel-PDF",
@@ -2091,14 +2019,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Naam van het kookboek",
     sammel_pdf_erstellen_btn: "PDF maken",
     abschnitt_titel_inhaltsverzeichnis: "Inhoudsopgave",
-    kopf_optionen_btn: "Opties",
-    optionen_titel: "Opties",
-    optionen_vorlesen_erklaerung: "Voorlezen in de kookmodus: welk apparaat (per Home Assistant-gebruiker) een melding met de voorgelezen stap moet krijgen (zie README). Zonder invoer wordt de eigen spraaksynthese van de browser gebruikt.",
-    optionen_zeile_hinzufuegen_btn: "+ Regel toevoegen",
-    optionen_standard_label: "Standaardapparaat (voor niet-vermelde gebruikers)",
-    optionen_name_placeholder: "Weergavenaam in Home Assistant",
-    optionen_dienst_placeholder: "notify-service, bijv. mobile_app_telefoon",
-    optionen_zeile_entfernen_title: "Regel verwijderen",
     sammel_pdf_frage_umfang: "Welke recepten moeten in de verzamel-PDF?",
     sammel_pdf_alle_rezepte_btn: "Alle getoonde recepten",
     sammel_pdf_auswahl_btn: "Bepaalde recepten selecteren",
@@ -2314,8 +2234,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Sulge küpsetusrežiim",
     kochmodus_schritt_zurueck_aria: "Eelmine samm",
     kochmodus_schritt_weiter_aria: "Järgmine samm",
-    kochmodus_vorlesen_ein_aria: "Lülita automaatne ettelugemine sisse",
-    kochmodus_vorlesen_aus_aria: "Lülita automaatne ettelugemine välja",
     kochmodus_zutaten_ein_aria: "Näita koostisosi",
     kochmodus_zutaten_aus_aria: "Peida koostisosad",
     kopf_sammel_pdf_btn: "📚 Koond-PDF",
@@ -2326,14 +2244,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Kokaraamatu nimi",
     sammel_pdf_erstellen_btn: "Loo PDF",
     abschnitt_titel_inhaltsverzeichnis: "Sisukord",
-    kopf_optionen_btn: "Valikud",
-    optionen_titel: "Valikud",
-    optionen_vorlesen_erklaerung: "Ettelugemine kokkamisrežiimis: milline seade (Home Assistanti kasutaja kohta) peaks saama teavituse sammude ettelugemiseks (vaata README). Kande puudumisel kasutatakse brauseri sisseehitatud kõnesüntesaatorit.",
-    optionen_zeile_hinzufuegen_btn: "+ Lisa rida",
-    optionen_standard_label: "Vaikeseade (loetlemata kasutajatele)",
-    optionen_name_placeholder: "Home Assistanti kuvatav nimi",
-    optionen_dienst_placeholder: "notify-teenus, nt mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Eemalda rida",
     sammel_pdf_frage_umfang: "Millised retseptid peaksid koond-PDF-i minema?",
     sammel_pdf_alle_rezepte_btn: "Kõik kuvatud retseptid",
     sammel_pdf_auswahl_btn: "Vali konkreetsed retseptid",
@@ -2549,8 +2459,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Sulje kokkaustila",
     kochmodus_schritt_zurueck_aria: "Edellinen vaihe",
     kochmodus_schritt_weiter_aria: "Seuraava vaihe",
-    kochmodus_vorlesen_ein_aria: "Ota automaattinen ääneenluku käyttöön",
-    kochmodus_vorlesen_aus_aria: "Poista automaattinen ääneenluku käytöstä",
     kochmodus_zutaten_ein_aria: "Näytä ainekset",
     kochmodus_zutaten_aus_aria: "Piilota ainekset",
     kopf_sammel_pdf_btn: "📚 Kokoelma-PDF",
@@ -2561,14 +2469,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Keittokirjan nimi",
     sammel_pdf_erstellen_btn: "Luo PDF",
     abschnitt_titel_inhaltsverzeichnis: "Sisällysluettelo",
-    kopf_optionen_btn: "Asetukset",
-    optionen_titel: "Asetukset",
-    optionen_vorlesen_erklaerung: "Ääneenluku ruokailutilassa: mikä laite (Home Assistant -käyttäjän mukaan) saa ilmoituksen vaiheiden ääneenlukemisesta (katso README). Ilman merkintää käytetään selaimen omaa puhesynteesiä.",
-    optionen_zeile_hinzufuegen_btn: "+ Lisää rivi",
-    optionen_standard_label: "Oletuslaite (käyttäjille, joita ei ole listattu)",
-    optionen_name_placeholder: "Home Assistantin näyttönimi",
-    optionen_dienst_placeholder: "notify-palvelu, esim. mobile_app_puhelin",
-    optionen_zeile_entfernen_title: "Poista rivi",
     sammel_pdf_frage_umfang: "Mitkä reseptit kokoomapdf:ään?",
     sammel_pdf_alle_rezepte_btn: "Kaikki näytetyt reseptit",
     sammel_pdf_auswahl_btn: "Valitse tietyt reseptit",
@@ -2785,8 +2685,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Fermer le mode cuisine",
     kochmodus_schritt_zurueck_aria: "Étape précédente",
     kochmodus_schritt_weiter_aria: "Étape suivante",
-    kochmodus_vorlesen_ein_aria: "Activer la lecture automatique",
-    kochmodus_vorlesen_aus_aria: "Désactiver la lecture automatique",
     kochmodus_zutaten_ein_aria: "Afficher les ingrédients",
     kochmodus_zutaten_aus_aria: "Masquer les ingrédients",
     kopf_sammel_pdf_btn: "📚 PDF groupé",
@@ -2797,14 +2695,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Nom du livre de cuisine",
     sammel_pdf_erstellen_btn: "Créer le PDF",
     abschnitt_titel_inhaltsverzeichnis: "Table des matières",
-    kopf_optionen_btn: "Options",
-    optionen_titel: "Options",
-    optionen_vorlesen_erklaerung: "Lecture à voix haute en mode cuisine : quel appareil (par utilisateur Home Assistant) doit recevoir une notification pour lire les étapes à voix haute (voir README). Sans entrée, la synthèse vocale du navigateur est utilisée.",
-    optionen_zeile_hinzufuegen_btn: "+ Ajouter une ligne",
-    optionen_standard_label: "Appareil par défaut (pour les utilisateurs non listés)",
-    optionen_name_placeholder: "Nom affiché dans Home Assistant",
-    optionen_dienst_placeholder: "service notify, par ex. mobile_app_telephone",
-    optionen_zeile_entfernen_title: "Supprimer la ligne",
     sammel_pdf_frage_umfang: "Quelles recettes inclure dans le PDF groupé ?",
     sammel_pdf_alle_rezepte_btn: "Toutes les recettes affichées",
     sammel_pdf_auswahl_btn: "Choisir des recettes précises",
@@ -3021,8 +2911,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Κλείσιμο λειτουργίας μαγειρέματος",
     kochmodus_schritt_zurueck_aria: "Προηγούμενο βήμα",
     kochmodus_schritt_weiter_aria: "Επόμενο βήμα",
-    kochmodus_vorlesen_ein_aria: "Ενεργοποίηση αυτόματης ανάγνωσης",
-    kochmodus_vorlesen_aus_aria: "Απενεργοποίηση αυτόματης ανάγνωσης",
     kochmodus_zutaten_ein_aria: "Εμφάνιση υλικών",
     kochmodus_zutaten_aus_aria: "Απόκρυψη υλικών",
     kopf_sammel_pdf_btn: "📚 Συγκεντρωτικό PDF",
@@ -3033,14 +2921,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Όνομα βιβλίου μαγειρικής",
     sammel_pdf_erstellen_btn: "Δημιουργία PDF",
     abschnitt_titel_inhaltsverzeichnis: "Πίνακας περιεχομένων",
-    kopf_optionen_btn: "Επιλογές",
-    optionen_titel: "Επιλογές",
-    optionen_vorlesen_erklaerung: "Ανάγνωση στη λειτουργία μαγειρέματος: ποια συσκευή (ανά χρήστη Home Assistant) θα λαμβάνει ειδοποίηση για την εκφώνηση των βημάτων (δείτε README). Χωρίς καταχώριση χρησιμοποιείται η ενσωματωμένη σύνθεση φωνής του προγράμματος περιήγησης.",
-    optionen_zeile_hinzufuegen_btn: "+ Προσθήκη γραμμής",
-    optionen_standard_label: "Προεπιλεγμένη συσκευή (για μη καταχωρισμένους χρήστες)",
-    optionen_name_placeholder: "Εμφανιζόμενο όνομα στο Home Assistant",
-    optionen_dienst_placeholder: "υπηρεσία notify, π.χ. mobile_app_tilefono",
-    optionen_zeile_entfernen_title: "Αφαίρεση γραμμής",
     sammel_pdf_frage_umfang: "Ποιες συνταγές να μπουν στο συνολικό PDF;",
     sammel_pdf_alle_rezepte_btn: "Όλες οι εμφανιζόμενες συνταγές",
     sammel_pdf_auswahl_btn: "Επιλογή συγκεκριμένων συνταγών",
@@ -3257,8 +3137,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Főzési mód bezárása",
     kochmodus_schritt_zurueck_aria: "Előző lépés",
     kochmodus_schritt_weiter_aria: "Következő lépés",
-    kochmodus_vorlesen_ein_aria: "Automatikus felolvasás bekapcsolása",
-    kochmodus_vorlesen_aus_aria: "Automatikus felolvasás kikapcsolása",
     kochmodus_zutaten_ein_aria: "Hozzávalók megjelenítése",
     kochmodus_zutaten_aus_aria: "Hozzávalók elrejtése",
     kopf_sammel_pdf_btn: "📚 Gyűjtő PDF",
@@ -3269,14 +3147,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "A szakácskönyv neve",
     sammel_pdf_erstellen_btn: "PDF létrehozása",
     abschnitt_titel_inhaltsverzeichnis: "Tartalomjegyzék",
-    kopf_optionen_btn: "Beállítások",
-    optionen_titel: "Beállítások",
-    optionen_vorlesen_erklaerung: "Felolvasás főzés módban: melyik eszköz (Home Assistant-felhasználónként) kapjon értesítést a lépések felolvasásához (lásd README). Bejegyzés nélkül a böngésző saját hangszintézise lesz használva.",
-    optionen_zeile_hinzufuegen_btn: "+ Sor hozzáadása",
-    optionen_standard_label: "Alapértelmezett eszköz (a fel nem sorolt felhasználóknak)",
-    optionen_name_placeholder: "Home Assistant megjelenítési név",
-    optionen_dienst_placeholder: "notify-szolgáltatás, pl. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Sor eltávolítása",
     sammel_pdf_frage_umfang: "Mely receptek kerüljenek a gyűjtő PDF-be?",
     sammel_pdf_alle_rezepte_btn: "Az összes megjelenített recept",
     sammel_pdf_auswahl_btn: "Bizonyos receptek kiválasztása",
@@ -3493,8 +3363,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Dún an mód cócaireachta",
     kochmodus_schritt_zurueck_aria: "An chéim roimhe seo",
     kochmodus_schritt_weiter_aria: "An chéad chéim eile",
-    kochmodus_vorlesen_ein_aria: "Cuir léamh uathoibríoch ar siúl",
-    kochmodus_vorlesen_aus_aria: "Múch léamh uathoibríoch",
     kochmodus_zutaten_ein_aria: "Taispeáin comhábhair",
     kochmodus_zutaten_aus_aria: "Folaigh comhábhair",
     kopf_sammel_pdf_btn: "📚 PDF Bailithe",
@@ -3505,14 +3373,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Ainm an leabhair chócaireachta",
     sammel_pdf_erstellen_btn: "Cruthaigh PDF",
     abschnitt_titel_inhaltsverzeichnis: "Clár Ábhair",
-    kopf_optionen_btn: "Roghanna",
-    optionen_titel: "Roghanna",
-    optionen_vorlesen_erklaerung: "Léamh os ard sa mhód cócaireachta: cén gléas (de réir úsáideoir Home Assistant) a ba chóir fógra a fháil chun na céimeanna a léamh os ard (féach README). Gan iontráil, úsáidtear sintéis urlabhra dhúchasach an bhrabhsálaí.",
-    optionen_zeile_hinzufuegen_btn: "+ Cuir líne leis",
-    optionen_standard_label: "Gléas réamhshocraithe (le haghaidh úsáideoirí nach bhfuil liostaithe)",
-    optionen_name_placeholder: "Ainm taispeána Home Assistant",
-    optionen_dienst_placeholder: "seirbhís notify, m.sh. mobile_app_guthan",
-    optionen_zeile_entfernen_title: "Bain líne",
     sammel_pdf_frage_umfang: "Cé na oidis ba chóir a bheith san PDF comhcheangailte?",
     sammel_pdf_alle_rezepte_btn: "Gach oide a thaispeántar",
     sammel_pdf_auswahl_btn: "Roghnaigh oidis áirithe",
@@ -3729,8 +3589,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Chiudi modalità cucina",
     kochmodus_schritt_zurueck_aria: "Passo precedente",
     kochmodus_schritt_weiter_aria: "Passo successivo",
-    kochmodus_vorlesen_ein_aria: "Attiva la lettura automatica",
-    kochmodus_vorlesen_aus_aria: "Disattiva la lettura automatica",
     kochmodus_zutaten_ein_aria: "Mostra ingredienti",
     kochmodus_zutaten_aus_aria: "Nascondi ingredienti",
     kopf_sammel_pdf_btn: "📚 PDF raccolta",
@@ -3741,14 +3599,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Nome del ricettario",
     sammel_pdf_erstellen_btn: "Crea PDF",
     abschnitt_titel_inhaltsverzeichnis: "Indice",
-    kopf_optionen_btn: "Opzioni",
-    optionen_titel: "Opzioni",
-    optionen_vorlesen_erklaerung: "Lettura ad alta voce in modalità cucina: quale dispositivo (per utente Home Assistant) deve ricevere una notifica per leggere i passaggi ad alta voce (vedi README). Senza una voce configurata viene usata la sintesi vocale del browser.",
-    optionen_zeile_hinzufuegen_btn: "+ Aggiungi riga",
-    optionen_standard_label: "Dispositivo predefinito (per utenti non elencati)",
-    optionen_name_placeholder: "Nome visualizzato in Home Assistant",
-    optionen_dienst_placeholder: "servizio notify, es. mobile_app_telefono",
-    optionen_zeile_entfernen_title: "Rimuovi riga",
     sammel_pdf_frage_umfang: "Quali ricette devono finire nel PDF combinato?",
     sammel_pdf_alle_rezepte_btn: "Tutte le ricette mostrate",
     sammel_pdf_auswahl_btn: "Seleziona ricette specifiche",
@@ -3964,8 +3814,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Aizvērt gatavošanas režīmu",
     kochmodus_schritt_zurueck_aria: "Iepriekšējais solis",
     kochmodus_schritt_weiter_aria: "Nākamais solis",
-    kochmodus_vorlesen_ein_aria: "Ieslēgt automātisko nolasīšanu",
-    kochmodus_vorlesen_aus_aria: "Izslēgt automātisko nolasīšanu",
     kochmodus_zutaten_ein_aria: "Rādīt sastāvdaļas",
     kochmodus_zutaten_aus_aria: "Slēpt sastāvdaļas",
     kopf_sammel_pdf_btn: "📚 Kopīgais PDF",
@@ -3976,14 +3824,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Pavārgrāmatas nosaukums",
     sammel_pdf_erstellen_btn: "Izveidot PDF",
     abschnitt_titel_inhaltsverzeichnis: "Satura rādītājs",
-    kopf_optionen_btn: "Opcijas",
-    optionen_titel: "Opcijas",
-    optionen_vorlesen_erklaerung: "Priekšlasīšana gatavošanas režīmā: kurai ierīcei (pēc Home Assistant lietotāja) jāsaņem paziņojums soļu priekšlasīšanai (skatiet README). Bez ieraksta tiek izmantota pārlūkprogrammas iebūvētā runas sintēze.",
-    optionen_zeile_hinzufuegen_btn: "+ Pievienot rindu",
-    optionen_standard_label: "Noklusējuma ierīce (neuzskaitītiem lietotājiem)",
-    optionen_name_placeholder: "Home Assistant attēlotais vārds",
-    optionen_dienst_placeholder: "notify-pakalpojums, piem. mobile_app_telefons",
-    optionen_zeile_entfernen_title: "Noņemt rindu",
     sammel_pdf_frage_umfang: "Kuras receptes iekļaut kopējā PDF?",
     sammel_pdf_alle_rezepte_btn: "Visas parādītās receptes",
     sammel_pdf_auswahl_btn: "Izvēlēties konkrētas receptes",
@@ -4199,8 +4039,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Uždaryti gaminimo režimą",
     kochmodus_schritt_zurueck_aria: "Ankstesnis veiksmas",
     kochmodus_schritt_weiter_aria: "Kitas veiksmas",
-    kochmodus_vorlesen_ein_aria: "Įjungti automatinį skaitymą",
-    kochmodus_vorlesen_aus_aria: "Išjungti automatinį skaitymą",
     kochmodus_zutaten_ein_aria: "Rodyti ingredientus",
     kochmodus_zutaten_aus_aria: "Slėpti ingredientus",
     kopf_sammel_pdf_btn: "📚 Bendras PDF",
@@ -4211,14 +4049,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Receptų knygos pavadinimas",
     sammel_pdf_erstellen_btn: "Sukurti PDF",
     abschnitt_titel_inhaltsverzeichnis: "Turinys",
-    kopf_optionen_btn: "Parinktys",
-    optionen_titel: "Parinktys",
-    optionen_vorlesen_erklaerung: "Skaitymas balsu gaminimo režime: kuris įrenginys (pagal Home Assistant naudotoją) turi gauti pranešimą su žingsnių skaitymu balsu (žr. README). Be įrašo naudojama naršyklės vidinė kalbos sintezė.",
-    optionen_zeile_hinzufuegen_btn: "+ Pridėti eilutę",
-    optionen_standard_label: "Numatytasis įrenginys (nenurodytiems naudotojams)",
-    optionen_name_placeholder: "Home Assistant rodomas vardas",
-    optionen_dienst_placeholder: "notify paslauga, pvz. mobile_app_telefonas",
-    optionen_zeile_entfernen_title: "Pašalinti eilutę",
     sammel_pdf_frage_umfang: "Kurie receptai turėtų atsidurti bendrame PDF?",
     sammel_pdf_alle_rezepte_btn: "Visi rodomi receptai",
     sammel_pdf_auswahl_btn: "Pasirinkti konkrečius receptus",
@@ -4435,8 +4265,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Agħlaq il-modalità tat-tisjir",
     kochmodus_schritt_zurueck_aria: "Pass ta' qabel",
     kochmodus_schritt_weiter_aria: "Pass li jmiss",
-    kochmodus_vorlesen_ein_aria: "Ixgħel il-qari awtomatiku",
-    kochmodus_vorlesen_aus_aria: "Itfi l-qari awtomatiku",
     kochmodus_zutaten_ein_aria: "Uri l-ingredjenti",
     kochmodus_zutaten_aus_aria: "Aħbi l-ingredjenti",
     kopf_sammel_pdf_btn: "📚 PDF Miġbura",
@@ -4447,14 +4275,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Isem tal-ktieb tat-tisjir",
     sammel_pdf_erstellen_btn: "Oħloq PDF",
     abschnitt_titel_inhaltsverzeichnis: "Werrej",
-    kopf_optionen_btn: "Għażliet",
-    optionen_titel: "Għażliet",
-    optionen_vorlesen_erklaerung: "Qari b'leħen fil-mod tat-tisjir: liema apparat (skont l-utent tal-Home Assistant) għandu jirċievi notifika biex jinqara l-pass b'leħen (ara README). Mingħajr entrata tintuża s-sintesi tal-vuċi tal-browser stess.",
-    optionen_zeile_hinzufuegen_btn: "+ Żid ringiela",
-    optionen_standard_label: "Apparat awtomatiku (għal utenti mhux elenkati)",
-    optionen_name_placeholder: "Isem li jidher fil-Home Assistant",
-    optionen_dienst_placeholder: "servizz notify, eż. mobile_app_mowbajl",
-    optionen_zeile_entfernen_title: "Neħħi ringiela",
     sammel_pdf_frage_umfang: "Liema riċetti għandhom jidħlu fil-PDF ġenerali?",
     sammel_pdf_alle_rezepte_btn: "Ir-riċetti kollha murija",
     sammel_pdf_auswahl_btn: "Agħżel riċetti speċifiċi",
@@ -4670,8 +4490,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Zamknij tryb gotowania",
     kochmodus_schritt_zurueck_aria: "Poprzedni krok",
     kochmodus_schritt_weiter_aria: "Następny krok",
-    kochmodus_vorlesen_ein_aria: "Włącz automatyczne czytanie",
-    kochmodus_vorlesen_aus_aria: "Wyłącz automatyczne czytanie",
     kochmodus_zutaten_ein_aria: "Pokaż składniki",
     kochmodus_zutaten_aus_aria: "Ukryj składniki",
     kopf_sammel_pdf_btn: "📚 Zbiorczy PDF",
@@ -4682,14 +4500,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Nazwa książki kucharskiej",
     sammel_pdf_erstellen_btn: "Utwórz PDF",
     abschnitt_titel_inhaltsverzeichnis: "Spis treści",
-    kopf_optionen_btn: "Opcje",
-    optionen_titel: "Opcje",
-    optionen_vorlesen_erklaerung: "Odczytywanie w trybie gotowania: które urządzenie (dla danego użytkownika Home Assistant) ma otrzymywać powiadomienie z odczytywanymi krokami (zob. README). Bez wpisu używana jest wbudowana synteza mowy przeglądarki.",
-    optionen_zeile_hinzufuegen_btn: "+ Dodaj wiersz",
-    optionen_standard_label: "Urządzenie domyślne (dla niewymienionych użytkowników)",
-    optionen_name_placeholder: "Nazwa wyświetlana w Home Assistant",
-    optionen_dienst_placeholder: "usługa notify, np. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Usuń wiersz",
     sammel_pdf_frage_umfang: "Które przepisy powinny znaleźć się we wspólnym PDF?",
     sammel_pdf_alle_rezepte_btn: "Wszystkie wyświetlone przepisy",
     sammel_pdf_auswahl_btn: "Wybierz konkretne przepisy",
@@ -4906,8 +4716,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Fechar modo de cozinha",
     kochmodus_schritt_zurueck_aria: "Passo anterior",
     kochmodus_schritt_weiter_aria: "Próximo passo",
-    kochmodus_vorlesen_ein_aria: "Ativar leitura automática",
-    kochmodus_vorlesen_aus_aria: "Desativar leitura automática",
     kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
     kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
     kopf_sammel_pdf_btn: "📚 PDF coletivo",
@@ -4918,14 +4726,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Nome do livro de receitas",
     sammel_pdf_erstellen_btn: "Criar PDF",
     abschnitt_titel_inhaltsverzeichnis: "Índice",
-    kopf_optionen_btn: "Opções",
-    optionen_titel: "Opções",
-    optionen_vorlesen_erklaerung: "Leitura em voz alta no modo de cozinha: qual dispositivo (por utilizador do Home Assistant) deve receber uma notificação para ler os passos em voz alta (ver README). Sem entrada, é usada a síntese de voz do próprio navegador.",
-    optionen_zeile_hinzufuegen_btn: "+ Adicionar linha",
-    optionen_standard_label: "Dispositivo padrão (para utilizadores não listados)",
-    optionen_name_placeholder: "Nome de exibição no Home Assistant",
-    optionen_dienst_placeholder: "serviço notify, ex. mobile_app_telefone",
-    optionen_zeile_entfernen_title: "Remover linha",
     sammel_pdf_frage_umfang: "Quais receitas devem entrar no PDF conjunto?",
     sammel_pdf_alle_rezepte_btn: "Todas as receitas exibidas",
     sammel_pdf_auswahl_btn: "Selecionar receitas específicas",
@@ -5141,8 +4941,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Închide modul de gătit",
     kochmodus_schritt_zurueck_aria: "Pasul anterior",
     kochmodus_schritt_weiter_aria: "Pasul următor",
-    kochmodus_vorlesen_ein_aria: "Activează citirea automată",
-    kochmodus_vorlesen_aus_aria: "Dezactivează citirea automată",
     kochmodus_zutaten_ein_aria: "Afișează ingredientele",
     kochmodus_zutaten_aus_aria: "Ascunde ingredientele",
     kopf_sammel_pdf_btn: "📚 PDF colectiv",
@@ -5153,14 +4951,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Numele cărții de bucate",
     sammel_pdf_erstellen_btn: "Creează PDF",
     abschnitt_titel_inhaltsverzeichnis: "Cuprins",
-    kopf_optionen_btn: "Opțiuni",
-    optionen_titel: "Opțiuni",
-    optionen_vorlesen_erklaerung: "Citire cu voce tare în modul de gătit: ce dispozitiv (per utilizator Home Assistant) ar trebui să primească o notificare pentru citirea pașilor cu voce tare (vezi README). Fără o intrare, se folosește sinteza vocală proprie a browserului.",
-    optionen_zeile_hinzufuegen_btn: "+ Adaugă rând",
-    optionen_standard_label: "Dispozitiv implicit (pentru utilizatorii nelistați)",
-    optionen_name_placeholder: "Numele afișat în Home Assistant",
-    optionen_dienst_placeholder: "serviciu notify, ex. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Elimină rândul",
     sammel_pdf_frage_umfang: "Care rețete ar trebui incluse în PDF-ul comun?",
     sammel_pdf_alle_rezepte_btn: "Toate rețetele afișate",
     sammel_pdf_auswahl_btn: "Selectează rețete specifice",
@@ -5376,8 +5166,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Zavrieť režim varenia",
     kochmodus_schritt_zurueck_aria: "Predchádzajúci krok",
     kochmodus_schritt_weiter_aria: "Ďalší krok",
-    kochmodus_vorlesen_ein_aria: "Zapnúť automatické čítanie",
-    kochmodus_vorlesen_aus_aria: "Vypnúť automatické čítanie",
     kochmodus_zutaten_ein_aria: "Zobraziť suroviny",
     kochmodus_zutaten_aus_aria: "Skryť suroviny",
     kopf_sammel_pdf_btn: "📚 Súhrnné PDF",
@@ -5388,14 +5176,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Názov kuchárskej knihy",
     sammel_pdf_erstellen_btn: "Vytvoriť PDF",
     abschnitt_titel_inhaltsverzeichnis: "Obsah",
-    kopf_optionen_btn: "Možnosti",
-    optionen_titel: "Možnosti",
-    optionen_vorlesen_erklaerung: "Nahlas čítanie v režime varenia: ktoré zariadenie (podľa používateľa Home Assistant) má dostávať oznámenie s nahlas čítanými krokmi (pozri README). Bez záznamu sa použije vstavaná syntéza reči prehliadača.",
-    optionen_zeile_hinzufuegen_btn: "+ Pridať riadok",
-    optionen_standard_label: "Predvolené zariadenie (pre neuvedených používateľov)",
-    optionen_name_placeholder: "Zobrazované meno v Home Assistant",
-    optionen_dienst_placeholder: "notify-služba, napr. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Odstrániť riadok",
     sammel_pdf_frage_umfang: "Ktoré recepty majú byť v spoločnom PDF?",
     sammel_pdf_alle_rezepte_btn: "Všetky zobrazené recepty",
     sammel_pdf_auswahl_btn: "Vybrať konkrétne recepty",
@@ -5611,8 +5391,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Zapri način kuhanja",
     kochmodus_schritt_zurueck_aria: "Prejšnji korak",
     kochmodus_schritt_weiter_aria: "Naslednji korak",
-    kochmodus_vorlesen_ein_aria: "Vklopi samodejno branje",
-    kochmodus_vorlesen_aus_aria: "Izklopi samodejno branje",
     kochmodus_zutaten_ein_aria: "Prikaži sestavine",
     kochmodus_zutaten_aus_aria: "Skrij sestavine",
     kopf_sammel_pdf_btn: "📚 Zbirni PDF",
@@ -5623,14 +5401,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Ime kuharske knjige",
     sammel_pdf_erstellen_btn: "Ustvari PDF",
     abschnitt_titel_inhaltsverzeichnis: "Kazalo",
-    kopf_optionen_btn: "Možnosti",
-    optionen_titel: "Možnosti",
-    optionen_vorlesen_erklaerung: "Branje na glas v načinu kuhanja: katera naprava (glede na uporabnika Home Assistant) naj prejme obvestilo za branje korakov na glas (glejte README). Brez vnosa se uporabi vgrajena sinteza govora brskalnika.",
-    optionen_zeile_hinzufuegen_btn: "+ Dodaj vrstico",
-    optionen_standard_label: "Privzeta naprava (za nenavedene uporabnike)",
-    optionen_name_placeholder: "Prikazano ime v Home Assistant",
-    optionen_dienst_placeholder: "notify storitev, npr. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Odstrani vrstico",
     sammel_pdf_frage_umfang: "Kateri recepti naj gredo v skupni PDF?",
     sammel_pdf_alle_rezepte_btn: "Vsi prikazani recepti",
     sammel_pdf_auswahl_btn: "Izberi določene recepte",
@@ -5846,8 +5616,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Cerrar modo cocina",
     kochmodus_schritt_zurueck_aria: "Paso anterior",
     kochmodus_schritt_weiter_aria: "Paso siguiente",
-    kochmodus_vorlesen_ein_aria: "Activar lectura automática",
-    kochmodus_vorlesen_aus_aria: "Desactivar lectura automática",
     kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
     kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
     kopf_sammel_pdf_btn: "📚 PDF conjunto",
@@ -5858,14 +5626,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Nombre del recetario",
     sammel_pdf_erstellen_btn: "Crear PDF",
     abschnitt_titel_inhaltsverzeichnis: "Índice",
-    kopf_optionen_btn: "Opciones",
-    optionen_titel: "Opciones",
-    optionen_vorlesen_erklaerung: "Lectura en voz alta en modo cocina: qué dispositivo (por usuario de Home Assistant) debe recibir una notificación para leer los pasos en voz alta (ver README). Sin una entrada se usa la síntesis de voz propia del navegador.",
-    optionen_zeile_hinzufuegen_btn: "+ Añadir fila",
-    optionen_standard_label: "Dispositivo predeterminado (para usuarios no listados)",
-    optionen_name_placeholder: "Nombre visible en Home Assistant",
-    optionen_dienst_placeholder: "servicio notify, p. ej. mobile_app_telefono",
-    optionen_zeile_entfernen_title: "Eliminar fila",
     sammel_pdf_frage_umfang: "¿Qué recetas deben incluirse en el PDF conjunto?",
     sammel_pdf_alle_rezepte_btn: "Todas las recetas mostradas",
     sammel_pdf_auswahl_btn: "Seleccionar recetas concretas",
@@ -6081,8 +5841,6 @@ const UEBERSETZUNGEN = {
     kochmodus_schliessen_aria: "Stäng matlagningsläge",
     kochmodus_schritt_zurueck_aria: "Föregående steg",
     kochmodus_schritt_weiter_aria: "Nästa steg",
-    kochmodus_vorlesen_ein_aria: "Slå på automatisk uppläsning",
-    kochmodus_vorlesen_aus_aria: "Stäng av automatisk uppläsning",
     kochmodus_zutaten_ein_aria: "Visa ingredienser",
     kochmodus_zutaten_aus_aria: "Dölj ingredienser",
     kopf_sammel_pdf_btn: "📚 Samlings-PDF",
@@ -6093,14 +5851,6 @@ const UEBERSETZUNGEN = {
     sammel_pdf_name_placeholder: "Namn på kokboken",
     sammel_pdf_erstellen_btn: "Skapa PDF",
     abschnitt_titel_inhaltsverzeichnis: "Innehållsförteckning",
-    kopf_optionen_btn: "Alternativ",
-    optionen_titel: "Alternativ",
-    optionen_vorlesen_erklaerung: "Uppläsning i tillagningsläge: vilken enhet (per Home Assistant-användare) som ska få en avisering för att läsa upp stegen (se README). Utan post används webbläsarens egen talsyntes.",
-    optionen_zeile_hinzufuegen_btn: "+ Lägg till rad",
-    optionen_standard_label: "Standardenhet (för ej listade användare)",
-    optionen_name_placeholder: "Home Assistant-visningsnamn",
-    optionen_dienst_placeholder: "notify-tjänst, t.ex. mobile_app_telefon",
-    optionen_zeile_entfernen_title: "Ta bort rad",
     sammel_pdf_frage_umfang: "Vilka recept ska ingå i den samlade PDF-filen?",
     sammel_pdf_alle_rezepte_btn: "Alla visade recept",
     sammel_pdf_auswahl_btn: "Välj specifika recept",
@@ -6186,14 +5936,6 @@ const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
 // Marker herausgefiltert, statt als (kaputtes) Rezept angezeigt zu werden.
 const WOCHENPLAN_MARKER = "__rezeptbuch_wochenplan__";
 const KOCHBUECHER_MARKER = "__rezeptbuch_kochbuecher__";
-// Genau wie WOCHENPLAN_MARKER/KOCHBUECHER_MARKER: speichert die im
-// Optionen-Dialog hinterlegten Einstellungen (aktuell: welches Gerät/welcher
-// notify-Dienst für welchen Home-Assistant-Nutzer beim Vorlesen im Kochmodus
-// benachrichtigt werden soll) direkt in der To-do-Liste - kein YAML-Editieren
-// der Karten-Konfiguration nötig, und die Zuordnung gilt geräteübergreifend
-// für alle, die dieselbe To-do-Liste nutzen (siehe _einstellungenAusItem/
-// _einstellungenSpeichern, _kochmodusTtsNotifyServiceErmitteln).
-const EINSTELLUNGEN_MARKER = "__rezeptbuch_einstellungen__";
 
 // "schluessel" bleibt der interne, sprachunabhängige Speicherschlüssel
 // (siehe _leereWochentage() usw.) - das Anzeige-Label kommt erst zur
@@ -6735,16 +6477,6 @@ class RezeptbuchCard extends HTMLElement {
     this._wochenplanAnsicht = "diese";
     this._kochbuecherItem = null;
     this._kochbuecher = [];
-    // Optionen-Dialog (siehe EINSTELLUNGEN_MARKER/_einstellungen*): aktuell
-    // nur die Vorlesen-Geräte-Zuordnung, aber als eigenständiges Objekt
-    // angelegt, damit sich künftige Optionen leicht ergänzen lassen.
-    this._einstellungenItem = null;
-    this._einstellungen = { schemaVersion: 1, ttsNotifyServices: {}, ttsNotifyServiceStandard: "" };
-    // Arbeitskopie während der Dialog offen ist (siehe
-    // _optionenModalOeffnen/_optionenZeilenRendern) - erst beim Klick auf
-    // "Speichern" wird daraus this._einstellungen und das Marker-Item.
-    this._optionenZeilen = [];
-    this._optionenStandardEntwurf = "";
     // Paginierung der Rezeptübersicht (feature: viele Rezepte auf mehrere
     // Seiten aufteilen statt alle auf einmal zu zeigen) - 1-basiert, wird
     // bei jeder Filter-/Sortier-/Suchänderung auf 1 zurückgesetzt (siehe
@@ -6763,7 +6495,6 @@ class RezeptbuchCard extends HTMLElement {
     this._kochmodusAktiv = false;
     this._kochmodusSchrittIndex = 0;
     this._kochmodusZutatenSichtbar = false;
-    this._kochmodusVorlesenAktiv = false;
 
     // Sammel-PDF-Modal (siehe _sammelPdfModalOeffnen/_sammelPdf*): merkt
     // sich zwischen den Modal-Schritten die aktuell gefilterte Rezeptliste,
@@ -7093,12 +6824,10 @@ class RezeptbuchCard extends HTMLElement {
       // (kaputtes) Rezept auftauchen.
       this._wochenplanItem = items.find((i) => i.summary === WOCHENPLAN_MARKER) || null;
       this._kochbuecherItem = items.find((i) => i.summary === KOCHBUECHER_MARKER) || null;
-      this._einstellungenItem = items.find((i) => i.summary === EINSTELLUNGEN_MARKER) || null;
       this._wochenplan = this._wochenplanAusItem(this._wochenplanItem);
       this._kochbuecher = this._kochbuecherAusItem(this._kochbuecherItem);
-      this._einstellungen = this._einstellungenAusItem(this._einstellungenItem);
       this._rezepte = items
-        .filter((item) => item.summary !== WOCHENPLAN_MARKER && item.summary !== KOCHBUECHER_MARKER && item.summary !== EINSTELLUNGEN_MARKER)
+        .filter((item) => item.summary !== WOCHENPLAN_MARKER && item.summary !== KOCHBUECHER_MARKER)
         .map((item) => this._itemZuRezept(item));
     } catch (fehler) {
       console.error("Rezeptbuch: Laden fehlgeschlagen", fehler);
@@ -7189,48 +6918,6 @@ class RezeptbuchCard extends HTMLElement {
       return erfolg;
     }
     const erfolg = await this._serviceAufrufen("add_item", { item: KOCHBUECHER_MARKER, description: beschreibung });
-    if (erfolg) await this._rezepteLaden();
-    return erfolg;
-  }
-
-  // Im Optionen-Dialog gespeicherte Einstellungen aus dem versteckten
-  // Marker-Item parsen (siehe EINSTELLUNGEN_MARKER). Liefert immer ein
-  // vollständiges Objekt zurück, auch ohne Item/mit kaputtem JSON, damit der
-  // Rest des Codes (siehe _kochmodusTtsNotifyServiceErmitteln) sich nicht um
-  // fehlende Felder kümmern muss.
-  _einstellungenAusItem(item) {
-    const leer = { schemaVersion: 1, ttsNotifyServices: {}, ttsNotifyServiceStandard: "" };
-    if (!item || !item.description) return leer;
-    try {
-      const geparst = JSON.parse(item.description);
-      return {
-        schemaVersion: geparst.schemaVersion || 1,
-        ttsNotifyServices: (geparst.ttsNotifyServices && typeof geparst.ttsNotifyServices === "object") ? geparst.ttsNotifyServices : {},
-        ttsNotifyServiceStandard: geparst.ttsNotifyServiceStandard || "",
-      };
-    } catch {
-      return leer;
-    }
-  }
-
-  // Schreibt die im Optionen-Dialog bearbeiteten Einstellungen zurück in ihr
-  // Marker-Item (analog zu _wochenplanSpeichern/_kochbuecherSpeichern).
-  async _einstellungenSpeichern(neueEinstellungen) {
-    const payload = {
-      schemaVersion: 1,
-      ttsNotifyServices: neueEinstellungen.ttsNotifyServices,
-      ttsNotifyServiceStandard: neueEinstellungen.ttsNotifyServiceStandard,
-    };
-    const beschreibung = JSON.stringify(payload);
-    if (this._einstellungenItem) {
-      const erfolg = await this._serviceAufrufen("update_item", { item: this._einstellungenItem.uid, description: beschreibung });
-      if (erfolg) {
-        this._einstellungenItem = { ...this._einstellungenItem, description: beschreibung };
-        this._einstellungen = payload;
-      }
-      return erfolg;
-    }
-    const erfolg = await this._serviceAufrufen("add_item", { item: EINSTELLUNGEN_MARKER, description: beschreibung });
     if (erfolg) await this._rezepteLaden();
     return erfolg;
   }
@@ -7664,35 +7351,20 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   // Setzt den Kochmodus-Zustand zurück (u.a. beim Verlassen der
-  // Detailansicht) und stoppt eine ggf. noch laufende Sprachausgabe -
-  // sonst würde beim nächsten Öffnen eines Rezepts sofort wieder
-  // vorgelesen bzw. mitten in einem alten Schritt weitergezählt.
+  // Detailansicht).
   _kochmodusZuruecksetzen() {
-    this._sprachausgabeStoppen();
     this._kochmodusAktiv = false;
     this._kochmodusSchrittIndex = 0;
     this._kochmodusZutatenSichtbar = false;
-  }
-
-  // Bricht nur eine laufende Web-Speech-Ausgabe ab (Weg 1, siehe
-  // _kochmodusAktuellenSchrittVorlesen) - eine bereits an die Companion-App
-  // geschickte TTS-Benachrichtigung (Weg 2, "tts_notify_service") lässt
-  // sich technisch nicht mehr zurückrufen, sobald sie verschickt ist.
-  _sprachausgabeStoppen() {
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
   }
 
   _kochmodusOeffnen() {
     this._kochmodusAktiv = true;
     this._kochmodusSchrittIndex = 0;
     this._render();
-    if (this._kochmodusVorlesenAktiv) this._kochmodusAktuellenSchrittVorlesen();
   }
 
   _kochmodusSchliessen() {
-    this._sprachausgabeStoppen();
     this._kochmodusAktiv = false;
     this._render();
   }
@@ -7703,131 +7375,6 @@ class RezeptbuchCard extends HTMLElement {
     if (neuerIndex < 0 || neuerIndex >= schritte.length) return;
     this._kochmodusSchrittIndex = neuerIndex;
     this._render();
-    if (this._kochmodusVorlesenAktiv) this._kochmodusAktuellenSchrittVorlesen();
-  }
-
-  _kochmodusVorlesenUmschalten() {
-    this._kochmodusVorlesenAktiv = !this._kochmodusVorlesenAktiv;
-    if (this._kochmodusVorlesenAktiv) {
-      this._kochmodusAktuellenSchrittVorlesen();
-    } else {
-      this._sprachausgabeStoppen();
-    }
-    this._render();
-  }
-
-  // Ermittelt, welcher notify.mobile_app_*-Dienst (falls überhaupt einer)
-  // für das Vorlesen per Benachrichtigung genutzt werden soll (siehe
-  // _kochmodusAktuellenSchrittVorlesen, Weg 2). Vier mögliche Quellen, in
-  // dieser Rangfolge (je genauer/frischer die Quelle, desto höher):
-  // 1. Im Optionen-Dialog hinterlegte Zuordnung (this._einstellungen.
-  //    ttsNotifyServices, siehe EINSTELLUNGEN_MARKER) für den GERADE
-  //    angemeldeten Nutzer (hass.user.name) - komfortabelster Weg, da direkt
-  //    in der Karte konfigurierbar, ohne die YAML-Kartenkonfiguration
-  //    anzufassen.
-  // 2. Dieselbe Zuordnung, aber aus der YAML-Kartenoption
-  //    "tts_notify_services" (Altbestand/Alternative für alle, die lieber
-  //    per YAML konfigurieren).
-  // 3. Im Optionen-Dialog hinterlegtes Standard-/Fallback-Gerät
-  //    (this._einstellungen.ttsNotifyServiceStandard) - greift, wenn der
-  //    angemeldete Nutzer in keiner der beiden Zuordnungen auftaucht.
-  // 4. Die einzelne YAML-Kartenoption "tts_notify_service" als letzter
-  //    Fallback.
-  // Taucht der Nutzer in KEINER Quelle auf und ist auch kein Standard-Gerät
-  // hinterlegt, liefert die Methode null - dann bleibt es beim Vorlesen über
-  // die Web Speech API.
-  _kochmodusTtsNotifyServiceErmitteln() {
-    const nutzername = this._hass && this._hass.user && this._hass.user.name;
-    const uiZuordnung = (this._einstellungen && this._einstellungen.ttsNotifyServices) || {};
-    const konfigZuordnung = this._config.tts_notify_services || {};
-    if (nutzername) {
-      if (uiZuordnung[nutzername]) return uiZuordnung[nutzername];
-      if (konfigZuordnung[nutzername]) return konfigZuordnung[nutzername];
-    }
-    const uiStandard = this._einstellungen && this._einstellungen.ttsNotifyServiceStandard;
-    if (uiStandard) return uiStandard;
-    return this._config.tts_notify_service || null;
-  }
-
-  // Liest den aktuellen Kochmodus-Schritt vor. Zwei Wege, je nach
-  // Kartenkonfiguration:
-  //
-  // 1. Standard: die im Browser eingebaute Sprachausgabe (Web Speech API) -
-  //    bewusst KEINE Anbindung an Home Assistants eigenen tts-Dienst nötig,
-  //    funktioniert überall sofort, ganz ohne Einrichtung (passend zum
-  //    Grundsatz dieses Projekts "kein Backend nötig"). In manchen
-  //    eingebetteten WebViews (u.a. der Home-Assistant-App selbst) liefert
-  //    dieser Weg trotz funktionierender System-Sprachausgabe aber KEINEN
-  //    Ton, ohne dass ein Fehler auftritt - eine bekannte Einschränkung
-  //    dieser WebViews, die sich von hier aus nicht umgehen lässt.
-  // 2. Fallback für genau diesen Fall: ist eine der Kartenoptionen
-  //    "tts_notify_service"/"tts_notify_services" gesetzt (siehe
-  //    _kochmodusTtsNotifyServiceErmitteln), wird STATTDESSEN eine
-  //    Home-Assistant-Benachrichtigung mit TTS-Befehl an die
-  //    Companion-App geschickt - die liest den Text über die NATIVE
-  //    System-Sprachausgabe des Geräts vor, komplett an der WebView vorbei.
-  //    Bewusst weiterhin kein media_player/TTS-Backend nötig - es wird
-  //    nach wie vor nur die Sprachausgabe des Geräts selbst genutzt, auf
-  //    dem die Karte offen ist, nur eben über einen anderen technischen
-  //    Weg. Ohne diese Optionen bleibt Weg 1 aktiv.
-  _kochmodusAktuellenSchrittVorlesen() {
-    const schritte = (this._aktivesRezept.steps || []).filter((s) => s && s.trim());
-    const text = schritte[this._kochmodusSchrittIndex];
-    if (!text) return;
-
-    const ttsNotifyService = this._kochmodusTtsNotifyServiceErmitteln();
-    if (ttsNotifyService && this._hass) {
-      this._hass
-        .callService("notify", ttsNotifyService, {
-          message: "TTS",
-          data: { tts_text: text },
-        })
-        .catch((fehler) => {
-          console.error("Rezeptbuch: Vorlesen per Benachrichtigung (tts_notify_service) fehlgeschlagen", fehler);
-        });
-      return;
-    }
-
-    if (typeof window === "undefined" || !window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
-      return;
-    }
-
-    const sprechen = () => {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      // NUR der zweistellige Sprachcode (z.B. "de") reicht manchen
-      // eingebetteten WebViews (u.a. der Home-Assistant-App) NICHT, um eine
-      // installierte Stimme zu finden - ohne Treffer bleibt die Ausgabe
-      // dort lautlos, ganz ohne Fehlermeldung. Deshalb wird aktiv nach einer
-      // passenden installierten Stimme gesucht (Sprachcode-Präfixvergleich)
-      // und deren VOLLER Sprachcode (z.B. "de-DE") dem Utterance mitgegeben
-      // (nur "lang", nicht "voice" - Zuweisen eines nicht vom Browser selbst
-      // stammenden Objekts an "voice" wird von manchen Engines abgelehnt).
-      const zielSprache = ((this._hass && this._hass.language) || this._sprache() || "de").toLowerCase();
-      const stimmen = typeof window.speechSynthesis.getVoices === "function" ? window.speechSynthesis.getVoices() : [];
-      const passendeStimme = (stimmen || []).find((s) => s.lang && s.lang.toLowerCase().startsWith(zielSprache));
-      utterance.lang = passendeStimme ? passendeStimme.lang : zielSprache;
-      window.speechSynthesis.speak(utterance);
-    };
-
-    // Die Stimmenliste wird von manchen Browsern/WebViews erst ASYNCHRON
-    // nachgeladen - beim allerersten Aufruf kann getVoices() noch leer
-    // sein, obwohl kurz danach passende Stimmen verfügbar wären. Deshalb
-    // hier einmalig kurz auf das "voiceschanged"-Ereignis warten (mit
-    // Zeit-Fallback), statt sofort ohne Stimmen-Treffer loszulegen.
-    const vorhandeneStimmen = typeof window.speechSynthesis.getVoices === "function" ? window.speechSynthesis.getVoices() : [];
-    if ((!vorhandeneStimmen || vorhandeneStimmen.length === 0) && typeof window.speechSynthesis.addEventListener === "function") {
-      let schonGesprochen = false;
-      const einmaligSprechen = () => {
-        if (schonGesprochen) return;
-        schonGesprochen = true;
-        sprechen();
-      };
-      window.speechSynthesis.addEventListener("voiceschanged", einmaligSprechen, { once: true });
-      setTimeout(einmaligSprechen, 300);
-    } else {
-      sprechen();
-    }
   }
 
   _neuesRezeptFormular() {
@@ -8439,13 +7986,6 @@ class RezeptbuchCard extends HTMLElement {
         .sammel-pdf-auswahl-zeile { display:flex; align-items:center; gap:8px; padding:6px 0; cursor:pointer; }
         .sammel-pdf-auswahl-zeile input { flex-shrink:0; }
         .sammel-pdf-auswahl-zeile span { color: var(--primary-text-color); }
-        .optionen-zeile { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
-        .optionen-zeile input { flex:1; box-sizing:border-box; padding:8px 12px; border-radius:10px;
-          border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); }
-        .optionen-zeile input.optionen-zeile-name { flex:0 0 40%; }
-        .optionen-zeile-entfernen { border:none; background:transparent; color:#a8402a; cursor:pointer; font-size:1em; flex-shrink:0; padding:0 4px; }
-        #optionen-standard-feld { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
-          border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); margin-top:4px; }
         .tags-liste { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
         .tag-chip {
           display:inline-flex; align-items:center; gap:4px; background: var(--kb-terrakotta-hell);
@@ -8636,7 +8176,6 @@ class RezeptbuchCard extends HTMLElement {
             ${this._rezepte.length ? `<button class="sekundaer" id="sichern-btn">${this._t("kopf_sichern_btn")}</button>` : ""}
             ${this._rezepte.length ? `<button class="sekundaer" id="sammel-pdf-btn">${this._t("kopf_sammel_pdf_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
-            <button class="sekundaer" id="optionen-btn" title="${this._t("kopf_optionen_btn")}" aria-label="${this._t("kopf_optionen_btn")}">${this._t("kopf_optionen_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
             ${this._rezepte.length && this._config.ask_cooked !== false ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
@@ -8742,26 +8281,6 @@ class RezeptbuchCard extends HTMLElement {
             </div>
           </div>
         </div>
-
-        <div class="modal-overlay" id="optionen-modal" style="display:none;">
-          <div class="modal-box modal-box-breit">
-            <h3 style="margin-top:0;">${this._t("optionen_titel")}</h3>
-            <p style="text-align:left; margin-top:0;">${this._t("optionen_vorlesen_erklaerung")}</p>
-            <div id="optionen-zeilen-liste"></div>
-            <button type="button" class="sekundaer klein" id="optionen-zeile-hinzufuegen-btn" style="margin-top:8px;">${this._t("optionen_zeile_hinzufuegen_btn")}</button>
-            <div style="margin-top:16px; text-align:left;">
-              <label for="optionen-standard-feld">${this._t("optionen_standard_label")}</label><br>
-              <input type="text" id="optionen-standard-feld" list="optionen-notify-dienste-liste" placeholder="${this._t("optionen_dienst_placeholder")}" value="${this._escape(this._optionenStandardEntwurf)}">
-            </div>
-            <datalist id="optionen-notify-dienste-liste">
-              ${this._notifyDiensteVerfuegbar().map((d) => `<option value="${this._escape(d)}"></option>`).join("")}
-            </datalist>
-            <div class="modal-aktionen" style="margin-top:14px;">
-              <button type="button" class="sekundaer" id="optionen-abbrechen-btn">${this._t("allgemein_abbrechen")}</button>
-              <button type="button" class="primaer" id="optionen-speichern-btn">${this._t("allgemein_speichern")}</button>
-            </div>
-          </div>
-        </div>
         <div class="versions-hinweis">v${CARD_VERSION}</div>
       </ha-card>
     `;
@@ -8783,32 +8302,6 @@ class RezeptbuchCard extends HTMLElement {
 
     this.shadowRoot.getElementById("neu-btn").addEventListener("click", () => this._neuesRezeptFormular());
     this.shadowRoot.getElementById("wochenplan-btn").addEventListener("click", () => this._wochenplanAnzeigen());
-    this.shadowRoot.getElementById("optionen-btn").addEventListener("click", () => this._optionenModalOeffnen());
-
-    const optionenAbbrechenBtn = this.shadowRoot.getElementById("optionen-abbrechen-btn");
-    if (optionenAbbrechenBtn) {
-      optionenAbbrechenBtn.addEventListener("click", () => this._optionenModalSchliessen());
-    }
-
-    const optionenSpeichernBtn = this.shadowRoot.getElementById("optionen-speichern-btn");
-    if (optionenSpeichernBtn) {
-      optionenSpeichernBtn.addEventListener("click", () => this._optionenSpeichern());
-    }
-
-    const optionenZeileHinzufuegenBtn = this.shadowRoot.getElementById("optionen-zeile-hinzufuegen-btn");
-    if (optionenZeileHinzufuegenBtn) {
-      optionenZeileHinzufuegenBtn.addEventListener("click", () => {
-        this._optionenZeilen.push({ name: "", dienst: "" });
-        this._optionenZeilenRendern();
-      });
-    }
-
-    const optionenStandardFeld = this.shadowRoot.getElementById("optionen-standard-feld");
-    if (optionenStandardFeld) {
-      optionenStandardFeld.addEventListener("input", () => {
-        this._optionenStandardEntwurf = optionenStandardFeld.value;
-      });
-    }
 
     const sichernBtn = this.shadowRoot.getElementById("sichern-btn");
     if (sichernBtn) {
@@ -9813,90 +9306,6 @@ class RezeptbuchCard extends HTMLElement {
   // 4. "name"    - (nur bei "Ja") individueller Kochbuch-Name.
   // Nur wenn es überhaupt Rezepte zu exportieren gibt; sonst wie beim
   // direkten Export der Hinweis "keine Rezepte" statt eines leeren Modals.
-  // Liest die Namen der unter der HA-Integration "notify" verfügbaren
-  // Dienste aus hass.services aus (z.B. "mobile_app_chris_smartphone") -
-  // nur zum Befüllen der Autovervollständigung im Optionen-Dialog
-  // (datalist), damit man sich den genauen Dienstnamen nicht aus den
-  // Entwicklerwerkzeugen abschreiben muss. Ist hass.services (noch) nicht
-  // verfügbar (z.B. sehr früh beim Laden oder in Tests ohne Mock), bleibt
-  // die Liste einfach leer - das Eingabefeld funktioniert trotzdem als
-  // normales Textfeld.
-  _notifyDiensteVerfuegbar() {
-    const dienste = this._hass && this._hass.services && this._hass.services.notify;
-    if (!dienste) return [];
-    return Object.keys(dienste).sort();
-  }
-
-  // Öffnet den Optionen-Dialog: baut aus den aktuell gespeicherten
-  // Einstellungen (this._einstellungen, siehe EINSTELLUNGEN_MARKER) eine
-  // Arbeitskopie (this._optionenZeilen/_optionenStandardEntwurf), die sich
-  // frei bearbeiten lässt, ohne die gespeicherten Einstellungen schon vor
-  // einem Klick auf "Speichern" zu verändern (siehe _optionenSpeichern).
-  _optionenModalOeffnen() {
-    const zuordnung = (this._einstellungen && this._einstellungen.ttsNotifyServices) || {};
-    this._optionenZeilen = Object.entries(zuordnung).map(([name, dienst]) => ({ name, dienst }));
-    this._optionenStandardEntwurf = (this._einstellungen && this._einstellungen.ttsNotifyServiceStandard) || "";
-    const standardFeld = this.shadowRoot.getElementById("optionen-standard-feld");
-    if (standardFeld) standardFeld.value = this._optionenStandardEntwurf;
-    this._optionenZeilenRendern();
-    const modal = this.shadowRoot.getElementById("optionen-modal");
-    if (modal) modal.style.display = "flex";
-  }
-
-  _optionenModalSchliessen() {
-    const modal = this.shadowRoot.getElementById("optionen-modal");
-    if (modal) modal.style.display = "none";
-  }
-
-  // Zeichnet die Liste der Zuordnungs-Zeilen (HA-Anzeigename -> notify-
-  // Dienst) im Optionen-Dialog neu - beim ersten Öffnen sowie nach jedem
-  // Hinzufügen/Entfernen einer Zeile. Tippen in ein bestehendes Feld löst
-  // dagegen KEIN Neuzeichnen aus (nur ein "input"-Listener, siehe unten),
-  // damit der Cursor beim Tippen nicht durch ein Neuzeichnen "wegspringt".
-  _optionenZeilenRendern() {
-    const container = this.shadowRoot.getElementById("optionen-zeilen-liste");
-    if (!container) return;
-    container.innerHTML = this._optionenZeilen
-      .map((zeile, i) => `
-        <div class="optionen-zeile" data-index="${i}">
-          <input type="text" class="optionen-zeile-name" data-feld="name" data-index="${i}" placeholder="${this._t("optionen_name_placeholder")}" value="${this._escape(zeile.name)}">
-          <input type="text" data-feld="dienst" data-index="${i}" list="optionen-notify-dienste-liste" placeholder="${this._t("optionen_dienst_placeholder")}" value="${this._escape(zeile.dienst)}">
-          <button type="button" class="optionen-zeile-entfernen" data-index="${i}" title="${this._t("optionen_zeile_entfernen_title")}" aria-label="${this._t("optionen_zeile_entfernen_title")}">✕</button>
-        </div>
-      `)
-      .join("");
-    container.querySelectorAll("input[data-feld]").forEach((feld) => {
-      feld.addEventListener("input", () => {
-        const i = Number(feld.dataset.index);
-        this._optionenZeilen[i][feld.dataset.feld] = feld.value;
-      });
-    });
-    container.querySelectorAll(".optionen-zeile-entfernen").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        this._optionenZeilen.splice(Number(btn.dataset.index), 1);
-        this._optionenZeilenRendern();
-      });
-    });
-  }
-
-  // Übernimmt die Arbeitskopie (this._optionenZeilen/_optionenStandardEntwurf)
-  // in die gespeicherten Einstellungen: leere Zeilen (fehlender Name oder
-  // Dienst) werden dabei stillschweigend übersprungen, statt kaputte
-  // Zuordnungen zu speichern.
-  async _optionenSpeichern() {
-    const ttsNotifyServices = {};
-    for (const zeile of this._optionenZeilen) {
-      const name = (zeile.name || "").trim();
-      const dienst = (zeile.dienst || "").trim();
-      if (name && dienst) ttsNotifyServices[name] = dienst;
-    }
-    const ttsNotifyServiceStandard = (this._optionenStandardEntwurf || "").trim();
-    const erfolg = await this._einstellungenSpeichern({ ttsNotifyServices, ttsNotifyServiceStandard });
-    if (erfolg) {
-      this._optionenModalSchliessen();
-    }
-  }
-
   _sammelPdfModalOeffnen() {
     const liste = this._sortiereRezepte(this._gefilterteRezepte());
     if (!liste.length) {
@@ -10136,7 +9545,6 @@ class RezeptbuchCard extends HTMLElement {
           </div>
           <div class="kochmodus-werkzeuge">
             <button class="sekundaer klein${this._kochmodusZutatenSichtbar ? " aktiv" : ""}" id="kochmodus-zutaten-btn" aria-label="${this._t(this._kochmodusZutatenSichtbar ? "kochmodus_zutaten_aus_aria" : "kochmodus_zutaten_ein_aria")}">🥕 ${this._t("abschnitt_titel_zutaten")}</button>
-            <button class="sekundaer klein${this._kochmodusVorlesenAktiv ? " aktiv" : ""}" id="kochmodus-vorlesen-btn" aria-label="${this._t(this._kochmodusVorlesenAktiv ? "kochmodus_vorlesen_aus_aria" : "kochmodus_vorlesen_ein_aria")}">${this._kochmodusVorlesenAktiv ? "🔊" : "🔈"}</button>
           </div>
           ${this._kochmodusZutatenSichtbar ? `
             <div class="kochmodus-zutaten-panel">
@@ -10179,10 +9587,6 @@ class RezeptbuchCard extends HTMLElement {
         this._kochmodusZutatenSichtbar = !this._kochmodusZutatenSichtbar;
         this._render();
       });
-    }
-    const kochmodusVorlesenBtn = this.shadowRoot.getElementById("kochmodus-vorlesen-btn");
-    if (kochmodusVorlesenBtn) {
-      kochmodusVorlesenBtn.addEventListener("click", () => this._kochmodusVorlesenUmschalten());
     }
     const kochmodusZurueckBtn = this.shadowRoot.getElementById("kochmodus-zurueck-btn");
     if (kochmodusZurueckBtn) {
