@@ -3445,6 +3445,10 @@ async function testKochmodusVorlesenPerSprachausgabe(browser) {
         value: {
           speak: (utterance) => gesprocheneTexte.push(utterance.text),
           cancel: () => { abgebrochenAnzahl++; },
+          // Nicht leer, damit der (asynchrone) "voiceschanged"-Wartepfad in
+          // _kochmodusAktuellenSchrittVorlesen hier nicht greift und die
+          // Assertions unten weiterhin SOFORT (synchron) prüfen können.
+          getVoices: () => [{ lang: "de-DE", name: "Test-Stimme" }],
         },
       });
 
@@ -3482,6 +3486,106 @@ async function testKochmodusVorlesenPerSprachausgabe(browser) {
     assert(
       ergebnis.nachZurueckOhneVorlesen.length === 2,
       "nach dem Ausschalten wird bei einem weiteren Schrittwechsel NICHT mehr automatisch vorgelesen"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusVorlesenNutztVollenSprachcodeDerInstalliertenStimme(browser) {
+  console.log("\nTest: Vorlesen nutzt den VOLLEN Sprachcode einer passenden installierten Stimme (z.B. 'de-DE' statt nur 'de')");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Wasser aufkochen"] }),
+    });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      const gesprocheneUtterances = [];
+      // Simuliert eine WebView mit mehreren installierten Stimmen, darunter
+      // eine für Deutsch, aber unter dem VOLLEN Sprachcode "de-DE" (nicht
+      // nur "de") - genau der Fall, den viele eingebettete WebViews
+      // (u.a. die Home-Assistant-App) für eine Stimmen-Zuordnung brauchen.
+      Object.defineProperty(window, "speechSynthesis", {
+        configurable: true,
+        value: {
+          speak: (utterance) => gesprocheneUtterances.push(utterance),
+          cancel: () => {},
+          getVoices: () => [
+            { lang: "en-US", name: "English Test Voice" },
+            { lang: "de-DE", name: "Deutsche Test-Stimme" },
+          ],
+        },
+      });
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+
+      return { sprachCode: gesprocheneUtterances[0] ? gesprocheneUtterances[0].lang : null };
+    });
+
+    assert(
+      ergebnis.sprachCode === "de-DE",
+      `die Sprachausgabe erhält den vollen Sprachcode der passenden installierten Stimme (tatsächlich: ${JSON.stringify(ergebnis.sprachCode)})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusVorlesenWartetKurzAufNachladendeStimmenliste(browser) {
+  console.log("\nTest: Vorlesen wartet kurz auf eine asynchron nachladende Stimmenliste, statt sofort ohne Stimmen-Treffer zu sprechen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Wasser aufkochen"] }),
+    });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const gesprocheneUtterances = [];
+      let stimmenVerfuegbar = false;
+      const voiceschangedListener = [];
+      Object.defineProperty(window, "speechSynthesis", {
+        configurable: true,
+        value: {
+          speak: (utterance) => gesprocheneUtterances.push(utterance),
+          cancel: () => {},
+          // Anfangs LEER (wie bei manchen Browsern/WebViews direkt nach dem
+          // Laden) - erst nach "voiceschanged" ist die deutsche Stimme da.
+          getVoices: () => (stimmenVerfuegbar ? [{ lang: "de-DE", name: "Deutsche Test-Stimme" }] : []),
+          addEventListener: (art, fn) => { if (art === "voiceschanged") voiceschangedListener.push(fn); },
+        },
+      });
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+
+      const sofortGesprochen = gesprocheneUtterances.length > 0;
+
+      // Stimmen "laden nach" und das Ereignis auslösen, auf das die Karte
+      // registriert sein sollte.
+      stimmenVerfuegbar = true;
+      voiceschangedListener.forEach((fn) => fn());
+      await new Promise((r) => setTimeout(r, 10));
+
+      return {
+        sofortGesprochen,
+        anzahlNachEreignis: gesprocheneUtterances.length,
+        sprachCodeNachEreignis: gesprocheneUtterances[0] ? gesprocheneUtterances[0].lang : null,
+      };
+    });
+
+    assert(!ergebnis.sofortGesprochen, "ohne vorhandene Stimmen wird NICHT sofort ohne Stimmen-Treffer gesprochen");
+    assert(ergebnis.anzahlNachEreignis === 1, "sobald die Stimmenliste nachlädt ('voiceschanged'), wird genau einmal gesprochen");
+    assert(
+      ergebnis.sprachCodeNachEreignis === "de-DE",
+      `dabei wird der volle Sprachcode der jetzt verfügbaren Stimme verwendet (tatsächlich: ${JSON.stringify(ergebnis.sprachCodeNachEreignis)})`
     );
   } finally {
     await page.close();
@@ -3815,6 +3919,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusNavigationDurchSchritte(browser);
     await testKochmodusZutatenEinblenden(browser);
     await testKochmodusVorlesenPerSprachausgabe(browser);
+    await testKochmodusVorlesenNutztVollenSprachcodeDerInstalliertenStimme(browser);
+    await testKochmodusVorlesenWartetKurzAufNachladendeStimmenliste(browser);
   } finally {
     await browser.close();
   }

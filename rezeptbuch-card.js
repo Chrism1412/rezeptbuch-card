@@ -7467,10 +7467,43 @@ class RezeptbuchCard extends HTMLElement {
     const schritte = (this._aktivesRezept.steps || []).filter((s) => s && s.trim());
     const text = schritte[this._kochmodusSchrittIndex];
     if (!text) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = (this._hass && this._hass.language) || this._sprache();
-    window.speechSynthesis.speak(utterance);
+
+    const sprechen = () => {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      // NUR der zweistellige Sprachcode (z.B. "de") reicht manchen
+      // eingebetteten WebViews (u.a. der Home-Assistant-App) NICHT, um eine
+      // installierte Stimme zu finden - ohne Treffer bleibt die Ausgabe
+      // dort lautlos, ganz ohne Fehlermeldung. Deshalb wird aktiv nach einer
+      // passenden installierten Stimme gesucht (Sprachcode-Präfixvergleich)
+      // und deren VOLLER Sprachcode (z.B. "de-DE") dem Utterance mitgegeben
+      // (nur "lang", nicht "voice" - Zuweisen eines nicht vom Browser selbst
+      // stammenden Objekts an "voice" wird von manchen Engines abgelehnt).
+      const zielSprache = ((this._hass && this._hass.language) || this._sprache() || "de").toLowerCase();
+      const stimmen = typeof window.speechSynthesis.getVoices === "function" ? window.speechSynthesis.getVoices() : [];
+      const passendeStimme = (stimmen || []).find((s) => s.lang && s.lang.toLowerCase().startsWith(zielSprache));
+      utterance.lang = passendeStimme ? passendeStimme.lang : zielSprache;
+      window.speechSynthesis.speak(utterance);
+    };
+
+    // Die Stimmenliste wird von manchen Browsern/WebViews erst ASYNCHRON
+    // nachgeladen - beim allerersten Aufruf kann getVoices() noch leer
+    // sein, obwohl kurz danach passende Stimmen verfügbar wären. Deshalb
+    // hier einmalig kurz auf das "voiceschanged"-Ereignis warten (mit
+    // Zeit-Fallback), statt sofort ohne Stimmen-Treffer loszulegen.
+    const vorhandeneStimmen = typeof window.speechSynthesis.getVoices === "function" ? window.speechSynthesis.getVoices() : [];
+    if ((!vorhandeneStimmen || vorhandeneStimmen.length === 0) && typeof window.speechSynthesis.addEventListener === "function") {
+      let schonGesprochen = false;
+      const einmaligSprechen = () => {
+        if (schonGesprochen) return;
+        schonGesprochen = true;
+        sprechen();
+      };
+      window.speechSynthesis.addEventListener("voiceschanged", einmaligSprechen, { once: true });
+      setTimeout(einmaligSprechen, 300);
+    } else {
+      sprechen();
+    }
   }
 
   _neuesRezeptFormular() {

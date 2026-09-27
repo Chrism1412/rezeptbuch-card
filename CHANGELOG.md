@@ -17,7 +17,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Vorlesen des jeweils aktuellen Schritts über die im Browser eingebaute
   Sprachausgabe (Web Speech API) ein- und ausschalten - kein Home-
   Assistant-TTS-Setup oder Lautsprecher-Entity nötig, funktioniert direkt
-  auf dem Gerät, auf dem die Karte gerade offen ist.
+  auf dem Gerät, auf dem die Karte gerade offen ist. Sucht dabei aktiv nach
+  einer installierten Stimme mit vollem Sprachcode (z.B. "de-DE" statt nur
+  "de") und wartet nötigenfalls kurz auf eine asynchron nachladende
+  Stimmenliste - beides Fälle, in denen die Ausgabe in eingebetteten
+  WebViews (u.a. der Home-Assistant-App) sonst lautlos bleiben kann.
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen
