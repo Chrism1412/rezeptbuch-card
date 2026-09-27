@@ -7656,22 +7656,23 @@ class RezeptbuchCard extends HTMLElement {
       if (typeof AudioContextKlasse === "function") {
         const kontext = new AudioContextKlasse();
         const jetzt = kontext.currentTime;
-        // Drei kurze Pieptöne statt eines Dauertons - deutlich hörbar,
-        // aber nicht so unangenehm wie ein Alarm.
-        [0, 0.35, 0.7].forEach((versatz) => {
+        // Sechs kurze Pieptöne statt eines Dauertons - deutlich länger und
+        // damit auch aus einem anderen Zimmer oder bei Küchenlärm noch gut
+        // wahrnehmbar, aber nicht so unangenehm wie ein Daueralarm.
+        [0, 0.4, 0.8, 1.2, 1.6, 2.0].forEach((versatz) => {
           const oszillator = kontext.createOscillator();
           const lautstaerke = kontext.createGain();
           oszillator.type = "sine";
           oszillator.frequency.value = 880;
           lautstaerke.gain.setValueAtTime(0.0001, jetzt + versatz);
           lautstaerke.gain.exponentialRampToValueAtTime(0.3, jetzt + versatz + 0.02);
-          lautstaerke.gain.exponentialRampToValueAtTime(0.0001, jetzt + versatz + 0.25);
+          lautstaerke.gain.exponentialRampToValueAtTime(0.0001, jetzt + versatz + 0.3);
           oszillator.connect(lautstaerke);
           lautstaerke.connect(kontext.destination);
           oszillator.start(jetzt + versatz);
-          oszillator.stop(jetzt + versatz + 0.3);
+          oszillator.stop(jetzt + versatz + 0.35);
         });
-        setTimeout(() => kontext.close().catch(() => {}), 1200);
+        setTimeout(() => kontext.close().catch(() => {}), 2600);
       }
     } catch (fehler) {
       // Ton ist reine Zusatzfunktion - die visuelle Meldung reicht notfalls.
