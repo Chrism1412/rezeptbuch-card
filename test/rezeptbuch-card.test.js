@@ -3309,35 +3309,48 @@ async function testPaginierungTeiltRezepteInSeitenAuf(browser) {
 
     const zustandSeite1 = await page.evaluate(() => {
       const kacheln = window.__karte.shadowRoot.querySelectorAll(".kachel");
-      const navigation = window.__karte.shadowRoot.getElementById("seite-zurueck-btn");
-      const anzeige = window.__karte.shadowRoot.querySelector(".seiten-anzeige");
+      const navigationOben = window.__karte.shadowRoot.getElementById("seite-zurueck-btn-oben");
+      const navigationUnten = window.__karte.shadowRoot.getElementById("seite-zurueck-btn-unten");
+      const anzeigen = window.__karte.shadowRoot.querySelectorAll(".seiten-anzeige");
       return {
         anzahlKacheln: kacheln.length,
-        zurueckDeaktiviert: navigation ? navigation.disabled : null,
-        anzeigeText: anzeige ? anzeige.textContent : null,
+        navigationObenVorhanden: !!navigationOben,
+        zurueckDeaktiviertOben: navigationOben ? navigationOben.disabled : null,
+        zurueckDeaktiviertUnten: navigationUnten ? navigationUnten.disabled : null,
+        anzahlAnzeigen: anzeigen.length,
+        anzeigeText: anzeigen.length ? anzeigen[0].textContent : null,
       };
     });
     assert(zustandSeite1.anzahlKacheln === 2, "Seite 1 zeigt nur 2 von 5 Rezepten (items_per_page: 2)");
-    assert(zustandSeite1.zurueckDeaktiviert === true, "'Zurück' ist auf Seite 1 deaktiviert");
+    assert(zustandSeite1.navigationObenVorhanden, "die Seitennavigation erscheint auch oberhalb der Rezeptübersicht");
+    assert(zustandSeite1.anzahlAnzeigen === 2, "die Seitenanzeige erscheint sowohl oberhalb als auch unterhalb der Übersicht");
+    assert(zustandSeite1.zurueckDeaktiviertOben === true, "'Zurück' ist oben auf Seite 1 deaktiviert");
+    assert(zustandSeite1.zurueckDeaktiviertUnten === true, "'Zurück' ist unten auf Seite 1 deaktiviert");
     assert(zustandSeite1.anzeigeText === "Seite 1 von 3", `Seitenanzeige zeigt 'Seite 1 von 3' (tatsächlich: ${JSON.stringify(zustandSeite1.anzeigeText)})`);
 
-    await page.evaluate(() => window.__karte.shadowRoot.getElementById("seite-weiter-btn").click());
+    await page.evaluate(() => window.__karte.shadowRoot.getElementById("seite-weiter-btn-oben").click());
     const zustandSeite2 = await page.evaluate(() => ({
       anzahlKacheln: window.__karte.shadowRoot.querySelectorAll(".kachel").length,
       anzeigeText: window.__karte.shadowRoot.querySelector(".seiten-anzeige").textContent,
-      zurueckDeaktiviert: window.__karte.shadowRoot.getElementById("seite-zurueck-btn").disabled,
+      zurueckDeaktiviertOben: window.__karte.shadowRoot.getElementById("seite-zurueck-btn-oben").disabled,
+      zurueckDeaktiviertUnten: window.__karte.shadowRoot.getElementById("seite-zurueck-btn-unten").disabled,
     }));
     assert(zustandSeite2.anzahlKacheln === 2, "Seite 2 zeigt die nächsten 2 Rezepte");
     assert(zustandSeite2.anzeigeText === "Seite 2 von 3", `Seitenanzeige zeigt 'Seite 2 von 3' (tatsächlich: ${JSON.stringify(zustandSeite2.anzeigeText)})`);
-    assert(zustandSeite2.zurueckDeaktiviert === false, "'Zurück' ist auf Seite 2 wieder aktiv");
+    assert(zustandSeite2.zurueckDeaktiviertOben === false, "'Zurück' ist oben auf Seite 2 wieder aktiv");
+    assert(zustandSeite2.zurueckDeaktiviertUnten === false, "'Zurück' ist unten auf Seite 2 wieder aktiv");
 
-    await page.evaluate(() => window.__karte.shadowRoot.getElementById("seite-weiter-btn").click());
+    // Der Seitenwechsel über die UNTERE Leiste angestoßen, um sicherzustellen,
+    // dass beide Leisten (oben/unten) tatsächlich denselben Zustand steuern.
+    await page.evaluate(() => window.__karte.shadowRoot.getElementById("seite-weiter-btn-unten").click());
     const zustandSeite3 = await page.evaluate(() => ({
       anzahlKacheln: window.__karte.shadowRoot.querySelectorAll(".kachel").length,
-      weiterDeaktiviert: window.__karte.shadowRoot.getElementById("seite-weiter-btn").disabled,
+      weiterDeaktiviertOben: window.__karte.shadowRoot.getElementById("seite-weiter-btn-oben").disabled,
+      weiterDeaktiviertUnten: window.__karte.shadowRoot.getElementById("seite-weiter-btn-unten").disabled,
     }));
     assert(zustandSeite3.anzahlKacheln === 1, "Seite 3 (letzte Seite) zeigt das übrig gebliebene 5. Rezept");
-    assert(zustandSeite3.weiterDeaktiviert === true, "'Weiter' ist auf der letzten Seite deaktiviert");
+    assert(zustandSeite3.weiterDeaktiviertOben === true, "'Weiter' ist oben auf der letzten Seite deaktiviert");
+    assert(zustandSeite3.weiterDeaktiviertUnten === true, "'Weiter' ist unten auf der letzten Seite deaktiviert");
 
     // Such-Eingabe soll wieder auf Seite 1 zurücksetzen, auch wenn man
     // gerade auf Seite 3 war.

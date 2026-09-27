@@ -26,6 +26,12 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   einem selbst gewählten Kochbuch-Namen als erste Seite eingefügt werden
   soll.
 
+### Geändert
+- **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
+  oberhalb der Kacheln (bisher nur unterhalb) - bei vielen Rezepten muss
+  man dadurch nicht mehr erst nach unten scrollen, nur um die Seite zu
+  wechseln.
+
 ## [1.0.4] - 2026-09-26
 
 ### Hinzugefügt

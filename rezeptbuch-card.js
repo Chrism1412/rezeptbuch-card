@@ -7659,7 +7659,7 @@ class RezeptbuchCard extends HTMLElement {
           border-radius:999px; padding:3px 9px;
         }
         .leer { text-align:center; color: var(--secondary-text-color); padding: 32px 0; font-size:0.95em; }
-        .seiten-navigation { display:flex; justify-content:center; align-items:center; gap:14px; margin-top:20px; }
+        .seiten-navigation { display:flex; justify-content:center; align-items:center; gap:14px; margin:20px 0; }
         .seiten-anzeige { color: var(--secondary-text-color); font-size:0.9em; }
         /* Dezenter Versions-Vermerk unten links auf der Rezeptübersicht -
            rein informativ (z.B. beim Melden eines Fehlers hilfreich), soll
@@ -8417,34 +8417,40 @@ class RezeptbuchCard extends HTMLElement {
       bereich.innerHTML = `<div class="leer">${this._t("leer_keine_treffer", { begriff: this._escape(this._suchbegriff) })}</div>`;
       return;
     }
-    const seitenNavigation = gesamtSeiten > 1
+    // Seitennavigation wird sowohl ÜBER als auch UNTER dem Kachel-Grid
+    // angezeigt (zwei baugleiche Leisten mit unterschiedlichem ID-Suffix,
+    // da IDs im DOM eindeutig sein müssen) - bei vielen Rezepten muss man
+    // sonst immer erst nach unten scrollen, nur um die Seite zu wechseln.
+    const seitenNavigationHtml = (suffix) => gesamtSeiten > 1
       ? `<div class="seiten-navigation">
-          <button type="button" class="sekundaer klein" id="seite-zurueck-btn" ${this._aktuelleSeite <= 1 ? "disabled" : ""}>${this._t("seite_zurueck_btn")}</button>
+          <button type="button" class="sekundaer klein" id="seite-zurueck-btn-${suffix}" ${this._aktuelleSeite <= 1 ? "disabled" : ""}>${this._t("seite_zurueck_btn")}</button>
           <span class="seiten-anzeige">${this._t("seite_anzeige", { aktuell: this._aktuelleSeite, gesamt: gesamtSeiten })}</span>
-          <button type="button" class="sekundaer klein" id="seite-weiter-btn" ${this._aktuelleSeite >= gesamtSeiten ? "disabled" : ""}>${this._t("seite_weiter_btn")}</button>
+          <button type="button" class="sekundaer klein" id="seite-weiter-btn-${suffix}" ${this._aktuelleSeite >= gesamtSeiten ? "disabled" : ""}>${this._t("seite_weiter_btn")}</button>
         </div>`
       : "";
-    bereich.innerHTML = `<div class="grid">${kacheln}</div>${seitenNavigation}`;
+    bereich.innerHTML = `${seitenNavigationHtml("oben")}<div class="grid">${kacheln}</div>${seitenNavigationHtml("unten")}`;
 
-    const seiteZurueckBtn = this.shadowRoot.getElementById("seite-zurueck-btn");
-    if (seiteZurueckBtn) {
-      seiteZurueckBtn.addEventListener("click", () => {
-        this._aktuelleSeite = Math.max(1, this._aktuelleSeite - 1);
-        this._ergebnisAktualisieren();
-        // Beim Seitenwechsel nach oben scrollen - sonst bleibt der Blick auf
-        // der Stelle stehen, an der vorher die letzte Kachel der alten Seite
-        // war, was mitten in der neuen Seite landen kann.
-        bereich.scrollIntoView({ block: "start" });
-      });
-    }
-    const seiteWeiterBtn = this.shadowRoot.getElementById("seite-weiter-btn");
-    if (seiteWeiterBtn) {
-      seiteWeiterBtn.addEventListener("click", () => {
-        this._aktuelleSeite = Math.min(gesamtSeiten, this._aktuelleSeite + 1);
-        this._ergebnisAktualisieren();
-        bereich.scrollIntoView({ block: "start" });
-      });
-    }
+    ["oben", "unten"].forEach((suffix) => {
+      const seiteZurueckBtn = this.shadowRoot.getElementById(`seite-zurueck-btn-${suffix}`);
+      if (seiteZurueckBtn) {
+        seiteZurueckBtn.addEventListener("click", () => {
+          this._aktuelleSeite = Math.max(1, this._aktuelleSeite - 1);
+          this._ergebnisAktualisieren();
+          // Beim Seitenwechsel nach oben scrollen - sonst bleibt der Blick
+          // auf der Stelle stehen, an der vorher die letzte Kachel der
+          // alten Seite war, was mitten in der neuen Seite landen kann.
+          bereich.scrollIntoView({ block: "start" });
+        });
+      }
+      const seiteWeiterBtn = this.shadowRoot.getElementById(`seite-weiter-btn-${suffix}`);
+      if (seiteWeiterBtn) {
+        seiteWeiterBtn.addEventListener("click", () => {
+          this._aktuelleSeite = Math.min(gesamtSeiten, this._aktuelleSeite + 1);
+          this._ergebnisAktualisieren();
+          bereich.scrollIntoView({ block: "start" });
+        });
+      }
+    });
 
     // Barrierefreiheit: die eigentliche Aktivierungslogik ist in eine
     // eigene Funktion ausgelagert, damit sie sowohl vom Maus-Klick als auch
