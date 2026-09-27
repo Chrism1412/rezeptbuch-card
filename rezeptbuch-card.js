@@ -1,11 +1,15 @@
 /*
-  Rezeptbuch-Karte (Version 4) für Home Assistant
+  Rezeptbuch-Karte für Home Assistant
+  (aktuelle Versionsnummer siehe CARD_VERSION weiter unten sowie
+  package.json/CHANGELOG.md - hier bewusst NICHT redundant hartkodiert,
+  damit dieser Kommentar nicht bei jedem Release erneut veraltet)
+
   Speichert Rezepte in einer "Lokalen To-do-Liste" (local_todo) - das ist
   serverseitiger Speicher, für jedes Gerät/jeden Nutzer gleich sichtbar.
   Die Karte selbst braucht dafür KEIN Pyscript und KEIN eigenes Backend -
   nur Home Assistants eingebaute, seit Jahren stabile To-do-Dienste.
 
-  Optionale Zusatz-Skripte (siehe ANLEITUNG-Backup.md), NICHT für den
+  Optionale Zusatz-Skripte (siehe docs/ANLEITUNG-Backup.md), NICHT für den
   Grundbetrieb der Karte nötig, sondern für automatische Wartungsaufgaben,
   die absichtlich außerhalb der Karte laufen:
   - rezeptbuch_backup.py / rezeptbuch_restore.py: tägliches Backup + manuelles
@@ -23,18 +27,25 @@
      hinzufügen" -> "Lokale To-do" -> z.B. "Rezepte" anlegen
      (erzeugt direkt eine Entität wie todo.rezepte)
 
-  Installation der Karte:
+  Installation der Karte - ausführlich mit Screenshots siehe README.md
+  ("Grundinstallation") bzw. docs/ANLEITUNG-Backup.md, hier nur die
+  Kurzfassung:
+  Empfohlen über HACS ("Benutzerdefinierte Repositories" -> dieses Repo
+  als Kategorie "Dashboard" eintragen -> "Rezeptbuch-Karte" installieren);
+  HACS legt die Datei automatisch ab und trägt die Dashboard-Ressource
+  meist auch gleich selbst ein.
+  Alternativ manuell, ganz ohne HACS:
   1. Diese Datei nach /config/www/rezeptbuch-card.js kopieren
   2. Einstellungen -> Dashboards -> Ressourcen -> Ressource hinzufügen
      URL: /local/rezeptbuch-card.js   Typ: JavaScript-Modul
   3. Karte hinzufügen mit:
      type: custom:rezeptbuch-card
      entity: todo.rezepte
-     shopping_list_entity: todo.einkaufsliste   # optional, siehe Abschnitt 18
+     shopping_list_entity: todo.einkaufsliste   # optional, siehe unten
 
   Optional: shopping_list_entity zeigt auf eine ZWEITE Lokale To-do-Liste
-  (eigene Integration, siehe ANLEITUNG-Backup.md Abschnitt 18) - erst damit
-  funktioniert der "Einkaufsliste erstellen"-Knopf (Zutaten mehrerer
+  (eigene Integration, siehe docs/ANLEITUNG-Backup.md Abschnitt 18) - erst
+  damit funktioniert der "Einkaufsliste erstellen"-Knopf (Zutaten mehrerer
   ausgewählter Rezepte bzw. des Wochenplans werden dort angehängt). Ohne
   diese Angabe funktioniert die Karte unverändert weiter, der Knopf zeigt
   dann nur einen erklärenden Hinweis statt eines Absturzes.
