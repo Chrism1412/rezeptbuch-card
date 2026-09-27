@@ -71,6 +71,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Zurück",
     allgemein_ja: "Ja",
     allgemein_nein: "Nein",
+    allgemein_an: "An",
+    allgemein_aus: "Aus",
     allgemein_speichern: "Speichern",
     allgemein_speichert: "Speichert…",
     allgemein_abbrechen: "Abbrechen",
@@ -383,6 +385,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Zrugg",
     allgemein_ja: "Ja",
     allgemein_nein: "Nei",
+    allgemein_an: "A",
+    allgemein_aus: "Us",
     allgemein_speichern: "Speichere",
     allgemein_speichert: "Speicheret…",
     allgemein_abbrechen: "Abbräche",
@@ -689,6 +693,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Back",
     allgemein_ja: "Yes",
     allgemein_nein: "No",
+    allgemein_an: "On",
+    allgemein_aus: "Off",
     allgemein_speichern: "Save",
     allgemein_speichert: "Saving…",
     allgemein_abbrechen: "Cancel",
@@ -975,6 +981,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Назад",
     allgemein_ja: "Да",
     allgemein_nein: "Не",
+    allgemein_an: "Вкл.",
+    allgemein_aus: "Изкл.",
     allgemein_speichern: "Запази",
     allgemein_speichert: "Запазва се…",
     allgemein_abbrechen: "Отказ",
@@ -1219,6 +1227,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Natrag",
     allgemein_ja: "Da",
     allgemein_nein: "Ne",
+    allgemein_an: "Uklj.",
+    allgemein_aus: "Isklj.",
     allgemein_speichern: "Spremi",
     allgemein_speichert: "Spremanje…",
     allgemein_abbrechen: "Odustani",
@@ -1463,6 +1473,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Zpět",
     allgemein_ja: "Ano",
     allgemein_nein: "Ne",
+    allgemein_an: "Zap",
+    allgemein_aus: "Vyp",
     allgemein_speichern: "Uložit",
     allgemein_speichert: "Ukládá se…",
     allgemein_abbrechen: "Zrušit",
@@ -1707,6 +1719,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Tilbage",
     allgemein_ja: "Ja",
     allgemein_nein: "Nej",
+    allgemein_an: "Til",
+    allgemein_aus: "Fra",
     allgemein_speichern: "Gem",
     allgemein_speichert: "Gemmer…",
     allgemein_abbrechen: "Annuller",
@@ -1951,6 +1965,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Terug",
     allgemein_ja: "Ja",
     allgemein_nein: "Nee",
+    allgemein_an: "Aan",
+    allgemein_aus: "Uit",
     allgemein_speichern: "Opslaan",
     allgemein_speichert: "Bezig met opslaan…",
     allgemein_abbrechen: "Annuleren",
@@ -2195,6 +2211,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Tagasi",
     allgemein_ja: "Jah",
     allgemein_nein: "Ei",
+    allgemein_an: "Sees",
+    allgemein_aus: "Väljas",
     allgemein_speichern: "Salvesta",
     allgemein_speichert: "Salvestamine…",
     allgemein_abbrechen: "Loobu",
@@ -2439,6 +2457,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Takaisin",
     allgemein_ja: "Kyllä",
     allgemein_nein: "Ei",
+    allgemein_an: "Päällä",
+    allgemein_aus: "Pois",
     allgemein_speichern: "Tallenna",
     allgemein_speichert: "Tallennetaan…",
     allgemein_abbrechen: "Peruuta",
@@ -2683,6 +2703,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Retour",
     allgemein_ja: "Oui",
     allgemein_nein: "Non",
+    allgemein_an: "Activé",
+    allgemein_aus: "Désactivé",
     allgemein_speichern: "Enregistrer",
     allgemein_speichert: "Enregistrement…",
     allgemein_abbrechen: "Annuler",
@@ -2928,6 +2950,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Πίσω",
     allgemein_ja: "Ναι",
     allgemein_nein: "Όχι",
+    allgemein_an: "Ενεργό",
+    allgemein_aus: "Ανενεργό",
     allgemein_speichern: "Αποθήκευση",
     allgemein_speichert: "Αποθήκευση…",
     allgemein_abbrechen: "Ακύρωση",
@@ -3173,6 +3197,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Vissza",
     allgemein_ja: "Igen",
     allgemein_nein: "Nem",
+    allgemein_an: "Be",
+    allgemein_aus: "Ki",
     allgemein_speichern: "Mentés",
     allgemein_speichert: "Mentés…",
     allgemein_abbrechen: "Mégse",
@@ -3418,6 +3444,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Siar",
     allgemein_ja: "Tá",
     allgemein_nein: "Níl",
+    allgemein_an: "Ar",
+    allgemein_aus: "Múchta",
     allgemein_speichern: "Sábháil",
     allgemein_speichert: "Ag sábháil…",
     allgemein_abbrechen: "Cealaigh",
@@ -3663,6 +3691,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Indietro",
     allgemein_ja: "Sì",
     allgemein_nein: "No",
+    allgemein_an: "Attivo",
+    allgemein_aus: "Disattivo",
     allgemein_speichern: "Salva",
     allgemein_speichert: "Salvataggio…",
     allgemein_abbrechen: "Annulla",
@@ -3908,6 +3938,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Atpakaļ",
     allgemein_ja: "Jā",
     allgemein_nein: "Nē",
+    allgemein_an: "Iesl.",
+    allgemein_aus: "Izsl.",
     allgemein_speichern: "Saglabāt",
     allgemein_speichert: "Saglabā…",
     allgemein_abbrechen: "Atcelt",
@@ -4152,6 +4184,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Atgal",
     allgemein_ja: "Taip",
     allgemein_nein: "Ne",
+    allgemein_an: "Įjungta",
+    allgemein_aus: "Išjungta",
     allgemein_speichern: "Išsaugoti",
     allgemein_speichert: "Išsaugoma…",
     allgemein_abbrechen: "Atšaukti",
@@ -4396,6 +4430,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Lura",
     allgemein_ja: "Iva",
     allgemein_nein: "Le",
+    allgemein_an: "Mixgħul",
+    allgemein_aus: "Mitfi",
     allgemein_speichern: "Issejvja",
     allgemein_speichert: "Qed jissejvja…",
     allgemein_abbrechen: "Ikkanċella",
@@ -4641,6 +4677,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Wstecz",
     allgemein_ja: "Tak",
     allgemein_nein: "Nie",
+    allgemein_an: "Wł.",
+    allgemein_aus: "Wył.",
     allgemein_speichern: "Zapisz",
     allgemein_speichert: "Zapisywanie…",
     allgemein_abbrechen: "Anuluj",
@@ -4885,6 +4923,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Voltar",
     allgemein_ja: "Sim",
     allgemein_nein: "Não",
+    allgemein_an: "Ligado",
+    allgemein_aus: "Desligado",
     allgemein_speichern: "Guardar",
     allgemein_speichert: "A guardar…",
     allgemein_abbrechen: "Cancelar",
@@ -5130,6 +5170,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Înapoi",
     allgemein_ja: "Da",
     allgemein_nein: "Nu",
+    allgemein_an: "Activ",
+    allgemein_aus: "Dezactivat",
     allgemein_speichern: "Salvează",
     allgemein_speichert: "Se salvează…",
     allgemein_abbrechen: "Anulează",
@@ -5374,6 +5416,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Späť",
     allgemein_ja: "Áno",
     allgemein_nein: "Nie",
+    allgemein_an: "Zap",
+    allgemein_aus: "Vyp",
     allgemein_speichern: "Uložiť",
     allgemein_speichert: "Ukladá sa…",
     allgemein_abbrechen: "Zrušiť",
@@ -5618,6 +5662,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Nazaj",
     allgemein_ja: "Da",
     allgemein_nein: "Ne",
+    allgemein_an: "Vklj.",
+    allgemein_aus: "Izklj.",
     allgemein_speichern: "Shrani",
     allgemein_speichert: "Shranjevanje…",
     allgemein_abbrechen: "Prekliči",
@@ -5862,6 +5908,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Volver",
     allgemein_ja: "Sí",
     allgemein_nein: "No",
+    allgemein_an: "Activado",
+    allgemein_aus: "Desactivado",
     allgemein_speichern: "Guardar",
     allgemein_speichert: "Guardando…",
     allgemein_abbrechen: "Cancelar",
@@ -6106,6 +6154,8 @@ const UEBERSETZUNGEN = {
     allgemein_zurueck: "← Tillbaka",
     allgemein_ja: "Ja",
     allgemein_nein: "Nej",
+    allgemein_an: "På",
+    allgemein_aus: "Av",
     allgemein_speichern: "Spara",
     allgemein_speichert: "Sparar…",
     allgemein_abbrechen: "Avbryt",
@@ -8772,19 +8822,23 @@ class RezeptbuchCard extends HTMLElement {
           border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); }
         .schalter-zeile { display:flex; align-items:center; justify-content:space-between; gap:14px; text-align:left; margin-bottom:8px; }
         .schalter-label { font-weight:600; }
-        .schalter { position:relative; display:inline-block; width:46px; height:26px; flex-shrink:0; }
-        .schalter input { opacity:0; width:0; height:0; }
-        .schalter-slider {
-          position:absolute; cursor:pointer; inset:0; background-color: var(--kb-terrakotta-hell);
-          border-radius:999px; transition:0.2s;
+        /* Der Schalter sieht bewusst wie die übrigen Knöpfe der Karte aus
+           (gleiche Pillenform/Farbe wie button.primaer/button.sekundaer),
+           statt wie ein systemtypischer iOS-Slider - "Aus" wie ein
+           sekundaer-Knopf (nur Umriss), "An" wie ein primaer-Knopf
+           (gefüllt terrakotta). */
+        .schalter-btn {
+          display:inline-flex; align-items:center; justify-content:center; gap:6px;
+          border-radius:999px; padding:8px 18px; cursor:pointer; font-size:0.9em; font-weight:600;
+          white-space:nowrap; user-select:none; flex-shrink:0;
+          background: transparent; color: var(--kb-terrakotta); border:1.5px solid var(--kb-terrakotta);
         }
-        .schalter-slider::before {
-          position:absolute; content:""; height:20px; width:20px; left:3px; bottom:3px;
-          background-color:#fff; border-radius:50%; transition:0.2s;
+        .schalter-btn input { position:absolute; opacity:0; width:0; height:0; }
+        .schalter-btn.schalter-btn-aktiv {
+          background: var(--kb-terrakotta); color:#fff; border-color: var(--kb-terrakotta);
+          box-shadow: 0 2px 6px rgba(193,101,47,0.35);
         }
-        .schalter input:checked + .schalter-slider { background-color: var(--kb-terrakotta); }
-        .schalter input:checked + .schalter-slider::before { transform: translateX(20px); }
-        .schalter input:focus-visible + .schalter-slider { outline:2px solid var(--kb-terrakotta-dunkel); outline-offset:2px; }
+        .schalter-btn:focus-within { outline:2px solid var(--kb-terrakotta-dunkel); outline-offset:2px; }
         .kochbuecher-zeile { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:16px; }
         .kochbuch-chip { cursor:pointer; }
         .kochbuch-loeschen {
@@ -9092,9 +9146,9 @@ class RezeptbuchCard extends HTMLElement {
             <p style="text-align:left;">${this._t("statistik_einstellungen_text")}</p>
             <div class="schalter-zeile">
               <span class="schalter-label">${this._t("statistik_einstellungen_schalter_label")}</span>
-              <label class="schalter">
+              <label class="schalter-btn ${this._einstellungen.erfassungAktiv !== false ? "schalter-btn-aktiv" : ""}">
                 <input type="checkbox" id="statistik-einstellungen-schalter" ${this._einstellungen.erfassungAktiv !== false ? "checked" : ""}>
-                <span class="schalter-slider"></span>
+                <span>${this._einstellungen.erfassungAktiv !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
               </label>
             </div>
             <div class="modal-aktionen" style="margin-top:14px;">

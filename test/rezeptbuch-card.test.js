@@ -1390,9 +1390,14 @@ async function testStatistikEinstellungenSchalter(browser) {
 
     const schalterAnfangsZustand = await page.evaluate(() => {
       const schalter = window.__karte.shadowRoot.getElementById("statistik-einstellungen-schalter");
-      return schalter && schalter.tagName === "INPUT" && schalter.type === "checkbox" && schalter.checked;
+      const label = schalter && schalter.closest(".schalter-btn");
+      return {
+        istCheckbox: !!schalter && schalter.tagName === "INPUT" && schalter.type === "checkbox" && schalter.checked,
+        siehtWieButtonAus: !!label && label.classList.contains("schalter-btn-aktiv"),
+      };
     });
-    assert(schalterAnfangsZustand, "Der Schalter ist eine Checkbox (als Toggle gestylt) und initial eingeschaltet");
+    assert(schalterAnfangsZustand.istCheckbox, "Der Schalter ist technisch eine Checkbox und initial eingeschaltet");
+    assert(schalterAnfangsZustand.siehtWieButtonAus, "Der Schalter ist optisch wie die übrigen Knöpfe gestylt (Pillenform/Terrakotta), nicht wie ein iOS-Slider");
 
     // Schalter ausschalten -> Statistik-Knopf verschwindet, Einstellung
     // wird im Marker-Item gespeichert (übersteht ein Neuladen).
@@ -1402,14 +1407,20 @@ async function testStatistikEinstellungenSchalter(browser) {
       schalter.dispatchEvent(new Event("change"));
     });
     await page.waitForFunction(() => !window.__karte.shadowRoot.getElementById("statistik-btn"), { timeout: 2000 });
-    const nachAusschalten = await page.evaluate(() => ({
-      statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
-      modalNochOffen: window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal").style.display === "flex",
-      abfrageAktiv: window.__karte._zubereitetAbfrageAktiv(),
-    }));
+    const nachAusschalten = await page.evaluate(() => {
+      const schalter = window.__karte.shadowRoot.getElementById("statistik-einstellungen-schalter");
+      const label = schalter && schalter.closest(".schalter-btn");
+      return {
+        statistikBtnSichtbar: !!window.__karte.shadowRoot.getElementById("statistik-btn"),
+        modalNochOffen: window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal").style.display === "flex",
+        abfrageAktiv: window.__karte._zubereitetAbfrageAktiv(),
+        schalterZeigtAus: !!label && !label.classList.contains("schalter-btn-aktiv") && label.textContent.trim() === window.__karte._t("allgemein_aus"),
+      };
+    });
     assert(!nachAusschalten.statistikBtnSichtbar, "Nach dem Ausschalten ist der Statistik-Knopf ausgeblendet");
     assert(nachAusschalten.modalNochOffen, "Das Modal bleibt nach dem Umschalten weiterhin offen");
     assert(!nachAusschalten.abfrageAktiv, "Der Schalter schaltet zusammen mit der Statistik auch die 'Hast du zubereitet?'-Abfrage ab");
+    assert(nachAusschalten.schalterZeigtAus, "Der Schalter zeigt optisch/textlich den ausgeschalteten Zustand ('Aus', ohne aktive Knopf-Farbe)");
 
     // Mit ausgeschaltetem Schalter springt der Zurück-Knopf in der
     // Detailansicht direkt zur Liste, ohne die Abfrage zu zeigen.
