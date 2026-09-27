@@ -2805,6 +2805,276 @@ async function testPdfWasserzeichenAufJederSeite(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Sammel-PDF: exportiert mehrere Rezepte als EIN gemeinsames PDF.
+// ---------------------------------------------------------------------
+async function testSammelPdfEnthaeltAlleRezepteAufEigenenSeiten(browser) {
+  console.log("\nTest: Sammel-PDF enthält alle übergebenen Rezepte, je eines pro Seite");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Erstes Rezept", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Zweites Rezept", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Drittes Rezept", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const texte = [];
+      let seitenHinzugefuegt = 0;
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text, x, y) { texte.push({ text, x, y }); }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() { seitenHinzugefuegt++; }
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      const liste = karte._sortiereRezepte(karte._gefilterteRezepte());
+      const ergebnisPdf = await karte._sammelPdfErstellen(liste, "Testsammlung");
+      return {
+        dateiname: ergebnisPdf.dateiname,
+        seitenHinzugefuegt,
+        anzahlRezepte: liste.length,
+        titelGefunden: ["Erstes Rezept", "Zweites Rezept", "Drittes Rezept"].map(
+          (titel) => texte.some((t) => t.text === titel)
+        ),
+      };
+    });
+
+    assert(ergebnis.dateiname === "Testsammlung.pdf", `Dateiname wie übergeben (tatsächlich: ${ergebnis.dateiname})`);
+    assert(ergebnis.anzahlRezepte === 3, "alle 3 angelegten Rezepte stecken in der gefilterten/sortierten Liste");
+    assert(
+      ergebnis.seitenHinzugefuegt === ergebnis.anzahlRezepte - 1,
+      `für jedes weitere Rezept wird eine neue Seite begonnen (tatsächlich: ${ergebnis.seitenHinzugefuegt} addPage()-Aufrufe bei ${ergebnis.anzahlRezepte} Rezepten)`
+    );
+    assert(ergebnis.titelGefunden.every(Boolean), "die Titel aller drei Rezepte erscheinen im Sammel-PDF");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSammelPdfOhneRezepteZeigtHinweisOhnePdfErstellung(browser) {
+  console.log("\nTest: Sammel-PDF ohne (gefilterte) Rezepte zeigt einen Hinweis statt ein leeres PDF zu erzeugen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      let jsPdfAngefragt = false;
+      karte._jsPdfLaden = () => {
+        jsPdfAngefragt = true;
+        return Promise.reject(new Error("sollte hier nicht aufgerufen werden"));
+      };
+      await karte._sammelPdfExport();
+      return { alerts: window.__alertAufrufe, jsPdfAngefragt };
+    });
+
+    assert(ergebnis.alerts.length === 1, "genau ein Hinweis wird angezeigt, wenn keine Rezepte zum Export vorhanden sind");
+    assert(!ergebnis.jsPdfAngefragt, "ohne Rezepte wird gar nicht erst versucht, ein PDF zu erzeugen");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Kochmodus: Vollbild-Schritt-für-Schritt-Ansicht in der Detailansicht.
+// ---------------------------------------------------------------------
+async function testKochmodusButtonNurBeiVorhandenenSchritten(browser) {
+  console.log("\nTest: Kochmodus-Button erscheint nur, wenn das Rezept Zubereitungsschritte hat");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Ohne Schritte", payload: leererPayload({ steps: [] }) });
+    await rezeptDirektAnlegen(page, { title: "Mit Schritten", payload: leererPayload({ steps: ["Schritt 1", "Schritt 2"] }) });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      const ohneSchritte = karte._rezepte.find((r) => r.title === "Ohne Schritte");
+      const mitSchritten = karte._rezepte.find((r) => r.title === "Mit Schritten");
+
+      karte._rezeptOeffnen(ohneSchritte);
+      const kein = !karte.shadowRoot.getElementById("kochmodus-btn");
+
+      karte._rezeptOeffnen(mitSchritten);
+      const vorhanden = !!karte.shadowRoot.getElementById("kochmodus-btn");
+
+      return { kein, vorhanden };
+    });
+
+    assert(ergebnis.kein, "ohne Zubereitungsschritte gibt es keinen Kochmodus-Button");
+    assert(ergebnis.vorhanden, "mit Zubereitungsschritten erscheint der Kochmodus-Button");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusNavigationDurchSchritte(browser) {
+  console.log("\nTest: Kochmodus zeigt Schritte einzeln an und lässt vor/zurück navigieren");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Dreischritt-Rezept",
+      payload: leererPayload({ steps: ["Erster Schritt", "Zweiter Schritt", "Dritter Schritt"] }),
+    });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+
+      const zustand1 = {
+        overlaySichtbar: karte.shadowRoot.getElementById("kochmodus-overlay").style.display === "flex",
+        schrittText: karte.shadowRoot.querySelector(".kochmodus-schritt-text").textContent,
+        anzeige: karte.shadowRoot.querySelector(".kochmodus-schritt-anzeige").textContent,
+        zurueckDeaktiviert: karte.shadowRoot.getElementById("kochmodus-zurueck-btn").disabled,
+      };
+
+      karte.shadowRoot.getElementById("kochmodus-weiter-btn").click();
+      const zustand2 = {
+        schrittText: karte.shadowRoot.querySelector(".kochmodus-schritt-text").textContent,
+        zurueckDeaktiviert: karte.shadowRoot.getElementById("kochmodus-zurueck-btn").disabled,
+      };
+
+      karte.shadowRoot.getElementById("kochmodus-weiter-btn").click();
+      const zustand3 = {
+        schrittText: karte.shadowRoot.querySelector(".kochmodus-schritt-text").textContent,
+        weiterDeaktiviert: karte.shadowRoot.getElementById("kochmodus-weiter-btn").disabled,
+      };
+
+      karte.shadowRoot.getElementById("kochmodus-zurueck-btn").click();
+      const zustand4 = { schrittText: karte.shadowRoot.querySelector(".kochmodus-schritt-text").textContent };
+
+      karte.shadowRoot.getElementById("kochmodus-schliessen-btn").click();
+      const nachSchliessen = karte.shadowRoot.getElementById("kochmodus-overlay").style.display === "none";
+
+      return { zustand1, zustand2, zustand3, zustand4, nachSchliessen };
+    });
+
+    assert(ergebnis.zustand1.overlaySichtbar, "Kochmodus-Overlay wird nach Klick auf den Button angezeigt");
+    assert(ergebnis.zustand1.schrittText === "Erster Schritt", `startet beim ersten Schritt (tatsächlich: ${JSON.stringify(ergebnis.zustand1.schrittText)})`);
+    assert(ergebnis.zustand1.anzeige === "Schritt 1 von 3", `Schrittanzeige zeigt 'Schritt 1 von 3' (tatsächlich: ${JSON.stringify(ergebnis.zustand1.anzeige)})`);
+    assert(ergebnis.zustand1.zurueckDeaktiviert === true, "'Zurück' ist beim ersten Schritt deaktiviert");
+    assert(ergebnis.zustand2.schrittText === "Zweiter Schritt", "ein Klick auf 'Weiter' zeigt den zweiten Schritt");
+    assert(ergebnis.zustand2.zurueckDeaktiviert === false, "'Zurück' ist ab dem zweiten Schritt wieder aktiv");
+    assert(ergebnis.zustand3.schrittText === "Dritter Schritt", "noch ein Klick auf 'Weiter' zeigt den dritten (letzten) Schritt");
+    assert(ergebnis.zustand3.weiterDeaktiviert === true, "'Weiter' ist beim letzten Schritt deaktiviert");
+    assert(ergebnis.zustand4.schrittText === "Zweiter Schritt", "ein Klick auf 'Zurück' zeigt wieder den vorherigen Schritt");
+    assert(ergebnis.nachSchliessen, "das Overlay wird nach Klick auf 'Schließen' wieder ausgeblendet");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusZutatenEinblenden(browser) {
+  console.log("\nTest: Kochmodus kann die Zutatenliste ein- und ausblenden");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ ingredients: [{ amount: "2", unit: "kg", name: "Kartoffeln" }], steps: ["Kochen"] }),
+    });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+
+      const vorher = !!karte.shadowRoot.querySelector(".kochmodus-zutaten-panel");
+      karte.shadowRoot.getElementById("kochmodus-zutaten-btn").click();
+      const panel = karte.shadowRoot.querySelector(".kochmodus-zutaten-panel");
+      const nachher = panel ? panel.textContent : null;
+
+      karte.shadowRoot.getElementById("kochmodus-zutaten-btn").click();
+      const wiederWeg = !karte.shadowRoot.querySelector(".kochmodus-zutaten-panel");
+
+      return { vorher, nachher, wiederWeg };
+    });
+
+    assert(!ergebnis.vorher, "die Zutatenliste ist im Kochmodus standardmäßig ausgeblendet");
+    assert(ergebnis.nachher && ergebnis.nachher.includes("Kartoffeln"), "nach Klick auf den Zutaten-Knopf wird die Zutatenliste eingeblendet");
+    assert(ergebnis.wiederWeg, "ein erneuter Klick blendet die Zutatenliste wieder aus");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testKochmodusVorlesenPerSprachausgabe(browser) {
+  console.log("\nTest: Kochmodus kann Schritte automatisch über die Sprachausgabe vorlesen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Wasser aufkochen", "Nudeln hinzufügen"] }),
+    });
+
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      const gesprocheneTexte = [];
+      let abgebrochenAnzahl = 0;
+      // Echte Sprachausgabe ist im (headless) Testbrowser nicht sinnvoll
+      // prüfbar (keine tatsächliche Audioausgabe) - stattdessen wird
+      // window.speechSynthesis hier durch ein einfaches Double ersetzt, das
+      // nur aufzeichnet, WAS die Karte vorlesen lassen wollte.
+      // Object.defineProperty statt einfacher Zuweisung: "speechSynthesis"
+      // ist im echten Browser ein schreibgeschützter Getter auf window -
+      // eine normale Zuweisung würde dort still verpuffen.
+      Object.defineProperty(window, "speechSynthesis", {
+        configurable: true,
+        value: {
+          speak: (utterance) => gesprocheneTexte.push(utterance.text),
+          cancel: () => { abgebrochenAnzahl++; },
+        },
+      });
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+
+      // Vorlesen einschalten - liest sofort den aktuellen (ersten) Schritt vor.
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+      const nachEinschalten = { gesprocheneTexte: [...gesprocheneTexte], knopfAktiv: karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").classList.contains("aktiv") };
+
+      // Nächster Schritt soll automatisch mitgelesen werden.
+      karte.shadowRoot.getElementById("kochmodus-weiter-btn").click();
+      const nachWeiter = [...gesprocheneTexte];
+
+      // Ausschalten soll eine laufende Sprachausgabe abbrechen und beim
+      // nächsten Schritt NICHT mehr automatisch vorlesen.
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+      const abgebrochenNachAusschalten = abgebrochenAnzahl;
+      karte.shadowRoot.getElementById("kochmodus-zurueck-btn").click();
+      const nachZurueckOhneVorlesen = [...gesprocheneTexte];
+
+      return { nachEinschalten, nachWeiter, abgebrochenNachAusschalten, nachZurueckOhneVorlesen };
+    });
+
+    assert(
+      ergebnis.nachEinschalten.gesprocheneTexte.length === 1 && ergebnis.nachEinschalten.gesprocheneTexte[0] === "Wasser aufkochen",
+      `Einschalten liest sofort den aktuellen Schritt vor (tatsächlich: ${JSON.stringify(ergebnis.nachEinschalten.gesprocheneTexte)})`
+    );
+    assert(ergebnis.nachEinschalten.knopfAktiv, "der Vorlesen-Knopf zeigt seinen aktiven Zustand (Klasse 'aktiv')");
+    assert(
+      ergebnis.nachWeiter.length === 2 && ergebnis.nachWeiter[1] === "Nudeln hinzufügen",
+      `ein Schrittwechsel liest bei aktivem Vorlesen automatisch den neuen Schritt vor (tatsächlich: ${JSON.stringify(ergebnis.nachWeiter)})`
+    );
+    assert(ergebnis.abgebrochenNachAusschalten >= 1, "das Ausschalten bricht eine laufende Sprachausgabe ab");
+    assert(
+      ergebnis.nachZurueckOhneVorlesen.length === 2,
+      "nach dem Ausschalten wird bei einem weiteren Schrittwechsel NICHT mehr automatisch vorgelesen"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -3104,6 +3374,12 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testUpdateHinweisBeiNeuererGithubVersion(browser);
     await testUpdateHinweisKeinBannerBeiGleicherOderAelterVersion(browser);
     await testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser);
+    await testSammelPdfEnthaeltAlleRezepteAufEigenenSeiten(browser);
+    await testSammelPdfOhneRezepteZeigtHinweisOhnePdfErstellung(browser);
+    await testKochmodusButtonNurBeiVorhandenenSchritten(browser);
+    await testKochmodusNavigationDurchSchritte(browser);
+    await testKochmodusZutatenEinblenden(browser);
+    await testKochmodusVorlesenPerSprachausgabe(browser);
   } finally {
     await browser.close();
   }

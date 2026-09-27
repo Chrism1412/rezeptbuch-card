@@ -319,6 +319,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Neue Version verfügbar: {{version}}",
     update_ansehen_btn: "Ansehen",
     update_schliessen_aria: "Hinweis ausblenden",
+    detail_kochmodus_btn: "🍳 Kochmodus",
+    kochmodus_schritt_anzeige: "Schritt {{aktuell}} von {{gesamt}}",
+    kochmodus_schliessen_aria: "Kochmodus schließen",
+    kochmodus_schritt_zurueck_aria: "Vorheriger Schritt",
+    kochmodus_schritt_weiter_aria: "Nächster Schritt",
+    kochmodus_vorlesen_ein_aria: "Automatisches Vorlesen einschalten",
+    kochmodus_vorlesen_aus_aria: "Automatisches Vorlesen ausschalten",
+    kochmodus_zutaten_ein_aria: "Zutaten einblenden",
+    kochmodus_zutaten_aus_aria: "Zutaten ausblenden",
+    kopf_sammel_pdf_btn: "📚 Sammel-PDF",
+    sammel_pdf_keine_rezepte: "Keine Rezepte zum Exportieren gefunden.",
   },
 
   // Schwiizerdütsch (gsw) - es git kei einheitlichi amtlichi Schriibwiis
@@ -589,6 +600,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Neui Version verfüegbar: {{version}}",
     update_ansehen_btn: "Aluege",
     update_schliessen_aria: "Hiwiis usblände",
+    detail_kochmodus_btn: "🍳 Kochmodus",
+    kochmodus_schritt_anzeige: "Schritt {{aktuell}} vo {{gesamt}}",
+    kochmodus_schliessen_aria: "Kochmodus schliesse",
+    kochmodus_schritt_zurueck_aria: "Vorherige Schritt",
+    kochmodus_schritt_weiter_aria: "Nächschte Schritt",
+    kochmodus_vorlesen_ein_aria: "Automatischs Vorläse ischalte",
+    kochmodus_vorlesen_aus_aria: "Automatischs Vorläse usschalte",
+    kochmodus_zutaten_ein_aria: "Zuetate iblände",
+    kochmodus_zutaten_aus_aria: "Zuetate usblände",
+    kopf_sammel_pdf_btn: "📚 Sammel-PDF",
+    sammel_pdf_keine_rezepte: "Kei Rezept zum Exportiere gfunde.",
   },
   en: {
     allgemein_zurueck: "← Back",
@@ -833,6 +855,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "New version available: {{version}}",
     update_ansehen_btn: "View",
     update_schliessen_aria: "Dismiss notice",
+    detail_kochmodus_btn: "🍳 Cook Mode",
+    kochmodus_schritt_anzeige: "Step {{aktuell}} of {{gesamt}}",
+    kochmodus_schliessen_aria: "Close cook mode",
+    kochmodus_schritt_zurueck_aria: "Previous step",
+    kochmodus_schritt_weiter_aria: "Next step",
+    kochmodus_vorlesen_ein_aria: "Turn on automatic read-aloud",
+    kochmodus_vorlesen_aus_aria: "Turn off automatic read-aloud",
+    kochmodus_zutaten_ein_aria: "Show ingredients",
+    kochmodus_zutaten_aus_aria: "Hide ingredients",
+    kopf_sammel_pdf_btn: "📚 Collected PDF",
+    sammel_pdf_keine_rezepte: "No recipes found to export.",
   },
   bg: {
     allgemein_zurueck: "← Назад",
@@ -1035,6 +1068,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Налична е нова версия: {{version}}",
     update_ansehen_btn: "Преглед",
     update_schliessen_aria: "Скриване на съобщението",
+    detail_kochmodus_btn: "🍳 Режим готвене",
+    kochmodus_schritt_anzeige: "Стъпка {{aktuell}} от {{gesamt}}",
+    kochmodus_schliessen_aria: "Затвори режим готвене",
+    kochmodus_schritt_zurueck_aria: "Предишна стъпка",
+    kochmodus_schritt_weiter_aria: "Следваща стъпка",
+    kochmodus_vorlesen_ein_aria: "Включи автоматично четене",
+    kochmodus_vorlesen_aus_aria: "Изключи автоматично четене",
+    kochmodus_zutaten_ein_aria: "Покажи съставките",
+    kochmodus_zutaten_aus_aria: "Скрий съставките",
+    kopf_sammel_pdf_btn: "📚 Общ PDF",
+    sammel_pdf_keine_rezepte: "Няма намерени рецепти за експортиране.",
   },
   hr: {
     allgemein_zurueck: "← Natrag",
@@ -1237,6 +1281,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Dostupna je nova verzija: {{version}}",
     update_ansehen_btn: "Pogledaj",
     update_schliessen_aria: "Sakrij obavijest",
+    detail_kochmodus_btn: "🍳 Način kuhanja",
+    kochmodus_schritt_anzeige: "Korak {{aktuell}} od {{gesamt}}",
+    kochmodus_schliessen_aria: "Zatvori način kuhanja",
+    kochmodus_schritt_zurueck_aria: "Prethodni korak",
+    kochmodus_schritt_weiter_aria: "Sljedeći korak",
+    kochmodus_vorlesen_ein_aria: "Uključi automatsko čitanje",
+    kochmodus_vorlesen_aus_aria: "Isključi automatsko čitanje",
+    kochmodus_zutaten_ein_aria: "Prikaži sastojke",
+    kochmodus_zutaten_aus_aria: "Sakrij sastojke",
+    kopf_sammel_pdf_btn: "📚 Zbirni PDF",
+    sammel_pdf_keine_rezepte: "Nema recepata za izvoz.",
   },
   cs: {
     allgemein_zurueck: "← Zpět",
@@ -1439,6 +1494,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Je dostupná nová verze: {{version}}",
     update_ansehen_btn: "Zobrazit",
     update_schliessen_aria: "Skrýt upozornění",
+    detail_kochmodus_btn: "🍳 Režim vaření",
+    kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
+    kochmodus_schliessen_aria: "Zavřít režim vaření",
+    kochmodus_schritt_zurueck_aria: "Předchozí krok",
+    kochmodus_schritt_weiter_aria: "Další krok",
+    kochmodus_vorlesen_ein_aria: "Zapnout automatické čtení",
+    kochmodus_vorlesen_aus_aria: "Vypnout automatické čtení",
+    kochmodus_zutaten_ein_aria: "Zobrazit suroviny",
+    kochmodus_zutaten_aus_aria: "Skrýt suroviny",
+    kopf_sammel_pdf_btn: "📚 Souhrnné PDF",
+    sammel_pdf_keine_rezepte: "Nebyly nalezeny žádné recepty k exportu.",
   },
   da: {
     allgemein_zurueck: "← Tilbage",
@@ -1641,6 +1707,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Ny version tilgængelig: {{version}}",
     update_ansehen_btn: "Vis",
     update_schliessen_aria: "Skjul meddelelse",
+    detail_kochmodus_btn: "🍳 Tilberedningstilstand",
+    kochmodus_schritt_anzeige: "Trin {{aktuell}} af {{gesamt}}",
+    kochmodus_schliessen_aria: "Luk tilberedningstilstand",
+    kochmodus_schritt_zurueck_aria: "Forrige trin",
+    kochmodus_schritt_weiter_aria: "Næste trin",
+    kochmodus_vorlesen_ein_aria: "Slå automatisk oplæsning til",
+    kochmodus_vorlesen_aus_aria: "Slå automatisk oplæsning fra",
+    kochmodus_zutaten_ein_aria: "Vis ingredienser",
+    kochmodus_zutaten_aus_aria: "Skjul ingredienser",
+    kopf_sammel_pdf_btn: "📚 Samlet PDF",
+    sammel_pdf_keine_rezepte: "Ingen opskrifter fundet til eksport.",
   },
   nl: {
     allgemein_zurueck: "← Terug",
@@ -1843,6 +1920,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nieuwe versie beschikbaar: {{version}}",
     update_ansehen_btn: "Bekijken",
     update_schliessen_aria: "Melding verbergen",
+    detail_kochmodus_btn: "🍳 Kookmodus",
+    kochmodus_schritt_anzeige: "Stap {{aktuell}} van {{gesamt}}",
+    kochmodus_schliessen_aria: "Kookmodus sluiten",
+    kochmodus_schritt_zurueck_aria: "Vorige stap",
+    kochmodus_schritt_weiter_aria: "Volgende stap",
+    kochmodus_vorlesen_ein_aria: "Automatisch voorlezen inschakelen",
+    kochmodus_vorlesen_aus_aria: "Automatisch voorlezen uitschakelen",
+    kochmodus_zutaten_ein_aria: "Ingrediënten tonen",
+    kochmodus_zutaten_aus_aria: "Ingrediënten verbergen",
+    kopf_sammel_pdf_btn: "📚 Verzamel-PDF",
+    sammel_pdf_keine_rezepte: "Geen recepten gevonden om te exporteren.",
   },
   et: {
     allgemein_zurueck: "← Tagasi",
@@ -2045,6 +2133,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Uus versioon saadaval: {{version}}",
     update_ansehen_btn: "Vaata",
     update_schliessen_aria: "Peida teavitus",
+    detail_kochmodus_btn: "🍳 Küpsetusrežiim",
+    kochmodus_schritt_anzeige: "Samm {{aktuell}} / {{gesamt}}",
+    kochmodus_schliessen_aria: "Sulge küpsetusrežiim",
+    kochmodus_schritt_zurueck_aria: "Eelmine samm",
+    kochmodus_schritt_weiter_aria: "Järgmine samm",
+    kochmodus_vorlesen_ein_aria: "Lülita automaatne ettelugemine sisse",
+    kochmodus_vorlesen_aus_aria: "Lülita automaatne ettelugemine välja",
+    kochmodus_zutaten_ein_aria: "Näita koostisosi",
+    kochmodus_zutaten_aus_aria: "Peida koostisosad",
+    kopf_sammel_pdf_btn: "📚 Koond-PDF",
+    sammel_pdf_keine_rezepte: "Eksportimiseks retsepte ei leitud.",
   },
   fi: {
     allgemein_zurueck: "← Takaisin",
@@ -2247,6 +2346,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Uusi versio saatavilla: {{version}}",
     update_ansehen_btn: "Katso",
     update_schliessen_aria: "Piilota ilmoitus",
+    detail_kochmodus_btn: "🍳 Kokkaustila",
+    kochmodus_schritt_anzeige: "Vaihe {{aktuell}}/{{gesamt}}",
+    kochmodus_schliessen_aria: "Sulje kokkaustila",
+    kochmodus_schritt_zurueck_aria: "Edellinen vaihe",
+    kochmodus_schritt_weiter_aria: "Seuraava vaihe",
+    kochmodus_vorlesen_ein_aria: "Ota automaattinen ääneenluku käyttöön",
+    kochmodus_vorlesen_aus_aria: "Poista automaattinen ääneenluku käytöstä",
+    kochmodus_zutaten_ein_aria: "Näytä ainekset",
+    kochmodus_zutaten_aus_aria: "Piilota ainekset",
+    kopf_sammel_pdf_btn: "📚 Kokoelma-PDF",
+    sammel_pdf_keine_rezepte: "Vietäviä reseptejä ei löytynyt.",
   },
   fr: {
     allgemein_zurueck: "← Retour",
@@ -2450,6 +2560,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nouvelle version disponible : {{version}}",
     update_ansehen_btn: "Voir",
     update_schliessen_aria: "Masquer la notification",
+    detail_kochmodus_btn: "🍳 Mode cuisine",
+    kochmodus_schritt_anzeige: "Étape {{aktuell}} sur {{gesamt}}",
+    kochmodus_schliessen_aria: "Fermer le mode cuisine",
+    kochmodus_schritt_zurueck_aria: "Étape précédente",
+    kochmodus_schritt_weiter_aria: "Étape suivante",
+    kochmodus_vorlesen_ein_aria: "Activer la lecture automatique",
+    kochmodus_vorlesen_aus_aria: "Désactiver la lecture automatique",
+    kochmodus_zutaten_ein_aria: "Afficher les ingrédients",
+    kochmodus_zutaten_aus_aria: "Masquer les ingrédients",
+    kopf_sammel_pdf_btn: "📚 PDF groupé",
+    sammel_pdf_keine_rezepte: "Aucune recette trouvée à exporter.",
   },
   el: {
     allgemein_zurueck: "← Πίσω",
@@ -2653,6 +2774,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Διατίθεται νέα έκδοση: {{version}}",
     update_ansehen_btn: "Προβολή",
     update_schliessen_aria: "Απόκρυψη ειδοποίησης",
+    detail_kochmodus_btn: "🍳 Λειτουργία μαγειρέματος",
+    kochmodus_schritt_anzeige: "Βήμα {{aktuell}} από {{gesamt}}",
+    kochmodus_schliessen_aria: "Κλείσιμο λειτουργίας μαγειρέματος",
+    kochmodus_schritt_zurueck_aria: "Προηγούμενο βήμα",
+    kochmodus_schritt_weiter_aria: "Επόμενο βήμα",
+    kochmodus_vorlesen_ein_aria: "Ενεργοποίηση αυτόματης ανάγνωσης",
+    kochmodus_vorlesen_aus_aria: "Απενεργοποίηση αυτόματης ανάγνωσης",
+    kochmodus_zutaten_ein_aria: "Εμφάνιση υλικών",
+    kochmodus_zutaten_aus_aria: "Απόκρυψη υλικών",
+    kopf_sammel_pdf_btn: "📚 Συγκεντρωτικό PDF",
+    sammel_pdf_keine_rezepte: "Δεν βρέθηκαν συνταγές για εξαγωγή.",
   },
   hu: {
     allgemein_zurueck: "← Vissza",
@@ -2856,6 +2988,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Új verzió érhető el: {{version}}",
     update_ansehen_btn: "Megnézem",
     update_schliessen_aria: "Értesítés elrejtése",
+    detail_kochmodus_btn: "🍳 Főzési mód",
+    kochmodus_schritt_anzeige: "{{aktuell}}. lépés / {{gesamt}}",
+    kochmodus_schliessen_aria: "Főzési mód bezárása",
+    kochmodus_schritt_zurueck_aria: "Előző lépés",
+    kochmodus_schritt_weiter_aria: "Következő lépés",
+    kochmodus_vorlesen_ein_aria: "Automatikus felolvasás bekapcsolása",
+    kochmodus_vorlesen_aus_aria: "Automatikus felolvasás kikapcsolása",
+    kochmodus_zutaten_ein_aria: "Hozzávalók megjelenítése",
+    kochmodus_zutaten_aus_aria: "Hozzávalók elrejtése",
+    kopf_sammel_pdf_btn: "📚 Gyűjtő PDF",
+    sammel_pdf_keine_rezepte: "Nem található exportálható recept.",
   },
   ga: {
     allgemein_zurueck: "← Siar",
@@ -3059,6 +3202,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Leagan nua ar fáil: {{version}}",
     update_ansehen_btn: "Amharc",
     update_schliessen_aria: "Cuir an fógra i bhfolach",
+    detail_kochmodus_btn: "🍳 Mód Cócaireachta",
+    kochmodus_schritt_anzeige: "Céim {{aktuell}} de {{gesamt}}",
+    kochmodus_schliessen_aria: "Dún an mód cócaireachta",
+    kochmodus_schritt_zurueck_aria: "An chéim roimhe seo",
+    kochmodus_schritt_weiter_aria: "An chéad chéim eile",
+    kochmodus_vorlesen_ein_aria: "Cuir léamh uathoibríoch ar siúl",
+    kochmodus_vorlesen_aus_aria: "Múch léamh uathoibríoch",
+    kochmodus_zutaten_ein_aria: "Taispeáin comhábhair",
+    kochmodus_zutaten_aus_aria: "Folaigh comhábhair",
+    kopf_sammel_pdf_btn: "📚 PDF Bailithe",
+    sammel_pdf_keine_rezepte: "Níor aimsíodh aon oideas le heaspórtáil.",
   },
   it: {
     allgemein_zurueck: "← Indietro",
@@ -3262,6 +3416,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nuova versione disponibile: {{version}}",
     update_ansehen_btn: "Visualizza",
     update_schliessen_aria: "Nascondi avviso",
+    detail_kochmodus_btn: "🍳 Modalità cucina",
+    kochmodus_schritt_anzeige: "Passo {{aktuell}} di {{gesamt}}",
+    kochmodus_schliessen_aria: "Chiudi modalità cucina",
+    kochmodus_schritt_zurueck_aria: "Passo precedente",
+    kochmodus_schritt_weiter_aria: "Passo successivo",
+    kochmodus_vorlesen_ein_aria: "Attiva la lettura automatica",
+    kochmodus_vorlesen_aus_aria: "Disattiva la lettura automatica",
+    kochmodus_zutaten_ein_aria: "Mostra ingredienti",
+    kochmodus_zutaten_aus_aria: "Nascondi ingredienti",
+    kopf_sammel_pdf_btn: "📚 PDF raccolta",
+    sammel_pdf_keine_rezepte: "Nessuna ricetta trovata da esportare.",
   },
   lv: {
     allgemein_zurueck: "← Atpakaļ",
@@ -3464,6 +3629,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Pieejama jauna versija: {{version}}",
     update_ansehen_btn: "Skatīt",
     update_schliessen_aria: "Slēpt paziņojumu",
+    detail_kochmodus_btn: "🍳 Gatavošanas režīms",
+    kochmodus_schritt_anzeige: "{{aktuell}}. solis no {{gesamt}}",
+    kochmodus_schliessen_aria: "Aizvērt gatavošanas režīmu",
+    kochmodus_schritt_zurueck_aria: "Iepriekšējais solis",
+    kochmodus_schritt_weiter_aria: "Nākamais solis",
+    kochmodus_vorlesen_ein_aria: "Ieslēgt automātisko nolasīšanu",
+    kochmodus_vorlesen_aus_aria: "Izslēgt automātisko nolasīšanu",
+    kochmodus_zutaten_ein_aria: "Rādīt sastāvdaļas",
+    kochmodus_zutaten_aus_aria: "Slēpt sastāvdaļas",
+    kopf_sammel_pdf_btn: "📚 Kopīgais PDF",
+    sammel_pdf_keine_rezepte: "Netika atrasta neviena recepte eksportēšanai.",
   },
   lt: {
     allgemein_zurueck: "← Atgal",
@@ -3666,6 +3842,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Yra nauja versija: {{version}}",
     update_ansehen_btn: "Žiūrėti",
     update_schliessen_aria: "Slėpti pranešimą",
+    detail_kochmodus_btn: "🍳 Gaminimo režimas",
+    kochmodus_schritt_anzeige: "{{aktuell}} veiksmas iš {{gesamt}}",
+    kochmodus_schliessen_aria: "Uždaryti gaminimo režimą",
+    kochmodus_schritt_zurueck_aria: "Ankstesnis veiksmas",
+    kochmodus_schritt_weiter_aria: "Kitas veiksmas",
+    kochmodus_vorlesen_ein_aria: "Įjungti automatinį skaitymą",
+    kochmodus_vorlesen_aus_aria: "Išjungti automatinį skaitymą",
+    kochmodus_zutaten_ein_aria: "Rodyti ingredientus",
+    kochmodus_zutaten_aus_aria: "Slėpti ingredientus",
+    kopf_sammel_pdf_btn: "📚 Bendras PDF",
+    sammel_pdf_keine_rezepte: "Nerasta receptų eksportavimui.",
   },
   mt: {
     allgemein_zurueck: "← Lura",
@@ -3869,6 +4056,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Verżjoni ġdida disponibbli: {{version}}",
     update_ansehen_btn: "Ara",
     update_schliessen_aria: "Aħbi n-notifika",
+    detail_kochmodus_btn: "🍳 Modalità tat-Tisjir",
+    kochmodus_schritt_anzeige: "Pass {{aktuell}} minn {{gesamt}}",
+    kochmodus_schliessen_aria: "Agħlaq il-modalità tat-tisjir",
+    kochmodus_schritt_zurueck_aria: "Pass ta' qabel",
+    kochmodus_schritt_weiter_aria: "Pass li jmiss",
+    kochmodus_vorlesen_ein_aria: "Ixgħel il-qari awtomatiku",
+    kochmodus_vorlesen_aus_aria: "Itfi l-qari awtomatiku",
+    kochmodus_zutaten_ein_aria: "Uri l-ingredjenti",
+    kochmodus_zutaten_aus_aria: "Aħbi l-ingredjenti",
+    kopf_sammel_pdf_btn: "📚 PDF Miġbura",
+    sammel_pdf_keine_rezepte: "Ma nstab l-ebda riċetta biex tiġi esportata.",
   },
   pl: {
     allgemein_zurueck: "← Wstecz",
@@ -4071,6 +4269,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Dostępna nowa wersja: {{version}}",
     update_ansehen_btn: "Zobacz",
     update_schliessen_aria: "Ukryj powiadomienie",
+    detail_kochmodus_btn: "🍳 Tryb gotowania",
+    kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
+    kochmodus_schliessen_aria: "Zamknij tryb gotowania",
+    kochmodus_schritt_zurueck_aria: "Poprzedni krok",
+    kochmodus_schritt_weiter_aria: "Następny krok",
+    kochmodus_vorlesen_ein_aria: "Włącz automatyczne czytanie",
+    kochmodus_vorlesen_aus_aria: "Wyłącz automatyczne czytanie",
+    kochmodus_zutaten_ein_aria: "Pokaż składniki",
+    kochmodus_zutaten_aus_aria: "Ukryj składniki",
+    kopf_sammel_pdf_btn: "📚 Zbiorczy PDF",
+    sammel_pdf_keine_rezepte: "Nie znaleziono przepisów do eksportu.",
   },
   pt: {
     allgemein_zurueck: "← Voltar",
@@ -4274,6 +4483,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nova versão disponível: {{version}}",
     update_ansehen_btn: "Ver",
     update_schliessen_aria: "Ocultar aviso",
+    detail_kochmodus_btn: "🍳 Modo de cozinha",
+    kochmodus_schritt_anzeige: "Passo {{aktuell}} de {{gesamt}}",
+    kochmodus_schliessen_aria: "Fechar modo de cozinha",
+    kochmodus_schritt_zurueck_aria: "Passo anterior",
+    kochmodus_schritt_weiter_aria: "Próximo passo",
+    kochmodus_vorlesen_ein_aria: "Ativar leitura automática",
+    kochmodus_vorlesen_aus_aria: "Desativar leitura automática",
+    kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
+    kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
+    kopf_sammel_pdf_btn: "📚 PDF coletivo",
+    sammel_pdf_keine_rezepte: "Nenhuma receita encontrada para exportar.",
   },
   ro: {
     allgemein_zurueck: "← Înapoi",
@@ -4476,6 +4696,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Este disponibilă o versiune nouă: {{version}}",
     update_ansehen_btn: "Vezi",
     update_schliessen_aria: "Ascunde notificarea",
+    detail_kochmodus_btn: "🍳 Mod de gătit",
+    kochmodus_schritt_anzeige: "Pasul {{aktuell}} din {{gesamt}}",
+    kochmodus_schliessen_aria: "Închide modul de gătit",
+    kochmodus_schritt_zurueck_aria: "Pasul anterior",
+    kochmodus_schritt_weiter_aria: "Pasul următor",
+    kochmodus_vorlesen_ein_aria: "Activează citirea automată",
+    kochmodus_vorlesen_aus_aria: "Dezactivează citirea automată",
+    kochmodus_zutaten_ein_aria: "Afișează ingredientele",
+    kochmodus_zutaten_aus_aria: "Ascunde ingredientele",
+    kopf_sammel_pdf_btn: "📚 PDF colectiv",
+    sammel_pdf_keine_rezepte: "Nu s-a găsit nicio rețetă de exportat.",
   },
   sk: {
     allgemein_zurueck: "← Späť",
@@ -4678,6 +4909,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "K dispozícii je nová verzia: {{version}}",
     update_ansehen_btn: "Zobraziť",
     update_schliessen_aria: "Skryť upozornenie",
+    detail_kochmodus_btn: "🍳 Režim varenia",
+    kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
+    kochmodus_schliessen_aria: "Zavrieť režim varenia",
+    kochmodus_schritt_zurueck_aria: "Predchádzajúci krok",
+    kochmodus_schritt_weiter_aria: "Ďalší krok",
+    kochmodus_vorlesen_ein_aria: "Zapnúť automatické čítanie",
+    kochmodus_vorlesen_aus_aria: "Vypnúť automatické čítanie",
+    kochmodus_zutaten_ein_aria: "Zobraziť suroviny",
+    kochmodus_zutaten_aus_aria: "Skryť suroviny",
+    kopf_sammel_pdf_btn: "📚 Súhrnné PDF",
+    sammel_pdf_keine_rezepte: "Nenašli sa žiadne recepty na export.",
   },
   sl: {
     allgemein_zurueck: "← Nazaj",
@@ -4880,6 +5122,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Na voljo je nova različica: {{version}}",
     update_ansehen_btn: "Ogled",
     update_schliessen_aria: "Skrij obvestilo",
+    detail_kochmodus_btn: "🍳 Način kuhanja",
+    kochmodus_schritt_anzeige: "Korak {{aktuell}} od {{gesamt}}",
+    kochmodus_schliessen_aria: "Zapri način kuhanja",
+    kochmodus_schritt_zurueck_aria: "Prejšnji korak",
+    kochmodus_schritt_weiter_aria: "Naslednji korak",
+    kochmodus_vorlesen_ein_aria: "Vklopi samodejno branje",
+    kochmodus_vorlesen_aus_aria: "Izklopi samodejno branje",
+    kochmodus_zutaten_ein_aria: "Prikaži sestavine",
+    kochmodus_zutaten_aus_aria: "Skrij sestavine",
+    kopf_sammel_pdf_btn: "📚 Zbirni PDF",
+    sammel_pdf_keine_rezepte: "Ni najdenih receptov za izvoz.",
   },
   es: {
     allgemein_zurueck: "← Volver",
@@ -5082,6 +5335,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nueva versión disponible: {{version}}",
     update_ansehen_btn: "Ver",
     update_schliessen_aria: "Ocultar aviso",
+    detail_kochmodus_btn: "🍳 Modo cocina",
+    kochmodus_schritt_anzeige: "Paso {{aktuell}} de {{gesamt}}",
+    kochmodus_schliessen_aria: "Cerrar modo cocina",
+    kochmodus_schritt_zurueck_aria: "Paso anterior",
+    kochmodus_schritt_weiter_aria: "Paso siguiente",
+    kochmodus_vorlesen_ein_aria: "Activar lectura automática",
+    kochmodus_vorlesen_aus_aria: "Desactivar lectura automática",
+    kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
+    kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
+    kopf_sammel_pdf_btn: "📚 PDF conjunto",
+    sammel_pdf_keine_rezepte: "No se encontraron recetas para exportar.",
   },
   sv: {
     allgemein_zurueck: "← Tillbaka",
@@ -5284,6 +5548,17 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Ny version tillgänglig: {{version}}",
     update_ansehen_btn: "Visa",
     update_schliessen_aria: "Dölj meddelande",
+    detail_kochmodus_btn: "🍳 Matlagningsläge",
+    kochmodus_schritt_anzeige: "Steg {{aktuell}} av {{gesamt}}",
+    kochmodus_schliessen_aria: "Stäng matlagningsläge",
+    kochmodus_schritt_zurueck_aria: "Föregående steg",
+    kochmodus_schritt_weiter_aria: "Nästa steg",
+    kochmodus_vorlesen_ein_aria: "Slå på automatisk uppläsning",
+    kochmodus_vorlesen_aus_aria: "Stäng av automatisk uppläsning",
+    kochmodus_zutaten_ein_aria: "Visa ingredienser",
+    kochmodus_zutaten_aus_aria: "Dölj ingredienser",
+    kopf_sammel_pdf_btn: "📚 Samlings-PDF",
+    sammel_pdf_keine_rezepte: "Inga recept hittades att exportera.",
   },
 };
 
@@ -5348,7 +5623,7 @@ const SCHEMA_VERSION = 2;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "1.0.4";
+const CARD_VERSION = "1.0.5";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v1.0.4".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
@@ -5913,6 +6188,14 @@ class RezeptbuchCard extends HTMLElement {
     // führendes "v") oder false, falls keine neuere Version existiert.
     this._updateHinweisVersion = null;
     this._updateHinweisAusgeblendet = false;
+
+    // Kochmodus (Vollbild-Schritt-für-Schritt-Ansicht in der Detailansicht,
+    // siehe _renderDetail/_kochmodus*) - _kochmodusSchrittIndex ist
+    // 0-basiert, im Gegensatz zur 1-basierten Anzeige für den Nutzer.
+    this._kochmodusAktiv = false;
+    this._kochmodusSchrittIndex = 0;
+    this._kochmodusZutatenSichtbar = false;
+    this._kochmodusVorlesenAktiv = false;
   }
 
   // Ermittelt die aktive Anzeigesprache: Deutsch ist Standard/Rückfall
@@ -6755,8 +7038,81 @@ class RezeptbuchCard extends HTMLElement {
     this._ansicht = "liste";
     this._aktivesRezept = null;
     this._urlHashSetzen(null);
+    this._kochmodusZuruecksetzen();
     await this._rezepteLaden();
     this._scrollPositionWiederherstellen();
+  }
+
+  // Setzt den Kochmodus-Zustand zurück (u.a. beim Verlassen der
+  // Detailansicht) und stoppt eine ggf. noch laufende Sprachausgabe -
+  // sonst würde beim nächsten Öffnen eines Rezepts sofort wieder
+  // vorgelesen bzw. mitten in einem alten Schritt weitergezählt.
+  _kochmodusZuruecksetzen() {
+    this._sprachausgabeStoppen();
+    this._kochmodusAktiv = false;
+    this._kochmodusSchrittIndex = 0;
+    this._kochmodusZutatenSichtbar = false;
+  }
+
+  _sprachausgabeStoppen() {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  _kochmodusOeffnen() {
+    this._kochmodusAktiv = true;
+    this._kochmodusSchrittIndex = 0;
+    this._render();
+    if (this._kochmodusVorlesenAktiv) this._kochmodusAktuellenSchrittVorlesen();
+  }
+
+  _kochmodusSchliessen() {
+    this._sprachausgabeStoppen();
+    this._kochmodusAktiv = false;
+    this._render();
+  }
+
+  _kochmodusSchrittWechseln(richtung) {
+    const schritte = (this._aktivesRezept.steps || []).filter((s) => s && s.trim());
+    const neuerIndex = this._kochmodusSchrittIndex + richtung;
+    if (neuerIndex < 0 || neuerIndex >= schritte.length) return;
+    this._kochmodusSchrittIndex = neuerIndex;
+    this._render();
+    if (this._kochmodusVorlesenAktiv) this._kochmodusAktuellenSchrittVorlesen();
+  }
+
+  _kochmodusVorlesenUmschalten() {
+    this._kochmodusVorlesenAktiv = !this._kochmodusVorlesenAktiv;
+    if (this._kochmodusVorlesenAktiv) {
+      this._kochmodusAktuellenSchrittVorlesen();
+    } else {
+      this._sprachausgabeStoppen();
+    }
+    this._render();
+  }
+
+  // Liest den aktuellen Kochmodus-Schritt über die im Browser eingebaute
+  // Sprachausgabe (Web Speech API) vor - bewusst KEINE Anbindung an Home
+  // Assistants eigenen tts-Dienst: der bräuchte ein konfiguriertes
+  // TTS-Backend plus einen media_player als Ausgabegerät (typischerweise
+  // einen Lautsprecher irgendwo im Haus, nicht zwingend in der Küche neben
+  // dem Tablet). Die Sprachausgabe des Geräts, auf dem die Karte gerade
+  // offen ist, funktioniert dagegen überall sofort, ganz ohne Einrichtung -
+  // passend zum Grundsatz dieses Projekts ("kein Backend nötig"). Steht sie
+  // nicht zur Verfügung (z.B. manche eingebetteten WebViews), passiert
+  // einfach nichts - kein Fehler für den Nutzer.
+  _kochmodusAktuellenSchrittVorlesen() {
+    if (typeof window === "undefined" || !window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
+      return;
+    }
+    const schritte = (this._aktivesRezept.steps || []).filter((s) => s && s.trim());
+    const text = schritte[this._kochmodusSchrittIndex];
+    if (!text) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = (this._hass && this._hass.language) || this._sprache();
+    window.speechSynthesis.speak(utterance);
   }
 
   _neuesRezeptFormular() {
@@ -7384,6 +7740,42 @@ class RezeptbuchCard extends HTMLElement {
         }
         .modal-box p { margin:0 0 18px; font-size:1.05em; color: var(--primary-text-color); }
         .modal-aktionen { display:flex; gap:10px; justify-content:center; }
+
+        /* Kochmodus: Vollbild-Schritt-für-Schritt-Ansicht (siehe
+           _renderDetail/_kochmodus*) - deckt die ganze Karte ab, damit
+           während des Kochens nichts anderes versehentlich antippbar ist. */
+        .kochmodus-overlay {
+          position: fixed; inset: 0; background: var(--card-background-color);
+          z-index: 1050; display:flex; flex-direction:column; box-sizing:border-box;
+          padding:16px 20px; overflow:hidden;
+        }
+        .kochmodus-kopf { display:flex; align-items:center; gap:10px; }
+        .kochmodus-titel {
+          flex:1; margin:0; font-size:1.05em; font-weight:700; color: var(--primary-text-color);
+          overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        }
+        .kochmodus-schliessen-btn {
+          background:transparent; border:none; font-size:1.6em; line-height:1;
+          color: var(--primary-text-color); cursor:pointer; padding:2px 8px; border-radius:8px;
+        }
+        .kochmodus-schliessen-btn:focus-visible { outline:2px solid var(--kb-terrakotta); outline-offset:2px; }
+        .kochmodus-werkzeuge { display:flex; gap:8px; margin:10px 0; flex-wrap:wrap; }
+        .kochmodus-werkzeuge button.aktiv { background: var(--kb-terrakotta); color:#fff; }
+        .kochmodus-zutaten-panel {
+          background: var(--kb-terrakotta-hell); border-radius:12px; padding:12px 16px;
+          margin-bottom:10px; max-height:32vh; overflow-y:auto; flex-shrink:0;
+        }
+        .kochmodus-zutaten-panel h4 { margin:0 0 6px; color: var(--kb-terrakotta-dunkel); }
+        .kochmodus-zutaten-panel ul { margin:0; padding-left:20px; }
+        .kochmodus-body {
+          flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+          text-align:center; overflow-y:auto; padding:10px 4px; min-height:0;
+        }
+        .kochmodus-schritt-anzeige { color: var(--secondary-text-color); font-size:0.9em; margin-bottom:10px; }
+        .kochmodus-schritt-text { font-size:1.4em; line-height:1.45; color: var(--primary-text-color); max-width:640px; }
+        .kochmodus-fuss { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:12px; flex-shrink:0; }
+        .kochmodus-nav-btn { font-size:1.2em; padding:14px 22px; border-radius:12px; flex:1; max-width:160px; }
+        .kochmodus-nav-btn:disabled { opacity:0.35; }
         /* Breitere Variante für die Prompt-Anzeige (Abschnitt "JSON
            einfügen") - der normale .modal-box ist für kurze Ja/Nein-Fragen
            gedacht (340px, zentrierter Text), hier steht aber ein mehrere
@@ -7491,6 +7883,7 @@ class RezeptbuchCard extends HTMLElement {
           <h2>${titel}</h2>
           <div class="kopf-aktionen">
             ${this._rezepte.length ? `<button class="sekundaer" id="sichern-btn">${this._t("kopf_sichern_btn")}</button>` : ""}
+            ${this._rezepte.length ? `<button class="sekundaer" id="sammel-pdf-btn">${this._t("kopf_sammel_pdf_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
             ${this._rezepte.length && this._config.ask_cooked !== false ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
@@ -7584,6 +7977,11 @@ class RezeptbuchCard extends HTMLElement {
     const sichernBtn = this.shadowRoot.getElementById("sichern-btn");
     if (sichernBtn) {
       sichernBtn.addEventListener("click", () => this._rezepteExportieren());
+    }
+
+    const sammelPdfBtn = this.shadowRoot.getElementById("sammel-pdf-btn");
+    if (sammelPdfBtn) {
+      sammelPdfBtn.addEventListener("click", () => this._sammelPdfExport());
     }
 
     const einkaufsmodusBtn = this.shadowRoot.getElementById("einkaufsmodus-btn");
@@ -8004,9 +8402,13 @@ class RezeptbuchCard extends HTMLElement {
     doc.setTextColor(20);
   }
 
-  async _pdfErstellen(r) {
-    const jsPDFKlasse = await this._jsPdfLaden();
-    const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
+  // Zeichnet EIN Rezept auf die aktuelle Seite von "doc" (ab margin oben) -
+  // ausgelagert aus _pdfErstellen, damit dieselbe Zeichenlogik sowohl für
+  // den Einzel-Export (_pdfErstellen) als auch für den Sammel-PDF-Export
+  // mehrerer Rezepte (_sammelPdfErstellen) verwendet werden kann. Legt
+  // selbst keine neue Seite an - das entscheidet die aufrufende Stelle
+  // (bei mehreren Rezepten also VOR jedem weiteren Aufruf doc.addPage()).
+  async _rezeptContentInPdfZeichnen(doc, r) {
     const margin = 20;
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -8218,11 +8620,15 @@ class RezeptbuchCard extends HTMLElement {
       }
     }
 
-    // Seitenfuß-Wasserzeichen auf JEDER Seite anbringen - nicht nur auf der
-    // (einen) Seite mit dem Bild-Wasserzeichen. `setPage`/`getNumberOfPages`
-    // gibt es nur bei der echten jsPDF-Bibliothek, nicht bei den einfachen
-    // Fakes in den Tests - dann wird der Fuß einfach nur auf die aktuelle
-    // (einzige) Seite gezeichnet.
+  }
+
+  // Zeichnet das Seitenfuß-Wasserzeichen auf JEDER Seite von "doc" -
+  // gemeinsam genutzt von _pdfErstellen (ein Rezept) und _sammelPdfErstellen
+  // (mehrere Rezepte hintereinander). `setPage`/`getNumberOfPages` gibt es
+  // nur bei der echten jsPDF-Bibliothek, nicht bei den einfachen Fakes in
+  // den Tests - dann wird der Fuß einfach nur auf die aktuelle Seite
+  // gezeichnet.
+  _pdfAlleSeitenWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin) {
     if (typeof doc.internal.getNumberOfPages === "function" && typeof doc.setPage === "function") {
       const seitenAnzahl = doc.internal.getNumberOfPages();
       for (let i = 1; i <= seitenAnzahl; i++) {
@@ -8232,8 +8638,50 @@ class RezeptbuchCard extends HTMLElement {
     } else {
       this._pdfSeitenfussWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin);
     }
+  }
+
+  async _pdfErstellen(r) {
+    const jsPDFKlasse = await this._jsPdfLaden();
+    const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
+    const margin = 20;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    await this._rezeptContentInPdfZeichnen(doc, r);
+    this._pdfAlleSeitenWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin);
 
     const dateiname = `${r.title.replace(/[^a-zA-Z0-9äöüÄÖÜß]+/g, "_")}.pdf`;
+    return { blob: doc.output("blob"), dateiname, mimeType: "application/pdf" };
+  }
+
+  // Sammel-PDF: exportiert mehrere Rezepte (z.B. die aktuell gefilterte
+  // Liste aus der Übersicht) als EIN gemeinsames PDF, ein Rezept pro
+  // (mindestens einer) Seite - nutzt dieselbe Zeichenlogik wie der
+  // Einzel-Export. Die Portionenzahl wird dabei je Rezept auf dessen
+  // Standardportionen zurückgesetzt (die Übersicht hat keine
+  // rezeptspezifische Portionenwahl wie die Detailansicht) und danach
+  // wiederhergestellt.
+  async _sammelPdfErstellen(rezepte, dateinameBasis) {
+    const jsPDFKlasse = await this._jsPdfLaden();
+    const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
+    const margin = 20;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    const portionenVorher = this._portionen;
+    try {
+      for (let i = 0; i < rezepte.length; i++) {
+        if (i > 0) doc.addPage();
+        this._portionen = rezepte[i].servings || 1;
+        await this._rezeptContentInPdfZeichnen(doc, rezepte[i]);
+      }
+    } finally {
+      this._portionen = portionenVorher;
+    }
+
+    this._pdfAlleSeitenWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin);
+
+    const dateiname = `${dateinameBasis.replace(/[^a-zA-Z0-9äöüÄÖÜß]+/g, "_")}.pdf`;
     return { blob: doc.output("blob"), dateiname, mimeType: "application/pdf" };
   }
 
@@ -8382,6 +8830,39 @@ class RezeptbuchCard extends HTMLElement {
     }
   }
 
+  // Sammel-PDF: exportiert alle AKTUELL GEFILTERTEN Rezepte (Suche/
+  // Kategorie/Tags/Kochbuch aus der Übersicht, aber unabhängig von der
+  // Seiten-Paginierung) als ein einziges PDF - z.B. für einen Ausdruck
+  // mehrerer Rezepte auf einmal. Dieselbe window.open()-Zustellung wie
+  // beim Teilen/Drucken eines einzelnen Rezepts (siehe dort für die
+  // Begründung: zuverlässiger als ein unsichtbarer Download-Link,
+  // besonders in eingebetteten WebViews wie der Home-Assistant-App).
+  async _sammelPdfExport() {
+    const liste = this._sortiereRezepte(this._gefilterteRezepte());
+    if (!liste.length) {
+      alert(this._t("sammel_pdf_keine_rezepte"));
+      return;
+    }
+    try {
+      const datum = new Date().toISOString().slice(0, 10);
+      const { blob, dateiname } = await this._sammelPdfErstellen(liste, `Rezeptbuch_${datum}`);
+      const url = URL.createObjectURL(blob);
+      const neuesFenster = window.open(url, "_blank");
+      if (!neuesFenster) {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = dateiname;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (fehler) {
+      console.error("Rezeptbuch: Sammel-PDF-Export fehlgeschlagen", fehler);
+      alert(this._t("fehler_teilen_drucken", { fehler: fehler.message || fehler }));
+    }
+  }
+
   _renderDetail(stil) {
     const r = this._aktivesRezept;
     const basisPortionen = r.servings || 1;
@@ -8398,10 +8879,16 @@ class RezeptbuchCard extends HTMLElement {
       })
       .join("");
 
-    const schritteListe = (r.steps || [])
-      .filter((s) => s && s.trim())
-      .map((s) => `<li>${this._escape(s)}</li>`)
-      .join("");
+    const schritte = (r.steps || []).filter((s) => s && s.trim());
+    const schritteListe = schritte.map((s) => `<li>${this._escape(s)}</li>`).join("");
+
+    // Kochmodus-Zustand ist rezeptübergreifend auf der Karteninstanz
+    // gespeichert (siehe Konstruktor/_kochmodusZuruecksetzen) - hier vor dem
+    // Rendern auf den gültigen Bereich klemmen, falls sich die Schrittzahl
+    // seit dem letzten Rendern verringert hat (z.B. nach einer Bearbeitung).
+    if (this._kochmodusSchrittIndex >= schritte.length) {
+      this._kochmodusSchrittIndex = Math.max(0, schritte.length - 1);
+    }
 
     const { durchschnitt, anzahl } = this._durchschnittsBewertung(r.ratings);
     const eigeneId = this._hass.user ? this._hass.user.id : null;
@@ -8422,6 +8909,7 @@ class RezeptbuchCard extends HTMLElement {
         <div class="kopf">
           <button class="sekundaer" id="zurueck-btn">${this._t("allgemein_zurueck")}</button>
           <button class="sekundaer" id="drucken-btn">${this._t("detail_teilen_drucken_btn")}</button>
+          ${schritte.length ? `<button class="sekundaer" id="kochmodus-btn">${this._t("detail_kochmodus_btn")}</button>` : ""}
         </div>
         <h2 class="detail-titel">${this._escape(r.title)}</h2>
         <div class="kategorie-badge">🏷️ ${this._escape(this._kategorieLabel(r.category || "Sonstiges"))}</div>
@@ -8497,6 +8985,33 @@ class RezeptbuchCard extends HTMLElement {
             </div>
           </div>
         </div>
+
+        ${schritte.length ? `
+        <div class="kochmodus-overlay" id="kochmodus-overlay" style="display:${this._kochmodusAktiv ? "flex" : "none"};">
+          <div class="kochmodus-kopf">
+            <h3 class="kochmodus-titel">${this._escape(r.title)}</h3>
+            <button class="kochmodus-schliessen-btn" id="kochmodus-schliessen-btn" aria-label="${this._t("kochmodus_schliessen_aria")}">✕</button>
+          </div>
+          <div class="kochmodus-werkzeuge">
+            <button class="sekundaer klein${this._kochmodusZutatenSichtbar ? " aktiv" : ""}" id="kochmodus-zutaten-btn" aria-label="${this._t(this._kochmodusZutatenSichtbar ? "kochmodus_zutaten_aus_aria" : "kochmodus_zutaten_ein_aria")}">🥕 ${this._t("abschnitt_titel_zutaten")}</button>
+            <button class="sekundaer klein${this._kochmodusVorlesenAktiv ? " aktiv" : ""}" id="kochmodus-vorlesen-btn" aria-label="${this._t(this._kochmodusVorlesenAktiv ? "kochmodus_vorlesen_aus_aria" : "kochmodus_vorlesen_ein_aria")}">${this._kochmodusVorlesenAktiv ? "🔊" : "🔈"}</button>
+          </div>
+          ${this._kochmodusZutatenSichtbar ? `
+            <div class="kochmodus-zutaten-panel">
+              <h4>${this._t("abschnitt_titel_zutaten")}</h4>
+              <ul>${zeilen || `<li>${this._t("keine_zutaten")}</li>`}</ul>
+            </div>
+          ` : ""}
+          <div class="kochmodus-body">
+            <div class="kochmodus-schritt-anzeige">${this._t("kochmodus_schritt_anzeige", { aktuell: this._kochmodusSchrittIndex + 1, gesamt: schritte.length })}</div>
+            <div class="kochmodus-schritt-text">${this._escape(schritte[this._kochmodusSchrittIndex] || "")}</div>
+          </div>
+          <div class="kochmodus-fuss">
+            <button class="sekundaer kochmodus-nav-btn" id="kochmodus-zurueck-btn" aria-label="${this._t("kochmodus_schritt_zurueck_aria")}" ${this._kochmodusSchrittIndex === 0 ? "disabled" : ""}>‹</button>
+            <button class="primaer kochmodus-nav-btn" id="kochmodus-weiter-btn" aria-label="${this._t("kochmodus_schritt_weiter_aria")}" ${this._kochmodusSchrittIndex >= schritte.length - 1 ? "disabled" : ""}>›</button>
+          </div>
+        </div>
+        ` : ""}
       </ha-card>
     `;
 
@@ -8508,6 +9023,33 @@ class RezeptbuchCard extends HTMLElement {
       }
     });
     this.shadowRoot.getElementById("drucken-btn").addEventListener("click", () => this._rezeptDrucken(r));
+    const kochmodusBtn = this.shadowRoot.getElementById("kochmodus-btn");
+    if (kochmodusBtn) {
+      kochmodusBtn.addEventListener("click", () => this._kochmodusOeffnen());
+    }
+    const kochmodusSchliessenBtn = this.shadowRoot.getElementById("kochmodus-schliessen-btn");
+    if (kochmodusSchliessenBtn) {
+      kochmodusSchliessenBtn.addEventListener("click", () => this._kochmodusSchliessen());
+    }
+    const kochmodusZutatenBtn = this.shadowRoot.getElementById("kochmodus-zutaten-btn");
+    if (kochmodusZutatenBtn) {
+      kochmodusZutatenBtn.addEventListener("click", () => {
+        this._kochmodusZutatenSichtbar = !this._kochmodusZutatenSichtbar;
+        this._render();
+      });
+    }
+    const kochmodusVorlesenBtn = this.shadowRoot.getElementById("kochmodus-vorlesen-btn");
+    if (kochmodusVorlesenBtn) {
+      kochmodusVorlesenBtn.addEventListener("click", () => this._kochmodusVorlesenUmschalten());
+    }
+    const kochmodusZurueckBtn = this.shadowRoot.getElementById("kochmodus-zurueck-btn");
+    if (kochmodusZurueckBtn) {
+      kochmodusZurueckBtn.addEventListener("click", () => this._kochmodusSchrittWechseln(-1));
+    }
+    const kochmodusWeiterBtn = this.shadowRoot.getElementById("kochmodus-weiter-btn");
+    if (kochmodusWeiterBtn) {
+      kochmodusWeiterBtn.addEventListener("click", () => this._kochmodusSchrittWechseln(1));
+    }
     this.shadowRoot.getElementById("modal-nein-btn").addEventListener("click", () => this._navigationZurueck());
     this.shadowRoot.getElementById("modal-ja-btn").addEventListener("click", (e) => {
       e.target.disabled = true;

@@ -4,6 +4,25 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.0.5] - 2026-09-27
+
+### Hinzugefügt
+- **Kochmodus**: neue Vollbild-Schritt-für-Schritt-Ansicht in der
+  Detailansicht (Knopf "Kochmodus", nur sichtbar wenn Zubereitungsschritte
+  vorhanden sind) - zeigt jeweils einen Schritt groß und gut lesbar an, mit
+  Vor-/Zurück-Navigation und einer optional einblendbaren Zutatenliste.
+  Praktisch am Tablet in der Küche, ohne beim Kochen lange scrollen zu
+  müssen.
+- **Vorlesen per Sprachausgabe**: im Kochmodus lässt sich das automatische
+  Vorlesen des jeweils aktuellen Schritts über die im Browser eingebaute
+  Sprachausgabe (Web Speech API) ein- und ausschalten - kein Home-
+  Assistant-TTS-Setup oder Lautsprecher-Entity nötig, funktioniert direkt
+  auf dem Gerät, auf dem die Karte gerade offen ist.
+- **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
+  exportiert alle aktuell gefilterten/gesuchten Rezepte (unabhängig von der
+  Seiten-Paginierung) als ein einziges PDF, ein Rezept pro (mindestens
+  einer) Seite - z.B. praktisch für einen Sammelausdruck.
+
 ## [1.0.4] - 2026-09-26
 
 ### Hinzugefügt
