@@ -9416,21 +9416,22 @@ class RezeptbuchCard extends HTMLElement {
   // Ellipsen/Dreiecke/Linien, keine derart plastischen Illustrationen.
   // Die vier Positionen sind rechnerisch aus den Foto-Slots in
   // _sammelPdfDeckblattCollageZeichnen abgeleitet (nicht mehr am äußeren
-  // Rand): jeweils der Mittelpunkt zwischen den zwei benachbarten Fotos
-  // (oben: Slot 1+2, unten: Slot 3+4, links: Slot 1+3, rechts: Slot 2+4) -
-  // sowohl in der Breite als auch in der Höhe -, ein Stück (20%) in
-  // Richtung der mittleren, größten Kachel (Slot 0) verschoben. So sitzen
-  // die Icons sichtbar in den Lücken *zwischen* den Fotos statt am
-  // Seitenrand, peeken aber am Rand der mittleren Kachel noch hervor.
+  // Rand): jeweils genau der Mittelpunkt zwischen den zwei benachbarten
+  // Fotos (oben: Slot 1+2, unten: Slot 3+4, links: Slot 1+3, rechts:
+  // Slot 2+4) - sowohl in der Breite als auch in der Höhe. (Eine frühere
+  // Version hat zusätzlich noch Richtung der mittleren Kachel verschoben -
+  // das saß dann zu weit innen/verdeckt; ohne diese Verschiebung sitzen
+  // die Icons sichtbar in der Lücke zwischen den Fotos, ohne von der
+  // mittleren Kachel überdeckt zu werden.)
   _sammelPdfDeckblattDekorationZeichnen(doc, x, y, breite, hoehe) {
     const groesse = Math.min(24, Math.max(14, Math.min(breite, hoehe) * 0.16));
     const icon = (datenUrl, cx, cy) => {
       doc.addImage(datenUrl, "PNG", cx - groesse / 2, cy - groesse / 2, groesse, groesse);
     };
-    icon(DEKO_ICON_TOMATE_BASE64, x + breite * 0.5, y + hoehe * 0.29);
-    icon(DEKO_ICON_KAROTTEN_BASE64, x + breite * 0.22, y + hoehe * 0.49);
-    icon(DEKO_ICON_KOCHLOEFFEL_BASE64, x + breite * 0.78, y + hoehe * 0.49);
-    icon(DEKO_ICON_RUEHRBESEN_BASE64, x + breite * 0.5, y + hoehe * 0.69);
+    icon(DEKO_ICON_TOMATE_BASE64, x + breite * 0.5, y + hoehe * 0.25);
+    icon(DEKO_ICON_KAROTTEN_BASE64, x + breite * 0.15, y + hoehe * 0.50);
+    icon(DEKO_ICON_KOCHLOEFFEL_BASE64, x + breite * 0.85, y + hoehe * 0.50);
+    icon(DEKO_ICON_RUEHRBESEN_BASE64, x + breite * 0.5, y + hoehe * 0.71);
   }
 
   // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur im
