@@ -45,12 +45,6 @@ komplett neue Kernfunktionen.
   im PDF (und im Inhaltsverzeichnis) sind dabei immer nach Kategorie
   sortiert, unabhängig von Tags oder der aktuellen Sortierung der
   Übersicht.
-- Neue Kartenoption `show_statistics: false` blendet ausschließlich den
-  "Statistik"-Knopf im Kopfbereich der Rezeptübersicht aus, unabhängig
-  von `ask_cooked`. Die "Hast du zubereitet?"-Abfrage und die
-  Zubereitungs-Zählung je Rezept laufen dabei im Hintergrund normal
-  weiter - praktisch, wenn nur die Auswertung selbst nicht angezeigt
-  werden soll, die Historie aber weiter mitgesammelt wird.
 - **Eigene Kategorien**: über einen neuen "+ Neue Kategorie"-Knopf im
   Filterbereich der Übersicht lassen sich zusätzlich zu den elf fest
   eingebauten Kategorien beliebig eigene anlegen - sie erscheinen sofort
@@ -62,24 +56,29 @@ komplett neue Kernfunktionen.
   eigenen Kategorien analog zu Wochenplan/Kochbüchern als verstecktes
   Item in derselben To-do-Liste.
 - **Abfrage & Statistik per Schalter direkt in der Karte ein-/ausschalten**:
-  ist `show_statistics` nicht in der YAML-Konfiguration gesetzt, erscheint
-  ganz rechts im Kopfbereich (nach allen anderen Knöpfen) ein ⚙️-Symbol.
-  Ein Klick darauf öffnet ein Fenster mit einem echten Ein-/Ausschalter
-  (kein manuelles Bearbeiten der Konfiguration mehr nötig), der bewusst
-  BEIDES zusammen regelt: die "Hast du zubereitet?"-Abfrage UND den
-  Statistik-Knopf. Die Einstellung wird analog zu
-  Wochenplan/Kochbüchern/Kategorien als verstecktes Item in derselben
-  To-do-Liste gespeichert und bleibt damit dauerhaft erhalten. Sind
-  `ask_cooked` bzw. `show_statistics` dagegen weiterhin explizit in der
-  YAML gesetzt, hat das unverändert Vorrang (`ask_cooked: false` schaltet
-  die Abfrage fest ab; ein explizit gesetztes `show_statistics` blendet
-  den ⚙️-Schalter dann gar nicht erst ein).
+  ganz rechts im Kopfbereich (nach allen anderen Knöpfen) sitzt jetzt ein
+  ⚙️-Symbol. Ein Klick darauf öffnet ein Fenster mit einem echten
+  Ein-/Ausschalter - kein Bearbeiten der Dashboard-Konfiguration mehr
+  nötig. Der Schalter regelt bewusst BEIDES zusammen: die "Hast du
+  zubereitet?"-Abfrage UND den Statistik-Knopf. Die Einstellung wird
+  analog zu Wochenplan/Kochbüchern/Kategorien als verstecktes Item in
+  derselben To-do-Liste gespeichert und bleibt damit dauerhaft erhalten.
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
   oberhalb der Kacheln (bisher nur unterhalb) - bei vielen Rezepten muss
   man dadurch nicht mehr erst nach unten scrollen, nur um die Seite zu
   wechseln.
+
+### Entfernt
+- **Die Kartenoptionen `ask_cooked: false` (seit v1.0.2) und
+  `show_statistics`**: beide sind durch den neuen ⚙️-Schalter direkt in
+  der Karte ersetzt worden (siehe oben) - ein einziger echter
+  Ein-/Ausschalter statt zweier YAML-Felder, die man von Hand editieren
+  musste. Wer eines der beiden Felder noch in seiner Dashboard-YAML
+  stehen hat, kann es einfach entfernen (es wird nun folgenlos
+  ignoriert) und stattdessen den ⚙️-Schalter verwenden - bereits
+  erfasste Zubereitungen bleiben davon unberührt.
 
 ## [1.0.4] - 2026-09-26
 

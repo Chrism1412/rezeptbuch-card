@@ -306,68 +306,30 @@ entity: todo.rezepte
 shopping_list_entity: todo.einkaufsliste
 ```
 
-**"Hast du zubereitet?"-Abfrage abschalten + Statistik:** Beim Verlassen
-eines geöffneten Rezepts fragt die Karte standardmäßig nach, ob es
-zubereitet wurde, und zählt "Ja" in einer kleinen Zubereitungs-Historie
-je Rezept mit. Wer das nicht möchte, kann die Abfrage über das
-Kartenfeld `ask_cooked: false` komplett abschalten:
-
-```yaml
-type: custom:rezeptbuch-card
-entity: todo.rezepte
-ask_cooked: false
-```
-
-Bereits erfasste Zubereitungen bleiben dabei erhalten, es kommen nur
-keine neuen mehr hinzu. Solange die Abfrage aktiv ist (Standard, oder
-`ask_cooked` gar nicht gesetzt), erscheint zusätzlich ein
+**"Hast du zubereitet?"-Abfrage + Statistik:** Beim Verlassen eines
+geöffneten Rezepts fragt die Karte standardmäßig nach, ob es zubereitet
+wurde, und zählt "Ja" in einer kleinen Zubereitungs-Historie je Rezept
+mit. Solange das aktiv ist, erscheint zusätzlich ein
 **"Statistik"**-Knopf im Kopfbereich der Rezeptliste: er zeigt "Du hast
 in [Jahr] Xx aus deinem Rezeptbuch gekocht" sowie "insgesamt", dazu die
 5 meistgekochten Rezepte. Reine Auswertung der ohnehin gespeicherten
-Daten, kein zusätzliches Skript und keine Automation nötig.
+Daten, kein zusätzliches Skript und keine Automation nötig. Ein "?"
+neben dem Statistik-Titel erklärt das genauer: gezählt wird jede
+Bestätigung der Frage "Hast du zubereitet?", unabhängig von
+Portionsgröße oder wie oft am selben Tag.
 
-Ein "?" neben dem Statistik-Titel erklärt das genauer: gezählt wird
-jede Bestätigung der Frage "Hast du zubereitet?", unabhängig von
-Portionsgröße oder wie oft am selben Tag. Ist diese Frage über
-`ask_cooked: false` deaktiviert, wachsen die Zahlen nicht weiter -
-bereits erfasste Zubereitungen bleiben aber erhalten.
-
-Wer die Abfrage (und damit die Zählung) behalten, aber nur den
-**Statistik-Knopf selbst** ausblenden möchte - z.B. weil die Auswertung
-auf dem Küchen-Tablet niemanden interessiert, die Zubereitungen im
-Hintergrund aber trotzdem mitgezählt werden sollen -, kann das separat
-über das Kartenfeld `show_statistics: false` tun, unabhängig von
-`ask_cooked`:
-
-```yaml
-type: custom:rezeptbuch-card
-entity: todo.rezepte
-show_statistics: false
-```
-
-Die beiden Felder lassen sich beliebig kombinieren: `ask_cooked: false`
-schaltet die Abfrage UND automatisch auch die Statistik ab (ohne neue
-Daten gibt es ja nichts auszuwerten); `show_statistics: false` blendet
-dagegen NUR den Knopf aus, die Abfrage und Zählung laufen im Hintergrund
-normal weiter - praktisch, wenn man die Auswertung später doch wieder
-einblenden möchte, ohne die bereits gesammelte Historie zu verlieren.
-
-**Abfrage & Statistik per Schalter direkt in der Karte ein-/ausschalten:**
-Wer `show_statistics` nicht in der YAML-Konfiguration setzt, bekommt ganz
-rechts im Kopfbereich (nach allen anderen Knöpfen) ein kleines ⚙️-Symbol.
-Ein Klick darauf öffnet ein Fenster mit einem echten Ein-/Ausschalter -
-kein Code-Editieren nötig. Anders als die beiden YAML-Felder oben regelt
-dieser eine Schalter bewusst BEIDES zusammen: ausgeschaltet blendet er
+Ganz rechts im Kopfbereich (nach allen anderen Knöpfen) sitzt dafür ein
+kleines ⚙️-Symbol. Ein Klick darauf öffnet ein Fenster mit einem echten
+Ein-/Ausschalter - kein Bearbeiten der Dashboard-Konfiguration nötig.
+Der Schalter regelt bewusst BEIDES zusammen: ausgeschaltet blendet er
 sowohl den Statistik-Knopf aus als auch die "Hast du zubereitet?"-Abfrage
-selbst - praktisch, wenn man beides einfach komplett abschalten will,
-ohne sich mit zwei getrennten Optionen zu befassen. Die Einstellung wird
-genau wie Wochenplan, Kochbücher und Kategorien im selben To-do-Eintrag
-gespeichert und bleibt daher dauerhaft erhalten. Ist `ask_cooked` oder
-`show_statistics` dagegen explizit in der YAML gesetzt, hat das weiterhin
-Vorrang: `ask_cooked: false` schaltet die Abfrage fest ab (unabhängig vom
-Schalter), und ist `show_statistics` explizit gesetzt (`true` oder
-`false`), wird der ⚙️-Schalter gar nicht erst angezeigt, damit es nicht
-zwei widersprüchliche Schalter gibt.
+selbst, sodass beim Verlassen eines Rezepts gar nicht mehr gefragt wird -
+praktisch, wenn einen das Ganze nicht interessiert. Bereits erfasste
+Zubereitungen bleiben dabei immer erhalten, es kommen nur keine neuen
+mehr hinzu. Die Einstellung wird genau wie Wochenplan, Kochbücher und
+Kategorien als eigenes, verstecktes Element in derselben To-do-Liste
+gespeichert und bleibt daher dauerhaft erhalten - kein Zurücksetzen bei
+einem Update der Karte.
 
 **Rezeptübersicht seitenweise anzeigen:** Bei vielen Rezepten lässt sich
 die Übersicht über das Kartenfeld `items_per_page` in Seiten aufteilen

@@ -204,7 +204,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Abfrage & Statistik aktivieren",
     statistik_info_titel: "Wie wird diese Statistik berechnet?",
     statistik_info_text:
-      "Diese Auswertung zählt jede Bestätigung der Frage „Hast du zubereitet?“ - unabhängig von Portionsgröße oder Häufigkeit am selben Tag. Ist diese Frage über die Kartenoption ask_cooked: false deaktiviert, wachsen die Zahlen nicht weiter, bereits erfasste Zubereitungen bleiben aber erhalten.",
+      "Diese Auswertung zählt jede Bestätigung der Frage „Hast du zubereitet?“ - unabhängig von Portionsgröße oder Häufigkeit am selben Tag. Ist diese Frage über den Schalter in den Statistik-Einstellungen (⚙️) deaktiviert, wachsen die Zahlen nicht weiter, bereits erfasste Zubereitungen bleiben aber erhalten.",
     statistik_dieses_jahr: "Du hast in {{jahr}} {{anzahl}}x aus deinem Rezeptbuch gekocht",
     statistik_gesamt: "Du hast insgesamt {{anzahl}}x aus deinem Rezeptbuch gekocht",
     statistik_top_titel: "Meistgekocht",
@@ -516,7 +516,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Abfrag & Statistik ischalte",
     statistik_info_titel: "Wie wird die Statistik berechnet?",
     statistik_info_text:
-      "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über d'Charte-Option ask_cooked: false deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
+      "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über de Schalter i de Statistik-Iistellige (⚙️) deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
     statistik_dieses_jahr: "Du hesch im {{jahr}} {{anzahl}}x us dim Rezeptbuech kocht",
     statistik_gesamt: "Du hesch insgesamt {{anzahl}}x us dim Rezeptbuech kocht",
     statistik_top_titel: "Am meischte gkocht",
@@ -808,7 +808,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Enable question & statistics",
     statistik_info_titel: "How is this statistic calculated?",
     statistik_info_text:
-      "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the ask_cooked: false card option, the numbers stop growing, but already recorded preparations are kept.",
+      "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the switch in the statistics settings (⚙️), the numbers stop growing, but already recorded preparations are kept.",
     statistik_dieses_jahr: "You've cooked {{anzahl}}x from your recipe book in {{jahr}}",
     statistik_gesamt: "You've cooked {{anzahl}}x from your recipe book in total",
     statistik_top_titel: "Most cooked",
@@ -1079,7 +1079,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Активиране на въпрос и статистика",
     statistik_info_titel: "Как се изчислява тази статистика?",
     statistik_info_text:
-      "Тази статистика брои всяко потвърждение на въпроса „Приготви ли го?“ - независимо от размера на порцията или колко пъти в един и същи ден. Ако този въпрос е деактивиран чрез опцията ask_cooked: false, числата спират да растат, но вече записаните приготвяния се запазват.",
+      "Тази статистика брои всяко потвърждение на въпроса „Приготви ли го?“ - независимо от размера на порцията или колко пъти в един и същи ден. Ако този въпрос е деактивиран чрез превключвателя в настройките на статистиката (⚙️), числата спират да растат, но вече записаните приготвяния се запазват.",
     statistik_dieses_jahr: "Готвил(а) си {{anzahl}}x от готварската си книга през {{jahr}}",
     statistik_gesamt: "Готвил(а) си общо {{anzahl}}x от готварската си книга",
     statistik_top_titel: "Най-често готвено",
@@ -1323,7 +1323,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Uključi pitanje i statistiku",
     statistik_info_titel: "Kako se izračunava ova statistika?",
     statistik_info_text:
-      "Ova statistika broji svaku potvrdu pitanja „Jesi li pripremio/la?“ - bez obzira na veličinu porcije ili koliko puta istog dana. Ako je to pitanje onemogućeno putem opcije kartice ask_cooked: false, brojevi prestaju rasti, ali već zabilježene pripreme ostaju sačuvane.",
+      "Ova statistika broji svaku potvrdu pitanja „Jesi li pripremio/la?“ - bez obzira na veličinu porcije ili koliko puta istog dana. Ako je to pitanje onemogućeno putem prekidača u postavkama statistike (⚙️), brojevi prestaju rasti, ali već zabilježene pripreme ostaju sačuvane.",
     statistik_dieses_jahr: "Kuhao/la si {{anzahl}}x iz svoje kuharice u {{jahr}}",
     statistik_gesamt: "Ukupno si kuhao/la {{anzahl}}x iz svoje kuharice",
     statistik_top_titel: "Najčešće pripremano",
@@ -1567,7 +1567,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Zapnout otázku a statistiku",
     statistik_info_titel: "Jak se tato statistika počítá?",
     statistik_info_text:
-      "Toto vyhodnocení počítá každé potvrzení otázky „Připravil(a) jste?“ - bez ohledu na velikost porce nebo počet za stejný den. Pokud je tato otázka vypnuta pomocí volby karty ask_cooked: false, čísla dál nerostou, ale již zaznamenané přípravy zůstávají zachovány.",
+      "Toto vyhodnocení počítá každé potvrzení otázky „Připravil(a) jste?“ - bez ohledu na velikost porce nebo počet za stejný den. Pokud je tato otázka vypnuta pomocí přepínače v nastavení statistiky (⚙️), čísla dál nerostou, ale již zaznamenané přípravy zůstávají zachovány.",
     statistik_dieses_jahr: "V roce {{jahr}} jsi ze své kuchařky vařil(a) {{anzahl}}x",
     statistik_gesamt: "Celkem jsi ze své kuchařky vařil(a) {{anzahl}}x",
     statistik_top_titel: "Nejčastěji připravováno",
@@ -1811,7 +1811,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Aktivér spørgsmål og statistik",
     statistik_info_titel: "Hvordan beregnes denne statistik?",
     statistik_info_text:
-      "Denne opgørelse tæller hver bekræftelse af spørgsmålet „Tilberedte du den?“ - uanset portionsstørrelse eller hvor mange gange samme dag. Hvis spørgsmålet er deaktiveret via kortindstillingen ask_cooked: false, holder tallene op med at stige, men allerede registrerede tilberedninger bevares.",
+      "Denne opgørelse tæller hver bekræftelse af spørgsmålet „Tilberedte du den?“ - uanset portionsstørrelse eller hvor mange gange samme dag. Hvis spørgsmålet er deaktiveret via kontakten i statistikindstillingerne (⚙️), holder tallene op med at stige, men allerede registrerede tilberedninger bevares.",
     statistik_dieses_jahr: "Du har lavet mad {{anzahl}}x fra din opskriftsbog i {{jahr}}",
     statistik_gesamt: "Du har i alt lavet mad {{anzahl}}x fra din opskriftsbog",
     statistik_top_titel: "Mest tilberedt",
@@ -2055,7 +2055,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Vraag & statistiek inschakelen",
     statistik_info_titel: "Hoe wordt deze statistiek berekend?",
     statistik_info_text:
-      "Deze weergave telt elke bevestiging van de vraag „Heb je het bereid?“ - ongeacht portiegrootte of hoe vaak op dezelfde dag. Als deze vraag is uitgeschakeld via de kaartoptie ask_cooked: false, groeien de aantallen niet meer, maar al geregistreerde bereidingen blijven behouden.",
+      "Deze weergave telt elke bevestiging van de vraag „Heb je het bereid?“ - ongeacht portiegrootte of hoe vaak op dezelfde dag. Als deze vraag is uitgeschakeld via de schakelaar in de statistiekinstellingen (⚙️), groeien de aantallen niet meer, maar al geregistreerde bereidingen blijven behouden.",
     statistik_dieses_jahr: "Je hebt {{anzahl}}x uit je receptenboek gekookt in {{jahr}}",
     statistik_gesamt: "Je hebt in totaal {{anzahl}}x uit je receptenboek gekookt",
     statistik_top_titel: "Meest bereid",
@@ -2299,7 +2299,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Luba küsimus ja statistika",
     statistik_info_titel: "Kuidas seda statistikat arvutatakse?",
     statistik_info_text:
-      "See ülevaade loeb kokku iga kinnituse küsimusele „Kas valmistasid?“ - sõltumata portsjoni suurusest või sellest, mitu korda samal päeval. Kui see küsimus on kaardi valikuga ask_cooked: false välja lülitatud, arvud enam ei kasva, kuid juba salvestatud valmistamised säilivad.",
+      "See ülevaade loeb kokku iga kinnituse küsimusele „Kas valmistasid?“ - sõltumata portsjoni suurusest või sellest, mitu korda samal päeval. Kui see küsimus on statistika seadete lülitiga (⚙️) välja lülitatud, arvud enam ei kasva, kuid juba salvestatud valmistamised säilivad.",
     statistik_dieses_jahr: "Sa oled {{jahr}} aastal oma retseptiraamatust valmistanud toitu {{anzahl}} korda",
     statistik_gesamt: "Kokku oled oma retseptiraamatust valmistanud toitu {{anzahl}} korda",
     statistik_top_titel: "Enim valmistatud",
@@ -2543,7 +2543,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Ota kysymys ja tilastot käyttöön",
     statistik_info_titel: "Miten tämä tilasto lasketaan?",
     statistik_info_text:
-      "Tämä yhteenveto laskee jokaisen vahvistuksen kysymykseen „Valmistitko sen?“ - annoskoosta tai saman päivän toistokerroista riippumatta. Jos tämä kysymys on poistettu käytöstä kortin asetuksella ask_cooked: false, luvut eivät enää kasva, mutta jo tallennetut valmistuskerrat säilyvät.",
+      "Tämä yhteenveto laskee jokaisen vahvistuksen kysymykseen „Valmistitko sen?“ - annoskoosta tai saman päivän toistokerroista riippumatta. Jos tämä kysymys on poistettu käytöstä tilastoasetusten kytkimellä (⚙️), luvut eivät enää kasva, mutta jo tallennetut valmistuskerrat säilyvät.",
     statistik_dieses_jahr: "Olet kokannut {{anzahl}}x reseptikirjastasi vuonna {{jahr}}",
     statistik_gesamt: "Olet kokannut yhteensä {{anzahl}}x reseptikirjastasi",
     statistik_top_titel: "Eniten valmistetut",
@@ -2788,7 +2788,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Activer la question et les statistiques",
     statistik_info_titel: "Comment cette statistique est-elle calculée ?",
     statistik_info_text:
-      "Ce bilan comptabilise chaque confirmation de la question « As-tu préparé ? » - quelle que soit la taille des portions ou le nombre de fois le même jour. Si cette question est désactivée via l'option de carte ask_cooked: false, les chiffres cessent d'augmenter, mais les préparations déjà enregistrées sont conservées.",
+      "Ce bilan comptabilise chaque confirmation de la question « As-tu préparé ? » - quelle que soit la taille des portions ou le nombre de fois le même jour. Si cette question est désactivée via l'interrupteur des paramètres de statistiques (⚙️), les chiffres cessent d'augmenter, mais les préparations déjà enregistrées sont conservées.",
     statistik_dieses_jahr: "Tu as cuisiné {{anzahl}}x depuis ton livre de recettes en {{jahr}}",
     statistik_gesamt: "Tu as cuisiné {{anzahl}}x depuis ton livre de recettes au total",
     statistik_top_titel: "Les plus préparées",
@@ -3033,7 +3033,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Ενεργοποίηση ερώτησης & στατιστικών",
     statistik_info_titel: "Πώς υπολογίζεται αυτή η στατιστική;",
     statistik_info_text:
-      "Αυτή η αξιολόγηση μετρά κάθε επιβεβαίωση της ερώτησης «Το παρασκεύασες;» - ανεξάρτητα από το μέγεθος της μερίδας ή το πόσες φορές την ίδια ημέρα. Αν αυτή η ερώτηση είναι απενεργοποιημένη μέσω της επιλογής κάρτας ask_cooked: false, οι αριθμοί σταματούν να αυξάνονται, αλλά οι ήδη καταγεγραμμένες παρασκευές διατηρούνται.",
+      "Αυτή η αξιολόγηση μετρά κάθε επιβεβαίωση της ερώτησης «Το παρασκεύασες;» - ανεξάρτητα από το μέγεθος της μερίδας ή το πόσες φορές την ίδια ημέρα. Αν αυτή η ερώτηση είναι απενεργοποιημένη μέσω του διακόπτη στις ρυθμίσεις στατιστικών (⚙️), οι αριθμοί σταματούν να αυξάνονται, αλλά οι ήδη καταγεγραμμένες παρασκευές διατηρούνται.",
     statistik_dieses_jahr: "Μαγείρεψες {{anzahl}}x από το βιβλίο συνταγών σου το {{jahr}}",
     statistik_gesamt: "Μαγείρεψες συνολικά {{anzahl}}x από το βιβλίο συνταγών σου",
     statistik_top_titel: "Πιο συχνά παρασκευασμένα",
@@ -3278,7 +3278,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Kérdés és statisztika bekapcsolása",
     statistik_info_titel: "Hogyan számítjuk ki ezt a statisztikát?",
     statistik_info_text:
-      "Ez a kiértékelés minden megerősítést számol az „Elkészítetted?“ kérdésre - függetlenül az adag méretétől vagy attól, hányszor ugyanazon a napon. Ha ez a kérdés ki van kapcsolva az ask_cooked: false kártyabeállítással, a számok nem nőnek tovább, de a már rögzített elkészítések megmaradnak.",
+      "Ez a kiértékelés minden megerősítést számol az „Elkészítetted?“ kérdésre - függetlenül az adag méretétől vagy attól, hányszor ugyanazon a napon. Ha ez a kérdés ki van kapcsolva a statisztika beállításaiban található kapcsolóval (⚙️), a számok nem nőnek tovább, de a már rögzített elkészítések megmaradnak.",
     statistik_dieses_jahr: "{{jahr}}-ban {{anzahl}}x főztél a receptkönyvedből",
     statistik_gesamt: "Összesen {{anzahl}}x főztél a receptkönyvedből",
     statistik_top_titel: "Leggyakrabban elkészítve",
@@ -3523,7 +3523,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Cumasaigh an cheist agus staitisticí",
     statistik_info_titel: "Conas a ríomhtar an staitistic seo?",
     statistik_info_text:
-      "Áirítear sa mheasúnú seo gach deimhniú ar an gceist „Ar ullmhaigh tú é?“ - beag beann ar mhéid an fhreastail nó cé mhéad uair an lá céanna. Má tá an cheist seo díchumasaithe tríd an rogha cárta ask_cooked: false, ní fhásfaidh na huimhreacha a thuilleadh, ach coinneofar na hullmhúcháin atá taifeadta cheana.",
+      "Áirítear sa mheasúnú seo gach deimhniú ar an gceist „Ar ullmhaigh tú é?“ - beag beann ar mhéid an fhreastail nó cé mhéad uair an lá céanna. Má tá an cheist seo díchumasaithe tríd an lasc i socruithe na staitisticí (⚙️), ní fhásfaidh na huimhreacha a thuilleadh, ach coinneofar na hullmhúcháin atá taifeadta cheana.",
     statistik_dieses_jahr: "Rinne tú cócaireacht {{anzahl}}x ó do leabhar oideas in {{jahr}}",
     statistik_gesamt: "Rinne tú cócaireacht {{anzahl}}x ó do leabhar oideas san iomlán",
     statistik_top_titel: "Is mó a ullmhaíodh",
@@ -3768,7 +3768,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Attiva domanda e statistiche",
     statistik_info_titel: "Come viene calcolata questa statistica?",
     statistik_info_text:
-      "Questo riepilogo conta ogni conferma alla domanda «Hai preparato?» - indipendentemente dalla dimensione delle porzioni o da quante volte nello stesso giorno. Se questa domanda è disattivata tramite l'opzione della scheda ask_cooked: false, i numeri smettono di crescere, ma le preparazioni già registrate vengono mantenute.",
+      "Questo riepilogo conta ogni conferma alla domanda «Hai preparato?» - indipendentemente dalla dimensione delle porzioni o da quante volte nello stesso giorno. Se questa domanda è disattivata tramite l'interruttore nelle impostazioni statistiche (⚙️), i numeri smettono di crescere, ma le preparazioni già registrate vengono mantenute.",
     statistik_dieses_jahr: "Hai cucinato {{anzahl}}x dal tuo ricettario nel {{jahr}}",
     statistik_gesamt: "Hai cucinato {{anzahl}}x dal tuo ricettario in totale",
     statistik_top_titel: "Più preparate",
@@ -4012,7 +4012,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Iespējot jautājumu un statistiku",
     statistik_info_titel: "Kā tiek aprēķināta šī statistika?",
     statistik_info_text:
-      "Šis apkopojums saskaita katru apstiprinājumu jautājumam „Vai pagatavoji?“ - neatkarīgi no porcijas lieluma vai reižu skaita tajā pašā dienā. Ja šis jautājums ir atspējots ar kartītes opciju ask_cooked: false, skaitļi vairs nepieaug, bet jau reģistrētās gatavošanas reizes saglabājas.",
+      "Šis apkopojums saskaita katru apstiprinājumu jautājumam „Vai pagatavoji?“ - neatkarīgi no porcijas lieluma vai reižu skaita tajā pašā dienā. Ja šis jautājums ir atspējots ar slēdzi statistikas iestatījumos (⚙️), skaitļi vairs nepieaug, bet jau reģistrētās gatavošanas reizes saglabājas.",
     statistik_dieses_jahr: "Tu esi gatavojis/gatavojusi {{anzahl}}x no savas recepšu grāmatas {{jahr}} gadā",
     statistik_gesamt: "Kopā tu esi gatavojis/gatavojusi {{anzahl}}x no savas recepšu grāmatas",
     statistik_top_titel: "Visbiežāk gatavots",
@@ -4256,7 +4256,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Įjungti klausimą ir statistiką",
     statistik_info_titel: "Kaip skaičiuojama ši statistika?",
     statistik_info_text:
-      "Šioje apžvalgoje skaičiuojamas kiekvienas patvirtinimas į klausimą „Ar paruošei?“ - nepriklausomai nuo porcijos dydžio ar kartų skaičiaus tą pačią dieną. Jei šis klausimas išjungtas naudojant kortelės parinktį ask_cooked: false, skaičiai nebeauga, tačiau jau užfiksuoti gaminimai išlieka.",
+      "Šioje apžvalgoje skaičiuojamas kiekvienas patvirtinimas į klausimą „Ar paruošei?“ - nepriklausomai nuo porcijos dydžio ar kartų skaičiaus tą pačią dieną. Jei šis klausimas išjungtas naudojant jungiklį statistikos nustatymuose (⚙️), skaičiai nebeauga, tačiau jau užfiksuoti gaminimai išlieka.",
     statistik_dieses_jahr: "{{jahr}} m. gaminai {{anzahl}}x iš savo receptų knygos",
     statistik_gesamt: "Iš viso gaminai {{anzahl}}x iš savo receptų knygos",
     statistik_top_titel: "Dažniausiai gaminami",
@@ -4501,7 +4501,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Ixgħel il-mistoqsija u l-istatistika",
     statistik_info_titel: "Kif tiġi kkalkulata din l-istatistika?",
     statistik_info_text:
-      "Din il-valutazzjoni tgħodd kull konferma tal-mistoqsija „Ħejjejtu?“ - irrispettivament mid-daqs tal-porzjon jew kemm-il darba fl-istess jum. Jekk din il-mistoqsija tkun diżattivata permezz tal-għażla tal-karta ask_cooked: false, in-numri jieqfu jikbru, iżda t-tħejjijiet diġà rreġistrati jibqgħu.",
+      "Din il-valutazzjoni tgħodd kull konferma tal-mistoqsija „Ħejjejtu?“ - irrispettivament mid-daqs tal-porzjon jew kemm-il darba fl-istess jum. Jekk din il-mistoqsija tkun diżattivata permezz tal-swiċċ fis-settings tal-istatistika (⚙️), in-numri jieqfu jikbru, iżda t-tħejjijiet diġà rreġistrati jibqgħu.",
     statistik_dieses_jahr: "Sajjart {{anzahl}}x mill-ktieb tar-riċetti tiegħek fis-sena {{jahr}}",
     statistik_gesamt: "Sajjart {{anzahl}}x mill-ktieb tar-riċetti tiegħek b'kollox",
     statistik_top_titel: "L-aktar imħejji",
@@ -4745,7 +4745,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Włącz pytanie i statystyki",
     statistik_info_titel: "Jak obliczana jest ta statystyka?",
     statistik_info_text:
-      "To zestawienie liczy każde potwierdzenie pytania „Czy przygotowałeś/aś?“ - niezależnie od wielkości porcji czy liczby powtórzeń tego samego dnia. Jeśli to pytanie jest wyłączone opcją karty ask_cooked: false, liczby przestają rosnąć, ale już zapisane przygotowania pozostają zachowane.",
+      "To zestawienie liczy każde potwierdzenie pytania „Czy przygotowałeś/aś?“ - niezależnie od wielkości porcji czy liczby powtórzeń tego samego dnia. Jeśli to pytanie jest wyłączone przełącznikiem w ustawieniach statystyk (⚙️), liczby przestają rosnąć, ale już zapisane przygotowania pozostają zachowane.",
     statistik_dieses_jahr: "W {{jahr}} roku gotowałeś/aś {{anzahl}}x z własnej książki kucharskiej",
     statistik_gesamt: "Łącznie gotowałeś/aś {{anzahl}}x z własnej książki kucharskiej",
     statistik_top_titel: "Najczęściej przygotowywane",
@@ -4990,7 +4990,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Ativar pergunta e estatísticas",
     statistik_info_titel: "Como é calculada esta estatística?",
     statistik_info_text:
-      "Esta avaliação conta cada confirmação da pergunta «Preparaste?» - independentemente do tamanho da porção ou de quantas vezes no mesmo dia. Se esta pergunta estiver desativada através da opção do cartão ask_cooked: false, os números deixam de aumentar, mas as preparações já registadas são mantidas.",
+      "Esta avaliação conta cada confirmação da pergunta «Preparaste?» - independentemente do tamanho da porção ou de quantas vezes no mesmo dia. Se esta pergunta estiver desativada através do interruptor nas configurações de estatísticas (⚙️), os números deixam de aumentar, mas as preparações já registadas são mantidas.",
     statistik_dieses_jahr: "Cozinhaste {{anzahl}}x do teu livro de receitas em {{jahr}}",
     statistik_gesamt: "Cozinhaste {{anzahl}}x do teu livro de receitas no total",
     statistik_top_titel: "Mais preparado",
@@ -5234,7 +5234,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Activează întrebarea și statisticile",
     statistik_info_titel: "Cum se calculează această statistică?",
     statistik_info_text:
-      "Această evaluare numără fiecare confirmare a întrebării „Ai preparat?“ - indiferent de dimensiunea porției sau de câte ori în aceeași zi. Dacă această întrebare este dezactivată prin opțiunea de card ask_cooked: false, numerele nu mai cresc, dar preparările deja înregistrate rămân păstrate.",
+      "Această evaluare numără fiecare confirmare a întrebării „Ai preparat?“ - indiferent de dimensiunea porției sau de câte ori în aceeași zi. Dacă această întrebare este dezactivată prin comutatorul din setările statisticii (⚙️), numerele nu mai cresc, dar preparările deja înregistrate rămân păstrate.",
     statistik_dieses_jahr: "Ai gătit de {{anzahl}}x din cartea ta de rețete în {{jahr}}",
     statistik_gesamt: "Ai gătit de {{anzahl}}x din cartea ta de rețete în total",
     statistik_top_titel: "Cel mai des preparat",
@@ -5478,7 +5478,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Zapnúť otázku a štatistiku",
     statistik_info_titel: "Ako sa táto štatistika počíta?",
     statistik_info_text:
-      "Toto vyhodnotenie počíta každé potvrdenie otázky „Pripravil(a) si?“ - bez ohľadu na veľkosť porcie alebo počet za rovnaký deň. Ak je táto otázka vypnutá pomocou voľby karty ask_cooked: false, čísla ďalej nerastú, ale už zaznamenané prípravy zostávajú zachované.",
+      "Toto vyhodnotenie počíta každé potvrdenie otázky „Pripravil(a) si?“ - bez ohľadu na veľkosť porcie alebo počet za rovnaký deň. Ak je táto otázka vypnutá pomocou prepínača v nastaveniach štatistiky (⚙️), čísla ďalej nerastú, ale už zaznamenané prípravy zostávajú zachované.",
     statistik_dieses_jahr: "V roku {{jahr}} si z vlastnej kuchárky varil(a) {{anzahl}}x",
     statistik_gesamt: "Celkovo si z vlastnej kuchárky varil(a) {{anzahl}}x",
     statistik_top_titel: "Najčastejšie pripravované",
@@ -5722,7 +5722,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Vklopi vprašanje in statistiko",
     statistik_info_titel: "Kako se izračuna ta statistika?",
     statistik_info_text:
-      "Ta pregled šteje vsako potrditev vprašanja „Si pripravil/a?“ - ne glede na velikost porcije ali kolikokrat isti dan. Če je to vprašanje onemogočeno z možnostjo kartice ask_cooked: false, se števila ne povečujejo več, že zabeležene priprave pa ostanejo ohranjene.",
+      "Ta pregled šteje vsako potrditev vprašanja „Si pripravil/a?“ - ne glede na velikost porcije ali kolikokrat isti dan. Če je to vprašanje onemogočeno s stikalom v nastavitvah statistike (⚙️), se števila ne povečujejo več, že zabeležene priprave pa ostanejo ohranjene.",
     statistik_dieses_jahr: "V letu {{jahr}} si kuhal/a {{anzahl}}x iz svoje kuharske knjige",
     statistik_gesamt: "Skupaj si kuhal/a {{anzahl}}x iz svoje kuharske knjige",
     statistik_top_titel: "Največkrat pripravljeno",
@@ -5966,7 +5966,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Activar pregunta y estadísticas",
     statistik_info_titel: "¿Cómo se calcula esta estadística?",
     statistik_info_text:
-      "Este resumen cuenta cada confirmación de la pregunta «¿Lo preparaste?» - independientemente del tamaño de la porción o de cuántas veces el mismo día. Si esta pregunta está desactivada mediante la opción de tarjeta ask_cooked: false, los números dejan de aumentar, pero las preparaciones ya registradas se conservan.",
+      "Este resumen cuenta cada confirmación de la pregunta «¿Lo preparaste?» - independientemente del tamaño de la porción o de cuántas veces el mismo día. Si esta pregunta está desactivada mediante el interruptor de los ajustes de estadísticas (⚙️), los números dejan de aumentar, pero las preparaciones ya registradas se conservan.",
     statistik_dieses_jahr: "Has cocinado {{anzahl}}x de tu recetario en {{jahr}}",
     statistik_gesamt: "Has cocinado {{anzahl}}x de tu recetario en total",
     statistik_top_titel: "Más preparado",
@@ -6210,7 +6210,7 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_schalter_label: "Aktivera fråga och statistik",
     statistik_info_titel: "Hur beräknas denna statistik?",
     statistik_info_text:
-      "Den här sammanställningen räknar varje bekräftelse av frågan „Lagade du den?“ - oavsett portionsstorlek eller hur många gånger samma dag. Om frågan är inaktiverad via kortalternativet ask_cooked: false slutar siffrorna att öka, men redan registrerade tillagningar behålls.",
+      "Den här sammanställningen räknar varje bekräftelse av frågan „Lagade du den?“ - oavsett portionsstorlek eller hur många gånger samma dag. Om frågan är inaktiverad via reglaget i statistikinställningarna (⚙️) slutar siffrorna att öka, men redan registrerade tillagningar behålls.",
     statistik_dieses_jahr: "Du har lagat mat {{anzahl}}x från din receptbok under {{jahr}}",
     statistik_gesamt: "Du har lagat mat {{anzahl}}x från din receptbok totalt",
     statistik_top_titel: "Mest tillagad",
@@ -6431,13 +6431,9 @@ const KOCHBUECHER_MARKER = "__rezeptbuch_kochbuecher__";
 const KATEGORIEN_MARKER = "__rezeptbuch_kategorien__";
 // Versteckt gespeicherte Nutzer-Einstellungen, die sich per echtem
 // Ein-/Ausschalter IN der Karte selbst umschalten lassen (siehe
-// _statistikAktiv/_einstellungenModal*) - bewusst als eigenes,
-// verstecktes Item statt in der Kartenoption `show_statistics` in der
-// Dashboard-YAML, damit man dafür nicht die YAML-Konfiguration bearbeiten
-// muss. Ist `show_statistics` als Kartenoption explizit gesetzt (true
-// oder false), hat das aber weiterhin Vorrang vor dieser gespeicherten
-// Einstellung - eine bewusste Admin-Vorgabe in der YAML soll sich nicht
-// durch einen Schalter in der Oberfläche aushebeln lassen.
+// _erfassungAktiv/_einstellungenModal*) - bewusst als eigenes, verstecktes
+// Item statt einer Kartenoption in der Dashboard-YAML, damit man dafür
+// nie die YAML-Konfiguration bearbeiten muss.
 const EINSTELLUNGEN_MARKER = "__rezeptbuch_einstellungen__";
 
 // "schluessel" bleibt der interne, sprachunabhängige Speicherschlüssel
@@ -7122,10 +7118,9 @@ class RezeptbuchCard extends HTMLElement {
       if (this._ansicht === "detail" && this._zubereitetAbfrageAktiv()) {
         // Bei einer offenen Rezept-Detailansicht zuerst fragen, ob
         // zubereitet wurde - dazu den soeben verbrauchten History-Eintrag
-        // wiederherstellen, statt direkt zur Liste zu springen. Per
-        // Kartenoption "ask_cooked: false" oder über den Schalter in den
-        // Statistik-Einstellungen lässt sich diese Abfrage komplett
-        // abschalten (siehe _zurueck-btn-Handler und README).
+        // wiederherstellen, statt direkt zur Liste zu springen. Über den
+        // Schalter in den Statistik-Einstellungen lässt sich diese
+        // Abfrage komplett abschalten (siehe _zurueck-btn-Handler).
         history.pushState({ rezeptbuchOffen: true }, "", location.href);
         this._historyGeschoben = true;
         this._zubereitetModalAnzeigen();
@@ -7558,35 +7553,19 @@ class RezeptbuchCard extends HTMLElement {
     return erfolg;
   }
 
-  // Ob der Statistik-Knopf angezeigt wird: `ask_cooked: false` schaltet
-  // (wie bisher) die Zählung UND die Statistik komplett ab. Ist die
-  // Kartenoption `show_statistics` in der Dashboard-YAML explizit gesetzt
-  // (true ODER false), hat das als bewusste Admin-Vorgabe Vorrang vor der
-  // gespeicherten Einstellung - der Schalter in der Oberfläche (siehe
-  // _einstellungenModal*) wird dann auch gar nicht erst angeboten (siehe
-  // _renderListe). Ist `show_statistics` NICHT gesetzt, entscheidet die per
-  // Schalter gespeicherte Einstellung (Standard: sichtbar) - derselbe
-  // Schalter, der auch die "Hast du zubereitet?"-Abfrage steuert (siehe
-  // _zubereitetAbfrageAktiv).
+  // Ob der Statistik-Knopf angezeigt UND die "Hast du zubereitet?"-Abfrage
+  // gestellt wird: beides zusammen gesteuert durch genau einen echten
+  // Ein-/Ausschalter in der Oberfläche (siehe _einstellungenModal* und den
+  // ⚙️-Knopf in _renderListe) - keine YAML-Kartenoption mehr nötig.
   _statistikAktiv() {
-    if (this._config.ask_cooked === false) return false;
-    if (this._config.show_statistics === false) return false;
-    if (this._config.show_statistics === true) return true;
     return this._einstellungen.erfassungAktiv !== false;
   }
 
   // Ob die "Hast du zubereitet?"-Abfrage beim Verlassen eines Rezepts
-  // erscheint: `ask_cooked: false` in der YAML deaktiviert sie (wie
-  // bisher) fest und hat Vorrang. Ist `ask_cooked` NICHT explizit
-  // gesetzt, entscheidet derselbe per Schalter gespeicherte Wert wie bei
-  // der Statistik (_statistikAktiv) - ein einziger echter Ein-/
-  // Ausschalter in der Oberfläche für beides zusammen, statt zwei
-  // halb-unabhängiger Einstellungen. `show_statistics` wirkt bewusst
-  // NICHT auf die Abfrage selbst - wer nur den Statistik-Knopf per YAML
-  // ausblenden will, soll die Zubereitungen weiterhin mitzählen können.
+  // erscheint - derselbe Schalter wie bei der Statistik (_statistikAktiv),
+  // damit ein einziger Schalter beides zusammen regelt.
   _zubereitetAbfrageAktiv() {
-    if (this._config.ask_cooked === false) return false;
-    return this._einstellungen.erfassungAktiv !== false;
+    return this._statistikAktiv();
   }
 
   // Zentrale Stelle für Schema-Migrationen: bringt ein aus dem JSON
@@ -7924,7 +7903,7 @@ class RezeptbuchCard extends HTMLElement {
   // laufenden Kalenderjahr, Anzahl insgesamt, sowie die 5 meistgekochten
   // Rezepte. Reine Client-seitige Auswertung vorhandener Daten - kein
   // separates Skript, keine Datenbank, kein automation-Trigger (siehe
-  // _zubereitetModalAnzeigen/ask_cooked für die Datenerfassung selbst).
+  // _zubereitetModalAnzeigen/_statistikAktiv für die Datenerfassung selbst).
   _statistikBerechnen() {
     const aktuellesJahr = new Date().getFullYear();
     let gesamt = 0;
@@ -9051,7 +9030,7 @@ class RezeptbuchCard extends HTMLElement {
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
             ${this._rezepte.length && this._statistikAktiv() ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
-            ${this._rezepte.length && this._config.ask_cooked !== false && this._config.show_statistics === undefined ? `<button class="info-btn" id="statistik-einstellungen-btn" title="${this._t("statistik_einstellungen_btn_title")}" aria-label="${this._t("statistik_einstellungen_btn_title")}">⚙️</button>` : ""}
+            ${this._rezepte.length ? `<button class="info-btn" id="statistik-einstellungen-btn" title="${this._t("statistik_einstellungen_btn_title")}" aria-label="${this._t("statistik_einstellungen_btn_title")}">⚙️</button>` : ""}
           </div>
         </div>
         ${this._rezepte.length ? `
