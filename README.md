@@ -28,7 +28,7 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
 - Rezeptfotos (werden automatisch als echte Dateien statt Base64-Text
   gespeichert, um die To-do-Liste schlank zu halten)
 - PDF-Export eines Rezepts, auch ganz ohne Internetzugang
-- **Sammel-PDF**: exportiert mehrere Rezepte auf einmal als ein gemeinsames PDF (Knopf "Sammel-PDF" in der Übersicht) - wahlweise alle aktuell gefilterten/gesuchten Rezepte oder nur einzeln angehakte Rezepte aus einer Checkliste, optional mit einer selbst benannten Inhaltsverzeichnis-Seite als erster Seite
+- **Sammel-PDF**: exportiert mehrere Rezepte auf einmal als ein gemeinsames PDF (Knopf "Sammel-PDF" in der Übersicht) - wahlweise alle aktuell gefilterten/gesuchten Rezepte oder nur einzeln angehakte Rezepte aus einer Checkliste, optional mit einer selbst benannten Inhaltsverzeichnis-Seite als erster Seite; die Reihenfolge im PDF richtet sich immer nach Kategorie
 - **Kochmodus**: Vollbild-Schritt-für-Schritt-Ansicht mit großen, gut lesbaren Schritten, Vor-/Zurück-Navigation und einblendbarer Zutatenliste - praktisch am Tablet in der Küche
 - **Vorlesen per Sprachausgabe**: im Kochmodus lässt sich jeder Schritt automatisch über die im Browser eingebaute Sprachausgabe vorlesen (kein Home-Assistant-TTS-Setup nötig)
 - **Automatische Rezepterkennung** aus eingefügtem Text (reine

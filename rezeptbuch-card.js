@@ -7724,6 +7724,24 @@ class RezeptbuchCard extends HTMLElement {
     return kopie;
   }
 
+  // Sortiert eine Rezeptliste nach Kategorie (NICHT nach Tag) - unabhängig
+  // von der in der Übersicht aktuell eingestellten Sortierung. Wird für das
+  // Sammel-PDF verwendet (siehe _sammelPdfErstellen), damit die Reihenfolge
+  // im PDF (und im optionalen Inhaltsverzeichnis) immer nach Kategorie
+  // gruppiert ist, gleich wie die Rezepte zuvor in der Übersicht sortiert
+  // oder gefiltert waren.
+  _sortiereNachKategorie(liste) {
+    const kopie = [...liste];
+    kopie.sort((a, b) => {
+      const kA = a.category || "Sonstiges";
+      const kB = b.category || "Sonstiges";
+      const vgl = kA.localeCompare(kB, "de");
+      if (vgl !== 0) return vgl;
+      return (a.title || "").localeCompare(b.title || "", "de");
+    });
+    return kopie;
+  }
+
   // Alle im aktuellen Rezeptbestand vorkommenden Tags, alphabetisch sortiert -
   // Grundlage für die Tag-Filterzeile in der Listenansicht.
   _alleTags() {
@@ -9199,8 +9217,12 @@ class RezeptbuchCard extends HTMLElement {
   // rezeptspezifische Portionenwahl wie die Detailansicht) und danach
   // wiederhergestellt. `optionen.inhaltsverzeichnis` fügt optional eine
   // Deckblatt-/Inhaltsverzeichnis-Seite als Seite 1 ein, mit
-  // `optionen.titel` als individuellem Kochbuch-Namen.
+  // `optionen.titel` als individuellem Kochbuch-Namen. Die Rezepte werden
+  // dabei IMMER nach Kategorie (nicht Tag) sortiert, unabhängig von der
+  // übergebenen Reihenfolge bzw. der aktuellen Sortierung der Übersicht -
+  // siehe _sortiereNachKategorie.
   async _sammelPdfErstellen(rezepte, dateinameBasis, optionen = {}) {
+    const rezepteSortiert = this._sortiereNachKategorie(rezepte);
     const jsPDFKlasse = await this._jsPdfLaden();
     const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
     const margin = 20;
@@ -9208,15 +9230,15 @@ class RezeptbuchCard extends HTMLElement {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     if (optionen.inhaltsverzeichnis) {
-      this._sammelPdfInhaltsverzeichnisZeichnen(doc, optionen.titel || dateinameBasis, rezepte, margin, pageWidth);
+      this._sammelPdfInhaltsverzeichnisZeichnen(doc, optionen.titel || dateinameBasis, rezepteSortiert, margin, pageWidth);
     }
 
     const portionenVorher = this._portionen;
     try {
-      for (let i = 0; i < rezepte.length; i++) {
+      for (let i = 0; i < rezepteSortiert.length; i++) {
         if (i > 0 || optionen.inhaltsverzeichnis) doc.addPage();
-        this._portionen = rezepte[i].servings || 1;
-        await this._rezeptContentInPdfZeichnen(doc, rezepte[i]);
+        this._portionen = rezepteSortiert[i].servings || 1;
+        await this._rezeptContentInPdfZeichnen(doc, rezepteSortiert[i]);
       }
     } finally {
       this._portionen = portionenVorher;

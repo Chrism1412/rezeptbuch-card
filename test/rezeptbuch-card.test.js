@@ -2886,6 +2886,78 @@ async function testSammelPdfOhneRezepteZeigtHinweisOhnePdfErstellung(browser) {
   }
 }
 
+async function testSammelPdfSortiertRezepteNachKategorieNichtNachTag(browser) {
+  console.log("\nTest: Sammel-PDF sortiert die Rezepte nach Kategorie (nicht nach Tag oder Übergabereihenfolge)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    // Bewusst in einer Reihenfolge angelegt, die NICHT der erwarteten
+    // Kategorie-Sortierung entspricht (Nachtisch, Hauptgericht, Vorspeise),
+    // und mit Tags, die - würde stattdessen nach Tag sortiert - eine andere
+    // Reihenfolge ergäben (a-Tag, b-Tag, c-Tag statt alphabetisch nach
+    // Kategorie: "Hauptgericht" vor "Nachtisch" vor "Vorspeise").
+    await rezeptDirektAnlegen(page, {
+      title: "Erstes Rezept",
+      payload: leererPayload({ category: "Nachtisch", tags: ["a-tag"] }),
+    });
+    await rezeptDirektAnlegen(page, {
+      title: "Zweites Rezept",
+      payload: leererPayload({ category: "Hauptgericht", tags: ["b-tag"] }),
+    });
+    await rezeptDirektAnlegen(page, {
+      title: "Drittes Rezept",
+      payload: leererPayload({ category: "Vorspeise", tags: ["c-tag"] }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const texte = [];
+      class FakeJsPdf {
+        constructor() {
+          this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } };
+        }
+        setFont() {}
+        setFontSize() {}
+        setTextColor() {}
+        setDrawColor() {}
+        setLineWidth() {}
+        line() {}
+        text(text) { texte.push(text); }
+        getTextWidth(t) { return t.length * 1.5; }
+        splitTextToSize(t) { return [t]; }
+        addPage() {}
+        addImage() {}
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      // Absichtlich UNSORTIERT (Anlegereihenfolge) übergeben - die Sortierung
+      // nach Kategorie muss innerhalb von _sammelPdfErstellen selbst
+      // passieren, unabhängig von der übergebenen Reihenfolge.
+      const liste = karte._rezepte.slice();
+      await karte._sammelPdfErstellen(liste, "Testsammlung");
+
+      // Reihenfolge der Rezepttitel anhand der Aufrufreihenfolge von
+      // doc.text() ermitteln - der erste vorkommende Titel-Text pro Rezept
+      // (die Fake-jsPDF hat kein echtes Seitenkonzept, daher zählt hier nur
+      // die Reihenfolge der Zeichenaufrufe, nicht eine y-Position).
+      const reihenfolge = ["Erstes Rezept", "Zweites Rezept", "Drittes Rezept"]
+        .map((titel) => ({ titel, index: texte.indexOf(titel) }))
+        .sort((a, b) => a.index - b.index)
+        .map((e) => e.titel);
+
+      return { reihenfolge };
+    });
+
+    assert(
+      JSON.stringify(ergebnis.reihenfolge) === JSON.stringify(["Zweites Rezept", "Erstes Rezept", "Drittes Rezept"]),
+      `Rezepte erscheinen nach Kategorie sortiert - Hauptgericht, Nachtisch, Vorspeise (tatsächlich: ${JSON.stringify(ergebnis.reihenfolge)})`
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 // ---------------------------------------------------------------------
 // Sammel-PDF: optionales Inhaltsverzeichnis/Deckblatt als Seite 1.
 // ---------------------------------------------------------------------
@@ -3730,6 +3802,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser);
     await testSammelPdfEnthaeltAlleRezepteAufEigenenSeiten(browser);
     await testSammelPdfOhneRezepteZeigtHinweisOhnePdfErstellung(browser);
+    await testSammelPdfSortiertRezepteNachKategorieNichtNachTag(browser);
     await testSammelPdfModalZeigtZuerstUmfangswahl(browser);
     await testSammelPdfModalAlleExportiertGesamteGefilterteListe(browser);
     await testSammelPdfModalAuswahlExportiertNurAngehakteRezepte(browser);

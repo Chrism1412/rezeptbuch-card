@@ -25,7 +25,10 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   (unabhängig von der Seiten-Paginierung) oder nur einzeln angehakte
   Rezepte aus einer Checkliste ins PDF sollen. Danach wird optional
   gefragt, ob zusätzlich eine Inhaltsverzeichnis-Seite mit einem selbst
-  gewählten Kochbuch-Namen als erste Seite eingefügt werden soll.
+  gewählten Kochbuch-Namen als erste Seite eingefügt werden soll. Die
+  Rezepte im PDF (und im Inhaltsverzeichnis) sind dabei immer nach
+  Kategorie sortiert, unabhängig von Tags oder der aktuellen Sortierung
+  der Übersicht.
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
