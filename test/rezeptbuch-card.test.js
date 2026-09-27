@@ -3592,6 +3592,66 @@ async function testKochmodusVorlesenWartetKurzAufNachladendeStimmenliste(browser
   }
 }
 
+async function testKochmodusVorlesenNutztTtsNotifyServiceStattWebSpeech(browser) {
+  console.log("\nTest: Mit konfiguriertem 'tts_notify_service' wird per Benachrichtigung vorgelesen statt über die Web Speech API");
+  const page = await neueTestUmgebung(browser, { tts_notify_service: "mobile_app_testgeraet" });
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept",
+      payload: leererPayload({ steps: ["Wasser aufkochen", "Nudeln hinzufügen"] }),
+    });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const serviceAufrufe = [];
+      let webSpeechAufgerufen = false;
+
+      // Web Speech API absichtlich funktionsfähig simuliert, damit sich
+      // zeigt: bei konfiguriertem "tts_notify_service" wird sie GAR NICHT
+      // erst angefasst (kein Doppel-Vorlesen über zwei Wege gleichzeitig).
+      Object.defineProperty(window, "speechSynthesis", {
+        configurable: true,
+        value: {
+          speak: () => { webSpeechAufgerufen = true; },
+          cancel: () => {},
+          getVoices: () => [{ lang: "de-DE", name: "Deutsche Test-Stimme" }],
+        },
+      });
+
+      karte._hass.callService = async (domain, service, daten) => {
+        serviceAufrufe.push({ domain, service, daten });
+      };
+
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-vorlesen-btn").click();
+      await new Promise((r) => setTimeout(r, 10));
+
+      karte.shadowRoot.getElementById("kochmodus-weiter-btn").click();
+      await new Promise((r) => setTimeout(r, 10));
+
+      return { serviceAufrufe, webSpeechAufgerufen };
+    });
+
+    assert(!ergebnis.webSpeechAufgerufen, "die Web Speech API wird bei konfiguriertem 'tts_notify_service' NICHT verwendet");
+    assert(ergebnis.serviceAufrufe.length === 2, `pro vorgelesenem Schritt wird genau ein Service-Aufruf ausgelöst (tatsächlich: ${ergebnis.serviceAufrufe.length})`);
+    assert(
+      ergebnis.serviceAufrufe.every((a) => a.domain === "notify" && a.service === "mobile_app_testgeraet"),
+      "der Aufruf geht an 'notify.<tts_notify_service>' wie konfiguriert"
+    );
+    assert(
+      ergebnis.serviceAufrufe[0].daten.message === "TTS" && ergebnis.serviceAufrufe[0].daten.data.tts_text === "Wasser aufkochen",
+      `der Aufruf nutzt das dokumentierte TTS-Benachrichtigungsformat der Companion App (tatsächlich: ${JSON.stringify(ergebnis.serviceAufrufe[0].daten)})`
+    );
+    assert(
+      ergebnis.serviceAufrufe[1].daten.data.tts_text === "Nudeln hinzufügen",
+      "beim Schrittwechsel wird der jeweils neue Schritttext übergeben"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testHtmlExportWasserzeichenAufBild(browser) {
   console.log("\nTest: HTML-Export (Fallback ohne jsPDF) zeigt dezentes 'Rezeptbuch-Card'-Wasserzeichen auf dem Bild");
   const page = await neueTestUmgebung(browser);
@@ -3921,6 +3981,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusVorlesenPerSprachausgabe(browser);
     await testKochmodusVorlesenNutztVollenSprachcodeDerInstalliertenStimme(browser);
     await testKochmodusVorlesenWartetKurzAufNachladendeStimmenliste(browser);
+    await testKochmodusVorlesenNutztTtsNotifyServiceStattWebSpeech(browser);
   } finally {
     await browser.close();
   }

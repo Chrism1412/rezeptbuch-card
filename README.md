@@ -339,6 +339,38 @@ entity: todo.rezepte
 items_per_page: 12
 ```
 
+**Vorlesen im Kochmodus funktioniert nicht in der Home-Assistant-App:**
+Der Vorlesen-Knopf im Kochmodus nutzt standardmäßig die im Browser
+eingebaute Sprachausgabe (Web Speech API) - kein zusätzliches Setup
+nötig, funktioniert in normalen Browsern zuverlässig. In der
+eingebetteten WebView der Home-Assistant-Companion-App (Android und/oder
+iOS, je nach Geräte-/App-Version) kann diese Web-Sprachausgabe jedoch
+lautlos bleiben, obwohl die System-Sprachausgabe des Geräts selbst
+einwandfrei funktioniert - eine bekannte Einschränkung dieser WebView,
+die sich von der Karte aus nicht direkt beheben lässt.
+
+Als Alternative nutzt die Karte dann optional die **TTS-Benachrichtigung
+der Companion App** (offizielle App-Funktion, siehe
+[Companion-App-Dokumentation](https://companion.home-assistant.io/docs/notifications/notifications-basic/)):
+die App liest den Text über die native System-Sprachausgabe des Geräts
+vor, komplett an der WebView vorbei. Dafür das Kartenfeld
+`tts_notify_service` auf den Namen des eigenen `notify.mobile_app_*`-
+Dienstes setzen (zu finden unter Entwicklerwerkzeuge → Aktionen/Dienste,
+Suche nach "notify" - der Gerätename ohne das führende "notify."):
+
+```yaml
+type: custom:rezeptbuch-card
+entity: todo.rezepte
+tts_notify_service: mobile_app_chris_smartphone
+```
+
+Ist `tts_notify_service` gesetzt, wird AUSSCHLIESSLICH dieser Weg
+genutzt (kein Doppel-Vorlesen über beide Wege gleichzeitig). Ohne diese
+Option bleibt es bei der Web-Sprachausgabe wie bisher. Eine bereits
+verschickte TTS-Benachrichtigung lässt sich technisch nicht mehr
+abbrechen - der "Vorlesen aus"-Knopf verhindert dann nur weitere,
+zukünftige Ansagen.
+
 ## Projektstruktur
 
 ```

@@ -22,6 +22,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   "de") und wartet nötigenfalls kurz auf eine asynchron nachladende
   Stimmenliste - beides Fälle, in denen die Ausgabe in eingebetteten
   WebViews (u.a. der Home-Assistant-App) sonst lautlos bleiben kann.
+  Bleibt die Web-Sprachausgabe in der Companion-App trotzdem lautlos
+  (bekannte Einschränkung mancher WebViews), lässt sich über das neue
+  Kartenfeld `tts_notify_service` stattdessen die TTS-Benachrichtigung der
+  Companion App nutzen - liest über die native System-Sprachausgabe des
+  Geräts vor, komplett an der WebView vorbei. Siehe README.
 - **Sammel-PDF**: neuer Knopf "Sammel-PDF" in der Rezeptübersicht
   exportiert Rezepte als ein einziges PDF, ein Rezept pro (mindestens
   einer) Seite - z.B. praktisch für einen Sammelausdruck. Beim Erstellen

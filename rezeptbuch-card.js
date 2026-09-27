@@ -7412,6 +7412,10 @@ class RezeptbuchCard extends HTMLElement {
     this._kochmodusZutatenSichtbar = false;
   }
 
+  // Bricht nur eine laufende Web-Speech-Ausgabe ab (Weg 1, siehe
+  // _kochmodusAktuellenSchrittVorlesen) - eine bereits an die Companion-App
+  // geschickte TTS-Benachrichtigung (Weg 2, "tts_notify_service") lässt
+  // sich technisch nicht mehr zurückrufen, sobald sie verschickt ist.
   _sprachausgabeStoppen() {
     if (typeof window !== "undefined" && window.speechSynthesis) {
       window.speechSynthesis.cancel();
@@ -7450,23 +7454,47 @@ class RezeptbuchCard extends HTMLElement {
     this._render();
   }
 
-  // Liest den aktuellen Kochmodus-Schritt über die im Browser eingebaute
-  // Sprachausgabe (Web Speech API) vor - bewusst KEINE Anbindung an Home
-  // Assistants eigenen tts-Dienst: der bräuchte ein konfiguriertes
-  // TTS-Backend plus einen media_player als Ausgabegerät (typischerweise
-  // einen Lautsprecher irgendwo im Haus, nicht zwingend in der Küche neben
-  // dem Tablet). Die Sprachausgabe des Geräts, auf dem die Karte gerade
-  // offen ist, funktioniert dagegen überall sofort, ganz ohne Einrichtung -
-  // passend zum Grundsatz dieses Projekts ("kein Backend nötig"). Steht sie
-  // nicht zur Verfügung (z.B. manche eingebetteten WebViews), passiert
-  // einfach nichts - kein Fehler für den Nutzer.
+  // Liest den aktuellen Kochmodus-Schritt vor. Zwei Wege, je nach
+  // Kartenkonfiguration:
+  //
+  // 1. Standard: die im Browser eingebaute Sprachausgabe (Web Speech API) -
+  //    bewusst KEINE Anbindung an Home Assistants eigenen tts-Dienst nötig,
+  //    funktioniert überall sofort, ganz ohne Einrichtung (passend zum
+  //    Grundsatz dieses Projekts "kein Backend nötig"). In manchen
+  //    eingebetteten WebViews (u.a. der Home-Assistant-App selbst) liefert
+  //    dieser Weg trotz funktionierender System-Sprachausgabe aber KEINEN
+  //    Ton, ohne dass ein Fehler auftritt - eine bekannte Einschränkung
+  //    dieser WebViews, die sich von hier aus nicht umgehen lässt.
+  // 2. Fallback für genau diesen Fall: ist die Kartenoption
+  //    "tts_notify_service" gesetzt (Name des notify.mobile_app_*-Dienstes
+  //    des Geräts, siehe README), wird STATTDESSEN eine
+  //    Home-Assistant-Benachrichtigung mit TTS-Befehl an die
+  //    Companion-App geschickt - die liest den Text über die NATIVE
+  //    System-Sprachausgabe des Geräts vor, komplett an der WebView vorbei.
+  //    Bewusst weiterhin kein media_player/TTS-Backend nötig - es wird
+  //    nach wie vor nur die Sprachausgabe des Geräts selbst genutzt, auf
+  //    dem die Karte offen ist, nur eben über einen anderen technischen
+  //    Weg. Ohne "tts_notify_service" bleibt Weg 1 aktiv.
   _kochmodusAktuellenSchrittVorlesen() {
-    if (typeof window === "undefined" || !window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
-      return;
-    }
     const schritte = (this._aktivesRezept.steps || []).filter((s) => s && s.trim());
     const text = schritte[this._kochmodusSchrittIndex];
     if (!text) return;
+
+    if (this._config.tts_notify_service && this._hass) {
+      this._hass
+        .callService("notify", this._config.tts_notify_service, {
+          message: "TTS",
+          data: { tts_text: text },
+        })
+        .catch((fehler) => {
+          console.error("Rezeptbuch: Vorlesen per Benachrichtigung (tts_notify_service) fehlgeschlagen", fehler);
+        });
+      return;
+    }
+
+    if (typeof window === "undefined" || !window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
+      return;
+    }
 
     const sprechen = () => {
       window.speechSynthesis.cancel();
