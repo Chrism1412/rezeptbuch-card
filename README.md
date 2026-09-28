@@ -78,6 +78,15 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
   GitHub-API, ob eine neuere Version veröffentlicht wurde, und zeigt bei
   Bedarf einen wegklickbaren Hinweis mit Link zur Release-Seite - rein
   informativ, ohne Internetzugang bleibt die Karte einfach ohne Hinweis
+- **Warnt vor vergessener Ressourcen-Versionsnummer**: Browser cachen
+  `/local/rezeptbuch-card.js` sehr hartnäckig - nur eine geänderte `?v=...`
+  in der Ressourcen-URL (Einstellungen → Dashboards → Ressourcen) zwingt
+  sie zuverlässig, die neue Datei zu laden. Merkt die Karte, dass sie
+  selbst gerade mit einer neuen Version läuft, die URL-Versionsnummer sich
+  seit dem letzten Laden in diesem Browser aber nicht geändert hat, zeigt
+  sie einen wegklickbaren Warnhinweis - ein Zeichen dafür, dass andere
+  Geräte unter derselben URL sonst weiterhin die alte, zwischengespeicherte
+  Datei bekommen würden. Rein lokal (kein Netzwerkzugriff)
 - **Mehrsprachige Oberfläche (alle 24 offiziellen EU-Sprachen + Schwiizerdütsch)**:
   die Kartensprache wird automatisch anhand der in Home Assistant
   eingestellten Sprache erkannt - bei Deutsch (und wenn die Sprache nicht

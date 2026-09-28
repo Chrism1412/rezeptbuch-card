@@ -343,6 +343,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Neue Version verfügbar: {{version}}",
     update_ansehen_btn: "Ansehen",
     update_schliessen_aria: "Hinweis ausblenden",
+    ressourcen_version_hinweis: "⚠️ Diese Karte wurde aktualisiert, aber die Ressourcen-URL wurde nicht geändert (weiterhin \"?v={{version}}\"). Andere Browser/Geräte laden dadurch evtl. weiterhin die alte, zwischengespeicherte Datei - erhöhe die Versionsnummer in der Ressourcen-URL (Einstellungen → Dashboards → Ressourcen).",
     detail_kochmodus_btn: "🍳 Kochmodus",
     kochmodus_schritt_anzeige: "Schritt {{aktuell}} von {{gesamt}}",
     kochmodus_schliessen_aria: "Kochmodus schließen",
@@ -657,6 +658,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Neui Version verfüegbar: {{version}}",
     update_ansehen_btn: "Aluege",
     update_schliessen_aria: "Hiwiis usblände",
+    ressourcen_version_hinweis: "⚠️ Die Charte isch aktualisiert worde, aber d'Ressource-URL het sich nid gänderet (immer no \"?v={{version}}\"). Angeri Browser/Geräht lönd drum evtl. immer no die alt, zwüscheg'speicherti Datei - erhöh d'Versionsnummere i de Ressource-URL (Ischtellige → Dashboards → Ressource).",
     detail_kochmodus_btn: "🍳 Kochmodus",
     kochmodus_schritt_anzeige: "Schritt {{aktuell}} vo {{gesamt}}",
     kochmodus_schliessen_aria: "Kochmodus schliesse",
@@ -945,6 +947,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "New version available: {{version}}",
     update_ansehen_btn: "View",
     update_schliessen_aria: "Dismiss notice",
+    ressourcen_version_hinweis: "⚠️ This card was updated, but the resource URL wasn't changed (still \"?v={{version}}\"). Other browsers/devices may therefore keep loading the old, cached file - increase the version number in the resource URL (Settings → Dashboards → Resources).",
     detail_kochmodus_btn: "🍳 Cook Mode",
     kochmodus_schritt_anzeige: "Step {{aktuell}} of {{gesamt}}",
     kochmodus_schliessen_aria: "Close cook mode",
@@ -1191,6 +1194,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Налична е нова версия: {{version}}",
     update_ansehen_btn: "Преглед",
     update_schliessen_aria: "Скриване на съобщението",
+    ressourcen_version_hinweis: "⚠️ Тази карта беше актуализирана, но URL адресът на ресурса не беше променен (все още \"?v={{version}}\"). Затова други браузъри/устройства може да продължат да зареждат стария, кеширан файл - увеличете номера на версията в URL адреса на ресурса (Настройки → Табла → Ресурси).",
     detail_kochmodus_btn: "🍳 Режим готвене",
     kochmodus_schritt_anzeige: "Стъпка {{aktuell}} от {{gesamt}}",
     kochmodus_schliessen_aria: "Затвори режим готвене",
@@ -1437,6 +1441,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Dostupna je nova verzija: {{version}}",
     update_ansehen_btn: "Pogledaj",
     update_schliessen_aria: "Sakrij obavijest",
+    ressourcen_version_hinweis: "⚠️ Ova kartica je ažurirana, ali URL resursa nije promijenjen (i dalje \"?v={{version}}\"). Drugi preglednici/uređaji stoga možda i dalje učitavaju staru, predmemoriranu datoteku - povećaj broj verzije u URL-u resursa (Postavke → Nadzorne ploče → Resursi).",
     detail_kochmodus_btn: "🍳 Način kuhanja",
     kochmodus_schritt_anzeige: "Korak {{aktuell}} od {{gesamt}}",
     kochmodus_schliessen_aria: "Zatvori način kuhanja",
@@ -1683,6 +1688,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Je dostupná nová verze: {{version}}",
     update_ansehen_btn: "Zobrazit",
     update_schliessen_aria: "Skrýt upozornění",
+    ressourcen_version_hinweis: "⚠️ Tato karta byla aktualizována, ale URL zdroje se nezměnila (stále \"?v={{version}}\"). Jiné prohlížeče/zařízení proto mohou dál načítat starý, uložený soubor - zvyš číslo verze v URL zdroje (Nastavení → Dashboardy → Zdroje).",
     detail_kochmodus_btn: "🍳 Režim vaření",
     kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
     kochmodus_schliessen_aria: "Zavřít režim vaření",
@@ -1929,6 +1935,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Ny version tilgængelig: {{version}}",
     update_ansehen_btn: "Vis",
     update_schliessen_aria: "Skjul meddelelse",
+    ressourcen_version_hinweis: "⚠️ Dette kort er blevet opdateret, men ressource-URL'en blev ikke ændret (stadig \"?v={{version}}\"). Andre browsere/enheder indlæser derfor muligvis stadig den gamle, cachede fil - øg versionsnummeret i ressource-URL'en (Indstillinger → Dashboards → Ressourcer).",
     detail_kochmodus_btn: "🍳 Tilberedningstilstand",
     kochmodus_schritt_anzeige: "Trin {{aktuell}} af {{gesamt}}",
     kochmodus_schliessen_aria: "Luk tilberedningstilstand",
@@ -2175,6 +2182,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nieuwe versie beschikbaar: {{version}}",
     update_ansehen_btn: "Bekijken",
     update_schliessen_aria: "Melding verbergen",
+    ressourcen_version_hinweis: "⚠️ Deze kaart is bijgewerkt, maar de resource-URL is niet gewijzigd (nog steeds \"?v={{version}}\"). Andere browsers/apparaten laden daardoor mogelijk nog steeds het oude, gecachte bestand - verhoog het versienummer in de resource-URL (Instellingen → Dashboards → Bronnen).",
     detail_kochmodus_btn: "🍳 Kookmodus",
     kochmodus_schritt_anzeige: "Stap {{aktuell}} van {{gesamt}}",
     kochmodus_schliessen_aria: "Kookmodus sluiten",
@@ -2421,6 +2429,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Uus versioon saadaval: {{version}}",
     update_ansehen_btn: "Vaata",
     update_schliessen_aria: "Peida teavitus",
+    ressourcen_version_hinweis: "⚠️ Seda kaarti värskendati, kuid ressursi URL ei muutunud (endiselt \"?v={{version}}\"). Teised brauserid/seadmed võivad seetõttu jätkuvalt laadida vana, vahemällu salvestatud faili - suurenda versiooninumbrit ressursi URL-is (Seaded → Töölauad → Ressursid).",
     detail_kochmodus_btn: "🍳 Küpsetusrežiim",
     kochmodus_schritt_anzeige: "Samm {{aktuell}} / {{gesamt}}",
     kochmodus_schliessen_aria: "Sulge küpsetusrežiim",
@@ -2667,6 +2676,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Uusi versio saatavilla: {{version}}",
     update_ansehen_btn: "Katso",
     update_schliessen_aria: "Piilota ilmoitus",
+    ressourcen_version_hinweis: "⚠️ Tämä kortti päivitettiin, mutta resurssin URL-osoitetta ei muutettu (edelleen \"?v={{version}}\"). Muut selaimet/laitteet saattavat siksi ladata edelleen vanhan, välimuistiin tallennetun tiedoston - kasvata versionumeroa resurssin URL-osoitteessa (Asetukset → Kojelaudat → Resurssit).",
     detail_kochmodus_btn: "🍳 Kokkaustila",
     kochmodus_schritt_anzeige: "Vaihe {{aktuell}}/{{gesamt}}",
     kochmodus_schliessen_aria: "Sulje kokkaustila",
@@ -2914,6 +2924,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nouvelle version disponible : {{version}}",
     update_ansehen_btn: "Voir",
     update_schliessen_aria: "Masquer la notification",
+    ressourcen_version_hinweis: "⚠️ Cette carte a été mise à jour, mais l'URL de la ressource n'a pas changé (toujours \"?v={{version}}\"). D'autres navigateurs/appareils risquent donc de continuer à charger l'ancien fichier mis en cache - augmente le numéro de version dans l'URL de la ressource (Paramètres → Tableaux de bord → Ressources).",
     detail_kochmodus_btn: "🍳 Mode cuisine",
     kochmodus_schritt_anzeige: "Étape {{aktuell}} sur {{gesamt}}",
     kochmodus_schliessen_aria: "Fermer le mode cuisine",
@@ -3161,6 +3172,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Διατίθεται νέα έκδοση: {{version}}",
     update_ansehen_btn: "Προβολή",
     update_schliessen_aria: "Απόκρυψη ειδοποίησης",
+    ressourcen_version_hinweis: "⚠️ Αυτή η κάρτα ενημερώθηκε, αλλά το URL του πόρου δεν άλλαξε (παραμένει \"?v={{version}}\"). Άλλα προγράμματα περιήγησης/συσκευές ενδέχεται επομένως να συνεχίσουν να φορτώνουν το παλιό, αποθηκευμένο στην προσωρινή μνήμη αρχείο - αύξησε τον αριθμό έκδοσης στο URL του πόρου (Ρυθμίσεις → Πίνακες ελέγχου → Πόροι).",
     detail_kochmodus_btn: "🍳 Λειτουργία μαγειρέματος",
     kochmodus_schritt_anzeige: "Βήμα {{aktuell}} από {{gesamt}}",
     kochmodus_schliessen_aria: "Κλείσιμο λειτουργίας μαγειρέματος",
@@ -3408,6 +3420,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Új verzió érhető el: {{version}}",
     update_ansehen_btn: "Megnézem",
     update_schliessen_aria: "Értesítés elrejtése",
+    ressourcen_version_hinweis: "⚠️ Ez a kártya frissült, de az erőforrás URL-je nem változott (továbbra is \"?v={{version}}\"). Más böngészők/eszközök emiatt esetleg továbbra is a régi, gyorsítótárazott fájlt töltik be - növeld a verziószámot az erőforrás URL-jében (Beállítások → Vezérlőpultok → Erőforrások).",
     detail_kochmodus_btn: "🍳 Főzési mód",
     kochmodus_schritt_anzeige: "{{aktuell}}. lépés / {{gesamt}}",
     kochmodus_schliessen_aria: "Főzési mód bezárása",
@@ -3655,6 +3668,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Leagan nua ar fáil: {{version}}",
     update_ansehen_btn: "Amharc",
     update_schliessen_aria: "Cuir an fógra i bhfolach",
+    ressourcen_version_hinweis: "⚠️ Nuashonraíodh an cárta seo, ach níor athraíodh URL na hacmhainne (fós \"?v={{version}}\"). D'fhéadfadh brabhsálaithe/gléasanna eile leanúint de bheith ag lódáil an tseanchomhaid taisce dá bharr - méadaigh an uimhir leagain in URL na hacmhainne (Socruithe → Deais → Acmhainní).",
     detail_kochmodus_btn: "🍳 Mód Cócaireachta",
     kochmodus_schritt_anzeige: "Céim {{aktuell}} de {{gesamt}}",
     kochmodus_schliessen_aria: "Dún an mód cócaireachta",
@@ -3902,6 +3916,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nuova versione disponibile: {{version}}",
     update_ansehen_btn: "Visualizza",
     update_schliessen_aria: "Nascondi avviso",
+    ressourcen_version_hinweis: "⚠️ Questa scheda è stata aggiornata, ma l'URL della risorsa non è stato modificato (ancora \"?v={{version}}\"). Altri browser/dispositivi potrebbero quindi continuare a caricare il vecchio file memorizzato nella cache - aumenta il numero di versione nell'URL della risorsa (Impostazioni → Dashboard → Risorse).",
     detail_kochmodus_btn: "🍳 Modalità cucina",
     kochmodus_schritt_anzeige: "Passo {{aktuell}} di {{gesamt}}",
     kochmodus_schliessen_aria: "Chiudi modalità cucina",
@@ -4148,6 +4163,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Pieejama jauna versija: {{version}}",
     update_ansehen_btn: "Skatīt",
     update_schliessen_aria: "Slēpt paziņojumu",
+    ressourcen_version_hinweis: "⚠️ Šī kartīte tika atjaunināta, bet resursa URL netika mainīts (joprojām \"?v={{version}}\"). Citas pārlūkprogrammas/ierīces tāpēc var turpināt ielādēt veco, kešatmiņā saglabāto failu - palielini versijas numuru resursa URL (Iestatījumi → Paneļi → Resursi).",
     detail_kochmodus_btn: "🍳 Gatavošanas režīms",
     kochmodus_schritt_anzeige: "{{aktuell}}. solis no {{gesamt}}",
     kochmodus_schliessen_aria: "Aizvērt gatavošanas režīmu",
@@ -4394,6 +4410,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Yra nauja versija: {{version}}",
     update_ansehen_btn: "Žiūrėti",
     update_schliessen_aria: "Slėpti pranešimą",
+    ressourcen_version_hinweis: "⚠️ Ši kortelė buvo atnaujinta, bet ištekliaus URL nepasikeitė (vis dar \"?v={{version}}\"). Kitos naršyklės/įrenginiai dėl to gali toliau įkelti seną, podėlyje saugomą failą - padidink versijos numerį ištekliaus URL (Nustatymai → Prietaisų skydeliai → Ištekliai).",
     detail_kochmodus_btn: "🍳 Gaminimo režimas",
     kochmodus_schritt_anzeige: "{{aktuell}} veiksmas iš {{gesamt}}",
     kochmodus_schliessen_aria: "Uždaryti gaminimo režimą",
@@ -4641,6 +4658,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Verżjoni ġdida disponibbli: {{version}}",
     update_ansehen_btn: "Ara",
     update_schliessen_aria: "Aħbi n-notifika",
+    ressourcen_version_hinweis: "⚠️ Din il-karta ġiet aġġornata, iżda l-URL tar-riżorsa ma nbidlitx (għadha \"?v={{version}}\"). Browsers/apparati oħra għalhekk jistgħu jibqgħu jtellgħu l-fajl qadim, maħżun fil-cache - żid in-numru tal-verżjoni fl-URL tar-riżorsa (Settings → Dashboards → Riżorsi).",
     detail_kochmodus_btn: "🍳 Modalità tat-Tisjir",
     kochmodus_schritt_anzeige: "Pass {{aktuell}} minn {{gesamt}}",
     kochmodus_schliessen_aria: "Agħlaq il-modalità tat-tisjir",
@@ -4887,6 +4905,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Dostępna nowa wersja: {{version}}",
     update_ansehen_btn: "Zobacz",
     update_schliessen_aria: "Ukryj powiadomienie",
+    ressourcen_version_hinweis: "⚠️ Ta karta została zaktualizowana, ale adres URL zasobu nie został zmieniony (nadal \"?v={{version}}\"). Inne przeglądarki/urządzenia mogą więc nadal wczytywać stary, zapisany w pamięci podręcznej plik - zwiększ numer wersji w adresie URL zasobu (Ustawienia → Panele → Zasoby).",
     detail_kochmodus_btn: "🍳 Tryb gotowania",
     kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
     kochmodus_schliessen_aria: "Zamknij tryb gotowania",
@@ -5134,6 +5153,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nova versão disponível: {{version}}",
     update_ansehen_btn: "Ver",
     update_schliessen_aria: "Ocultar aviso",
+    ressourcen_version_hinweis: "⚠️ Este cartão foi atualizado, mas o URL do recurso não foi alterado (continua \"?v={{version}}\"). Outros navegadores/dispositivos podem por isso continuar a carregar o ficheiro antigo em cache - aumenta o número de versão no URL do recurso (Definições → Painéis → Recursos).",
     detail_kochmodus_btn: "🍳 Modo de cozinha",
     kochmodus_schritt_anzeige: "Passo {{aktuell}} de {{gesamt}}",
     kochmodus_schliessen_aria: "Fechar modo de cozinha",
@@ -5380,6 +5400,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Este disponibilă o versiune nouă: {{version}}",
     update_ansehen_btn: "Vezi",
     update_schliessen_aria: "Ascunde notificarea",
+    ressourcen_version_hinweis: "⚠️ Acest card a fost actualizat, dar URL-ul resursei nu a fost schimbat (rămâne \"?v={{version}}\"). Alte browsere/dispozitive ar putea astfel continua să încarce fișierul vechi, stocat în cache - crește numărul versiunii în URL-ul resursei (Setări → Panouri → Resurse).",
     detail_kochmodus_btn: "🍳 Mod de gătit",
     kochmodus_schritt_anzeige: "Pasul {{aktuell}} din {{gesamt}}",
     kochmodus_schliessen_aria: "Închide modul de gătit",
@@ -5626,6 +5647,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "K dispozícii je nová verzia: {{version}}",
     update_ansehen_btn: "Zobraziť",
     update_schliessen_aria: "Skryť upozornenie",
+    ressourcen_version_hinweis: "⚠️ Táto karta bola aktualizovaná, ale URL zdroja sa nezmenila (stále \"?v={{version}}\"). Iné prehliadače/zariadenia preto môžu naďalej načítavať starý, uložený súbor - zvýš číslo verzie v URL zdroja (Nastavenia → Dashboardy → Zdroje).",
     detail_kochmodus_btn: "🍳 Režim varenia",
     kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
     kochmodus_schliessen_aria: "Zavrieť režim varenia",
@@ -5872,6 +5894,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Na voljo je nova različica: {{version}}",
     update_ansehen_btn: "Ogled",
     update_schliessen_aria: "Skrij obvestilo",
+    ressourcen_version_hinweis: "⚠️ Ta kartica je bila posodobljena, vendar se URL vira ni spremenil (še vedno \"?v={{version}}\"). Drugi brskalniki/naprave zato morda še naprej nalagajo staro, predpomnjeno datoteko - povečaj številko različice v URL-ju vira (Nastavitve → Nadzorne plošče → Viri).",
     detail_kochmodus_btn: "🍳 Način kuhanja",
     kochmodus_schritt_anzeige: "Korak {{aktuell}} od {{gesamt}}",
     kochmodus_schliessen_aria: "Zapri način kuhanja",
@@ -6118,6 +6141,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Nueva versión disponible: {{version}}",
     update_ansehen_btn: "Ver",
     update_schliessen_aria: "Ocultar aviso",
+    ressourcen_version_hinweis: "⚠️ Esta tarjeta se actualizó, pero la URL del recurso no cambió (sigue siendo \"?v={{version}}\"). Otros navegadores/dispositivos podrían seguir cargando el archivo antiguo en caché - aumenta el número de versión en la URL del recurso (Ajustes → Paneles → Recursos).",
     detail_kochmodus_btn: "🍳 Modo cocina",
     kochmodus_schritt_anzeige: "Paso {{aktuell}} de {{gesamt}}",
     kochmodus_schliessen_aria: "Cerrar modo cocina",
@@ -6364,6 +6388,7 @@ const UEBERSETZUNGEN = {
     update_neue_version: "Ny version tillgänglig: {{version}}",
     update_ansehen_btn: "Visa",
     update_schliessen_aria: "Dölj meddelande",
+    ressourcen_version_hinweis: "⚠️ Det här kortet uppdaterades, men resurs-URL:en ändrades inte (fortfarande \"?v={{version}}\"). Andra webbläsare/enheter kan därför fortsätta ladda den gamla, cachade filen - öka versionsnumret i resurs-URL:en (Inställningar → Instrumentpaneler → Resurser).",
     detail_kochmodus_btn: "🍳 Matlagningsläge",
     kochmodus_schritt_anzeige: "Steg {{aktuell}} av {{gesamt}}",
     kochmodus_schliessen_aria: "Stäng matlagningsläge",
@@ -7047,6 +7072,12 @@ class RezeptbuchCard extends HTMLElement {
     // führendes "v") oder false, falls keine neuere Version existiert.
     this._updateHinweisVersion = null;
     this._updateHinweisAusgeblendet = false;
+    // Ressourcen-Versions-Hinweis (siehe _ressourcenVersionPruefen): enthält
+    // die aktuelle "?v="-Versionsnummer aus der eigenen Skript-URL, sobald
+    // erkannt wurde, dass sich CARD_VERSION geändert hat, diese Nummer aber
+    // nicht - sonst null.
+    this._ressourcenVersionsHinweis = null;
+    this._ressourcenVersionsHinweisAusgeblendet = false;
 
     // Kochmodus (Vollbild-Schritt-für-Schritt-Ansicht in der Detailansicht,
     // siehe _renderDetail/_kochmodus*) - _kochmodusSchrittIndex ist
@@ -7297,6 +7328,9 @@ class RezeptbuchCard extends HTMLElement {
       // Netzwerkzugriff auf GitHub warten. Rein informativ, siehe
       // _updatePruefen().
       this._updatePruefen();
+      // Rein lokal, kein Netzwerkzugriff - kann daher synchron nebenbei
+      // laufen (siehe _ressourcenVersionPruefen).
+      this._ressourcenVersionPruefen();
     }
   }
 
@@ -7353,6 +7387,68 @@ class RezeptbuchCard extends HTMLElement {
       if (this._ansicht === "liste") this._render();
     } catch (e) {
       console.warn("Rezeptbuch: Update-Prüfung fehlgeschlagen (kein Internetzugang o.ä.)", e);
+    }
+  }
+
+  // Warnt davor, dass eine gerade neu geladene Kartenversion NICHT bei
+  // allen Browsern/Geräten ankommen wird: Home Assistant/Browser cachen
+  // /local/rezeptbuch-card.js sehr aggressiv unter ihrer jeweiligen URL -
+  // nur eine geänderte "?v=..."-Versionsnummer in der Ressourcen-URL
+  // (Einstellungen -> Dashboards -> Ressourcen) zwingt sie zuverlässig zu
+  // einem Neuabruf. Erkennung: in localStorage wird bei jedem Laden
+  // festgehalten, mit welcher CARD_VERSION und welcher "?v="-Nummer die
+  // Karte zuletzt lief. Hat sich CARD_VERSION seitdem geändert (dieser
+  // Browser hat also - z.B. durch einen harten Reload - tatsächlich eine
+  // neue Datei bekommen), die "?v="-Nummer in der URL aber NICHT, ist das
+  // ein starkes Indiz, dass andere Geräte unter derselben unveränderten
+  // URL weiterhin die alte Datei aus ihrem eigenen Cache bekommen. Rein
+  // lokal (kein Netzwerkzugriff, keine GitHub-Abfrage) und rein
+  // informativ - schlägt irgendein Schritt fehl (z.B. kein <script>-Tag
+  // mit src auffindbar, kein "?v="-Parameter verwendet, localStorage
+  // nicht verfügbar), bleibt die Karte einfach ohne diesen Hinweis.
+  _ressourcenVersionPruefen() {
+    try {
+      const eigenesSkript = Array.from(document.querySelectorAll("script[src]"))
+        .find((s) => s.src.includes("rezeptbuch-card.js"));
+      if (!eigenesSkript) return;
+
+      let aktuelleRessourcenVersion;
+      try {
+        aktuelleRessourcenVersion = new URL(eigenesSkript.src).searchParams.get("v");
+      } catch (e) {
+        return;
+      }
+      if (!aktuelleRessourcenVersion) return; // keine "?v="-Nummer verwendet - nichts zu vergleichen
+
+      const SPEICHER_SCHLUESSEL = "rezeptbuch_letzter_ladestand";
+      let letzterStand = null;
+      try {
+        letzterStand = JSON.parse(localStorage.getItem(SPEICHER_SCHLUESSEL) || "null");
+      } catch (e) {
+        letzterStand = null;
+      }
+
+      if (
+        letzterStand &&
+        letzterStand.cardVersion !== CARD_VERSION &&
+        letzterStand.ressourcenVersion === aktuelleRessourcenVersion
+      ) {
+        this._ressourcenVersionsHinweis = aktuelleRessourcenVersion;
+        this._ressourcenVersionsHinweisAusgeblendet = false;
+        if (this._ansicht === "liste") this._render();
+      }
+
+      try {
+        localStorage.setItem(SPEICHER_SCHLUESSEL, JSON.stringify({
+          cardVersion: CARD_VERSION,
+          ressourcenVersion: aktuelleRessourcenVersion,
+        }));
+      } catch (e) {
+        // localStorage evtl. nicht verfügbar (z.B. privater Modus) - dann
+        // wird beim nächsten Laden einfach erneut verglichen, kein Blocker.
+      }
+    } catch (e) {
+      // Rein informativ, siehe _updatePruefen - nie ein Fehler für den Nutzer.
     }
   }
 
@@ -9118,6 +9214,12 @@ class RezeptbuchCard extends HTMLElement {
             <button type="button" class="update-schliessen-btn" id="update-banner-schliessen-btn" aria-label="${this._t("update_schliessen_aria")}">✕</button>
           </div>
         ` : ""}
+        ${this._ressourcenVersionsHinweis && !this._ressourcenVersionsHinweisAusgeblendet ? `
+          <div class="update-banner" id="ressourcen-version-banner">
+            <span>${this._t("ressourcen_version_hinweis", { version: this._escape(this._ressourcenVersionsHinweis) })}</span>
+            <button type="button" class="update-schliessen-btn" id="ressourcen-version-banner-schliessen-btn" aria-label="${this._t("update_schliessen_aria")}">✕</button>
+          </div>
+        ` : ""}
         <div id="ergebnis-bereich"></div>
 
         <div class="modal-overlay" id="kochbuch-info-modal" style="display:none;">
@@ -9222,6 +9324,15 @@ class RezeptbuchCard extends HTMLElement {
           // nach einem Neuladen erneut, kein Blocker.
         }
         const banner = this.shadowRoot.getElementById("update-banner");
+        if (banner) banner.remove();
+      });
+    }
+
+    const ressourcenVersionBannerSchliessenBtn = this.shadowRoot.getElementById("ressourcen-version-banner-schliessen-btn");
+    if (ressourcenVersionBannerSchliessenBtn) {
+      ressourcenVersionBannerSchliessenBtn.addEventListener("click", () => {
+        this._ressourcenVersionsHinweisAusgeblendet = true;
+        const banner = this.shadowRoot.getElementById("ressourcen-version-banner");
         if (banner) banner.remove();
       });
     }

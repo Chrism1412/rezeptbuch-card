@@ -1510,6 +1510,120 @@ async function testZahnradBleibtRundAufSchmalemBildschirm(browser) {
 }
 
 // ---------------------------------------------------------------------
+// _ressourcenVersionPruefen(): warnt, wenn CARD_VERSION sich gegenüber dem
+// letzten Laden geändert hat, die "?v="-Nummer in der Ressourcen-URL
+// (Skript-Tag) aber nicht - ein starkes Indiz, dass andere Geräte unter
+// derselben URL weiterhin die alte, zwischengespeicherte Datei bekommen.
+// ---------------------------------------------------------------------
+async function testRessourcenVersionsHinweis(browser) {
+  console.log("\nTest: Warnt, wenn sich die Kartenversion geändert hat, die '?v='-Ressourcen-Nummer aber nicht");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+
+    // In dieser Sandbox-Testumgebung (Seite ohne eigene Origin) verweigert
+    // Chromium den echten Zugriff auf window.localStorage - siehe
+    // testUpdateHinweisSchliessenBlendetIhnDauerhaftAus für denselben
+    // In-Memory-Ersatz.
+    await page.evaluate(() => {
+      const speicher = new Map();
+      Object.defineProperty(window, "localStorage", {
+        configurable: true,
+        value: {
+          getItem: (k) => (speicher.has(k) ? speicher.get(k) : null),
+          setItem: (k, v) => speicher.set(k, String(v)),
+          removeItem: (k) => speicher.delete(k),
+        },
+      });
+    });
+
+    // Simuliert das <script src="...rezeptbuch-card.js?v=3">, das Home
+    // Assistant für die eingebundene Ressource tatsächlich ins Dokument
+    // einfügt (die Test-Karte selbst wird per addScriptTag({path}) ohne
+    // eigenes src geladen, siehe neueTestUmgebung - daher hier separat
+    // nachgebildet).
+    await page.evaluate(() => {
+      const skript = document.createElement("script");
+      skript.src = "https://ha.example.invalid/local/rezeptbuch-card.js?v=3";
+      document.head.appendChild(skript);
+    });
+
+    // Allererster Aufruf: noch kein vorheriger Ladestand in localStorage
+    // bekannt -> kein Hinweis, nur der Ausgangsstand wird gespeichert.
+    const ersterAufruf = await page.evaluate(() => {
+      window.__karte._ressourcenVersionPruefen();
+      return window.__karte._ressourcenVersionsHinweis;
+    });
+    assert(ersterAufruf === null, "Beim allerersten Aufruf (kein vorheriger Ladestand) gibt es noch keinen Hinweis");
+
+    // Erneuter Aufruf ohne jede Änderung (normaler Fall, kein Update) ->
+    // weiterhin kein Hinweis.
+    const unveraendert = await page.evaluate(() => {
+      window.__karte._ressourcenVersionPruefen();
+      return window.__karte._ressourcenVersionsHinweis;
+    });
+    assert(unveraendert === null, "Ohne Versionsänderung gibt es keinen Hinweis");
+
+    // Simuliert: die Karte lief laut gespeichertem Stand zuletzt mit einer
+    // ANDEREN (älteren) CARD_VERSION - genau das, was nach einem
+    // erfolgreichen Datei-Update in DIESEM Browser passiert wäre. Die
+    // "?v="-Nummer im Skript-Tag bleibt dabei bewusst gleich (der Fehler,
+    // den man machen kann).
+    const hinweisErscheint = await page.evaluate(() => {
+      const stand = JSON.parse(localStorage.getItem("rezeptbuch_letzter_ladestand"));
+      stand.cardVersion = "0.0.1-test-alt";
+      localStorage.setItem("rezeptbuch_letzter_ladestand", JSON.stringify(stand));
+      window.__karte._ressourcenVersionPruefen();
+      window.__karte._render();
+      const banner = window.__karte.shadowRoot.getElementById("ressourcen-version-banner");
+      return {
+        hinweisVersion: window.__karte._ressourcenVersionsHinweis,
+        bannerText: banner ? banner.textContent : null,
+      };
+    });
+    assert(hinweisErscheint.hinweisVersion === "3", "Hat sich CARD_VERSION geändert, aber die '?v='-Nummer nicht, wird der Hinweis mit der aktuellen Nummer gesetzt (tatsächlich: " + JSON.stringify(hinweisErscheint.hinweisVersion) + ")");
+    assert(!!hinweisErscheint.bannerText && hinweisErscheint.bannerText.includes("?v=3"), "Der Banner zeigt die betroffene '?v='-Nummer im Text an (tatsächlich: " + JSON.stringify(hinweisErscheint.bannerText) + ")");
+
+    // Schließen-Knopf entfernt den Banner.
+    const nachSchliessen = await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("ressourcen-version-banner-schliessen-btn").click();
+      return !!window.__karte.shadowRoot.getElementById("ressourcen-version-banner");
+    });
+    assert(!nachSchliessen, "Der Schließen-Knopf entfernt den Ressourcen-Versions-Banner");
+
+    // Danach (Stand wurde beim letzten _ressourcenVersionPruefen()-Aufruf
+    // bereits aktualisiert) verschwindet der Hinweis von selbst wieder,
+    // ohne erneutes manuelles Wegklicken nötig zu haben.
+    const nachFolgeAufruf = await page.evaluate(() => {
+      window.__karte._ressourcenVersionsHinweis = null; // Ausgangszustand für diesen Teiltest
+      window.__karte._ressourcenVersionPruefen();
+      return window.__karte._ressourcenVersionsHinweis;
+    });
+    assert(nachFolgeAufruf === null, "Nach dem Update ist der gespeicherte Stand aktuell - ein weiterer Aufruf zeigt keinen (erneuten) Hinweis mehr");
+
+    // Vorbildlicher Fall: Kartenversion UND '?v='-Nummer ändern sich
+    // gemeinsam -> korrektes Vorgehen, kein Hinweis.
+    const beideGeaendert = await page.evaluate(() => {
+      const stand = JSON.parse(localStorage.getItem("rezeptbuch_letzter_ladestand"));
+      stand.cardVersion = "0.0.2-test-alt";
+      localStorage.setItem("rezeptbuch_letzter_ladestand", JSON.stringify(stand));
+
+      document.querySelectorAll('script[src*="rezeptbuch-card.js"]').forEach((s) => s.remove());
+      const neuesSkript = document.createElement("script");
+      neuesSkript.src = "https://ha.example.invalid/local/rezeptbuch-card.js?v=4";
+      document.head.appendChild(neuesSkript);
+
+      window.__karte._ressourcenVersionsHinweis = null;
+      window.__karte._ressourcenVersionPruefen();
+      return window.__karte._ressourcenVersionsHinweis;
+    });
+    assert(beideGeaendert === null, "Ändern sich Kartenversion UND '?v='-Nummer gemeinsam (korrektes Vorgehen), gibt es keinen Hinweis");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Eigene Kategorien: anlegen, im Formular/Filter erscheinen, Duplikate
 // abweisen, nicht löschbar solange verwendet, sonst löschbar.
 // ---------------------------------------------------------------------
@@ -4502,6 +4616,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testStatistikBerechnung(browser);
     await testStatistikEinstellungenSchalter(browser);
     await testZahnradBleibtRundAufSchmalemBildschirm(browser);
+    await testRessourcenVersionsHinweis(browser);
     await testEigeneKategorieAnlegen(browser);
     await testEigeneKategorieDuplikatUndLeer(browser);
     await testEigeneKategorieLoeschen(browser);

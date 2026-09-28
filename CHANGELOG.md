@@ -63,6 +63,14 @@ komplett neue Kernfunktionen.
   zubereitet?"-Abfrage UND den Statistik-Knopf. Die Einstellung wird
   analog zu Wochenplan/Kochbüchern/Kategorien als verstecktes Item in
   derselben To-do-Liste gespeichert und bleibt damit dauerhaft erhalten.
+- **Warnt vor vergessener Ressourcen-Versionsnummer**: erkennt die Karte,
+  dass sie selbst gerade mit einer neuen `CARD_VERSION` läuft, die
+  `?v=...`-Versionsnummer in der eigenen Ressourcen-URL sich seit dem
+  letzten Laden in diesem Browser aber nicht geändert hat, zeigt sie einen
+  wegklickbaren Warnhinweis. Browser cachen `/local/rezeptbuch-card.js`
+  hartnäckig unter ihrer jeweiligen URL - ohne geänderte Versionsnummer
+  bekommen andere Geräte sonst unbemerkt weiter die alte Datei. Rein
+  lokal, kein Netzwerkzugriff.
 
 ### Geändert
 - **Seitennavigation der Rezeptübersicht**: erscheint jetzt zusätzlich
