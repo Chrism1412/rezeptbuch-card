@@ -49,6 +49,43 @@
   ausgewählter Rezepte bzw. des Wochenplans werden dort angehängt). Ohne
   diese Angabe funktioniert die Karte unverändert weiter, der Knopf zeigt
   dann nur einen erklärenden Hinweis statt eines Absturzes.
+
+  ---------------------------------------------------------------------
+  INHALTSVERZEICHNIS (grobe Zeilennummern, ändern sich mit jedem Release
+  etwas - dient zur schnellen Orientierung, nicht als exakte Referenz):
+
+    68    Übersetzungen (UEBERSETZUNGEN, alle 25 Sprachblöcke)
+    7018  class RezeptbuchCard - Beginn
+      7019   Konstruktor (Grundzustand aller internen Felder)
+      7127   Sprache/Übersetzung (_sprache, _t)
+      7318   hass-Setter (Einstiegspunkt bei jedem HA-Update)
+      7347   Update-Hinweis über GitHub-Releases (_updatePruefen)
+      7409   Ressourcen-Versions-Warnung (_ressourcenVersionPruefen)
+      7478   Laden/Speichern: Rezepte, Wochenplan, Kochbücher,
+             Kategorien, Einstellungen (die "versteckten Marker-Items")
+      7750   Rezept-Hilfsfunktionen (Migration, Bearbeitungsrechte,
+             Bewertungen/Sterne, Kommentare)
+      7978   Einkaufsliste (_einkaufslisteAggregieren/-Erstellen)
+      8053   Statistik ("Hast du zubereitet?"-Auswertung)
+      8149   Kochmodus (inkl. Timer, Screen-Wake-Lock)
+      8321   Rezept-Formular (Neu/Bearbeiten/Löschen, Bildkompression,
+             Speichern)
+      8531   Mengen-Skalierung nach Portionen, Sortierung, Filter
+      8634   _render() - zentraler Render-Dispatcher (wählt je nach
+             _ansicht die passende _render*-Methode unten)
+      9124   _renderListe() - Rezeptübersicht (inkl. Kategorie-Chips,
+             Update-/Ressourcen-Version-Banner)
+      9823   PDF-Export (Einzel- und Sammel-PDF, jsPDF, Wasserzeichen,
+             Deckblatt-Collage)
+      10743  _renderDetail() - Detailansicht eines Rezepts
+      11033  _renderWochenplan() - Wochenplan-Ansicht
+      11128  _renderFormular() - Formular zum Anlegen/Bearbeiten
+    11650 customElements.define(...) - Ende
+
+  Bei größeren Änderungen gerne kurz mit "grep -n" die aktuellen
+  Zeilennummern der betroffenen Methode(n) neu prüfen, statt sich blind
+  auf diese Liste zu verlassen.
+  ---------------------------------------------------------------------
 */
 
 // ---------------------------------------------------------------------
