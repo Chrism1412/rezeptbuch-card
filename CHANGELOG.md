@@ -4,7 +4,7 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [2.0.0] - 2026-09-27
+## [2.0.0] - 2026-09-28
 
 Erstes veröffentlichtes Update seit `v1.0.4` - fasst alle seitdem
 angesammelten, aber nie einzeln veröffentlichten Änderungen (intern
@@ -79,6 +79,13 @@ komplett neue Kernfunktionen.
   stehen hat, kann es einfach entfernen (es wird nun folgenlos
   ignoriert) und stattdessen den ⚙️-Schalter verwenden - bereits
   erfasste Zubereitungen bleiben davon unberührt.
+
+### Behoben
+- **⚙️-Symbol im Kopfbereich wurde auf schmalen Bildschirmen (Handy) zu
+  einer breiten, ovalen Pille statt eines kleinen runden Knopfs**: eine
+  bestehende Regel zog dort alle Knöpfe im Kopfbereich gleichmäßig in die
+  Breite - das runde ⚙️-Symbol war davon nicht ausgenommen. Betraf nur die
+  Optik auf schmalen Bildschirmen, keine Funktion.
 
 ## [1.0.4] - 2026-09-26
 

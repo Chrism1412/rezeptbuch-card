@@ -1472,6 +1472,44 @@ async function testStatistikEinstellungenSchalter(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Regressionstest: auf schmalen Bildschirmen (Handy) gibt es eine Regel,
+// die alle Knöpfe im Kopfbereich gleichmäßig in die Breite zieht
+// (".kopf-aktionen button { flex:1 1 auto; }" unter 480px). Das runde
+// ⚙️-Symbol (.info-btn) muss davon ausgenommen sein, sonst wird es zu
+// einer breiten, ovalen Pille verzerrt statt eines kleinen runden Knopfs
+// zu bleiben (genau das ist einmal passiert).
+// ---------------------------------------------------------------------
+async function testZahnradBleibtRundAufSchmalemBildschirm(browser) {
+  console.log("\nTest: Das ⚙️-Symbol bleibt auf schmalen Bildschirmen rund, statt sich wie die anderen Knöpfe in die Breite zu ziehen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    await page.setViewportSize({ width: 375, height: 800 });
+
+    const ergebnis = await page.evaluate(() => {
+      window.__karte._render();
+      const zahnrad = window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn");
+      const neuBtn = window.__karte.shadowRoot.getElementById("neu-btn");
+      const stilZahnrad = getComputedStyle(zahnrad);
+      const stilNeuBtn = getComputedStyle(neuBtn);
+      return {
+        zahnradBreite: zahnrad.getBoundingClientRect().width,
+        neuBtnBreite: neuBtn.getBoundingClientRect().width,
+        zahnradFlexGrow: stilZahnrad.flexGrow,
+        neuBtnFlexGrow: stilNeuBtn.flexGrow,
+      };
+    });
+
+    assert(ergebnis.zahnradFlexGrow === "0", "Das ⚙️-Symbol wächst auf schmalen Bildschirmen NICHT mit (flex-grow: 0, tatsächlich: " + ergebnis.zahnradFlexGrow + ")");
+    assert(ergebnis.neuBtnFlexGrow === "1", "Die übrigen Knöpfe wie '+ Neu' wachsen auf schmalen Bildschirmen weiterhin mit (flex-grow: 1, tatsächlich: " + ergebnis.neuBtnFlexGrow + ")");
+    assert(ergebnis.zahnradBreite < 40, "Das ⚙️-Symbol bleibt klein/rund (unter 40px breit, tatsächlich: " + ergebnis.zahnradBreite + "px)");
+    assert(ergebnis.neuBtnBreite > ergebnis.zahnradBreite * 3, "Die übrigen Knöpfe sind deutlich breiter als das ⚙️-Symbol (kein einheitliches Verzerren mehr)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Eigene Kategorien: anlegen, im Formular/Filter erscheinen, Duplikate
 // abweisen, nicht löschbar solange verwendet, sonst löschbar.
 // ---------------------------------------------------------------------
@@ -4463,6 +4501,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testEinkaufslisteEinheitenSynonyme(browser);
     await testStatistikBerechnung(browser);
     await testStatistikEinstellungenSchalter(browser);
+    await testZahnradBleibtRundAufSchmalemBildschirm(browser);
     await testEigeneKategorieAnlegen(browser);
     await testEigeneKategorieDuplikatUndLeer(browser);
     await testEigeneKategorieLoeschen(browser);

@@ -8594,7 +8594,10 @@ class RezeptbuchCard extends HTMLElement {
         .kopf-aktionen { display:flex; gap:8px; align-items:center; flex-wrap:wrap; width:100%; }
         @media (max-width: 480px) {
           .kopf-aktionen { justify-content:flex-start; }
-          .kopf-aktionen button { flex:1 1 auto; }
+          /* Das runde ⚙️-Symbol (.info-btn) bewusst ausnehmen - sonst zieht
+             diese Regel es auf schmalen Bildschirmen zu einer breiten,
+             ovalen Pille statt eines kleinen runden Knopfs. */
+          .kopf-aktionen button:not(.info-btn) { flex:1 1 auto; }
         }
         .undo-banner {
           display:flex; align-items:center; justify-content:space-between; gap:10px;
