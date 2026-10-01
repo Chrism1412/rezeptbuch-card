@@ -225,11 +225,16 @@ Companion-App).
 
 Jede der folgenden Funktionen ist unabhängig von den anderen - nur
 einrichten, was tatsächlich gebraucht wird. Gemeinsame Basis für alle:
-das jeweilige Skript aus `scripts/` nach `/config/scripts/` kopieren, den
-passenden `shell_command:`-Eintrag in die eigene `configuration.yaml`
-übernehmen und Home Assistant danach **komplett neu starten** (nicht nur
-YAML neu laden), damit der `shell_command` als Service verfügbar wird. Wer
-lieber alles auf einmal einträgt, findet die komplette Vorlage in
+das jeweilige Skript aus `scripts/` nach `/config/scripts/` kopieren
+(**der Ordner `scripts` existiert bei vielen Installationen noch nicht -
+falls nötig vorher selbst anlegen**, z. B. über den File-Editor-Add-on
+oder per Samba/SSH), den passenden `shell_command:`-Eintrag in die eigene
+`configuration.yaml` übernehmen und Home Assistant danach **komplett neu
+starten** (nicht nur YAML neu laden), damit der `shell_command` als
+Service verfügbar wird. Fehlt der Ordner oder die Datei, meldet Home
+Assistant im Log beim Ausführen `return code: 2` ("can't open file" -
+Python findet die Skriptdatei schlicht nicht). Wer lieber alles auf
+einmal einträgt, findet die komplette Vorlage in
 [`examples/configuration.snippet.yaml`](examples/configuration.snippet.yaml).
 
 **Tägliches Backup + Wiederherstellen** ([Details: Anleitung Abschnitt 1-8](docs/ANLEITUNG-Backup.md)):

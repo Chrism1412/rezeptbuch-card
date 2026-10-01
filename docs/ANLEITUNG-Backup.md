@@ -52,6 +52,13 @@ Lade `rezeptbuch_backup.py` nach
 /config/scripts/rezeptbuch_backup.py
 ```
 
+**Falls der Ordner `/config/scripts/` noch nicht existiert** (bei vielen
+frischen Installationen der Fall): einfach selbst anlegen, z. B. über den
+File-Editor-Add-on oder per Samba/SSH - Home Assistant legt ihn nicht von
+selbst an. Fehlt der Ordner oder die Datei beim späteren Ausführen des
+`shell_command`, erscheint im Log `return code: 2` ("can't open file" -
+Python findet die Skriptdatei schlicht nicht unter dem erwarteten Pfad).
+
 Der Zielordner `/config/Backup-Rezepte/` wird beim ersten Lauf automatisch vom
 Skript selbst angelegt.
 
@@ -333,6 +340,11 @@ Hilfsskripten in dieser Anleitung.
 
 1. Neue Datei `rezeptbuch_url_import.py` nach `/config/scripts/` hochladen
    (z. B. per Studio Code Server / Datei-Editor-Add-on, oder per Samba/SFTP).
+   **Existiert der Ordner `scripts` dort noch nicht**, z. B. weil noch keines
+   der anderen Rezeptbuch-Skripte eingerichtet wurde, einfach selbst
+   anlegen - Home Assistant tut das nicht automatisch. Fehlt der Ordner
+   oder die Datei später beim Ausführen, erscheint im Log `return code: 2`
+   ("can't open file").
 2. In der `configuration.yaml` im bestehenden `shell_command:`-Block folgende
    Zeile ergänzen (falls du Abschnitt 4 dieser Anleitung schon eingerichtet
    hast, ist der Block bereits vorhanden - hier kommt nur eine weitere Zeile
