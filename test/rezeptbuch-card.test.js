@@ -2113,12 +2113,24 @@ async function testAmerikanischeKategorieEinstellung(browser) {
       const kochmodusKnopf = !!root.getElementById("kochmodus-umrechnungstabelle-btn");
       // Funktionscheck: der Knopf öffnet tatsächlich dasselbe Popup.
       root.getElementById("kochmodus-umrechnungstabelle-btn").click();
-      const modalOffen = root.getElementById("umrechnungstabelle-modal").style.display === "flex";
-      return { detailKnopf, kochmodusKnopf, modalOffen };
+      const modal = root.getElementById("umrechnungstabelle-modal");
+      const modalOffen = modal.style.display === "flex";
+      // Reiner display:flex-Check reicht NICHT: das Kochmodus-Overlay liegt
+      // als Vollbild-Ansicht ÜBER dem Rest der Karte (siehe .kochmodus-
+      // overlay-CSS) - steht die Umrechnungstabelle per z-index darunter,
+      // öffnet sie sich zwar technisch, bleibt für den Nutzer aber
+      // unsichtbar dahinter verborgen. Deshalb hier zusätzlich prüfen, was
+      // an einem Punkt INNERHALB des Modals tatsächlich sichtbar/klickbar
+      // ist (elementFromPoint berücksichtigt z-index-Stapelung).
+      const box = modal.querySelector(".modal-box").getBoundingClientRect();
+      const mitte = root.elementFromPoint(box.left + box.width / 2, box.top + 10);
+      const modalLiegtObenAuf = !!mitte && !!mitte.closest && !!mitte.closest("#umrechnungstabelle-modal");
+      return { detailKnopf, kochmodusKnopf, modalOffen, modalLiegtObenAuf };
     }, usUid);
     assert(nachEinstellungUs.detailKnopf === true, "Nach Auswahl der Kategorie erscheint der Knopf im Rezept selbst");
     assert(nachEinstellungUs.kochmodusKnopf === true, "Nach Auswahl der Kategorie erscheint der Knopf auch im Kochmodus");
     assert(nachEinstellungUs.modalOffen === true, "Der Knopf im Kochmodus öffnet das Umrechnungstabelle-Popup");
+    assert(nachEinstellungUs.modalLiegtObenAuf === true, "Die Umrechnungstabelle liegt im Kochmodus tatsächlich sichtbar OBEN, nicht unsichtbar hinter dem Kochmodus-Overlay");
 
     const nachEinstellungDe = await page.evaluate(async (uid) => {
       await window.__karte._zurListe();

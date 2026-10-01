@@ -7271,7 +7271,7 @@ const SCHEMA_VERSION = 2;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "2.1.1";
+const CARD_VERSION = "2.1.2";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v2.0.0".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
@@ -10624,7 +10624,7 @@ class RezeptbuchCard extends HTMLElement {
 
         .modal-overlay {
           position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-          display:flex; align-items:center; justify-content:center; z-index: 1000; padding:20px;
+          display:flex; align-items:center; justify-content:center; z-index: 1100; padding:20px;
         }
         .modal-box {
           background: var(--card-background-color); border-radius:16px; padding:24px;
@@ -10635,7 +10635,11 @@ class RezeptbuchCard extends HTMLElement {
 
         /* Kochmodus: Vollbild-Schritt-für-Schritt-Ansicht (siehe
            _renderDetail/_kochmodus*) - deckt die ganze Karte ab, damit
-           während des Kochens nichts anderes versehentlich antippbar ist. */
+           während des Kochens nichts anderes versehentlich antippbar ist.
+           Wichtig: z-index MUSS kleiner bleiben als .modal-overlay (oben),
+           sonst öffnet sich z.B. die Umrechnungstabelle aus dem Kochmodus
+           heraus zwar technisch (display:flex), landet aber unsichtbar
+           HINTER diesem Overlay. */
         .kochmodus-overlay {
           position: fixed; inset: 0; background: var(--card-background-color);
           z-index: 1050; display:flex; flex-direction:column; box-sizing:border-box;
