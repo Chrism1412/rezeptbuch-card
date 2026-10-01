@@ -28,7 +28,10 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
   eigene anlegen (erscheinen sofort als Filter-Chip und im Formular-
   Dropdown) - eine noch verwendete eigene Kategorie lässt sich erst
   löschen, nachdem die betroffenen Rezepte umkategorisiert wurden, damit
-  dabei nie unbemerkt Daten verloren gehen
+  dabei nie unbemerkt Daten verloren gehen. Per ✎-Knopf lässt sie sich
+  auch umbenennen (alle Rezepte mit dieser Kategorie werden dabei
+  automatisch mit umbenannt). Umbenennen/Löschen ist Home-Assistant-Admins
+  vorbehalten, neue Kategorien anlegen bleibt für jeden Nutzer offen
 - Portionen-Rechner (Zutatenmengen skalieren automatisch)
 - Bewertungen, Kommentare, Koch-Historie ("zubereitet am ...")
 - Rezeptfotos (werden automatisch als echte Dateien statt Base64-Text
@@ -47,9 +50,14 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
   ohnehin eingebauten schema.org/Recipe-Strukturdaten aus (siehe
   [Rechtliches](#rechtliches) unten)
 - Konflikt-Schutz, falls zwei Geräte gleichzeitig dasselbe Rezept bearbeiten
+  (gilt inzwischen auch für die Einstellungen selbst, z.B. wenn zwei Geräte
+  fast gleichzeitig unterschiedliche Schalter/eigene Umrechnungstabelle-
+  Zutaten ändern)
 - **Automatische Einkaufsliste**: mehrere Rezepte auswählen und ihre
   Zutaten (gleicher Name+Einheit summiert) in eine zweite To-do-Liste
-  übertragen
+  übertragen - alternativ lässt sich auch direkt im einzelnen Rezept per
+  Checkbox nur eine Auswahl fehlender Zutaten (mit der aktuell
+  eingestellten Portionsmenge) gezielt übernehmen
 - **Wochenplan**: jedem Wochentag ein Rezept zuordnen, direkt daraus eine
   Einkaufsliste erstellen - kein weiterer Helfer nötig; vergangene Tage
   werden automatisch geleert, eine zusätzlich planbare Folgewoche rückt
@@ -63,6 +71,33 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
 - **Rezept dauerhaft aus allen Backups entfernen**: verhindert, dass ein
   gelöschtes Rezept beim Wiederherstellen eines alten Backups ungewollt
   zurückkehrt
+- **Vollständiges Backup**: der "💾 Sichern"-Knopf exportiert in einer
+  einzigen JSON-Datei nicht nur die Rezepte, sondern zusätzlich
+  Einstellungen (inkl. eigener Umrechnungstabelle-Zutaten), eigene
+  Kategorien, Kochbücher und Wochenplan - ein einzelnes Rezept lässt sich
+  daraus weiterhin über "JSON einfügen" wiederherstellen
+- **Amerikanische Maßeinheiten**: `cup`, `tbsp`, `tsp`, `oz`, `lb`, `pt`,
+  `qt`, `gal` und `fl oz` werden bei der Zutaten-Texterkennung korrekt als
+  Einheit erkannt; Volumenangaben werden automatisch exakt in
+  Milliliter/Liter umgerechnet, Gewichtsangaben in Gramm/Kilogramm
+  (inklusive Brüchen, Unicode-Bruchzeichen, gemischten Zahlen und
+  Mengenbereichen) - bewusst nur gleichartig (Volumen → Volumen, Gewicht →
+  Gewicht), nie Volumen → Gewicht, da das die Dichte der Zutat kennen
+  müsste
+- **Umrechnungstabelle**: Knopf "📐 Umrechnungstabelle" im Hauptmenü (und,
+  sofern in den Einstellungen eine "Kategorie für amerikanische Rezepte"
+  ausgewählt ist, zusätzlich direkt in passenden Rezepten und im
+  Kochmodus) öffnet ein durchsuchbares Nachschlage-Popup mit Richtwerten
+  in Gramm für 70 gängige Zutaten (je 1 Tasse/EL/TL) in allen 25 Sprachen -
+  rein informativ, nie automatisch auf ein Rezept angewendet. Fehlende
+  Zutaten lassen sich selbst ergänzen und nachträglich bearbeiten ("+
+  Eigene Zutat hinzufügen" bzw. ✎)
+- Eigene Kommentare lassen sich nachträglich bearbeiten und löschen
+  (ein HA-Admin darf das zusätzlich bei jedem Kommentar); Zubereitungs-
+  schritte im Formular per ▲/▼ verschieben; fehlt beim Anlegen eines
+  Rezepts die passende Kategorie, lässt sie sich direkt im Formular über
+  "+ Neue Kategorie" ergänzen, ohne die übrigen Eingaben zu verlieren -
+  weitere Details dazu in [CHANGELOG.md](CHANGELOG.md)
 - **Barrierefreiheit**: Rezept-Kacheln und Sterne-Bewertung sind per
   Tastatur bedienbar (Tab/Enter/Leertaste), Icon-Buttons haben sprechende
   Beschreibungen für Screenreader, Farben erfüllen WCAG-AA-Kontrast, und

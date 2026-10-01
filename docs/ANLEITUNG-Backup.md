@@ -906,3 +906,281 @@ verwendet eine neutrale, im Alltag online gebräuchliche Schreibweise. Wie
 bei den anderen nicht-deutschen/englischen Sprachen ist das eine
 KI-Übersetzung, hier ohne einheitlichen Standard, an dem man sie
 überhaupt messen könnte - Korrekturvorschläge sind besonders willkommen.
+
+## 28. Kochmodus (mit Timer)
+
+Über den Knopf "Kochmodus" in der Detailansicht eines Rezepts (nur
+sichtbar, wenn das Rezept Zubereitungsschritte hat) öffnet sich eine
+Vollbild-Ansicht, die jeweils einen Schritt groß und gut lesbar anzeigt -
+praktisch am Tablet in der Küche, ohne bei vielen Schritten lange scrollen
+zu müssen. Mit den Knöpfen "Zurück"/"Weiter" wechselst du zwischen den
+Schritten, über "Zutaten anzeigen" lässt sich bei Bedarf zusätzlich die
+Zutatenliste einblenden.
+
+**Eingebauter Timer:** zu jedem Schritt lässt sich ein Timer starten -
+entweder über eine Minuten-Schnellauswahl oder eine frei eingegebene
+Minutenzahl. Die verbleibende Zeit wird direkt am Timer-Knopf angezeigt;
+läuft die Zeit ab, gibt die Karte ein akustisches Signal und lässt
+(unterstützt das Gerät das) das Gerät kurz vibrieren. Schließt du das
+Kochmodus-Overlay zwischendurch (z. B. um kurz in der normalen
+Detailansicht nachzuschauen), läuft ein bereits gestarteter Timer bewusst
+im Hintergrund weiter - erst wenn du das Rezept ganz verlässt, wird er
+zurückgesetzt.
+
+**Bildschirm bleibt wach:** solange der Kochmodus offen ist, hält die
+Karte über die Screen-Wake-Lock-API des Browsers den Bildschirm wach -
+kein ständiges Neu-Entsperren mehr mit fettigen Fingern beim Kochen.
+Unterstützt der verwendete Browser diese API nicht, funktioniert der
+Kochmodus trotzdem ganz normal, nur eben ohne dieses Extra. Kein weiterer
+Einrichtungsschritt nötig, nichts davon braucht Internetzugang.
+
+## 29. Sammel-PDF-Export
+
+Über den neuen Knopf "Sammel-PDF" in der Rezeptübersicht lässt sich eine
+Auswahl an Rezepten als EIN gemeinsames PDF exportieren, statt jedes
+Rezept einzeln auszudrucken - ein Rezept pro (mindestens einer) Seite.
+
+**Auswahl beim Erstellen:**
+1. "Sammel-PDF" anklicken.
+2. Wählen: entweder alle aktuell gefilterten/gesuchten Rezepte (unabhängig
+   davon, wie viele Seiten die Übersicht gerade zeigt) oder nur einzeln
+   angehakte Rezepte aus einer eingeblendeten Checkliste.
+3. Optional: einen eigenen Namen für ein Kochbuch-Deckblatt eingeben. Wird
+   einer eingegeben, bekommt das PDF vorangestellt ein großes, zentriertes
+   Deckblatt (eleganter, fetter Schriftzug) mit einer Foto-Collage aus bis
+   zu 6 Fotos der enthaltenen Rezepte (locker überlappend wie hingelegte
+   Polaroids) sowie direkt danach eine Inhaltsverzeichnis-Seite mit der
+   nummerierten Rezeptliste.
+
+Die Rezepte im PDF (und im Inhaltsverzeichnis) werden dabei immer nach
+Kategorie sortiert - unabhängig von Tags oder der aktuellen Sortierung der
+Übersicht. Wie beim Einzel-PDF (Abschnitt 11) funktioniert der Export
+komplett lokal, ohne CDN oder Internetzugang.
+
+## 30. Eigene Kategorien
+
+Reichen dir die elf fest eingebauten Kategorien nicht, lassen sich über
+den Knopf "+ Neue Kategorie" im Filterbereich der Übersicht beliebig
+eigene anlegen - sie erscheinen sofort als Filter-Chip in der Übersicht
+und als zusätzliche Option im Kategorie-Dropdown des Rezeptformulars.
+
+Eine eigene Kategorie lässt sich über den ✎-Knopf am Filter-Chip
+umbenennen - alle Rezepte, die sie verwenden, werden dabei automatisch auf
+den neuen Namen aktualisiert. Über den ✕-Knopf lässt sie sich wieder
+löschen, aber bewusst erst, wenn kein Rezept sie mehr verwendet (verwendet
+noch mindestens eines sie, erscheint stattdessen ein Hinweis mit der
+Anzahl der betroffenen Rezepte) - so geht beim Löschen nie unbemerkt die
+Kategorie-Zuordnung eines Rezepts verloren. Umbenennen und Löschen sind
+Home-Assistant-Admins vorbehalten (eine Änderung wirkt sich schließlich
+auf ALLE Rezepte mit dieser Kategorie aus); eine neue Kategorie anlegen
+bleibt bewusst für jeden Nutzer offen.
+
+Gespeichert werden eigene Kategorien - wie Wochenplan und Kochbücher -
+als zusätzlicher, unsichtbarer Eintrag in derselben Rezept-To-do-Liste,
+also ganz ohne weiteren Helfer.
+
+## 31. Abfrage & Statistik per Schalter (⚙️) ein-/ausschalten
+
+Ganz rechts im Kopfbereich der Rezeptübersicht sitzt ein ⚙️-Symbol. Ein
+Klick darauf öffnet ein Einstellungen-Fenster mit einem echten
+Ein-/Ausschalter, der BEIDES gleichzeitig regelt: die "Hast du
+zubereitet?"-Abfrage beim Verlassen eines Rezepts UND den
+"Statistik"-Knopf im Kopfbereich (siehe Abschnitt "Hast du zubereitet?"-
+Abfrage + Statistik im README). Vorher ließ sich das nur über die
+Dashboard-YAML-Konfiguration ändern - jetzt reicht ein Klick, ohne die
+Kartenkonfiguration zu bearbeiten.
+
+**Wichtig, falls du vorher die YAML-Optionen `ask_cooked: false` oder
+`show_statistics` gesetzt hattest:** beide wurden durch diesen Schalter
+ersetzt und werden von der Karte nicht mehr ausgewertet. Du kannst sie
+einfach aus der Kartenkonfiguration entfernen (sie werden ansonsten
+folgenlos ignoriert) und stattdessen den ⚙️-Schalter auf den gewünschten
+Zustand stellen - bereits erfasste Zubereitungen bleiben davon komplett
+unberührt, es geht dabei nichts verloren.
+
+Der Schalter wird - wie Wochenplan, Kochbücher und eigene Kategorien - als
+unsichtbarer Eintrag in derselben To-do-Liste gespeichert und bleibt damit
+geräteübergreifend und dauerhaft erhalten.
+
+## 32. Warnt vor vergessener Ressourcen-Versionsnummer
+
+Browser cachen `/local/rezeptbuch-card.js` sehr hartnäckig - ohne eine bei
+jedem Update geänderte `?v=...`-Versionsnummer am Ende der Ressourcen-URL
+(Einstellungen → Dashboards → Ressourcen) bekommen andere Geräte sonst
+unbemerkt weiter die alte, zwischengespeicherte Datei.
+
+Die Karte erkennt das jetzt selbst: merkt sie beim Laden, dass sie selbst
+mit einer neuen Kartenversion läuft, sich die `?v=...`-Nummer in ihrer
+eigenen Ressourcen-URL seit dem letzten Laden in diesem Browser aber NICHT
+geändert hat, zeigt sie einen wegklickbaren Warnhinweis direkt in der
+Karte. Das Ganze läuft rein lokal im Browser, ohne jeden Netzwerkzugriff -
+erscheint der Hinweis, einfach die Versionsnummer in der Ressourcen-URL
+erhöhen und die Seite neu laden.
+
+## 33. Kommentare bearbeiten und löschen
+
+Eigene Kommentare zu einem Rezept lassen sich jetzt nachträglich über
+✎/✕-Knöpfe direkt am Kommentar bearbeiten und löschen. Ein
+Home-Assistant-Admin darf das zusätzlich bei JEDEM Kommentar, nicht nur
+den eigenen - praktisch, um z. B. einen unpassenden Kommentar eines
+anderen Haushaltsmitglieds zu entfernen.
+
+Löschen läuft über ein eigenes Bestätigungs-Modal der Karte, bewusst NICHT
+über den nativen `confirm()`-Dialog des Browsers - der verhält sich in der
+Home-Assistant-Begleit-App (iOS/Android) erfahrungsgemäß unzuverlässig
+bzw. gar nicht.
+
+**Hinweis zu alten Kommentaren:** Kommentare, die vor diesem Update
+verfasst wurden, haben keine hinterlegte Nutzer-Zuordnung und bleiben
+deshalb wie gewohnt für ALLE Nutzer zum Bearbeiten/Löschen offen (nicht
+nur für Admins) - das lässt sich nachträglich nicht mehr sauber
+auflösen, ändert aber nichts an der Funktion selbst.
+
+## 34. Amerikanische Maßeinheiten erkennen und automatisch umrechnen
+
+Kopierst du ein amerikanisches Rezept (z. B. per KI-generiertem JSON, über
+die Prompt-Hilfe aus Abschnitt 26) in die Karte, werden die dort üblichen
+Maßeinheiten jetzt korrekt erkannt statt versehentlich Teil des
+Zutatennamens zu werden: `cup`, `tbsp`/`tablespoon`, `tsp`/`teaspoon`,
+`oz`/`ounce`, `lb`/`pound`, `pt`/`pint`, `qt`/`quart`, `gal`/`gallon` und
+`fl oz`/`fluid ounce`.
+
+Zusätzlich werden Volumenangaben (`cup`, `tbsp`, `tsp`, `fl oz`, `pt`,
+`qt`, `gal`) automatisch EXAKT in Milliliter bzw. Liter umgerechnet,
+Gewichtsangaben (`oz`, `lb`) in Gramm bzw. Kilogramm - das funktioniert
+auch bei Brüchen ("1/2 cup"), Unicode-Bruchzeichen ("½ TL"), gemischten
+Zahlen ("1 1/2 cups") und Mengenbereichen ("1-2 cups").
+
+**Bewusste Grenze:** umgerechnet wird NUR gleichartig - Volumen zu Volumen
+mit festen mathematischen Faktoren, niemals Volumen zu Gewicht (z. B. "1
+cup Mehl" direkt in Gramm). Eine solche Umrechnung müsste die Dichte der
+jeweiligen Zutat kennen (Mehl, Zucker und Flüssigkeiten wiegen pro Tasse
+völlig unterschiedlich viel) und wäre damit Raten statt Umrechnen - das
+widerspricht unserem Grundsatz "lieber nichts umrechnen als falsch raten".
+Für genau diesen Fall gibt es stattdessen die rein informative
+Umrechnungstabelle aus dem nächsten Abschnitt.
+
+## 35. Umrechnungstabelle (inkl. eigener Zutaten)
+
+Über den Knopf "📐 Umrechnungstabelle" im Hauptmenü der Rezeptübersicht
+öffnet sich ein Nachschlage-Popup mit Richtwerten in Gramm für 70 in der
+Küche häufig verwendete Zutaten, jeweils für 1 Tasse/1 Esslöffel/1
+Teelöffel (soweit praktisch üblich) - mit Suchfeld zum schnellen Filtern,
+und die Zutatennamen selbst stehen in allen 25 unterstützten Sprachen.
+
+**Bewusst unabhängig von echten Rezeptdaten:** die Tabelle dient nur zum
+manuellen Nachschlagen (z. B. "wie viel Gramm sind etwa 1 Tasse Mehl?")
+und wird NIE automatisch auf ein Rezept angewendet - die Werte können je
+nach Marke, Körnung oder Konsistenz der Zutat schwanken, siehe auch den
+Grundsatz im vorigen Abschnitt.
+
+**Eigene Zutaten ergänzen:** fehlt eine Zutat in der Tabelle, lässt sie
+sich direkt im Popup über "+ Eigene Zutat hinzufügen" selbst anlegen -
+Name und wahlweise Gramm pro Tasse/Esslöffel/Teelöffel (jedes Feld
+optional, je nachdem was du weißt). Über den ✎-Knopf neben einem eigenen
+Eintrag lässt er sich nachträglich bearbeiten (Formular öffnet sich
+vorausgefüllt), über ✕ wieder löschen. Eigene Einträge werden bewusst
+NICHT übersetzt - der Name erscheint genau so, wie er eingegeben wurde -
+und auch hier gibt es bewusst KEINE automatische Umrechnung zwischen
+Volumen und Gewicht über eine geschätzte Dichte.
+
+Eigene Zutaten sind geteilt wie die übrigen Einstellungen (jedes Gerät
+sieht dieselbe Liste) und werden - wie in Abschnitt 36 beschrieben -
+konfliktsicher gespeichert.
+
+**Direkt im Rezept selbst:** im Einstellungen-Popup (⚙️, siehe Abschnitt
+31) lässt sich unter "Kategorie für amerikanische Rezepte" eine Kategorie
+auswählen (z. B. eine eigene Kategorie "Amerikanisch"). Hat ein Rezept
+genau diese Kategorie, erscheint der "Umrechnungstabelle"-Knopf
+zusätzlich direkt im Rezept und im Kochmodus - praktisch, um beim
+Nachkochen schnell nachzuschlagen, ohne zurück zur Übersicht zu müssen.
+Standardmäßig ist keine Kategorie ausgewählt, der Knopf bleibt dann wie
+bisher nur im Hauptmenü.
+
+## 36. Einstellungen jetzt konfliktsicher gespeichert
+
+Ändern zwei Geräte fast gleichzeitig unterschiedliche Einstellungen - z. B.
+auf dem einen den ⚙️-Statistik-Schalter aus Abschnitt 31, auf dem anderen
+eine eigene Umrechnungstabelle-Zutat aus Abschnitt 35 - lädt die Karte vor
+dem eigentlichen Speichern jetzt automatisch den aktuellsten Stand von
+Home Assistant nach und wendet nur die eigene Änderung darauf an. Vorher
+hätte das Gerät, das zuletzt speichert, die zwischenzeitliche Änderung des
+anderen Geräts dabei stillschweigend wieder überschrieben.
+
+Dafür bekommen eigene Umrechnungstabelle-Zutaten intern eine feste,
+zufällig erzeugte ID statt sich nur über ihre Position in der Liste zu
+identifizieren - robuster, falls sich die Reihenfolge durch eine
+zwischenzeitliche Änderung eines anderen Geräts verschiebt. Für dich als
+Nutzer ändert sich dabei nichts an der Bedienung, nur die Zuverlässigkeit
+im Hintergrund.
+
+## 37. Vollständiges Backup
+
+Der Knopf "💾 Sichern" in der Rezeptübersicht exportiert nicht mehr nur
+die Rezepte, sondern in EINER JSON-Datei zusätzlich: die Einstellungen
+(inklusive eigener Umrechnungstabelle-Zutaten aus Abschnitt 35), eigene
+Kategorien (Abschnitt 30), Kochbücher und den Wochenplan (Abschnitt 19).
+Vorher wäre bei Beschädigung oder Löschung eines der anderen, versteckten
+Marker-Items genau das verloren gewesen, ohne dass es ein Backup davon
+gegeben hätte.
+
+**Format-Hinweis:** die exportierte Datei ist jetzt ein Objekt (`{
+rezepte: [...], einstellungen: {...}, ... }`) statt einer reinen
+Rezeptliste wie früher. Ein einzelnes Rezept lässt sich daraus trotzdem
+weiterhin wie gewohnt über "JSON einfügen" wiederherstellen - dafür einfach
+das gewünschte Element aus dem `rezepte`-Array entnehmen (z. B. `rezepte[3]`
+bei einem Editor/Texteditor mit JSON-Unterstützung) und einfügen. Das
+automatisierte, tägliche Backup über das Skript aus Abschnitt 1-7 bleibt
+davon unabhängig und läuft unverändert weiter.
+
+## 38. Fehlende Zutaten direkt in die Einkaufsliste
+
+Zusätzlich zur Einkaufsliste aus ganzen Rezepten (Abschnitt 18) lässt sich
+jetzt auch direkt im einzelnen Rezept jede Zutat über eine Checkbox
+einzeln auswählen. Ein neuer Knopf darunter übernimmt dann gezielt NUR die
+angehakten Zutaten - mit der aktuell eingestellten (ggf. über den
+Portionen-Rechner hoch- oder runtergerechneten) Menge - in die
+konfigurierte Einkaufsliste. Praktisch, wenn von einem Rezept nur noch ein
+paar Zutaten im Haus fehlen, statt gleich die komplette Zutatenliste zu
+übertragen.
+
+Es gilt dieselbe `shopping_list_entity`-Konfiguration wie in Abschnitt 18
+beschrieben - ohne konfigurierte Einkaufsliste zeigt ein Klick auf den
+Knopf stattdessen einen erklärenden Hinweis.
+
+## 39. Weitere kleine Verbesserungen (2.0.0 / 2.1.1)
+
+Ergänzend ein paar kleinere Änderungen, die keinen eigenen ausführlichen
+Abschnitt brauchen:
+
+- **Vorhandene Tags als Vorschlag**: beim Anlegen/Bearbeiten eines
+  Rezepts schlägt das Tag-Feld (über die native Browser-Vorschlagsliste)
+  bereits an anderen Rezepten vergebene Tags vor - vermeidet doppelte Tags
+  in leicht abweichender Schreibweise.
+- **Zubereitungsschritte verschieben**: Schritte im Formular lassen sich
+  jetzt per ▲/▼-Knopf nach oben/unten verschieben, statt nur gelöscht oder
+  bearbeitet werden zu können (bewusst keine Drag&Drop-Lösung - auf
+  Touch-Geräten/in der Begleit-App erfahrungsgemäß unzuverlässig).
+- **Neue Kategorie direkt im Rezept-Formular anlegen**: fehlt beim
+  Anlegen/Bearbeiten eines Rezepts die passende Kategorie, lässt sich im
+  Kategorie-Dropdown über "+ Neue Kategorie" eine neue anlegen, ohne das
+  Formular zu verlassen und bisherige Eingaben zu verwerfen.
+- **Seitennavigation der Rezeptübersicht** erscheint jetzt zusätzlich
+  oberhalb der Kacheln (vorher nur unterhalb) - bei vielen Rezepten muss
+  man dafür nicht mehr erst nach unten scrollen.
+
+## 40. Übersetzung korrigieren (Issue-Vorlage)
+
+Fällt dir in einer der 25 Sprachen eine falsche, unnatürliche oder
+fehlende Übersetzung auf, gibt es dafür jetzt auf GitHub unter "Issues" →
+"New issue" eine eigene, strukturierte Vorlage "Übersetzung korrigieren" -
+mit Sprachauswahl, der betroffenen Stelle (bzw. dem technischen
+i18n-Schlüssel, falls bekannt), dem aktuellen Text und deinem
+Korrekturvorschlag. Ein Pull Request mit der Korrektur direkt in
+`rezeptbuch-card.js` ist genauso willkommen wie das Formular - siehe dazu
+auch CONTRIBUTING.md, Abschnitt "Eine neue Sprache ergänzen".
+
+Alle Übersetzungen außer Deutsch und Englisch sind KI-generiert und noch
+nicht von Muttersprachler:innen gegengelesen - jede noch so kleine
+Korrektur ist ausdrücklich willkommen, auch für nur eine einzelne
+Textstelle.
