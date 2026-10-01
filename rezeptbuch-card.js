@@ -7271,7 +7271,7 @@ const SCHEMA_VERSION = 2;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "2.1.2";
+const CARD_VERSION = "2.1.3";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v2.0.0".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
@@ -10527,6 +10527,13 @@ class RezeptbuchCard extends HTMLElement {
         }
 
         .kategorie-filter, .tag-filter { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+        /* Kategorie- und Tag-Chips sehen (bewusst, siehe .chip) fast
+           gleich aus - ohne optische Trennung wirken beide Zeilen wie EINE
+           durchgehende Chip-Wolke, vor allem wenn die Kategorie-Zeile
+           umbricht. Eine dünne Trennlinie oberhalb der Tag-Zeile grenzt
+           beide klar voneinander ab (gleiches Motiv wie .detail-trenner,
+           nur dezenter/breiter statt als kurzer Akzent-Strich). */
+        .tag-filter { border-top:1.5px dashed var(--kb-terrakotta-hell); padding-top:14px; }
         .chip {
           border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color);
           color: var(--kb-terrakotta-dunkel); border-radius:999px; padding:5px 13px; font-size:0.8em;

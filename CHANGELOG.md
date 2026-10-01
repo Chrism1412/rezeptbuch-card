@@ -4,6 +4,15 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.1.3] - 2026-10-01
+
+### Geändert
+- **Kategorie- und Tag-Filterchips in der Übersicht jetzt optisch
+  abgetrennt**: beide Chip-Zeilen sahen sich bisher zum Verwechseln
+  ähnlich und gingen vor allem bei umbrechender Kategorie-Zeile optisch
+  ineinander über. Eine dünne, gestrichelte Trennlinie oberhalb der
+  Tag-Zeile grenzt beide jetzt klar voneinander ab.
+
 ## [2.1.2] - 2026-10-01
 
 ### Behoben
