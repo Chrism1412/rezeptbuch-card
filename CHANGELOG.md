@@ -85,8 +85,39 @@ Ressourcen-Versionsnummer").
 - **Kategorie umbenennen**: eine selbst angelegte Kategorie lässt sich
   jetzt per ✎-Knopf umbenennen - alle Rezepte, die sie verwenden, werden
   dabei automatisch auf den neuen Namen aktualisiert.
+- **Eigene Zutat in der Umrechnungstabelle bearbeiten**: ein ✎-Knopf
+  neben dem bisherigen ✕ erlaubt jetzt, eine selbst hinzugefügte Zutat
+  nachträglich zu ändern (Formular öffnet sich vorausgefüllt), statt sie
+  löschen und mit denselben Werten neu anlegen zu müssen.
+- **Vollständiges Backup**: der "💾 Sichern"-Knopf exportiert jetzt nicht
+  mehr nur die Rezepte, sondern zusätzlich die Einstellungen (inkl.
+  eigener Umrechnungstabelle-Zutaten), eigene Kategorien, Kochbücher und
+  Wochenplan als EINE JSON-Datei - vorher wäre all das verloren gewesen,
+  würde eines der anderen versteckten Marker-Items beschädigt oder
+  gelöscht. Das Format ist jetzt ein Objekt (`{ rezepte: [...], ... }`)
+  statt einer reinen Rezeptliste; ein einzelnes Rezept lässt sich daraus
+  weiterhin über "JSON einfügen" wiederherstellen (z.B. `rezepte[3]`
+  entnehmen und einfügen).
+- **Fehlende Zutaten direkt in die Einkaufsliste**: im Rezept selbst
+  lässt sich jetzt jede Zutat per Checkbox einzeln auswählen und über
+  einen neuen Knopf gezielt NUR diese Auswahl (statt immer des ganzen
+  Rezepts) in die konfigurierte Einkaufsliste übernehmen - mit der
+  aktuell eingestellten (ggf. hoch-/runtergerechneten) Portionsmenge.
+- **Übersetzung korrigieren (Issue-Vorlage)**: neue, strukturierte
+  GitHub-Issue-Vorlage extra für Korrekturen an einer der 25 eingebauten
+  Sprachen - ergänzt den bisherigen Hinweis dazu in CONTRIBUTING.md um
+  ein Formular mit Sprachauswahl, betroffener Stelle und Korrekturvorschlag.
 
 ### Geändert
+- **Einstellungen jetzt konfliktsicher gespeichert**: ändern zwei Geräte
+  fast gleichzeitig unterschiedliche Einstellungen (z.B. den
+  Statistik-Schalter auf dem einen, eine eigene Umrechnungstabelle-Zutat
+  auf dem anderen), lädt die Karte vor dem Schreiben jetzt den jeweils
+  aktuellsten Stand nach und wendet nur die eigene Änderung darauf an -
+  vorher hätte das zuletzt speichernde Gerät die zwischenzeitliche
+  Änderung des anderen Geräts stillschweigend wieder überschrieben.
+  Eigene Umrechnungstabelle-Zutaten bekommen dafür intern eine feste ID
+  statt nur ihrer Listenposition.
 - **Kategorien verwalten nur noch für Admins**: eine eigene Kategorie
   umzubenennen oder zu löschen geht jetzt nur noch für HA-Admins (wirkt
   sich schließlich auf ALLE Rezepte mit dieser Kategorie aus). Neue

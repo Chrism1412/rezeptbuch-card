@@ -1,0 +1,72 @@
+name: Übersetzung korrigieren
+description: Eine der 25 eingebauten Sprachen enthält eine falsche, unnatürliche oder fehlende Übersetzung
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Alle Übersetzungen außer Deutsch und Englisch wurden KI-generiert und
+        noch nicht von Muttersprachler:innen gegengelesen (siehe
+        CONTRIBUTING.md, Abschnitt "Eine neue Sprache ergänzen"). Jede
+        Korrektur ist willkommen - auch für nur eine einzelne Textstelle.
+        Ein Pull Request mit der Korrektur direkt in `rezeptbuch-card.js`
+        ist genauso willkommen wie dieses Formular.
+  - type: dropdown
+    id: sprache
+    attributes:
+      label: Sprache
+      options:
+        - Bulgarisch
+        - Dänisch
+        - Deutsch
+        - Englisch
+        - Estnisch
+        - Finnisch
+        - Französisch
+        - Griechisch
+        - Irisch
+        - Italienisch
+        - Kroatisch
+        - Lettisch
+        - Litauisch
+        - Maltesisch
+        - Niederländisch
+        - Polnisch
+        - Portugiesisch
+        - Rumänisch
+        - Schwedisch
+        - Schwiizerdütsch
+        - Slowakisch
+        - Slowenisch
+        - Spanisch
+        - Tschechisch
+        - Ungarisch
+    validations:
+      required: true
+  - type: input
+    id: stelle
+    attributes:
+      label: Wo in der Karte? (bzw. der i18n-Schlüssel, falls bekannt)
+      description: Z.B. "Umrechnungstabelle-Popup, Spaltenüberschrift" oder direkt der Schlüssel wie 'umrechnungstabelle_spalte_tasse'.
+      placeholder: z.B. 'umrechnungstabelle_eigene_hinweis' oder "Button oben rechts im Kochmodus"
+    validations:
+      required: true
+  - type: input
+    id: aktueller-text
+    attributes:
+      label: Aktueller (falscher/unnatürlicher) Text
+    validations:
+      required: false
+  - type: input
+    id: vorschlag
+    attributes:
+      label: Vorschlag für die Korrektur
+    validations:
+      required: true
+  - type: textarea
+    id: begruendung
+    attributes:
+      label: Begründung (optional)
+      description: Hilfreich, falls die Korrektur nicht offensichtlich ist (z.B. Grammatik, Dialekt, zu förmlich/unförmlich, falscher Fachbegriff).
+    validations:
+      required: false

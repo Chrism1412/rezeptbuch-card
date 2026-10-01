@@ -182,6 +182,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/EL",
     umrechnungstabelle_eigene_tl_platzhalter: "g/TL",
     umrechnungstabelle_eigene_loeschen_titel: "Eigene Zutat löschen",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Eigene Zutat bearbeiten",
     umrechnungstabelle_eigene_name_fehlt: "Bitte einen Namen eingeben.",
     umrechnungstabelle_eigene_hinweis: "Fehlt eine Zutat, deren Umrechnung du selbst kennst? Füge sie hier manuell hinzu - eine automatische Umrechnung zwischen Volumen und Gewicht bieten wir bewusst nicht an, da sie je nach Zutat, Marke und Dichte raten müsste.",
     einkaufsmodus_start_btn: "🛒 Einkaufsliste",
@@ -213,6 +214,8 @@ const UEBERSETZUNGEN = {
       "in der Kartenkonfiguration angeben (z.B. shopping_list_entity: todo.einkaufsliste) - " +
       "dafür wird eine ZWEITE Lokale To-do-Liste als Helfer benötigt. Siehe ANLEITUNG-Backup.md, Abschnitt 18.",
     fehler_einkaufsliste_keine_auswahl: "Bitte mindestens ein Rezept auswählen.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Bitte mindestens eine Zutat auswählen.",
+    zutaten_fehlend_einkaufsliste_btn: "Ausgewählte zur Einkaufsliste hinzufügen",
     fehler_einkaufsliste_keine_zutaten: "Die ausgewählten Rezepte enthalten keine Zutaten.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen:
       "Konnte \"{{zeile}}\" nicht zur Einkaufsliste hinzufügen:\n{{fehler}}\n\nBereits hinzugefügte Zutaten bleiben in der Einkaufsliste stehen.",
@@ -524,6 +527,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/EL",
     umrechnungstabelle_eigene_tl_platzhalter: "g/TL",
     umrechnungstabelle_eigene_loeschen_titel: "Eigeni Zutat lösche",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Eigeni Zutat bearbeite",
     umrechnungstabelle_eigene_name_fehlt: "Bitte en Name iigeh.",
     umrechnungstabelle_eigene_hinweis: "Fehlt e Zutat, wo du dr Umrechnigswärt sälber weisch? Füeg si hie vo Hand dezue - e automatischi Umrechnig zwüsche Volumen und Gwicht biete mir bewusst nid a, wil das je nach Zutat, Marke und Dichti ghätti bruucht.",
     einkaufsmodus_start_btn: "🛒 Yychaufsliste",
@@ -555,6 +559,8 @@ const UEBERSETZUNGEN = {
       "i de Charte-Konfiguration aagäh (z.B. shopping_list_entity: todo.einkaufsliste) - " +
       "dafür bruucht's e ZWEITI Lokali To-do-Liste als Hälfer. Lueg i ANLEITUNG-Backup.md, Abschnitt 18.",
     fehler_einkaufsliste_keine_auswahl: "Bitte mindeschtens es Rezäpt uswähle.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Bitte mindeschtens eini Zutat uswähle.",
+    zutaten_fehlend_einkaufsliste_btn: "Usgwählti zur Yychaufsliste hinzuefüege",
     fehler_einkaufsliste_keine_zutaten: "D usgwählte Rezäpt händ kei Zuetate.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen:
       "Konnt \"{{zeile}}\" nöd zur Yychaufsliste hinzuefüege:\n{{fehler}}\n\nScho hinzuegfüegti Zuetate bliibed i de Yychaufsliste.",
@@ -853,6 +859,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/tbsp",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tsp",
     umrechnungstabelle_eigene_loeschen_titel: "Delete custom ingredient",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Edit custom ingredient",
     umrechnungstabelle_eigene_name_fehlt: "Please enter a name.",
     umrechnungstabelle_eigene_hinweis: "Missing an ingredient whose conversion value you know yourself? Add it here manually - we deliberately don't offer automatic conversion between volume and weight, since that would mean guessing based on ingredient, brand and density.",
     einkaufsmodus_start_btn: "🛒 Shopping list",
@@ -882,6 +889,8 @@ const UEBERSETZUNGEN = {
       "in the card configuration (e.g. shopping_list_entity: todo.shopping_list) - " +
       "this requires a SECOND Local To-do List helper. See ANLEITUNG-Backup.md, section 18.",
     fehler_einkaufsliste_keine_auswahl: "Please select at least one recipe.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Please select at least one ingredient.",
+    zutaten_fehlend_einkaufsliste_btn: "Add selected to shopping list",
     fehler_einkaufsliste_keine_zutaten: "The selected recipes don't contain any ingredients.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen:
       "Could not add \"{{zeile}}\" to the shopping list:\n{{fehler}}\n\nIngredients already added remain on the shopping list.",
@@ -1165,6 +1174,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "г/с.л.",
     umrechnungstabelle_eigene_tl_platzhalter: "г/ч.л.",
     umrechnungstabelle_eigene_loeschen_titel: "Изтрий собствения продукт",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Редактирай собствения продукт",
     umrechnungstabelle_eigene_name_fehlt: "Моля, въведи име.",
     umrechnungstabelle_eigene_hinweis: "Липсва продукт, чиято стойност за преобразуване знаеш сам? Добави го тук ръчно - съзнателно не предлагаме автоматично преобразуване между обем и тегло, тъй като това би означавало да гадаем в зависимост от продукта, марката и плътността.",
     einkaufsmodus_start_btn: "🛒 Списък за пазаруване",
@@ -1189,6 +1199,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Създай списък за пазаруване",
     fehler_einkaufsliste_keine_konfiguration: "За списъка за пазаруване все още липсва конфигурация: моля, задайте 'shopping_list_entity' в конфигурацията на картата (напр. shopping_list_entity: todo.einkaufsliste) - за това е необходим ВТОРИ помощник \"Локален списък със задачи\". Вижте ANLEITUNG-Backup.md, раздел 18.",
     fehler_einkaufsliste_keine_auswahl: "Моля, изберете поне една рецепта.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Моля, изберете поне една съставка.",
+    zutaten_fehlend_einkaufsliste_btn: "Добави избраните в списъка за пазаруване",
     fehler_einkaufsliste_keine_zutaten: "Избраните рецепти не съдържат съставки.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Не можа да се добави \"{{zeile}}\" към списъка за пазаруване:\n{{fehler}}\n\nВече добавените съставки остават в списъка.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} съставка(и) добавени към \"{{entity}}\".",
@@ -1439,6 +1451,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/žl.",
     umrechnungstabelle_eigene_tl_platzhalter: "g/žličica",
     umrechnungstabelle_eigene_loeschen_titel: "Izbriši svoj sastojak",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Uredi svoj sastojak",
     umrechnungstabelle_eigene_name_fehlt: "Unesi naziv.",
     umrechnungstabelle_eigene_hinweis: "Nedostaje sastojak čiju vrijednost pretvorbe sam znaš? Dodaj ga ovdje ručno - automatsku pretvorbu između volumena i mase svjesno ne nudimo, jer bi to značilo nagađanje ovisno o sastojku, marki i gustoći.",
     einkaufsmodus_start_btn: "🛒 Popis za kupovinu",
@@ -1463,6 +1476,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Izradi popis za kupovinu",
     fehler_einkaufsliste_keine_konfiguration: "Za popis za kupovinu još nedostaje konfiguracija: unesi 'shopping_list_entity' u konfiguraciji kartice (npr. shopping_list_entity: todo.einkaufsliste) - za to je potreban DRUGI pomoćnik \"Lokalni popis obaveza\". Pogledaj ANLEITUNG-Backup.md, odjeljak 18.",
     fehler_einkaufsliste_keine_auswahl: "Odaberi barem jedan recept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Odaberi barem jedan sastojak.",
+    zutaten_fehlend_einkaufsliste_btn: "Dodaj odabrano na popis za kupovinu",
     fehler_einkaufsliste_keine_zutaten: "Odabrani recepti ne sadrže sastojke.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nije moguće dodati \"{{zeile}}\" na popis za kupovinu:\n{{fehler}}\n\nVeć dodani sastojci ostaju na popisu.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} sastojak(a) dodano na \"{{entity}}\".",
@@ -1713,6 +1728,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/lžíce",
     umrechnungstabelle_eigene_tl_platzhalter: "g/lžička",
     umrechnungstabelle_eigene_loeschen_titel: "Smazat vlastní surovinu",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Upravit vlastní surovinu",
     umrechnungstabelle_eigene_name_fehlt: "Zadej prosím název.",
     umrechnungstabelle_eigene_hinweis: "Chybí surovina, jejíž převodní hodnotu znáš sám? Přidej ji sem ručně - automatický převod mezi objemem a hmotností vědomě nenabízíme, protože by to znamenalo hádat podle suroviny, značky a hustoty.",
     einkaufsmodus_start_btn: "🛒 Nákupní seznam",
@@ -1737,6 +1753,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Vytvořit nákupní seznam",
     fehler_einkaufsliste_keine_konfiguration: "Pro nákupní seznam ještě chybí konfigurace: zadejte prosím 'shopping_list_entity' v konfiguraci karty (např. shopping_list_entity: todo.einkaufsliste) - k tomu je potřeba DRUHÝ pomocník Místní seznam úkolů. Viz ANLEITUNG-Backup.md, oddíl 18.",
     fehler_einkaufsliste_keine_auswahl: "Vyberte prosím alespoň jeden recept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Vyberte prosím alespoň jednu surovinu.",
+    zutaten_fehlend_einkaufsliste_btn: "Přidat vybrané do nákupního seznamu",
     fehler_einkaufsliste_keine_zutaten: "Vybrané recepty neobsahují žádné suroviny.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nepodařilo se přidat \"{{zeile}}\" do nákupního seznamu:\n{{fehler}}\n\nJiž přidané suroviny zůstávají v seznamu.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} surovin(y) přidáno do \"{{entity}}\".",
@@ -1987,6 +2005,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/spsk.",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tsk.",
     umrechnungstabelle_eigene_loeschen_titel: "Slet egen ingrediens",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Rediger egen ingrediens",
     umrechnungstabelle_eigene_name_fehlt: "Angiv venligst et navn.",
     umrechnungstabelle_eigene_hinweis: "Mangler der en ingrediens, hvis omregningsværdi du selv kender? Tilføj den her manuelt - vi tilbyder bevidst ikke automatisk omregning mellem volumen og vægt, da det ville kræve et gæt baseret på ingrediens, mærke og konsistens.",
     einkaufsmodus_start_btn: "🛒 Indkøbsliste",
@@ -2011,6 +2030,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Opret indkøbsliste",
     fehler_einkaufsliste_keine_konfiguration: "Indkøbslisten mangler stadig konfiguration: angiv venligst 'shopping_list_entity' i kortkonfigurationen (f.eks. shopping_list_entity: todo.einkaufsliste) - dette kræver en ANDEN Lokal to-do-liste-hjælper. Se ANLEITUNG-Backup.md, afsnit 18.",
     fehler_einkaufsliste_keine_auswahl: "Vælg venligst mindst én opskrift.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Vælg venligst mindst én ingrediens.",
+    zutaten_fehlend_einkaufsliste_btn: "Tilføj valgte til indkøbslisten",
     fehler_einkaufsliste_keine_zutaten: "De valgte opskrifter indeholder ingen ingredienser.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Kunne ikke tilføje \"{{zeile}}\" til indkøbslisten:\n{{fehler}}\n\nAllerede tilføjede ingredienser forbliver på indkøbslisten.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediens(er) tilføjet til \"{{entity}}\".",
@@ -2261,6 +2282,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/el.",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tl.",
     umrechnungstabelle_eigene_loeschen_titel: "Eigen ingrediënt verwijderen",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Eigen ingrediënt bewerken",
     umrechnungstabelle_eigene_name_fehlt: "Voer een naam in.",
     umrechnungstabelle_eigene_hinweis: "Mis je een ingrediënt waarvan je de omrekenwaarde zelf weet? Voeg het hier handmatig toe - we bieden bewust geen automatische omrekening tussen volume en gewicht aan, omdat dat zou neerkomen op gokken op basis van ingrediënt, merk en consistentie.",
     einkaufsmodus_start_btn: "🛒 Boodschappenlijst",
@@ -2285,6 +2307,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Boodschappenlijst maken",
     fehler_einkaufsliste_keine_konfiguration: "Voor de boodschappenlijst ontbreekt nog de configuratie: geef 'shopping_list_entity' op in de kaartconfiguratie (bijv. shopping_list_entity: todo.einkaufsliste) - hiervoor is een TWEEDE Lokale to-do-lijst-helper nodig. Zie ANLEITUNG-Backup.md, sectie 18.",
     fehler_einkaufsliste_keine_auswahl: "Selecteer minstens één recept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Selecteer minstens één ingrediënt.",
+    zutaten_fehlend_einkaufsliste_btn: "Geselecteerde toevoegen aan boodschappenlijst",
     fehler_einkaufsliste_keine_zutaten: "De geselecteerde recepten bevatten geen ingrediënten.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Kon \"{{zeile}}\" niet toevoegen aan de boodschappenlijst:\n{{fehler}}\n\nReeds toegevoegde ingrediënten blijven op de lijst staan.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediënt(en) toegevoegd aan \"{{entity}}\".",
@@ -2535,6 +2559,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/spl",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tl",
     umrechnungstabelle_eigene_loeschen_titel: "Kustuta oma koostisosa",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Muuda oma koostisosa",
     umrechnungstabelle_eigene_name_fehlt: "Palun sisesta nimi.",
     umrechnungstabelle_eigene_hinweis: "Kas puudub koostisosa, mille teisendusväärtust sa tead? Lisa see siia käsitsi - teadlikult ei pakume automaatset teisendust mahu ja kaalu vahel, kuna see tähendaks arvamist sõltuvalt koostisosast, margist ja konsistentsist.",
     einkaufsmodus_start_btn: "🛒 Ostunimekiri",
@@ -2559,6 +2584,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Loo ostunimekiri",
     fehler_einkaufsliste_keine_konfiguration: "Ostunimekirja jaoks puudub veel seadistus: sisesta kaardi seadistuses 'shopping_list_entity' (nt shopping_list_entity: todo.einkaufsliste) - selleks on vaja TEIST Kohaliku ülesannete nimekirja abistajat. Vaata ANLEITUNG-Backup.md, jaotis 18.",
     fehler_einkaufsliste_keine_auswahl: "Vali vähemalt üks retsept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Vali vähemalt üks koostisosa.",
+    zutaten_fehlend_einkaufsliste_btn: "Lisa valitud ostunimekirja",
     fehler_einkaufsliste_keine_zutaten: "Valitud retseptidel pole koostisosi.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "\"{{zeile}}\" lisamine ostunimekirja ebaõnnestus:\n{{fehler}}\n\nJuba lisatud koostisosad jäävad nimekirja alles.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} koostisosa lisatud nimekirja \"{{entity}}\".",
@@ -2809,6 +2836,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/rkl",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tl",
     umrechnungstabelle_eigene_loeschen_titel: "Poista oma raaka-aine",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Muokkaa omaa raaka-ainetta",
     umrechnungstabelle_eigene_name_fehlt: "Anna nimi.",
     umrechnungstabelle_eigene_hinweis: "Puuttuuko raaka-aine, jonka muuntoarvon tiedät itse? Lisää se tähän manuaalisesti - emme tarjoa tarkoituksella automaattista muunnosta tilavuuden ja painon välillä, koska se vaatisi arvailua raaka-aineen, merkin ja koostumuksen mukaan.",
     einkaufsmodus_start_btn: "🛒 Ostoslista",
@@ -2833,6 +2861,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Luo ostoslista",
     fehler_einkaufsliste_keine_konfiguration: "Ostoslistan määrityksiä puuttuu vielä: määritä 'shopping_list_entity' kortin asetuksissa (esim. shopping_list_entity: todo.einkaufsliste) - tähän tarvitaan TOINEN Paikallinen tehtävälista -apuri. Katso ANLEITUNG-Backup.md, osio 18.",
     fehler_einkaufsliste_keine_auswahl: "Valitse vähintään yksi resepti.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Valitse vähintään yksi aines.",
+    zutaten_fehlend_einkaufsliste_btn: "Lisää valitut ostoslistaan",
     fehler_einkaufsliste_keine_zutaten: "Valituissa resepteissä ei ole aineksia.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Kohteen \"{{zeile}}\" lisääminen ostoslistalle epäonnistui:\n{{fehler}}\n\nJo lisätyt ainekset jäävät ostoslistalle.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ainesosaa lisätty listaan \"{{entity}}\".",
@@ -3083,6 +3113,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/c. à s.",
     umrechnungstabelle_eigene_tl_platzhalter: "g/c. à c.",
     umrechnungstabelle_eigene_loeschen_titel: "Supprimer l'ingrédient personnalisé",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Modifier l'ingrédient personnalisé",
     umrechnungstabelle_eigene_name_fehlt: "Merci de saisir un nom.",
     umrechnungstabelle_eigene_hinweis: "Il manque un ingrédient dont tu connais la valeur de conversion ? Ajoute-le ici manuellement - nous ne proposons volontairement pas de conversion automatique entre volume et poids, car cela reviendrait à deviner selon l'ingrédient, la marque et la consistance.",
     einkaufsmodus_start_btn: "🛒 Liste de courses",
@@ -3108,6 +3139,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Créer la liste de courses",
     fehler_einkaufsliste_keine_konfiguration: "La configuration de la liste de courses est encore manquante : merci d'indiquer 'shopping_list_entity' dans la configuration de la carte (p. ex. shopping_list_entity: todo.einkaufsliste) - cela nécessite un DEUXIÈME assistant Liste de tâches locale. Voir ANLEITUNG-Backup.md, section 18.",
     fehler_einkaufsliste_keine_auswahl: "Merci de sélectionner au moins une recette.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Merci de sélectionner au moins un ingrédient.",
+    zutaten_fehlend_einkaufsliste_btn: "Ajouter la sélection à la liste de courses",
     fehler_einkaufsliste_keine_zutaten: "Les recettes sélectionnées ne contiennent aucun ingrédient.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Impossible d'ajouter \"{{zeile}}\" à la liste de courses :\n{{fehler}}\n\nLes ingrédients déjà ajoutés restent dans la liste.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrédient(s) ajouté(s) à \"{{entity}}\".",
@@ -3358,6 +3391,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "γρ./κ.σ.",
     umrechnungstabelle_eigene_tl_platzhalter: "γρ./κ.γ.",
     umrechnungstabelle_eigene_loeschen_titel: "Διαγραφή δικού σου υλικού",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Επεξεργασία δικού σου υλικού",
     umrechnungstabelle_eigene_name_fehlt: "Παρακαλώ εισάγετε ένα όνομα.",
     umrechnungstabelle_eigene_hinweis: "Λείπει ένα υλικό του οποίου γνωρίζεις την τιμή μετατροπής; Πρόσθεσέ το εδώ χειροκίνητα - δεν προσφέρουμε σκόπιμα αυτόματη μετατροπή μεταξύ όγκου και βάρους, καθώς αυτό θα σήμαινε να μαντεύουμε ανάλογα με το υλικό, τη μάρκα και την πυκνότητα.",
     einkaufsmodus_start_btn: "🛒 Λίστα αγορών",
@@ -3383,6 +3417,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Δημιουργία λίστας αγορών",
     fehler_einkaufsliste_keine_konfiguration: "Λείπει ακόμη η διαμόρφωση για τη λίστα αγορών: όρισε 'shopping_list_entity' στη διαμόρφωση της κάρτας (π.χ. shopping_list_entity: todo.einkaufsliste) - για αυτό χρειάζεται μια ΔΕΥΤΕΡΗ βοηθητική «Τοπική λίστα εργασιών». Δες το ANLEITUNG-Backup.md, ενότητα 18.",
     fehler_einkaufsliste_keine_auswahl: "Επίλεξε τουλάχιστον μία συνταγή.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Επίλεξε τουλάχιστον ένα υλικό.",
+    zutaten_fehlend_einkaufsliste_btn: "Προσθήκη επιλεγμένων στη λίστα αγορών",
     fehler_einkaufsliste_keine_zutaten: "Οι επιλεγμένες συνταγές δεν περιέχουν υλικά.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Δεν ήταν δυνατή η προσθήκη του \"{{zeile}}\" στη λίστα αγορών:\n{{fehler}}\n\nΤα ήδη προστιθέμενα υλικά παραμένουν στη λίστα.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} υλικό/ά προστέθηκαν στο \"{{entity}}\".",
@@ -3633,6 +3669,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/evőkanál",
     umrechnungstabelle_eigene_tl_platzhalter: "g/teáskanál",
     umrechnungstabelle_eigene_loeschen_titel: "Saját alapanyag törlése",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Saját alapanyag szerkesztése",
     umrechnungstabelle_eigene_name_fehlt: "Adj meg egy nevet.",
     umrechnungstabelle_eigene_hinweis: "Hiányzik egy alapanyag, amelynek átváltási értékét te magad ismered? Add hozzá itt kézzel - szándékosan nem kínálunk automatikus átváltást térfogat és tömeg között, mivel ez alapanyagtól, márkától és sűrűségtől függő tippelést jelentene.",
     einkaufsmodus_start_btn: "🛒 Bevásárlólista",
@@ -3658,6 +3695,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Bevásárlólista létrehozása",
     fehler_einkaufsliste_keine_konfiguration: "A bevásárlólistához még hiányzik a konfiguráció: add meg a 'shopping_list_entity' beállítást a kártya konfigurációjában (pl. shopping_list_entity: todo.einkaufsliste) - ehhez egy MÁSODIK „Helyi teendőlista” segéd szükséges. Lásd az ANLEITUNG-Backup.md fájl 18. szakaszát.",
     fehler_einkaufsliste_keine_auswahl: "Válassz ki legalább egy receptet.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Válassz ki legalább egy hozzávalót.",
+    zutaten_fehlend_einkaufsliste_btn: "Kiválasztottak hozzáadása a bevásárlólistához",
     fehler_einkaufsliste_keine_zutaten: "A kiválasztott receptek nem tartalmaznak hozzávalókat.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nem sikerült hozzáadni a(z) \"{{zeile}}\" tételt a bevásárlólistához:\n{{fehler}}\n\nA már hozzáadott hozzávalók a listán maradnak.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} hozzávaló hozzáadva a(z) \"{{entity}}\" listához.",
@@ -3908,6 +3947,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/spúnóg bhord",
     umrechnungstabelle_eigene_tl_platzhalter: "g/taespúnóg",
     umrechnungstabelle_eigene_loeschen_titel: "Scrios comhábhar féin",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Cuir an comhábhar féin in eagar",
     umrechnungstabelle_eigene_name_fehlt: "Cuir ainm isteach le do thoil.",
     umrechnungstabelle_eigene_hinweis: "An bhfuil comhábhar ar eolas agat an luach tiontaithe dó? Cuir isteach de láimh anseo é - go hoiriúnach ní thugaimid tiontú uathoibríoch idir toirt agus meáchan, mar bheadh sé sin ina bhuille faoi thuairim ag brath ar an chomhábhar, an branda agus an dlús.",
     einkaufsmodus_start_btn: "🛒 Liosta siopadóireachta",
@@ -3933,6 +3973,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Cruthaigh liosta siopadóireachta",
     fehler_einkaufsliste_keine_konfiguration: "Tá an chumraíocht don liosta siopadóireachta ar iarraidh fós: cuir isteach 'shopping_list_entity' i gcumraíocht an chárta le do thoil (m.sh. shopping_list_entity: todo.einkaufsliste) - teastaíonn DARA cuidí \"Liosta Le Déanamh Áitiúil\" chuige seo. Féach ANLEITUNG-Backup.md, alt 18.",
     fehler_einkaufsliste_keine_auswahl: "Roghnaigh oideas amháin ar a laghad, le do thoil.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Roghnaigh comhábhar amháin ar a laghad, le do thoil.",
+    zutaten_fehlend_einkaufsliste_btn: "Cuir an rogha leis an liosta siopadóireachta",
     fehler_einkaufsliste_keine_zutaten: "Níl aon chomhábhair sna hoidis roghnaithe.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Níorbh fhéidir \"{{zeile}}\" a chur leis an liosta siopadóireachta:\n{{fehler}}\n\nFanann na comhábhair atá curtha leis cheana féin ar an liosta.",
     einkaufsliste_hinzugefuegt: "Cuireadh {{anzahl}} chomhábhar/chomhábhair leis an liosta \"{{entity}}\".",
@@ -4183,6 +4225,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/cucchiaio",
     umrechnungstabelle_eigene_tl_platzhalter: "g/cucchiaino",
     umrechnungstabelle_eigene_loeschen_titel: "Elimina ingrediente personalizzato",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Modifica ingrediente personalizzato",
     umrechnungstabelle_eigene_name_fehlt: "Inserisci un nome.",
     umrechnungstabelle_eigene_hinweis: "Manca un ingrediente di cui conosci tu stesso il valore di conversione? Aggiungilo qui manualmente - non offriamo volutamente una conversione automatica tra volume e peso, perché significherebbe indovinare in base a ingrediente, marca e consistenza.",
     einkaufsmodus_start_btn: "🛒 Lista della spesa",
@@ -4208,6 +4251,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Crea lista della spesa",
     fehler_einkaufsliste_keine_konfiguration: "Manca ancora la configurazione per la lista della spesa: indica 'shopping_list_entity' nella configurazione della card (es. shopping_list_entity: todo.einkaufsliste) - a tale scopo serve un SECONDO helper Lista di cose da fare locale. Vedi ANLEITUNG-Backup.md, sezione 18.",
     fehler_einkaufsliste_keine_auswahl: "Seleziona almeno una ricetta.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Seleziona almeno un ingrediente.",
+    zutaten_fehlend_einkaufsliste_btn: "Aggiungi selezionati alla lista della spesa",
     fehler_einkaufsliste_keine_zutaten: "Le ricette selezionate non contengono ingredienti.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Impossibile aggiungere \"{{zeile}}\" alla lista della spesa:\n{{fehler}}\n\nGli ingredienti già aggiunti restano nella lista.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediente/i aggiunto/i a \"{{entity}}\".",
@@ -4458,6 +4503,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/ēd.k.",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tēj.k.",
     umrechnungstabelle_eigene_loeschen_titel: "Dzēst savu sastāvdaļu",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Redigēt savu sastāvdaļu",
     umrechnungstabelle_eigene_name_fehlt: "Lūdzu, ievadi nosaukumu.",
     umrechnungstabelle_eigene_hinweis: "Trūkst sastāvdaļas, kuras pārrēķina vērtību zini pats? Pievieno to šeit manuāli - mēs apzināti nepiedāvājam automātisku pārrēķinu starp tilpumu un svaru, jo tas nozīmētu minēšanu atkarībā no sastāvdaļas, markas un blīvuma.",
     einkaufsmodus_start_btn: "🛒 Iepirkumu saraksts",
@@ -4482,6 +4528,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Izveidot iepirkumu sarakstu",
     fehler_einkaufsliste_keine_konfiguration: "Iepirkumu sarakstam vēl trūkst konfigurācijas: lūdzu, norādi 'shopping_list_entity' kartītes konfigurācijā (piem., shopping_list_entity: todo.einkaufsliste) - tam nepieciešams OTRS \"Lokālā darāmo darbu saraksta\" palīgs. Skatīt ANLEITUNG-Backup.md, 18. sadaļu.",
     fehler_einkaufsliste_keine_auswahl: "Lūdzu, izvēlies vismaz vienu recepti.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Lūdzu, izvēlies vismaz vienu sastāvdaļu.",
+    zutaten_fehlend_einkaufsliste_btn: "Pievienot atlasītos iepirkumu sarakstam",
     fehler_einkaufsliste_keine_zutaten: "Izvēlētajās receptēs nav sastāvdaļu.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Neizdevās pievienot \"{{zeile}}\" iepirkumu sarakstam:\n{{fehler}}\n\nJau pievienotās sastāvdaļas paliek sarakstā.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} sastāvdaļa(s) pievienota(s) sarakstam \"{{entity}}\".",
@@ -4732,6 +4780,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/šaukštas",
     umrechnungstabelle_eigene_tl_platzhalter: "g/šaukštelis",
     umrechnungstabelle_eigene_loeschen_titel: "Pašalinti savo produktą",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Redaguoti savo produktą",
     umrechnungstabelle_eigene_name_fehlt: "Įveskite pavadinimą.",
     umrechnungstabelle_eigene_hinweis: "Trūksta produkto, kurio perskaičiavimo reikšmę žinote patys? Pridėkite jį čia ranka - automatinio tūrio ir svorio perskaičiavimo sąmoningai nesiūlome, nes tai reikštų spėjimą pagal produktą, gamintoją ir konsistenciją.",
     einkaufsmodus_start_btn: "🛒 Pirkinių sąrašas",
@@ -4756,6 +4805,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Sukurti pirkinių sąrašą",
     fehler_einkaufsliste_keine_konfiguration: "Pirkinių sąrašui dar trūksta konfigūracijos: nurodyk 'shopping_list_entity' kortelės konfigūracijoje (pvz., shopping_list_entity: todo.einkaufsliste) - tam reikalingas ANTRAS \"Vietinio užduočių sąrašo\" pagalbininkas. Žr. ANLEITUNG-Backup.md, 18 skyrių.",
     fehler_einkaufsliste_keine_auswahl: "Pasirink bent vieną receptą.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Pasirink bent vieną produktą.",
+    zutaten_fehlend_einkaufsliste_btn: "Pridėti pasirinktus į pirkinių sąrašą",
     fehler_einkaufsliste_keine_zutaten: "Pasirinktuose receptuose nėra ingredientų.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nepavyko pridėti \"{{zeile}}\" į pirkinių sąrašą:\n{{fehler}}\n\nJau pridėti ingredientai lieka sąraše.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingredientas(-ai) pridėta(-i) į \"{{entity}}\".",
@@ -5006,6 +5057,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/mgħarfa",
     umrechnungstabelle_eigene_tl_platzhalter: "g/mgħarfa żgħira",
     umrechnungstabelle_eigene_loeschen_titel: "Ħassar l-ingredjent tiegħek",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Editja l-ingredjent tiegħek",
     umrechnungstabelle_eigene_name_fehlt: "Jekk jogħġbok daħħal isem.",
     umrechnungstabelle_eigene_hinweis: "Nieqes ingredjent li taf int stess il-valur tal-konverżjoni tiegħu? Żidu hawn manwalment - apposta ma noffrux konverżjoni awtomatika bejn il-volum u l-piż, għax dan ikun ifisser li nilagħbu x-xorti skont l-ingredjent, il-marka u l-konsistenza.",
     einkaufsmodus_start_btn: "🛒 Lista tax-Xiri",
@@ -5031,6 +5083,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Oħloq lista tax-xiri",
     fehler_einkaufsliste_keine_konfiguration: "Il-konfigurazzjoni għal-lista tax-xiri għadha nieqsa: jekk jogħġbok speċifika 'shopping_list_entity' fil-konfigurazzjoni tal-kard (eż. shopping_list_entity: todo.einkaufsliste) - għal dan hemm bżonn TIENI għajnuna \"Lista ta' xogħol lokali\". Ara ANLEITUNG-Backup.md, taqsima 18.",
     fehler_einkaufsliste_keine_auswahl: "Jekk jogħġbok agħżel mill-inqas riċetta waħda.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Jekk jogħġbok agħżel mill-inqas ingredjent wieħed.",
+    zutaten_fehlend_einkaufsliste_btn: "Żid l-ingredjenti magħżula mal-lista tax-xiri",
     fehler_einkaufsliste_keine_zutaten: "Ir-riċetti magħżula ma fihom l-ebda ingredjent.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Ma setax jiżdied \"{{zeile}}\" mal-lista tax-xiri:\n{{fehler}}\n\nL-ingredjenti li diġà ġew miżjuda jibqgħu fil-lista.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingredjent(i) miżjuda ma' \"{{entity}}\".",
@@ -5281,6 +5335,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/łyżka",
     umrechnungstabelle_eigene_tl_platzhalter: "g/łyżeczka",
     umrechnungstabelle_eigene_loeschen_titel: "Usuń własny produkt",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Edytuj własny produkt",
     umrechnungstabelle_eigene_name_fehlt: "Podaj nazwę.",
     umrechnungstabelle_eigene_hinweis: "Brakuje produktu, którego wartość przeliczeniową znasz sam? Dodaj go tutaj ręcznie - celowo nie oferujemy automatycznego przeliczania między objętością a masą, ponieważ oznaczałoby to zgadywanie w zależności od produktu, marki i konsystencji.",
     einkaufsmodus_start_btn: "🛒 Lista zakupów",
@@ -5305,6 +5360,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Utwórz listę zakupów",
     fehler_einkaufsliste_keine_konfiguration: "Brakuje jeszcze konfiguracji listy zakupów: podaj 'shopping_list_entity' w konfiguracji karty (np. shopping_list_entity: todo.einkaufsliste) - do tego potrzebny jest DRUGI pomocnik Lokalna lista zadań. Zobacz ANLEITUNG-Backup.md, sekcja 18.",
     fehler_einkaufsliste_keine_auswahl: "Wybierz co najmniej jeden przepis.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Wybierz co najmniej jeden produkt.",
+    zutaten_fehlend_einkaufsliste_btn: "Dodaj wybrane do listy zakupów",
     fehler_einkaufsliste_keine_zutaten: "Wybrane przepisy nie zawierają żadnych składników.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nie udało się dodać \"{{zeile}}\" do listy zakupów:\n{{fehler}}\n\nJuż dodane składniki pozostają na liście.",
     einkaufsliste_hinzugefuegt: "Dodano {{anzahl}} składnik(ów) do \"{{entity}}\".",
@@ -5555,6 +5612,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/col. sopa",
     umrechnungstabelle_eigene_tl_platzhalter: "g/col. chá",
     umrechnungstabelle_eigene_loeschen_titel: "Eliminar ingrediente próprio",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Editar ingrediente próprio",
     umrechnungstabelle_eigene_name_fehlt: "Introduz um nome, por favor.",
     umrechnungstabelle_eigene_hinweis: "Falta um ingrediente cujo valor de conversão conheces? Adiciona-o aqui manualmente - propositadamente não oferecemos conversão automática entre volume e peso, pois isso significaria adivinhar com base no ingrediente, na marca e na consistência.",
     einkaufsmodus_start_btn: "🛒 Lista de compras",
@@ -5580,6 +5638,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Criar lista de compras",
     fehler_einkaufsliste_keine_konfiguration: "Falta ainda a configuração da lista de compras: indica 'shopping_list_entity' na configuração do cartão (p. ex. shopping_list_entity: todo.einkaufsliste) - para isso é necessário um SEGUNDO assistente Lista de tarefas local. Ver ANLEITUNG-Backup.md, secção 18.",
     fehler_einkaufsliste_keine_auswahl: "Seleciona pelo menos uma receita.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Seleciona pelo menos um ingrediente.",
+    zutaten_fehlend_einkaufsliste_btn: "Adicionar selecionados à lista de compras",
     fehler_einkaufsliste_keine_zutaten: "As receitas selecionadas não contêm ingredientes.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Não foi possível adicionar \"{{zeile}}\" à lista de compras:\n{{fehler}}\n\nOs ingredientes já adicionados permanecem na lista.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediente(s) adicionado(s) a \"{{entity}}\".",
@@ -5830,6 +5890,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/lingură",
     umrechnungstabelle_eigene_tl_platzhalter: "g/linguriță",
     umrechnungstabelle_eigene_loeschen_titel: "Șterge ingredientul propriu",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Editează ingredientul propriu",
     umrechnungstabelle_eigene_name_fehlt: "Introdu un nume, te rog.",
     umrechnungstabelle_eigene_hinweis: "Îți lipsește un ingredient a cărui valoare de conversie o cunoști? Adaugă-l aici manual - în mod deliberat nu oferim conversie automată între volum și greutate, pentru că ar însemna să ghicim în funcție de ingredient, marcă și consistență.",
     einkaufsmodus_start_btn: "🛒 Listă de cumpărături",
@@ -5854,6 +5915,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Creează lista de cumpărături",
     fehler_einkaufsliste_keine_konfiguration: "Configurația pentru lista de cumpărături lipsește încă: te rugăm să specifici 'shopping_list_entity' în configurația cardului (de ex. shopping_list_entity: todo.einkaufsliste) - pentru aceasta este necesar un AL DOILEA ajutor Listă de sarcini locală. Vezi ANLEITUNG-Backup.md, secțiunea 18.",
     fehler_einkaufsliste_keine_auswahl: "Selectează cel puțin o rețetă.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Selectează cel puțin un ingredient.",
+    zutaten_fehlend_einkaufsliste_btn: "Adaugă selectate în lista de cumpărături",
     fehler_einkaufsliste_keine_zutaten: "Rețetele selectate nu conțin ingrediente.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nu s-a putut adăuga \"{{zeile}}\" la lista de cumpărături:\n{{fehler}}\n\nIngredientele deja adăugate rămân pe listă.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingredient(e) adăugat(e) la \"{{entity}}\".",
@@ -6104,6 +6167,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/lyžica",
     umrechnungstabelle_eigene_tl_platzhalter: "g/čajová lyžička",
     umrechnungstabelle_eigene_loeschen_titel: "Vymazať vlastnú surovinu",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Upraviť vlastnú surovinu",
     umrechnungstabelle_eigene_name_fehlt: "Zadaj názov.",
     umrechnungstabelle_eigene_hinweis: "Chýba surovina, ktorej prevodnú hodnotu poznáš sám? Pridaj ju sem ručne - automatický prevod medzi objemom a hmotnosťou vedome neponúkame, pretože by to znamenalo hádanie podľa suroviny, značky a konzistencie.",
     einkaufsmodus_start_btn: "🛒 Nákupný zoznam",
@@ -6128,6 +6192,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Vytvoriť nákupný zoznam",
     fehler_einkaufsliste_keine_konfiguration: "Pre nákupný zoznam ešte chýba konfigurácia: zadajte prosím 'shopping_list_entity' v konfigurácii karty (napr. shopping_list_entity: todo.einkaufsliste) - na to je potrebný DRUHÝ pomocník Lokálny zoznam úloh. Pozri ANLEITUNG-Backup.md, oddiel 18.",
     fehler_einkaufsliste_keine_auswahl: "Vyberte prosím aspoň jeden recept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Vyberte prosím aspoň jednu surovinu.",
+    zutaten_fehlend_einkaufsliste_btn: "Pridať vybrané do nákupného zoznamu",
     fehler_einkaufsliste_keine_zutaten: "Vybrané recepty neobsahujú žiadne suroviny.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nepodarilo sa pridať \"{{zeile}}\" do nákupného zoznamu:\n{{fehler}}\n\nUž pridané suroviny zostávajú v zozname.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} surovina/y pridané do \"{{entity}}\".",
@@ -6378,6 +6444,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/jed. žlica",
     umrechnungstabelle_eigene_tl_platzhalter: "g/čaj. žlička",
     umrechnungstabelle_eigene_loeschen_titel: "Izbriši lastno sestavino",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Uredi lastno sestavino",
     umrechnungstabelle_eigene_name_fehlt: "Vnesi ime.",
     umrechnungstabelle_eigene_hinweis: "Manjka sestavina, za katero sam poznaš pretvorbeno vrednost? Dodaj jo tukaj ročno - samodejne pretvorbe med prostornino in maso zavestno ne ponujamo, ker bi to pomenilo ugibanje glede na sestavino, znamko in gostoto.",
     einkaufsmodus_start_btn: "🛒 Nakupovalni seznam",
@@ -6402,6 +6469,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Ustvari nakupovalni seznam",
     fehler_einkaufsliste_keine_konfiguration: "Za nakupovalni seznam še manjka konfiguracija: prosimo, navedi 'shopping_list_entity' v konfiguraciji kartice (npr. shopping_list_entity: todo.einkaufsliste) - za to je potreben DRUGI pomočnik Lokalni seznam opravil. Glej ANLEITUNG-Backup.md, razdelek 18.",
     fehler_einkaufsliste_keine_auswahl: "Izberi vsaj en recept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Izberi vsaj eno sestavino.",
+    zutaten_fehlend_einkaufsliste_btn: "Dodaj izbrano na nakupovalni seznam",
     fehler_einkaufsliste_keine_zutaten: "Izbrani recepti ne vsebujejo sestavin.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Ni bilo mogoče dodati \"{{zeile}}\" na nakupovalni seznam:\n{{fehler}}\n\nŽe dodane sestavine ostanejo na seznamu.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} sestavin(a) dodanih na seznam \"{{entity}}\".",
@@ -6652,6 +6721,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/cda.",
     umrechnungstabelle_eigene_tl_platzhalter: "g/cdta.",
     umrechnungstabelle_eigene_loeschen_titel: "Eliminar ingrediente propio",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Editar ingrediente propio",
     umrechnungstabelle_eigene_name_fehlt: "Introduce un nombre.",
     umrechnungstabelle_eigene_hinweis: "¿Falta un ingrediente cuyo valor de conversión conoces tú mismo? Añádelo aquí manualmente - deliberadamente no ofrecemos conversión automática entre volumen y peso, ya que eso supondría adivinar según el ingrediente, la marca y la consistencia.",
     einkaufsmodus_start_btn: "🛒 Lista de la compra",
@@ -6676,6 +6746,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Crear lista de la compra",
     fehler_einkaufsliste_keine_konfiguration: "Aún falta la configuración para la lista de la compra: indica 'shopping_list_entity' en la configuración de la tarjeta (p. ej. shopping_list_entity: todo.einkaufsliste) - para ello se necesita un SEGUNDO asistente de Lista de tareas local. Consulta ANLEITUNG-Backup.md, sección 18.",
     fehler_einkaufsliste_keine_auswahl: "Selecciona al menos una receta.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Selecciona al menos un ingrediente.",
+    zutaten_fehlend_einkaufsliste_btn: "Añadir seleccionados a la lista de la compra",
     fehler_einkaufsliste_keine_zutaten: "Las recetas seleccionadas no contienen ingredientes.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "No se pudo añadir \"{{zeile}}\" a la lista de la compra:\n{{fehler}}\n\nLos ingredientes ya añadidos permanecen en la lista.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediente(s) añadido(s) a \"{{entity}}\".",
@@ -6926,6 +6998,7 @@ const UEBERSETZUNGEN = {
     umrechnungstabelle_eigene_el_platzhalter: "g/msk",
     umrechnungstabelle_eigene_tl_platzhalter: "g/tsk",
     umrechnungstabelle_eigene_loeschen_titel: "Ta bort egen ingrediens",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Redigera egen ingrediens",
     umrechnungstabelle_eigene_name_fehlt: "Ange ett namn.",
     umrechnungstabelle_eigene_hinweis: "Saknas en ingrediens vars omvandlingsvärde du själv känner till? Lägg till den här manuellt - vi erbjuder medvetet inte automatisk omvandling mellan volym och vikt, eftersom det skulle innebära att gissa utifrån ingrediens, märke och konsistens.",
     einkaufsmodus_start_btn: "🛒 Inköpslista",
@@ -6950,6 +7023,8 @@ const UEBERSETZUNGEN = {
     einkaufsliste_erstellen_btn: "Skapa inköpslista",
     fehler_einkaufsliste_keine_konfiguration: "Konfigurationen för inköpslistan saknas fortfarande: ange 'shopping_list_entity' i kortets konfiguration (t.ex. shopping_list_entity: todo.einkaufsliste) - för detta krävs en ANDRA hjälpare Lokal att-göra-lista. Se ANLEITUNG-Backup.md, avsnitt 18.",
     fehler_einkaufsliste_keine_auswahl: "Välj minst ett recept.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Välj minst en ingrediens.",
+    zutaten_fehlend_einkaufsliste_btn: "Lägg till valda i inköpslistan",
     fehler_einkaufsliste_keine_zutaten: "De valda recepten innehåller inga ingredienser.",
     fehler_einkaufsliste_eintrag_fehlgeschlagen: "Det gick inte att lägga till \"{{zeile}}\" i inköpslistan:\n{{fehler}}\n\nRedan tillagda ingredienser finns kvar i listan.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediens(er) tillagda i \"{{entity}}\".",
@@ -8030,6 +8105,11 @@ class RezeptbuchCard extends HTMLElement {
     this._einstellungenItem = null;
     this._einstellungen = { erfassungAktiv: true };
     this._einstellungenModalSichtbar = false;
+    // ID der gerade im Umrechnungstabelle-Popup bearbeiteten eigenen Zutat
+    // (siehe _umrechnungstabelleEigeneBearbeitenOeffnen) - null = das
+    // Formular legt beim Speichern eine NEUE Zutat an statt eine
+    // bestehende zu ersetzen.
+    this._umrechnungstabelleBearbeiteId = null;
     // Paginierung der Rezeptübersicht (feature: viele Rezepte auf mehrere
     // Seiten aufteilen statt alle auf einmal zu zeigen) - 1-basiert, wird
     // bei jeder Filter-/Sortier-/Suchänderung auf 1 zurückgesetzt (siehe
@@ -8732,6 +8812,50 @@ class RezeptbuchCard extends HTMLElement {
     return erfolg;
   }
 
+  // Ändert die Einstellungen konfliktsicher: lädt vor dem Schreiben den
+  // GERADE AKTUELLEN Stand frisch vom Server (nicht den evtl. veralteten
+  // lokalen Cache this._einstellungen), wendet "aenderungFn" darauf an und
+  // speichert erst DAS. Ohne das würde z.B. folgendes Szenario eine
+  // Änderung stillschweigend verschlucken: Handy A öffnet die Einstellungen
+  // und schaltet "Hast du zubereitet?" aus; kurz danach fügt Tablet B (noch
+  // auf dem alten Stand) eine eigene Umrechnungstabelle-Zutat hinzu und
+  // speichert seinen kompletten (veralteten) Einstellungen-Stand zurück -
+  // damit wäre A's Änderung wieder weg, obwohl B sie nie gesehen hat. Mit
+  // dieser Methode sieht B vor dem Speichern den aktuellen Stand (inkl.
+  // A's Änderung) und ändert daran gezielt nur sein eigenes Feld.
+  // "aenderungFn" bekommt den frisch geladenen Stand und gibt den neuen
+  // Stand zurück (z.B. (stand) => ({ ...stand, erfassungAktiv: false })).
+  async _einstellungenAktualisieren(aenderungFn) {
+    let aktuellerStand = this._einstellungen;
+    try {
+      const antwort = await this._hass.connection.sendMessagePromise({
+        type: "todo/item/list", entity_id: this._config.entity,
+      });
+      const items = (antwort && antwort.items) || [];
+      const frischesItem = items.find((i) => i.summary === EINSTELLUNGEN_MARKER) || null;
+      if (frischesItem) {
+        aktuellerStand = this._einstellungenAusItem(frischesItem);
+        this._einstellungenItem = frischesItem;
+      }
+    } catch (fehler) {
+      // Kein harter Fehler: ohne frischen Stand wird mit dem zuletzt
+      // bekannten lokalen weitergemacht - besser als die Änderung ganz
+      // zu verwerfen, auch wenn der Konfliktschutz dann für DIESEN
+      // Speichervorgang nicht greift.
+      console.error("Rezeptbuch: aktueller Stand der Einstellungen konnte vor dem Speichern nicht frisch geladen werden - verwende zuletzt bekannten Stand", fehler);
+    }
+    return await this._einstellungenSpeichern(aenderungFn(aktuellerStand));
+  }
+
+  // Erzeugt eine rein clientseitige, kurze eindeutige ID - für Dinge wie
+  // eigene Umrechnungstabelle-Zutaten, die (anders als Rezepte) kein
+  // eigenes To-do-Item mit server-vergebener uid haben, sondern nur als
+  // Eintrag innerhalb der Einstellungen existieren. Muss nur innerhalb
+  // dieser einen Liste eindeutig sein, keine kryptographischen Ansprüche.
+  _zufallsId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+  }
+
   // Ob der Statistik-Knopf angezeigt UND die "Hast du zubereitet?"-Abfrage
   // gestellt wird: beides zusammen gesteuert durch genau einen echten
   // Ein-/Ausschalter in der Oberfläche (siehe _einstellungenModal* und den
@@ -9179,6 +9303,18 @@ class RezeptbuchCard extends HTMLElement {
       alert(this._t("fehler_einkaufsliste_keine_zutaten"));
       return;
     }
+    await this._einkaufslisteZeilenAnlegen(zeilen);
+  }
+
+  // Legt beliebige, schon fertig formatierte Zutaten-Zeilen (z.B. "200 g
+  // Mehl") als einzelne Einträge in der Einkaufsliste an - der eigentliche
+  // Service-Aufruf-Teil von _einkaufslisteErstellen, ausgelagert, damit ihn
+  // auch _zutatenFehlendZurEinkaufsliste (einzelne, im Rezept selbst
+  // ausgewählte Zutaten statt ganzer aggregierter Rezepte) verwenden kann,
+  // ohne den Code zu duplizieren. Die Konfigurations-/Auswahlprüfungen
+  // bleiben bewusst bei den jeweiligen Aufrufern, weil die Fehlermeldung
+  // ("kein Rezept" vs. "keine Zutat ausgewählt") je nach Kontext anders ist.
+  async _einkaufslisteZeilenAnlegen(zeilen) {
     for (const zeile of zeilen) {
       try {
         // Bewusst hass.callService() direkt statt _serviceAufrufen(): letzteres
@@ -9238,11 +9374,29 @@ class RezeptbuchCard extends HTMLElement {
     `;
   }
 
-  _rezepteExportieren() {
-    const daten = this._rezepte.map((r) => ({
-      title: r.title,
-      ...this._rezeptPayload(r),
-    }));
+  // Vollständiges Backup als JSON-Datei zum Download - NICHT nur die
+  // Rezepte (wie früher), sondern alles, was sonst verloren wäre, würde
+  // das versteckte Marker-Item einer der anderen Listen (Einstellungen,
+  // eigene Kategorien, Kochbücher, Wochenplan) beschädigt oder gelöscht:
+  // all das liegt sonst nirgendwo sonst gesichert. "rezepte" bleibt bewusst
+  // eine Liste einzelner Rezept-Objekte (wie im alten Format) - wer nur
+  // EIN Rezept wiederherstellen will, kann z.B. "rezepte[3]" aus der Datei
+  // entnehmen und unverändert in das normale "JSON einfügen"-Feld eines
+  // Rezepts pasten (siehe zutatUebernehmen oben, das genau dieses Format
+  // erwartet).
+  _backupErstellen() {
+    const daten = {
+      schemaVersion: 2,
+      exportiertAm: new Date().toISOString(),
+      rezepte: this._rezepte.map((r) => ({
+        title: r.title,
+        ...this._rezeptPayload(r),
+      })),
+      einstellungen: this._einstellungen,
+      eigeneKategorien: this._eigeneKategorien,
+      kochbuecher: this._kochbuecher,
+      wochenplan: this._wochenplan,
+    };
     const text = JSON.stringify(daten, null, 2);
     const blob = new Blob([text], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -9771,9 +9925,12 @@ class RezeptbuchCard extends HTMLElement {
                       <td>${z.tsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tsp).replace(".", ",") }) : "–"}</td>
                     </tr>`;
     }).join("");
-    const eigene = (this._einstellungen.eigeneUmrechnungen || []).map((z, i) => `
-                    <tr data-zutat-name="${this._escape(this._normalisieren(z.name))}" data-eigene-index="${i}">
-                      <td>${this._escape(z.name)} <button type="button" class="umrechnungstabelle-eigene-loeschen-btn" data-index="${i}" title="${this._t("umrechnungstabelle_eigene_loeschen_titel")}">✕</button></td>
+    const eigene = (this._einstellungen.eigeneUmrechnungen || []).map((z) => `
+                    <tr data-zutat-name="${this._escape(this._normalisieren(z.name))}" data-eigene-id="${this._escape(z.id)}">
+                      <td>${this._escape(z.name)}
+                        <button type="button" class="umrechnungstabelle-eigene-bearbeiten-btn" data-id="${this._escape(z.id)}" title="${this._t("umrechnungstabelle_eigene_bearbeiten_titel")}">✎</button>
+                        <button type="button" class="umrechnungstabelle-eigene-loeschen-btn" data-id="${this._escape(z.id)}" title="${this._t("umrechnungstabelle_eigene_loeschen_titel")}">✕</button>
+                      </td>
                       <td>${z.cup !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.cup).replace(".", ",") }) : "–"}</td>
                       <td>${z.tbsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tbsp).replace(".", ",") }) : "–"}</td>
                       <td>${z.tsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tsp).replace(".", ",") }) : "–"}</td>
@@ -9831,23 +9988,30 @@ class RezeptbuchCard extends HTMLElement {
         await this._umrechnungstabelleEigeneSpeichern();
       });
     }
-    // Löschen eigener Zutaten per Klick-Delegation auf die Liste, nicht pro
-    // Zeile einzeln verdrahtet: nach jedem Hinzufügen/Löschen wird nur der
-    // <tbody>-Inhalt neu aufgebaut (siehe _umrechnungstabelleTabelleAktualisieren),
-    // einzeln verdrahtete Knöpfe wären danach verwaist.
+    // Löschen/Bearbeiten eigener Zutaten per Klick-Delegation auf die
+    // Liste, nicht pro Zeile einzeln verdrahtet: nach jedem Hinzufügen/
+    // Löschen wird nur der <tbody>-Inhalt neu aufgebaut (siehe
+    // _umrechnungstabelleTabelleAktualisieren), einzeln verdrahtete Knöpfe
+    // wären danach verwaist.
     const liste = this.shadowRoot.getElementById("umrechnungstabelle-liste");
     if (liste) {
       liste.addEventListener("click", async (ev) => {
         const loeschenBtn = ev.target.closest(".umrechnungstabelle-eigene-loeschen-btn");
-        if (!loeschenBtn) return;
-        await this._umrechnungstabelleEigeneLoeschen(parseInt(loeschenBtn.dataset.index, 10));
+        if (loeschenBtn) {
+          await this._umrechnungstabelleEigeneLoeschen(loeschenBtn.dataset.id);
+          return;
+        }
+        const bearbeitenBtn = ev.target.closest(".umrechnungstabelle-eigene-bearbeiten-btn");
+        if (bearbeitenBtn) {
+          this._umrechnungstabelleEigeneBearbeitenOeffnen(bearbeitenBtn.dataset.id);
+        }
       });
     }
   }
 
-  // Setzt das "Eigene Zutat hinzufügen"-Formular zurück (Felder leeren,
-  // Fehlerhinweis und Formular wieder einklappen) - nach erfolgreichem
-  // Speichern sowie beim Abbrechen.
+  // Setzt das "Eigene Zutat hinzufügen/bearbeiten"-Formular zurück (Felder
+  // leeren, Fehlerhinweis einklappen, Bearbeiten-Modus verlassen) - nach
+  // erfolgreichem Speichern sowie beim Abbrechen.
   _umrechnungstabelleEigeneFormularZuruecksetzen() {
     const eigeneFormular = this.shadowRoot.getElementById("umrechnungstabelle-eigene-formular");
     if (eigeneFormular) eigeneFormular.style.display = "none";
@@ -9857,13 +10021,40 @@ class RezeptbuchCard extends HTMLElement {
       const feld = this.shadowRoot.getElementById(id);
       if (feld) feld.value = "";
     });
+    this._umrechnungstabelleBearbeiteId = null;
   }
 
-  // Liest das "Eigene Zutat hinzufügen"-Formular aus, validiert (nur der
-  // Name ist Pflicht - cup/tbsp/tsp sind einzeln optional, man kennt ja
-  // vielleicht nur einen der drei Werte) und speichert die neue Zutat in
-  // den (geteilten) Einstellungen. Baut danach NUR den Tabelleninhalt neu
-  // auf (siehe _umrechnungstabelleTabelleAktualisieren) statt this._render()
+  // Öffnet das Formular im Bearbeiten-Modus, vorausgefüllt mit den Werten
+  // der angeklickten eigenen Zutat (per ID, siehe _zufallsId) - merkt sich
+  // die ID auf der Karteninstanz (this._umrechnungstabelleBearbeiteId),
+  // damit _umrechnungstabelleEigeneSpeichern weiß, dass diese Zutat ERSETZT
+  // statt eine neue angehängt werden soll.
+  _umrechnungstabelleEigeneBearbeitenOeffnen(id) {
+    const eintrag = (this._einstellungen.eigeneUmrechnungen || []).find((e) => e.id === id);
+    if (!eintrag) return;
+    this._umrechnungstabelleBearbeiteId = id;
+    const eigeneFormular = this.shadowRoot.getElementById("umrechnungstabelle-eigene-formular");
+    if (eigeneFormular) eigeneFormular.style.display = "block";
+    const setzen = (feldId, wert) => {
+      const feld = this.shadowRoot.getElementById(feldId);
+      if (feld) feld.value = wert === undefined || wert === null ? "" : String(wert).replace(".", ",");
+    };
+    setzen("umrechnungstabelle-eigene-name-feld", eintrag.name);
+    setzen("umrechnungstabelle-eigene-tasse-feld", eintrag.cup);
+    setzen("umrechnungstabelle-eigene-el-feld", eintrag.tbsp);
+    setzen("umrechnungstabelle-eigene-tl-feld", eintrag.tsp);
+  }
+
+  // Liest das "Eigene Zutat hinzufügen/bearbeiten"-Formular aus, validiert
+  // (nur der Name ist Pflicht - cup/tbsp/tsp sind einzeln optional, man
+  // kennt ja vielleicht nur einen der drei Werte) und speichert die Zutat
+  // konfliktsicher in den (geteilten) Einstellungen (siehe
+  // _einstellungenAktualisieren - verhindert, dass ein zwischenzeitlich
+  // von einem anderen Gerät hinzugefügter Eintrag beim Speichern wieder
+  // verschwindet). Ist this._umrechnungstabelleBearbeiteId gesetzt, wird
+  // die bestehende Zutat mit dieser ID ersetzt statt eine neue anzuhängen.
+  // Baut danach NUR den Tabelleninhalt neu auf (siehe
+  // _umrechnungstabelleTabelleAktualisieren) statt this._render()
   // aufzurufen, das das offene Popup sofort wieder schließen würde.
   async _umrechnungstabelleEigeneSpeichern() {
     const nameFeld = this.shadowRoot.getElementById("umrechnungstabelle-eigene-name-feld");
@@ -9882,29 +10073,42 @@ class RezeptbuchCard extends HTMLElement {
       const zahl = parseFloat(roh.replace(",", "."));
       return Number.isFinite(zahl) ? zahl : undefined;
     };
-    const eintrag = { name };
+    const bearbeiteId = this._umrechnungstabelleBearbeiteId;
+    const eintrag = { id: bearbeiteId || this._zufallsId(), name };
     const cup = wertParsen("umrechnungstabelle-eigene-tasse-feld");
     const tbsp = wertParsen("umrechnungstabelle-eigene-el-feld");
     const tsp = wertParsen("umrechnungstabelle-eigene-tl-feld");
     if (cup !== undefined) eintrag.cup = cup;
     if (tbsp !== undefined) eintrag.tbsp = tbsp;
     if (tsp !== undefined) eintrag.tsp = tsp;
-    const neueListe = [...(this._einstellungen.eigeneUmrechnungen || []), eintrag];
-    const erfolg = await this._einstellungenSpeichern({ ...this._einstellungen, eigeneUmrechnungen: neueListe });
+    const erfolg = await this._einstellungenAktualisieren((stand) => {
+      const bisherige = stand.eigeneUmrechnungen || [];
+      const neueListe = bearbeiteId
+        ? bisherige.map((e) => (e.id === bearbeiteId ? eintrag : e))
+        : [...bisherige, eintrag];
+      return { ...stand, eigeneUmrechnungen: neueListe };
+    });
     if (erfolg) {
       this._umrechnungstabelleEigeneFormularZuruecksetzen();
       this._umrechnungstabelleTabelleAktualisieren();
     }
   }
 
-  // Entfernt eine eigene Zutat (per Index in eigeneUmrechnungen) wieder -
-  // ebenfalls ohne this._render(), siehe _umrechnungstabelleEigeneSpeichern.
-  async _umrechnungstabelleEigeneLoeschen(index) {
-    const eigene = this._einstellungen.eigeneUmrechnungen || [];
-    if (!Number.isInteger(index) || index < 0 || index >= eigene.length) return;
-    const neueListe = eigene.filter((_, i) => i !== index);
-    const erfolg = await this._einstellungenSpeichern({ ...this._einstellungen, eigeneUmrechnungen: neueListe });
-    if (erfolg) this._umrechnungstabelleTabelleAktualisieren();
+  // Entfernt eine eigene Zutat (per ID, siehe _zufallsId) wieder -
+  // konfliktsicher über _einstellungenAktualisieren, ebenfalls ohne
+  // this._render(), siehe _umrechnungstabelleEigeneSpeichern.
+  async _umrechnungstabelleEigeneLoeschen(id) {
+    if (!id) return;
+    const erfolg = await this._einstellungenAktualisieren((stand) => ({
+      ...stand,
+      eigeneUmrechnungen: (stand.eigeneUmrechnungen || []).filter((e) => e.id !== id),
+    }));
+    if (erfolg) {
+      // Falls gerade die bearbeitete Zutat gelöscht wurde, Formular auch
+      // wieder in den "Hinzufügen"-Modus zurücksetzen.
+      if (this._umrechnungstabelleBearbeiteId === id) this._umrechnungstabelleEigeneFormularZuruecksetzen();
+      this._umrechnungstabelleTabelleAktualisieren();
+    }
   }
 
   // Baut nach dem Hinzufügen/Löschen einer eigenen Zutat nur den
@@ -10228,6 +10432,8 @@ class RezeptbuchCard extends HTMLElement {
           border-bottom:1px dashed var(--kb-terrakotta-hell); font-size:0.95em;
         }
         ul.zutaten-liste li:last-child { border-bottom:none; }
+        .zutat-fehlt-label { display:flex; align-items:center; gap:10px; width:100%; cursor:pointer; }
+        .zutat-fehlt-checkbox { flex:0 0 auto; }
         .zutat-menge-chip {
           flex:0 0 auto; background: var(--kb-terrakotta-hell); color: var(--kb-terrakotta-dunkel);
           font-weight:700; font-size:0.85em; border-radius:999px; padding:3px 11px; white-space:nowrap;
@@ -10505,7 +10711,7 @@ class RezeptbuchCard extends HTMLElement {
         .umrechnungstabelle-tabelle th { position:sticky; top:0; background: var(--card-background-color, #fff); color: var(--secondary-text-color); font-weight:600; }
         .umrechnungstabelle-tabelle td:not(:first-child), .umrechnungstabelle-tabelle th:not(:first-child) { text-align:right; white-space:nowrap; }
         .umrechnungstabelle-keine-treffer { text-align:center; color: var(--secondary-text-color); padding:14px 8px; margin:0; }
-        .umrechnungstabelle-eigene-loeschen-btn { background:none; border:none; color: var(--secondary-text-color); cursor:pointer; font-size:0.9em; padding:0 2px; }
+        .umrechnungstabelle-eigene-loeschen-btn, .umrechnungstabelle-eigene-bearbeiten-btn { background:none; border:none; color: var(--secondary-text-color); cursor:pointer; font-size:0.9em; padding:0 2px; }
         .umrechnungstabelle-eigene-bereich { margin-top:10px; text-align:left; }
         .umrechnungstabelle-eigene-bereich #umrechnungstabelle-eigene-formular { margin-top:10px; padding:10px; border:1px solid var(--divider-color, #ddd); border-radius:8px; }
         .umrechnungstabelle-eigene-bereich input[type="text"], .umrechnungstabelle-eigene-bereich input[type="number"] { width:100%; box-sizing:border-box; margin-bottom:8px; }
@@ -10807,7 +11013,7 @@ class RezeptbuchCard extends HTMLElement {
 
     const sichernBtn = this.shadowRoot.getElementById("sichern-btn");
     if (sichernBtn) {
-      sichernBtn.addEventListener("click", () => this._rezepteExportieren());
+      sichernBtn.addEventListener("click", () => this._backupErstellen());
     }
 
     const sammelPdfBtn = this.shadowRoot.getElementById("sammel-pdf-btn");
@@ -11168,14 +11374,15 @@ class RezeptbuchCard extends HTMLElement {
     if (statistikEinstellungenSchalter) {
       statistikEinstellungenSchalter.addEventListener("change", async (ev) => {
         const aktiv = ev.target.checked;
-        await this._einstellungenSpeichern({ ...this._einstellungen, erfassungAktiv: aktiv });
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, erfassungAktiv: aktiv }));
         this._render();
       });
     }
     const usKategorieFeld = this.shadowRoot.getElementById("us-kategorie-feld");
     if (usKategorieFeld) {
       usKategorieFeld.addEventListener("change", async (ev) => {
-        await this._einstellungenSpeichern({ ...this._einstellungen, amerikanischeKategorie: ev.target.value });
+        const wert = ev.target.value;
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, amerikanischeKategorie: wert }));
         this._render();
       });
     }
@@ -12255,11 +12462,17 @@ class RezeptbuchCard extends HTMLElement {
       // unten) - ein beschreibender Alt-Text würde ihn nur doppelt vorlesen.
       ? `<div class="detail-bildbox"><img class="detail-bild" src="${this._escape(r.image)}" alt=""></div>`
       : "";
+    // "zutat-fehlt-checkbox" + data-index: erlaubt, einzelne fehlende
+    // Zutaten auszuwählen und NUR diese (statt zwangsläufig das ganze
+    // Rezept) in die Einkaufsliste zu übernehmen (siehe
+    // "zutaten-fehlend-einkaufsliste-btn" weiter unten sowie
+    // _einkaufslisteZeilenAnlegen). data-index verweist auf die Position
+    // in r.ingredients - innerhalb dieses einen Render-Durchlaufs stabil.
     const zeilen = (r.ingredients || [])
-      .map((z) => {
+      .map((z, i) => {
         const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
         const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
-        return `<li>${mengeText ? `<span class="zutat-menge-chip">${this._escape(mengeText)}</span>` : ""}<span class="zutat-name">${this._escape(z.name)}</span></li>`;
+        return `<li><label class="zutat-fehlt-label"><input type="checkbox" class="zutat-fehlt-checkbox" data-index="${i}">${mengeText ? `<span class="zutat-menge-chip">${this._escape(mengeText)}</span>` : ""}<span class="zutat-name">${this._escape(z.name)}</span></label></li>`;
       })
       .join("");
 
@@ -12349,6 +12562,7 @@ class RezeptbuchCard extends HTMLElement {
             </div>
             <h3 class="abschnitt-titel">${this._t("abschnitt_titel_zutaten")}</h3>
             <ul class="zutaten-liste">${zeilen || `<li>${this._t("keine_zutaten")}</li>`}</ul>
+            ${(r.ingredients || []).length ? `<button type="button" class="sekundaer klein" id="zutaten-fehlend-einkaufsliste-btn">${this._t("zutaten_fehlend_einkaufsliste_btn")}</button>` : ""}
           </div>
           ${schritteListe ? `
           <div class="detail-spalte-rechts">
@@ -12531,6 +12745,36 @@ class RezeptbuchCard extends HTMLElement {
       this._portionen = this._portionen + 1;
       this._render();
     });
+
+    // Fehlende Zutaten direkt aus dem Rezept heraus in die Einkaufsliste:
+    // nur die per Checkbox ausgewählten Zeilen, nicht automatisch das
+    // ganze Rezept (siehe _einkaufslisteErstellen für "alle Zutaten eines
+    // Rezepts"). Verwendet die aktuell eingestellte Portionenzahl, nicht
+    // die Grundmenge - wer z.B. auf 2 Portionen hochgerechnet hat, soll
+    // auch genau diese Menge einkaufen.
+    const zutatenFehlendBtn = this.shadowRoot.getElementById("zutaten-fehlend-einkaufsliste-btn");
+    if (zutatenFehlendBtn) {
+      zutatenFehlendBtn.addEventListener("click", async () => {
+        const ausgewaehlteIndices = Array.from(this.shadowRoot.querySelectorAll(".zutat-fehlt-checkbox:checked"))
+          .map((cb) => parseInt(cb.dataset.index, 10));
+        if (ausgewaehlteIndices.length === 0) {
+          alert(this._t("fehler_einkaufsliste_keine_auswahl_zutaten"));
+          return;
+        }
+        if (!this._config.shopping_list_entity) {
+          alert(this._t("fehler_einkaufsliste_keine_konfiguration"));
+          return;
+        }
+        const zeilen = ausgewaehlteIndices
+          .map((i) => r.ingredients[i])
+          .filter(Boolean)
+          .map((z) => {
+            const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
+            return [menge !== "" ? menge : "", z.unit || "", z.name].filter(Boolean).join(" ");
+          });
+        await this._einkaufslisteZeilenAnlegen(zeilen);
+      });
+    }
 
     // "button" statt "span" (siehe _sterneInteraktivHtml) - click deckt dabei
     // automatisch auch die per Tastatur (Enter/Leertaste) ausgelöste

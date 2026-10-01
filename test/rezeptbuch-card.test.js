@@ -967,7 +967,7 @@ async function testUmrechnungstabelleEigeneZutat(browser) {
     const ergebnisNachLoeschen = await page.evaluate(async () => {
       const root = window.__karte.shadowRoot;
       const loeschenBtn = root.querySelector(".umrechnungstabelle-eigene-loeschen-btn");
-      await window.__karte._umrechnungstabelleEigeneLoeschen(parseInt(loeschenBtn.dataset.index, 10));
+      await window.__karte._umrechnungstabelleEigeneLoeschen(loeschenBtn.dataset.id);
       return {
         modalNochOffen: root.getElementById("umrechnungstabelle-modal").style.display,
         anzahlZeilenGesamt: root.querySelectorAll("#umrechnungstabelle-liste tbody tr").length,
@@ -979,6 +979,141 @@ async function testUmrechnungstabelleEigeneZutat(browser) {
     assert(ergebnisNachLoeschen.anzahlZeilenGesamt === 70, "Nach dem Löschen ist die Zeile wieder weg");
     assert(ergebnisNachLoeschen.zeileNochDa === false, "Die gelöschte Zutat erscheint nicht mehr im DOM");
     assert(ergebnisNachLoeschen.gespeicherteEigene === 0, "Die eigene Zutat ist auch aus den Einstellungen entfernt");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: eine eigene Umrechnungstabelle-Zutat lässt sich über den
+// "Bearbeiten"-Knopf (✎) nachträglich ändern, statt sie löschen und neu
+// anlegen zu müssen - die ID bleibt dabei erhalten (wichtig, damit andere
+// Felder wie "cup" beim bloßen Ändern von "tbsp" nicht verloren gehen).
+// ---------------------------------------------------------------------
+async function testUmrechnungstabelleEigeneZutatBearbeiten(browser) {
+  console.log("\nTest: Umrechnungstabelle - eigene Zutat nachträglich bearbeiten");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const vorher = await page.evaluate(async () => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("umrechnungstabelle-btn").click();
+      root.getElementById("umrechnungstabelle-eigene-oeffnen-btn").click();
+      root.getElementById("umrechnungstabelle-eigene-name-feld").value = "Testkoerner Spezial";
+      root.getElementById("umrechnungstabelle-eigene-tasse-feld").value = "100";
+      root.getElementById("umrechnungstabelle-eigene-el-feld").value = "10";
+      await window.__karte._umrechnungstabelleEigeneSpeichern();
+      const eintrag = window.__karte._einstellungen.eigeneUmrechnungen[0];
+      return { id: eintrag.id, anzahlVorher: window.__karte._einstellungen.eigeneUmrechnungen.length };
+    });
+
+    const nachBearbeiten = await page.evaluate(async (id) => {
+      const root = window.__karte.shadowRoot;
+      root.querySelector(".umrechnungstabelle-eigene-bearbeiten-btn").click();
+      const vorausgefuellt = {
+        name: root.getElementById("umrechnungstabelle-eigene-name-feld").value,
+        tasse: root.getElementById("umrechnungstabelle-eigene-tasse-feld").value,
+        el: root.getElementById("umrechnungstabelle-eigene-el-feld").value,
+      };
+      // Nur den TL-Wert ergänzen, Name/Tasse/EL unverändert lassen -
+      // beide sollen danach erhalten bleiben (kein versehentliches Löschen
+      // nicht angefasster Felder).
+      root.getElementById("umrechnungstabelle-eigene-tl-feld").value = "3";
+      await window.__karte._umrechnungstabelleEigeneSpeichern();
+      const liste = window.__karte._einstellungen.eigeneUmrechnungen;
+      return { vorausgefuellt, anzahlNachher: liste.length, eintrag: liste.find((e) => e.id === id) };
+    }, vorher.id);
+
+    assert(nachBearbeiten.vorausgefuellt.name === "Testkoerner Spezial", "Das Formular wird mit dem Namen der zu bearbeitenden Zutat vorausgefüllt");
+    assert(nachBearbeiten.vorausgefuellt.tasse === "100", "Das Formular wird mit dem Tasse-Wert vorausgefüllt");
+    assert(nachBearbeiten.vorausgefuellt.el === "10", "Das Formular wird mit dem EL-Wert vorausgefüllt");
+    assert(nachBearbeiten.anzahlNachher === vorher.anzahlVorher, "Bearbeiten ERSETZT die bestehende Zutat, statt eine zusätzliche anzulegen");
+    assert(!!nachBearbeiten.eintrag, "Die bearbeitete Zutat ist weiterhin unter derselben ID auffindbar");
+    assert(nachBearbeiten.eintrag.cup === 100 && nachBearbeiten.eintrag.tbsp === 10 && nachBearbeiten.eintrag.tsp === 3, `Die unverändert gelassenen Werte bleiben erhalten, der neue TL-Wert kommt dazu (tatsächlich: ${JSON.stringify(nachBearbeiten.eintrag)})`);
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: Einstellungen werden konfliktsicher geschrieben
+// (_einstellungenAktualisieren) - eine Änderung, die ein "anderes Gerät"
+// zwischen dem letzten lokalen Laden und dem eigenen Speichern vorgenommen
+// hat, bleibt erhalten, statt vom eigenen (auf altem Stand basierenden)
+// Speichervorgang überschrieben zu werden.
+// ---------------------------------------------------------------------
+async function testEinstellungenKonfliktsicheresSpeichern(browser) {
+  console.log("\nTest: Einstellungen werden konfliktsicher (nicht überschreibend) gespeichert");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      // Zustand herstellen, der ein "anderes Gerät" simuliert: zunächst
+      // einmal normal speichern, damit ein Marker-Item existiert.
+      await karte._einstellungenAktualisieren((stand) => ({ ...stand, erfassungAktiv: true }));
+
+      // "Dieses Gerät" hält noch den alten Stand in this._einstellungen
+      // (kein erneutes Laden) - simuliert eine Weile offen gewesene Karte.
+      const altStandVorKonflikt = { ...karte._einstellungen };
+
+      // "Ein anderes Gerät" ändert zwischenzeitlich serverseitig etwas,
+      // das dieses Gerät lokal noch nicht kennt - direkt über den
+      // simulierten Service-Aufruf, damit karte._einstellungen NICHT
+      // aktualisiert wird (genau das simuliert das andere Gerät).
+      const andereEinstellungen = { schemaVersion: 1, ...altStandVorKonflikt, amerikanischeKategorie: "Amerikanisch" };
+      await karte._hass.callService("todo", "update_item", {
+        item: karte._einstellungenItem.uid,
+        description: JSON.stringify(andereEinstellungen),
+        entity_id: karte._config.entity,
+      });
+
+      // "Dieses Gerät" ändert jetzt (immer noch auf Basis des alten lokalen
+      // Standes) ein ANDERES Feld - ohne Konfliktschutz würde das die
+      // zwischenzeitliche Änderung des anderen Geräts überschreiben.
+      await karte._einstellungenAktualisieren((stand) => ({ ...stand, erfassungAktiv: false }));
+
+      const antwort = await karte._hass.connection.sendMessagePromise({ type: "todo/item/list", entity_id: karte._config.entity });
+      const item = antwort.items.find((i) => i.summary === "__rezeptbuch_einstellungen__");
+      return JSON.parse(item.description);
+    });
+
+    assert(ergebnis.erfassungAktiv === false, "Die eigene (letzte) Änderung wird übernommen");
+    assert(ergebnis.amerikanischeKategorie === "Amerikanisch", "Die zwischenzeitliche Änderung des anderen Geräts bleibt erhalten, statt überschrieben zu werden");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: der "💾 Sichern"-Knopf exportiert nicht mehr nur die Rezepte,
+// sondern ein vollständiges Backup (Rezepte + Einstellungen + eigene
+// Kategorien + Kochbücher + Wochenplan) als JSON-Datei-Download - sonst
+// wären diese Teile verloren, würde das jeweilige versteckte Marker-Item
+// beschädigt oder gelöscht.
+// ---------------------------------------------------------------------
+async function testVollstaendigesBackup(browser) {
+  console.log("\nTest: '💾 Sichern' exportiert ein vollständiges Backup, nicht nur die Rezepte");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Gulasch", payload: leererPayload({ category: "Hauptgericht" }) });
+    await page.evaluate(async () => {
+      await window.__karte._einstellungenAktualisieren((stand) => ({ ...stand, erfassungAktiv: false }));
+      await window.__karte._eigeneKategorienSpeichern(["Testkategorie"]);
+    });
+
+    const downloadPromise = page.waitForEvent("download");
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("sichern-btn").click();
+    });
+    const download = await downloadPromise;
+    const dateiname = download.suggestedFilename();
+    const pfad = await download.path();
+    const inhalt = JSON.parse(require("fs").readFileSync(pfad, "utf8"));
+
+    assert(/^rezeptbuch-sicherung-\d{4}-\d{2}-\d{2}\.json$/.test(dateiname), `Der Dateiname folgt dem bisherigen Schema (tatsächlich: '${dateiname}')`);
+    assert(Array.isArray(inhalt.rezepte) && inhalt.rezepte.some((r) => r.title === "Gulasch"), "Die Rezepte sind weiterhin enthalten (wie im alten Format)");
+    assert(inhalt.einstellungen && inhalt.einstellungen.erfassungAktiv === false, "Die Einstellungen sind jetzt zusätzlich im Backup enthalten");
+    assert(Array.isArray(inhalt.eigeneKategorien) && inhalt.eigeneKategorien.includes("Testkategorie"), "Die eigenen Kategorien sind zusätzlich im Backup enthalten");
+    assert("kochbuecher" in inhalt && "wochenplan" in inhalt, "Kochbücher und Wochenplan sind als Felder im Backup vorhanden (auch wenn hier leer/null)");
   } finally {
     await page.close();
   }
@@ -2705,6 +2840,62 @@ async function testEinkaufslisteUeberUi(browser) {
     assert(aufrufe.length === 1, "Die zusammengeführte Mehl-Zutat wird als EIN Eintrag angelegt (200+300=500 g Mehl)");
     assert(aufrufe[0].item === "500 g Mehl", "Der Einkaufslisten-Eintrag hat das Format 'Menge Einheit Name'");
     assert(aufrufe[0].entity_id === "todo.einkaufsliste", "Der Eintrag wird für die konfigurierte shopping_list_entity angelegt (nicht für die Rezeptliste)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: nur die im Rezept selbst per Checkbox ausgewählten ("fehlenden")
+// Zutaten werden in die Einkaufsliste übernommen, NICHT automatisch das
+// ganze Rezept - und zwar in der aktuell eingestellten (hier: verdoppelten)
+// Portionsmenge.
+// ---------------------------------------------------------------------
+async function testFehlendeZutatenZurEinkaufsliste(browser) {
+  console.log("\nTest: Fehlende Zutaten direkt aus dem Rezept in die Einkaufsliste übernehmen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await page.evaluate(() => {
+      window.__karte._config.shopping_list_entity = "todo.einkaufsliste";
+    });
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Pfannkuchen",
+      payload: leererPayload({
+        servings: 2,
+        ingredients: [
+          { amount: "200", unit: "g", name: "Mehl" },
+          { amount: "2", unit: "", name: "Eier" },
+          { amount: "250", unit: "ml", name: "Milch" },
+        ],
+      }),
+    });
+
+    const ohneAuswahl = await page.evaluate((uid) => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.uid === uid));
+      const root = window.__karte.shadowRoot;
+      root.getElementById("zutaten-fehlend-einkaufsliste-btn").click();
+      return window.__alertAufrufe.slice();
+    }, uid);
+    assert(ohneAuswahl.some((a) => a.includes("Zutat")), "Ohne ausgewählte Zutat erscheint eine erklärende Warnung statt eines leeren Eintrags");
+
+    const ergebnis = await page.evaluate(async () => {
+      const root = window.__karte.shadowRoot;
+      // Portionen verdoppeln (2 -> 4), damit geprüft werden kann, dass die
+      // AKTUELL eingestellte Menge übernommen wird, nicht die Grundmenge.
+      root.getElementById("plus-btn").click();
+      root.getElementById("plus-btn").click();
+      const checkboxen = Array.from(root.querySelectorAll(".zutat-fehlt-checkbox"));
+      checkboxen[0].checked = true; // Mehl
+      checkboxen[2].checked = true; // Milch (Eier bewusst NICHT ausgewählt)
+      root.getElementById("zutaten-fehlend-einkaufsliste-btn").click();
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      return window.__addItemAufrufe.slice();
+    });
+
+    assert(ergebnis.length === 2, `Nur die zwei ausgewählten Zutaten werden angelegt, nicht alle drei (tatsächlich: ${ergebnis.length})`);
+    assert(ergebnis.some((a) => a.item === "400 g Mehl"), `Mehl wird mit der aktuell eingestellten (verdoppelten) Menge angelegt (tatsächlich: ${JSON.stringify(ergebnis)})`);
+    assert(ergebnis.some((a) => a.item === "500 ml Milch"), "Milch wird ebenfalls mit der verdoppelten Menge angelegt");
+    assert(!ergebnis.some((a) => a.item.includes("Eier")), "Die NICHT ausgewählten 'Eier' werden nicht in die Einkaufsliste übernommen");
   } finally {
     await page.close();
   }
@@ -5552,6 +5743,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testUmrechnungstabelleModal(browser);
     await testUmrechnungstabelleUebersetzt(browser);
     await testUmrechnungstabelleEigeneZutat(browser);
+    await testUmrechnungstabelleEigeneZutatBearbeiten(browser);
+    await testEinstellungenKonfliktsicheresSpeichern(browser);
+    await testVollstaendigesBackup(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
     await testZubereitungsschritteVerschieben(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);
@@ -5589,6 +5783,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testDetailZweiSpaltenAufBreitemBildschirm(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);
+    await testFehlendeZutatenZurEinkaufsliste(browser);
     await testWochenplanZuweisenUndPersistenz(browser);
     await testWochenplanEinkaufsliste(browser);
     await testWochenplanVergangeneTageWerdenAutomatischGeleert(browser);
