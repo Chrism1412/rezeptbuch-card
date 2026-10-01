@@ -24,10 +24,26 @@ seit [2.0.0]).
   `gal`/`gallon` und `fl oz`/`fluid ounce` werden bei der
   Zutaten-Texterkennung jetzt korrekt als Einheit erkannt (z.B. bei per KI
   erzeugtem JSON aus einem amerikanischen Rezept) statt versehentlich Teil
-  des Zutatennamens zu werden. Bewusst weiterhin keine Umrechnung zu
-  metrischen Einheiten - nur Erkennung und Schreibvarianten-Gleichsetzung
-  für die Einkaufslisten-Zusammenfassung, im selben Geist wie die
-  bestehende deutsche Einheiten-Synonymtabelle.
+  des Zutatennamens zu werden.
+- **Automatische Umrechnung amerikanischer Maßeinheiten**: Volumenangaben
+  (`cup`, `tbsp`, `tsp`, `fl oz`, `pt`, `qt`, `gal`) werden bei der
+  Zutaten-Erkennung jetzt automatisch EXAKT in Milliliter bzw. Liter
+  umgerechnet, Gewichtsangaben (`oz`, `lb`) in Gramm bzw. Kilogramm -
+  inklusive Brüchen ("1/2 cup"), Unicode-Bruchzeichen ("½ TL"), gemischten
+  Zahlen ("1 1/2 cups") und Mengenbereichen ("1-2 cups"). Es handelt sich
+  bewusst NUR um gleichartige Umrechnung (Volumen → Volumen, Gewicht →
+  Gewicht) mit festen mathematischen Faktoren - keine Umrechnung zwischen
+  Volumen und Gewicht (z.B. "1 cup Mehl" → Gramm), da das die Dichte der
+  jeweiligen Zutat kennen müsste und damit Raten wäre. Für genau diesen
+  Fall gibt es stattdessen die neue, rein informative Umrechnungstabelle
+  (siehe unten).
+- **Umrechnungstabelle (Hauptmenü)**: neuer Knopf "📐 Umrechnungstabelle"
+  öffnet ein Nachschlage-Popup mit Richtwerten in Gramm für ca. 50 in der
+  Küche häufig verwendete Zutaten (je 1 Tasse/EL/TL, soweit praktisch
+  üblich), mit Suchfeld zum schnellen Filtern. Bewusst komplett unabhängig
+  von echten Rezeptdaten - die Werte dienen nur zum manuellen Nachschlagen
+  und werden NIE automatisch auf ein Rezept angewendet, da sie je nach
+  Marke/Konsistenz der Zutat variieren können.
 - **Vorhandene Tags als Vorschlag**: beim Anlegen/Bearbeiten eines
   Rezepts zeigt das Tag-Eingabefeld jetzt (über eine native
   Browser-Vorschlagsliste) bereits an anderen Rezepten vergebene Tags an

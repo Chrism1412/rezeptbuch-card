@@ -721,7 +721,7 @@ async function testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser) {
 // nur korrekte Erkennung + Synonym-Normalisierung für die Einkaufsliste.
 // ---------------------------------------------------------------------
 async function testAmerikanischeEinheitenWerdenErkannt(browser) {
-  console.log("\nTest: Amerikanische Einheiten (cup, tbsp, oz, ...) werden erkannt");
+  console.log("\nTest: Amerikanische Einheiten (cup, tbsp, oz, ...) werden erkannt UND exakt in Metrik umgerechnet");
   const page = await neueTestUmgebung(browser);
   try {
     await page.evaluate(() => window.__karte._neuesRezeptFormular());
@@ -755,17 +755,123 @@ async function testAmerikanischeEinheitenWerdenErkannt(browser) {
     const aktiv = await page.evaluate(() => window.__karte._aktivesRezept);
     const z = aktiv.ingredients;
 
-    assert(z[0].unit === "cups" && z[0].name === "flour", "\"cups\" wird als Einheit erkannt (tatsächlich: " + JSON.stringify(z[0]) + ")");
-    assert(z[1].unit === "tbsp" && z[1].name === "sugar", "\"tbsp\" wird als Einheit erkannt");
-    assert(z[2].unit === "tbsp." && z[2].name === "melted butter", "\"tbsp.\" (mit Punkt) wird als Einheit erkannt, nicht Teil des Namens");
-    assert(z[3].unit === "tsp" && z[3].name === "salt", "\"tsp\" wird als Einheit erkannt");
-    assert(z[4].unit === "oz" && z[4].name === "cream cheese", "\"oz\" wird als Einheit erkannt");
-    assert(z[5].unit === "lb" && z[5].name === "ground beef", "\"lb\" wird als Einheit erkannt");
-    assert(z[6].unit === "lbs" && z[6].name === "chicken thighs", "\"lbs\" wird als Einheit erkannt");
-    assert(z[7].unit === "pt" && z[7].name === "heavy cream", "\"pt\" wird als Einheit erkannt");
-    assert(z[8].unit === "qt" && z[8].name === "chicken stock", "\"qt\" wird als Einheit erkannt");
-    assert(z[9].unit === "gal" && z[9].name === "milk", "\"gal\" wird als Einheit erkannt");
-    assert(z[10].unit === "fl oz" && z[10].name === "milk", "\"fl oz\" (zwei Wörter) wird als EINE Einheit erkannt, nicht als Teil des Namens");
+    // Die Einheiten werden erkannt und automatisch EXAKT (reine Mathematik,
+    // keine Dichte-Schätzung) in die passende metrische Einheit umgerechnet:
+    // Volumen -> ml/l, Gewicht -> g/kg (siehe _usEinheitUmrechnen).
+    assert(z[0].amount === "473" && z[0].unit === "ml" && z[0].name === "flour", "\"2 cups\" wird exakt zu 473 ml umgerechnet (tatsächlich: " + JSON.stringify(z[0]) + ")");
+    assert(z[1].amount === "15" && z[1].unit === "ml" && z[1].name === "sugar", "\"1 tbsp\" wird exakt zu 15 ml umgerechnet");
+    assert(z[2].amount === "30" && z[2].unit === "ml" && z[2].name === "melted butter", "\"2 tbsp.\" (mit Punkt) wird exakt zu 30 ml umgerechnet, Name bleibt sauber");
+    assert(z[3].amount === "5" && z[3].unit === "ml" && z[3].name === "salt", "\"1 tsp\" wird exakt zu 5 ml umgerechnet");
+    assert(z[4].amount === "227" && z[4].unit === "g" && z[4].name === "cream cheese", "\"8 oz\" wird exakt zu 227 g umgerechnet");
+    assert(z[5].amount === "454" && z[5].unit === "g" && z[5].name === "ground beef", "\"1 lb\" wird exakt zu 454 g umgerechnet");
+    assert(z[6].amount === "907" && z[6].unit === "g" && z[6].name === "chicken thighs", "\"2 lbs\" wird exakt zu 907 g umgerechnet");
+    assert(z[7].amount === "473" && z[7].unit === "ml" && z[7].name === "heavy cream", "\"1 pt\" wird exakt zu 473 ml umgerechnet");
+    assert(z[8].amount === "1,89" && z[8].unit === "l" && z[8].name === "chicken stock", "\"2 qt\" wird ab 1000 ml als Liter angezeigt (1,89 l)");
+    assert(z[9].amount === "3,79" && z[9].unit === "l" && z[9].name === "milk", "\"1 gal\" wird ab 1000 ml als Liter angezeigt (3,79 l)");
+    assert(z[10].amount === "118" && z[10].unit === "ml" && z[10].name === "milk", "\"4 fl oz\" (zwei Wörter) wird als EINE Einheit erkannt und exakt zu 118 ml umgerechnet");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: die US-Einheiten-Umrechnung versteht auch Brüche, Unicode-
+// Bruchzeichen, gemischte Zahlen und Mengenbereiche korrekt (nicht nur
+// glatte Ganzzahlen wie im Test oben) und lässt nicht-amerikanische
+// Einheiten unverändert.
+// ---------------------------------------------------------------------
+async function testUsEinheitenUmrechnungMitBruechenUndBereichen(browser) {
+  console.log("\nTest: US-Einheiten-Umrechnung mit Brüchen, Bereichen und gemischten Zahlen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await page.evaluate(() => window.__karte._neuesRezeptFormular());
+
+    const importierteJson = JSON.stringify({
+      title: "Bruch-Test",
+      servings: 4,
+      ingredients: [
+        "1/2 cup sugar",
+        "1 1/2 cups flour",
+        "½ tsp salt",
+        "1-2 cups milk",
+        "500 g Mehl",
+        "1 Zwiebel",
+      ],
+      steps: ["Alles vermengen"],
+    });
+
+    await page.evaluate((json) => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("json-einfuegen-btn").click();
+      root.getElementById("json-feld").value = json;
+      root.getElementById("json-uebernehmen-btn").click();
+    }, importierteJson);
+
+    const aktiv = await page.evaluate(() => window.__karte._aktivesRezept);
+    const z = aktiv.ingredients;
+
+    assert(z[0].amount === "118" && z[0].unit === "ml", "\"1/2 cup\" (einfacher Bruch) wird exakt zu 118 ml umgerechnet (tatsächlich: " + JSON.stringify(z[0]) + ")");
+    assert(z[1].amount === "355" && z[1].unit === "ml", "\"1 1/2 cups\" (gemischte Zahl) wird exakt zu 355 ml umgerechnet (tatsächlich: " + JSON.stringify(z[1]) + ")");
+    assert(z[2].amount === "2" && z[2].unit === "ml", "\"½ tsp\" (Unicode-Bruchzeichen) wird exakt zu 2 ml umgerechnet (tatsächlich: " + JSON.stringify(z[2]) + ")");
+    assert(z[3].amount === "237-473" && z[3].unit === "ml", "\"1-2 cups\" (Bereich) wird exakt zu 237-473 ml umgerechnet, beide Seiten in derselben Einheit (tatsächlich: " + JSON.stringify(z[3]) + ")");
+    assert(z[4].amount === "500" && z[4].unit === "g" && z[4].name === "Mehl", "Metrische Einheiten (\"g\") bleiben unverändert");
+    assert(z[5].amount === "1" && z[5].unit === "" && z[5].name === "Zwiebel", "Zutaten ohne Einheit bleiben unverändert");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: Knopf "Umrechnungstabelle" im Hauptmenü öffnet ein rein
+// informatives Nachschlage-Popup (~50 Zutaten, Tasse/EL/TL in Gramm) mit
+// Suchfilter - unabhängig von echten Rezeptdaten, nichts wird automatisch
+// angewendet.
+// ---------------------------------------------------------------------
+async function testUmrechnungstabelleModal(browser) {
+  console.log("\nTest: Umrechnungstabelle-Popup im Hauptmenü (Nachschlagetabelle + Suche)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      const root = window.__karte.shadowRoot;
+      const vorherSichtbar = root.getElementById("umrechnungstabelle-modal").style.display;
+      root.getElementById("umrechnungstabelle-btn").click();
+      const modalSichtbarNachKlick = root.getElementById("umrechnungstabelle-modal").style.display;
+      const anzahlZeilenGesamt = root.querySelectorAll("#umrechnungstabelle-liste tbody tr").length;
+      const mehlZeileVorSuche = root.querySelector('tr[data-zutat-name*="mehl"]').style.display;
+
+      const sucheFeld = root.getElementById("umrechnungstabelle-suche-feld");
+      sucheFeld.value = "mehl";
+      sucheFeld.dispatchEvent(new Event("input"));
+      const sichtbareZeilenNachSuche = Array.from(root.querySelectorAll("#umrechnungstabelle-liste tbody tr")).filter((z) => z.style.display !== "none").length;
+      const keineTrefferSichtbarBeiTreffer = root.getElementById("umrechnungstabelle-keine-treffer").style.display;
+
+      sucheFeld.value = "xyz-gibt-es-nicht";
+      sucheFeld.dispatchEvent(new Event("input"));
+      const sichtbareZeilenOhneTreffer = Array.from(root.querySelectorAll("#umrechnungstabelle-liste tbody tr")).filter((z) => z.style.display !== "none").length;
+      const keineTrefferSichtbarOhneTreffer = root.getElementById("umrechnungstabelle-keine-treffer").style.display;
+
+      root.getElementById("umrechnungstabelle-schliessen-btn").click();
+      const modalNachSchliessen = root.getElementById("umrechnungstabelle-modal").style.display;
+      const sucheFeldNachSchliessen = sucheFeld.value;
+
+      return {
+        vorherSichtbar, modalSichtbarNachKlick, anzahlZeilenGesamt, mehlZeileVorSuche,
+        sichtbareZeilenNachSuche, keineTrefferSichtbarBeiTreffer,
+        sichtbareZeilenOhneTreffer, keineTrefferSichtbarOhneTreffer,
+        modalNachSchliessen, sucheFeldNachSchliessen,
+      };
+    });
+
+    assert(ergebnis.vorherSichtbar === "none", "Popup ist anfangs unsichtbar");
+    assert(ergebnis.modalSichtbarNachKlick === "flex", "Klick auf 'Umrechnungstabelle' zeigt das Popup");
+    assert(ergebnis.anzahlZeilenGesamt >= 50, `Die Tabelle enthält mindestens 50 Zutaten (tatsächlich: ${ergebnis.anzahlZeilenGesamt})`);
+    assert(ergebnis.mehlZeileVorSuche !== "none", "Vor der Suche sind alle Zeilen sichtbar, z.B. 'Mehl'");
+    assert(ergebnis.sichtbareZeilenNachSuche === 1, `Die Suche nach 'mehl' lässt genau eine Zeile übrig (tatsächlich: ${ergebnis.sichtbareZeilenNachSuche})`);
+    assert(ergebnis.keineTrefferSichtbarBeiTreffer === "none", "Der 'Keine Zutat gefunden'-Hinweis bleibt bei Treffern versteckt");
+    assert(ergebnis.sichtbareZeilenOhneTreffer === 0, "Eine Suche ohne Treffer blendet alle Zeilen aus");
+    assert(ergebnis.keineTrefferSichtbarOhneTreffer === "block", "Der 'Keine Zutat gefunden'-Hinweis erscheint, wenn die Suche keine Treffer hat");
+    assert(ergebnis.modalNachSchliessen === "none", "Schließen-Knopf versteckt das Popup wieder");
+    assert(ergebnis.sucheFeldNachSchliessen === "", "Das Suchfeld wird beim Schließen zurückgesetzt");
   } finally {
     await page.close();
   }
@@ -5256,6 +5362,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testJsonImportZutatenAlsText(browser);
     await testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser);
     await testAmerikanischeEinheitenWerdenErkannt(browser);
+    await testUsEinheitenUmrechnungMitBruechenUndBereichen(browser);
+    await testUmrechnungstabelleModal(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
     await testZubereitungsschritteVerschieben(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);

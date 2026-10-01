@@ -166,6 +166,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Rezeptbuch",
     kopf_sichern_btn: "💾 Sichern",
     kopf_wochenplan_btn: "📅 Wochenplan",
+    umrechnungstabelle_btn: "📐 Umrechnungstabelle",
+    umrechnungstabelle_titel: "Umrechnungstabelle",
+    umrechnungstabelle_hinweis: "Richtwerte in Gramm für ca. 50 häufige Küchenzutaten - abhängig von Marke und Konsistenz, deshalb nur zum Nachschlagen. Diese Werte werden NICHT automatisch auf deine Rezepte angewendet.",
+    umrechnungstabelle_suche_placeholder: "Zutat suchen …",
+    umrechnungstabelle_spalte_zutat: "Zutat",
+    umrechnungstabelle_spalte_tasse: "1 Tasse",
+    umrechnungstabelle_spalte_el: "1 EL",
+    umrechnungstabelle_spalte_tl: "1 TL",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Keine Zutat gefunden.",
     einkaufsmodus_start_btn: "🛒 Einkaufsliste",
     einkaufsmodus_beenden_btn: "✕ Auswahl beenden",
     kopf_neu_btn: "+ Neu",
@@ -487,6 +497,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Rezäptbuech",
     kopf_sichern_btn: "💾 Sichere",
     kopf_wochenplan_btn: "📅 Wuchepla",
+    umrechnungstabelle_btn: "📐 Umrechnungstabälle",
+    umrechnungstabelle_titel: "Umrechnungstabälle",
+    umrechnungstabelle_hinweis: "Richtwärt in Gramm für circa 50 häufig Küchezutate - je nach Marke und Konsischtänz anders, drum nume zum Nahgucke. Die Wärt wärde NID automatisch uf dini Rezäpt aagwändet.",
+    umrechnungstabelle_suche_placeholder: "Zutat sueche …",
+    umrechnungstabelle_spalte_zutat: "Zutat",
+    umrechnungstabelle_spalte_tasse: "1 Tasse",
+    umrechnungstabelle_spalte_el: "1 EL",
+    umrechnungstabelle_spalte_tl: "1 TL",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Kei Zutat gfunde.",
     einkaufsmodus_start_btn: "🛒 Yychaufsliste",
     einkaufsmodus_beenden_btn: "✕ Uswahl beende",
     kopf_neu_btn: "+ Nöis",
@@ -795,6 +815,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Recipe Book",
     kopf_sichern_btn: "💾 Backup",
     kopf_wochenplan_btn: "📅 Meal plan",
+    umrechnungstabelle_btn: "📐 Conversion table",
+    umrechnungstabelle_titel: "Conversion table",
+    umrechnungstabelle_hinweis: "Approximate gram values for about 50 common kitchen ingredients - these vary by brand and consistency, so treat them as reference only. They are NOT applied automatically to your recipes.",
+    umrechnungstabelle_suche_placeholder: "Search ingredient …",
+    umrechnungstabelle_spalte_zutat: "Ingredient",
+    umrechnungstabelle_spalte_tasse: "1 cup",
+    umrechnungstabelle_spalte_el: "1 tbsp",
+    umrechnungstabelle_spalte_tl: "1 tsp",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "No ingredient found.",
     einkaufsmodus_start_btn: "🛒 Shopping list",
     einkaufsmodus_beenden_btn: "✕ Cancel selection",
     kopf_neu_btn: "+ New",
@@ -1086,6 +1116,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Готварска книга",
     kopf_sichern_btn: "💾 Резервно копие",
     kopf_wochenplan_btn: "📅 Седмичен план",
+    umrechnungstabelle_btn: "📐 Таблица за преобразуване",
+    umrechnungstabelle_titel: "Таблица за преобразуване",
+    umrechnungstabelle_hinweis: "Приблизителни стойности в грамове за около 50 често срещани кухненски продукти - варират по марка и консистенция, затова служат само за справка. Те НЕ се прилагат автоматично към твоите рецепти.",
+    umrechnungstabelle_suche_placeholder: "Търсене на продукт …",
+    umrechnungstabelle_spalte_zutat: "Продукт",
+    umrechnungstabelle_spalte_tasse: "1 чаша",
+    umrechnungstabelle_spalte_el: "1 с.л.",
+    umrechnungstabelle_spalte_tl: "1 ч.л.",
+    umrechnungstabelle_gramm_wert: "{{wert}} г",
+    umrechnungstabelle_keine_treffer: "Няма намерен продукт.",
     einkaufsmodus_start_btn: "🛒 Списък за пазаруване",
     einkaufsmodus_beenden_btn: "✕ Прекрати избора",
     kopf_neu_btn: "+ Ново",
@@ -1339,6 +1379,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuharica",
     kopf_sichern_btn: "💾 Sigurnosna kopija",
     kopf_wochenplan_btn: "📅 Tjedni plan",
+    umrechnungstabelle_btn: "📐 Tablica preračunavanja",
+    umrechnungstabelle_titel: "Tablica preračunavanja",
+    umrechnungstabelle_hinweis: "Približne vrijednosti u gramima za oko 50 čestih kuhinjskih sastojaka - ovise o marki i gustoći, pa služe samo za orijentaciju. NE primjenjuju se automatski na tvoje recepte.",
+    umrechnungstabelle_suche_placeholder: "Pretraži sastojak …",
+    umrechnungstabelle_spalte_zutat: "Sastojak",
+    umrechnungstabelle_spalte_tasse: "1 šalica",
+    umrechnungstabelle_spalte_el: "1 žl.",
+    umrechnungstabelle_spalte_tl: "1 žličica",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Nijedan sastojak nije pronađen.",
     einkaufsmodus_start_btn: "🛒 Popis za kupovinu",
     einkaufsmodus_beenden_btn: "✕ Prekini odabir",
     kopf_neu_btn: "+ Novo",
@@ -1592,6 +1642,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuchařka",
     kopf_sichern_btn: "💾 Záloha",
     kopf_wochenplan_btn: "📅 Týdenní plán",
+    umrechnungstabelle_btn: "📐 Převodní tabulka",
+    umrechnungstabelle_titel: "Převodní tabulka",
+    umrechnungstabelle_hinweis: "Přibližné hodnoty v gramech pro cca 50 běžných kuchyňských surovin - liší se podle značky a konzistence, slouží jen k nahlédnutí. NEjsou automaticky použity na tvé recepty.",
+    umrechnungstabelle_suche_placeholder: "Hledat surovinu …",
+    umrechnungstabelle_spalte_zutat: "Surovina",
+    umrechnungstabelle_spalte_tasse: "1 hrnek",
+    umrechnungstabelle_spalte_el: "1 lžíce",
+    umrechnungstabelle_spalte_tl: "1 lžička",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Žádná surovina nenalezena.",
     einkaufsmodus_start_btn: "🛒 Nákupní seznam",
     einkaufsmodus_beenden_btn: "✕ Ukončit výběr",
     kopf_neu_btn: "+ Nový",
@@ -1845,6 +1905,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kogebog",
     kopf_sichern_btn: "💾 Sikkerhedskopi",
     kopf_wochenplan_btn: "📅 Ugeplan",
+    umrechnungstabelle_btn: "📐 Omregningstabel",
+    umrechnungstabelle_titel: "Omregningstabel",
+    umrechnungstabelle_hinweis: "Vejledende værdier i gram for ca. 50 almindelige køkkeningredienser - varierer efter mærke og konsistens, kun til opslag. Bruges IKKE automatisk på dine opskrifter.",
+    umrechnungstabelle_suche_placeholder: "Søg ingrediens …",
+    umrechnungstabelle_spalte_zutat: "Ingrediens",
+    umrechnungstabelle_spalte_tasse: "1 kop",
+    umrechnungstabelle_spalte_el: "1 spsk.",
+    umrechnungstabelle_spalte_tl: "1 tsk.",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Ingen ingrediens fundet.",
     einkaufsmodus_start_btn: "🛒 Indkøbsliste",
     einkaufsmodus_beenden_btn: "✕ Afslut valg",
     kopf_neu_btn: "+ Ny",
@@ -2098,6 +2168,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kookboek",
     kopf_sichern_btn: "💾 Back-up",
     kopf_wochenplan_btn: "📅 Weekmenu",
+    umrechnungstabelle_btn: "📐 Omrekentabel",
+    umrechnungstabelle_titel: "Omrekentabel",
+    umrechnungstabelle_hinweis: "Richtwaarden in gram voor ca. 50 veelgebruikte keukeningrediënten - afhankelijk van merk en consistentie, dus alleen als naslag. Worden NIET automatisch op je recepten toegepast.",
+    umrechnungstabelle_suche_placeholder: "Ingrediënt zoeken …",
+    umrechnungstabelle_spalte_zutat: "Ingrediënt",
+    umrechnungstabelle_spalte_tasse: "1 kop",
+    umrechnungstabelle_spalte_el: "1 el.",
+    umrechnungstabelle_spalte_tl: "1 tl.",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Geen ingrediënt gevonden.",
     einkaufsmodus_start_btn: "🛒 Boodschappenlijst",
     einkaufsmodus_beenden_btn: "✕ Selectie beëindigen",
     kopf_neu_btn: "+ Nieuw",
@@ -2351,6 +2431,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Retseptiraamat",
     kopf_sichern_btn: "💾 Varukoopia",
     kopf_wochenplan_btn: "📅 Nädalaplaan",
+    umrechnungstabelle_btn: "📐 Teisendustabel",
+    umrechnungstabelle_titel: "Teisendustabel",
+    umrechnungstabelle_hinweis: "Ligikaudsed grammiväärtused ca 50 levinud köögikoostisosa jaoks - sõltuvad margist ja konsistentsist, seega vaid viitena. Neid EI rakendata automaatselt sinu retseptidele.",
+    umrechnungstabelle_suche_placeholder: "Otsi koostisosa …",
+    umrechnungstabelle_spalte_zutat: "Koostisosa",
+    umrechnungstabelle_spalte_tasse: "1 tass",
+    umrechnungstabelle_spalte_el: "1 spl",
+    umrechnungstabelle_spalte_tl: "1 tl",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Koostisosa ei leitud.",
     einkaufsmodus_start_btn: "🛒 Ostunimekiri",
     einkaufsmodus_beenden_btn: "✕ Lõpeta valimine",
     kopf_neu_btn: "+ Uus",
@@ -2604,6 +2694,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Reseptikirja",
     kopf_sichern_btn: "💾 Varmuuskopio",
     kopf_wochenplan_btn: "📅 Viikkosuunnitelma",
+    umrechnungstabelle_btn: "📐 Muuntotaulukko",
+    umrechnungstabelle_titel: "Muuntotaulukko",
+    umrechnungstabelle_hinweis: "Suuntaa antavat gramma-arvot noin 50 yleiselle keittiön raaka-aineelle - vaihtelevat merkin ja koostumuksen mukaan, siis vain viitteeksi. Niitä EI sovelleta automaattisesti resepteihisi.",
+    umrechnungstabelle_suche_placeholder: "Hae raaka-ainetta …",
+    umrechnungstabelle_spalte_zutat: "Raaka-aine",
+    umrechnungstabelle_spalte_tasse: "1 kupillinen",
+    umrechnungstabelle_spalte_el: "1 rkl",
+    umrechnungstabelle_spalte_tl: "1 tl",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Raaka-ainetta ei löytynyt.",
     einkaufsmodus_start_btn: "🛒 Ostoslista",
     einkaufsmodus_beenden_btn: "✕ Lopeta valinta",
     kopf_neu_btn: "+ Uusi",
@@ -2857,6 +2957,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Livre de recettes",
     kopf_sichern_btn: "💾 Sauvegarde",
     kopf_wochenplan_btn: "📅 Planning de la semaine",
+    umrechnungstabelle_btn: "📐 Table de conversion",
+    umrechnungstabelle_titel: "Table de conversion",
+    umrechnungstabelle_hinweis: "Valeurs approximatives en grammes pour une cinquantaine d'ingrédients courants - elles varient selon la marque et la consistance, donc à titre indicatif uniquement. Elles ne sont PAS appliquées automatiquement à tes recettes.",
+    umrechnungstabelle_suche_placeholder: "Rechercher un ingrédient …",
+    umrechnungstabelle_spalte_zutat: "Ingrédient",
+    umrechnungstabelle_spalte_tasse: "1 tasse",
+    umrechnungstabelle_spalte_el: "1 c. à s.",
+    umrechnungstabelle_spalte_tl: "1 c. à c.",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Aucun ingrédient trouvé.",
     einkaufsmodus_start_btn: "🛒 Liste de courses",
     einkaufsmodus_beenden_btn: "✕ Terminer la sélection",
     kopf_neu_btn: "+ Nouveau",
@@ -3111,6 +3221,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Βιβλίο συνταγών",
     kopf_sichern_btn: "💾 Αντίγραφο ασφαλείας",
     kopf_wochenplan_btn: "📅 Εβδομαδιαίος προγραμματισμός",
+    umrechnungstabelle_btn: "📐 Πίνακας μετατροπής",
+    umrechnungstabelle_titel: "Πίνακας μετατροπής",
+    umrechnungstabelle_hinweis: "Κατά προσέγγιση τιμές σε γραμμάρια για περίπου 50 συνηθισμένα υλικά κουζίνας - διαφέρουν ανά μάρκα και σύσταση, άρα μόνο για αναφορά. ΔΕΝ εφαρμόζονται αυτόματα στις συνταγές σου.",
+    umrechnungstabelle_suche_placeholder: "Αναζήτηση υλικού …",
+    umrechnungstabelle_spalte_zutat: "Υλικό",
+    umrechnungstabelle_spalte_tasse: "1 φλιτζάνι",
+    umrechnungstabelle_spalte_el: "1 κ.σ.",
+    umrechnungstabelle_spalte_tl: "1 κ.γ.",
+    umrechnungstabelle_gramm_wert: "{{wert}} γρ.",
+    umrechnungstabelle_keine_treffer: "Δεν βρέθηκε υλικό.",
     einkaufsmodus_start_btn: "🛒 Λίστα αγορών",
     einkaufsmodus_beenden_btn: "✕ Τερματισμός επιλογής",
     kopf_neu_btn: "+ Νέα",
@@ -3365,6 +3485,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Szakácskönyv",
     kopf_sichern_btn: "💾 Biztonsági mentés",
     kopf_wochenplan_btn: "📅 Heti étrend",
+    umrechnungstabelle_btn: "📐 Átváltási táblázat",
+    umrechnungstabelle_titel: "Átváltási táblázat",
+    umrechnungstabelle_hinweis: "Hozzávetőleges grammértékek kb. 50 gyakori konyhai alapanyaghoz - márkától és állapottól függően változhatnak, csak útmutatóként. NEM kerülnek automatikusan a receptjeidre.",
+    umrechnungstabelle_suche_placeholder: "Alapanyag keresése …",
+    umrechnungstabelle_spalte_zutat: "Alapanyag",
+    umrechnungstabelle_spalte_tasse: "1 bögre",
+    umrechnungstabelle_spalte_el: "1 evőkanál",
+    umrechnungstabelle_spalte_tl: "1 teáskanál",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Nem található alapanyag.",
     einkaufsmodus_start_btn: "🛒 Bevásárlólista",
     einkaufsmodus_beenden_btn: "✕ Kiválasztás befejezése",
     kopf_neu_btn: "+ Új",
@@ -3619,6 +3749,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Leabhar Cócaireachta",
     kopf_sichern_btn: "💾 Cúltaca",
     kopf_wochenplan_btn: "📅 Plean seachtainiúil",
+    umrechnungstabelle_btn: "📐 Tábla tiontaithe",
+    umrechnungstabelle_titel: "Tábla tiontaithe",
+    umrechnungstabelle_hinweis: "Luachanna garaimm thuairisciúla do thart ar 50 comhábhar coitianta cistine - athraíonn siad de réir branda agus comhdhlúis, mar sin ní bhaineann siad ach le tagairt. NÍ chuirtear i bhfeidhm go huathoibríoch ar do chuid oidis iad.",
+    umrechnungstabelle_suche_placeholder: "Cuardaigh comhábhar …",
+    umrechnungstabelle_spalte_zutat: "Comhábhar",
+    umrechnungstabelle_spalte_tasse: "1 chupán",
+    umrechnungstabelle_spalte_el: "1 spúnóg bhord",
+    umrechnungstabelle_spalte_tl: "1 taespúnóg",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Níor aimsíodh comhábhar.",
     einkaufsmodus_start_btn: "🛒 Liosta siopadóireachta",
     einkaufsmodus_beenden_btn: "✕ Stop an roghnú",
     kopf_neu_btn: "+ Nua",
@@ -3873,6 +4013,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Ricettario",
     kopf_sichern_btn: "💾 Backup",
     kopf_wochenplan_btn: "📅 Piano settimanale",
+    umrechnungstabelle_btn: "📐 Tabella di conversione",
+    umrechnungstabelle_titel: "Tabella di conversione",
+    umrechnungstabelle_hinweis: "Valori approssimativi in grammi per circa 50 ingredienti comuni in cucina - variano in base a marca e consistenza, quindi solo come riferimento. NON vengono applicati automaticamente alle tue ricette.",
+    umrechnungstabelle_suche_placeholder: "Cerca ingrediente …",
+    umrechnungstabelle_spalte_zutat: "Ingrediente",
+    umrechnungstabelle_spalte_tasse: "1 tazza",
+    umrechnungstabelle_spalte_el: "1 cucchiaio",
+    umrechnungstabelle_spalte_tl: "1 cucchiaino",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Nessun ingrediente trovato.",
     einkaufsmodus_start_btn: "🛒 Lista della spesa",
     einkaufsmodus_beenden_btn: "✕ Termina selezione",
     kopf_neu_btn: "+ Nuova",
@@ -4127,6 +4277,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Pavārgrāmata",
     kopf_sichern_btn: "💾 Rezerves kopija",
     kopf_wochenplan_btn: "📅 Nedēļas plāns",
+    umrechnungstabelle_btn: "📐 Pārrēķina tabula",
+    umrechnungstabelle_titel: "Pārrēķina tabula",
+    umrechnungstabelle_hinweis: "Orientējošas vērtības gramos apmēram 50 biežāk lietotām virtuves sastāvdaļām - atšķiras atkarībā no markas un konsistences, tāpēc tikai uzziņai. Tās NETIEK automātiski piemērotas tavām receptēm.",
+    umrechnungstabelle_suche_placeholder: "Meklēt sastāvdaļu …",
+    umrechnungstabelle_spalte_zutat: "Sastāvdaļa",
+    umrechnungstabelle_spalte_tasse: "1 glāze",
+    umrechnungstabelle_spalte_el: "1 ēd. k.",
+    umrechnungstabelle_spalte_tl: "1 tēj. k.",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Sastāvdaļa netika atrasta.",
     einkaufsmodus_start_btn: "🛒 Iepirkumu saraksts",
     einkaufsmodus_beenden_btn: "✕ Pārtraukt atlasi",
     kopf_neu_btn: "+ Jauns",
@@ -4380,6 +4540,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Receptų knyga",
     kopf_sichern_btn: "💾 Atsarginė kopija",
     kopf_wochenplan_btn: "📅 Savaitės planas",
+    umrechnungstabelle_btn: "📐 Perskaičiavimo lentelė",
+    umrechnungstabelle_titel: "Perskaičiavimo lentelė",
+    umrechnungstabelle_hinweis: "Orientacinės gramų vertės apie 50 dažnai naudojamų virtuvės produktų - skiriasi pagal gamintoją ir konsistenciją, todėl tik informacijai. Jos NĖRA automatiškai pritaikomos tavo receptams.",
+    umrechnungstabelle_suche_placeholder: "Ieškoti produkto …",
+    umrechnungstabelle_spalte_zutat: "Produktas",
+    umrechnungstabelle_spalte_tasse: "1 puodelis",
+    umrechnungstabelle_spalte_el: "1 šaukštas",
+    umrechnungstabelle_spalte_tl: "1 šaukštelis",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Produktas nerastas.",
     einkaufsmodus_start_btn: "🛒 Pirkinių sąrašas",
     einkaufsmodus_beenden_btn: "✕ Baigti pasirinkimą",
     kopf_neu_btn: "+ Naujas",
@@ -4633,6 +4803,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Ktieb tar-Riċetti",
     kopf_sichern_btn: "💾 Kopja ta' Sigurtà",
     kopf_wochenplan_btn: "📅 Pjan tal-Ġimgħa",
+    umrechnungstabelle_btn: "📐 Tabella tal-konverżjoni",
+    umrechnungstabelle_titel: "Tabella tal-konverżjoni",
+    umrechnungstabelle_hinweis: "Valuri indikattivi fi grammi għal madwar 50 ingredjent komuni tal-kċina - ivarjaw skont il-marka u l-konsistenza, għalhekk biss ta' referenza. Ma jiġux applikati awtomatikament fuq ir-riċetti tiegħek.",
+    umrechnungstabelle_suche_placeholder: "Fittex ingredjent …",
+    umrechnungstabelle_spalte_zutat: "Ingredjent",
+    umrechnungstabelle_spalte_tasse: "1 tazza",
+    umrechnungstabelle_spalte_el: "1 mgħarfa",
+    umrechnungstabelle_spalte_tl: "1 mgħarfa tal-ikel żgħira",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "L-ebda ingredjent ma nstab.",
     einkaufsmodus_start_btn: "🛒 Lista tax-Xiri",
     einkaufsmodus_beenden_btn: "✕ Waqqaf l-għażla",
     kopf_neu_btn: "+ Ġdid",
@@ -4887,6 +5067,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Książka kucharska",
     kopf_sichern_btn: "💾 Kopia zapasowa",
     kopf_wochenplan_btn: "📅 Plan tygodnia",
+    umrechnungstabelle_btn: "📐 Tabela przeliczeń",
+    umrechnungstabelle_titel: "Tabela przeliczeń",
+    umrechnungstabelle_hinweis: "Orientacyjne wartości w gramach dla ok. 50 często używanych produktów kuchennych - różnią się w zależności od marki i konsystencji, więc służą tylko do wglądu. NIE są automatycznie stosowane w twoich przepisach.",
+    umrechnungstabelle_suche_placeholder: "Szukaj produktu …",
+    umrechnungstabelle_spalte_zutat: "Produkt",
+    umrechnungstabelle_spalte_tasse: "1 szklanka",
+    umrechnungstabelle_spalte_el: "1 łyżka",
+    umrechnungstabelle_spalte_tl: "1 łyżeczka",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Nie znaleziono produktu.",
     einkaufsmodus_start_btn: "🛒 Lista zakupów",
     einkaufsmodus_beenden_btn: "✕ Zakończ wybór",
     kopf_neu_btn: "+ Nowy",
@@ -5140,6 +5330,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Livro de Receitas",
     kopf_sichern_btn: "💾 Cópia de segurança",
     kopf_wochenplan_btn: "📅 Plano semanal",
+    umrechnungstabelle_btn: "📐 Tabela de conversão",
+    umrechnungstabelle_titel: "Tabela de conversão",
+    umrechnungstabelle_hinweis: "Valores aproximados em gramas para cerca de 50 ingredientes comuns na cozinha - variam por marca e consistência, por isso servem apenas de referência. NÃO são aplicados automaticamente às tuas receitas.",
+    umrechnungstabelle_suche_placeholder: "Procurar ingrediente …",
+    umrechnungstabelle_spalte_zutat: "Ingrediente",
+    umrechnungstabelle_spalte_tasse: "1 chávena",
+    umrechnungstabelle_spalte_el: "1 col. de sopa",
+    umrechnungstabelle_spalte_tl: "1 col. de chá",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Nenhum ingrediente encontrado.",
     einkaufsmodus_start_btn: "🛒 Lista de compras",
     einkaufsmodus_beenden_btn: "✕ Terminar seleção",
     kopf_neu_btn: "+ Nova",
@@ -5394,6 +5594,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Carte de rețete",
     kopf_sichern_btn: "💾 Copie de rezervă",
     kopf_wochenplan_btn: "📅 Plan săptămânal",
+    umrechnungstabelle_btn: "📐 Tabel de conversie",
+    umrechnungstabelle_titel: "Tabel de conversie",
+    umrechnungstabelle_hinweis: "Valori orientative în grame pentru circa 50 de ingrediente comune de bucătărie - variază în funcție de marcă și consistență, deci doar pentru consultare. NU sunt aplicate automat rețetelor tale.",
+    umrechnungstabelle_suche_placeholder: "Caută ingredient …",
+    umrechnungstabelle_spalte_zutat: "Ingredient",
+    umrechnungstabelle_spalte_tasse: "1 cană",
+    umrechnungstabelle_spalte_el: "1 lingură",
+    umrechnungstabelle_spalte_tl: "1 linguriță",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Niciun ingredient găsit.",
     einkaufsmodus_start_btn: "🛒 Listă de cumpărături",
     einkaufsmodus_beenden_btn: "✕ Încheie selecția",
     kopf_neu_btn: "+ Nou",
@@ -5647,6 +5857,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuchárska kniha",
     kopf_sichern_btn: "💾 Záloha",
     kopf_wochenplan_btn: "📅 Týždenný plán",
+    umrechnungstabelle_btn: "📐 Prevodná tabuľka",
+    umrechnungstabelle_titel: "Prevodná tabuľka",
+    umrechnungstabelle_hinweis: "Orientačné hodnoty v gramoch pre približne 50 bežných kuchynských surovín - líšia sa podľa značky a konzistencie, slúžia len na nahliadnutie. NEaplikujú sa automaticky na tvoje recepty.",
+    umrechnungstabelle_suche_placeholder: "Hľadať surovinu …",
+    umrechnungstabelle_spalte_zutat: "Surovina",
+    umrechnungstabelle_spalte_tasse: "1 hrnček",
+    umrechnungstabelle_spalte_el: "1 lyžica",
+    umrechnungstabelle_spalte_tl: "1 čajová lyžička",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Nenašla sa žiadna surovina.",
     einkaufsmodus_start_btn: "🛒 Nákupný zoznam",
     einkaufsmodus_beenden_btn: "✕ Ukončiť výber",
     kopf_neu_btn: "+ Nový",
@@ -5900,6 +6120,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuharska knjiga",
     kopf_sichern_btn: "💾 Varnostna kopija",
     kopf_wochenplan_btn: "📅 Tedenski načrt",
+    umrechnungstabelle_btn: "📐 Pretvorbena tabela",
+    umrechnungstabelle_titel: "Pretvorbena tabela",
+    umrechnungstabelle_hinweis: "Približne vrednosti v gramih za okoli 50 pogostih kuhinjskih sestavin - razlikujejo se glede na znamko in gostoto, zato služijo le kot napotek. NISO samodejno uporabljene na tvojih receptih.",
+    umrechnungstabelle_suche_placeholder: "Iskanje sestavine …",
+    umrechnungstabelle_spalte_zutat: "Sestavina",
+    umrechnungstabelle_spalte_tasse: "1 skodelica",
+    umrechnungstabelle_spalte_el: "1 jed. žlica",
+    umrechnungstabelle_spalte_tl: "1 čaj. žlička",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Sestavina ni bila najdena.",
     einkaufsmodus_start_btn: "🛒 Nakupovalni seznam",
     einkaufsmodus_beenden_btn: "✕ Končaj izbiranje",
     kopf_neu_btn: "+ Nov",
@@ -6153,6 +6383,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Libro de recetas",
     kopf_sichern_btn: "💾 Copia de seguridad",
     kopf_wochenplan_btn: "📅 Plan semanal",
+    umrechnungstabelle_btn: "📐 Tabla de conversión",
+    umrechnungstabelle_titel: "Tabla de conversión",
+    umrechnungstabelle_hinweis: "Valores orientativos en gramos para unos 50 ingredientes habituales de cocina - varían según la marca y la consistencia, por lo que son solo de referencia. NO se aplican automáticamente a tus recetas.",
+    umrechnungstabelle_suche_placeholder: "Buscar ingrediente …",
+    umrechnungstabelle_spalte_zutat: "Ingrediente",
+    umrechnungstabelle_spalte_tasse: "1 taza",
+    umrechnungstabelle_spalte_el: "1 cda.",
+    umrechnungstabelle_spalte_tl: "1 cdta.",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "No se encontró ningún ingrediente.",
     einkaufsmodus_start_btn: "🛒 Lista de la compra",
     einkaufsmodus_beenden_btn: "✕ Finalizar selección",
     kopf_neu_btn: "+ Nueva",
@@ -6406,6 +6646,16 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kokbok",
     kopf_sichern_btn: "💾 Säkerhetskopia",
     kopf_wochenplan_btn: "📅 Veckoplan",
+    umrechnungstabelle_btn: "📐 Omvandlingstabell",
+    umrechnungstabelle_titel: "Omvandlingstabell",
+    umrechnungstabelle_hinweis: "Ungefärliga gramvärden för ca 50 vanliga köksingredienser - varierar beroende på märke och konsistens, så endast som referens. Används INTE automatiskt på dina recept.",
+    umrechnungstabelle_suche_placeholder: "Sök ingrediens …",
+    umrechnungstabelle_spalte_zutat: "Ingrediens",
+    umrechnungstabelle_spalte_tasse: "1 kopp",
+    umrechnungstabelle_spalte_el: "1 msk",
+    umrechnungstabelle_spalte_tl: "1 tsk",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "Ingen ingrediens hittades.",
     einkaufsmodus_start_btn: "🛒 Inköpslista",
     einkaufsmodus_beenden_btn: "✕ Avsluta val",
     kopf_neu_btn: "+ Ny",
@@ -6881,6 +7131,118 @@ const EINHEIT_SYNONYME = {
   "fluid ounce": "fl oz", "fluid ounces": "fl oz",
 };
 
+// Exakte (NICHT geschätzte) Umrechnungsfaktoren amerikanischer Maßeinheiten
+// in metrische Einheiten - reine Mathematik (1 cup = 236.588 ml usw.), KEINE
+// Zutaten-Dichte-Tabelle. Das ist bewusst beschränkt auf "gleichartige"
+// Umrechnung (Volumen -> Volumen, Gewicht -> Gewicht): cup/tbsp/tsp/fl oz/
+// pt/qt/gal sind Volumenangaben und werden zu ml/l; oz/lb sind
+// Gewichtsangaben und werden zu g/kg. Eine Umrechnung Volumen -> Gewicht
+// (z.B. "1 cup Mehl" -> Gramm) würde die Dichte der jeweiligen Zutat
+// brauchen und wäre damit Raten - das macht diese Karte bewusst NICHT
+// automatisch (siehe stattdessen die separate, rein informative
+// Umrechnungstabelle im Hauptmenü).
+const US_EINHEIT_IN_ML = { cup: 236.588, tbsp: 14.787, tsp: 4.929, "fl oz": 29.574, pt: 473.176, qt: 946.353, gal: 3785.41 };
+const US_EINHEIT_IN_G = { oz: 28.3495, lb: 453.592 };
+
+// Unicode-Bruchzeichen als Dezimalwert, fürs exakte Verrechnen bei der
+// US-Einheiten-Umrechnung (siehe _usEinheitUmrechnen).
+const BRUCH_ZEICHEN_WERT = {
+  "½": 1 / 2, "⅓": 1 / 3, "⅔": 2 / 3, "¼": 1 / 4, "¾": 3 / 4,
+  "⅕": 1 / 5, "⅖": 2 / 5, "⅗": 3 / 5, "⅘": 4 / 5,
+  "⅙": 1 / 6, "⅚": 5 / 6, "⅛": 1 / 8, "⅜": 3 / 8, "⅝": 5 / 8, "⅞": 7 / 8,
+};
+
+// Parst EINEN einzelnen Mengen-Wert (ohne Bereich) als Dezimalzahl -
+// Ganz-/Kommazahlen ("400", "1,5"), einfache Brüche ("1/2"), Unicode-
+// Bruchzeichen ("½") und gemischte Zahlen ("1 1/2", "1 ½"). Anders als
+// _mengeNumerischParsen (siehe dortiger Kommentar) werden Brüche hier
+// bewusst unterstützt, weil es NICHT ums Aufsummieren mehrerer Zutaten
+// geht, sondern nur um die Umrechnung EINER Zutatenzeile in eine andere
+// Einheit - dafür muss "1/2 cup" exakt als 0,5 gelesen werden, sonst wäre
+// die Umrechnung falsch (parseFloat("1/2") allein ergäbe fälschlich 1).
+function _mengeWertParsen(wert) {
+  const w = (wert || "").trim();
+  if (!w) return null;
+
+  let treffer = w.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/); // gemischt: "1 1/2"
+  if (treffer) {
+    const nenner = Number(treffer[3]);
+    if (!nenner) return null;
+    return Number(treffer[1]) + Number(treffer[2]) / nenner;
+  }
+
+  treffer = w.match(new RegExp(`^(\\d+)\\s+(${ZUTAT_MENGE_BRUCHZEICHEN})$`)); // gemischt: "1 ½"
+  if (treffer) return Number(treffer[1]) + BRUCH_ZEICHEN_WERT[treffer[2]];
+
+  treffer = w.match(/^(\d+)\s*\/\s*(\d+)$/); // einfacher Bruch: "1/2"
+  if (treffer) {
+    const nenner = Number(treffer[2]);
+    if (!nenner) return null;
+    return Number(treffer[1]) / nenner;
+  }
+
+  if (BRUCH_ZEICHEN_WERT[w] !== undefined) return BRUCH_ZEICHEN_WERT[w]; // "½"
+
+  if (/^\d+(?:[.,]\d+)?$/.test(w)) return parseFloat(w.replace(",", ".")); // "400" / "1,5"
+
+  return null;
+}
+
+// Parst eine komplette Mengenangabe, ggf. mit Bereich ("400-500",
+// "1/2-3/4", "1 bis 2"), in ein Array aus einer oder zwei Dezimalzahlen.
+// Gibt null zurück, wenn irgendein Teil nicht eindeutig lesbar ist - dann
+// wird bei der US-Umrechnung bewusst NICHTS verändert, statt zu raten.
+function _mengeBereichParsen(text) {
+  const w = (text || "").trim();
+  if (!w) return null;
+  const teile = w.split(/\s*(?:-|–|—|bis)\s*/);
+  if (teile.length > 2) return null;
+  const werte = teile.map(_mengeWertParsen);
+  if (werte.some((v) => v === null || Number.isNaN(v))) return null;
+  return werte;
+}
+
+// Formatiert eine umgerechnete Zahl zur Anzeige: feste Nachkommastellen-
+// Anzahl, überflüssige Nullen entfernt, Komma statt Punkt (wie der Rest der
+// Karte Zahlen anzeigt).
+function _umgerechneteZahlFormatieren(zahl, nachkommastellen) {
+  const faktor = Math.pow(10, nachkommastellen);
+  const gerundet = Math.round(zahl * faktor) / faktor;
+  return String(gerundet).replace(".", ",");
+}
+
+// Rechnet eine erkannte amerikanische Maßeinheit EXAKT in die passende
+// metrische Einheit um: Volumen (cup/tbsp/tsp/fl oz/pt/qt/gal) -> ml, ab
+// 1000 ml -> l; Gewicht (oz/lb) -> g, ab 1000 g -> kg. Reine Mathematik mit
+// festen Faktoren (siehe US_EINHEIT_IN_ML/US_EINHEIT_IN_G oben), KEINE
+// Zutaten-Dichte-Tabelle. Lässt Menge/Einheit unverändert, wenn die Einheit
+// keine erkannte amerikanische Einheit ist ODER die Menge nicht eindeutig
+// als Zahl/Bruch/Bereich lesbar ist (siehe _mengeBereichParsen) - lieber
+// nichts umrechnen als falsch raten.
+function _usEinheitUmrechnen(amountRoh, unitRoh) {
+  const einheitKanonisch = EINHEIT_SYNONYME[(unitRoh || "").trim().toLowerCase()] || "";
+  const istVolumen = Object.prototype.hasOwnProperty.call(US_EINHEIT_IN_ML, einheitKanonisch);
+  const istGewicht = !istVolumen && Object.prototype.hasOwnProperty.call(US_EINHEIT_IN_G, einheitKanonisch);
+  if (!istVolumen && !istGewicht) return { amount: amountRoh, unit: unitRoh };
+
+  const werte = _mengeBereichParsen(amountRoh);
+  if (werte === null) return { amount: amountRoh, unit: unitRoh };
+
+  const faktor = istVolumen ? US_EINHEIT_IN_ML[einheitKanonisch] : US_EINHEIT_IN_G[einheitKanonisch];
+  const umgerechnet = werte.map((w) => w * faktor);
+  const schwelle = 1000;
+  const grosseEinheit = istVolumen ? "l" : "kg";
+  const kleineEinheit = istVolumen ? "ml" : "g";
+  // Einheitlich für den ganzen (ggf. Bereichs-)Wert: der GRÖSSERE Wert
+  // entscheidet, damit z.B. "400-1200 g Mehl" nicht als "400 g - 1,2 kg"
+  // mit zwei verschiedenen Einheiten im selben Bereich angezeigt wird.
+  const nimmGrosseEinheit = Math.max(...umgerechnet) >= schwelle;
+  const texte = umgerechnet.map((w) =>
+    _umgerechneteZahlFormatieren(nimmGrosseEinheit ? w / schwelle : w, nimmGrosseEinheit ? 2 : 0)
+  );
+  return { amount: texte.join("-"), unit: nimmGrosseEinheit ? grosseEinheit : kleineEinheit };
+}
+
 // Erkennt "Menge Einheit Name" (z.B. "500 g Mehl", "1/2 TL Salz", "½ TL
 // Salz", "1,5 EL Öl", "400-500 g Mehl", "eine Prise Salz") - Menge und
 // Einheit sind beide optional, damit auch Zeilen ohne erkennbare Menge
@@ -6945,6 +7307,71 @@ const KATEGORIE_STICHWORTE = [
   ["Hauptgericht", /hauptgericht|hauptspeise|risotto|auflauf|eintopf|schnitzel|braten\b/i],
 ];
 
+// Rein INFORMATIVE Nachschlagetabelle für den "Umrechnungstabelle"-Knopf im
+// Hauptmenü: ungefähre Richtwerte in Gramm für Tasse/EL/TL bei ca. 50 in der
+// Küche häufig vorkommenden Zutaten. Das ist bewusst von der automatischen,
+// EXAKTEN Einheiten-Umrechnung (siehe _usEinheitUmrechnen) getrennt und wird
+// NIE automatisch auf echte Rezeptdaten angewendet: diese Werte hängen von
+// der Dichte der jeweiligen Zutat ab (wie fest Mehl im Messbecher sitzt,
+// wie fein etwas gemahlen ist usw.) und sind deshalb nur Richtwerte zum
+// manuellen Nachschlagen, keine verlässliche Grundlage für automatisches
+// Rechnen. Fehlende Felder (z.B. keine "Tasse"-Angabe bei Gewürzen, die
+// praktisch nur teelöffelweise vorkommen) werden in der Tabelle als "–"
+// angezeigt statt mit einer unüblichen, aber rechnerisch ableitbaren Zahl
+// aufgefüllt zu werden.
+const UMRECHNUNGSTABELLE_ZUTATEN = [
+  { name: "Mehl (Weizen, Type 405)", cup: 120, tbsp: 8, tsp: 2.6 },
+  { name: "Zucker (Kristallzucker)", cup: 200, tbsp: 12.5, tsp: 4.2 },
+  { name: "Puderzucker", cup: 120, tbsp: 7.5 },
+  { name: "Brauner Zucker (fest gepackt)", cup: 220, tbsp: 13.8 },
+  { name: "Butter", cup: 227, tbsp: 14.2, tsp: 4.7 },
+  { name: "Honig", cup: 340, tbsp: 21 },
+  { name: "Ahornsirup", cup: 315, tbsp: 20 },
+  { name: "Pflanzenöl", cup: 218, tbsp: 13.6 },
+  { name: "Olivenöl", cup: 216, tbsp: 13.5 },
+  { name: "Milch", cup: 240, tbsp: 15 },
+  { name: "Sahne (Schlagsahne)", cup: 240, tbsp: 15 },
+  { name: "Wasser", cup: 237, tbsp: 14.8, tsp: 4.9 },
+  { name: "Naturjoghurt", cup: 245, tbsp: 15.3 },
+  { name: "Saure Sahne", cup: 230, tbsp: 14.4 },
+  { name: "Frischkäse", cup: 232, tbsp: 14.5 },
+  { name: "Reis, ungekocht (Langkorn)", cup: 185 },
+  { name: "Haferflocken", cup: 90 },
+  { name: "Kakaopulver", cup: 85, tbsp: 5.3 },
+  { name: "Backpulver", tbsp: 12, tsp: 4 },
+  { name: "Natron", tbsp: 13.8, tsp: 4.6 },
+  { name: "Salz, fein", tbsp: 18, tsp: 6 },
+  { name: "Hefe, trocken", tbsp: 9.3, tsp: 3.1 },
+  { name: "Mandeln, gemahlen", cup: 96, tbsp: 6 },
+  { name: "Walnüsse, gehackt", cup: 100, tbsp: 6.3 },
+  { name: "Haselnüsse, gehackt", cup: 115, tbsp: 7.2 },
+  { name: "Rosinen", cup: 150, tbsp: 9.4 },
+  { name: "Schokoladenstückchen", cup: 170, tbsp: 10.6 },
+  { name: "Semmelbrösel, trocken", cup: 108, tbsp: 6.8 },
+  { name: "Parmesan, gerieben", cup: 100, tbsp: 6.3 },
+  { name: "Käse, gerieben (z.B. Gouda, Cheddar)", cup: 110, tbsp: 6.9 },
+  { name: "Quinoa, ungekocht", cup: 170 },
+  { name: "Linsen, getrocknet", cup: 190 },
+  { name: "Couscous, trocken", cup: 175 },
+  { name: "Erdnussbutter", cup: 258, tbsp: 16.1 },
+  { name: "Tomatenmark", cup: 262, tbsp: 16.4 },
+  { name: "Essig", cup: 240, tbsp: 15 },
+  { name: "Zitronensaft", cup: 245, tbsp: 15.3 },
+  { name: "Vanilleextrakt", tbsp: 12.5, tsp: 4.2 },
+  { name: "Zimt, gemahlen", tbsp: 7.8, tsp: 2.6 },
+  { name: "Ingwer, gemahlen", tbsp: 5.4, tsp: 1.8 },
+  { name: "Paprikapulver", tbsp: 6.9, tsp: 2.3 },
+  { name: "Pfeffer, gemahlen", tbsp: 6.9, tsp: 2.3 },
+  { name: "Knoblauchpulver", tbsp: 9.3, tsp: 3.1 },
+  { name: "Kurkuma, gemahlen", tbsp: 9, tsp: 3 },
+  { name: "Sesam (Sesamsamen)", cup: 144, tbsp: 9 },
+  { name: "Leinsamen", cup: 168, tbsp: 10.5 },
+  { name: "Chiasamen", cup: 170, tbsp: 10.6 },
+  { name: "Kokosflocken, ungesüßt", cup: 80, tbsp: 5 },
+  { name: "Kokosmilch (Dose, flüssig)", cup: 240, tbsp: 15 },
+  { name: "Maisstärke", cup: 120, tbsp: 7.5, tsp: 2.5 },
+];
+
 function _zutatZeileParsen(rohzeile) {
   // Führende Listenzeichen ("-", "*", "•") entfernen, wie sie beim Kopieren
   // von Webseiten/Chefkoch häufig vorkommen.
@@ -6952,7 +7379,11 @@ function _zutatZeileParsen(rohzeile) {
   const treffer = zeile.match(ZUTAT_MUSTER);
   if (!treffer) return { amount: "", unit: "", name: zeile.trim() };
   const [, amount, unit, name] = treffer;
-  return { amount: (amount || "").trim(), unit: (unit || "").trim(), name: name.trim() };
+  // Amerikanische Einheiten werden bei der Erkennung automatisch exakt in
+  // Metrik umgerechnet (siehe _usEinheitUmrechnen) - bewusst NUR gleichartig
+  // (Volumen->Volumen, Gewicht->Gewicht), ohne Dichte-Schätzung.
+  const umgerechnet = _usEinheitUmrechnen((amount || "").trim(), (unit || "").trim());
+  return { amount: umgerechnet.amount, unit: umgerechnet.unit, name: name.trim() };
 }
 
 // Ermittelt, ob in einem Zutaten-Block die Menge VOR dem Namen steht
@@ -6999,7 +7430,8 @@ function _zutatenPaarweiseParsen(zeilen, reihenfolge) {
           i = j + 1;
         }
       }
-      ergebnis.push({ amount, unit, name: zeile });
+      const umgerechnet1 = _usEinheitUmrechnen(amount, unit);
+      ergebnis.push({ amount: umgerechnet1.amount, unit: umgerechnet1.unit, name: zeile });
       continue;
     }
 
@@ -7028,7 +7460,8 @@ function _zutatenPaarweiseParsen(zeilen, reihenfolge) {
       i++;
     }
 
-    ergebnis.push({ amount: (amount || "").trim(), unit: (unit || "").trim(), name });
+    const umgerechnet2 = _usEinheitUmrechnen((amount || "").trim(), (unit || "").trim());
+    ergebnis.push({ amount: umgerechnet2.amount, unit: umgerechnet2.unit, name });
   }
   return ergebnis;
 }
@@ -8889,6 +9322,26 @@ class RezeptbuchCard extends HTMLElement {
       .replace(/ß/g, "ss");
   }
 
+  // Filtert die Zeilen der Umrechnungstabelle-Modal rein im DOM nach
+  // Zutatenname - bewusst OHNE this._render(), weil ein Re-Render das Modal
+  // (dessen "offen"-Zustand nur per style.display, nicht über eine eigene
+  // Daten-Property gesteuert wird - siehe Vorbild kochbuch-info-modal/
+  // statistik-modal) sofort wieder schließen würde.
+  _umrechnungstabelleFiltern(suchbegriff) {
+    const liste = this.shadowRoot.getElementById("umrechnungstabelle-liste");
+    if (!liste) return;
+    const begriffNorm = this._normalisieren(suchbegriff);
+    const zeilen = Array.from(liste.querySelectorAll("tbody tr"));
+    let treffer = 0;
+    for (const zeile of zeilen) {
+      const passt = !begriffNorm || (zeile.dataset.zutatName || "").includes(begriffNorm);
+      zeile.style.display = passt ? "" : "none";
+      if (passt) treffer++;
+    }
+    const keineTrefferHinweis = this.shadowRoot.getElementById("umrechnungstabelle-keine-treffer");
+    if (keineTrefferHinweis) keineTrefferHinweis.style.display = treffer === 0 ? "block" : "none";
+  }
+
   _sortiereRezepte(liste) {
     const kopie = [...liste];
     if (this._sortierung === "titel") {
@@ -9439,6 +9892,18 @@ class RezeptbuchCard extends HTMLElement {
            Kasten lesbarer ist. */
         .modal-box-breit { max-width:480px; text-align:left; }
         .modal-box-breit h3 { color: var(--primary-text-color); }
+        /* Höhere Variante für die Umrechnungstabelle (~50 Zeilen) - die
+           Zutatenliste selbst bekommt eine eigene Scroll-Fläche
+           (.umrechnungstabelle-liste), damit Überschrift, Hinweistext,
+           Suchfeld und die Schließen-Schaltfläche immer sichtbar bleiben. */
+        .modal-box-hoch { display:flex; flex-direction:column; max-height:85vh; }
+        #umrechnungstabelle-suche-feld { width:100%; box-sizing:border-box; margin-bottom:10px; }
+        .umrechnungstabelle-liste { overflow-y:auto; flex:1 1 auto; min-height:0; border:1px solid var(--divider-color, #ddd); border-radius:8px; }
+        .umrechnungstabelle-tabelle { width:100%; border-collapse:collapse; font-size:0.92em; }
+        .umrechnungstabelle-tabelle th, .umrechnungstabelle-tabelle td { padding:6px 8px; text-align:left; border-bottom:1px solid var(--divider-color, #eee); }
+        .umrechnungstabelle-tabelle th { position:sticky; top:0; background: var(--card-background-color, #fff); color: var(--secondary-text-color); font-weight:600; }
+        .umrechnungstabelle-tabelle td:not(:first-child), .umrechnungstabelle-tabelle th:not(:first-child) { text-align:right; white-space:nowrap; }
+        .umrechnungstabelle-keine-treffer { text-align:center; color: var(--secondary-text-color); padding:14px 8px; margin:0; }
         /* Kleiner runder "?"-Knopf neben "Von KI erzeugtes JSON einfügen" -
            öffnet den fertigen Prompt zum Kopieren (siehe json-info-modal). */
         .info-btn {
@@ -9559,6 +10024,7 @@ class RezeptbuchCard extends HTMLElement {
             ${this._rezepte.length ? `<button class="sekundaer" id="sichern-btn">${this._t("kopf_sichern_btn")}</button>` : ""}
             ${this._rezepte.length ? `<button class="sekundaer" id="sammel-pdf-btn">${this._t("kopf_sammel_pdf_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
+            <button class="sekundaer" id="umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
             ${this._rezepte.length && this._statistikAktiv() ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
@@ -9607,6 +10073,40 @@ class RezeptbuchCard extends HTMLElement {
             <p style="text-align:left;">${this._t("kochbuch_info_text")}</p>
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="primaer" id="kochbuch-info-schliessen-btn">${this._t("allgemein_schliessen")}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="umrechnungstabelle-modal" style="display:none;">
+          <div class="modal-box modal-box-breit modal-box-hoch">
+            <h3 style="margin-top:0;">${this._t("umrechnungstabelle_titel")}</h3>
+            <p style="text-align:left;">${this._t("umrechnungstabelle_hinweis")}</p>
+            <input type="text" id="umrechnungstabelle-suche-feld" placeholder="${this._t("umrechnungstabelle_suche_placeholder")}">
+            <div class="umrechnungstabelle-liste" id="umrechnungstabelle-liste">
+              <table class="umrechnungstabelle-tabelle">
+                <thead>
+                  <tr>
+                    <th>${this._t("umrechnungstabelle_spalte_zutat")}</th>
+                    <th>${this._t("umrechnungstabelle_spalte_tasse")}</th>
+                    <th>${this._t("umrechnungstabelle_spalte_el")}</th>
+                    <th>${this._t("umrechnungstabelle_spalte_tl")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${UMRECHNUNGSTABELLE_ZUTATEN.map((z) => `
+                    <tr data-zutat-name="${this._escape(this._normalisieren(z.name))}">
+                      <td>${this._escape(z.name)}</td>
+                      <td>${z.cup !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.cup).replace(".", ",") }) : "–"}</td>
+                      <td>${z.tbsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tbsp).replace(".", ",") }) : "–"}</td>
+                      <td>${z.tsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tsp).replace(".", ",") }) : "–"}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+              <p class="umrechnungstabelle-keine-treffer" id="umrechnungstabelle-keine-treffer" style="display:none;">${this._t("umrechnungstabelle_keine_treffer")}</p>
+            </div>
+            <div class="modal-aktionen" style="margin-top:14px;">
+              <button type="button" class="primaer" id="umrechnungstabelle-schliessen-btn">${this._t("allgemein_schliessen")}</button>
             </div>
           </div>
         </div>
@@ -10035,6 +10535,28 @@ class RezeptbuchCard extends HTMLElement {
     if (kochbuchInfoSchliessenBtn) {
       kochbuchInfoSchliessenBtn.addEventListener("click", () => {
         this.shadowRoot.getElementById("kochbuch-info-modal").style.display = "none";
+      });
+    }
+
+    const umrechnungstabelleBtn = this.shadowRoot.getElementById("umrechnungstabelle-btn");
+    if (umrechnungstabelleBtn) {
+      umrechnungstabelleBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("umrechnungstabelle-modal").style.display = "flex";
+      });
+    }
+    const umrechnungstabelleSchliessenBtn = this.shadowRoot.getElementById("umrechnungstabelle-schliessen-btn");
+    if (umrechnungstabelleSchliessenBtn) {
+      umrechnungstabelleSchliessenBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("umrechnungstabelle-modal").style.display = "none";
+        const sucheFeld = this.shadowRoot.getElementById("umrechnungstabelle-suche-feld");
+        if (sucheFeld) sucheFeld.value = "";
+        this._umrechnungstabelleFiltern("");
+      });
+    }
+    const umrechnungstabelleSucheFeld = this.shadowRoot.getElementById("umrechnungstabelle-suche-feld");
+    if (umrechnungstabelleSucheFeld) {
+      umrechnungstabelleSucheFeld.addEventListener("input", () => {
+        this._umrechnungstabelleFiltern(umrechnungstabelleSucheFeld.value);
       });
     }
 
