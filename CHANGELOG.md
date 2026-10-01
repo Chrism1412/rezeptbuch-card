@@ -6,8 +6,8 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [2.1.0] - 2026-10-01
 
-Erstes Update seit `v2.0.0` - acht über die GitHub-Issue-Vorlage
-eingereichte Verbesserungsvorschläge umgesetzt (eine neunte Anfrage -
+Erstes Update seit `v2.0.0` - vier über die GitHub-Issue-Vorlage
+eingereichte Verbesserungsvorschläge umgesetzt (eine fünfte Anfrage -
 eigene Hauptkategorien - gab es bereits seit [2.0.0]), dazu zwei beim
 internen Testen aufgefallene Korrekturen. Die Versionsnummer wurde bewusst
 erhöht, damit die Karte beim nächsten Laden zuverlässig ihren eigenen
