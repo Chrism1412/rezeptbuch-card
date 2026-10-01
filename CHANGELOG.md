@@ -38,6 +38,23 @@ seit [2.0.0]).
   in der Zeile bearbeitet werden zu können. Bewusst Auf/Ab-Knöpfe statt
   Drag&Drop (auf Touch-Geräten/in der Begleit-App erfahrungsgemäß
   unzuverlässig).
+- **Neue Kategorie direkt im Rezept-Formular anlegen**: fehlt beim
+  Anlegen/Bearbeiten eines Rezepts die passende Kategorie, muss man das
+  Formular nicht mehr verlassen (und alle bisherigen Eingaben verwerfen) -
+  im Kategorie-Dropdown gibt es dafür jetzt "+ Neue Kategorie", die
+  restlichen Formular-Felder bleiben dabei unangetastet erhalten.
+- **Kategorie umbenennen**: eine selbst angelegte Kategorie lässt sich
+  jetzt per ✎-Knopf umbenennen - alle Rezepte, die sie verwenden, werden
+  dabei automatisch auf den neuen Namen aktualisiert.
+
+### Geändert
+- **Kategorien verwalten nur noch für Admins**: eine eigene Kategorie
+  umzubenennen oder zu löschen geht jetzt nur noch für HA-Admins (wirkt
+  sich schließlich auf ALLE Rezepte mit dieser Kategorie aus). Neue
+  Kategorien anlegen bleibt bewusst für jeden Nutzer offen.
+- Der "+ Neue Kategorie"-Knopf in der Übersicht hebt sich jetzt per
+  gestricheltem Rand von den normalen Kategorie-Filter-Chips ab, damit er
+  zwischen vielen Kategorien nicht mehr so leicht übersehen wird.
 
 ## [2.0.0] - 2026-09-28
 

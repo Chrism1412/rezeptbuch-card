@@ -2107,6 +2107,216 @@ async function testEigeneKategorieLoeschen(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: nur ein HA-Admin sieht/darf die ✎-(Umbenennen)/✕-(Löschen)-Knöpfe
+// einer eigenen Kategorie verwenden - normale Nutzer dürfen weiterhin neue
+// Kategorien ANLEGEN (dafür reicht "+ Neue Kategorie"), aber bestehende
+// weder umbenennen noch löschen.
+// ---------------------------------------------------------------------
+async function testKategorieVerwaltenNurAdmin(browser) {
+  console.log("\nTest: Kategorie umbenennen/löschen nur für Admin sichtbar und erlaubt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Grillrezept", payload: leererPayload({ category: "Grillrezepte" }) });
+    await page.evaluate(async () => {
+      await window.__karte._eigeneKategorienSpeichern(["Grillrezepte"]);
+    });
+
+    // Als Nicht-Admin: weder ✎ noch ✕ werden überhaupt gerendert, und ein
+    // direkter Methodenaufruf (als Verteidigungslinie) wird ebenfalls
+    // abgelehnt.
+    const alsNichtAdmin = await page.evaluate(async () => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: false };
+      window.__karte._render();
+      const bearbeitenSichtbar = !!window.__karte.shadowRoot.querySelector('.kategorie-bearbeiten[data-kategorie="Grillrezepte"]');
+      const loeschenSichtbar = !!window.__karte.shadowRoot.querySelector('.kategorie-loeschen[data-kategorie="Grillrezepte"]');
+      const umbenennenErgebnis = await window.__karte._kategorieUmbenennen("Grillrezepte", "Grillrezepte neu");
+      return { bearbeitenSichtbar, loeschenSichtbar, umbenennenErgebnis, eigeneKategorien: window.__karte._eigeneKategorien };
+    });
+    assert(!alsNichtAdmin.bearbeitenSichtbar, "Als Nicht-Admin wird der ✎-Umbenennen-Knopf gar nicht erst angezeigt");
+    assert(!alsNichtAdmin.loeschenSichtbar, "Als Nicht-Admin wird der ✕-Löschen-Knopf gar nicht erst angezeigt");
+    assert(alsNichtAdmin.umbenennenErgebnis === false, "Ein direkter Aufruf von _kategorieUmbenennen() wird für einen Nicht-Admin abgelehnt (Verteidigungslinie)");
+    assert(alsNichtAdmin.eigeneKategorien.includes("Grillrezepte") && !alsNichtAdmin.eigeneKategorien.includes("Grillrezepte neu"), "Die Kategorie bleibt bei Ablehnung unverändert");
+
+    // Als Admin: beide Knöpfe erscheinen.
+    const alsAdmin = await page.evaluate(() => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: true };
+      window.__karte._render();
+      return {
+        bearbeitenSichtbar: !!window.__karte.shadowRoot.querySelector('.kategorie-bearbeiten[data-kategorie="Grillrezepte"]'),
+        loeschenSichtbar: !!window.__karte.shadowRoot.querySelector('.kategorie-loeschen[data-kategorie="Grillrezepte"]'),
+      };
+    });
+    assert(alsAdmin.bearbeitenSichtbar, "Als Admin wird der ✎-Umbenennen-Knopf angezeigt");
+    assert(alsAdmin.loeschenSichtbar, "Als Admin wird der ✕-Löschen-Knopf angezeigt");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: ein Admin benennt eine eigene Kategorie über die echte UI um (✎ ->
+// Eingabefeld -> Speichern) - ALLE Rezepte mit der alten Kategorie werden
+// automatisch auf den neuen Namen aktualisiert, kein Rezept verliert dabei
+// seine Zuordnung.
+// ---------------------------------------------------------------------
+async function testKategorieUmbenennenUeberUi(browser) {
+  console.log("\nTest: Kategorie über die UI umbenennen - Rezepte werden automatisch mit umbenannt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uidA = await rezeptDirektAnlegen(page, { title: "Spareribs", payload: leererPayload({ category: "Grillrezepte" }) });
+    const uidB = await rezeptDirektAnlegen(page, { title: "Gegrilltes Gemüse", payload: leererPayload({ category: "Grillrezepte" }) });
+    await rezeptDirektAnlegen(page, { title: "Nudelsalat", payload: leererPayload({ category: "Sonstiges" }) });
+    await page.evaluate(async () => {
+      await window.__karte._eigeneKategorienSpeichern(["Grillrezepte"]);
+      window.__karte._aktiveKategorie = "Grillrezepte";
+      window.__karte._render();
+    });
+
+    await page.evaluate(async () => {
+      const root = window.__karte.shadowRoot;
+      root.querySelector('.kategorie-bearbeiten[data-kategorie="Grillrezepte"]').click();
+      root.getElementById("kategorie-name-feld").value = "BBQ";
+      root.getElementById("kategorie-speichern-bestaetigen-btn").click();
+      // _kategorieUmbenennen() ist async (mehrere Service-Aufrufe) - warten,
+      // bis alle betroffenen Rezepte durch sind.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    const eigeneKategorien = await page.evaluate(() => window.__karte._eigeneKategorien);
+    assert(eigeneKategorien.includes("BBQ") && !eigeneKategorien.includes("Grillrezepte"), "Die eigene Kategorie selbst wird umbenannt (tatsächlich: " + JSON.stringify(eigeneKategorien) + ")");
+
+    const aktiveKategorie = await page.evaluate(() => window.__karte._aktiveKategorie);
+    assert(aktiveKategorie === "BBQ", "War die umbenannte Kategorie gerade als Filter aktiv, bleibt sie es unter dem neuen Namen");
+
+    const eintragA = await page.evaluate((uid) => JSON.parse(window.__speicher.find((i) => i.uid === uid).description), uidA);
+    const eintragB = await page.evaluate((uid) => JSON.parse(window.__speicher.find((i) => i.uid === uid).description), uidB);
+    assert(eintragA.category === "BBQ", "Rezept A (alte Kategorie) wird serverseitig auf den neuen Namen aktualisiert");
+    assert(eintragB.category === "BBQ", "Rezept B (alte Kategorie) wird serverseitig ebenfalls auf den neuen Namen aktualisiert");
+
+    const nudelsalat = await page.evaluate(() => window.__karte._rezepte.find((r) => r.title === "Nudelsalat"));
+    assert(nudelsalat.category === "Sonstiges", "Ein Rezept mit einer ANDEREN Kategorie bleibt beim Umbenennen unangetastet");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: beim Umbenennen wird derselbe Duplikat-Check wie beim Neuanlegen
+// angewendet (Groß-/Kleinschreibung ignorierend, gegen fest eingebaute UND
+// eigene Kategorien), wobei die eigene (alte) Kategorie selbst nicht als
+// Duplikat gegen sich selbst zählt.
+// ---------------------------------------------------------------------
+async function testKategorieUmbenennenDuplikatCheck(browser) {
+  console.log("\nTest: Kategorie umbenennen - Duplikat-Check analog zum Neuanlegen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    await page.evaluate(async () => {
+      await window.__karte._eigeneKategorienSpeichern(["Grillrezepte"]);
+      window.__karte._render();
+    });
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const umbenennenVersuchen = async (neuerName) => {
+        window.__alertAufrufe.length = 0;
+        karte.shadowRoot.querySelector('.kategorie-bearbeiten[data-kategorie="Grillrezepte"]').click();
+        karte.shadowRoot.getElementById("kategorie-name-feld").value = neuerName;
+        karte.shadowRoot.getElementById("kategorie-speichern-bestaetigen-btn").click();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      };
+
+      // Gegen eine fest eingebaute Kategorie (Groß-/Kleinschreibung
+      // ignorierend) - muss abgewiesen werden.
+      await umbenennenVersuchen("hauptgericht");
+      const gegenFestAbgewiesen = window.__alertAufrufe.length === 1 && karte._eigeneKategorien.includes("Grillrezepte");
+
+      // Auf den exakt gleichen (eigenen) Namen "umbenennen" - kein echtes
+      // Duplikat, da es dieselbe Kategorie ist, muss also durchgehen.
+      await umbenennenVersuchen("Grillrezepte");
+      const aufEigenenNamenErlaubt = window.__alertAufrufe.length === 0 && karte._eigeneKategorien.includes("Grillrezepte");
+
+      return { gegenFestAbgewiesen, aufEigenenNamenErlaubt };
+    });
+
+    assert(ergebnis.gegenFestAbgewiesen, "Umbenennen auf den Namen einer fest eingebauten Kategorie wird abgewiesen");
+    assert(ergebnis.aufEigenenNamenErlaubt, "Umbenennen auf den (unveränderten) eigenen Namen wird nicht fälschlich als Duplikat abgewiesen");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: eine neue Kategorie lässt sich DIREKT aus dem Rezept-Formular
+// heraus anlegen (gemeldeter Wunsch - bisher musste man das Formular
+// dafür verlassen und alle Eingaben verwerfen). Bereits eingegebene
+// Formular-Felder (hier: ein Zubereitungsschritt) dürfen dabei nicht
+// verloren gehen, und die neue Kategorie muss nach dem Speichern
+// tatsächlich am Rezept hängen.
+// ---------------------------------------------------------------------
+async function testNeueKategorieImFormularAnlegen(browser) {
+  console.log("\nTest: Neue Kategorie direkt im Rezept-Formular anlegen, ohne Formular-Eingaben zu verlieren");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await page.evaluate(() => window.__karte._neuesRezeptFormular());
+
+    await page.evaluate(() => {
+      // Einen Zubereitungsschritt eintippen, OHNE zu speichern - der darf
+      // durch das Anlegen der Kategorie nicht verloren gehen (kein
+      // this._render() dazwischen, siehe Code-Kommentar).
+      window.__karte.shadowRoot.querySelector("[data-schritt-feld]").value = "Noch nicht gespeicherter Schritt";
+    });
+
+    await page.evaluate(async () => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("kategorie-feld").value = "__neu__";
+      root.getElementById("kategorie-feld").dispatchEvent(new Event("change"));
+      root.getElementById("formular-kategorie-name-feld").value = "Grillrezepte";
+      root.getElementById("formular-kategorie-speichern-btn").click();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    const zustandNachAnlegen = await page.evaluate(() => {
+      const root = window.__karte.shadowRoot;
+      return {
+        schrittWert: root.querySelector("[data-schritt-feld]").value,
+        kategorieFeldWert: root.getElementById("kategorie-feld").value,
+        eigeneKategorien: window.__karte._eigeneKategorien,
+        bereichSichtbar: root.getElementById("formular-kategorie-neu-bereich").style.display !== "none",
+      };
+    });
+    assert(zustandNachAnlegen.schrittWert === "Noch nicht gespeicherter Schritt", "Der noch nicht gespeicherte Zubereitungsschritt bleibt im Formular erhalten (kein Formular-Neuaufbau)");
+    assert(zustandNachAnlegen.kategorieFeldWert === "Grillrezepte", "Das Kategorie-Dropdown wählt die neu angelegte Kategorie direkt aus");
+    assert(zustandNachAnlegen.eigeneKategorien.includes("Grillrezepte"), "Die neue Kategorie landet in _eigeneKategorien");
+    assert(!zustandNachAnlegen.bereichSichtbar, "Das Eingabefeld für die neue Kategorie blendet sich nach dem Anlegen wieder aus");
+
+    // Jetzt tatsächlich speichern - die neue Kategorie muss am Rezept
+    // landen.
+    await page.evaluate(async () => {
+      await window.__karte._formularSpeichern({
+        title: "Spareribs", servings: "4", category: "Grillrezepte",
+        ingredients: [{ amount: "1", unit: "kg", name: "Rippchen" }],
+        steps: ["Noch nicht gespeicherter Schritt"], image: null,
+      });
+    });
+    // Index 0 wäre hier NICHT zuverlässig das Rezept: das (versteckte)
+    // Marker-Item für die eigene Kategorie wurde durch das Anlegen oben
+    // bereits VOR dem Rezept im simulierten Speicher angelegt - deshalb
+    // gezielt per Titel suchen statt per Position.
+    const gespeichertesRezept = await page.evaluate(() =>
+      JSON.parse(window.__speicher.find((i) => i.summary === "Spareribs").description)
+    );
+    assert(gespeichertesRezept.category === "Grillrezepte", "Die im Formular neu angelegte Kategorie wird tatsächlich mit dem Rezept gespeichert");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 25e: Detailansicht - auf breiten Bildschirmen (z.B. Wandtablet im
 // Querformat) stehen Zutaten/Bild und Zubereitung nebeneinander (zwei
 // Spalten) statt wie auf schmalen Bildschirmen untereinander (eine Spalte).
@@ -5075,6 +5285,10 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testEigeneKategorieAnlegen(browser);
     await testEigeneKategorieDuplikatUndLeer(browser);
     await testEigeneKategorieLoeschen(browser);
+    await testKategorieVerwaltenNurAdmin(browser);
+    await testKategorieUmbenennenUeberUi(browser);
+    await testKategorieUmbenennenDuplikatCheck(browser);
+    await testNeueKategorieImFormularAnlegen(browser);
     await testDetailZweiSpaltenAufBreitemBildschirm(browser);
     await testEinkaufslisteOhneKonfiguration(browser);
     await testEinkaufslisteUeberUi(browser);

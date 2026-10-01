@@ -140,6 +140,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Diese Kategorie gibt es schon.",
     kategorie_loeschen_title: "Kategorie löschen",
     kategorie_loeschen_aria: "Kategorie {{name}} löschen",
+    kategorie_bearbeiten_title: "Kategorie umbenennen",
+    kategorie_bearbeiten_aria: "Kategorie {{name}} umbenennen",
+    kategorie_umbenennen_titel: "Kategorie \"{{name}}\" umbenennen:",
     fehler_kategorie_wird_verwendet: "Diese Kategorie wird noch von {{anzahl}}x verwendet - bitte zuerst eine andere Kategorie zuweisen.",
 
     // Wochentage (Anzeige - der interne Schlüssel in WOCHENTAGE bleibt
@@ -458,6 +461,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Die Kategorie gits scho.",
     kategorie_loeschen_title: "Kategorie lösche",
     kategorie_loeschen_aria: "Kategorie {{name}} lösche",
+    kategorie_bearbeiten_title: "Kategorie umbenenne",
+    kategorie_bearbeiten_aria: "Kategorie {{name}} umbenenne",
+    kategorie_umbenennen_titel: "Kategorie \"{{name}}\" umbenenne:",
     fehler_kategorie_wird_verwendet: "Die Kategorie wird no vo {{anzahl}}x bruucht - bitte zersch en anderi Kategorie zuedeile.",
 
     // Wochentage (Anzeige - der interne Schlüssel in WOCHENTAGE bleibt
@@ -767,6 +773,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "This category already exists.",
     kategorie_loeschen_title: "Delete category",
     kategorie_loeschen_aria: "Delete category {{name}}",
+    kategorie_bearbeiten_title: "Rename category",
+    kategorie_bearbeiten_aria: "Rename category {{name}}",
+    kategorie_umbenennen_titel: "Rename category \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "This category is still used by {{anzahl}}x recipes - please reassign them to another category first.",
 
     wochentag_montag: "Monday",
@@ -1058,6 +1067,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Тази категория вече съществува.",
     kategorie_loeschen_title: "Изтриване на категория",
     kategorie_loeschen_aria: "Изтриване на категория {{name}}",
+    kategorie_bearbeiten_title: "Преименуване на категория",
+    kategorie_bearbeiten_aria: "Преименуване на категория {{name}}",
+    kategorie_umbenennen_titel: "Преименуване на категория \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Тази категория все още се използва от {{anzahl}}x рецепти - моля, първо им задайте друга категория.",
     wochentag_montag: "Понеделник",
     wochentag_dienstag: "Вторник",
@@ -1308,6 +1320,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Ova kategorija već postoji.",
     kategorie_loeschen_title: "Izbriši kategoriju",
     kategorie_loeschen_aria: "Izbriši kategoriju {{name}}",
+    kategorie_bearbeiten_title: "Preimenuj kategoriju",
+    kategorie_bearbeiten_aria: "Preimenuj kategoriju {{name}}",
+    kategorie_umbenennen_titel: "Preimenovanje kategorije \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Ovu kategoriju još uvijek koristi {{anzahl}}x recepata - prvo im dodijelite drugu kategoriju.",
     wochentag_montag: "Ponedjeljak",
     wochentag_dienstag: "Utorak",
@@ -1558,6 +1573,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Tato kategorie již existuje.",
     kategorie_loeschen_title: "Smazat kategorii",
     kategorie_loeschen_aria: "Smazat kategorii {{name}}",
+    kategorie_bearbeiten_title: "Přejmenovat kategorii",
+    kategorie_bearbeiten_aria: "Přejmenovat kategorii {{name}}",
+    kategorie_umbenennen_titel: "Přejmenování kategorie \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Tuto kategorii stále používá {{anzahl}}x receptů - nejprve jim přiřaďte jinou kategorii.",
     wochentag_montag: "Pondělí",
     wochentag_dienstag: "Úterý",
@@ -1808,6 +1826,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Denne kategori findes allerede.",
     kategorie_loeschen_title: "Slet kategori",
     kategorie_loeschen_aria: "Slet kategori {{name}}",
+    kategorie_bearbeiten_title: "Omdøb kategori",
+    kategorie_bearbeiten_aria: "Omdøb kategori {{name}}",
+    kategorie_umbenennen_titel: "Omdøb kategori \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Denne kategori bruges stadig af {{anzahl}}x opskrifter - tildel dem venligst en anden kategori først.",
     wochentag_montag: "Mandag",
     wochentag_dienstag: "Tirsdag",
@@ -2058,6 +2079,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Deze categorie bestaat al.",
     kategorie_loeschen_title: "Categorie verwijderen",
     kategorie_loeschen_aria: "Categorie {{name}} verwijderen",
+    kategorie_bearbeiten_title: "Categorie hernoemen",
+    kategorie_bearbeiten_aria: "Categorie {{name}} hernoemen",
+    kategorie_umbenennen_titel: "Categorie \"{{name}}\" hernoemen:",
     fehler_kategorie_wird_verwendet: "Deze categorie wordt nog gebruikt door {{anzahl}}x recepten - wijs ze eerst een andere categorie toe.",
     wochentag_montag: "Maandag",
     wochentag_dienstag: "Dinsdag",
@@ -2308,6 +2332,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "See kategooria on juba olemas.",
     kategorie_loeschen_title: "Kustuta kategooria",
     kategorie_loeschen_aria: "Kustuta kategooria {{name}}",
+    kategorie_bearbeiten_title: "Nimeta kategooria",
+    kategorie_bearbeiten_aria: "Nimeta kategooria {{name}}",
+    kategorie_umbenennen_titel: "Kategooria \"{{name}}\" ümbernimetamine:",
     fehler_kategorie_wird_verwendet: "Seda kategooriat kasutab veel {{anzahl}}x retsepti - määra neile kõigepealt teine kategooria.",
     wochentag_montag: "Esmaspäev",
     wochentag_dienstag: "Teisipäev",
@@ -2558,6 +2585,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Tämä kategoria on jo olemassa.",
     kategorie_loeschen_title: "Poista kategoria",
     kategorie_loeschen_aria: "Poista kategoria {{name}}",
+    kategorie_bearbeiten_title: "Nimeä kategoria uudelleen",
+    kategorie_bearbeiten_aria: "Nimeä kategoria {{name}} uudelleen",
+    kategorie_umbenennen_titel: "Nimeä kategoria \"{{name}}\" uudelleen:",
     fehler_kategorie_wird_verwendet: "Tätä kategoriaa käyttää vielä {{anzahl}}x reseptiä - anna niille ensin toinen kategoria.",
     wochentag_montag: "Maanantai",
     wochentag_dienstag: "Tiistai",
@@ -2808,6 +2838,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Cette catégorie existe déjà.",
     kategorie_loeschen_title: "Supprimer la catégorie",
     kategorie_loeschen_aria: "Supprimer la catégorie {{name}}",
+    kategorie_bearbeiten_title: "Renommer la catégorie",
+    kategorie_bearbeiten_aria: "Renommer la catégorie {{name}}",
+    kategorie_umbenennen_titel: "Renommer la catégorie \"{{name}}\" :",
     fehler_kategorie_wird_verwendet: "Cette catégorie est encore utilisée par {{anzahl}}x recettes - veuillez d'abord leur attribuer une autre catégorie.",
     wochentag_montag: "Lundi",
     wochentag_dienstag: "Mardi",
@@ -3059,6 +3092,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Αυτή η κατηγορία υπάρχει ήδη.",
     kategorie_loeschen_title: "Διαγραφή κατηγορίας",
     kategorie_loeschen_aria: "Διαγραφή κατηγορίας {{name}}",
+    kategorie_bearbeiten_title: "Μετονομασία κατηγορίας",
+    kategorie_bearbeiten_aria: "Μετονομασία κατηγορίας {{name}}",
+    kategorie_umbenennen_titel: "Μετονομασία κατηγορίας \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Αυτή η κατηγορία χρησιμοποιείται ακόμα από {{anzahl}}x συνταγές - παρακαλώ δώστε τους πρώτα άλλη κατηγορία.",
     wochentag_montag: "Δευτέρα",
     wochentag_dienstag: "Τρίτη",
@@ -3310,6 +3346,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Ez a kategória már létezik.",
     kategorie_loeschen_title: "Kategória törlése",
     kategorie_loeschen_aria: "{{name}} kategória törlése",
+    kategorie_bearbeiten_title: "Kategória átnevezése",
+    kategorie_bearbeiten_aria: "Kategória {{name}} átnevezése",
+    kategorie_umbenennen_titel: "\"{{name}}\" kategória átnevezése:",
     fehler_kategorie_wird_verwendet: "Ezt a kategóriát még {{anzahl}}x recept használja - kérjük, először rendeljen hozzájuk másik kategóriát.",
     wochentag_montag: "Hétfő",
     wochentag_dienstag: "Kedd",
@@ -3561,6 +3600,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Tá an chatagóir seo ann cheana féin.",
     kategorie_loeschen_title: "Scrios catagóir",
     kategorie_loeschen_aria: "Scrios catagóir {{name}}",
+    kategorie_bearbeiten_title: "Athainmnigh an chatagóir",
+    kategorie_bearbeiten_aria: "Athainmnigh an chatagóir {{name}}",
+    kategorie_umbenennen_titel: "Ag athainmniú na catagóire \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Tá an chatagóir seo fós á húsáid ag {{anzahl}}x oideas - sann catagóir eile dóibh ar dtús le do thoil.",
     wochentag_montag: "Dé Luain",
     wochentag_dienstag: "Dé Máirt",
@@ -3812,6 +3854,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Questa categoria esiste già.",
     kategorie_loeschen_title: "Elimina categoria",
     kategorie_loeschen_aria: "Elimina categoria {{name}}",
+    kategorie_bearbeiten_title: "Rinomina categoria",
+    kategorie_bearbeiten_aria: "Rinomina categoria {{name}}",
+    kategorie_umbenennen_titel: "Rinomina categoria \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Questa categoria è ancora usata da {{anzahl}}x ricette - assegna prima loro un'altra categoria.",
     wochentag_montag: "Lunedì",
     wochentag_dienstag: "Martedì",
@@ -4063,6 +4108,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Šī kategorija jau pastāv.",
     kategorie_loeschen_title: "Dzēst kategoriju",
     kategorie_loeschen_aria: "Dzēst kategoriju {{name}}",
+    kategorie_bearbeiten_title: "Pārdēvēt kategoriju",
+    kategorie_bearbeiten_aria: "Pārdēvēt kategoriju {{name}}",
+    kategorie_umbenennen_titel: "Kategorijas \"{{name}}\" pārdēvēšana:",
     fehler_kategorie_wird_verwendet: "Šo kategoriju joprojām izmanto {{anzahl}}x receptes - vispirms piešķiriet tām citu kategoriju.",
     wochentag_montag: "Pirmdiena",
     wochentag_dienstag: "Otrdiena",
@@ -4313,6 +4361,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Tokia kategorija jau yra.",
     kategorie_loeschen_title: "Ištrinti kategoriją",
     kategorie_loeschen_aria: "Ištrinti kategoriją {{name}}",
+    kategorie_bearbeiten_title: "Pervadinti kategoriją",
+    kategorie_bearbeiten_aria: "Pervadinti kategoriją {{name}}",
+    kategorie_umbenennen_titel: "Kategorijos \"{{name}}\" pervadinimas:",
     fehler_kategorie_wird_verwendet: "Šią kategoriją vis dar naudoja {{anzahl}}x receptų - pirmiausia priskirkite jiems kitą kategoriją.",
     wochentag_montag: "Pirmadienis",
     wochentag_dienstag: "Antradienis",
@@ -4563,6 +4614,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Din il-kategorija diġà teżisti.",
     kategorie_loeschen_title: "Ħassar il-kategorija",
     kategorie_loeschen_aria: "Ħassar il-kategorija {{name}}",
+    kategorie_bearbeiten_title: "Semmi mill-ġdid il-kategorija",
+    kategorie_bearbeiten_aria: "Semmi mill-ġdid il-kategorija {{name}}",
+    kategorie_umbenennen_titel: "Qed tissemma mill-ġdid il-kategorija \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Din il-kategorija għadha tintuża minn {{anzahl}}x riċetti - jekk jogħġbok assenjalhom kategorija oħra l-ewwel.",
     wochentag_montag: "It-Tnejn",
     wochentag_dienstag: "It-Tlieta",
@@ -4814,6 +4868,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Ta kategoria już istnieje.",
     kategorie_loeschen_title: "Usuń kategorię",
     kategorie_loeschen_aria: "Usuń kategorię {{name}}",
+    kategorie_bearbeiten_title: "Zmień nazwę kategorii",
+    kategorie_bearbeiten_aria: "Zmień nazwę kategorii {{name}}",
+    kategorie_umbenennen_titel: "Zmiana nazwy kategorii \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Ta kategoria jest nadal używana przez {{anzahl}}x przepisów - najpierw przypisz im inną kategorię.",
     wochentag_montag: "Poniedziałek",
     wochentag_dienstag: "Wtorek",
@@ -5064,6 +5121,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Esta categoria já existe.",
     kategorie_loeschen_title: "Eliminar categoria",
     kategorie_loeschen_aria: "Eliminar categoria {{name}}",
+    kategorie_bearbeiten_title: "Renomear categoria",
+    kategorie_bearbeiten_aria: "Renomear categoria {{name}}",
+    kategorie_umbenennen_titel: "A renomear a categoria \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Esta categoria ainda é usada por {{anzahl}}x receitas - atribua-lhes primeiro outra categoria.",
     wochentag_montag: "Segunda-feira",
     wochentag_dienstag: "Terça-feira",
@@ -5315,6 +5375,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Această categorie există deja.",
     kategorie_loeschen_title: "Șterge categoria",
     kategorie_loeschen_aria: "Șterge categoria {{name}}",
+    kategorie_bearbeiten_title: "Redenumește categoria",
+    kategorie_bearbeiten_aria: "Redenumește categoria {{name}}",
+    kategorie_umbenennen_titel: "Redenumire categorie \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Această categorie este încă folosită de {{anzahl}}x rețete - atribuiți-le mai întâi o altă categorie.",
     wochentag_montag: "Luni",
     wochentag_dienstag: "Marți",
@@ -5565,6 +5628,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Táto kategória už existuje.",
     kategorie_loeschen_title: "Odstrániť kategóriu",
     kategorie_loeschen_aria: "Odstrániť kategóriu {{name}}",
+    kategorie_bearbeiten_title: "Premenovať kategóriu",
+    kategorie_bearbeiten_aria: "Premenovať kategóriu {{name}}",
+    kategorie_umbenennen_titel: "Premenovanie kategórie \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Túto kategóriu stále používa {{anzahl}}x receptov - najprv im priraďte inú kategóriu.",
     wochentag_montag: "Pondelok",
     wochentag_dienstag: "Utorok",
@@ -5815,6 +5881,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Ta kategorija že obstaja.",
     kategorie_loeschen_title: "Izbriši kategorijo",
     kategorie_loeschen_aria: "Izbriši kategorijo {{name}}",
+    kategorie_bearbeiten_title: "Preimenuj kategorijo",
+    kategorie_bearbeiten_aria: "Preimenuj kategorijo {{name}}",
+    kategorie_umbenennen_titel: "Preimenovanje kategorije \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "To kategorijo še vedno uporablja {{anzahl}}x receptov - najprej jim dodelite drugo kategorijo.",
     wochentag_montag: "Ponedeljek",
     wochentag_dienstag: "Torek",
@@ -6065,6 +6134,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Esta categoría ya existe.",
     kategorie_loeschen_title: "Eliminar categoría",
     kategorie_loeschen_aria: "Eliminar categoría {{name}}",
+    kategorie_bearbeiten_title: "Renombrar categoría",
+    kategorie_bearbeiten_aria: "Renombrar categoría {{name}}",
+    kategorie_umbenennen_titel: "Renombrar categoría \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Esta categoría todavía la usan {{anzahl}}x recetas - asígnales primero otra categoría.",
     wochentag_montag: "Lunes",
     wochentag_dienstag: "Martes",
@@ -6315,6 +6387,9 @@ const UEBERSETZUNGEN = {
     fehler_kategorie_existiert_bereits: "Den här kategorin finns redan.",
     kategorie_loeschen_title: "Ta bort kategori",
     kategorie_loeschen_aria: "Ta bort kategori {{name}}",
+    kategorie_bearbeiten_title: "Byt namn på kategori",
+    kategorie_bearbeiten_aria: "Byt namn på kategori {{name}}",
+    kategorie_umbenennen_titel: "Byt namn på kategorin \"{{name}}\":",
     fehler_kategorie_wird_verwendet: "Den här kategorin används fortfarande av {{anzahl}}x recept - tilldela dem först en annan kategori.",
     wochentag_montag: "Måndag",
     wochentag_dienstag: "Tisdag",
@@ -7771,7 +7846,14 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   // Schreibt die Liste eigener Kategorien zurück in ihr Marker-Item
-  // (analog zu _kochbuecherSpeichern).
+  // (analog zu _kochbuecherSpeichern). Anders als dort wird beim allerersten
+  // Anlegen (Marker-Item existiert noch nicht) bewusst NICHT der volle
+  // _rezepteLaden() verwendet, der ungefragt ALLES neu lädt und dabei
+  // this._render() auslöst - das würde z.B. ein gerade offenes, noch nicht
+  // gespeichertes Rezept-Formular verwerfen, wenn die allererste eigene
+  // Kategorie direkt aus dem Formular heraus angelegt wird. Stattdessen wird
+  // gezielt nur nach dem neuen Marker-Item gesucht, ohne sonst etwas
+  // anzufassen oder neu zu rendern - das überlässt der Aufrufer sich selbst.
   async _eigeneKategorienSpeichern(neueListe) {
     const beschreibung = JSON.stringify({ schemaVersion: 1, eigene: neueListe });
     if (this._kategorienItem) {
@@ -7783,7 +7865,18 @@ class RezeptbuchCard extends HTMLElement {
       return erfolg;
     }
     const erfolg = await this._serviceAufrufen("add_item", { item: KATEGORIEN_MARKER, description: beschreibung });
-    if (erfolg) await this._rezepteLaden();
+    if (erfolg) {
+      try {
+        const antwort = await this._hass.connection.sendMessagePromise({
+          type: "todo/item/list", entity_id: this._config.entity,
+        });
+        const items = (antwort && antwort.items) || [];
+        this._kategorienItem = items.find((i) => i.summary === KATEGORIEN_MARKER) || null;
+        this._eigeneKategorien = neueListe;
+      } catch (fehler) {
+        console.error("Rezeptbuch: Marker-Item für eigene Kategorien konnte nach dem Anlegen nicht nachgeladen werden", fehler);
+      }
+    }
     return erfolg;
   }
 
@@ -7970,6 +8063,41 @@ class RezeptbuchCard extends HTMLElement {
     if (this._hass.user.id === rezept.creator) return true;
     if (this._hass.user.is_admin) return true;
     return false;
+  }
+
+  // Eigene Kategorien gehören (anders als ein Rezept) niemandem einzelnen -
+  // es gibt keinen "Ersteller" einer Kategorie. Neu ANLEGEN bleibt deshalb
+  // bewusst für jeden Nutzer offen (z.B. direkt im Rezept-Formular, ohne
+  // dafür extra einen Admin suchen zu müssen). Löschen und Umbenennen
+  // wirken sich aber auf ALLE Rezepte aus, die diese Kategorie verwenden -
+  // dafür ist deshalb ein HA-Admin nötig.
+  _darfKategorienVerwalten() {
+    return !!(this._hass.user && this._hass.user.is_admin);
+  }
+
+  // Benennt eine selbst angelegte Kategorie um und schreibt den neuen Namen
+  // automatisch in JEDES Rezept, das die alte Kategorie verwendet, zurück
+  // (mit Konflikt-Schutz: pro Rezept vor dem Schreiben frisch vom Server
+  // laden, analog zu _kommentarHinzufuegen) - so geht keine
+  // Kategorie-Zuordnung durchs Umbenennen verloren.
+  async _kategorieUmbenennen(alterName, neuerName) {
+    if (!this._darfKategorienVerwalten()) return false;
+    const betroffene = this._rezepte.filter((r) => (r.category || "Sonstiges") === alterName);
+    for (const r of betroffene) {
+      const frisch = (await this._rezeptFrischLaden(r.uid)) || r;
+      const erfolg = await this._serviceAufrufen("update_item", {
+        item: r.uid,
+        description: JSON.stringify({ ...this._rezeptPayload(frisch), category: neuerName }),
+      });
+      if (erfolg) Object.assign(r, frisch, { category: neuerName });
+    }
+
+    const neueListe = (this._eigeneKategorien || []).map((k) => (k === alterName ? neuerName : k));
+    const erfolg = await this._eigeneKategorienSpeichern(neueListe);
+    if (erfolg && this._aktiveKategorie === alterName) this._aktiveKategorie = neuerName;
+    this._kategorieBearbeitungsZiel = null;
+    this._render();
+    return erfolg;
   }
 
   _formatZeit(iso) {
@@ -9154,11 +9282,11 @@ class RezeptbuchCard extends HTMLElement {
            Filter"-Signal, ohne so laut wie chip-aktiv zu wirken. */
         .chip-neu { border-style:dashed; border-width:2px; font-weight:700; }
         .kategorie-eigen-chip { display:inline-flex; align-items:center; gap:2px; padding-right:6px; }
-        .kategorie-loeschen {
+        .kategorie-loeschen, .kategorie-bearbeiten {
           border:none; background:transparent; color:inherit; cursor:pointer; font-size:0.9em;
           padding:0 2px; opacity:0.75; line-height:1;
         }
-        .kategorie-loeschen:hover { opacity:1; }
+        .kategorie-loeschen:hover, .kategorie-bearbeiten:hover { opacity:1; }
         #kategorie-speichern-bereich input { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
           border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); }
         .schalter-zeile { display:flex; align-items:center; justify-content:space-between; gap:14px; text-align:left; margin-bottom:8px; }
@@ -9367,15 +9495,24 @@ class RezeptbuchCard extends HTMLElement {
     const titel = this._config.title || this._t("kopf_titel_standard");
 
     const eigeneKategorienSet = new Set(this._eigeneKategorien || []);
+    // Umbenennen/Löschen einer Kategorie wirkt sich auf ALLE Rezepte aus,
+    // die sie verwenden - deshalb nur für HA-Admins sichtbar (siehe
+    // _darfKategorienVerwalten). Neu ANLEGEN bleibt bewusst für jeden
+    // offen, dafür reicht der "+ Neue Kategorie"-Knopf unten.
+    const darfKategorienVerwalten = this._darfKategorienVerwalten();
     const kategorieChips = this._rezepte.length
       ? `<div class="kategorie-filter" id="kategorie-filter">
           <button type="button" class="chip ${this._aktiveKategorie === "Alle" ? "chip-aktiv" : ""}" data-kategorie="Alle">${this._t("kategorie_filter_alle")}</button>
           ${this._alleKategorien().map((k) => eigeneKategorienSet.has(k)
-            ? `<span class="chip kategorie-eigen-chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))} <button type="button" class="kategorie-loeschen" data-kategorie="${this._escape(k)}" title="${this._t("kategorie_loeschen_title")}" aria-label="${this._t("kategorie_loeschen_aria", { name: this._escape(k) })}">✕</button></span>`
+            ? `<span class="chip kategorie-eigen-chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))}
+                ${darfKategorienVerwalten ? `<button type="button" class="kategorie-bearbeiten" data-kategorie="${this._escape(k)}" title="${this._t("kategorie_bearbeiten_title")}" aria-label="${this._t("kategorie_bearbeiten_aria", { name: this._escape(k) })}">✎</button>` : ""}
+                ${darfKategorienVerwalten ? `<button type="button" class="kategorie-loeschen" data-kategorie="${this._escape(k)}" title="${this._t("kategorie_loeschen_title")}" aria-label="${this._t("kategorie_loeschen_aria", { name: this._escape(k) })}">✕</button>` : ""}
+              </span>`
             : `<button type="button" class="chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))}</button>`
           ).join("")}
           <button type="button" class="chip chip-neu" id="kategorie-neu-btn">${this._t("kategorie_neu_btn")}</button>
           <div id="kategorie-speichern-bereich" style="display:none; width:100%; margin-top:8px;">
+            <div id="kategorie-speichern-titel" class="hinweis" style="margin-top:0;"></div>
             <input type="text" id="kategorie-name-feld" placeholder="${this._t("kategorie_name_placeholder")}">
             <button type="button" class="primaer klein" id="kategorie-speichern-bestaetigen-btn" style="margin-top:6px;">${this._t("allgemein_speichern")}</button>
           </div>
@@ -9741,12 +9878,37 @@ class RezeptbuchCard extends HTMLElement {
     if (kategorieNeuBtn) {
       kategorieNeuBtn.addEventListener("click", () => {
         const bereich = this.shadowRoot.getElementById("kategorie-speichern-bereich");
-        bereich.style.display = bereich.style.display === "none" ? "block" : "none";
+        // Erneuter Klick auf "+ Neue Kategorie" schließt das Formular wieder
+        // zu, SOFERN es gerade für genau diesen Zweck (nicht fürs
+        // Umbenennen) offen war - sonst (z.B. nach Klick auf ✎ bei einer
+        // anderen Kategorie) wird es stattdessen auf "Neu anlegen"
+        // umgeschaltet, statt einfach zuzuklappen.
+        const warSchonOffenFuerNeu = bereich.style.display !== "none" && this._kategorieBearbeitungsZiel === null;
+        this._kategorieBearbeitungsZiel = null;
+        bereich.style.display = warSchonOffenFuerNeu ? "none" : "block";
         if (bereich.style.display === "block") {
+          this.shadowRoot.getElementById("kategorie-name-feld").value = "";
+          this.shadowRoot.getElementById("kategorie-speichern-titel").textContent = "";
           this.shadowRoot.getElementById("kategorie-name-feld").focus();
         }
       });
     }
+
+    this.shadowRoot.querySelectorAll(".kategorie-bearbeiten").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!this._darfKategorienVerwalten()) return; // nur Verteidigungslinie - der Knopf wird eh nur für Admins gerendert
+        const kategorie = btn.dataset.kategorie;
+        this._kategorieBearbeitungsZiel = kategorie;
+        const bereich = this.shadowRoot.getElementById("kategorie-speichern-bereich");
+        const nameFeld = this.shadowRoot.getElementById("kategorie-name-feld");
+        nameFeld.value = this._kategorieLabel(kategorie);
+        this.shadowRoot.getElementById("kategorie-speichern-titel").textContent =
+          this._t("kategorie_umbenennen_titel", { name: this._kategorieLabel(kategorie) });
+        bereich.style.display = "block";
+        nameFeld.focus();
+      });
+    });
 
     const kategorieBestaetigenBtn = this.shadowRoot.getElementById("kategorie-speichern-bestaetigen-btn");
     if (kategorieBestaetigenBtn) {
@@ -9754,23 +9916,31 @@ class RezeptbuchCard extends HTMLElement {
         const nameFeld = this.shadowRoot.getElementById("kategorie-name-feld");
         const name = nameFeld.value.trim();
         if (!name) { alert(this._t("fehler_kategorie_name_fehlt")); return; }
+        const umbenennenZiel = this._kategorieBearbeitungsZiel;
         // Groß-/Kleinschreibung ignorierend gegen ALLE wählbaren Kategorien
         // prüfen (fest eingebaute, übersetzt UND deutsch, sowie eigene) -
         // sonst könnte z.B. "hauptgericht" unbemerkt neben "Hauptgericht"
-        // entstehen.
+        // entstehen. Beim Umbenennen zählt die eigene (alte) Kategorie
+        // selbst dabei nicht als Duplikat.
         const existiertBereits = this._alleKategorien().some((k) =>
-          k.toLowerCase() === name.toLowerCase() || this._kategorieLabel(k).toLowerCase() === name.toLowerCase()
+          k !== umbenennenZiel &&
+          (k.toLowerCase() === name.toLowerCase() || this._kategorieLabel(k).toLowerCase() === name.toLowerCase())
         );
         if (existiertBereits) { alert(this._t("fehler_kategorie_existiert_bereits")); return; }
         kategorieBestaetigenBtn.disabled = true;
-        await this._eigeneKategorienSpeichern([...(this._eigeneKategorien || []), name]);
-        this._render();
+        if (umbenennenZiel) {
+          await this._kategorieUmbenennen(umbenennenZiel, name);
+        } else {
+          await this._eigeneKategorienSpeichern([...(this._eigeneKategorien || []), name]);
+          this._render();
+        }
       });
     }
 
     this.shadowRoot.querySelectorAll(".kategorie-loeschen").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         e.stopPropagation();
+        if (!this._darfKategorienVerwalten()) return; // nur Verteidigungslinie - der Knopf wird eh nur für Admins gerendert
         const kategorie = btn.dataset.kategorie;
         // Eine Kategorie, die noch von mindestens einem Rezept verwendet
         // wird, lässt sich bewusst NICHT löschen (anders als ein
@@ -11507,7 +11677,20 @@ class RezeptbuchCard extends HTMLElement {
           <label>${this._t("formular_label_kategorie")}</label>
           <select id="kategorie-feld">
             ${this._alleKategorien().map((k) => `<option value="${this._escape(k)}" ${((r.category || "Sonstiges") === k) ? "selected" : ""}>${this._escape(this._kategorieLabel(k))}</option>`).join("")}
+            <option value="__neu__">${this._t("kategorie_neu_btn")}</option>
           </select>
+          <!-- Fehlt die passende Kategorie, muss man das Formular nicht erst
+               abbrechen (und alle bisherigen Eingaben verlieren) - die
+               Auswahl "+ Neue Kategorie" blendet direkt hier ein eigenes
+               Eingabefeld ein. Nach dem Anlegen wird gezielt nur die neue
+               <option> ergänzt, NICHT das ganze Formular neu gerendert -
+               das würde sonst Zutaten/Schritte verwerfen, die noch nicht in
+               this._aktivesRezept zurückgeschrieben sind (das passiert erst
+               beim Speichern). -->
+          <div id="formular-kategorie-neu-bereich" style="display:none; margin-top:8px;">
+            <input type="text" id="formular-kategorie-name-feld" placeholder="${this._t("kategorie_name_placeholder")}">
+            <button type="button" class="sekundaer klein" id="formular-kategorie-speichern-btn" style="margin-top:6px;">${this._t("allgemein_speichern")}</button>
+          </div>
 
           <label>${this._t("formular_label_tags")}</label>
           <div id="tags-liste" class="tags-liste"></div>
@@ -11806,6 +11989,44 @@ class RezeptbuchCard extends HTMLElement {
       } catch (e) {
         console.error("Rezeptbuch: Prompt konnte nicht kopiert werden", e);
       }
+    });
+
+    // Neue Kategorie direkt aus dem Formular heraus anlegen (siehe
+    // Kommentar bei der "+ Neue Kategorie"-<option> oben). Bewusst OHNE
+    // this._render() danach - sonst gingen alle noch nicht gespeicherten
+    // Formular-Eingaben verloren.
+    const kategorieFeld = this.shadowRoot.getElementById("kategorie-feld");
+    const formularKategorieNeuBereich = this.shadowRoot.getElementById("formular-kategorie-neu-bereich");
+    kategorieFeld.addEventListener("change", () => {
+      if (kategorieFeld.value === "__neu__") {
+        formularKategorieNeuBereich.style.display = "block";
+        this.shadowRoot.getElementById("formular-kategorie-name-feld").focus();
+      } else {
+        formularKategorieNeuBereich.style.display = "none";
+      }
+    });
+    this.shadowRoot.getElementById("formular-kategorie-speichern-btn").addEventListener("click", async () => {
+      const nameFeld = this.shadowRoot.getElementById("formular-kategorie-name-feld");
+      const name = nameFeld.value.trim();
+      if (!name) { alert(this._t("fehler_kategorie_name_fehlt")); return; }
+      const existiertBereits = this._alleKategorien().some((k) =>
+        k.toLowerCase() === name.toLowerCase() || this._kategorieLabel(k).toLowerCase() === name.toLowerCase()
+      );
+      if (existiertBereits) { alert(this._t("fehler_kategorie_existiert_bereits")); return; }
+      const speichernBtn = this.shadowRoot.getElementById("formular-kategorie-speichern-btn");
+      speichernBtn.disabled = true;
+      const erfolg = await this._eigeneKategorienSpeichern([...(this._eigeneKategorien || []), name]);
+      speichernBtn.disabled = false;
+      if (!erfolg) return;
+      // Gezielt nur die neue <option> ergänzen und auswählen, statt das
+      // ganze Formular neu zu rendern (siehe Kommentar weiter oben).
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      kategorieFeld.insertBefore(option, kategorieFeld.querySelector('option[value="__neu__"]'));
+      kategorieFeld.value = name;
+      formularKategorieNeuBereich.style.display = "none";
+      nameFeld.value = "";
     });
 
     // Tags: analog zum Zutaten-/Schritte-Muster wird this._aktivesRezept
