@@ -807,6 +807,89 @@ async function testLoeschenMitBestaetigungUndUndo(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: Zubereitungsschritte lassen sich im Formular per ▲/▼ verschieben
+// (gemeldeter Wunsch - bisher nur löschbar oder in der Zeile editierbar).
+// Geprüft über die echte UI (Klicks auf die Verschieben-Knöpfe), nicht
+// direkt per Methodenaufruf, damit auch die DOM-Verdrahtung mitgeprüft
+// wird (analog zum Kommentar-UI-Test weiter oben).
+// ---------------------------------------------------------------------
+async function testZubereitungsschritteVerschieben(browser) {
+  console.log("\nTest: Zubereitungsschritte im Formular verschieben (▲/▼)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Dreistufiges Rezept",
+      payload: leererPayload({ steps: ["Erster Schritt", "Zweiter Schritt", "Dritter Schritt"] }),
+    });
+    await page.evaluate((uid) => {
+      window.__karte._rezeptBearbeiten(window.__karte._rezepte.find((r) => r.uid === uid));
+    }, uid);
+
+    const liesSchritte = () => page.evaluate(() =>
+      Array.from(window.__karte.shadowRoot.querySelectorAll("[data-schritt-feld]")).map((f) => f.value)
+    );
+
+    const randzustand = await page.evaluate(() => {
+      const zeilen = window.__karte.shadowRoot.querySelectorAll(".schritt-zeile");
+      const erste = zeilen[0];
+      const letzte = zeilen[zeilen.length - 1];
+      return {
+        hochBeiErsterDeaktiviert: erste.querySelector(".schritt-hoch").disabled,
+        runterBeiLetzterDeaktiviert: letzte.querySelector(".schritt-runter").disabled,
+        runterBeiErsterAktiv: !erste.querySelector(".schritt-runter").disabled,
+        hochBeiLetzterAktiv: !letzte.querySelector(".schritt-hoch").disabled,
+      };
+    });
+    assert(randzustand.hochBeiErsterDeaktiviert, "Beim ersten Schritt ist der ▲-Knopf deaktiviert (kann nicht weiter nach oben)");
+    assert(randzustand.runterBeiLetzterDeaktiviert, "Beim letzten Schritt ist der ▼-Knopf deaktiviert (kann nicht weiter nach unten)");
+    assert(randzustand.runterBeiErsterAktiv, "Beim ersten Schritt ist der ▼-Knopf aktiv");
+    assert(randzustand.hochBeiLetzterAktiv, "Beim letzten Schritt ist der ▲-Knopf aktiv");
+
+    // Zweiten Schritt nach oben verschieben -> Reihenfolge: 2,1,3.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelectorAll(".schritt-zeile")[1].querySelector(".schritt-hoch").click();
+    });
+    assert(JSON.stringify(await liesSchritte()) === JSON.stringify(["Zweiter Schritt", "Erster Schritt", "Dritter Schritt"]), "Nach oben verschieben tauscht mit dem vorherigen Schritt");
+
+    // Jetzt letzten ("Dritter Schritt") nach oben verschieben -> 2,3,1.
+    await page.evaluate(() => {
+      const zeilen = window.__karte.shadowRoot.querySelectorAll(".schritt-zeile");
+      zeilen[zeilen.length - 1].querySelector(".schritt-hoch").click();
+    });
+    assert(JSON.stringify(await liesSchritte()) === JSON.stringify(["Zweiter Schritt", "Dritter Schritt", "Erster Schritt"]), "Erneutes Verschieben nach oben tauscht wieder mit dem jetzt vorherigen Schritt");
+
+    // Ersten Schritt ("Zweiter Schritt") nach unten verschieben -> 3,2,1.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelectorAll(".schritt-zeile")[0].querySelector(".schritt-runter").click();
+    });
+    assert(JSON.stringify(await liesSchritte()) === JSON.stringify(["Dritter Schritt", "Zweiter Schritt", "Erster Schritt"]), "Nach unten verschieben tauscht mit dem nachfolgenden Schritt");
+
+    // Die fortlaufende Nummerierung (1./2./3.) folgt der neuen Reihenfolge.
+    const nummern = await page.evaluate(() =>
+      Array.from(window.__karte.shadowRoot.querySelectorAll(".schritt-nummer")).map((n) => n.textContent)
+    );
+    assert(JSON.stringify(nummern) === JSON.stringify(["1.", "2.", "3."]), "Die Nummerierung bleibt nach dem Verschieben fortlaufend 1./2./3.");
+
+    // Speichern übernimmt tatsächlich die neue (verschobene) Reihenfolge.
+    await page.evaluate(async () => {
+      const schritte = Array.from(window.__karte.shadowRoot.querySelectorAll("[data-schritt-feld]")).map((f) => f.value);
+      await window.__karte._formularSpeichern({
+        title: "Dreistufiges Rezept", servings: "4", category: "Sonstiges",
+        ingredients: [{ amount: "1", unit: "Stk", name: "Test" }], steps: schritte, image: null,
+      });
+    });
+    const eintrag = await page.evaluate((uid) => window.__speicher.find((i) => i.uid === uid), uid);
+    const beschreibung = JSON.parse(eintrag.description);
+    assert(
+      JSON.stringify(beschreibung.steps) === JSON.stringify(["Dritter Schritt", "Zweiter Schritt", "Erster Schritt"]),
+      "Die verschobene Reihenfolge wird tatsächlich gespeichert (tatsächlich: " + JSON.stringify(beschreibung.steps) + ")"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 8: Regressionstest - das volle Bearbeiten-Formular darf cookLog
 // (Zubereitungs-Historie) nicht stillschweigend löschen, obwohl das
 // Formular dieses Feld gar nicht anzeigt oder bearbeitet.
@@ -4907,6 +4990,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser);
     await testAmerikanischeEinheitenWerdenErkannt(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
+    await testZubereitungsschritteVerschieben(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);
     await testTextErkennungUeberUi(browser);
     await testTextErkennungWarntBeiLeeremErgebnis(browser);

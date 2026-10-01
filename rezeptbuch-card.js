@@ -339,6 +339,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "z.B. Gemüse waschen und schneiden",
     formular_schritt_placeholder_naechster: "nächster Schritt",
     formular_schritt_entfernen_aria: "Schritt entfernen",
+    formular_schritt_hoch_aria: "Schritt nach oben verschieben",
+    formular_schritt_runter_aria: "Schritt nach unten verschieben",
     formular_label_bild: "Bild",
     formular_bild_vorhanden_hinweis: "(vorhanden – neue Datei ersetzt es)",
     formular_bild_hinweis: "Aktuelles Bild bleibt erhalten, falls du keine neue Datei wählst.",
@@ -655,6 +657,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "z.B. Gmües wäsche und schniide",
     formular_schritt_placeholder_naechster: "nächschte Schritt",
     formular_schritt_entfernen_aria: "Schritt entferne",
+    formular_schritt_hoch_aria: "Schritt nache obe verschiebe",
+    formular_schritt_runter_aria: "Schritt nache unge verschiebe",
     formular_label_bild: "Bild",
     formular_bild_vorhanden_hinweis: "(vorhande – nöis File ersetzt s)",
     formular_bild_hinweis: "S aktuälle Bild bliibt erhalte, falls kes nöis File usgwählt wird.",
@@ -947,6 +951,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "e.g. wash and chop vegetables",
     formular_schritt_placeholder_naechster: "next step",
     formular_schritt_entfernen_aria: "Remove step",
+    formular_schritt_hoch_aria: "Move step up",
+    formular_schritt_runter_aria: "Move step down",
     formular_label_bild: "Photo",
     formular_bild_vorhanden_hinweis: "(present – a new file will replace it)",
     formular_bild_hinweis: "The current photo is kept if you don't choose a new file.",
@@ -1205,6 +1211,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "напр. измий и нарежи зеленчуците",
     formular_schritt_placeholder_naechster: "следваща стъпка",
     formular_schritt_entfernen_aria: "Премахни стъпката",
+    formular_schritt_hoch_aria: "Премести стъпката нагоре",
+    formular_schritt_runter_aria: "Премести стъпката надолу",
     formular_label_bild: "Снимка",
     formular_bild_vorhanden_hinweis: "(налична – нов файл ще я замени)",
     formular_bild_hinweis: "Текущата снимка се запазва, ако не избереш нов файл.",
@@ -1453,6 +1461,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "npr. operi i nareži povrće",
     formular_schritt_placeholder_naechster: "sljedeći korak",
     formular_schritt_entfernen_aria: "Ukloni korak",
+    formular_schritt_hoch_aria: "Pomakni korak gore",
+    formular_schritt_runter_aria: "Pomakni korak dolje",
     formular_label_bild: "Slika",
     formular_bild_vorhanden_hinweis: "(postoji – nova datoteka će je zamijeniti)",
     formular_bild_hinweis: "Trenutna slika ostaje sačuvana ako ne odabereš novu datoteku.",
@@ -1701,6 +1711,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "např. umýt a nakrájet zeleninu",
     formular_schritt_placeholder_naechster: "další krok",
     formular_schritt_entfernen_aria: "Odebrat krok",
+    formular_schritt_hoch_aria: "Posunout krok nahoru",
+    formular_schritt_runter_aria: "Posunout krok dolů",
     formular_label_bild: "Fotka",
     formular_bild_vorhanden_hinweis: "(existuje – nový soubor ji nahradí)",
     formular_bild_hinweis: "Aktuální fotka zůstane zachována, pokud nevyberete nový soubor.",
@@ -1949,6 +1961,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "f.eks. vask og skær grøntsager",
     formular_schritt_placeholder_naechster: "næste trin",
     formular_schritt_entfernen_aria: "Fjern trin",
+    formular_schritt_hoch_aria: "Flyt trin op",
+    formular_schritt_runter_aria: "Flyt trin ned",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(findes – ny fil erstatter det)",
     formular_bild_hinweis: "Det nuværende foto bevares, hvis du ikke vælger en ny fil.",
@@ -2197,6 +2211,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "bijv. groenten wassen en snijden",
     formular_schritt_placeholder_naechster: "volgende stap",
     formular_schritt_entfernen_aria: "Stap verwijderen",
+    formular_schritt_hoch_aria: "Stap omhoog verplaatsen",
+    formular_schritt_runter_aria: "Stap omlaag verplaatsen",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(aanwezig – nieuw bestand vervangt deze)",
     formular_bild_hinweis: "De huidige foto blijft behouden als je geen nieuw bestand kiest.",
@@ -2445,6 +2461,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "nt pese ja tükelda köögiviljad",
     formular_schritt_placeholder_naechster: "järgmine samm",
     formular_schritt_entfernen_aria: "Eemalda samm",
+    formular_schritt_hoch_aria: "Liiguta sammu üles",
+    formular_schritt_runter_aria: "Liiguta sammu alla",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(olemas – uus fail asendab selle)",
     formular_bild_hinweis: "Praegune foto säilib, kui sa uut faili ei vali.",
@@ -2693,6 +2711,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "esim. pese ja pilko vihannekset",
     formular_schritt_placeholder_naechster: "seuraava vaihe",
     formular_schritt_entfernen_aria: "Poista vaihe",
+    formular_schritt_hoch_aria: "Siirrä vaihetta ylös",
+    formular_schritt_runter_aria: "Siirrä vaihetta alas",
     formular_label_bild: "Kuva",
     formular_bild_vorhanden_hinweis: "(olemassa – uusi tiedosto korvaa sen)",
     formular_bild_hinweis: "Nykyinen kuva säilyy, jos et valitse uutta tiedostoa.",
@@ -2942,6 +2962,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "p. ex. laver et couper les légumes",
     formular_schritt_placeholder_naechster: "étape suivante",
     formular_schritt_entfernen_aria: "Supprimer l'étape",
+    formular_schritt_hoch_aria: "Déplacer l'étape vers le haut",
+    formular_schritt_runter_aria: "Déplacer l'étape vers le bas",
     formular_label_bild: "Photo",
     formular_bild_vorhanden_hinweis: "(présente – un nouveau fichier la remplacera)",
     formular_bild_hinweis: "La photo actuelle est conservée si tu ne choisis pas de nouveau fichier.",
@@ -3191,6 +3213,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "π.χ. πλύνε και κόψε τα λαχανικά",
     formular_schritt_placeholder_naechster: "επόμενο βήμα",
     formular_schritt_entfernen_aria: "Αφαίρεση βήματος",
+    formular_schritt_hoch_aria: "Μετακίνηση βήματος προς τα πάνω",
+    formular_schritt_runter_aria: "Μετακίνηση βήματος προς τα κάτω",
     formular_label_bild: "Φωτογραφία",
     formular_bild_vorhanden_hinweis: "(υπάρχει – ένα νέο αρχείο θα την αντικαταστήσει)",
     formular_bild_hinweis: "Η τρέχουσα φωτογραφία διατηρείται αν δεν επιλέξεις νέο αρχείο.",
@@ -3440,6 +3464,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "pl. mosd meg és vágd fel a zöldségeket",
     formular_schritt_placeholder_naechster: "következő lépés",
     formular_schritt_entfernen_aria: "Lépés eltávolítása",
+    formular_schritt_hoch_aria: "Lépés mozgatása felfelé",
+    formular_schritt_runter_aria: "Lépés mozgatása lefelé",
     formular_label_bild: "Kép",
     formular_bild_vorhanden_hinweis: "(van – egy új fájl le fogja cserélni)",
     formular_bild_hinweis: "Az aktuális kép megmarad, ha nem választasz új fájlt.",
@@ -3689,6 +3715,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "m.sh. nigh agus gearr na glasraí",
     formular_schritt_placeholder_naechster: "an chéad chéim eile",
     formular_schritt_entfernen_aria: "Bain céim",
+    formular_schritt_hoch_aria: "Bog an chéim suas",
+    formular_schritt_runter_aria: "Bog an chéim síos",
     formular_label_bild: "Grianghraf",
     formular_bild_vorhanden_hinweis: "(ann – cuirfidh comhad nua ina ionad)",
     formular_bild_hinweis: "Fanann an grianghraf reatha ann mura roghnaíonn tú comhad nua.",
@@ -3938,6 +3966,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "es. lavare e tagliare le verdure",
     formular_schritt_placeholder_naechster: "passaggio successivo",
     formular_schritt_entfernen_aria: "Rimuovi passaggio",
+    formular_schritt_hoch_aria: "Sposta il passaggio in alto",
+    formular_schritt_runter_aria: "Sposta il passaggio in basso",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(presente – un nuovo file la sostituirà)",
     formular_bild_hinweis: "La foto attuale viene mantenuta se non scegli un nuovo file.",
@@ -4186,6 +4216,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "piem., nomazgā un sagriez dārzeņus",
     formular_schritt_placeholder_naechster: "nākamais solis",
     formular_schritt_entfernen_aria: "Noņemt soli",
+    formular_schritt_hoch_aria: "Pārvietot soli augšup",
+    formular_schritt_runter_aria: "Pārvietot soli lejup",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(ir – jauns fails to aizstās)",
     formular_bild_hinweis: "Pašreizējais foto saglabājas, ja neizvēlies jaunu failu.",
@@ -4434,6 +4466,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "pvz., nuplauk ir supjaustyk daržoves",
     formular_schritt_placeholder_naechster: "kitas žingsnis",
     formular_schritt_entfernen_aria: "Pašalinti žingsnį",
+    formular_schritt_hoch_aria: "Perkelti žingsnį aukštyn",
+    formular_schritt_runter_aria: "Perkelti žingsnį žemyn",
     formular_label_bild: "Nuotrauka",
     formular_bild_vorhanden_hinweis: "(yra – naujas failas ją pakeis)",
     formular_bild_hinweis: "Dabartinė nuotrauka išlieka, jei nepasirenki naujo failo.",
@@ -4683,6 +4717,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "eż. aħsel u aqta' l-ħaxix",
     formular_schritt_placeholder_naechster: "pass li jmiss",
     formular_schritt_entfernen_aria: "Neħħi l-pass",
+    formular_schritt_hoch_aria: "Mexxi l-pass 'il fuq",
+    formular_schritt_runter_aria: "Mexxi l-pass 'l isfel",
     formular_label_bild: "Ritratt",
     formular_bild_vorhanden_hinweis: "(jeżisti – fajl ġdid se jissostitwih)",
     formular_bild_hinweis: "Ir-ritratt attwali jibqa' jekk ma tagħżilx fajl ġdid.",
@@ -4931,6 +4967,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "np. umyj i pokrój warzywa",
     formular_schritt_placeholder_naechster: "następny krok",
     formular_schritt_entfernen_aria: "Usuń krok",
+    formular_schritt_hoch_aria: "Przesuń krok w górę",
+    formular_schritt_runter_aria: "Przesuń krok w dół",
     formular_label_bild: "Zdjęcie",
     formular_bild_vorhanden_hinweis: "(istnieje – nowy plik je zastąpi)",
     formular_bild_hinweis: "Aktualne zdjęcie zostaje zachowane, jeśli nie wybierzesz nowego pliku.",
@@ -5180,6 +5218,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "p. ex. lavar e cortar os legumes",
     formular_schritt_placeholder_naechster: "passo seguinte",
     formular_schritt_entfernen_aria: "Remover passo",
+    formular_schritt_hoch_aria: "Mover passo para cima",
+    formular_schritt_runter_aria: "Mover passo para baixo",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(existente – um novo ficheiro irá substituí-la)",
     formular_bild_hinweis: "A foto atual é mantida se não escolheres um novo ficheiro.",
@@ -5428,6 +5468,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "de ex. spală și taie legumele",
     formular_schritt_placeholder_naechster: "pasul următor",
     formular_schritt_entfernen_aria: "Elimină pasul",
+    formular_schritt_hoch_aria: "Deplasează pasul mai sus",
+    formular_schritt_runter_aria: "Deplasează pasul mai jos",
     formular_label_bild: "Fotografie",
     formular_bild_vorhanden_hinweis: "(există – un fișier nou o va înlocui)",
     formular_bild_hinweis: "Fotografia actuală rămâne păstrată dacă nu alegi un fișier nou.",
@@ -5676,6 +5718,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "napr. umyte a nakrájajte zeleninu",
     formular_schritt_placeholder_naechster: "ďalší krok",
     formular_schritt_entfernen_aria: "Odstrániť krok",
+    formular_schritt_hoch_aria: "Posunúť krok nahor",
+    formular_schritt_runter_aria: "Posunúť krok nadol",
     formular_label_bild: "Fotka",
     formular_bild_vorhanden_hinweis: "(existuje – nový súbor ju nahradí)",
     formular_bild_hinweis: "Aktuálna fotka zostane zachovaná, ak nevyberiete nový súbor.",
@@ -5924,6 +5968,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "npr. umij in nareži zelenjavo",
     formular_schritt_placeholder_naechster: "naslednji korak",
     formular_schritt_entfernen_aria: "Odstrani korak",
+    formular_schritt_hoch_aria: "Premakni korak navzgor",
+    formular_schritt_runter_aria: "Premakni korak navzdol",
     formular_label_bild: "Slika",
     formular_bild_vorhanden_hinweis: "(obstaja – nova datoteka jo bo nadomestila)",
     formular_bild_hinweis: "Trenutna slika ostane ohranjena, če ne izbereš nove datoteke.",
@@ -6172,6 +6218,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "p. ej. lavar y cortar las verduras",
     formular_schritt_placeholder_naechster: "siguiente paso",
     formular_schritt_entfernen_aria: "Eliminar paso",
+    formular_schritt_hoch_aria: "Mover paso hacia arriba",
+    formular_schritt_runter_aria: "Mover paso hacia abajo",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(existe – un nuevo archivo la sustituirá)",
     formular_bild_hinweis: "La foto actual se conserva si no eliges un nuevo archivo.",
@@ -6420,6 +6468,8 @@ const UEBERSETZUNGEN = {
     formular_schritt_placeholder_beispiel: "t.ex. tvätta och skär grönsakerna",
     formular_schritt_placeholder_naechster: "nästa steg",
     formular_schritt_entfernen_aria: "Ta bort steg",
+    formular_schritt_hoch_aria: "Flytta steget uppåt",
+    formular_schritt_runter_aria: "Flytta steget nedåt",
     formular_label_bild: "Foto",
     formular_bild_vorhanden_hinweis: "(finns – en ny fil ersätter det)",
     formular_bild_hinweis: "Nuvarande foto behålls om du inte väljer en ny fil.",
@@ -9024,6 +9074,10 @@ class RezeptbuchCard extends HTMLElement {
         .zutat-zeile button, .schritt-zeile button {
           flex:0 0 32px; border:none; border-radius:8px; background:#a8402a; color:#fff; cursor:pointer;
         }
+        .schritt-zeile button.schritt-verschieben {
+          background: var(--kb-terrakotta-hell); color: var(--kb-terrakotta-dunkel); flex:0 0 28px;
+        }
+        .schritt-zeile button.schritt-verschieben:disabled { opacity:0.35; cursor:default; }
         .schritt-zeile { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
         .schritt-zeile .schritt-nummer {
           flex:0 0 24px; height:24px; border-radius:50%; background: var(--kb-terrakotta); color:#fff;
@@ -11383,6 +11437,8 @@ class RezeptbuchCard extends HTMLElement {
         <div class="schritt-zeile">
           <span class="schritt-nummer">${i + 1}.</span>
           <input type="text" placeholder="${this._t("formular_schritt_placeholder_beispiel")}" value="${this._escape(s ?? "")}" data-schritt-feld>
+          <button type="button" class="schritt-verschieben schritt-hoch" aria-label="${this._t("formular_schritt_hoch_aria")}">▲</button>
+          <button type="button" class="schritt-verschieben schritt-runter" aria-label="${this._t("formular_schritt_runter_aria")}">▼</button>
           <button type="button" class="schritt-entfernen" aria-label="${this._t("formular_schritt_entfernen_aria")}">✕</button>
         </div>`
       )
@@ -11793,34 +11849,61 @@ class RezeptbuchCard extends HTMLElement {
       btn.addEventListener("click", (e) => e.target.closest(".zutat-zeile").remove());
     });
 
-    const schritteNummerierungAktualisieren = () => {
-      const liste = this.shadowRoot.getElementById("schritte-liste");
-      liste.querySelectorAll(".schritt-zeile").forEach((zeile, i) => {
+    // Zubereitungsschritte lassen sich per ▲/▼ verschieben statt nur zu
+    // löschen oder in der Zeile zu bearbeiten (gemeldeter Wunsch). Bewusst
+    // Auf/Ab-Knöpfe statt Drag&Drop: Drag&Drop ist auf Touch-Geräten (vor
+    // allem in der Home-Assistant-Begleit-App/WebView) erfahrungsgemäß
+    // unzuverlässig - siehe die Begründung gegen window.confirm() weiter
+    // oben für dieselbe Art von Problem. Die Reihenfolge beim Speichern
+    // ergibt sich einfach aus der DOM-Reihenfolge der Eingabefelder
+    // ("[data-schritt-feld]"), verschieben im DOM reicht also aus.
+    const schritteListeEl = this.shadowRoot.getElementById("schritte-liste");
+    const schritteAktualisieren = () => {
+      const zeilen = schritteListeEl.querySelectorAll(".schritt-zeile");
+      zeilen.forEach((zeile, i) => {
         zeile.querySelector(".schritt-nummer").textContent = `${i + 1}.`;
+        zeile.querySelector(".schritt-hoch").disabled = i === 0;
+        zeile.querySelector(".schritt-runter").disabled = i === zeilen.length - 1;
+      });
+    };
+
+    const schrittZeileVerdrahten = (zeile) => {
+      zeile.querySelector(".schritt-entfernen").addEventListener("click", () => {
+        zeile.remove();
+        schritteAktualisieren();
+      });
+      zeile.querySelector(".schritt-hoch").addEventListener("click", () => {
+        const vorherige = zeile.previousElementSibling;
+        if (vorherige) {
+          schritteListeEl.insertBefore(zeile, vorherige);
+          schritteAktualisieren();
+        }
+      });
+      zeile.querySelector(".schritt-runter").addEventListener("click", () => {
+        const naechste = zeile.nextElementSibling;
+        if (naechste) {
+          schritteListeEl.insertBefore(naechste, zeile);
+          schritteAktualisieren();
+        }
       });
     };
 
     this.shadowRoot.getElementById("schritt-hinzufuegen").addEventListener("click", () => {
-      const liste = this.shadowRoot.getElementById("schritte-liste");
       const div = document.createElement("div");
       div.className = "schritt-zeile";
       div.innerHTML = `
-        <span class="schritt-nummer">${liste.children.length + 1}.</span>
+        <span class="schritt-nummer">${schritteListeEl.children.length + 1}.</span>
         <input type="text" placeholder="${this._t("formular_schritt_placeholder_naechster")}" data-schritt-feld>
+        <button type="button" class="schritt-verschieben schritt-hoch" aria-label="${this._t("formular_schritt_hoch_aria")}">▲</button>
+        <button type="button" class="schritt-verschieben schritt-runter" aria-label="${this._t("formular_schritt_runter_aria")}">▼</button>
         <button type="button" class="schritt-entfernen" aria-label="${this._t("formular_schritt_entfernen_aria")}">✕</button>`;
-      liste.appendChild(div);
-      div.querySelector(".schritt-entfernen").addEventListener("click", () => {
-        div.remove();
-        schritteNummerierungAktualisieren();
-      });
+      schritteListeEl.appendChild(div);
+      schrittZeileVerdrahten(div);
+      schritteAktualisieren();
     });
 
-    this.shadowRoot.querySelectorAll(".schritt-entfernen").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.target.closest(".schritt-zeile").remove();
-        schritteNummerierungAktualisieren();
-      });
-    });
+    schritteListeEl.querySelectorAll(".schritt-zeile").forEach((zeile) => schrittZeileVerdrahten(zeile));
+    schritteAktualisieren();
 
     const speichernBtn = this.shadowRoot.getElementById("speichern-btn");
     speichernBtn.addEventListener("click", async () => {
