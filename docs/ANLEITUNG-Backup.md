@@ -1148,7 +1148,7 @@ Es gilt dieselbe `shopping_list_entity`-Konfiguration wie in Abschnitt 18
 beschrieben - ohne konfigurierte Einkaufsliste zeigt ein Klick auf den
 Knopf stattdessen einen erklärenden Hinweis.
 
-## 39. Weitere kleine Verbesserungen (2.0.0 / 2.1.1)
+## 39. Weitere kleine Verbesserungen (2.0.0 / 2.1.0)
 
 Ergänzend ein paar kleinere Änderungen, die keinen eigenen ausführlichen
 Abschnitt brauchen:

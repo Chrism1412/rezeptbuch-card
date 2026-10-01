@@ -4,38 +4,16 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [2.1.3] - 2026-10-01
+## [2.1.0] - 2026-10-01
 
-### Geändert
-- **Kategorie- und Tag-Filterchips in der Übersicht jetzt optisch
-  abgetrennt**: beide Chip-Zeilen sahen sich bisher zum Verwechseln
-  ähnlich und gingen vor allem bei umbrechender Kategorie-Zeile optisch
-  ineinander über. Eine dünne, gestrichelte Trennlinie oberhalb der
-  Tag-Zeile grenzt beide jetzt klar voneinander ab.
-
-## [2.1.2] - 2026-10-01
-
-### Behoben
-- **Umrechnungstabelle ließ sich aus dem Kochmodus heraus nicht öffnen**:
-  der Knopf "📐 Umrechnungstabelle" im Kochmodus-Werkzeugleiste öffnete
-  das Popup technisch zwar korrekt (`display:flex`), es landete dabei
-  aber unsichtbar HINTER dem Vollbild-Kochmodus-Overlay, weil dessen
-  z-index (1050) höher lag als der des Popups (1000) - für den Nutzer sah
-  es deshalb so aus, als würde sich gar nichts tun. Der Knopf im Rezept
-  selbst (außerhalb des Kochmodus) war davon nicht betroffen. Behoben
-  durch einen höheren z-index für alle Popups der Karte (jetzt 1100,
-  oberhalb des Kochmodus).
-
-## [2.1.1] - 2026-10-01
-
-Vier über die GitHub-Issue-Vorlage eingereichte Verbesserungsvorschläge
-umgesetzt (eine fünfte Anfrage - eigene Hauptkategorien - gab es bereits
-seit [2.0.0]). Die Versionsnummer wurde bewusst erhöht (statt wie bei den
-vorherigen Punkten dieses Abschnitts beizubehalten), damit die Karte beim
-nächsten Laden zuverlässig ihren eigenen "Browser-Cache nicht geleert"-
-Warnhinweis zeigen kann, falls die `?v=...`-Nummer der Ressourcen-URL nicht
-mit aktualisiert wird (siehe README, Abschnitt "Warnt vor vergessener
-Ressourcen-Versionsnummer").
+Erstes Update seit `v2.0.0` - acht über die GitHub-Issue-Vorlage
+eingereichte Verbesserungsvorschläge umgesetzt (eine neunte Anfrage -
+eigene Hauptkategorien - gab es bereits seit [2.0.0]), dazu zwei beim
+internen Testen aufgefallene Korrekturen. Die Versionsnummer wurde bewusst
+erhöht, damit die Karte beim nächsten Laden zuverlässig ihren eigenen
+"Browser-Cache nicht geleert"-Warnhinweis zeigen kann, falls die
+`?v=...`-Nummer der Ressourcen-URL nicht mit aktualisiert wird (siehe
+README, Abschnitt "Warnt vor vergessener Ressourcen-Versionsnummer").
 
 ### Hinzugefügt
 - **Kommentare bearbeiten/löschen**: eigene Kommentare zu einem Rezept
@@ -147,6 +125,22 @@ Ressourcen-Versionsnummer").
 - Der "+ Neue Kategorie"-Knopf in der Übersicht hebt sich jetzt per
   gestricheltem Rand von den normalen Kategorie-Filter-Chips ab, damit er
   zwischen vielen Kategorien nicht mehr so leicht übersehen wird.
+- **Kategorie- und Tag-Filterchips in der Übersicht jetzt optisch
+  abgetrennt**: beide Chip-Zeilen sahen sich bisher zum Verwechseln
+  ähnlich und gingen vor allem bei umbrechender Kategorie-Zeile optisch
+  ineinander über. Eine dünne, gestrichelte Trennlinie oberhalb der
+  Tag-Zeile grenzt beide jetzt klar voneinander ab.
+
+### Behoben
+- **Umrechnungstabelle ließ sich aus dem Kochmodus heraus nicht öffnen**:
+  der Knopf "📐 Umrechnungstabelle" in der Kochmodus-Werkzeugleiste
+  öffnete das Popup technisch zwar korrekt (`display:flex`), es landete
+  dabei aber unsichtbar HINTER dem Vollbild-Kochmodus-Overlay, weil dessen
+  z-index (1050) höher lag als der des Popups (1000) - für den Nutzer sah
+  es deshalb so aus, als würde sich gar nichts tun. Der Knopf im Rezept
+  selbst (außerhalb des Kochmodus) war davon nicht betroffen. Behoben
+  durch einen höheren z-index für alle Popups der Karte (jetzt 1100,
+  oberhalb des Kochmodus).
 
 ## [2.0.0] - 2026-09-28
 
