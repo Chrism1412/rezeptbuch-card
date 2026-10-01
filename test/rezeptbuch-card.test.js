@@ -714,6 +714,64 @@ async function testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: Amerikanische Maßeinheiten (cup, tbsp, oz usw.) werden bei der
+// Zutatenerkennung korrekt als Einheit erkannt statt in den Namen zu
+// rutschen - wichtig u.a. für per KI erzeugtes JSON mit US-Rezepten
+// (siehe Feature-Anfrage). Keine Umrechnung zu metrischen Einheiten,
+// nur korrekte Erkennung + Synonym-Normalisierung für die Einkaufsliste.
+// ---------------------------------------------------------------------
+async function testAmerikanischeEinheitenWerdenErkannt(browser) {
+  console.log("\nTest: Amerikanische Einheiten (cup, tbsp, oz, ...) werden erkannt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await page.evaluate(() => window.__karte._neuesRezeptFormular());
+
+    const importierteJson = JSON.stringify({
+      title: "American Pancakes",
+      servings: 4,
+      ingredients: [
+        "2 cups flour",
+        "1 tbsp sugar",
+        "2 tbsp. melted butter",
+        "1 tsp salt",
+        "8 oz cream cheese",
+        "1 lb ground beef",
+        "2 lbs chicken thighs",
+        "1 pt heavy cream",
+        "2 qt chicken stock",
+        "1 gal milk",
+        "4 fl oz milk",
+      ],
+      steps: ["Alles vermengen"],
+    });
+
+    await page.evaluate((json) => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("json-einfuegen-btn").click();
+      root.getElementById("json-feld").value = json;
+      root.getElementById("json-uebernehmen-btn").click();
+    }, importierteJson);
+
+    const aktiv = await page.evaluate(() => window.__karte._aktivesRezept);
+    const z = aktiv.ingredients;
+
+    assert(z[0].unit === "cups" && z[0].name === "flour", "\"cups\" wird als Einheit erkannt (tatsächlich: " + JSON.stringify(z[0]) + ")");
+    assert(z[1].unit === "tbsp" && z[1].name === "sugar", "\"tbsp\" wird als Einheit erkannt");
+    assert(z[2].unit === "tbsp." && z[2].name === "melted butter", "\"tbsp.\" (mit Punkt) wird als Einheit erkannt, nicht Teil des Namens");
+    assert(z[3].unit === "tsp" && z[3].name === "salt", "\"tsp\" wird als Einheit erkannt");
+    assert(z[4].unit === "oz" && z[4].name === "cream cheese", "\"oz\" wird als Einheit erkannt");
+    assert(z[5].unit === "lb" && z[5].name === "ground beef", "\"lb\" wird als Einheit erkannt");
+    assert(z[6].unit === "lbs" && z[6].name === "chicken thighs", "\"lbs\" wird als Einheit erkannt");
+    assert(z[7].unit === "pt" && z[7].name === "heavy cream", "\"pt\" wird als Einheit erkannt");
+    assert(z[8].unit === "qt" && z[8].name === "chicken stock", "\"qt\" wird als Einheit erkannt");
+    assert(z[9].unit === "gal" && z[9].name === "milk", "\"gal\" wird als Einheit erkannt");
+    assert(z[10].unit === "fl oz" && z[10].name === "milk", "\"fl oz\" (zwei Wörter) wird als EINE Einheit erkannt, nicht als Teil des Namens");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 7: Löschen erfordert die Bestätigung im eigenen Modal (kein
 // window.confirm()) und kann per Rückgängig-Fenster abgebrochen werden.
 // ---------------------------------------------------------------------
@@ -1500,6 +1558,34 @@ async function testEinkaufslisteEinheitenSynonyme(browser) {
     assert(ergebnis.length === 2, "Trotz drei verschiedener Schreibweisen für Gramm und zwei für Liter bleiben nur 2 Zeilen übrig (tatsächlich: " + JSON.stringify(ergebnis) + ")");
     assert(ergebnis.some((z) => z === "6 g Salz"), "\"g\", \"gr\" und \"Gramm\" werden als eine Einheit summiert (1+2+3=6 g Salz)");
     assert(ergebnis.some((z) => z === "2 l Milch"), "\"l\" und \"Liter\" werden als eine Einheit summiert (1+1=2 l Milch)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: dieselbe Einheiten-Synonym-Zusammenfassung wie oben, aber für die
+// neu ergänzten amerikanischen Einheiten (tbsp/tablespoon, oz/ounce usw.).
+// ---------------------------------------------------------------------
+async function testEinkaufslisteAmerikanischeEinheitenSynonyme(browser) {
+  console.log("\nTest: Einkaufsliste - amerikanische Einheiten-Synonyme (tbsp/tablespoon, oz/ounce, ...) werden zusammengefasst");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      const rezepte = [
+        { ingredients: [{ amount: "1", unit: "tbsp", name: "Zucker" }] },
+        { ingredients: [{ amount: "2", unit: "tablespoons", name: "Zucker" }] },
+        { ingredients: [{ amount: "8", unit: "oz", name: "Frischkäse" }] },
+        { ingredients: [{ amount: "4", unit: "ounces", name: "Frischkäse" }] },
+        { ingredients: [{ amount: "1", unit: "lb", name: "Hackfleisch" }] },
+        { ingredients: [{ amount: "1", unit: "pounds", name: "Hackfleisch" }] },
+      ];
+      return window.__karte._einkaufslisteAggregieren(rezepte);
+    });
+    assert(ergebnis.length === 3, "Trotz je zwei Schreibweisen für tbsp/oz/lb bleiben nur 3 Zeilen übrig (tatsächlich: " + JSON.stringify(ergebnis) + ")");
+    assert(ergebnis.some((z) => z === "3 tbsp Zucker"), "\"tbsp\" und \"tablespoons\" werden als eine Einheit summiert (1+2=3 tbsp Zucker)");
+    assert(ergebnis.some((z) => z === "12 oz Frischkäse"), "\"oz\" und \"ounces\" werden als eine Einheit summiert (8+4=12 oz Frischkäse)");
+    assert(ergebnis.some((z) => z === "2 lb Hackfleisch"), "\"lb\" und \"pounds\" werden als eine Einheit summiert (1+1=2 lb Hackfleisch)");
   } finally {
     await page.close();
   }
@@ -4784,6 +4870,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testJsonImportUebernimmtAlleFelder(browser);
     await testJsonImportZutatenAlsText(browser);
     await testAusgeschriebeneEinheitenWerdenVollstaendigErkannt(browser);
+    await testAmerikanischeEinheitenWerdenErkannt(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);
     await testTextErkennungUeberUi(browser);
@@ -4804,6 +4891,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testEnglischeUeberschriftenWerdenErkannt(browser);
     await testEinkaufslisteAggregation(browser);
     await testEinkaufslisteEinheitenSynonyme(browser);
+    await testEinkaufslisteAmerikanischeEinheitenSynonyme(browser);
     await testStatistikBerechnung(browser);
     await testStatistikEinstellungenSchalter(browser);
     await testZahnradBleibtRundAufSchmalemBildschirm(browser);

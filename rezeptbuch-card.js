@@ -6713,7 +6713,18 @@ const ZUTAT_MENGE_WORT = "ein(?:e|en)?|ein paar|einige|etwas|wenig|mehrere";
 // eines ausgeschriebenen Wortes sind ("gramm", "glas", "gläser", "liter"),
 // müssen deshalb NACH diesen längeren Alternativen stehen. Sonst matcht
 // z.B. bei "400 Gramm Mehl" nur das "g", und "ramm Mehl" landet im Namen.
-const ZUTAT_EINHEITEN = "kg|mg|ml|cl|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|gr\\.?|g|milliliter|liter|l";
+// Amerikanische Maßeinheiten (cup, tbsp, oz usw.) - analog zu den
+// deutschen/metrischen Einheiten NUR zur Erkennung + späterer
+// Synonym-Normalisierung (siehe EINHEIT_SYNONYME), bewusst OHNE
+// Umrechnung in metrische Einheiten (gleiche Begründung wie dort: keine
+// Einheiten-UMRECHNUNG, nur Textgleichsetzung). Reihenfolge innerhalb
+// dieses Blocks folgt derselben Regel wie beim Rest von ZUTAT_EINHEITEN:
+// ausgeschriebene/längere Formen vor kurzen Abkürzungen, die sonst als
+// Präfix vorzeitig zuschlagen würden (z.B. "gallon" vor "gal", sonst
+// bliebe bei "gallon Milch" das "lon" fälschlich im Namen hängen).
+const ZUTAT_EINHEITEN_US = "cups?|tablespoons?|tbsp\\.?s?|teaspoons?|tsp\\.?s?|fl\\.?\\s?oz\\.?|fluid\\s+ounces?|ounces?|oz\\.?|pounds?|lbs?\\.?|pints?|pt\\.?|quarts?|qt\\.?|gallons?|gal\\.?";
+
+const ZUTAT_EINHEITEN = `${ZUTAT_EINHEITEN_US}|kg|mg|ml|cl|el|tl|msp|prisen?|stück|stk\\.?|stange(?:n)?|zehe(?:n)?|bund|bd\\.?|dose(?:n)?|glas|gläser|packung(?:en)?|pck\\.?|scheibe(?:n)?|becher|blatt|blätter|würfel|tasse(?:n)?|esslöffel|teelöffel|handvoll|knolle(?:n)?|kopf|köpfe|gramm|kilo(?:gramm)?|gr\\.?|g|milliliter|liter|l`;
 
 // Kleine, bewusst auf die häufigsten Fälle beschränkte Synonym-Tabelle für
 // die Einkaufslisten-Zusammenfassung: verschiedene Schreibweisen derselben
@@ -6731,6 +6742,18 @@ const EINHEIT_SYNONYME = {
   l: "l", liter: "l",
   el: "EL", essloffel: "EL",
   tl: "TL", teeloffel: "TL",
+  // Amerikanische Einheiten - gleiche Schreibvarianten-Gleichsetzung wie
+  // oben, ebenfalls ohne Umrechnung zu metrischen Einheiten.
+  cup: "cup", cups: "cup",
+  tbsp: "tbsp", "tbsp.": "tbsp", tbsps: "tbsp", tablespoon: "tbsp", tablespoons: "tbsp",
+  tsp: "tsp", "tsp.": "tsp", tsps: "tsp", teaspoon: "tsp", teaspoons: "tsp",
+  oz: "oz", "oz.": "oz", ounce: "oz", ounces: "oz",
+  lb: "lb", "lb.": "lb", lbs: "lb", "lbs.": "lb", pound: "lb", pounds: "lb",
+  pt: "pt", "pt.": "pt", pint: "pt", pints: "pt",
+  qt: "qt", "qt.": "qt", quart: "qt", quarts: "qt",
+  gal: "gal", "gal.": "gal", gallon: "gal", gallons: "gal",
+  "fl oz": "fl oz", "fl. oz.": "fl oz", "fl oz.": "fl oz", "fl.oz.": "fl oz",
+  "fluid ounce": "fl oz", "fluid ounces": "fl oz",
 };
 
 // Erkennt "Menge Einheit Name" (z.B. "500 g Mehl", "1/2 TL Salz", "½ TL
