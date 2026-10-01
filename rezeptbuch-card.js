@@ -8812,6 +8812,20 @@ class RezeptbuchCard extends HTMLElement {
     return Array.from(menge).sort((a, b) => a.localeCompare(b, "de"));
   }
 
+  // Wie _alleTags(), aber ohne Einträge, die eigentlich ein Kategorie-Name
+  // sind (fest eingebaut oder selbst angelegt, jeweils Schlüssel UND
+  // übersetztes Anzeige-Label) - z.B. weil ein Rezept per JSON-Import
+  // versehentlich die Kategorie zusätzlich als Tag übernommen hat. Nur für
+  // die Tag-Vorschlagsliste im Formular gedacht: dort sollen ausschließlich
+  // echte Tags vorgeschlagen werden, keine Kategorien (die hat man ja schon
+  // über das Kategorie-Dropdown).
+  _alleTagsOhneKategorien() {
+    const kategorienNormalisiert = new Set(
+      this._alleKategorien().flatMap((k) => [this._normalisieren(k), this._normalisieren(this._kategorieLabel(k))])
+    );
+    return this._alleTags().filter((t) => !kategorienNormalisiert.has(this._normalisieren(t)));
+  }
+
   _gefilterteRezepte() {
     let liste = this._rezepte;
 
@@ -9134,6 +9148,11 @@ class RezeptbuchCard extends HTMLElement {
           cursor:pointer; font-weight:600;
         }
         .chip-aktiv { background: var(--kb-terrakotta); color:#fff; border-color: var(--kb-terrakotta); }
+        /* "+ Neue Kategorie" soll zwischen den Kategorie-Chips nicht
+           untergehen (gemeldet: zu unauffällig) - gestrichelter statt
+           durchgezogener Rand als dezentes, aber klares "Aktion statt
+           Filter"-Signal, ohne so laut wie chip-aktiv zu wirken. */
+        .chip-neu { border-style:dashed; border-width:2px; font-weight:700; }
         .kategorie-eigen-chip { display:inline-flex; align-items:center; gap:2px; padding-right:6px; }
         .kategorie-loeschen {
           border:none; background:transparent; color:inherit; cursor:pointer; font-size:0.9em;
@@ -9355,7 +9374,7 @@ class RezeptbuchCard extends HTMLElement {
             ? `<span class="chip kategorie-eigen-chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))} <button type="button" class="kategorie-loeschen" data-kategorie="${this._escape(k)}" title="${this._t("kategorie_loeschen_title")}" aria-label="${this._t("kategorie_loeschen_aria", { name: this._escape(k) })}">✕</button></span>`
             : `<button type="button" class="chip ${this._aktiveKategorie === k ? "chip-aktiv" : ""}" data-kategorie="${this._escape(k)}">${this._escape(this._kategorieLabel(k))}</button>`
           ).join("")}
-          <button type="button" class="chip" id="kategorie-neu-btn">${this._t("kategorie_neu_btn")}</button>
+          <button type="button" class="chip chip-neu" id="kategorie-neu-btn">${this._t("kategorie_neu_btn")}</button>
           <div id="kategorie-speichern-bereich" style="display:none; width:100%; margin-top:8px;">
             <input type="text" id="kategorie-name-feld" placeholder="${this._t("kategorie_name_placeholder")}">
             <button type="button" class="primaer klein" id="kategorie-speichern-bestaetigen-btn" style="margin-top:6px;">${this._t("allgemein_speichern")}</button>
@@ -11501,7 +11520,7 @@ class RezeptbuchCard extends HTMLElement {
                bereits an anderen Rezepten vergebene Tags zur Auswahl an,
                ohne zusätzlichen JS-Code/Build-Schritt. -->
           <datalist id="vorhandene-tags-liste">
-            ${this._alleTags().map((t) => `<option value="${this._escape(t)}"></option>`).join("")}
+            ${this._alleTagsOhneKategorien().map((t) => `<option value="${this._escape(t)}"></option>`).join("")}
           </datalist>
 
           <label>${this._t("formular_label_portionen")}</label>

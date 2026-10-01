@@ -2549,6 +2549,63 @@ async function testVorhandeneTagsWerdenAlsVorschlagAngezeigt(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: in der Tag-Vorschlagsliste erscheinen NUR echte Tags, keine
+// Kategorie-Namen - auch nicht, wenn ein Rezept (z.B. durch einen
+// JSON-Import) eine Kategorie versehentlich zusätzlich als Tag trägt.
+// Gilt sowohl für fest eingebaute als auch für selbst angelegte
+// Kategorien.
+// ---------------------------------------------------------------------
+async function testTagVorschlagsListeOhneKategorien(browser) {
+  console.log("\nTest: Tag-Vorschlagsliste enthält keine Kategorie-Namen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Gemüsecurry",
+      // "Hauptgericht" (fest eingebaute Kategorie) und "Grillrezepte"
+      // (selbst angelegte Kategorie) stecken hier versehentlich auch im
+      // tags-Array, zusammen mit einem echten Tag.
+      payload: leererPayload({ category: "Hauptgericht", tags: ["Hauptgericht", "Grillrezepte", "scharf"] }),
+    });
+    // _eigeneKategorien erst NACH rezeptDirektAnlegen setzen, da dessen
+    // interner _rezepteLaden()-Aufruf dieses Feld sonst aus dem (hier
+    // leeren) Marker-Item überschreiben würde.
+    await page.evaluate(() => {
+      window.__karte._eigeneKategorien = ["Grillrezepte"];
+    });
+
+    await page.evaluate(() => window.__karte._neuesRezeptFormular());
+    const vorschlaege = await page.evaluate(() =>
+      Array.from(window.__karte.shadowRoot.querySelectorAll("#vorhandene-tags-liste option")).map((o) => o.value)
+    );
+
+    assert(vorschlaege.includes("scharf"), "Der echte Tag ('scharf') erscheint weiterhin als Vorschlag");
+    assert(!vorschlaege.includes("Hauptgericht"), "Eine fest eingebaute Kategorie ('Hauptgericht') erscheint NICHT als Tag-Vorschlag");
+    assert(!vorschlaege.includes("Grillrezepte"), "Eine selbst angelegte Kategorie ('Grillrezepte') erscheint NICHT als Tag-Vorschlag");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: der "+ Neue Kategorie"-Knopf hebt sich optisch von den normalen
+// Kategorie-Filter-Chips ab (gemeldet: ging zwischen vielen Kategorien
+// zu leicht unter).
+// ---------------------------------------------------------------------
+async function testNeueKategorieKnopfHervorgehoben(browser) {
+  console.log("\nTest: '+ Neue Kategorie'-Knopf ist optisch hervorgehoben");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    const hatHervorhebungsKlasse = await page.evaluate(() =>
+      window.__karte.shadowRoot.getElementById("kategorie-neu-btn").classList.contains("chip-neu")
+    );
+    assert(hatHervorhebungsKlasse, "Der '+ Neue Kategorie'-Knopf trägt eine eigene Hervorhebungs-Klasse statt wie ein normaler Filter-Chip auszusehen");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 31: alte Rezepte ohne tags-Feld (schemaVersion 1) werden migriert und
 // erscheinen korrekt mit leerem tags-Array - kein Absturz beim Filtern.
 // ---------------------------------------------------------------------
@@ -5028,6 +5085,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testWochenplanTabWechselSpeichertRichtigesFeld(browser);
     await testTagsHinzufuegenSpeichernUndFiltern(browser);
     await testVorhandeneTagsWerdenAlsVorschlagAngezeigt(browser);
+    await testTagVorschlagsListeOhneKategorien(browser);
+    await testNeueKategorieKnopfHervorgehoben(browser);
     await testAlteRezepteOhneTagsWerdenMigriert(browser);
     await testKochbuecherSpeichernAnwendenLoeschen(browser);
     await testBarrierefreiheitVerbesserungen(browser);
