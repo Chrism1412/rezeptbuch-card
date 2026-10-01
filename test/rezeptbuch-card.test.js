@@ -823,9 +823,9 @@ async function testUsEinheitenUmrechnungMitBruechenUndBereichen(browser) {
 
 // ---------------------------------------------------------------------
 // Test: Knopf "Umrechnungstabelle" im Hauptmenü öffnet ein rein
-// informatives Nachschlage-Popup (~50 Zutaten, Tasse/EL/TL in Gramm) mit
-// Suchfilter - unabhängig von echten Rezeptdaten, nichts wird automatisch
-// angewendet.
+// informatives Nachschlage-Popup (70 Zutaten, Tasse/EL/TL in Gramm,
+// übersetzte Namen je Sprache) mit Suchfilter - unabhängig von echten
+// Rezeptdaten, nichts wird automatisch angewendet.
 // ---------------------------------------------------------------------
 async function testUmrechnungstabelleModal(browser) {
   console.log("\nTest: Umrechnungstabelle-Popup im Hauptmenü (Nachschlagetabelle + Suche)");
@@ -837,10 +837,10 @@ async function testUmrechnungstabelleModal(browser) {
       root.getElementById("umrechnungstabelle-btn").click();
       const modalSichtbarNachKlick = root.getElementById("umrechnungstabelle-modal").style.display;
       const anzahlZeilenGesamt = root.querySelectorAll("#umrechnungstabelle-liste tbody tr").length;
-      const mehlZeileVorSuche = root.querySelector('tr[data-zutat-name*="mehl"]').style.display;
+      const mehlZeileVorSuche = root.querySelector('tr[data-zutat-name*="puderzucker"]').style.display;
 
       const sucheFeld = root.getElementById("umrechnungstabelle-suche-feld");
-      sucheFeld.value = "mehl";
+      sucheFeld.value = "puderzucker";
       sucheFeld.dispatchEvent(new Event("input"));
       const sichtbareZeilenNachSuche = Array.from(root.querySelectorAll("#umrechnungstabelle-liste tbody tr")).filter((z) => z.style.display !== "none").length;
       const keineTrefferSichtbarBeiTreffer = root.getElementById("umrechnungstabelle-keine-treffer").style.display;
@@ -864,14 +864,46 @@ async function testUmrechnungstabelleModal(browser) {
 
     assert(ergebnis.vorherSichtbar === "none", "Popup ist anfangs unsichtbar");
     assert(ergebnis.modalSichtbarNachKlick === "flex", "Klick auf 'Umrechnungstabelle' zeigt das Popup");
-    assert(ergebnis.anzahlZeilenGesamt >= 50, `Die Tabelle enthält mindestens 50 Zutaten (tatsächlich: ${ergebnis.anzahlZeilenGesamt})`);
-    assert(ergebnis.mehlZeileVorSuche !== "none", "Vor der Suche sind alle Zeilen sichtbar, z.B. 'Mehl'");
-    assert(ergebnis.sichtbareZeilenNachSuche === 1, `Die Suche nach 'mehl' lässt genau eine Zeile übrig (tatsächlich: ${ergebnis.sichtbareZeilenNachSuche})`);
+    assert(ergebnis.anzahlZeilenGesamt === 70, `Die Tabelle enthält genau 70 Zutaten (tatsächlich: ${ergebnis.anzahlZeilenGesamt})`);
+    assert(ergebnis.mehlZeileVorSuche !== "none", "Vor der Suche sind alle Zeilen sichtbar, z.B. 'Puderzucker'");
+    assert(ergebnis.sichtbareZeilenNachSuche === 1, `Die Suche nach 'puderzucker' lässt genau eine Zeile übrig (tatsächlich: ${ergebnis.sichtbareZeilenNachSuche})`);
     assert(ergebnis.keineTrefferSichtbarBeiTreffer === "none", "Der 'Keine Zutat gefunden'-Hinweis bleibt bei Treffern versteckt");
     assert(ergebnis.sichtbareZeilenOhneTreffer === 0, "Eine Suche ohne Treffer blendet alle Zeilen aus");
     assert(ergebnis.keineTrefferSichtbarOhneTreffer === "block", "Der 'Keine Zutat gefunden'-Hinweis erscheint, wenn die Suche keine Treffer hat");
     assert(ergebnis.modalNachSchliessen === "none", "Schließen-Knopf versteckt das Popup wieder");
     assert(ergebnis.sucheFeldNachSchliessen === "", "Das Suchfeld wird beim Schließen zurückgesetzt");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: die Umrechnungstabelle ist wie der Rest der Karte übersetzt - auf
+// Englisch zeigt Titel UND die Zutatennamen selbst die englische Variante,
+// nicht die rohen i18n-Schlüssel (Regressionstest für genau diese Art
+// Fehler: fehlende/falsch eingefügte Übersetzungen fallen sonst nicht
+// strukturell auf, weil das Popup trotzdem öffnet/schließt).
+// ---------------------------------------------------------------------
+async function testUmrechnungstabelleUebersetzt(browser) {
+  console.log("\nTest: Umrechnungstabelle zeigt übersetzte Texte (nicht die rohen Schlüssel)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      window.__karte._hass = { ...window.__karte._hass, language: "en" };
+      window.__karte._render();
+      const root = window.__karte.shadowRoot;
+      root.getElementById("umrechnungstabelle-btn").click();
+      const modal = root.getElementById("umrechnungstabelle-modal");
+      return {
+        titelText: modal.querySelector("h3").textContent,
+        ersteZutat: modal.querySelector("tbody tr td").textContent,
+        enthaeltRohenSchluessel: modal.innerHTML.includes("umrechnungstabelle_"),
+      };
+    });
+
+    assert(ergebnis.titelText === "Conversion table", `Titel ist auf Englisch übersetzt (tatsächlich: '${ergebnis.titelText}')`);
+    assert(ergebnis.ersteZutat === "Flour (all-purpose)", `Erste Zutat ist auf Englisch übersetzt (tatsächlich: '${ergebnis.ersteZutat}')`);
+    assert(ergebnis.enthaeltRohenSchluessel === false, "Kein roher i18n-Schlüssel (z.B. 'umrechnungstabelle_titel') landet sichtbar im Popup");
   } finally {
     await page.close();
   }
@@ -1815,6 +1847,85 @@ async function testStatistikBerechnung(browser) {
 // Der Schalter wird persistent (Marker-Item) gespeichert und übersteht
 // ein Neuladen der Rezepte.
 // ---------------------------------------------------------------------
+// ---------------------------------------------------------------------
+// Test: Einstellung "Kategorie für amerikanische Rezepte" - Rezepte mit
+// der gewählten Kategorie bekommen zusätzlich einen "Umrechnungstabelle"-
+// Knopf im Rezept selbst und im Kochmodus, andere Rezepte nicht. Ohne
+// gewählte Kategorie (Standard) erscheint der Knopf dort nirgends.
+// ---------------------------------------------------------------------
+async function testAmerikanischeKategorieEinstellung(browser) {
+  console.log("\nTest: Einstellung 'Kategorie für amerikanische Rezepte' zeigt Umrechnungstabelle-Knopf im Rezept/Kochmodus");
+  const page = await neueTestUmgebung(browser);
+  try {
+    // "Amerikanisch" muss als eigene Kategorie existieren (sonst taucht sie
+    // im Auswahl-Dropdown der Einstellung gar nicht erst auf), genau wie
+    // ein echter Nutzer sie zuerst über "+ Neue Kategorie" anlegen würde.
+    await page.evaluate(() => window.__karte._eigeneKategorienSpeichern(["Amerikanisch"]));
+
+    const usUid = await rezeptDirektAnlegen(page, {
+      title: "American Pancakes",
+      payload: leererPayload({ category: "Amerikanisch", steps: ["Alles vermengen"] }),
+    });
+    const deUid = await rezeptDirektAnlegen(page, {
+      title: "Spätzle",
+      payload: leererPayload({ category: "Hauptgericht", steps: ["Teig kneten"] }),
+    });
+
+    // Ohne gewählte Einstellung (Standard: aus) darf der Knopf NIRGENDS im
+    // Rezept/Kochmodus erscheinen, selbst wenn die Kategorie zufällig
+    // "Amerikanisch" heißt.
+    const vorEinstellung = await page.evaluate((uid) => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.uid === uid));
+      const root = window.__karte.shadowRoot;
+      const detailKnopf = !!root.getElementById("detail-umrechnungstabelle-btn");
+      root.getElementById("kochmodus-btn").click();
+      const kochmodusKnopf = !!root.getElementById("kochmodus-umrechnungstabelle-btn");
+      return { detailKnopf, kochmodusKnopf };
+    }, usUid);
+    assert(vorEinstellung.detailKnopf === false, "Ohne gewählte Einstellung erscheint der Knopf NICHT im Rezept, selbst bei passendem Kategorienamen");
+    assert(vorEinstellung.kochmodusKnopf === false, "Ohne gewählte Einstellung erscheint der Knopf NICHT im Kochmodus");
+
+    // Einstellung setzen: "Amerikanisch" als US-Kategorie wählen.
+    await page.evaluate(async () => {
+      await window.__karte._zurListe();
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const feld = window.__karte.shadowRoot.getElementById("us-kategorie-feld");
+      feld.value = "Amerikanisch";
+      feld.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => window.__karte._einstellungen.amerikanischeKategorie === "Amerikanisch");
+
+    const nachEinstellungUs = await page.evaluate((uid) => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.uid === uid));
+      const root = window.__karte.shadowRoot;
+      const detailKnopf = !!root.getElementById("detail-umrechnungstabelle-btn");
+      root.getElementById("kochmodus-btn").click();
+      const kochmodusKnopf = !!root.getElementById("kochmodus-umrechnungstabelle-btn");
+      // Funktionscheck: der Knopf öffnet tatsächlich dasselbe Popup.
+      root.getElementById("kochmodus-umrechnungstabelle-btn").click();
+      const modalOffen = root.getElementById("umrechnungstabelle-modal").style.display === "flex";
+      return { detailKnopf, kochmodusKnopf, modalOffen };
+    }, usUid);
+    assert(nachEinstellungUs.detailKnopf === true, "Nach Auswahl der Kategorie erscheint der Knopf im Rezept selbst");
+    assert(nachEinstellungUs.kochmodusKnopf === true, "Nach Auswahl der Kategorie erscheint der Knopf auch im Kochmodus");
+    assert(nachEinstellungUs.modalOffen === true, "Der Knopf im Kochmodus öffnet das Umrechnungstabelle-Popup");
+
+    const nachEinstellungDe = await page.evaluate(async (uid) => {
+      await window.__karte._zurListe();
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.uid === uid));
+      const root = window.__karte.shadowRoot;
+      const detailKnopf = !!root.getElementById("detail-umrechnungstabelle-btn");
+      root.getElementById("kochmodus-btn").click();
+      const kochmodusKnopf = !!root.getElementById("kochmodus-umrechnungstabelle-btn");
+      return { detailKnopf, kochmodusKnopf };
+    }, deUid);
+    assert(nachEinstellungDe.detailKnopf === false, "Ein Rezept mit ANDERER Kategorie bekommt den Knopf nicht");
+    assert(nachEinstellungDe.kochmodusKnopf === false, "...auch nicht im Kochmodus");
+  } finally {
+    await page.close();
+  }
+}
+
 async function testStatistikEinstellungenSchalter(browser) {
   console.log("\nTest: Statistik-Einstellungen-Schalter (echter Ein-/Ausschalter, steuert Abfrage UND Statistik zusammen)");
   const page = await neueTestUmgebung(browser);
@@ -5364,6 +5475,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testAmerikanischeEinheitenWerdenErkannt(browser);
     await testUsEinheitenUmrechnungMitBruechenUndBereichen(browser);
     await testUmrechnungstabelleModal(browser);
+    await testUmrechnungstabelleUebersetzt(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
     await testZubereitungsschritteVerschieben(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);
@@ -5387,6 +5499,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testEinkaufslisteEinheitenSynonyme(browser);
     await testEinkaufslisteAmerikanischeEinheitenSynonyme(browser);
     await testStatistikBerechnung(browser);
+    await testAmerikanischeKategorieEinstellung(browser);
     await testStatistikEinstellungenSchalter(browser);
     await testZahnradBleibtRundAufSchmalemBildschirm(browser);
     await testRessourcenVersionsHinweis(browser);

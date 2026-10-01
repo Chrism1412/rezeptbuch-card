@@ -38,12 +38,22 @@ seit [2.0.0]).
   Fall gibt es stattdessen die neue, rein informative Umrechnungstabelle
   (siehe unten).
 - **Umrechnungstabelle (Hauptmenü)**: neuer Knopf "📐 Umrechnungstabelle"
-  öffnet ein Nachschlage-Popup mit Richtwerten in Gramm für ca. 50 in der
+  öffnet ein Nachschlage-Popup mit Richtwerten in Gramm für 70 in der
   Küche häufig verwendete Zutaten (je 1 Tasse/EL/TL, soweit praktisch
-  üblich), mit Suchfeld zum schnellen Filtern. Bewusst komplett unabhängig
+  üblich), mit Suchfeld zum schnellen Filtern - inklusive der Zutatennamen
+  selbst in allen 25 unterstützten Sprachen. Bewusst komplett unabhängig
   von echten Rezeptdaten - die Werte dienen nur zum manuellen Nachschlagen
   und werden NIE automatisch auf ein Rezept angewendet, da sie je nach
   Marke/Konsistenz der Zutat variieren können.
+- **Einstellung "Kategorie für amerikanische Rezepte"**: im
+  Einstellungen-Popup (⚙️) lässt sich jetzt eine Kategorie auswählen
+  (z.B. eine selbst angelegte Kategorie "Amerikanisch"). Bei Rezepten mit
+  genau dieser Kategorie erscheint der "Umrechnungstabelle"-Knopf
+  zusätzlich zum Hauptmenü auch direkt im Rezept selbst und im Kochmodus -
+  praktisch, um beim Nachkochen eines amerikanischen Rezepts schnell
+  nachzuschlagen, ohne zurück zur Übersicht zu müssen. Standardmäßig ist
+  keine Kategorie ausgewählt, der Knopf bleibt dann wie bisher nur im
+  Hauptmenü.
 - **Vorhandene Tags als Vorschlag**: beim Anlegen/Bearbeiten eines
   Rezepts zeigt das Tag-Eingabefeld jetzt (über eine native
   Browser-Vorschlagsliste) bereits an anderen Rezepten vergebene Tags an

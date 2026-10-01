@@ -254,6 +254,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Zubereitungs-Erfassung",
     statistik_einstellungen_text: "Hier kannst du festlegen, ob nach dem Verlassen eines Rezepts gefragt wird, ob du es zubereitet hast, und ob die daraus entstehende Statistik in dieser Karte angezeigt wird.",
     statistik_einstellungen_schalter_label: "Abfrage & Statistik aktivieren",
+    us_kategorie_einstellung_label: "Kategorie für amerikanische Rezepte",
+    us_kategorie_einstellung_text: "Bei Rezepten mit dieser Kategorie erscheint zusätzlich im Rezept selbst und im Kochmodus ein Knopf für die Umrechnungstabelle.",
+    us_kategorie_einstellung_keine: "— Keine —",
     statistik_info_titel: "Wie wird diese Statistik berechnet?",
     statistik_info_text:
       "Diese Auswertung zählt jede Bestätigung der Frage „Hast du zubereitet?“ - unabhängig von Portionsgröße oder Häufigkeit am selben Tag. Ist diese Frage über den Schalter in den Statistik-Einstellungen (⚙️) deaktiviert, wachsen die Zahlen nicht weiter, bereits erfasste Zubereitungen bleiben aber erhalten.",
@@ -585,6 +588,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Zubereitigs-Erfassig",
     statistik_einstellungen_text: "Da chasch feschtlege, ob nach em Verlaa vomene Rezept gfrogt wird, ob de's zubereitet hesch, und ob die Statistik i dere Charte azeigt wird.",
     statistik_einstellungen_schalter_label: "Abfrag & Statistik ischalte",
+    us_kategorie_einstellung_label: "Kategorie für amerikanischi Rezept",
+    us_kategorie_einstellung_text: "Bi Rezäpt mit dere Kategorie erschiint zuesätzlich im Rezäpt sälber und im Kochmodus en Knopf für d'Umrechnigstabälle.",
+    us_kategorie_einstellung_keine: "— Kei —",
     statistik_info_titel: "Wie wird die Statistik berechnet?",
     statistik_info_text:
       "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über de Schalter i de Statistik-Iistellige (⚙️) deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
@@ -896,6 +902,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Cooking log settings",
     statistik_einstellungen_text: "Here you can choose whether you're asked, after leaving a recipe, if you cooked it, and whether the resulting statistics are shown on this card.",
     statistik_einstellungen_schalter_label: "Enable question & statistics",
+    us_kategorie_einstellung_label: "Category for American recipes",
+    us_kategorie_einstellung_text: "Recipes with this category also get a conversion table button in the recipe itself and in cooking mode.",
+    us_kategorie_einstellung_keine: "— None —",
     statistik_info_titel: "How is this statistic calculated?",
     statistik_info_text:
       "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the switch in the statistics settings (⚙️), the numbers stop growing, but already recorded preparations are kept.",
@@ -1186,6 +1195,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Настройки на записа за готвене",
     statistik_einstellungen_text: "Тук можете да зададете дали да бъдете питани, след като напуснете рецепта, дали сте я приготвили, и дали получената статистика да се показва в тази карта.",
     statistik_einstellungen_schalter_label: "Активиране на въпрос и статистика",
+    us_kategorie_einstellung_label: "Категория за американски рецепти",
+    us_kategorie_einstellung_text: "При рецепти с тази категория се появява допълнителен бутон за таблицата за преобразуване в самата рецепта и в режим готвене.",
+    us_kategorie_einstellung_keine: "— Няма —",
     statistik_info_titel: "Как се изчислява тази статистика?",
     statistik_info_text:
       "Тази статистика брои всяко потвърждение на въпроса „Приготви ли го?“ - независимо от размера на порцията или колко пъти в един и същи ден. Ако този въпрос е деактивиран чрез превключвателя в настройките на статистиката (⚙️), числата спират да растат, но вече записаните приготвяния се запазват.",
@@ -1449,6 +1461,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Postavke evidencije kuhanja",
     statistik_einstellungen_text: "Ovdje možeš odrediti hoće li te se, nakon napuštanja recepta, pitati jesi li ga pripremio/la, i hoće li se prikazivati statistika koja iz toga proizlazi.",
     statistik_einstellungen_schalter_label: "Uključi pitanje i statistiku",
+    us_kategorie_einstellung_label: "Kategorija za američke recepte",
+    us_kategorie_einstellung_text: "Kod recepata s ovom kategorijom dodatno se pojavljuje gumb za tablicu preračunavanja u samom receptu i u načinu kuhanja.",
+    us_kategorie_einstellung_keine: "— Nijedna —",
     statistik_info_titel: "Kako se izračunava ova statistika?",
     statistik_info_text:
       "Ova statistika broji svaku potvrdu pitanja „Jesi li pripremio/la?“ - bez obzira na veličinu porcije ili koliko puta istog dana. Ako je to pitanje onemogućeno putem prekidača u postavkama statistike (⚙️), brojevi prestaju rasti, ali već zabilježene pripreme ostaju sačuvane.",
@@ -1712,6 +1727,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Nastavení zaznamenávání vaření",
     statistik_einstellungen_text: "Zde můžeš nastavit, zda se tě po opuštění receptu zeptáme, jestli jsi ho připravil(a), a zda se zobrazuje statistika, která z toho vzniká.",
     statistik_einstellungen_schalter_label: "Zapnout otázku a statistiku",
+    us_kategorie_einstellung_label: "Kategorie pro americké recepty",
+    us_kategorie_einstellung_text: "U receptů s touto kategorií se navíc zobrazí tlačítko pro převodní tabulku přímo v receptu a v režimu vaření.",
+    us_kategorie_einstellung_keine: "— Žádná —",
     statistik_info_titel: "Jak se tato statistika počítá?",
     statistik_info_text:
       "Toto vyhodnocení počítá každé potvrzení otázky „Připravil(a) jste?“ - bez ohledu na velikost porce nebo počet za stejný den. Pokud je tato otázka vypnuta pomocí přepínače v nastavení statistiky (⚙️), čísla dál nerostou, ale již zaznamenané přípravy zůstávají zachovány.",
@@ -1975,6 +1993,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Indstillinger for tilberedningslog",
     statistik_einstellungen_text: "Her kan du vælge, om du bliver spurgt, når du forlader en opskrift, om du tilberedte den, og om den resulterende statistik vises på dette kort.",
     statistik_einstellungen_schalter_label: "Aktivér spørgsmål og statistik",
+    us_kategorie_einstellung_label: "Kategori til amerikanske opskrifter",
+    us_kategorie_einstellung_text: "Opskrifter med denne kategori får desuden en knap til omregningstabellen i selve opskriften og i tilberedningstilstand.",
+    us_kategorie_einstellung_keine: "— Ingen —",
     statistik_info_titel: "Hvordan beregnes denne statistik?",
     statistik_info_text:
       "Denne opgørelse tæller hver bekræftelse af spørgsmålet „Tilberedte du den?“ - uanset portionsstørrelse eller hvor mange gange samme dag. Hvis spørgsmålet er deaktiveret via kontakten i statistikindstillingerne (⚙️), holder tallene op med at stige, men allerede registrerede tilberedninger bevares.",
@@ -2238,6 +2259,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Instellingen bereidingsregistratie",
     statistik_einstellungen_text: "Hier kun je instellen of je, na het verlaten van een recept, wordt gevraagd of je het hebt bereid, en of de bijbehorende statistiek op deze kaart wordt weergegeven.",
     statistik_einstellungen_schalter_label: "Vraag & statistiek inschakelen",
+    us_kategorie_einstellung_label: "Categorie voor Amerikaanse recepten",
+    us_kategorie_einstellung_text: "Recepten met deze categorie krijgen ook een knop voor de omrekentabel in het recept zelf en in de kookmodus.",
+    us_kategorie_einstellung_keine: "— Geen —",
     statistik_info_titel: "Hoe wordt deze statistiek berekend?",
     statistik_info_text:
       "Deze weergave telt elke bevestiging van de vraag „Heb je het bereid?“ - ongeacht portiegrootte of hoe vaak op dezelfde dag. Als deze vraag is uitgeschakeld via de schakelaar in de statistiekinstellingen (⚙️), groeien de aantallen niet meer, maar al geregistreerde bereidingen blijven behouden.",
@@ -2501,6 +2525,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Valmistamise jälgimise seaded",
     statistik_einstellungen_text: "Siin saad valida, kas retseptist väljumisel küsitakse, kas valmistasid selle, ja kas sellest tekkiv statistika kuvatakse sellel kaardil.",
     statistik_einstellungen_schalter_label: "Luba küsimus ja statistika",
+    us_kategorie_einstellung_label: "Kategooria Ameerika retseptidele",
+    us_kategorie_einstellung_text: "Selle kategooria retseptidel kuvatakse lisaks teisendustabeli nupp ka retseptis endas ja köögirežiimis.",
+    us_kategorie_einstellung_keine: "— Puudub —",
     statistik_info_titel: "Kuidas seda statistikat arvutatakse?",
     statistik_info_text:
       "See ülevaade loeb kokku iga kinnituse küsimusele „Kas valmistasid?“ - sõltumata portsjoni suurusest või sellest, mitu korda samal päeval. Kui see küsimus on statistika seadete lülitiga (⚙️) välja lülitatud, arvud enam ei kasva, kuid juba salvestatud valmistamised säilivad.",
@@ -2764,6 +2791,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Valmistuksen kirjaamisen asetukset",
     statistik_einstellungen_text: "Tässä voit valita, kysytäänkö reseptistä poistuttaessa, valmistitko sen, ja näytetäänkö siitä syntyvä tilasto tällä kortilla.",
     statistik_einstellungen_schalter_label: "Ota kysymys ja tilastot käyttöön",
+    us_kategorie_einstellung_label: "Kategoria amerikkalaisille resepteille",
+    us_kategorie_einstellung_text: "Tämän kategorian resepteissä näkyy lisäksi muuntotaulukon painike itse reseptissä ja keittiötilassa.",
+    us_kategorie_einstellung_keine: "— Ei mikään —",
     statistik_info_titel: "Miten tämä tilasto lasketaan?",
     statistik_info_text:
       "Tämä yhteenveto laskee jokaisen vahvistuksen kysymykseen „Valmistitko sen?“ - annoskoosta tai saman päivän toistokerroista riippumatta. Jos tämä kysymys on poistettu käytöstä tilastoasetusten kytkimellä (⚙️), luvut eivät enää kasva, mutta jo tallennetut valmistuskerrat säilyvät.",
@@ -3028,6 +3058,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Paramètres du suivi de préparation",
     statistik_einstellungen_text: "Ici, tu peux choisir si on te demande, en quittant une recette, si tu l'as préparée, et si les statistiques qui en résultent sont affichées sur cette carte.",
     statistik_einstellungen_schalter_label: "Activer la question et les statistiques",
+    us_kategorie_einstellung_label: "Catégorie pour les recettes américaines",
+    us_kategorie_einstellung_text: "Les recettes de cette catégorie affichent aussi un bouton pour la table de conversion directement dans la recette et en mode cuisine.",
+    us_kategorie_einstellung_keine: "— Aucune —",
     statistik_info_titel: "Comment cette statistique est-elle calculée ?",
     statistik_info_text:
       "Ce bilan comptabilise chaque confirmation de la question « As-tu préparé ? » - quelle que soit la taille des portions ou le nombre de fois le même jour. Si cette question est désactivée via l'interrupteur des paramètres de statistiques (⚙️), les chiffres cessent d'augmenter, mais les préparations déjà enregistrées sont conservées.",
@@ -3292,6 +3325,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Ρυθμίσεις καταγραφής μαγειρέματος",
     statistik_einstellungen_text: "Εδώ μπορείς να ορίσεις αν θα σε ρωτά, όταν βγαίνεις από μια συνταγή, αν τη μαγείρεψες, και αν θα εμφανίζονται τα στατιστικά που προκύπτουν σε αυτήν την κάρτα.",
     statistik_einstellungen_schalter_label: "Ενεργοποίηση ερώτησης & στατιστικών",
+    us_kategorie_einstellung_label: "Κατηγορία για αμερικανικές συνταγές",
+    us_kategorie_einstellung_text: "Οι συνταγές αυτής της κατηγορίας εμφανίζουν επιπλέον ένα κουμπί για τον πίνακα μετατροπής μέσα στη συνταγή και στη λειτουργία μαγειρέματος.",
+    us_kategorie_einstellung_keine: "— Καμία —",
     statistik_info_titel: "Πώς υπολογίζεται αυτή η στατιστική;",
     statistik_info_text:
       "Αυτή η αξιολόγηση μετρά κάθε επιβεβαίωση της ερώτησης «Το παρασκεύασες;» - ανεξάρτητα από το μέγεθος της μερίδας ή το πόσες φορές την ίδια ημέρα. Αν αυτή η ερώτηση είναι απενεργοποιημένη μέσω του διακόπτη στις ρυθμίσεις στατιστικών (⚙️), οι αριθμοί σταματούν να αυξάνονται, αλλά οι ήδη καταγεγραμμένες παρασκευές διατηρούνται.",
@@ -3556,6 +3592,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Elkészítés-naplózás beállításai",
     statistik_einstellungen_text: "Itt állíthatod be, hogy egy recept elhagyásakor megkérdezzük-e, elkészítetted-e, és hogy megjelenjen-e az ebből született statisztika ezen a kártyán.",
     statistik_einstellungen_schalter_label: "Kérdés és statisztika bekapcsolása",
+    us_kategorie_einstellung_label: "Kategória amerikai receptekhez",
+    us_kategorie_einstellung_text: "Az ebbe a kategóriába tartozó receptek a receptben magában és a főzési módban is megjelenítenek egy átváltási táblázat gombot.",
+    us_kategorie_einstellung_keine: "— Nincs —",
     statistik_info_titel: "Hogyan számítjuk ki ezt a statisztikát?",
     statistik_info_text:
       "Ez a kiértékelés minden megerősítést számol az „Elkészítetted?“ kérdésre - függetlenül az adag méretétől vagy attól, hányszor ugyanazon a napon. Ha ez a kérdés ki van kapcsolva a statisztika beállításaiban található kapcsolóval (⚙️), a számok nem nőnek tovább, de a már rögzített elkészítések megmaradnak.",
@@ -3820,6 +3859,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Socruithe logála cócaireachta",
     statistik_einstellungen_text: "Is féidir leat anseo a shocrú an bhfiafrófar díot, tar éis duit oideas a fhágáil, an ndearna tú é, agus an dtaispeánfar an staitisticí a eascraíonn as sin ar an gcárta seo.",
     statistik_einstellungen_schalter_label: "Cumasaigh an cheist agus staitisticí",
+    us_kategorie_einstellung_label: "Catagóir d'oidis Mheiriceánacha",
+    us_kategorie_einstellung_text: "Taispeánann oidis sa chatagóir seo cnaipe breise don tábla tiontaithe san oideas féin agus sa mhód cócaireachta.",
+    us_kategorie_einstellung_keine: "— Ceann ar bith —",
     statistik_info_titel: "Conas a ríomhtar an staitistic seo?",
     statistik_info_text:
       "Áirítear sa mheasúnú seo gach deimhniú ar an gceist „Ar ullmhaigh tú é?“ - beag beann ar mhéid an fhreastail nó cé mhéad uair an lá céanna. Má tá an cheist seo díchumasaithe tríd an lasc i socruithe na staitisticí (⚙️), ní fhásfaidh na huimhreacha a thuilleadh, ach coinneofar na hullmhúcháin atá taifeadta cheana.",
@@ -4084,6 +4126,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Impostazioni registro preparazioni",
     statistik_einstellungen_text: "Qui puoi stabilire se, uscendo da una ricetta, ti viene chiesto se l'hai preparata, e se le statistiche che ne derivano vengono mostrate su questa scheda.",
     statistik_einstellungen_schalter_label: "Attiva domanda e statistiche",
+    us_kategorie_einstellung_label: "Categoria per ricette americane",
+    us_kategorie_einstellung_text: "Le ricette con questa categoria mostrano anche un pulsante per la tabella di conversione nella ricetta stessa e in modalità cottura.",
+    us_kategorie_einstellung_keine: "— Nessuna —",
     statistik_info_titel: "Come viene calcolata questa statistica?",
     statistik_info_text:
       "Questo riepilogo conta ogni conferma alla domanda «Hai preparato?» - indipendentemente dalla dimensione delle porzioni o da quante volte nello stesso giorno. Se questa domanda è disattivata tramite l'interruttore nelle impostazioni statistiche (⚙️), i numeri smettono di crescere, ma le preparazioni già registrate vengono mantenute.",
@@ -4347,6 +4392,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Gatavošanas žurnāla iestatījumi",
     statistik_einstellungen_text: "Šeit vari iestatīt, vai, pametot recepti, tiek jautāts, vai to pagatavoji, un vai no tā izrietošā statistika tiek rādīta šajā kartītē.",
     statistik_einstellungen_schalter_label: "Iespējot jautājumu un statistiku",
+    us_kategorie_einstellung_label: "Kategorija amerikāņu receptēm",
+    us_kategorie_einstellung_text: "Receptēm ar šo kategoriju papildus parādās pārrēķina tabulas poga pašā receptē un gatavošanas režīmā.",
+    us_kategorie_einstellung_keine: "— Nav —",
     statistik_info_titel: "Kā tiek aprēķināta šī statistika?",
     statistik_info_text:
       "Šis apkopojums saskaita katru apstiprinājumu jautājumam „Vai pagatavoji?“ - neatkarīgi no porcijas lieluma vai reižu skaita tajā pašā dienā. Ja šis jautājums ir atspējots ar slēdzi statistikas iestatījumos (⚙️), skaitļi vairs nepieaug, bet jau reģistrētās gatavošanas reizes saglabājas.",
@@ -4610,6 +4658,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Gaminimo žurnalo nustatymai",
     statistik_einstellungen_text: "Čia gali nustatyti, ar išeinant iš recepto bus klausiama, ar jį paruošei, ir ar bus rodoma iš to atsirandanti statistika šioje kortelėje.",
     statistik_einstellungen_schalter_label: "Įjungti klausimą ir statistiką",
+    us_kategorie_einstellung_label: "Kategorija Amerikos receptams",
+    us_kategorie_einstellung_text: "Prie šios kategorijos receptų papildomai rodomas perskaičiavimo lentelės mygtukas pačiame recepte ir gaminimo režimu.",
+    us_kategorie_einstellung_keine: "— Jokios —",
     statistik_info_titel: "Kaip skaičiuojama ši statistika?",
     statistik_info_text:
       "Šioje apžvalgoje skaičiuojamas kiekvienas patvirtinimas į klausimą „Ar paruošei?“ - nepriklausomai nuo porcijos dydžio ar kartų skaičiaus tą pačią dieną. Jei šis klausimas išjungtas naudojant jungiklį statistikos nustatymuose (⚙️), skaičiai nebeauga, tačiau jau užfiksuoti gaminimai išlieka.",
@@ -4874,6 +4925,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Settings tar-reġistrazzjoni tat-tisjir",
     statistik_einstellungen_text: "Hawnhekk tista' tiddeċiedi jekk, wara li toħroġ minn riċetta, tintalabx tgħid jekk ħejjejtiex, u jekk l-istatistika li tirriżulta tintweriex f'din il-karta.",
     statistik_einstellungen_schalter_label: "Ixgħel il-mistoqsija u l-istatistika",
+    us_kategorie_einstellung_label: "Kategorija għal riċetti Amerikani",
+    us_kategorie_einstellung_text: "Ir-riċetti b'din il-kategorija juru wkoll buttuna għat-tabella tal-konverżjoni fir-riċetta nnifisha u fil-modalità tat-tisjir.",
+    us_kategorie_einstellung_keine: "— Xejn —",
     statistik_info_titel: "Kif tiġi kkalkulata din l-istatistika?",
     statistik_info_text:
       "Din il-valutazzjoni tgħodd kull konferma tal-mistoqsija „Ħejjejtu?“ - irrispettivament mid-daqs tal-porzjon jew kemm-il darba fl-istess jum. Jekk din il-mistoqsija tkun diżattivata permezz tal-swiċċ fis-settings tal-istatistika (⚙️), in-numri jieqfu jikbru, iżda t-tħejjijiet diġà rreġistrati jibqgħu.",
@@ -5137,6 +5191,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Ustawienia rejestrowania gotowania",
     statistik_einstellungen_text: "Tutaj możesz ustawić, czy po wyjściu z przepisu masz być pytany, czy go przygotowałeś/aś, i czy wynikające z tego statystyki są wyświetlane na tej karcie.",
     statistik_einstellungen_schalter_label: "Włącz pytanie i statystyki",
+    us_kategorie_einstellung_label: "Kategoria dla przepisów amerykańskich",
+    us_kategorie_einstellung_text: "Przy przepisach z tą kategorią dodatkowo pojawia się przycisk tabeli przeliczeń bezpośrednio w przepisie i w trybie gotowania.",
+    us_kategorie_einstellung_keine: "— Brak —",
     statistik_info_titel: "Jak obliczana jest ta statystyka?",
     statistik_info_text:
       "To zestawienie liczy każde potwierdzenie pytania „Czy przygotowałeś/aś?“ - niezależnie od wielkości porcji czy liczby powtórzeń tego samego dnia. Jeśli to pytanie jest wyłączone przełącznikiem w ustawieniach statystyk (⚙️), liczby przestają rosnąć, ale już zapisane przygotowania pozostają zachowane.",
@@ -5401,6 +5458,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Configurações do registo de preparação",
     statistik_einstellungen_text: "Aqui podes definir se, ao saíres de uma receita, te é perguntado se a preparaste, e se as estatísticas resultantes são exibidas neste cartão.",
     statistik_einstellungen_schalter_label: "Ativar pergunta e estatísticas",
+    us_kategorie_einstellung_label: "Categoria para receitas americanas",
+    us_kategorie_einstellung_text: "As receitas com esta categoria mostram também um botão para a tabela de conversão na própria receita e no modo de cozinha.",
+    us_kategorie_einstellung_keine: "— Nenhuma —",
     statistik_info_titel: "Como é calculada esta estatística?",
     statistik_info_text:
       "Esta avaliação conta cada confirmação da pergunta «Preparaste?» - independentemente do tamanho da porção ou de quantas vezes no mesmo dia. Se esta pergunta estiver desativada através do interruptor nas configurações de estatísticas (⚙️), os números deixam de aumentar, mas as preparações já registadas são mantidas.",
@@ -5664,6 +5724,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Setări jurnal de gătit",
     statistik_einstellungen_text: "Aici poți stabili dacă, la părăsirea unei rețete, ești întrebat dacă ai preparat-o, și dacă statisticile rezultate sunt afișate pe acest card.",
     statistik_einstellungen_schalter_label: "Activează întrebarea și statisticile",
+    us_kategorie_einstellung_label: "Categorie pentru rețete americane",
+    us_kategorie_einstellung_text: "Rețetele din această categorie afișează suplimentar un buton pentru tabelul de conversie chiar în rețetă și în modul de gătit.",
+    us_kategorie_einstellung_keine: "— Niciuna —",
     statistik_info_titel: "Cum se calculează această statistică?",
     statistik_info_text:
       "Această evaluare numără fiecare confirmare a întrebării „Ai preparat?“ - indiferent de dimensiunea porției sau de câte ori în aceeași zi. Dacă această întrebare este dezactivată prin comutatorul din setările statisticii (⚙️), numerele nu mai cresc, dar preparările deja înregistrate rămân păstrate.",
@@ -5927,6 +5990,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Nastavenia zaznamenávania varenia",
     statistik_einstellungen_text: "Tu môžeš nastaviť, či sa ťa po opustení receptu spýtame, či si ho pripravil(a), a či sa zobrazuje z toho vzniknutá štatistika na tejto karte.",
     statistik_einstellungen_schalter_label: "Zapnúť otázku a štatistiku",
+    us_kategorie_einstellung_label: "Kategória pre americké recepty",
+    us_kategorie_einstellung_text: "Pri receptoch s touto kategóriou sa navyše zobrazí tlačidlo prevodnej tabuľky priamo v recepte a v režime varenia.",
+    us_kategorie_einstellung_keine: "— Žiadna —",
     statistik_info_titel: "Ako sa táto štatistika počíta?",
     statistik_info_text:
       "Toto vyhodnotenie počíta každé potvrdenie otázky „Pripravil(a) si?“ - bez ohľadu na veľkosť porcie alebo počet za rovnaký deň. Ak je táto otázka vypnutá pomocou prepínača v nastaveniach štatistiky (⚙️), čísla ďalej nerastú, ale už zaznamenané prípravy zostávajú zachované.",
@@ -6190,6 +6256,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Nastavitve beleženja kuhanja",
     statistik_einstellungen_text: "Tukaj lahko določiš, ali te bo ob zapustitvi recepta vprašalo, ali si ga pripravil/a, in ali se prikazuje statistika, ki iz tega izhaja, na tej kartici.",
     statistik_einstellungen_schalter_label: "Vklopi vprašanje in statistiko",
+    us_kategorie_einstellung_label: "Kategorija za ameriške recepte",
+    us_kategorie_einstellung_text: "Pri receptih s to kategorijo se dodatno prikaže gumb za pretvorbeno tabelo neposredno v receptu in v kuharskem načinu.",
+    us_kategorie_einstellung_keine: "— Brez —",
     statistik_info_titel: "Kako se izračuna ta statistika?",
     statistik_info_text:
       "Ta pregled šteje vsako potrditev vprašanja „Si pripravil/a?“ - ne glede na velikost porcije ali kolikokrat isti dan. Če je to vprašanje onemogočeno s stikalom v nastavitvah statistike (⚙️), se števila ne povečujejo več, že zabeležene priprave pa ostanejo ohranjene.",
@@ -6453,6 +6522,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Ajustes del registro de cocina",
     statistik_einstellungen_text: "Aquí puedes elegir si, al salir de una receta, se te pregunta si la preparaste, y si las estadísticas resultantes se muestran en esta tarjeta.",
     statistik_einstellungen_schalter_label: "Activar pregunta y estadísticas",
+    us_kategorie_einstellung_label: "Categoría para recetas americanas",
+    us_kategorie_einstellung_text: "Las recetas con esta categoría muestran también un botón para la tabla de conversión en la propia receta y en el modo cocina.",
+    us_kategorie_einstellung_keine: "— Ninguna —",
     statistik_info_titel: "¿Cómo se calcula esta estadística?",
     statistik_info_text:
       "Este resumen cuenta cada confirmación de la pregunta «¿Lo preparaste?» - independientemente del tamaño de la porción o de cuántas veces el mismo día. Si esta pregunta está desactivada mediante el interruptor de los ajustes de estadísticas (⚙️), los números dejan de aumentar, pero las preparaciones ya registradas se conservan.",
@@ -6716,6 +6788,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_titel: "Inställningar för tillagningsloggen",
     statistik_einstellungen_text: "Här kan du välja om du blir tillfrågad, när du lämnar ett recept, om du lagade det, och om den resulterande statistiken visas på det här kortet.",
     statistik_einstellungen_schalter_label: "Aktivera fråga och statistik",
+    us_kategorie_einstellung_label: "Kategori för amerikanska recept",
+    us_kategorie_einstellung_text: "Recept med denna kategori visar även en knapp för omvandlingstabellen direkt i receptet och i lagningsläget.",
+    us_kategorie_einstellung_keine: "— Ingen —",
     statistik_info_titel: "Hur beräknas denna statistik?",
     statistik_info_text:
       "Den här sammanställningen räknar varje bekräftelse av frågan „Lagade du den?“ - oavsett portionsstorlek eller hur många gånger samma dag. Om frågan är inaktiverad via reglaget i statistikinställningarna (⚙️) slutar siffrorna att öka, men redan registrerade tillagningar behålls.",
@@ -7320,57 +7395,108 @@ const KATEGORIE_STICHWORTE = [
 // angezeigt statt mit einer unüblichen, aber rechnerisch ableitbaren Zahl
 // aufgefüllt zu werden.
 const UMRECHNUNGSTABELLE_ZUTATEN = [
-  { name: "Mehl (Weizen, Type 405)", cup: 120, tbsp: 8, tsp: 2.6 },
-  { name: "Zucker (Kristallzucker)", cup: 200, tbsp: 12.5, tsp: 4.2 },
-  { name: "Puderzucker", cup: 120, tbsp: 7.5 },
-  { name: "Brauner Zucker (fest gepackt)", cup: 220, tbsp: 13.8 },
-  { name: "Butter", cup: 227, tbsp: 14.2, tsp: 4.7 },
-  { name: "Honig", cup: 340, tbsp: 21 },
-  { name: "Ahornsirup", cup: 315, tbsp: 20 },
-  { name: "Pflanzenöl", cup: 218, tbsp: 13.6 },
-  { name: "Olivenöl", cup: 216, tbsp: 13.5 },
-  { name: "Milch", cup: 240, tbsp: 15 },
-  { name: "Sahne (Schlagsahne)", cup: 240, tbsp: 15 },
-  { name: "Wasser", cup: 237, tbsp: 14.8, tsp: 4.9 },
-  { name: "Naturjoghurt", cup: 245, tbsp: 15.3 },
-  { name: "Saure Sahne", cup: 230, tbsp: 14.4 },
-  { name: "Frischkäse", cup: 232, tbsp: 14.5 },
-  { name: "Reis, ungekocht (Langkorn)", cup: 185 },
-  { name: "Haferflocken", cup: 90 },
-  { name: "Kakaopulver", cup: 85, tbsp: 5.3 },
-  { name: "Backpulver", tbsp: 12, tsp: 4 },
-  { name: "Natron", tbsp: 13.8, tsp: 4.6 },
-  { name: "Salz, fein", tbsp: 18, tsp: 6 },
-  { name: "Hefe, trocken", tbsp: 9.3, tsp: 3.1 },
-  { name: "Mandeln, gemahlen", cup: 96, tbsp: 6 },
-  { name: "Walnüsse, gehackt", cup: 100, tbsp: 6.3 },
-  { name: "Haselnüsse, gehackt", cup: 115, tbsp: 7.2 },
-  { name: "Rosinen", cup: 150, tbsp: 9.4 },
-  { name: "Schokoladenstückchen", cup: 170, tbsp: 10.6 },
-  { name: "Semmelbrösel, trocken", cup: 108, tbsp: 6.8 },
-  { name: "Parmesan, gerieben", cup: 100, tbsp: 6.3 },
-  { name: "Käse, gerieben (z.B. Gouda, Cheddar)", cup: 110, tbsp: 6.9 },
-  { name: "Quinoa, ungekocht", cup: 170 },
-  { name: "Linsen, getrocknet", cup: 190 },
-  { name: "Couscous, trocken", cup: 175 },
-  { name: "Erdnussbutter", cup: 258, tbsp: 16.1 },
-  { name: "Tomatenmark", cup: 262, tbsp: 16.4 },
-  { name: "Essig", cup: 240, tbsp: 15 },
-  { name: "Zitronensaft", cup: 245, tbsp: 15.3 },
-  { name: "Vanilleextrakt", tbsp: 12.5, tsp: 4.2 },
-  { name: "Zimt, gemahlen", tbsp: 7.8, tsp: 2.6 },
-  { name: "Ingwer, gemahlen", tbsp: 5.4, tsp: 1.8 },
-  { name: "Paprikapulver", tbsp: 6.9, tsp: 2.3 },
-  { name: "Pfeffer, gemahlen", tbsp: 6.9, tsp: 2.3 },
-  { name: "Knoblauchpulver", tbsp: 9.3, tsp: 3.1 },
-  { name: "Kurkuma, gemahlen", tbsp: 9, tsp: 3 },
-  { name: "Sesam (Sesamsamen)", cup: 144, tbsp: 9 },
-  { name: "Leinsamen", cup: 168, tbsp: 10.5 },
-  { name: "Chiasamen", cup: 170, tbsp: 10.6 },
-  { name: "Kokosflocken, ungesüßt", cup: 80, tbsp: 5 },
-  { name: "Kokosmilch (Dose, flüssig)", cup: 240, tbsp: 15 },
-  { name: "Maisstärke", cup: 120, tbsp: 7.5, tsp: 2.5 },
+  { schluessel: "mehl", cup: 120, tbsp: 8, tsp: 2.6 },
+  { schluessel: "zucker", cup: 200, tbsp: 12.5, tsp: 4.2 },
+  { schluessel: "puderzucker", cup: 120, tbsp: 7.5 },
+  { schluessel: "brauner_zucker", cup: 220, tbsp: 13.8 },
+  { schluessel: "butter", cup: 227, tbsp: 14.2, tsp: 4.7 },
+  { schluessel: "honig", cup: 340, tbsp: 21 },
+  { schluessel: "ahornsirup", cup: 315, tbsp: 20 },
+  { schluessel: "pflanzenoel", cup: 218, tbsp: 13.6 },
+  { schluessel: "olivenoel", cup: 216, tbsp: 13.5 },
+  { schluessel: "milch", cup: 240, tbsp: 15 },
+  { schluessel: "sahne", cup: 240, tbsp: 15 },
+  { schluessel: "wasser", cup: 237, tbsp: 14.8, tsp: 4.9 },
+  { schluessel: "joghurt", cup: 245, tbsp: 15.3 },
+  { schluessel: "saure_sahne", cup: 230, tbsp: 14.4 },
+  { schluessel: "frischkaese", cup: 232, tbsp: 14.5 },
+  { schluessel: "reis", cup: 185 },
+  { schluessel: "haferflocken", cup: 90 },
+  { schluessel: "kakaopulver", cup: 85, tbsp: 5.3 },
+  { schluessel: "backpulver", tbsp: 12, tsp: 4 },
+  { schluessel: "natron", tbsp: 13.8, tsp: 4.6 },
+  { schluessel: "salz", tbsp: 18, tsp: 6 },
+  { schluessel: "hefe", tbsp: 9.3, tsp: 3.1 },
+  { schluessel: "mandeln", cup: 96, tbsp: 6 },
+  { schluessel: "walnuesse", cup: 100, tbsp: 6.3 },
+  { schluessel: "haselnuesse", cup: 115, tbsp: 7.2 },
+  { schluessel: "rosinen", cup: 150, tbsp: 9.4 },
+  { schluessel: "schokostueckchen", cup: 170, tbsp: 10.6 },
+  { schluessel: "semmelbroesel", cup: 108, tbsp: 6.8 },
+  { schluessel: "parmesan", cup: 100, tbsp: 6.3 },
+  { schluessel: "kaese_gerieben", cup: 110, tbsp: 6.9 },
+  { schluessel: "quinoa", cup: 170 },
+  { schluessel: "linsen", cup: 190 },
+  { schluessel: "couscous", cup: 175 },
+  { schluessel: "erdnussbutter", cup: 258, tbsp: 16.1 },
+  { schluessel: "tomatenmark", cup: 262, tbsp: 16.4 },
+  { schluessel: "essig", cup: 240, tbsp: 15 },
+  { schluessel: "zitronensaft", cup: 245, tbsp: 15.3 },
+  { schluessel: "vanilleextrakt", tbsp: 12.5, tsp: 4.2 },
+  { schluessel: "zimt", tbsp: 7.8, tsp: 2.6 },
+  { schluessel: "ingwer_gemahlen", tbsp: 5.4, tsp: 1.8 },
+  { schluessel: "paprikapulver", tbsp: 6.9, tsp: 2.3 },
+  { schluessel: "pfeffer", tbsp: 6.9, tsp: 2.3 },
+  { schluessel: "knoblauchpulver", tbsp: 9.3, tsp: 3.1 },
+  { schluessel: "kurkuma", tbsp: 9, tsp: 3 },
+  { schluessel: "sesam", cup: 144, tbsp: 9 },
+  { schluessel: "leinsamen", cup: 168, tbsp: 10.5 },
+  { schluessel: "chiasamen", cup: 170, tbsp: 10.6 },
+  { schluessel: "kokosflocken", cup: 80, tbsp: 5 },
+  { schluessel: "kokosmilch", cup: 240, tbsp: 15 },
+  { schluessel: "maisstaerke", cup: 120, tbsp: 7.5, tsp: 2.5 },
+  { schluessel: "vollkornmehl", cup: 120, tbsp: 7.5 },
+  { schluessel: "dinkelmehl", cup: 115, tbsp: 7 },
+  { schluessel: "griess", cup: 180 },
+  { schluessel: "senf", tbsp: 15, tsp: 5 },
+  { schluessel: "sojasauce", cup: 255, tbsp: 16 },
+  { schluessel: "ketchup", cup: 270, tbsp: 17 },
+  { schluessel: "mayonnaise", cup: 220, tbsp: 13.8 },
+  { schluessel: "buttermilch", cup: 245, tbsp: 15.3 },
+  { schluessel: "kondensmilch", cup: 306, tbsp: 19 },
+  { schluessel: "petersilie", cup: 60, tbsp: 3.8 },
+  { schluessel: "basilikum", cup: 40, tbsp: 2.5 },
+  { schluessel: "oregano", tbsp: 4.5, tsp: 1.5 },
+  { schluessel: "thymian", tbsp: 4.2, tsp: 1.4 },
+  { schluessel: "muskatnuss", tbsp: 6.6, tsp: 2.2 },
+  { schluessel: "kreuzkuemmel", tbsp: 6.3, tsp: 2.1 },
+  { schluessel: "cayennepfeffer", tbsp: 5.4, tsp: 1.8 },
+  { schluessel: "pekannuesse", cup: 110, tbsp: 6.9 },
+  { schluessel: "cashewkerne", cup: 120, tbsp: 7.5 },
+  { schluessel: "pistazien", cup: 120, tbsp: 7.5 },
+  { schluessel: "panko", cup: 60, tbsp: 3.8 },
 ];
+
+// Übersetzte Anzeigenamen für die Zutaten oben, je Sprachcode ein Array in
+// GENAU derselben Reihenfolge wie UMRECHNUNGSTABELLE_ZUTATEN (per Index
+// zusammengeführt, siehe RezeptbuchCard._umrechnungstabelleNamen()).
+const UMRECHNUNGSTABELLE_NAMEN = {
+  de: ["Mehl (Weizen, Type 405)", "Zucker (Kristallzucker)", "Puderzucker", "Brauner Zucker (fest gepackt)", "Butter", "Honig", "Ahornsirup", "Pflanzenöl", "Olivenöl", "Milch", "Sahne (Schlagsahne)", "Wasser", "Naturjoghurt", "Saure Sahne", "Frischkäse", "Reis, ungekocht (Langkorn)", "Haferflocken", "Kakaopulver", "Backpulver", "Natron", "Salz, fein", "Hefe, trocken", "Mandeln, gemahlen", "Walnüsse, gehackt", "Haselnüsse, gehackt", "Rosinen", "Schokoladenstückchen", "Semmelbrösel, trocken", "Parmesan, gerieben", "Käse, gerieben (z.B. Gouda, Cheddar)", "Quinoa, ungekocht", "Linsen, getrocknet", "Couscous, trocken", "Erdnussbutter", "Tomatenmark", "Essig", "Zitronensaft", "Vanilleextrakt", "Zimt, gemahlen", "Ingwer, gemahlen", "Paprikapulver", "Pfeffer, gemahlen", "Knoblauchpulver", "Kurkuma, gemahlen", "Sesam (Sesamsamen)", "Leinsamen", "Chiasamen", "Kokosflocken, ungesüßt", "Kokosmilch (Dose, flüssig)", "Maisstärke", "Vollkornmehl (Weizen)", "Dinkelmehl", "Grieß (Hartweizen)", "Senf (Dijon)", "Sojasauce", "Ketchup", "Mayonnaise", "Buttermilch", "Kondensmilch, gezuckert", "Petersilie, frisch, gehackt", "Basilikum, frisch, gehackt", "Oregano, getrocknet", "Thymian, getrocknet", "Muskatnuss, gemahlen", "Kreuzkümmel, gemahlen", "Cayennepfeffer", "Pekannüsse, gehackt", "Cashewkerne, gehackt", "Pistazien, gehackt", "Panko (grobe Semmelbrösel)"],
+  gsw: ["Mehl (Weize, Type 405)", "Zucker (Kristallzucker)", "Puderzucker", "Brune Zucker (fescht packt)", "Angge", "Honig", "Ahornsirup", "Pflanzeöl", "Olivenöl", "Milch", "Nidle (Schlagnidle)", "Wasser", "Natur-Joghurt", "Suuri Nidle", "Frischchäs", "Riis, ungkochet (Langkorn)", "Haferflocke", "Kakaopulver", "Bagpulver", "Natron", "Salz, fiin", "Hefe, trochne", "Mandle, gmahle", "Nüssli (Baumnüss), ghackt", "Haselnüss, ghackt", "Rosine", "Schoggistückli", "Brösmeli, trochne", "Parmesan, gribe", "Chäs, gribe (z.B. Gouda, Cheddar)", "Quinoa, ungkochet", "Linse, trochnet", "Couscous, trochne", "Erdnussbutter", "Tomatemark", "Essig", "Zitronesaft", "Vanilleextrakt", "Zimt, gmahle", "Ingwer, gmahle", "Paprikapulver", "Pfeffer, gmahle", "Chnobli-Pulver", "Kurkuma, gmahle", "Sesam", "Leisome", "Chiasome", "Kokosflocke, ungsüesst", "Kokosmilch (Büchs, flüssig)", "Maisstärchi", "Vollkornmehl (Weize)", "Dinkelmehl", "Grieß (Hartweize)", "Senf (Dijon)", "Sojasauce", "Ketchup", "Mayonnaise", "Buttermilch", "Kondensmilch, gsüesst", "Peterli, frisch, ghackt", "Basilikum, frisch, ghackt", "Oregano, trochnet", "Thymian, trochnet", "Muskat, gmahle", "Kreuzchümmel, gmahle", "Cayennepfeffer", "Pekannüss, ghackt", "Cashewkern, ghackt", "Pistazie, ghackt", "Panko (grobi Brösmeli)"],
+  en: ["Flour (all-purpose)", "Sugar (granulated)", "Powdered sugar", "Brown sugar (packed)", "Butter", "Honey", "Maple syrup", "Vegetable oil", "Olive oil", "Milk", "Heavy cream", "Water", "Plain yogurt", "Sour cream", "Cream cheese", "Rice, uncooked (long grain)", "Rolled oats", "Cocoa powder", "Baking powder", "Baking soda", "Salt, fine", "Yeast, dry", "Almonds, ground", "Walnuts, chopped", "Hazelnuts, chopped", "Raisins", "Chocolate chips", "Breadcrumbs, dry", "Parmesan, grated", "Cheese, shredded (e.g. cheddar)", "Quinoa, uncooked", "Lentils, dried", "Couscous, dry", "Peanut butter", "Tomato paste", "Vinegar", "Lemon juice", "Vanilla extract", "Cinnamon, ground", "Ginger, ground", "Paprika", "Pepper, ground", "Garlic powder", "Turmeric, ground", "Sesame seeds", "Flaxseed", "Chia seeds", "Coconut flakes, unsweetened", "Coconut milk (canned, liquid)", "Cornstarch", "Whole wheat flour", "Spelt flour", "Semolina", "Mustard (Dijon)", "Soy sauce", "Ketchup", "Mayonnaise", "Buttermilk", "Sweetened condensed milk", "Parsley, fresh, chopped", "Basil, fresh, chopped", "Oregano, dried", "Thyme, dried", "Nutmeg, ground", "Cumin, ground", "Cayenne pepper", "Pecans, chopped", "Cashews, chopped", "Pistachios, chopped", "Panko (coarse breadcrumbs)"],
+  bg: ["Брашно (пшенично, тип 405)", "Захар (кристална)", "Пудра захар", "Кафява захар (набита)", "Масло", "Мед", "Кленов сироп", "Растително масло", "Зехтин", "Мляко", "Сметана (за разбиване)", "Вода", "Натурално кисело мляко", "Заквасена сметана", "Крема сирене", "Ориз, суров (дългозърнест)", "Овесени ядки", "Какао на прах", "Бакпулвер", "Сода бикарбонат", "Сол, фина", "Мая, суха", "Бадеми, смлени", "Орехи, нарязани", "Лешници, нарязани", "Стафиди", "Шоколадови капки", "Галета, суха", "Пармезан, настърган", "Сирене, настъргано (напр. чедър)", "Киноа, сурова", "Леща, сушена", "Кус-кус, сух", "Фъстъчено масло", "Доматено пюре", "Оцет", "Лимонов сок", "Екстракт от ванилия", "Канела, смляна", "Джинджифил, смлян", "Червен пипер", "Черен пипер, смлян", "Чеснов прах", "Куркума, смляна", "Сусам", "Ленено семе", "Чиа семена", "Кокосови стърготини, неподсладени", "Кокосово мляко (консерва, течно)", "Царевично нишесте", "Пълнозърнесто брашно", "Лимец (спелта) брашно", "Грис", "Горчица (дижонска)", "Соев сос", "Кетчуп", "Майонеза", "Айрян/Бутермилк", "Кондензирано мляко, подсладено", "Магданоз, пресен, нарязан", "Босилек, пресен, нарязан", "Риган, сушен", "Мащерка, сушена", "Индийско орехче, смляно", "Кимион, смлян", "Лют червен пипер (кайен)", "Пекан, нарязан", "Кашу, нарязано", "Шам фъстък, нарязан", "Панко (едра галета)"],
+  hr: ["Brašno (pšenično, tip 405)", "Šećer (kristal)", "Šećer u prahu", "Smeđi šećer (nabijen)", "Maslac", "Med", "Javorov sirup", "Biljno ulje", "Maslinovo ulje", "Mlijeko", "Vrhnje za šlag", "Voda", "Prirodni jogurt", "Kiselo vrhnje", "Krem sir", "Riža, nekuhana (dugo zrno)", "Zobene pahuljice", "Kakao u prahu", "Prašak za pecivo", "Soda bikarbona", "Sol, fina", "Kvasac, suhi", "Bademi, mljeveni", "Orasi, sjeckani", "Lješnjaci, sjeckani", "Grožđice", "Čokoladne kapljice", "Krušne mrvice, suhe", "Parmezan, ribani", "Sir, ribani (npr. čedar)", "Kvinoja, nekuhana", "Leća, sušena", "Kuskus, suhi", "Maslac od kikirikija", "Koncentrat rajčice", "Ocat", "Limunov sok", "Ekstrakt vanilije", "Cimet, mljeveni", "Đumbir, mljeveni", "Mljevena paprika", "Papar, mljeveni", "Češnjak u prahu", "Kurkuma, mljevena", "Sezam", "Laneno sjeme", "Chia sjemenke", "Kokosove pahuljice, neslađene", "Kokosovo mlijeko (konzerva, tekuće)", "Kukuruzni škrob", "Integralno brašno", "Pir brašno", "Griz", "Senf (Dijon)", "Umak od soje", "Kečap", "Majoneza", "Mlaćenica", "Zaslađeno kondenzirano mlijeko", "Peršin, svježi, sjeckani", "Bosiljak, svježi, sjeckani", "Origano, sušeni", "Majčina dušica, sušena", "Muškatni oraščić, mljeveni", "Kumin, mljeveni", "Čili papar (kajenski)", "Pekan orasi, sjeckani", "Indijski oraščići, sjeckani", "Pistacije, sjeckane", "Panko (grube krušne mrvice)"],
+  cs: ["Mouka (pšeničná, hladká)", "Cukr (krystalový)", "Moučkový cukr", "Hnědý cukr (natlačený)", "Máslo", "Med", "Javorový sirup", "Rostlinný olej", "Olivový olej", "Mléko", "Smetana ke šlehání", "Voda", "Bílý jogurt", "Zakysaná smetana", "Smetanový sýr", "Rýže, syrová (dlouhozrnná)", "Ovesné vločky", "Kakaový prášek", "Prášek do pečiva", "Jedlá soda", "Sůl, jemná", "Droždí, sušené", "Mandle, mleté", "Vlašské ořechy, nasekané", "Lískové ořechy, nasekané", "Rozinky", "Čokoládové čočky", "Strouhanka, suchá", "Parmazán, strouhaný", "Sýr, strouhaný (např. čedar)", "Quinoa, syrová", "Čočka, sušená", "Kuskus, suchý", "Arašídové máslo", "Rajčatový protlak", "Ocet", "Citronová šťáva", "Vanilkový extrakt", "Skořice, mletá", "Zázvor, mletý", "Mletá paprika", "Pepř, mletý", "Česnekový prášek", "Kurkuma, mletá", "Sezam", "Lněné semínko", "Chia semínka", "Kokosové lupínky, neslazené", "Kokosové mléko (konzerva, tekuté)", "Kukuřičný škrob", "Celozrnná mouka", "Špaldová mouka", "Krupice", "Hořčice (dijonská)", "Sójová omáčka", "Kečup", "Majonéza", "Podmáslí", "Slazené kondenzované mléko", "Petržel, čerstvá, nasekaná", "Bazalka, čerstvá, nasekaná", "Oregano, sušené", "Tymián, sušený", "Muškátový oříšek, mletý", "Kmín, mletý", "Kajenský pepř", "Pekanové ořechy, nasekané", "Kešu ořechy, nasekané", "Pistácie, nasekané", "Panko (hrubá strouhanka)"],
+  da: ["Mel (hvede)", "Sukker (hvidt)", "Flormelis", "Brun farin (presset)", "Smør", "Honning", "Ahornsirup", "Vegetabilsk olie", "Olivenolie", "Mælk", "Fløde (piske)", "Vand", "Naturel yoghurt", "Cremefraiche", "Flødeost", "Ris, ukogt (langkornet)", "Havregryn", "Kakaopulver", "Bagepulver", "Natron", "Salt, fint", "Gær, tørret", "Mandler, malede", "Valnødder, hakkede", "Hasselnødder, hakkede", "Rosiner", "Chokoladeknapper", "Rasp, tørt", "Parmesan, revet", "Ost, revet (f.eks. cheddar)", "Quinoa, ukogt", "Linser, tørrede", "Couscous, tør", "Peanutbutter", "Tomatpuré", "Eddike", "Citronsaft", "Vaniljeekstrakt", "Kanel, stødt", "Ingefær, stødt", "Paprika", "Peber, stødt", "Hvidløgspulver", "Gurkemeje, stødt", "Sesamfrø", "Hørfrø", "Chiafrø", "Kokosmel, usødet", "Kokosmælk (dåse, flydende)", "Majsstivelse", "Fuldkornshvedemel", "Spelthvedemel", "Semulje", "Sennep (dijon)", "Sojasovs", "Ketchup", "Mayonnaise", "Kærnemælk", "Kondenseret mælk, sødet", "Persille, frisk, hakket", "Basilikum, frisk, hakket", "Oregano, tørret", "Timian, tørret", "Muskatnød, stødt", "Spidskommen, stødt", "Cayennepeber", "Pekannødder, hakkede", "Cashewnødder, hakkede", "Pistacienødder, hakkede", "Panko (grove rasp)"],
+  nl: ["Bloem (tarwe)", "Suiker (kristal)", "Poedersuiker", "Bruine suiker (aangedrukt)", "Boter", "Honing", "Ahornsiroop", "Plantaardige olie", "Olijfolie", "Melk", "Slagroom", "Water", "Naturel yoghurt", "Zure room", "Roomkaas", "Rijst, ongekookt (langkorrel)", "Havermout", "Cacaopoeder", "Bakpoeder", "Zuiveringszout", "Zout, fijn", "Gist, droog", "Amandelen, gemalen", "Walnoten, gehakt", "Hazelnoten, gehakt", "Rozijnen", "Chocoladedruppels", "Paneermeel, droog", "Parmezaan, geraspt", "Kaas, geraspt (bijv. cheddar)", "Quinoa, ongekookt", "Linzen, gedroogd", "Couscous, droog", "Pindakaas", "Tomatenpuree", "Azijn", "Citroensap", "Vanille-extract", "Kaneel, gemalen", "Gember, gemalen", "Paprikapoeder", "Peper, gemalen", "Knoflookpoeder", "Kurkuma, gemalen", "Sesamzaad", "Lijnzaad", "Chiazaad", "Kokosrasp, ongezoet", "Kokosmelk (blik, vloeibaar)", "Maïzena", "Volkorenmeel", "Speltmeel", "Griesmeel", "Mosterd (dijon)", "Sojasaus", "Ketchup", "Mayonaise", "Karnemelk", "Gecondenseerde melk, gezoet", "Peterselie, vers, gehakt", "Basilicum, vers, gehakt", "Oregano, gedroogd", "Tijm, gedroogd", "Nootmuskaat, gemalen", "Komijn, gemalen", "Cayennepeper", "Pecannoten, gehakt", "Cashewnoten, gehakt", "Pistachenoten, gehakt", "Panko (grof paneermeel)"],
+  et: ["Jahu (nisu)", "Suhkur (kristall)", "Tuhksuhkur", "Pruun suhkur (tihendatud)", "Või", "Mesi", "Vahtrasiirup", "Taimeõli", "Oliiviõli", "Piim", "Vahukoor", "Vesi", "Naturaalne jogurt", "Hapukoor", "Toorjuust", "Riis, keetmata (pikateraline)", "Kaerahelbed", "Kakaopulber", "Küpsetuspulber", "Söögisooda", "Sool, peen", "Pärm, kuiv", "Mandlid, jahvatatud", "Kreeka pähklid, tükeldatud", "Sarapuupähklid, tükeldatud", "Rosinad", "Šokolaaditükid", "Riivsai, kuiv", "Parmesan, riivitud", "Juust, riivitud (nt cheddar)", "Kinoa, keetmata", "Läätsed, kuivatatud", "Kuskuss, kuiv", "Maapähklivõi", "Tomatipasta", "Äädikas", "Sidrunimahl", "Vanilliekstrakt", "Kaneel, jahvatatud", "Ingver, jahvatatud", "Paprika", "Pipar, jahvatatud", "Küüslaugupulber", "Kurkum, jahvatatud", "Seesamiseemned", "Linaseemned", "Chia seemned", "Kookoshelbed, magustamata", "Kookospiim (purk, vedel)", "Maisitärklis", "Täistera nisujahu", "Spelditera jahu", "Manna", "Sinep (dijon)", "Sojakaste", "Ketšup", "Majonees", "Keefir/petipiim", "Magustatud kondenspiim", "Petersell, värske, hakitud", "Basiilik, värske, hakitud", "Oregano, kuivatatud", "Tüümian, kuivatatud", "Muskaatpähkel, jahvatatud", "Köömen, jahvatatud", "Cayenne'i pipar", "Pekanipähklid, tükeldatud", "Kašupähklid, tükeldatud", "Pistaatsiapähklid, tükeldatud", "Panko (jäme riivsai)"],
+  fi: ["Vehnäjauho", "Sokeri (kide)", "Tomusokeri", "Fariinisokeri (tiivistetty)", "Voi", "Hunaja", "Vaahterasiirappi", "Kasviöljy", "Oliiviöljy", "Maito", "Kuohukerma", "Vesi", "Luonnonjogurtti", "Smetana", "Tuorejuusto", "Riisi, keittämätön (pitkäjyväinen)", "Kaurahiutaleet", "Kaakaojauhe", "Leivinjauhe", "Ruokasooda", "Suola, hieno", "Hiiva, kuiva", "Manteli, jauhettu", "Saksanpähkinä, pilkottu", "Hasselpähkinä, pilkottu", "Rusina", "Suklaarouhe", "Korppujauho, kuiva", "Parmesan, raastettu", "Juusto, raastettu (esim. cheddar)", "Kvinoa, keittämätön", "Linssit, kuivatut", "Couscous, kuiva", "Maapähkinävoi", "Tomaattipyree", "Etikka", "Sitruunamehu", "Vaniljauute", "Kaneli, jauhettu", "Inkivääri, jauhettu", "Paprikajauhe", "Pippuri, jauhettu", "Valkosipulijauhe", "Kurkuma, jauhettu", "Seesaminsiemenet", "Pellavansiemenet", "Chiansiemenet", "Kookoshiutaleet, makeuttamaton", "Kookosmaito (tölkki, nestemäinen)", "Maissitärkkelys", "Täysjyvävehnäjauho", "Spelttijauho", "Mannasuurimo", "Sinappi (dijon)", "Soijakastike", "Ketsuppi", "Majoneesi", "Kirnupiimä", "Makeutettu kondensoitu maito", "Persilja, tuore, silputtu", "Basilika, tuore, silputtu", "Oregano, kuivattu", "Timjami, kuivattu", "Muskottipähkinä, jauhettu", "Juustokumina, jauhettu", "Cayennepippuri", "Pekaanipähkinä, pilkottu", "Cashewpähkinä, pilkottu", "Pistaasipähkinä, pilkottu", "Panko (karkea korppujauho)"],
+  fr: ["Farine (blé, T55)", "Sucre (cristallisé)", "Sucre glace", "Cassonade (tassée)", "Beurre", "Miel", "Sirop d'érable", "Huile végétale", "Huile d'olive", "Lait", "Crème liquide (entière)", "Eau", "Yaourt nature", "Crème aigre", "Fromage frais (type Philadelphia)", "Riz, cru (long grain)", "Flocons d'avoine", "Cacao en poudre", "Levure chimique", "Bicarbonate de soude", "Sel fin", "Levure sèche", "Amandes moulues", "Noix, hachées", "Noisettes, hachées", "Raisins secs", "Pépites de chocolat", "Chapelure sèche", "Parmesan râpé", "Fromage râpé (ex. cheddar)", "Quinoa, cru", "Lentilles séchées", "Couscous, sec", "Beurre de cacahuète", "Concentré de tomate", "Vinaigre", "Jus de citron", "Extrait de vanille", "Cannelle moulue", "Gingembre moulu", "Paprika", "Poivre moulu", "Ail en poudre", "Curcuma moulu", "Graines de sésame", "Graines de lin", "Graines de chia", "Noix de coco râpée, non sucrée", "Lait de coco (boîte, liquide)", "Fécule de maïs", "Farine complète", "Farine d'épeautre", "Semoule", "Moutarde (de Dijon)", "Sauce soja", "Ketchup", "Mayonnaise", "Babeurre", "Lait concentré sucré", "Persil, frais, haché", "Basilic, frais, haché", "Origan séché", "Thym séché", "Muscade moulue", "Cumin moulu", "Poivre de Cayenne", "Noix de pécan, hachées", "Noix de cajou, hachées", "Pistaches, hachées", "Panko (chapelure grossière)"],
+  el: ["Αλεύρι (σιταριού)", "Ζάχαρη (κρυσταλλική)", "Ζάχαρη άχνη", "Καστανή ζάχαρη (πιεσμένη)", "Βούτυρο", "Μέλι", "Σιρόπι σφενδάμου", "Φυτικό λάδι", "Ελαιόλαδο", "Γάλα", "Κρέμα γάλακτος (για χτύπημα)", "Νερό", "Γιαούρτι φυσικό", "Ξινή κρέμα", "Τυρί κρέμα", "Ρύζι, ωμό (μακρύκοκκο)", "Νιφάδες βρώμης", "Κακάο σε σκόνη", "Μπέικιν πάουντερ", "Μαγειρική σόδα", "Αλάτι, ψιλό", "Μαγιά, ξηρή", "Αμύγδαλα, αλεσμένα", "Καρύδια, κομμένα", "Φουντούκια, κομμένα", "Σταφίδες", "Σταγόνες σοκολάτας", "Τριμμένη φρυγανιά, στεγνή", "Παρμεζάνα, τριμμένη", "Τυρί, τριμμένο (π.χ. τσένταρ)", "Κινόα, ωμή", "Φακές, αποξηραμένες", "Κους-κους, ξηρό", "Φυστικοβούτυρο", "Πελτές ντομάτας", "Ξύδι", "Χυμός λεμονιού", "Εκχύλισμα βανίλιας", "Κανέλα, τριμμένη", "Τζίντζερ, τριμμένο", "Πάπρικα", "Πιπέρι, τριμμένο", "Σκόρδο σε σκόνη", "Κουρκουμάς, τριμμένος", "Σουσάμι", "Λιναρόσπορος", "Σπόροι chia", "Ξύσμα καρύδας, χωρίς ζάχαρη", "Γάλα καρύδας (κονσέρβα, υγρό)", "Κορν φλάουρ", "Αλεύρι ολικής άλεσης", "Αλεύρι σίκαλης (spelt)", "Σιμιγδάλι", "Μουστάρδα (Dijon)", "Σάλτσα σόγιας", "Κέτσαπ", "Μαγιονέζα", "Βουτυρόγαλα", "Γάλα συμπυκνωμένο, γλυκό", "Μαϊντανός, φρέσκος, ψιλοκομμένος", "Βασιλικός, φρέσκος, ψιλοκομμένος", "Ρίγανη, αποξηραμένη", "Θυμάρι, αποξηραμένο", "Μοσχοκάρυδο, τριμμένο", "Κύμινο, τριμμένο", "Πιπέρι καγιέν", "Πεκάν, κομμένα", "Κάσιους, κομμένα", "Φιστίκια Αιγίνης, κομμένα", "Πανκό (χοντρή φρυγανιά)"],
+  hu: ["Liszt (búza)", "Cukor (kristály)", "Porcukor", "Barna cukor (tömörített)", "Vaj", "Méz", "Juharszirup", "Növényi olaj", "Olívaolaj", "Tej", "Tejszín (habtejszín)", "Víz", "Natúr joghurt", "Tejföl", "Krémsajt", "Rizs, nyers (hosszú szemű)", "Zabpehely", "Kakaópor", "Sütőpor", "Szódabikarbóna", "Só, finom", "Élesztő, szárított", "Mandula, őrölt", "Dió, darabolt", "Mogyoró, darabolt", "Mazsola", "Csokoládédarabka", "Zsemlemorzsa, száraz", "Parmezán, reszelt", "Sajt, reszelt (pl. cheddar)", "Quinoa, nyers", "Lencse, szárított", "Kuszkusz, száraz", "Mogyoróvaj", "Paradicsompüré", "Ecet", "Citromlé", "Vaníliakivonat", "Fahéj, őrölt", "Gyömbér, őrölt", "Pirospaprika", "Bors, őrölt", "Fokhagymapor", "Kurkuma, őrölt", "Szezámmag", "Lenmag", "Chia mag", "Kókuszreszelék, cukrozatlan", "Kókusztej (konzerv, folyékony)", "Kukoricakeményítő", "Teljes kiőrlésű liszt", "Tönkölybúzaliszt", "Búzadara", "Mustár (dijoni)", "Szójaszósz", "Ketchup", "Majonéz", "Író", "Cukrozott sűrített tej", "Petrezselyem, friss, aprított", "Bazsalikom, friss, aprított", "Oregánó, szárított", "Kakukkfű, szárított", "Szerecsendió, őrölt", "Kömény, őrölt", "Cayenne bors", "Pekándió, darabolt", "Kesudió, darabolt", "Pisztácia, darabolt", "Panko (durva zsemlemorzsa)"],
+  ga: ["Plúr (cruithneachta)", "Siúcra (gráinneach)", "Siúcra reoáin", "Siúcra donn (brúite)", "Im", "Mil", "Síoróip mhailpe", "Ola glasraí", "Ola olóige", "Bainne", "Uachtar (coipthe)", "Uisce", "Iógart nádúrtha", "Uachtar géar", "Cáis uachtair", "Rís, amh (gráinne fada)", "Calóga coirce", "Púdar cócó", "Púdar bácála", "Sóid aráin", "Salann, mín", "Giosta, triomaithe", "Almóinní, meilte", "Gallchnónna, gearrtha", "Cnónna coill, gearrtha", "Rísíní", "Smearóidí seacláide", "Grabhróga aráin, triomaithe", "Parmesan, grátáilte", "Cáis, grátáilte (m.sh. cheddar)", "Quinoa, amh", "Lintilí, triomaithe", "Couscous, triom", "Im piseanna talún", "Taos trátaí", "Fínéagar", "Sú líomóide", "Úscra fanaile", "Cainéal, meilte", "Sinséar, meilte", "Paprica", "Piobar, meilte", "Púdar gairleoige", "Turmaric, meilte", "Síol seasam", "Síol líon", "Síol chia", "Calóga cnó cócó, gan siúcra", "Bainne cnó cócó (stán, leachtach)", "Stáirse arbhair", "Plúr caiscín", "Plúr speilt", "Grainneach", "Mustard (dijon)", "Anlann soighe", "Citeapúl", "Maonáis", "Bainne géar", "Bainne comhdhlúite milsithe", "Peirsil, úr, gearrtha", "Basal, úr, gearrtha", "Oragán, triomaithe", "Tím, triomaithe", "Noitmig, meilte", "Cmín, meilte", "Piobar cayenne", "Cnónna pecan, gearrtha", "Cnónna caisiú, gearrtha", "Pistasio, gearrtha", "Panko (grabhróga aráin gharbh)"],
+  it: ["Farina (grano, tipo 00)", "Zucchero (semolato)", "Zucchero a velo", "Zucchero di canna (pressato)", "Burro", "Miele", "Sciroppo d'acero", "Olio vegetale", "Olio d'oliva", "Latte", "Panna (da montare)", "Acqua", "Yogurt naturale", "Panna acida", "Formaggio cremoso", "Riso, crudo (chicco lungo)", "Fiocchi d'avena", "Cacao in polvere", "Lievito per dolci", "Bicarbonato di sodio", "Sale, fine", "Lievito secco", "Mandorle, macinate", "Noci, tritate", "Nocciole, tritate", "Uvetta", "Gocce di cioccolato", "Pangrattato, secco", "Parmigiano, grattugiato", "Formaggio, grattugiato (es. cheddar)", "Quinoa, cruda", "Lenticchie, secche", "Couscous, secco", "Burro di arachidi", "Concentrato di pomodoro", "Aceto", "Succo di limone", "Estratto di vaniglia", "Cannella, macinata", "Zenzero, macinato", "Paprica", "Pepe, macinato", "Aglio in polvere", "Curcuma, macinata", "Semi di sesamo", "Semi di lino", "Semi di chia", "Cocco rapé, non zuccherato", "Latte di cocco (lattina, liquido)", "Amido di mais", "Farina integrale", "Farina di farro", "Semolino", "Senape (digione)", "Salsa di soia", "Ketchup", "Maionese", "Latticello", "Latte condensato zuccherato", "Prezzemolo, fresco, tritato", "Basilico, fresco, tritato", "Origano, essiccato", "Timo, essiccato", "Noce moscata, macinata", "Cumino, macinato", "Pepe di Cayenna", "Noci pecan, tritate", "Anacardi, tritati", "Pistacchi, tritati", "Panko (pangrattato grosso)"],
+  lv: ["Milti (kviešu)", "Cukurs (kristāliskais)", "Pūdercukurs", "Brūnais cukurs (sablīvēts)", "Sviests", "Medus", "Kļavu sīrups", "Augu eļļa", "Olīveļļa", "Piens", "Krējums (saldais)", "Ūdens", "Dabīgais jogurts", "Skābais krējums", "Krēmsiers", "Rīsi, nevārīti (garengraudu)", "Auzu pārslas", "Kakao pulveris", "Cepamais pulveris", "Soda", "Sāls, smalka", "Raugs, sausais", "Mandeles, maltas", "Valrieksti, smalcināti", "Lazdu rieksti, smalcināti", "Rozīnes", "Šokolādes gabaliņi", "Rīvmaize, sausa", "Parmezāns, rīvēts", "Siers, rīvēts (piem. čedars)", "Kvinoja, nevārīta", "Lēcas, žāvētas", "Kuskuss, sauss", "Zemesriekstu sviests", "Tomātu pasta", "Etiķis", "Citronu sula", "Vaniļas ekstrakts", "Kanēlis, malts", "Ingvers, malts", "Paprika", "Pipari, malti", "Ķiploku pulveris", "Kurkuma, malta", "Sezama sēklas", "Linsēklas", "Chia sēklas", "Kokosa skaidiņas, nesaldinātas", "Kokosa piens (konservs, šķidrs)", "Kukurūzas ciete", "Pilngraudu milti", "Speltas milti", "Mannas putraimi", "Sinepes (dižonas)", "Sojas mērce", "Kečups", "Majonēze", "Paniņas", "Saldinātais iebiezinātais piens", "Pētersīļi, svaigi, smalcināti", "Baziliks, svaigs, smalcināts", "Raudene, žāvēta", "Timiāns, žāvēts", "Muskatrieksts, malts", "Ķimenes, maltas", "Kajennas pipari", "Pekanrieksti, smalcināti", "Indiešu rieksti, smalcināti", "Pistācijas, smalcinātas", "Panko (rupja rīvmaize)"],
+  lt: ["Miltai (kvietiniai)", "Cukrus (kristalinis)", "Cukraus pudra", "Rudasis cukrus (sugrūstas)", "Sviestas", "Medus", "Klevų sirupas", "Augalinis aliejus", "Alyvuogių aliejus", "Pienas", "Grietinėlė (plakama)", "Vanduo", "Natūralus jogurtas", "Grietinė", "Varškės sūris (kreminis)", "Ryžiai, žali (ilgagrūdžiai)", "Avižiniai dribsniai", "Kakavos milteliai", "Kepimo milteliai", "Soda", "Druska, smulki", "Mielės, sausos", "Migdolai, malti", "Graikiniai riešutai, smulkinti", "Lazdyno riešutai, smulkinti", "Razinos", "Šokolado gabaliukai", "Džiūvėsėliai, sausi", "Parmezanas, tarkuotas", "Sūris, tarkuotas (pvz. čederis)", "Kinoja, žalia", "Lęšiai, džiovinti", "Kuskusas, sausas", "Žemės riešutų sviestas", "Pomidorų pasta", "Actas", "Citrinų sultys", "Vanilės ekstraktas", "Cinamonas, maltas", "Imbieras, maltas", "Paprika", "Pipirai, malti", "Česnako milteliai", "Ciberžolė, malta", "Sezamo sėklos", "Linų sėmenys", "Chia sėklos", "Kokoso drožlės, nesaldintos", "Kokosų pienas (skardinė, skystas)", "Kukurūzų krakmolas", "Kvietiniai viso grūdo miltai", "Spelta miltai", "Manų kruopos", "Garstyčios (dižono)", "Sojų padažas", "Kečupas", "Majonezas", "Pasukos", "Saldintas tirštintas pienas", "Petražolės, šviežios, smulkintos", "Bazilikas, šviežias, smulkintas", "Raudonėlis, džiovintas", "Čiobrelis, džiovintas", "Muskato riešutas, maltas", "Kmynai, malti", "Čili pipirai (kajeno)", "Pekanai, smulkinti", "Anakardžiai, smulkinti", "Pistacijos, smulkintos", "Panko (stambūs džiūvėsėliai)"],
+  mt: ["Dqiq (qamħ)", "Zokkor (granulat)", "Zokkor ipprocessat (icing)", "Zokkor kannella (ippressat)", "Butir", "Għasel", "Ġulepp tal-maple", "Żejt veġetali", "Żejt taż-żebbuġa", "Ħalib", "Krema (tal-ħawd)", "Ilma", "Jogurt naturali", "Krema ħamuża", "Ġobon tal-krema", "Ross, mhux imsajjar (ħabba twila)", "Ħafur imgħaffeġ", "Trab tal-kawkaw", "Trab tal-ħami", "Sodju bikarbonat", "Melħ, fin", "Ħmira, niexfa", "Lewż, mitħun", "Ġewż, imqatta'", "Ġellewż, imqatta'", "Żbib", "Biċċiet taċ-ċikkulata", "Tifrik tal-ħobż, xott", "Parmiġjan, mħakkek", "Ġobon, mħakkek (eż. cheddar)", "Kinwa, mhux imsajra", "Għads, imnixxef", "Kuskus, xott", "Butir tal-karawett", "Pasta tat-tadam", "Ħall", "Meraq tal-lumi", "Estratt tal-vanilja", "Kannella, mitħuna", "Ġinġer, mitħun", "Paprika", "Bżar, mitħun", "Trab tat-tewm", "Kurkuma, mitħuna", "Żrieragħ tas-sesam", "Żrieragħ tal-kittien", "Żrieragħ tac-chia", "Qxur tal-ġewż tal-Indi, mingħajr zokkor", "Ħalib tal-ġewż tal-Indi (laned, likwidu)", "Lamtu tal-qamħirrun", "Dqiq sħiħ", "Dqiq tal-ispelt", "Semolina", "Mustarda (dijon)", "Zalza tas-soja", "Ketchup", "Majonejż", "Ħalib tal-ħawd (buttermilk)", "Ħalib ikkondensat, imħallat biz-zokkor", "Tursin, frisk, imqatta'", "Ħabaq, frisk, imqatta'", "Oregano, niexef", "Timu, niexef", "Noċemuskata, mitħuna", "Kemmun, mitħun", "Bżar cayenne", "Ġewż tal-pekan, imqatta'", "Ġewż tal-anakardju, imqatta'", "Fustuq, imqatta'", "Panko (tifrik tal-ħobż oħxon)"],
+  pl: ["Mąka (pszenna)", "Cukier (kryształ)", "Cukier puder", "Brązowy cukier (ubity)", "Masło", "Miód", "Syrop klonowy", "Olej roślinny", "Oliwa z oliwek", "Mleko", "Śmietana (kremówka)", "Woda", "Jogurt naturalny", "Śmietana (kwaśna)", "Serek śmietankowy", "Ryż, surowy (długoziarnisty)", "Płatki owsiane", "Kakao w proszku", "Proszek do pieczenia", "Soda oczyszczona", "Sól, drobna", "Drożdże, suszone", "Migdały, mielone", "Orzechy włoskie, posiekane", "Orzechy laskowe, posiekane", "Rodzynki", "Kawałki czekolady", "Bułka tarta, sucha", "Parmezan, tarty", "Ser, tarty (np. cheddar)", "Komosa ryżowa, surowa", "Soczewica, suszona", "Kuskus, suchy", "Masło orzechowe", "Koncentrat pomidorowy", "Ocet", "Sok z cytryny", "Ekstrakt waniliowy", "Cynamon, mielony", "Imbir, mielony", "Papryka mielona", "Pieprz, mielony", "Czosnek w proszku", "Kurkuma, mielona", "Sezam", "Siemię lniane", "Nasiona chia", "Wiórki kokosowe, bez cukru", "Mleko kokosowe (puszka, płynne)", "Skrobia kukurydziana", "Mąka pełnoziarnista", "Mąka orkiszowa", "Kasza manna", "Musztarda (dijon)", "Sos sojowy", "Ketchup", "Majonez", "Maślanka", "Mleko skondensowane, słodzone", "Pietruszka, świeża, posiekana", "Bazylia, świeża, posiekana", "Oregano, suszone", "Tymianek, suszony", "Gałka muszkatołowa, mielona", "Kmin rzymski, mielony", "Pieprz cayenne", "Orzechy pekan, posiekane", "Orzechy nerkowca, posiekane", "Pistacje, posiekane", "Panko (grube bułka tarta)"],
+  pt: ["Farinha (trigo)", "Açúcar (cristal)", "Açúcar em pó", "Açúcar mascavado (compactado)", "Manteiga", "Mel", "Xarope de ácer", "Óleo vegetal", "Azeite", "Leite", "Natas (para bater)", "Água", "Iogurte natural", "Natas azedas", "Queijo creme", "Arroz, cru (grão longo)", "Flocos de aveia", "Cacau em pó", "Fermento em pó", "Bicarbonato de sódio", "Sal, fino", "Fermento seco", "Amêndoas, moídas", "Nozes, picadas", "Avelãs, picadas", "Passas", "Pepitas de chocolate", "Pão ralado, seco", "Parmesão, ralado", "Queijo, ralado (ex. cheddar)", "Quinoa, crua", "Lentilhas, secas", "Cuscuz, seco", "Manteiga de amendoim", "Concentrado de tomate", "Vinagre", "Sumo de limão", "Extrato de baunilha", "Canela, moída", "Gengibre, moído", "Páprica", "Pimenta, moída", "Alho em pó", "Curcuma, moída", "Sementes de sésamo", "Sementes de linhaça", "Sementes de chia", "Coco ralado, sem açúcar", "Leite de coco (lata, líquido)", "Amido de milho", "Farinha integral", "Farinha de espelta", "Sêmola", "Mostarda (dijon)", "Molho de soja", "Ketchup", "Maionese", "Leitelho", "Leite condensado, adoçado", "Salsa, fresca, picada", "Manjericão, fresco, picado", "Orégãos, secos", "Tomilho, seco", "Noz-moscada, moída", "Cominho, moído", "Pimenta caiena", "Nozes pecã, picadas", "Castanha de caju, picada", "Pistáchios, picados", "Panko (pão ralado grosso)"],
+  ro: ["Făină (grâu)", "Zahăr (granulat)", "Zahăr pudră", "Zahăr brun (îndesat)", "Unt", "Miere", "Sirop de arțar", "Ulei vegetal", "Ulei de măsline", "Lapte", "Smântână pentru frișcă", "Apă", "Iaurt natural", "Smântână acră", "Cremă de brânză", "Orez, crud (bob lung)", "Fulgi de ovăz", "Pudră de cacao", "Praf de copt", "Bicarbonat de sodiu", "Sare, fină", "Drojdie, uscată", "Migdale, măcinate", "Nuci, tocate", "Alune de pădure, tocate", "Stafide", "Bucăți de ciocolată", "Pesmet, uscat", "Parmezan, ras", "Brânză, rasă (ex. cheddar)", "Quinoa, crudă", "Linte, uscată", "Cușcuș, uscat", "Unt de arahide", "Pastă de tomate", "Oțet", "Suc de lămâie", "Extract de vanilie", "Scorțișoară, măcinată", "Ghimbir, măcinat", "Boia de ardei", "Piper, măcinat", "Usturoi pudră", "Turmeric, măcinat", "Semințe de susan", "Semințe de in", "Semințe de chia", "Fulgi de cocos, neîndulciți", "Lapte de cocos (conservă, lichid)", "Amidon de porumb", "Făină integrală", "Făină de alac (spelta)", "Griș", "Muștar (dijon)", "Sos de soia", "Ketchup", "Maioneză", "Zară", "Lapte condensat, îndulcit", "Pătrunjel, proaspăt, tocat", "Busuioc, proaspăt, tocat", "Oregano, uscat", "Cimbru, uscat", "Nucșoară, măcinată", "Chimen, măcinat", "Piper cayenne", "Nuci pecan, tocate", "Caju, tocate", "Fistic, tocat", "Panko (pesmet grosier)"],
+  sk: ["Múka (pšeničná)", "Cukor (kryštálový)", "Práškový cukor", "Hnedý cukor (natlačený)", "Maslo", "Med", "Javorový sirup", "Rastlinný olej", "Olivový olej", "Mlieko", "Smotana na šľahanie", "Voda", "Biely jogurt", "Kyslá smotana", "Smotanový syr", "Ryža, surová (dlhozrnná)", "Ovsené vločky", "Kakaový prášok", "Prášok do pečiva", "Jedlá sóda", "Soľ, jemná", "Droždie, sušené", "Mandle, mleté", "Vlašské orechy, nasekané", "Lieskové orechy, nasekané", "Hrozienka", "Čokoládové cesnačky", "Strúhanka, suchá", "Parmezán, strúhaný", "Syr, strúhaný (napr. čedar)", "Quinoa, surová", "Šošovica, sušená", "Kuskus, suchý", "Arašidové maslo", "Paradajkový pretlak", "Ocot", "Citrónová šťava", "Vanilkový extrakt", "Škorica, mletá", "Zázvor, mletý", "Mletá paprika", "Korenie, mleté", "Cesnakový prášok", "Kurkuma, mletá", "Sezam", "Ľanové semienka", "Chia semienka", "Kokosové vločky, nesladené", "Kokosové mlieko (konzerva, tekuté)", "Kukuričný škrob", "Celozrnná múka", "Špaldová múka", "Krupica", "Horčica (dijonská)", "Sójová omáčka", "Kečup", "Majonéza", "Cmar", "Sladené kondenzované mlieko", "Petržlen, čerstvý, nasekaný", "Bazalka, čerstvá, nasekaná", "Oregano, sušené", "Tymian, sušený", "Muškátový oriešok, mletý", "Rasca, mletá", "Čili korenie (cayenne)", "Pekanové orechy, nasekané", "Kešu orechy, nasekané", "Pistácie, nasekané", "Panko (hrubá strúhanka)"],
+  sl: ["Moka (pšenična)", "Sladkor (kristalni)", "Sladkor v prahu", "Rjavi sladkor (stisnjen)", "Maslo", "Med", "Javorjev sirup", "Rastlinsko olje", "Oljčno olje", "Mleko", "Smetana za stepanje", "Voda", "Naravni jogurt", "Kisla smetana", "Smetanov sir", "Riž, surov (dolgozrnat)", "Ovseni kosmiči", "Kakav v prahu", "Pecilni prašek", "Soda bikarbona", "Sol, fina", "Kvas, suh", "Mandlji, mleti", "Orehi, sesekljani", "Lešniki, sesekljani", "Rozine", "Čokoladne kapljice", "Drobtine, suhe", "Parmezan, nastrgan", "Sir, nastrgan (npr. cheddar)", "Kvinoja, surova", "Leča, sušena", "Kuskus, suh", "Arašidovo maslo", "Paradižnikov koncentrat", "Kis", "Limonin sok", "Vanilijev ekstrakt", "Cimet, mlet", "Ingver, mlet", "Mleta paprika", "Poper, mlet", "Česnov prah", "Kurkuma, mleta", "Sezam", "Lanena semena", "Chia semena", "Kokosovi kosmiči, nesladkani", "Kokosovo mleko (konzerva, tekoče)", "Koruzni škrob", "Polnozrnata moka", "Pirina moka", "Zdrob", "Gorčica (dijonska)", "Sojina omaka", "Kečap", "Majoneza", "Pinjenec", "Kondenzirano mleko, sladkano", "Peteršilj, svež, sesekljan", "Bazilika, sveža, sesekljana", "Origano, posušen", "Timijan, posušen", "Muškatni orešček, mlet", "Kumina, mleta", "Kajenski poper", "Pekani, sesekljani", "Indijski oreščki, sesekljani", "Pistacije, sesekljane", "Panko (grobe drobtine)"],
+  es: ["Harina (trigo)", "Azúcar (granulado)", "Azúcar glas", "Azúcar moreno (compactado)", "Mantequilla", "Miel", "Jarabe de arce", "Aceite vegetal", "Aceite de oliva", "Leche", "Nata para montar", "Agua", "Yogur natural", "Nata agria", "Queso crema", "Arroz, crudo (grano largo)", "Copos de avena", "Cacao en polvo", "Levadura química", "Bicarbonato de sodio", "Sal, fina", "Levadura seca", "Almendras, molidas", "Nueces, picadas", "Avellanas, picadas", "Pasas", "Chispas de chocolate", "Pan rallado, seco", "Parmesano, rallado", "Queso, rallado (ej. cheddar)", "Quinoa, cruda", "Lentejas, secas", "Cuscús, seco", "Mantequilla de cacahuete", "Concentrado de tomate", "Vinagre", "Zumo de limón", "Extracto de vainilla", "Canela, molida", "Jengibre, molido", "Pimentón", "Pimienta, molida", "Ajo en polvo", "Cúrcuma, molida", "Semillas de sésamo", "Semillas de lino", "Semillas de chía", "Coco rallado, sin azúcar", "Leche de coco (lata, líquida)", "Maicena", "Harina integral", "Harina de espelta", "Sémola", "Mostaza (dijon)", "Salsa de soja", "Ketchup", "Mayonesa", "Suero de leche", "Leche condensada, azucarada", "Perejil, fresco, picado", "Albahaca, fresca, picada", "Orégano, seco", "Tomillo, seco", "Nuez moscada, molida", "Comino, molido", "Pimienta de cayena", "Nueces pecanas, picadas", "Anacardos, picados", "Pistachos, picados", "Panko (pan rallado grueso)"],
+  sv: ["Vetemjöl", "Socker (strö)", "Florsocker", "Farinsocker (packat)", "Smör", "Honung", "Lönnsirap", "Vegetabilisk olja", "Olivolja", "Mjölk", "Vispgrädde", "Vatten", "Naturell yoghurt", "Gräddfil", "Färskost", "Ris, okokt (långkornigt)", "Havregryn", "Kakaopulver", "Bakpulver", "Bikarbonat", "Salt, fint", "Jäst, torr", "Mandel, malen", "Valnötter, hackade", "Hasselnötter, hackade", "Russin", "Chokladknappar", "Ströbröd, torrt", "Parmesan, riven", "Ost, riven (t.ex. cheddar)", "Quinoa, okokt", "Linser, torkade", "Couscous, torr", "Jordnötssmör", "Tomatpuré", "Ättika", "Citronsaft", "Vaniljextrakt", "Kanel, malen", "Ingefära, malen", "Paprikapulver", "Peppar, malen", "Vitlökspulver", "Gurkmeja, malen", "Sesamfrön", "Linfrön", "Chiafrön", "Kokosflingor, osötade", "Kokosmjölk (burk, flytande)", "Majsstärkelse", "Fullkornsvetemjöl", "Speltmjöl", "Mannagryn", "Senap (dijon)", "Sojasås", "Ketchup", "Majonnäs", "Kärnmjölk", "Kondenserad mjölk, sötad", "Persilja, färsk, hackad", "Basilika, färsk, hackad", "Oregano, torkad", "Timjan, torkad", "Muskotnöt, malen", "Spiskummin, malen", "Cayennepeppar", "Pekannötter, hackade", "Cashewnötter, hackade", "Pistagenötter, hackade", "Panko (grovt ströbröd)"],
+};
 
 function _zutatZeileParsen(rohzeile) {
   // Führende Listenzeichen ("-", "*", "•") entfernen, wie sie beim Kopieren
@@ -8331,16 +8457,33 @@ class RezeptbuchCard extends HTMLElement {
   // soll nicht zwei halb-unabhängige Dinge gleichzeitig regeln müssen.
   // (Fallback auf den alten Feldnamen "showStatistics" schadet nicht,
   // falls irgendwo noch ein Item aus einem früheren Zwischenstand liegt.)
+  // amerikanischeKategorie: optional gewählte Kategorie (z.B. "Amerikanisch"),
+  // bei der die Karte zusätzlich im Rezept selbst und im Kochmodus einen
+  // "Umrechnungstabelle"-Knopf zeigt (siehe _istAmerikanischeKategorie).
+  // Leerer String = nicht gesetzt (Standard, Knopf erscheint dann wie
+  // bisher nur im Hauptmenü).
   _einstellungenAusItem(item) {
-    if (!item || !item.description) return { erfassungAktiv: true };
+    const standard = { erfassungAktiv: true, amerikanischeKategorie: "" };
+    if (!item || !item.description) return standard;
     try {
       const geparst = JSON.parse(item.description);
-      if (typeof geparst.erfassungAktiv === "boolean") return { erfassungAktiv: geparst.erfassungAktiv };
-      if (typeof geparst.showStatistics === "boolean") return { erfassungAktiv: geparst.showStatistics };
-      return { erfassungAktiv: true };
+      const ergebnis = { ...standard };
+      if (typeof geparst.erfassungAktiv === "boolean") ergebnis.erfassungAktiv = geparst.erfassungAktiv;
+      else if (typeof geparst.showStatistics === "boolean") ergebnis.erfassungAktiv = geparst.showStatistics;
+      if (typeof geparst.amerikanischeKategorie === "string") ergebnis.amerikanischeKategorie = geparst.amerikanischeKategorie;
+      return ergebnis;
     } catch {
-      return { erfassungAktiv: true };
+      return standard;
     }
+  }
+
+  // Ob ein Rezept die in den Einstellungen gewählte "Kategorie für
+  // amerikanische Rezepte" trägt - steuert, ob zusätzlich zum Hauptmenü
+  // auch im Rezept selbst und im Kochmodus ein "Umrechnungstabelle"-Knopf
+  // erscheint. Ohne gewählte Kategorie (Standard) immer false.
+  _istAmerikanischeKategorie(kategorie) {
+    const gewaehlt = this._einstellungen.amerikanischeKategorie;
+    return !!gewaehlt && (kategorie || "Sonstiges") === gewaehlt;
   }
 
   // Schreibt die Nutzer-Einstellungen zurück in ihr Marker-Item (analog zu
@@ -9322,6 +9465,92 @@ class RezeptbuchCard extends HTMLElement {
       .replace(/ß/g, "ss");
   }
 
+  // Übersetzte Zutatennamen für die Umrechnungstabelle in der aktuell
+  // aktiven Sprache (siehe UMRECHNUNGSTABELLE_NAMEN) - fällt wie _t() auf
+  // Deutsch zurück, falls eine Sprache (sollte nicht vorkommen) fehlt.
+  _umrechnungstabelleNamen() {
+    return UMRECHNUNGSTABELLE_NAMEN[this._sprache()] || UMRECHNUNGSTABELLE_NAMEN.de;
+  }
+
+  // HTML für das Umrechnungstabelle-Popup selbst - als eigene Methode, weil
+  // es sowohl in der Übersicht (_renderListe, Hauptmenü-Knopf) als auch in
+  // der Detailansicht/im Kochmodus (_renderDetail, bei Rezepten mit der in
+  // den Einstellungen gewählten "amerikanischen" Kategorie) eingebunden
+  // wird - jede _render*-Methode ersetzt this.shadowRoot.innerHTML komplett,
+  // das Popup-Markup müsste sonst doppelt gepflegt werden.
+  _umrechnungstabelleModalHtml() {
+    return `
+        <div class="modal-overlay" id="umrechnungstabelle-modal" style="display:none;">
+          <div class="modal-box modal-box-breit modal-box-hoch">
+            <h3 style="margin-top:0;">${this._t("umrechnungstabelle_titel")}</h3>
+            <p style="text-align:left;">${this._t("umrechnungstabelle_hinweis")}</p>
+            <input type="text" id="umrechnungstabelle-suche-feld" placeholder="${this._t("umrechnungstabelle_suche_placeholder")}">
+            <div class="umrechnungstabelle-liste" id="umrechnungstabelle-liste">
+              <table class="umrechnungstabelle-tabelle">
+                <thead>
+                  <tr>
+                    <th>${this._t("umrechnungstabelle_spalte_zutat")}</th>
+                    <th>${this._t("umrechnungstabelle_spalte_tasse")}</th>
+                    <th>${this._t("umrechnungstabelle_spalte_el")}</th>
+                    <th>${this._t("umrechnungstabelle_spalte_tl")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${UMRECHNUNGSTABELLE_ZUTATEN.map((z, i) => {
+                    const name = this._umrechnungstabelleNamen()[i] || z.schluessel;
+                    return `
+                    <tr data-zutat-name="${this._escape(this._normalisieren(name))}">
+                      <td>${this._escape(name)}</td>
+                      <td>${z.cup !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.cup).replace(".", ",") }) : "–"}</td>
+                      <td>${z.tbsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tbsp).replace(".", ",") }) : "–"}</td>
+                      <td>${z.tsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tsp).replace(".", ",") }) : "–"}</td>
+                    </tr>
+                  `;
+                  }).join("")}
+                </tbody>
+              </table>
+              <p class="umrechnungstabelle-keine-treffer" id="umrechnungstabelle-keine-treffer" style="display:none;">${this._t("umrechnungstabelle_keine_treffer")}</p>
+            </div>
+            <div class="modal-aktionen" style="margin-top:14px;">
+              <button type="button" class="primaer" id="umrechnungstabelle-schliessen-btn">${this._t("allgemein_schliessen")}</button>
+            </div>
+          </div>
+        </div>`;
+  }
+
+  // Verdrahtet die Klick-/Such-Handler des Umrechnungstabelle-Popups -
+  // gemeinsam für _renderListe und _renderDetail (siehe
+  // _umrechnungstabelleModalHtml) aufgerufen, damit die Logik nicht an
+  // zwei Stellen gepflegt werden muss. "oeffnenBtnIds" sind die IDs aller
+  // Knöpfe, die auf dieser Seite das Popup öffnen können (Hauptmenü hat
+  // genau einen, die Detailansicht kann zusätzlich/alternativ den
+  // Kochmodus-Knopf haben).
+  _umrechnungstabelleVerdrahten(oeffnenBtnIds) {
+    for (const id of oeffnenBtnIds) {
+      const btn = this.shadowRoot.getElementById(id);
+      if (btn) {
+        btn.addEventListener("click", () => {
+          this.shadowRoot.getElementById("umrechnungstabelle-modal").style.display = "flex";
+        });
+      }
+    }
+    const schliessenBtn = this.shadowRoot.getElementById("umrechnungstabelle-schliessen-btn");
+    if (schliessenBtn) {
+      schliessenBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("umrechnungstabelle-modal").style.display = "none";
+        const sucheFeld = this.shadowRoot.getElementById("umrechnungstabelle-suche-feld");
+        if (sucheFeld) sucheFeld.value = "";
+        this._umrechnungstabelleFiltern("");
+      });
+    }
+    const sucheFeld = this.shadowRoot.getElementById("umrechnungstabelle-suche-feld");
+    if (sucheFeld) {
+      sucheFeld.addEventListener("input", () => {
+        this._umrechnungstabelleFiltern(sucheFeld.value);
+      });
+    }
+  }
+
   // Filtert die Zeilen der Umrechnungstabelle-Modal rein im DOM nach
   // Zutatenname - bewusst OHNE this._render(), weil ein Re-Render das Modal
   // (dessen "offen"-Zustand nur per style.display, nicht über eine eigene
@@ -9743,6 +9972,9 @@ class RezeptbuchCard extends HTMLElement {
         #kategorie-speichern-bereich input { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
           border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color); color: var(--primary-text-color); }
         .schalter-zeile { display:flex; align-items:center; justify-content:space-between; gap:14px; text-align:left; margin-bottom:8px; }
+        .feld-zeile { display:flex; flex-direction:column; gap:6px; text-align:left; margin-bottom:8px; }
+        .feld-zeile label { color: var(--secondary-text-color); font-size:0.92em; }
+        .feld-zeile select { width:100%; box-sizing:border-box; }
         .schalter-label { font-weight:600; }
         /* Der Schalter sieht bewusst wie die übrigen Knöpfe der Karte aus
            (gleiche Pillenform/Farbe wie button.primaer/button.sekundaer),
@@ -10077,39 +10309,7 @@ class RezeptbuchCard extends HTMLElement {
           </div>
         </div>
 
-        <div class="modal-overlay" id="umrechnungstabelle-modal" style="display:none;">
-          <div class="modal-box modal-box-breit modal-box-hoch">
-            <h3 style="margin-top:0;">${this._t("umrechnungstabelle_titel")}</h3>
-            <p style="text-align:left;">${this._t("umrechnungstabelle_hinweis")}</p>
-            <input type="text" id="umrechnungstabelle-suche-feld" placeholder="${this._t("umrechnungstabelle_suche_placeholder")}">
-            <div class="umrechnungstabelle-liste" id="umrechnungstabelle-liste">
-              <table class="umrechnungstabelle-tabelle">
-                <thead>
-                  <tr>
-                    <th>${this._t("umrechnungstabelle_spalte_zutat")}</th>
-                    <th>${this._t("umrechnungstabelle_spalte_tasse")}</th>
-                    <th>${this._t("umrechnungstabelle_spalte_el")}</th>
-                    <th>${this._t("umrechnungstabelle_spalte_tl")}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${UMRECHNUNGSTABELLE_ZUTATEN.map((z) => `
-                    <tr data-zutat-name="${this._escape(this._normalisieren(z.name))}">
-                      <td>${this._escape(z.name)}</td>
-                      <td>${z.cup !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.cup).replace(".", ",") }) : "–"}</td>
-                      <td>${z.tbsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tbsp).replace(".", ",") }) : "–"}</td>
-                      <td>${z.tsp !== undefined ? this._t("umrechnungstabelle_gramm_wert", { wert: String(z.tsp).replace(".", ",") }) : "–"}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-              <p class="umrechnungstabelle-keine-treffer" id="umrechnungstabelle-keine-treffer" style="display:none;">${this._t("umrechnungstabelle_keine_treffer")}</p>
-            </div>
-            <div class="modal-aktionen" style="margin-top:14px;">
-              <button type="button" class="primaer" id="umrechnungstabelle-schliessen-btn">${this._t("allgemein_schliessen")}</button>
-            </div>
-          </div>
-        </div>
+        ${this._umrechnungstabelleModalHtml()}
 
         <div class="modal-overlay" id="statistik-modal" style="display:none;">
           <div class="modal-box modal-box-breit">
@@ -10134,6 +10334,15 @@ class RezeptbuchCard extends HTMLElement {
                 <input type="checkbox" id="statistik-einstellungen-schalter" ${this._einstellungen.erfassungAktiv !== false ? "checked" : ""}>
                 <span>${this._einstellungen.erfassungAktiv !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
               </label>
+            </div>
+            <hr class="detail-trenner">
+            <p style="text-align:left;">${this._t("us_kategorie_einstellung_text")}</p>
+            <div class="feld-zeile">
+              <label for="us-kategorie-feld">${this._t("us_kategorie_einstellung_label")}</label>
+              <select id="us-kategorie-feld">
+                <option value="">${this._t("us_kategorie_einstellung_keine")}</option>
+                ${this._alleKategorien().map((k) => `<option value="${this._escape(k)}" ${this._einstellungen.amerikanischeKategorie === k ? "selected" : ""}>${this._escape(this._kategorieLabel(k))}</option>`).join("")}
+              </select>
             </div>
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="primaer" id="statistik-einstellungen-schliessen-btn">${this._t("allgemein_schliessen")}</button>
@@ -10538,27 +10747,7 @@ class RezeptbuchCard extends HTMLElement {
       });
     }
 
-    const umrechnungstabelleBtn = this.shadowRoot.getElementById("umrechnungstabelle-btn");
-    if (umrechnungstabelleBtn) {
-      umrechnungstabelleBtn.addEventListener("click", () => {
-        this.shadowRoot.getElementById("umrechnungstabelle-modal").style.display = "flex";
-      });
-    }
-    const umrechnungstabelleSchliessenBtn = this.shadowRoot.getElementById("umrechnungstabelle-schliessen-btn");
-    if (umrechnungstabelleSchliessenBtn) {
-      umrechnungstabelleSchliessenBtn.addEventListener("click", () => {
-        this.shadowRoot.getElementById("umrechnungstabelle-modal").style.display = "none";
-        const sucheFeld = this.shadowRoot.getElementById("umrechnungstabelle-suche-feld");
-        if (sucheFeld) sucheFeld.value = "";
-        this._umrechnungstabelleFiltern("");
-      });
-    }
-    const umrechnungstabelleSucheFeld = this.shadowRoot.getElementById("umrechnungstabelle-suche-feld");
-    if (umrechnungstabelleSucheFeld) {
-      umrechnungstabelleSucheFeld.addEventListener("input", () => {
-        this._umrechnungstabelleFiltern(umrechnungstabelleSucheFeld.value);
-      });
-    }
+    this._umrechnungstabelleVerdrahten(["umrechnungstabelle-btn"]);
 
     const statistikBtn = this.shadowRoot.getElementById("statistik-btn");
     if (statistikBtn) {
@@ -10603,6 +10792,13 @@ class RezeptbuchCard extends HTMLElement {
       statistikEinstellungenSchalter.addEventListener("change", async (ev) => {
         const aktiv = ev.target.checked;
         await this._einstellungenSpeichern({ ...this._einstellungen, erfassungAktiv: aktiv });
+        this._render();
+      });
+    }
+    const usKategorieFeld = this.shadowRoot.getElementById("us-kategorie-feld");
+    if (usKategorieFeld) {
+      usKategorieFeld.addEventListener("change", async (ev) => {
+        await this._einstellungenSpeichern({ ...this._einstellungen, amerikanischeKategorie: ev.target.value });
         this._render();
       });
     }
@@ -11744,6 +11940,7 @@ class RezeptbuchCard extends HTMLElement {
           <button class="sekundaer" id="zurueck-btn">${this._t("allgemein_zurueck")}</button>
           <button class="sekundaer" id="drucken-btn">${this._t("detail_teilen_drucken_btn")}</button>
           ${schritte.length ? `<button class="sekundaer" id="kochmodus-btn">${this._t("detail_kochmodus_btn")}</button>` : ""}
+          ${this._istAmerikanischeKategorie(r.category) ? `<button class="sekundaer" id="detail-umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>` : ""}
         </div>
         <h2 class="detail-titel">${this._escape(r.title)}</h2>
         <div class="kategorie-badge">🏷️ ${this._escape(this._kategorieLabel(r.category || "Sonstiges"))}</div>
@@ -11839,6 +12036,7 @@ class RezeptbuchCard extends HTMLElement {
           <div class="kochmodus-werkzeuge">
             <button class="sekundaer klein${this._kochmodusZutatenSichtbar ? " aktiv" : ""}" id="kochmodus-zutaten-btn" aria-label="${this._t(this._kochmodusZutatenSichtbar ? "kochmodus_zutaten_aus_aria" : "kochmodus_zutaten_ein_aria")}">🥕 ${this._t("abschnitt_titel_zutaten")}</button>
             <button class="sekundaer klein${this._kochmodusTimerPanelSichtbar ? " aktiv" : ""}" id="kochmodus-timer-btn" aria-label="${this._t(this._kochmodusTimerPanelSichtbar ? "kochmodus_timer_aus_aria" : "kochmodus_timer_ein_aria")}">⏱${this._kochmodusTimerEndeZeitpunkt ? ` <span class="kochmodus-timer-badge">${this._kochmodusTimerRestAnzeige()}</span>` : this._kochmodusTimerAbgelaufen ? " ⏰" : ""}</button>
+            ${this._istAmerikanischeKategorie(r.category) ? `<button class="sekundaer klein" id="kochmodus-umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>` : ""}
           </div>
           ${this._kochmodusZutatenSichtbar ? `
             <div class="kochmodus-zutaten-panel">
@@ -11879,8 +12077,13 @@ class RezeptbuchCard extends HTMLElement {
           </div>
         </div>
         ` : ""}
+        ${this._istAmerikanischeKategorie(r.category) ? this._umrechnungstabelleModalHtml() : ""}
       </ha-card>
     `;
+
+    if (this._istAmerikanischeKategorie(r.category)) {
+      this._umrechnungstabelleVerdrahten(["detail-umrechnungstabelle-btn", "kochmodus-umrechnungstabelle-btn"]);
+    }
 
     this.shadowRoot.getElementById("zurueck-btn").addEventListener("click", () => {
       if (this._zubereitetAbfrageAktiv()) {
