@@ -4,11 +4,16 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [2.1.0] - 2026-10-01
+## [2.1.1] - 2026-10-01
 
 Vier über die GitHub-Issue-Vorlage eingereichte Verbesserungsvorschläge
 umgesetzt (eine fünfte Anfrage - eigene Hauptkategorien - gab es bereits
-seit [2.0.0]).
+seit [2.0.0]). Die Versionsnummer wurde bewusst erhöht (statt wie bei den
+vorherigen Punkten dieses Abschnitts beizubehalten), damit die Karte beim
+nächsten Laden zuverlässig ihren eigenen "Browser-Cache nicht geleert"-
+Warnhinweis zeigen kann, falls die `?v=...`-Nummer der Ressourcen-URL nicht
+mit aktualisiert wird (siehe README, Abschnitt "Warnt vor vergessener
+Ressourcen-Versionsnummer").
 
 ### Hinzugefügt
 - **Kommentare bearbeiten/löschen**: eigene Kommentare zu einem Rezept
