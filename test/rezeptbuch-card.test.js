@@ -2431,6 +2431,41 @@ async function testTagsHinzufuegenSpeichernUndFiltern(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: beim Anlegen/Bearbeiten eines Rezepts werden bereits an ANDEREN
+// Rezepten vergebene Tags als Vorschlag (natives <datalist>) angezeigt,
+// damit nicht versehentlich derselbe Tag leicht anders geschrieben noch
+// einmal neu angelegt wird (gemeldeter Wunsch: Doppelanlagen vermeiden).
+// ---------------------------------------------------------------------
+async function testVorhandeneTagsWerdenAlsVorschlagAngezeigt(browser) {
+  console.log("\nTest: Vorhandene Tags werden im Formular als Vorschlagsliste angezeigt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Gemüsecurry", payload: leererPayload({ tags: ["vegetarisch", "schnell"] }) });
+    await rezeptDirektAnlegen(page, { title: "Linsensuppe", payload: leererPayload({ tags: ["vegetarisch", "herbst"] }) });
+
+    await page.evaluate(() => window.__karte._neuesRezeptFormular());
+    const vorschlaege = await page.evaluate(() =>
+      Array.from(window.__karte.shadowRoot.querySelectorAll("#vorhandene-tags-liste option")).map((o) => o.value)
+    );
+    assert(
+      vorschlaege.includes("vegetarisch") && vorschlaege.includes("schnell") && vorschlaege.includes("herbst"),
+      "Alle bereits an anderen Rezepten vergebenen Tags erscheinen als Vorschlag (tatsächlich: " + JSON.stringify(vorschlaege) + ")"
+    );
+    assert(
+      vorschlaege.filter((t) => t === "vegetarisch").length === 1,
+      "Mehrfach vorkommende Tags erscheinen nur EINMAL in der Vorschlagsliste, nicht pro Rezept erneut"
+    );
+
+    const feldVerweistAufListe = await page.evaluate(
+      () => window.__karte.shadowRoot.getElementById("neuer-tag-feld").getAttribute("list") === "vorhandene-tags-liste"
+    );
+    assert(feldVerweistAufListe, "Das Tag-Eingabefeld ist tatsächlich mit der Vorschlagsliste verknüpft (list-Attribut)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 31: alte Rezepte ohne tags-Feld (schemaVersion 1) werden migriert und
 // erscheinen korrekt mit leerem tags-Array - kein Absturz beim Filtern.
 // ---------------------------------------------------------------------
@@ -4908,6 +4943,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testWochenplanFolgewocheRuecktNach(browser);
     await testWochenplanTabWechselSpeichertRichtigesFeld(browser);
     await testTagsHinzufuegenSpeichernUndFiltern(browser);
+    await testVorhandeneTagsWerdenAlsVorschlagAngezeigt(browser);
     await testAlteRezepteOhneTagsWerdenMigriert(browser);
     await testKochbuecherSpeichernAnwendenLoeschen(browser);
     await testBarrierefreiheitVerbesserungen(browser);

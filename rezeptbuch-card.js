@@ -11437,9 +11437,16 @@ class RezeptbuchCard extends HTMLElement {
           <label>${this._t("formular_label_tags")}</label>
           <div id="tags-liste" class="tags-liste"></div>
           <div class="tag-eingabe-zeile">
-            <input type="text" id="neuer-tag-feld" placeholder="${this._t("formular_tag_placeholder")}">
+            <input type="text" id="neuer-tag-feld" list="vorhandene-tags-liste" placeholder="${this._t("formular_tag_placeholder")}">
             <button type="button" class="sekundaer klein" id="tag-hinzufuegen">${this._t("formular_tag_hinzufuegen_btn")}</button>
           </div>
+          <!-- Native Browser-Vorschlagsliste (datalist) statt einer
+               selbstgebauten Dropdown-Komponente - zeigt beim Tippen
+               bereits an anderen Rezepten vergebene Tags zur Auswahl an,
+               ohne zusätzlichen JS-Code/Build-Schritt. -->
+          <datalist id="vorhandene-tags-liste">
+            ${this._alleTags().map((t) => `<option value="${this._escape(t)}"></option>`).join("")}
+          </datalist>
 
           <label>${this._t("formular_label_portionen")}</label>
           <input type="number" id="portionen-feld" min="1" step="1" value="${r.servings}">
