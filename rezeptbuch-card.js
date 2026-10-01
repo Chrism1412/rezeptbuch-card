@@ -250,6 +250,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Noch keine Zubereitungen erfasst.",
     modal_loeschen_frage: "\"{{titel}}\" wirklich löschen?",
     modal_loeschen_ja_btn: "Ja, löschen",
+    modal_kommentar_loeschen_frage: "Diesen Kommentar wirklich löschen?",
 
     // Wochenplan
     wochenplan_titel: "Wochenplan",
@@ -565,6 +566,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "No kei Zubereitige erfasst.",
     modal_loeschen_frage: "\"{{titel}}\" wirklich lösche?",
     modal_loeschen_ja_btn: "Ja, lösche",
+    modal_kommentar_loeschen_frage: "Dä Kommentar wirklich lösche?",
 
     // Wochenplan
     wochenplan_titel: "Wuchepla",
@@ -860,6 +862,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "No preparations recorded yet.",
     modal_loeschen_frage: "Really delete \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Yes, delete",
+    modal_kommentar_loeschen_frage: "Really delete this comment?",
 
     wochenplan_titel: "Meal plan",
     wochenplan_tab_diese: "This week",
@@ -1134,6 +1137,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Все още няма записани приготвяния.",
     modal_loeschen_frage: "Наистина ли да изтрия \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Да, изтрий",
+    modal_kommentar_loeschen_frage: "Наистина ли да изтриете този коментар?",
     wochenplan_titel: "Седмичен план",
     wochenplan_tab_diese: "Тази седмица",
     wochenplan_tab_folgewoche: "Следваща седмица",
@@ -1381,6 +1385,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Još nema zabilježenih priprema.",
     modal_loeschen_frage: "Stvarno izbrisati \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Da, izbriši",
+    modal_kommentar_loeschen_frage: "Stvarno želite izbrisati ovaj komentar?",
     wochenplan_titel: "Tjedni plan",
     wochenplan_tab_diese: "Ovaj tjedan",
     wochenplan_tab_folgewoche: "Sljedeći tjedan",
@@ -1628,6 +1633,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Zatím nejsou zaznamenány žádné přípravy.",
     modal_loeschen_frage: "Opravdu smazat \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Ano, smazat",
+    modal_kommentar_loeschen_frage: "Opravdu smazat tento komentář?",
     wochenplan_titel: "Týdenní plán",
     wochenplan_tab_diese: "Tento týden",
     wochenplan_tab_folgewoche: "Příští týden",
@@ -1875,6 +1881,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Endnu ingen tilberedninger registreret.",
     modal_loeschen_frage: "Vil du virkelig slette \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Ja, slet",
+    modal_kommentar_loeschen_frage: "Vil du virkelig slette denne kommentar?",
     wochenplan_titel: "Ugeplan",
     wochenplan_tab_diese: "Denne uge",
     wochenplan_tab_folgewoche: "Næste uge",
@@ -2122,6 +2129,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Nog geen bereidingen geregistreerd.",
     modal_loeschen_frage: "\"{{titel}}\" echt verwijderen?",
     modal_loeschen_ja_btn: "Ja, verwijderen",
+    modal_kommentar_loeschen_frage: "Deze reactie echt verwijderen?",
     wochenplan_titel: "Weekmenu",
     wochenplan_tab_diese: "Deze week",
     wochenplan_tab_folgewoche: "Volgende week",
@@ -2369,6 +2377,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Valmistamisi pole veel salvestatud.",
     modal_loeschen_frage: "Kas tõesti kustutada \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Jah, kustuta",
+    modal_kommentar_loeschen_frage: "Kustutada see kommentaar tõesti?",
     wochenplan_titel: "Nädalaplaan",
     wochenplan_tab_diese: "See nädal",
     wochenplan_tab_folgewoche: "Järgmine nädal",
@@ -2616,6 +2625,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Valmistuskertoja ei ole vielä tallennettu.",
     modal_loeschen_frage: "Poistetaanko \"{{titel}}\" varmasti?",
     modal_loeschen_ja_btn: "Kyllä, poista",
+    modal_kommentar_loeschen_frage: "Poistetaanko tämä kommentti varmasti?",
     wochenplan_titel: "Viikkosuunnitelma",
     wochenplan_tab_diese: "Tämä viikko",
     wochenplan_tab_folgewoche: "Seuraava viikko",
@@ -2864,6 +2874,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Aucune préparation enregistrée pour l'instant.",
     modal_loeschen_frage: "Vraiment supprimer \"{{titel}}\" ?",
     modal_loeschen_ja_btn: "Oui, supprimer",
+    modal_kommentar_loeschen_frage: "Vraiment supprimer ce commentaire ?",
     wochenplan_titel: "Planning de la semaine",
     wochenplan_tab_diese: "Cette semaine",
     wochenplan_tab_folgewoche: "Semaine suivante",
@@ -3112,6 +3123,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Δεν έχουν καταγραφεί ακόμη παρασκευές.",
     modal_loeschen_frage: "Να διαγραφεί πραγματικά το \"{{titel}}\";",
     modal_loeschen_ja_btn: "Ναι, διαγραφή",
+    modal_kommentar_loeschen_frage: "Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;",
     wochenplan_titel: "Εβδομαδιαίος προγραμματισμός",
     wochenplan_tab_diese: "Αυτή την εβδομάδα",
     wochenplan_tab_folgewoche: "Επόμενη εβδομάδα",
@@ -3360,6 +3372,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Még nincs rögzített elkészítés.",
     modal_loeschen_frage: "Biztosan törlöd a(z) \"{{titel}}\" receptet?",
     modal_loeschen_ja_btn: "Igen, törlés",
+    modal_kommentar_loeschen_frage: "Biztosan törli ezt a megjegyzést?",
     wochenplan_titel: "Heti étrend",
     wochenplan_tab_diese: "Ezen a héten",
     wochenplan_tab_folgewoche: "Következő hét",
@@ -3608,6 +3621,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Níl aon ullmhúcháin taifeadta fós.",
     modal_loeschen_frage: "An bhfuil tú cinnte gur mian leat \"{{titel}}\" a scriosadh?",
     modal_loeschen_ja_btn: "Tá, scrios",
+    modal_kommentar_loeschen_frage: "An bhfuil tú cinnte gur mian leat an nóta tráchta seo a scriosadh?",
     wochenplan_titel: "Plean seachtainiúil",
     wochenplan_tab_diese: "An tseachtain seo",
     wochenplan_tab_folgewoche: "An tseachtain seo chugainn",
@@ -3856,6 +3870,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Nessuna preparazione registrata finora.",
     modal_loeschen_frage: "Eliminare davvero \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Sì, elimina",
+    modal_kommentar_loeschen_frage: "Eliminare davvero questo commento?",
     wochenplan_titel: "Piano settimanale",
     wochenplan_tab_diese: "Questa settimana",
     wochenplan_tab_folgewoche: "Settimana prossima",
@@ -4103,6 +4118,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Vēl nav reģistrēta neviena gatavošana.",
     modal_loeschen_frage: "Vai tiešām dzēst \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Jā, dzēst",
+    modal_kommentar_loeschen_frage: "Vai tiešām dzēst šo komentāru?",
     wochenplan_titel: "Nedēļas plāns",
     wochenplan_tab_diese: "Šī nedēļa",
     wochenplan_tab_folgewoche: "Nākamā nedēļa",
@@ -4350,6 +4366,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Kol kas neužfiksuota jokių gaminimų.",
     modal_loeschen_frage: "Tikrai ištrinti \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Taip, ištrinti",
+    modal_kommentar_loeschen_frage: "Ar tikrai norite ištrinti šį komentarą?",
     wochenplan_titel: "Savaitės planas",
     wochenplan_tab_diese: "Ši savaitė",
     wochenplan_tab_folgewoche: "Kita savaitė",
@@ -4598,6 +4615,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Għadha ma ġiet irreġistrata l-ebda tħejjija.",
     modal_loeschen_frage: "Tassew tħassar \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Iva, ħassar",
+    modal_kommentar_loeschen_frage: "Tassew tħassar dan il-kumment?",
     wochenplan_titel: "Pjan tal-Ġimgħa",
     wochenplan_tab_diese: "Din il-ġimgħa",
     wochenplan_tab_folgewoche: "Il-ġimgħa d-dieħla",
@@ -4845,6 +4863,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Nie zapisano jeszcze żadnych przygotowań.",
     modal_loeschen_frage: "Czy na pewno usunąć \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Tak, usuń",
+    modal_kommentar_loeschen_frage: "Czy naprawdę usunąć ten komentarz?",
     wochenplan_titel: "Plan tygodnia",
     wochenplan_tab_diese: "Ten tydzień",
     wochenplan_tab_folgewoche: "Następny tydzień",
@@ -5093,6 +5112,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Ainda não há preparações registadas.",
     modal_loeschen_frage: "Eliminar mesmo \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Sim, eliminar",
+    modal_kommentar_loeschen_frage: "Eliminar mesmo este comentário?",
     wochenplan_titel: "Plano semanal",
     wochenplan_tab_diese: "Esta semana",
     wochenplan_tab_folgewoche: "Próxima semana",
@@ -5340,6 +5360,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Încă nu sunt înregistrate preparări.",
     modal_loeschen_frage: "Chiar vrei să ștergi \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Da, șterge",
+    modal_kommentar_loeschen_frage: "Sigur ștergeți acest comentariu?",
     wochenplan_titel: "Plan săptămânal",
     wochenplan_tab_diese: "Săptămâna aceasta",
     wochenplan_tab_folgewoche: "Săptămâna viitoare",
@@ -5587,6 +5608,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Zatiaľ nie sú zaznamenané žiadne prípravy.",
     modal_loeschen_frage: "Naozaj vymazať \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Áno, vymazať",
+    modal_kommentar_loeschen_frage: "Naozaj vymazať tento komentár?",
     wochenplan_titel: "Týždenný plán",
     wochenplan_tab_diese: "Tento týždeň",
     wochenplan_tab_folgewoche: "Budúci týždeň",
@@ -5834,6 +5856,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Še ni zabeleženih priprav.",
     modal_loeschen_frage: "Res izbrisati \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Da, izbriši",
+    modal_kommentar_loeschen_frage: "Ali res želite izbrisati ta komentar?",
     wochenplan_titel: "Tedenski načrt",
     wochenplan_tab_diese: "Ta teden",
     wochenplan_tab_folgewoche: "Naslednji teden",
@@ -6081,6 +6104,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Todavía no hay preparaciones registradas.",
     modal_loeschen_frage: "¿Eliminar realmente \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Sí, eliminar",
+    modal_kommentar_loeschen_frage: "¿Eliminar realmente este comentario?",
     wochenplan_titel: "Plan semanal",
     wochenplan_tab_diese: "Esta semana",
     wochenplan_tab_folgewoche: "Próxima semana",
@@ -6328,6 +6352,7 @@ const UEBERSETZUNGEN = {
     statistik_keine_daten: "Inga tillagningar registrerade ännu.",
     modal_loeschen_frage: "Verkligen ta bort \"{{titel}}\"?",
     modal_loeschen_ja_btn: "Ja, ta bort",
+    modal_kommentar_loeschen_frage: "Vill du verkligen ta bort den här kommentaren?",
     wochenplan_titel: "Veckoplan",
     wochenplan_tab_diese: "Denna vecka",
     wochenplan_tab_folgewoche: "Nästa vecka",
@@ -7895,6 +7920,7 @@ class RezeptbuchCard extends HTMLElement {
     const frisch = (await this._rezeptFrischLaden(r.uid)) || r;
     const neueComments = [...(frisch.comments || []), {
       author: (this._hass.user && this._hass.user.name) || this._t("allgemein_unbekannt"),
+      authorId: this._hass.user ? this._hass.user.id : null,
       text: text.trim(),
       zeit: new Date().toISOString(),
     }];
@@ -7907,6 +7933,87 @@ class RezeptbuchCard extends HTMLElement {
     // synchronisieren, nicht nur den Kommentar anhängen - so zeigt die
     // Ansicht auch inzwischen von anderen geänderte Felder korrekt an.
     Object.assign(r, frisch, { comments: neueComments });
+    this._render();
+  }
+
+  // Gleiches Muster wie _darfBearbeiten für Rezepte: alte Kommentare ohne
+  // hinterlegte authorId (vor diesem Feature geschrieben) sind für alle
+  // offen, neue nur für den Verfasser selbst oder einen HA-Admin.
+  _kommentarDarfBearbeiten(kommentar) {
+    if (!kommentar.authorId) return true;
+    if (!this._hass.user) return false;
+    if (this._hass.user.id === kommentar.authorId) return true;
+    if (this._hass.user.is_admin) return true;
+    return false;
+  }
+
+  _kommentarBearbeiten(index) {
+    this._kommentarBearbeitungIndex = index;
+    this._render();
+  }
+
+  _kommentarBearbeitenAbbrechen() {
+    this._kommentarBearbeitungIndex = null;
+    this._render();
+  }
+
+  async _kommentarBearbeitenSpeichern(index, neuerText) {
+    if (!neuerText || !neuerText.trim()) return;
+    const r = this._aktivesRezept;
+    const frisch = (await this._rezeptFrischLaden(r.uid)) || r;
+    const alterKommentar = (r.comments || [])[index];
+    if (!alterKommentar) return;
+    // Nicht über den Index im frisch geladenen Stand zugreifen (der könnte
+    // sich durch einen zwischenzeitlichen Kommentar von jemand anderem
+    // verschoben haben) - stattdessen über author+zeit identifizieren, das
+    // zusammen einen bestehenden Kommentar eindeutig genug kennzeichnet.
+    const neueComments = (frisch.comments || []).map((k) =>
+      k.author === alterKommentar.author && k.zeit === alterKommentar.zeit
+        ? { ...k, text: neuerText.trim() }
+        : k
+    );
+    const erfolg = await this._serviceAufrufen("update_item", {
+      item: r.uid,
+      description: JSON.stringify({ ...this._rezeptPayload(frisch), comments: neueComments }),
+    });
+    if (!erfolg) return;
+    Object.assign(r, frisch, { comments: neueComments });
+    this._kommentarBearbeitungIndex = null;
+    this._render();
+  }
+
+  _kommentarLoeschen(index) {
+    // Eigenes Modal statt window.confirm() - siehe Begründung bei
+    // _rezeptLoeschen weiter oben (native Dialoge sind in der
+    // Home-Assistant-Begleit-App/WebView unzuverlässig).
+    this._kommentarZumLoeschenIndex = index;
+    const modal = this.shadowRoot.getElementById("kommentar-loeschen-modal");
+    if (modal) modal.style.display = "flex";
+  }
+
+  _kommentarLoeschenModalVerstecken() {
+    const modal = this.shadowRoot.getElementById("kommentar-loeschen-modal");
+    if (modal) modal.style.display = "none";
+  }
+
+  async _kommentarLoeschenBestaetigt() {
+    const index = this._kommentarZumLoeschenIndex;
+    this._kommentarLoeschenModalVerstecken();
+    if (index == null) return;
+    const r = this._aktivesRezept;
+    const frisch = (await this._rezeptFrischLaden(r.uid)) || r;
+    const alterKommentar = (r.comments || [])[index];
+    if (!alterKommentar) return;
+    const neueComments = (frisch.comments || []).filter(
+      (k) => !(k.author === alterKommentar.author && k.zeit === alterKommentar.zeit)
+    );
+    const erfolg = await this._serviceAufrufen("update_item", {
+      item: r.uid,
+      description: JSON.stringify({ ...this._rezeptPayload(frisch), comments: neueComments }),
+    });
+    if (!erfolg) return;
+    Object.assign(r, frisch, { comments: neueComments });
+    this._kommentarZumLoeschenIndex = null;
     this._render();
   }
 
@@ -8929,11 +9036,13 @@ class RezeptbuchCard extends HTMLElement {
         .kommentar-autor { font-weight:700; font-size:0.85em; color: var(--kb-terrakotta-dunkel); }
         .kommentar-zeit { font-size:0.72em; color: var(--secondary-text-color); margin-left:8px; }
         .kommentar-text { margin-top:3px; font-size:0.92em; line-height:1.4; color: var(--primary-text-color); }
-        .kommentar-formular textarea {
+        .kommentar-formular textarea, .kommentar-bearbeiten-feld {
           width:100%; box-sizing:border-box; min-height:70px; padding:9px 12px; border-radius:10px;
           border:1.5px solid var(--kb-terrakotta-hell); background: var(--card-background-color);
           color: var(--primary-text-color); font-size:0.9em; margin-bottom:8px;
         }
+        .kommentar-bearbeiten-feld { margin-top:3px; }
+        .kommentar-aktionen { display:flex; gap:8px; margin-top:4px; }
 
         .sortier-zeile { display:flex; align-items:center; gap:8px; margin-bottom:14px; font-size:0.85em; color: var(--secondary-text-color); }
         .sortier-zeile select {
@@ -10810,10 +10919,33 @@ class RezeptbuchCard extends HTMLElement {
     const darfBearbeiten = this._darfBearbeiten(r);
 
     const kommentarZeilen = (r.comments || [])
-      .map((k) => `<li>
-          <span class="kommentar-autor">${this._escape(k.author)}</span><span class="kommentar-zeit">${this._formatZeit(k.zeit)}</span>
-          <div class="kommentar-text">${this._escape(k.text)}</div>
-        </li>`)
+      .map((k, i) => {
+        if (this._kommentarBearbeitungIndex === i) {
+          // Bearbeiten-Modus: eigenes Textfeld statt der normalen Anzeige -
+          // data-index verweist auf die Position in r.comments (innerhalb
+          // dieses einen Render-Durchlaufs stabil, siehe Kommentar bei den
+          // zugehörigen Event-Handlern weiter unten).
+          return `<li>
+              <span class="kommentar-autor">${this._escape(k.author)}</span><span class="kommentar-zeit">${this._formatZeit(k.zeit)}</span>
+              <textarea class="kommentar-bearbeiten-feld" data-index="${i}">${this._escape(k.text)}</textarea>
+              <div class="kommentar-aktionen">
+                <button class="sekundaer klein kommentar-speichern-btn" data-index="${i}">${this._t("allgemein_speichern")}</button>
+                <button class="sekundaer klein kommentar-abbrechen-btn" data-index="${i}">${this._t("allgemein_abbrechen")}</button>
+              </div>
+            </li>`;
+        }
+        const darfKommentarBearbeiten = this._kommentarDarfBearbeiten(k);
+        return `<li>
+            <span class="kommentar-autor">${this._escape(k.author)}</span><span class="kommentar-zeit">${this._formatZeit(k.zeit)}</span>
+            <div class="kommentar-text">${this._escape(k.text)}</div>
+            ${darfKommentarBearbeiten ? `
+              <div class="kommentar-aktionen">
+                <button class="sekundaer klein kommentar-bearbeiten-btn" data-index="${i}">${this._t("allgemein_bearbeiten")}</button>
+                <button class="gefahr klein kommentar-loeschen-btn" data-index="${i}">${this._t("allgemein_loeschen")}</button>
+              </div>
+            ` : ""}
+          </li>`;
+      })
       .join("");
 
     this.shadowRoot.innerHTML = `
@@ -10896,6 +11028,16 @@ class RezeptbuchCard extends HTMLElement {
             <div class="modal-aktionen">
               <button class="sekundaer" id="loeschen-modal-nein-btn">${this._t("allgemein_nein")}</button>
               <button class="gefahr" id="loeschen-modal-ja-btn">${this._t("modal_loeschen_ja_btn")}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="kommentar-loeschen-modal" style="display:none;">
+          <div class="modal-box">
+            <p>${this._t("modal_kommentar_loeschen_frage")}</p>
+            <div class="modal-aktionen">
+              <button class="sekundaer" id="kommentar-loeschen-modal-nein-btn">${this._t("allgemein_nein")}</button>
+              <button class="gefahr" id="kommentar-loeschen-modal-ja-btn">${this._t("modal_loeschen_ja_btn")}</button>
             </div>
           </div>
         </div>
@@ -11045,6 +11187,41 @@ class RezeptbuchCard extends HTMLElement {
         kommentarBtn.disabled = false;
       });
     });
+
+    this.shadowRoot.querySelectorAll(".kommentar-bearbeiten-btn").forEach((btn) => {
+      btn.addEventListener("click", () => this._kommentarBearbeiten(parseInt(btn.dataset.index, 10)));
+    });
+    this.shadowRoot.querySelectorAll(".kommentar-loeschen-btn").forEach((btn) => {
+      btn.addEventListener("click", () => this._kommentarLoeschen(parseInt(btn.dataset.index, 10)));
+    });
+    this.shadowRoot.querySelectorAll(".kommentar-abbrechen-btn").forEach((btn) => {
+      btn.addEventListener("click", () => this._kommentarBearbeitenAbbrechen());
+    });
+    this.shadowRoot.querySelectorAll(".kommentar-speichern-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const index = parseInt(btn.dataset.index, 10);
+        const feld = this.shadowRoot.querySelector(`.kommentar-bearbeiten-feld[data-index="${index}"]`);
+        if (!feld || !feld.value.trim()) return;
+        btn.disabled = true;
+        this._kommentarBearbeitenSpeichern(index, feld.value).finally(() => {
+          btn.disabled = false;
+        });
+      });
+    });
+    const kommentarLoeschenModalNein = this.shadowRoot.getElementById("kommentar-loeschen-modal-nein-btn");
+    if (kommentarLoeschenModalNein) {
+      kommentarLoeschenModalNein.addEventListener("click", () => {
+        this._kommentarZumLoeschenIndex = null;
+        this._kommentarLoeschenModalVerstecken();
+      });
+    }
+    const kommentarLoeschenModalJa = this.shadowRoot.getElementById("kommentar-loeschen-modal-ja-btn");
+    if (kommentarLoeschenModalJa) {
+      kommentarLoeschenModalJa.addEventListener("click", (e) => {
+        e.target.disabled = true;
+        this._kommentarLoeschenBestaetigt();
+      });
+    }
 
     const bearbeitenBtn = this.shadowRoot.getElementById("bearbeiten-btn");
     if (bearbeitenBtn) bearbeitenBtn.addEventListener("click", () => this._rezeptBearbeiten(r));

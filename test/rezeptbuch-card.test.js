@@ -257,6 +257,195 @@ async function testKonfliktSchutzKommentar(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: Kommentare können vom eigenen Verfasser bearbeitet und gelöscht
+// werden, von einem fremden (nicht-admin) Nutzer aber nicht - ein Admin
+// darf trotzdem immer, und alte Kommentare ohne authorId bleiben wie
+// bisher für alle offen (Rückwärtskompatibilität, analog _darfBearbeiten).
+// ---------------------------------------------------------------------
+async function testKommentarBearbeitenUndLoeschenRechte(browser) {
+  console.log("\nTest: Kommentare bearbeiten/löschen - Rechte und Funktion");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Gulasch",
+      payload: leererPayload({
+        comments: [
+          { author: "Erika", authorId: "user-1", text: "Mein Kommentar", zeit: "2026-01-01T00:00:00.000Z" },
+          { author: "Jemand anders", authorId: "user-2", text: "Fremder Kommentar", zeit: "2026-01-02T00:00:00.000Z" },
+          { author: "Ganz alt", text: "Alter Kommentar ohne authorId", zeit: "2026-01-03T00:00:00.000Z" },
+        ],
+      }),
+    });
+
+    await page.evaluate((uid) => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.uid === uid));
+    }, uid);
+
+    // Fall 1: eigener Kommentar (authorId === eigene user-id) - darf auch
+    // als Nicht-Admin bearbeitet/gelöscht werden.
+    const rechteEigenerAlsNichtAdmin = await page.evaluate(() => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: false };
+      return window.__karte._kommentarDarfBearbeiten(window.__karte._aktivesRezept.comments[0]);
+    });
+    assert(rechteEigenerAlsNichtAdmin === true, "Eigener Kommentar ist auch als Nicht-Admin bearbeitbar/löschbar");
+
+    // Fall 2: fremder Kommentar als Nicht-Admin - nicht erlaubt.
+    const rechteFremderAlsNichtAdmin = await page.evaluate(() => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: false };
+      return window.__karte._kommentarDarfBearbeiten(window.__karte._aktivesRezept.comments[1]);
+    });
+    assert(rechteFremderAlsNichtAdmin === false, "Fremder Kommentar ist als Nicht-Admin NICHT bearbeitbar/löschbar");
+
+    // Fall 3: fremder Kommentar, aber als Admin - erlaubt.
+    const rechteFremderAlsAdmin = await page.evaluate(() => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: true };
+      return window.__karte._kommentarDarfBearbeiten(window.__karte._aktivesRezept.comments[1]);
+    });
+    assert(rechteFremderAlsAdmin === true, "Fremder Kommentar ist für einen Admin bearbeitbar/löschbar");
+
+    // Fall 4: alter Kommentar ganz ohne authorId - für alle offen, auch
+    // ohne Admin-Rechte (Rückwärtskompatibilität mit Daten vor diesem Feature).
+    const rechteAlterKommentarAlsNichtAdmin = await page.evaluate(() => {
+      window.__karte._hass.user = { id: "irgendwer", name: "Irgendwer", is_admin: false };
+      return window.__karte._kommentarDarfBearbeiten(window.__karte._aktivesRezept.comments[2]);
+    });
+    assert(rechteAlterKommentarAlsNichtAdmin === true, "Alter Kommentar ohne authorId bleibt für alle offen");
+
+    // Funktionstest: Bearbeiten speichert den neuen Text, ohne die anderen
+    // Kommentare zu verändern.
+    await page.evaluate(() => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: false };
+    });
+    await page.evaluate(async () => {
+      await window.__karte._kommentarBearbeitenSpeichern(0, "Mein geänderter Kommentar");
+    });
+    let eintrag = await page.evaluate((uid) => window.__speicher.find((i) => i.uid === uid), uid);
+    let beschreibung = JSON.parse(eintrag.description);
+    assert(beschreibung.comments.length === 3, "Bearbeiten ändert nicht die Anzahl der Kommentare");
+    assert(beschreibung.comments[0].text === "Mein geänderter Kommentar", "Der bearbeitete Kommentartext wird gespeichert");
+    assert(beschreibung.comments[1].text === "Fremder Kommentar", "Andere Kommentare bleiben beim Bearbeiten unverändert");
+
+    // Funktionstest: Löschen entfernt genau den gemeinten Kommentar.
+    await page.evaluate(async () => {
+      window.__karte._kommentarZumLoeschenIndex = 1;
+      await window.__karte._kommentarLoeschenBestaetigt();
+    });
+    eintrag = await page.evaluate((uid) => window.__speicher.find((i) => i.uid === uid), uid);
+    beschreibung = JSON.parse(eintrag.description);
+    assert(beschreibung.comments.length === 2, "Löschen entfernt genau einen Kommentar");
+    assert(
+      !beschreibung.comments.some((k) => k.text === "Fremder Kommentar"),
+      "Der gelöschte Kommentar ist nicht mehr vorhanden"
+    );
+    assert(
+      beschreibung.comments.some((k) => k.text === "Mein geänderter Kommentar"),
+      "Die übrigen Kommentare bleiben nach dem Löschen erhalten"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: Kommentar-Bearbeiten/Löschen-Buttons über die echte UI getrieben
+// (Klicks statt direkter Methodenaufrufe) - prüft, dass Sichtbarkeit und
+// Verdrahtung der Buttons tatsächlich stimmen, nicht nur die Logik
+// dahinter. Nutzt dasselbe eigene Bestätigungs-Modal wie beim
+// Rezept-Löschen (kein window.confirm()).
+// ---------------------------------------------------------------------
+async function testKommentarBearbeitenUndLoeschenUeberUi(browser) {
+  console.log("\nTest: Kommentare bearbeiten/löschen über die echte UI");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Gulasch",
+      payload: leererPayload({
+        comments: [
+          { author: "Erika", authorId: "user-1", text: "Mein Kommentar", zeit: "2026-01-01T00:00:00.000Z" },
+          { author: "Jemand anders", authorId: "user-2", text: "Fremder Kommentar", zeit: "2026-01-02T00:00:00.000Z" },
+        ],
+      }),
+    });
+
+    await page.evaluate((uid) => {
+      window.__karte._hass.user = { id: "user-1", name: "Erika", is_admin: false };
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.uid === uid));
+    }, uid);
+
+    const sichtbarkeitAlsNichtAdmin = await page.evaluate(() => {
+      const buttons = Array.from(window.__karte.shadowRoot.querySelectorAll(".kommentar-bearbeiten-btn, .kommentar-loeschen-btn"));
+      return buttons.map((b) => b.dataset.index);
+    });
+    assert(
+      sichtbarkeitAlsNichtAdmin.length === 2 && sichtbarkeitAlsNichtAdmin.every((i) => i === "0"),
+      "Als Nicht-Admin erscheinen Bearbeiten/Löschen nur beim eigenen Kommentar (Index 0), nicht beim fremden"
+    );
+
+    // Bearbeiten-Button klicken -> Textfeld erscheint mit vorbefülltem Text.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelector('.kommentar-bearbeiten-btn[data-index="0"]').click();
+    });
+    const feldWert = await page.evaluate(() =>
+      window.__karte.shadowRoot.querySelector('.kommentar-bearbeiten-feld[data-index="0"]').value
+    );
+    assert(feldWert === "Mein Kommentar", "Das Bearbeiten-Textfeld ist mit dem bisherigen Kommentartext vorbefüllt");
+
+    // Text ändern und über den Speichern-Button sichern.
+    await page.evaluate(() => {
+      const feld = window.__karte.shadowRoot.querySelector('.kommentar-bearbeiten-feld[data-index="0"]');
+      feld.value = "Über die UI geänderter Kommentar";
+    });
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelector('.kommentar-speichern-btn[data-index="0"]').click();
+    });
+    await page.waitForFunction(
+      (uid) => {
+        const eintrag = window.__speicher.find((i) => i.uid === uid);
+        return eintrag && JSON.parse(eintrag.description).comments[0].text === "Über die UI geänderter Kommentar";
+      },
+      uid
+    );
+    let eintrag = await page.evaluate((uid) => window.__speicher.find((i) => i.uid === uid), uid);
+    assert(
+      JSON.parse(eintrag.description).comments[0].text === "Über die UI geänderter Kommentar",
+      "Über den Speichern-Button in der UI wird der geänderte Kommentartext übernommen"
+    );
+
+    // Löschen-Button klicken -> eigenes Modal (kein window.confirm()) muss
+    // erscheinen, bevor tatsächlich etwas gelöscht wird.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelector('.kommentar-loeschen-btn[data-index="0"]').click();
+    });
+    const modalSichtbarVorBestaetigung = await page.evaluate(
+      () => window.__karte.shadowRoot.getElementById("kommentar-loeschen-modal").style.display === "flex"
+    );
+    assert(modalSichtbarVorBestaetigung, "Vor dem Löschen erscheint erst das eigene Bestätigungs-Modal");
+    let eintragVorBestaetigung = await page.evaluate((uid) => window.__speicher.find((i) => i.uid === uid), uid);
+    assert(
+      JSON.parse(eintragVorBestaetigung.description).comments.length === 2,
+      "Vor der Bestätigung im Modal wird noch nichts gelöscht"
+    );
+
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("kommentar-loeschen-modal-ja-btn").click();
+    });
+    await page.waitForFunction(
+      (uid) => {
+        const eintrag = window.__speicher.find((i) => i.uid === uid);
+        return eintrag && JSON.parse(eintrag.description).comments.length === 1;
+      },
+      uid
+    );
+    eintrag = await page.evaluate((uid) => window.__speicher.find((i) => i.uid === uid), uid);
+    const uebrig = JSON.parse(eintrag.description).comments;
+    assert(uebrig.length === 1, "Nach Bestätigung im Modal wird der Kommentar tatsächlich gelöscht");
+    assert(uebrig[0].text === "Fremder Kommentar", "Der fremde Kommentar bleibt unangetastet");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 3: Konflikt-Schutz beim vollständigen Bearbeiten-Formular.
 // Fall A: kein Konflikt -> Speichern funktioniert normal.
 // Fall B: Konflikt (jemand anderes hat währenddessen geändert) -> Warnung,
@@ -4587,6 +4776,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
   try {
     await testGrundfunktionNeuesRezept(browser);
     await testKonfliktSchutzKommentar(browser);
+    await testKommentarBearbeitenUndLoeschenRechte(browser);
+    await testKommentarBearbeitenUndLoeschenUeberUi(browser);
     await testKonfliktSchutzFormular(browser);
     await testSchemaVersionierung(browser);
     await testDurchschnittsBewertungStringSicher(browser);
