@@ -910,6 +910,81 @@ async function testUmrechnungstabelleUebersetzt(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: in der Umrechnungstabelle kann man selbst eine fehlende Zutat
+// hinzufügen (Name + optionale Gramm-Werte pro Tasse/EL/TL) und wieder
+// löschen - bewusst OHNE automatische Umrechnung/Übersetzung (der Nutzer
+// trägt den ihm bekannten Wert selbst ein). Prüft außerdem, dass ohne
+// Namen eine Fehlermeldung erscheint statt eines leeren Eintrags, und
+// dass das Popup dabei NICHT geschlossen wird (kein this._render()).
+// ---------------------------------------------------------------------
+async function testUmrechnungstabelleEigeneZutat(browser) {
+  console.log("\nTest: Umrechnungstabelle - eigene Zutat hinzufügen und löschen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnisOhneName = await page.evaluate(() => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("umrechnungstabelle-btn").click();
+      root.getElementById("umrechnungstabelle-eigene-oeffnen-btn").click();
+      const formularSichtbarNachOeffnen = root.getElementById("umrechnungstabelle-eigene-formular").style.display;
+      root.getElementById("umrechnungstabelle-eigene-speichern-btn").click();
+      return {
+        formularSichtbarNachOeffnen,
+        fehlerSichtbar: root.getElementById("umrechnungstabelle-eigene-fehler").style.display,
+        modalNochOffen: root.getElementById("umrechnungstabelle-modal").style.display,
+        gespeicherteEigene: (window.__karte._einstellungen.eigeneUmrechnungen || []).length,
+      };
+    });
+    assert(ergebnisOhneName.formularSichtbarNachOeffnen === "block", "Der Knopf '+ Eigene Zutat hinzufügen' klappt das Formular auf");
+    assert(ergebnisOhneName.fehlerSichtbar === "block", "Speichern ohne Namen zeigt die Fehlermeldung");
+    assert(ergebnisOhneName.modalNochOffen === "flex", "Das Popup bleibt bei einem Validierungsfehler offen");
+    assert(ergebnisOhneName.gespeicherteEigene === 0, "Ohne Namen wird nichts gespeichert");
+
+    const ergebnisMitName = await page.evaluate(async () => {
+      const root = window.__karte.shadowRoot;
+      root.getElementById("umrechnungstabelle-eigene-name-feld").value = "Testmehl Spezial XY";
+      root.getElementById("umrechnungstabelle-eigene-tasse-feld").value = "90";
+      // EL/TL bewusst leer gelassen - sollen "–" anzeigen, nicht 0.
+      await window.__karte._umrechnungstabelleEigeneSpeichern();
+      const neueZeile = root.querySelector('tr[data-zutat-name*="testmehl spezial"]');
+      return {
+        modalNochOffenNachSpeichern: root.getElementById("umrechnungstabelle-modal").style.display,
+        formularWiederZu: root.getElementById("umrechnungstabelle-eigene-formular").style.display,
+        anzahlZeilenGesamt: root.querySelectorAll("#umrechnungstabelle-liste tbody tr").length,
+        neueZeileVorhanden: !!neueZeile,
+        neueZeileZellen: neueZeile ? Array.from(neueZeile.querySelectorAll("td")).map((td) => td.textContent.trim()) : null,
+        gespeicherteEigene: window.__karte._einstellungen.eigeneUmrechnungen,
+      };
+    });
+    assert(ergebnisMitName.modalNochOffenNachSpeichern === "flex", "Nach erfolgreichem Speichern bleibt das Popup offen");
+    assert(ergebnisMitName.formularWiederZu === "none", "Das Formular klappt nach dem Speichern wieder zu");
+    assert(ergebnisMitName.anzahlZeilenGesamt === 71, `Die eigene Zutat erscheint als zusätzliche Zeile (tatsächlich: ${ergebnisMitName.anzahlZeilenGesamt} Zeilen)`);
+    assert(ergebnisMitName.neueZeileVorhanden === true, "Die neue Zeile für 'Testmehl Spezial XY' ist im DOM vorhanden");
+    assert(ergebnisMitName.neueZeileZellen[1].includes("90"), `Der Tasse-Wert wird angezeigt (tatsächlich: '${ergebnisMitName.neueZeileZellen[1]}')`);
+    assert(ergebnisMitName.neueZeileZellen[2] === "–", "EL ohne Eingabe zeigt '–' statt 0");
+    assert(ergebnisMitName.neueZeileZellen[3] === "–", "TL ohne Eingabe zeigt '–' statt 0");
+    assert(ergebnisMitName.gespeicherteEigene.length === 1 && ergebnisMitName.gespeicherteEigene[0].name === "Testmehl Spezial XY", "Die eigene Zutat ist in den (geteilten) Einstellungen gespeichert");
+
+    const ergebnisNachLoeschen = await page.evaluate(async () => {
+      const root = window.__karte.shadowRoot;
+      const loeschenBtn = root.querySelector(".umrechnungstabelle-eigene-loeschen-btn");
+      await window.__karte._umrechnungstabelleEigeneLoeschen(parseInt(loeschenBtn.dataset.index, 10));
+      return {
+        modalNochOffen: root.getElementById("umrechnungstabelle-modal").style.display,
+        anzahlZeilenGesamt: root.querySelectorAll("#umrechnungstabelle-liste tbody tr").length,
+        zeileNochDa: !!root.querySelector('tr[data-zutat-name*="testmehl spezial"]'),
+        gespeicherteEigene: window.__karte._einstellungen.eigeneUmrechnungen.length,
+      };
+    });
+    assert(ergebnisNachLoeschen.modalNochOffen === "flex", "Das Popup bleibt auch nach dem Löschen offen");
+    assert(ergebnisNachLoeschen.anzahlZeilenGesamt === 70, "Nach dem Löschen ist die Zeile wieder weg");
+    assert(ergebnisNachLoeschen.zeileNochDa === false, "Die gelöschte Zutat erscheint nicht mehr im DOM");
+    assert(ergebnisNachLoeschen.gespeicherteEigene === 0, "Die eigene Zutat ist auch aus den Einstellungen entfernt");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 7: Löschen erfordert die Bestätigung im eigenen Modal (kein
 // window.confirm()) und kann per Rückgängig-Fenster abgebrochen werden.
 // ---------------------------------------------------------------------
@@ -5476,6 +5551,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testUsEinheitenUmrechnungMitBruechenUndBereichen(browser);
     await testUmrechnungstabelleModal(browser);
     await testUmrechnungstabelleUebersetzt(browser);
+    await testUmrechnungstabelleEigeneZutat(browser);
     await testLoeschenMitBestaetigungUndUndo(browser);
     await testZubereitungsschritteVerschieben(browser);
     await testFormularBearbeitenBehaeltCookLog(browser);

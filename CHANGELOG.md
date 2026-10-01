@@ -49,7 +49,15 @@ Ressourcen-Versionsnummer").
   selbst in allen 25 unterstützten Sprachen. Bewusst komplett unabhängig
   von echten Rezeptdaten - die Werte dienen nur zum manuellen Nachschlagen
   und werden NIE automatisch auf ein Rezept angewendet, da sie je nach
-  Marke/Konsistenz der Zutat variieren können.
+  Marke/Konsistenz der Zutat variieren können. Fehlt eine Zutat, lässt sie
+  sich über "+ Eigene Zutat hinzufügen" direkt im Popup selbst ergänzen
+  (Name + wahlweise Gramm pro Tasse/EL/TL, einzeln löschbar) - bewusst
+  OHNE automatische Umrechnung zwischen Volumen und Gewicht (z.B. über
+  eine geschätzte Dichte je Zutat): das würde unserem Grundsatz "lieber
+  nichts umrechnen als falsch raten" widersprechen (siehe auch die exakte,
+  NUR gleichartige Umrechnung oben). Eigene Einträge sind geteilt (wie die
+  übrigen Einstellungen) und werden nicht übersetzt - der Name wird genau
+  so angezeigt, wie er eingegeben wurde.
 - **Einstellung "Kategorie für amerikanische Rezepte"**: im
   Einstellungen-Popup (⚙️) lässt sich jetzt eine Kategorie auswählen
   (z.B. eine selbst angelegte Kategorie "Amerikanisch"). Bei Rezepten mit
