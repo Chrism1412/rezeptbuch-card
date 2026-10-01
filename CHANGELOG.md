@@ -4,6 +4,41 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.1.0] - 2026-10-01
+
+Vier über die GitHub-Issue-Vorlage eingereichte Verbesserungsvorschläge
+umgesetzt (eine fünfte Anfrage - eigene Hauptkategorien - gab es bereits
+seit [2.0.0]).
+
+### Hinzugefügt
+- **Kommentare bearbeiten/löschen**: eigene Kommentare zu einem Rezept
+  lassen sich jetzt nachträglich bearbeiten und löschen; ein
+  Home-Assistant-Admin darf das zusätzlich bei JEDEM Kommentar (nicht nur
+  den eigenen). Alte, vor diesem Update verfasste Kommentare bleiben wie
+  gewohnt für alle offen (keine hinterlegte Nutzer-Zuordnung). Löschen
+  läuft über ein eigenes Bestätigungs-Modal, nicht über den nativen
+  Browser-Dialog (der verhält sich in der Home-Assistant-Begleit-App
+  unzuverlässig).
+- **Amerikanische Maßeinheiten**: `cup`, `tbsp`/`tablespoon`,
+  `tsp`/`teaspoon`, `oz`/`ounce`, `lb`/`pound`, `pt`/`pint`, `qt`/`quart`,
+  `gal`/`gallon` und `fl oz`/`fluid ounce` werden bei der
+  Zutaten-Texterkennung jetzt korrekt als Einheit erkannt (z.B. bei per KI
+  erzeugtem JSON aus einem amerikanischen Rezept) statt versehentlich Teil
+  des Zutatennamens zu werden. Bewusst weiterhin keine Umrechnung zu
+  metrischen Einheiten - nur Erkennung und Schreibvarianten-Gleichsetzung
+  für die Einkaufslisten-Zusammenfassung, im selben Geist wie die
+  bestehende deutsche Einheiten-Synonymtabelle.
+- **Vorhandene Tags als Vorschlag**: beim Anlegen/Bearbeiten eines
+  Rezepts zeigt das Tag-Eingabefeld jetzt (über eine native
+  Browser-Vorschlagsliste) bereits an anderen Rezepten vergebene Tags an
+  - vermeidet, dass derselbe Tag versehentlich in leicht abweichender
+  Schreibweise doppelt angelegt wird.
+- **Zubereitungsschritte verschieben**: Schritte im Formular lassen sich
+  jetzt per ▲/▼-Knopf nach oben/unten verschieben, statt nur gelöscht oder
+  in der Zeile bearbeitet werden zu können. Bewusst Auf/Ab-Knöpfe statt
+  Drag&Drop (auf Touch-Geräten/in der Begleit-App erfahrungsgemäß
+  unzuverlässig).
+
 ## [2.0.0] - 2026-09-28
 
 Erstes veröffentlichtes Update seit `v1.0.4` - fasst alle seitdem
