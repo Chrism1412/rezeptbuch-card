@@ -3404,6 +3404,63 @@ async function testTagFilterSichtbarkeitEinstellung(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: die Kochbücher-Zeile ("Smarte Sammlung" - gespeicherte Filter-
+// kombinationen inkl. Tags) ist nur sichtbar, solange der Tag-Filter
+// eingeblendet ist - ohne sichtbare Tags ergibt das Speichern/Anwenden
+// solcher Kombinationen für den Nutzer keinen Sinn mehr. Ein bereits
+// gespeichertes Kochbuch geht dabei nicht verloren, es taucht beim
+// Wiedereinschalten unverändert wieder auf.
+// ---------------------------------------------------------------------
+async function testKochbuecherZeileNurSichtbarWennTagsAktiv(browser) {
+  console.log("\nTest: Kochbücher-Zeile ist nur sichtbar, solange der Tag-Filter aktiviert ist");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Kürbissuppe", payload: leererPayload({ category: "Suppe", tags: ["herbst"] }) });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+    await page.evaluate(async () => {
+      await window.__karte._kochbuecherSpeichern([{ name: "Herbstsuppen", category: "Suppe", tags: ["herbst"], suchbegriff: "" }]);
+      window.__karte._render();
+    });
+
+    const mitAktivenTags = await page.evaluate(() => !!window.__karte.shadowRoot.getElementById("kochbuecher-zeile"));
+    assert(mitAktivenTags, "Bei aktivem Tag-Filter ist die Kochbücher-Zeile (mit dem gespeicherten Kochbuch) sichtbar");
+
+    // Tag-Filter über die Einstellungen ausschalten.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const schalter = window.__karte.shadowRoot.getElementById("tags-einstellungen-schalter");
+      schalter.checked = false;
+      schalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !window.__karte.shadowRoot.getElementById("kochbuecher-zeile"), { timeout: 2000 });
+    const nachAusschalten = await page.evaluate(() => ({
+      zeileSichtbar: !!window.__karte.shadowRoot.getElementById("kochbuecher-zeile"),
+      kochbuchBleibtGespeichert: window.__karte._kochbuecher.length === 1,
+    }));
+    assert(!nachAusschalten.zeileSichtbar, "Ohne Tag-Filter ist die Kochbücher-Zeile nicht mehr vorhanden");
+    assert(nachAusschalten.kochbuchBleibtGespeichert, "Das gespeicherte Kochbuch bleibt dabei in this._kochbuecher erhalten (geht nicht verloren)");
+
+    // Wieder einschalten -> Zeile samt Kochbuch erscheint wieder.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const schalter = window.__karte.shadowRoot.getElementById("tags-einstellungen-schalter");
+      schalter.checked = true;
+      schalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !!window.__karte.shadowRoot.getElementById("kochbuecher-zeile"), { timeout: 2000 });
+    const nachWiederEinschalten = await page.evaluate(() =>
+      Array.from(window.__karte.shadowRoot.querySelectorAll(".kochbuch-chip")).map((c) => c.textContent.trim())
+    );
+    assert(
+      nachWiederEinschalten.some((t) => t.includes("Herbstsuppen")),
+      "Nach dem Wiedereinschalten erscheint das unverändert gebliebene Kochbuch wieder als Chip"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test: der "+ Neue Kategorie"-Knopf hebt sich optisch von den normalen
 // Kategorie-Filter-Chips ab (gemeldet: ging zwischen vielen Kategorien
 // zu leicht unter).
@@ -5073,6 +5130,94 @@ async function testZufallsrezeptFaelltBeiLeererFilterungZurueck(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Test: Zufallsrezept- und Umrechnungstabelle-Knopf im Kopf der Übersicht
+// lassen sich je über eine eigene Einstellung aus-/einblenden. Der
+// Umrechnungstabelle-Knopf bei der eingestellten US-Kategorie (Detail-
+// ansicht/Kochmodus) ist davon bewusst NICHT betroffen.
+// ---------------------------------------------------------------------
+async function testZufallsrezeptUndUmrechnungstabelleKopfSichtbarkeitEinstellung(browser) {
+  console.log("\nTest: Zufallsrezept- und Umrechnungstabelle-Knopf im Kopf lassen sich über Einstellungen aus-/einblenden");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Pancakes", payload: leererPayload({ category: "Amerikanisch" }) });
+    await page.evaluate(() => {
+      window.__karte._rezepteLaden();
+    });
+    await page.evaluate(async () => {
+      await window.__karte._einstellungenAktualisieren((stand) => ({ ...stand, amerikanischeKategorie: "Amerikanisch" }));
+      window.__karte._render();
+    });
+
+    const anfangsZustand = await page.evaluate(() => ({
+      zufall: !!window.__karte.shadowRoot.getElementById("zufallsrezept-btn"),
+      umrechnungKopf: !!window.__karte.shadowRoot.getElementById("umrechnungstabelle-btn"),
+    }));
+    assert(anfangsZustand.zufall, "Standardmäßig ist der Zufallsrezept-Knopf im Kopf sichtbar");
+    assert(anfangsZustand.umrechnungKopf, "Standardmäßig ist der Umrechnungstabelle-Knopf im Kopf sichtbar");
+
+    // Beide über den Einstellungen-Dialog ausschalten.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const zufallSchalter = window.__karte.shadowRoot.getElementById("zufallsrezept-einstellungen-schalter");
+      zufallSchalter.checked = false;
+      zufallSchalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !window.__karte.shadowRoot.getElementById("zufallsrezept-btn"), { timeout: 2000 });
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const umrechnungSchalter = window.__karte.shadowRoot.getElementById("umrechnungstabelle-kopf-einstellungen-schalter");
+      umrechnungSchalter.checked = false;
+      umrechnungSchalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !window.__karte.shadowRoot.getElementById("umrechnungstabelle-btn"), { timeout: 2000 });
+
+    const nachAusschalten = await page.evaluate(() => ({
+      zufall: !!window.__karte.shadowRoot.getElementById("zufallsrezept-btn"),
+      umrechnungKopf: !!window.__karte.shadowRoot.getElementById("umrechnungstabelle-btn"),
+    }));
+    assert(!nachAusschalten.zufall, "Der Zufallsrezept-Knopf ist nach dem Ausschalten nicht mehr im Kopf vorhanden");
+    assert(!nachAusschalten.umrechnungKopf, "Der Umrechnungstabelle-Knopf ist nach dem Ausschalten nicht mehr im Kopf vorhanden");
+
+    // Der Umrechnungstabelle-Knopf AM REZEPT (eingestellte US-Kategorie)
+    // bleibt trotz ausgeschalteter Kopf-Einstellung erhalten.
+    await page.evaluate(() => {
+      window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.title === "Pancakes"));
+    });
+    const amRezept = await page.evaluate(() => !!window.__karte.shadowRoot.getElementById("detail-umrechnungstabelle-btn"));
+    assert(amRezept, "Der Umrechnungstabelle-Knopf am Rezept mit eingestellter US-Kategorie bleibt sichtbar, auch wenn die Kopf-Einstellung ausgeschaltet ist");
+
+    // Wieder einschalten -> beide Knöpfe im Kopf erscheinen wieder. Jeder
+    // Schalter in einem eigenen evaluate()-Aufruf, damit der asynchrone
+    // Render-Vorgang des ersten Schalters abgeschlossen ist, bevor der
+    // zweite Schalter im (dann neu aufgebauten) Shadow DOM gesucht wird.
+    await page.evaluate(() => {
+      window.__karte._ansicht = "liste";
+      window.__karte._render();
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const zufallSchalter = window.__karte.shadowRoot.getElementById("zufallsrezept-einstellungen-schalter");
+      zufallSchalter.checked = true;
+      zufallSchalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !!window.__karte.shadowRoot.getElementById("zufallsrezept-btn"), { timeout: 2000 });
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const umrechnungSchalter = window.__karte.shadowRoot.getElementById("umrechnungstabelle-kopf-einstellungen-schalter");
+      umrechnungSchalter.checked = true;
+      umrechnungSchalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !!window.__karte.shadowRoot.getElementById("umrechnungstabelle-btn"), { timeout: 2000 });
+    const nachWiederEinschalten = await page.evaluate(() => ({
+      zufall: !!window.__karte.shadowRoot.getElementById("zufallsrezept-btn"),
+      umrechnungKopf: !!window.__karte.shadowRoot.getElementById("umrechnungstabelle-btn"),
+    }));
+    assert(nachWiederEinschalten.zufall, "Nach dem Wiedereinschalten erscheint der Zufallsrezept-Knopf im Kopf wieder");
+    assert(nachWiederEinschalten.umrechnungKopf, "Nach dem Wiedereinschalten erscheint der Umrechnungstabelle-Knopf im Kopf wieder");
+  } finally {
+    await page.close();
+  }
+}
+
 async function testSammelPdfModalAbbrechenExportiertNichts(browser) {
   console.log("\nTest: Sammel-PDF-Modal 'Abbrechen' bei der Namenseingabe exportiert nichts");
   const page = await neueTestUmgebung(browser);
@@ -6191,6 +6336,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testTagVorschlagsListeOhneKategorien(browser);
     await testAlleKategorieSetztTagFilterZurueck(browser);
     await testTagFilterSichtbarkeitEinstellung(browser);
+    await testKochbuecherZeileNurSichtbarWennTagsAktiv(browser);
     await testNeueKategorieKnopfHervorgehoben(browser);
     await testAlteRezepteOhneTagsWerdenMigriert(browser);
     await testKochbuecherSpeichernAnwendenLoeschen(browser);
@@ -6231,6 +6377,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfBilderCheckboxStandardBehaeltBilder(browser);
     await testZufallsrezeptBeruecksichtigtFilter(browser);
     await testZufallsrezeptFaelltBeiLeererFilterungZurueck(browser);
+    await testZufallsrezeptUndUmrechnungstabelleKopfSichtbarkeitEinstellung(browser);
     await testSammelPdfModalAbbrechenExportiertNichts(browser);
     await testSammelPdfModalWahlAbbrechenSchliesstOhneWeitereSchritte(browser);
     await testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser);

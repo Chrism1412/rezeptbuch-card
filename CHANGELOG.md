@@ -12,6 +12,19 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Kategorie-/Tag-Auswahl oder Suche (wählt nur aus den aktuell sichtbaren
   Treffern); ergibt die Filterung keinen Treffer, wählt der Knopf
   stattdessen aus allen vorhandenen Rezepten.
+- **Zufallsrezept- und Umrechnungstabelle-Knopf im Kopf ein-/ausblendbar**:
+  zwei neue Einstellungen (⚙️-Knopf → Einstellungen) blenden die beiden
+  Knöpfe im Kopf der Rezeptübersicht bei Bedarf aus. Der
+  Umrechnungstabelle-Knopf am Rezept bzw. im Kochmodus mit der
+  eingestellten "Kategorie für amerikanische Rezepte" bleibt davon
+  unberührt und erscheint dort weiterhin, auch wenn die Kopf-Einstellung
+  ausgeschaltet ist.
+- **"Smarte Sammlung" (Kochbücher) jetzt an den Tag-Filter gekoppelt**: da
+  eine gespeicherte Filterkombination auch aktive Tags enthalten kann,
+  erscheint die Kochbücher-Zeile (speichern/anwenden/löschen) nur noch,
+  solange der Tag-Filter in der Übersicht eingeblendet ist. Bereits
+  gespeicherte Kochbücher gehen beim Ausblenden nicht verloren - sie
+  erscheinen beim Wiedereinschalten unverändert wieder.
 - **Tag-Filter ein-/ausblendbar**: neue Einstellung (⚙️-Knopf → Einstellungen)
   blendet die Tag-Filterzeile in der Rezeptübersicht komplett aus, für alle,
   die lieber nur über Kategorien oder die Suche arbeiten. Rein optisch - die

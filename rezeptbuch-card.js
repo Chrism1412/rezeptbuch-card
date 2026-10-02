@@ -270,6 +270,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Hier kannst du festlegen, ob nach dem Verlassen eines Rezepts gefragt wird, ob du es zubereitet hast, und ob die daraus entstehende Statistik in dieser Karte angezeigt wird.",
     statistik_einstellungen_schalter_label: "Abfrage & Statistik aktivieren",
     tags_einstellung_schalter_label: "Tag-Filter in der Übersicht anzeigen",
+    zufallsrezept_einstellung_schalter_label: "Zufallsrezept-Knopf in der Übersicht anzeigen",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Umrechnungstabelle-Knopf in der Übersicht anzeigen",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Bei der eingestellten Kategorie für amerikanische Rezepte erscheint die Umrechnungstabelle im Rezept und im Kochmodus weiterhin, auch wenn dieser Knopf hier ausgeschaltet ist.",
     us_kategorie_einstellung_label: "Kategorie für amerikanische Rezepte",
     us_kategorie_einstellung_text: "Bei Rezepten mit dieser Kategorie erscheint zusätzlich im Rezept selbst und im Kochmodus ein Knopf für die Umrechnungstabelle.",
     us_kategorie_einstellung_keine: "— Keine —",
@@ -621,6 +624,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Da chasch feschtlege, ob nach em Verlaa vomene Rezept gfrogt wird, ob de's zubereitet hesch, und ob die Statistik i dere Charte azeigt wird.",
     statistik_einstellungen_schalter_label: "Abfrag & Statistik ischalte",
     tags_einstellung_schalter_label: "Tag-Filter in der Übersicht zeige",
+    zufallsrezept_einstellung_schalter_label: "Zuckerle-Rezept-Knopf i de Übersicht zeige",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Umrechnigstabälle-Knopf i de Übersicht zeige",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Bi de iigstellte Kategorie für amerikanischi Rezept erschiint d'Umrechnigstabälle im Rezept und im Chochmodus wyterhin, au wenn de Knopf da usgschalted isch.",
     us_kategorie_einstellung_label: "Kategorie für amerikanischi Rezept",
     us_kategorie_einstellung_text: "Bi Rezäpt mit dere Kategorie erschiint zuesätzlich im Rezäpt sälber und im Kochmodus en Knopf für d'Umrechnigstabälle.",
     us_kategorie_einstellung_keine: "— Kei —",
@@ -952,6 +958,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Here you can choose whether you're asked, after leaving a recipe, if you cooked it, and whether the resulting statistics are shown on this card.",
     statistik_einstellungen_schalter_label: "Enable question & statistics",
     tags_einstellung_schalter_label: "Show tag filter in overview",
+    zufallsrezept_einstellung_schalter_label: "Show random recipe button in overview",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Show conversion table button in overview",
+    umrechnungstabelle_kopf_einstellung_hinweis: "For the configured category for American recipes, the conversion table still appears in the recipe and in cooking mode, even if this button is switched off here.",
     us_kategorie_einstellung_label: "Category for American recipes",
     us_kategorie_einstellung_text: "Recipes with this category also get a conversion table button in the recipe itself and in cooking mode.",
     us_kategorie_einstellung_keine: "— None —",
@@ -1262,6 +1271,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Тук можете да зададете дали да бъдете питани, след като напуснете рецепта, дали сте я приготвили, и дали получената статистика да се показва в тази карта.",
     statistik_einstellungen_schalter_label: "Активиране на въпрос и статистика",
     tags_einstellung_schalter_label: "Показване на филтъра по тагове в прегледа",
+    zufallsrezept_einstellung_schalter_label: "Показване на бутона за произволна рецепта в прегледа",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Показване на бутона за таблица за преобразуване в прегледа",
+    umrechnungstabelle_kopf_einstellung_hinweis: "За зададената категория за американски рецепти таблицата за преобразуване продължава да се показва в рецептата и в режим готвене, дори ако този бутон е изключен тук.",
     us_kategorie_einstellung_label: "Категория за американски рецепти",
     us_kategorie_einstellung_text: "При рецепти с тази категория се появява допълнителен бутон за таблицата за преобразуване в самата рецепта и в режим готвене.",
     us_kategorie_einstellung_keine: "— Няма —",
@@ -1545,6 +1557,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Ovdje možeš odrediti hoće li te se, nakon napuštanja recepta, pitati jesi li ga pripremio/la, i hoće li se prikazivati statistika koja iz toga proizlazi.",
     statistik_einstellungen_schalter_label: "Uključi pitanje i statistiku",
     tags_einstellung_schalter_label: "Prikaži filtar oznaka u pregledu",
+    zufallsrezept_einstellung_schalter_label: "Prikaži gumb za nasumičan recept u pregledu",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Prikaži gumb za tablicu pretvorbe u pregledu",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Za postavljenu kategoriju za američke recepte tablica pretvorbe i dalje se prikazuje u receptu i u načinu kuhanja, čak i ako je ovaj gumb ovdje isključen.",
     us_kategorie_einstellung_label: "Kategorija za američke recepte",
     us_kategorie_einstellung_text: "Kod recepata s ovom kategorijom dodatno se pojavljuje gumb za tablicu preračunavanja u samom receptu i u načinu kuhanja.",
     us_kategorie_einstellung_keine: "— Nijedna —",
@@ -1828,6 +1843,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Zde můžeš nastavit, zda se tě po opuštění receptu zeptáme, jestli jsi ho připravil(a), a zda se zobrazuje statistika, která z toho vzniká.",
     statistik_einstellungen_schalter_label: "Zapnout otázku a statistiku",
     tags_einstellung_schalter_label: "Zobrazit filtr štítků v přehledu",
+    zufallsrezept_einstellung_schalter_label: "Zobrazit tlačítko Náhodný recept v přehledu",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Zobrazit tlačítko převodní tabulky v přehledu",
+    umrechnungstabelle_kopf_einstellung_hinweis: "U nastavené kategorie pro americké recepty se převodní tabulka v receptu a v režimu vaření zobrazuje i nadále, i když je toto tlačítko zde vypnuté.",
     us_kategorie_einstellung_label: "Kategorie pro americké recepty",
     us_kategorie_einstellung_text: "U receptů s touto kategorií se navíc zobrazí tlačítko pro převodní tabulku přímo v receptu a v režimu vaření.",
     us_kategorie_einstellung_keine: "— Žádná —",
@@ -2111,6 +2129,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Her kan du vælge, om du bliver spurgt, når du forlader en opskrift, om du tilberedte den, og om den resulterende statistik vises på dette kort.",
     statistik_einstellungen_schalter_label: "Aktivér spørgsmål og statistik",
     tags_einstellung_schalter_label: "Vis tag-filter i overblikket",
+    zufallsrezept_einstellung_schalter_label: "Vis knappen Tilfældig opskrift i overblikket",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Vis knappen til omregningstabel i overblikket",
+    umrechnungstabelle_kopf_einstellung_hinweis: "For den valgte kategori til amerikanske opskrifter vises omregningstabellen fortsat i opskriften og i tilberedningstilstand, selvom denne knap er slået fra her.",
     us_kategorie_einstellung_label: "Kategori til amerikanske opskrifter",
     us_kategorie_einstellung_text: "Opskrifter med denne kategori får desuden en knap til omregningstabellen i selve opskriften og i tilberedningstilstand.",
     us_kategorie_einstellung_keine: "— Ingen —",
@@ -2394,6 +2415,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Hier kun je instellen of je, na het verlaten van een recept, wordt gevraagd of je het hebt bereid, en of de bijbehorende statistiek op deze kaart wordt weergegeven.",
     statistik_einstellungen_schalter_label: "Vraag & statistiek inschakelen",
     tags_einstellung_schalter_label: "Tagfilter in overzicht weergeven",
+    zufallsrezept_einstellung_schalter_label: "Knop 'Willekeurig recept' in overzicht weergeven",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Knop voor omrekentabel in overzicht weergeven",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Bij de ingestelde categorie voor Amerikaanse recepten verschijnt de omrekentabel nog steeds in het recept en in de kookmodus, ook als deze knop hier is uitgeschakeld.",
     us_kategorie_einstellung_label: "Categorie voor Amerikaanse recepten",
     us_kategorie_einstellung_text: "Recepten met deze categorie krijgen ook een knop voor de omrekentabel in het recept zelf en in de kookmodus.",
     us_kategorie_einstellung_keine: "— Geen —",
@@ -2677,6 +2701,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Siin saad valida, kas retseptist väljumisel küsitakse, kas valmistasid selle, ja kas sellest tekkiv statistika kuvatakse sellel kaardil.",
     statistik_einstellungen_schalter_label: "Luba küsimus ja statistika",
     tags_einstellung_schalter_label: "Kuva märksõnafilter ülevaates",
+    zufallsrezept_einstellung_schalter_label: "Kuva juhusliku retsepti nupp ülevaates",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Kuva teisendustabeli nupp ülevaates",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Ameerika retseptide jaoks määratud kategooria puhul kuvatakse teisendustabel retseptis ja kokkamise režiimis endiselt, isegi kui see nupp on siin välja lülitatud.",
     us_kategorie_einstellung_label: "Kategooria Ameerika retseptidele",
     us_kategorie_einstellung_text: "Selle kategooria retseptidel kuvatakse lisaks teisendustabeli nupp ka retseptis endas ja köögirežiimis.",
     us_kategorie_einstellung_keine: "— Puudub —",
@@ -2960,6 +2987,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Tässä voit valita, kysytäänkö reseptistä poistuttaessa, valmistitko sen, ja näytetäänkö siitä syntyvä tilasto tällä kortilla.",
     statistik_einstellungen_schalter_label: "Ota kysymys ja tilastot käyttöön",
     tags_einstellung_schalter_label: "Näytä tägisuodatin yleiskatsauksessa",
+    zufallsrezept_einstellung_schalter_label: "Näytä Satunnainen resepti -painike yleiskatsauksessa",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Näytä muuntotaulukon painike yleiskatsauksessa",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Amerikkalaisille resepteille asetetussa kategoriassa muuntotaulukko näkyy edelleen reseptissä ja kokkaustilassa, vaikka tämä painike olisi täällä pois päältä.",
     us_kategorie_einstellung_label: "Kategoria amerikkalaisille resepteille",
     us_kategorie_einstellung_text: "Tämän kategorian resepteissä näkyy lisäksi muuntotaulukon painike itse reseptissä ja keittiötilassa.",
     us_kategorie_einstellung_keine: "— Ei mikään —",
@@ -3244,6 +3274,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Ici, tu peux choisir si on te demande, en quittant une recette, si tu l'as préparée, et si les statistiques qui en résultent sont affichées sur cette carte.",
     statistik_einstellungen_schalter_label: "Activer la question et les statistiques",
     tags_einstellung_schalter_label: "Afficher le filtre par tags dans l'aperçu",
+    zufallsrezept_einstellung_schalter_label: "Afficher le bouton Recette aléatoire dans l'aperçu",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Afficher le bouton du tableau de conversion dans l'aperçu",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Pour la catégorie configurée pour les recettes américaines, le tableau de conversion continue d'apparaître dans la recette et en mode cuisine, même si ce bouton est désactivé ici.",
     us_kategorie_einstellung_label: "Catégorie pour les recettes américaines",
     us_kategorie_einstellung_text: "Les recettes de cette catégorie affichent aussi un bouton pour la table de conversion directement dans la recette et en mode cuisine.",
     us_kategorie_einstellung_keine: "— Aucune —",
@@ -3528,6 +3561,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Εδώ μπορείς να ορίσεις αν θα σε ρωτά, όταν βγαίνεις από μια συνταγή, αν τη μαγείρεψες, και αν θα εμφανίζονται τα στατιστικά που προκύπτουν σε αυτήν την κάρτα.",
     statistik_einstellungen_schalter_label: "Ενεργοποίηση ερώτησης & στατιστικών",
     tags_einstellung_schalter_label: "Εμφάνιση φίλτρου ετικετών στην επισκόπηση",
+    zufallsrezept_einstellung_schalter_label: "Εμφάνιση κουμπιού τυχαίας συνταγής στην επισκόπηση",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Εμφάνιση κουμπιού πίνακα μετατροπών στην επισκόπηση",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Για την καθορισμένη κατηγορία αμερικανικών συνταγών, ο πίνακας μετατροπών συνεχίζει να εμφανίζεται στη συνταγή και στη λειτουργία μαγειρέματος, ακόμη κι αν αυτό το κουμπί είναι απενεργοποιημένο εδώ.",
     us_kategorie_einstellung_label: "Κατηγορία για αμερικανικές συνταγές",
     us_kategorie_einstellung_text: "Οι συνταγές αυτής της κατηγορίας εμφανίζουν επιπλέον ένα κουμπί για τον πίνακα μετατροπής μέσα στη συνταγή και στη λειτουργία μαγειρέματος.",
     us_kategorie_einstellung_keine: "— Καμία —",
@@ -3812,6 +3848,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Itt állíthatod be, hogy egy recept elhagyásakor megkérdezzük-e, elkészítetted-e, és hogy megjelenjen-e az ebből született statisztika ezen a kártyán.",
     statistik_einstellungen_schalter_label: "Kérdés és statisztika bekapcsolása",
     tags_einstellung_schalter_label: "Címkeszűrő megjelenítése az áttekintőben",
+    zufallsrezept_einstellung_schalter_label: "Véletlen recept gomb megjelenítése az áttekintőben",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Átváltási táblázat gomb megjelenítése az áttekintőben",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Az amerikai receptekhez beállított kategóriánál az átváltási táblázat továbbra is megjelenik a receptnél és főzési módban, még akkor is, ha ez a gomb itt ki van kapcsolva.",
     us_kategorie_einstellung_label: "Kategória amerikai receptekhez",
     us_kategorie_einstellung_text: "Az ebbe a kategóriába tartozó receptek a receptben magában és a főzési módban is megjelenítenek egy átváltási táblázat gombot.",
     us_kategorie_einstellung_keine: "— Nincs —",
@@ -4096,6 +4135,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Is féidir leat anseo a shocrú an bhfiafrófar díot, tar éis duit oideas a fhágáil, an ndearna tú é, agus an dtaispeánfar an staitisticí a eascraíonn as sin ar an gcárta seo.",
     statistik_einstellungen_schalter_label: "Cumasaigh an cheist agus staitisticí",
     tags_einstellung_schalter_label: "Taispeáin scagaire clibeanna sa forbhreathnú",
+    zufallsrezept_einstellung_schalter_label: "Taispeáin an cnaipe Oideas randamach sa forbhreathnú",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Taispeáin an cnaipe tábla tiontaithe sa forbhreathnú",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Maidir leis an gcatagóir atá socraithe le haghaidh oidis Mheiriceánacha, leanann an tábla tiontaithe de bheith le feiceáil san oideas agus sa mhód cócaireachta, fiú má tá an cnaipe seo múchta anseo.",
     us_kategorie_einstellung_label: "Catagóir d'oidis Mheiriceánacha",
     us_kategorie_einstellung_text: "Taispeánann oidis sa chatagóir seo cnaipe breise don tábla tiontaithe san oideas féin agus sa mhód cócaireachta.",
     us_kategorie_einstellung_keine: "— Ceann ar bith —",
@@ -4380,6 +4422,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Qui puoi stabilire se, uscendo da una ricetta, ti viene chiesto se l'hai preparata, e se le statistiche che ne derivano vengono mostrate su questa scheda.",
     statistik_einstellungen_schalter_label: "Attiva domanda e statistiche",
     tags_einstellung_schalter_label: "Mostra il filtro tag nella panoramica",
+    zufallsrezept_einstellung_schalter_label: "Mostra il pulsante Ricetta casuale nella panoramica",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Mostra il pulsante della tabella di conversione nella panoramica",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Per la categoria impostata per le ricette americane, la tabella di conversione continua a comparire nella ricetta e in modalità cottura, anche se questo pulsante qui è disattivato.",
     us_kategorie_einstellung_label: "Categoria per ricette americane",
     us_kategorie_einstellung_text: "Le ricette con questa categoria mostrano anche un pulsante per la tabella di conversione nella ricetta stessa e in modalità cottura.",
     us_kategorie_einstellung_keine: "— Nessuna —",
@@ -4663,6 +4708,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Šeit vari iestatīt, vai, pametot recepti, tiek jautāts, vai to pagatavoji, un vai no tā izrietošā statistika tiek rādīta šajā kartītē.",
     statistik_einstellungen_schalter_label: "Iespējot jautājumu un statistiku",
     tags_einstellung_schalter_label: "Rādīt tagu filtru pārskatā",
+    zufallsrezept_einstellung_schalter_label: "Rādīt pogu 'Nejaušā recepte' pārskatā",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Rādīt pārrēķinu tabulas pogu pārskatā",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Iestatītajai amerikāņu recepšu kategorijai pārrēķinu tabula receptē un gatavošanas režīmā tiek rādīta joprojām, pat ja šī poga šeit ir izslēgta.",
     us_kategorie_einstellung_label: "Kategorija amerikāņu receptēm",
     us_kategorie_einstellung_text: "Receptēm ar šo kategoriju papildus parādās pārrēķina tabulas poga pašā receptē un gatavošanas režīmā.",
     us_kategorie_einstellung_keine: "— Nav —",
@@ -4946,6 +4994,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Čia gali nustatyti, ar išeinant iš recepto bus klausiama, ar jį paruošei, ir ar bus rodoma iš to atsirandanti statistika šioje kortelėje.",
     statistik_einstellungen_schalter_label: "Įjungti klausimą ir statistiką",
     tags_einstellung_schalter_label: "Rodyti žymų filtrą apžvalgoje",
+    zufallsrezept_einstellung_schalter_label: "Rodyti atsitiktinio recepto mygtuką apžvalgoje",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Rodyti perskaičiavimo lentelės mygtuką apžvalgoje",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Nustatytai amerikietiškų receptų kategorijai perskaičiavimo lentelė ir toliau rodoma recepte bei gaminimo režime, net jei šis mygtukas čia išjungtas.",
     us_kategorie_einstellung_label: "Kategorija Amerikos receptams",
     us_kategorie_einstellung_text: "Prie šios kategorijos receptų papildomai rodomas perskaičiavimo lentelės mygtukas pačiame recepte ir gaminimo režimu.",
     us_kategorie_einstellung_keine: "— Jokios —",
@@ -5230,6 +5281,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Hawnhekk tista' tiddeċiedi jekk, wara li toħroġ minn riċetta, tintalabx tgħid jekk ħejjejtiex, u jekk l-istatistika li tirriżulta tintweriex f'din il-karta.",
     statistik_einstellungen_schalter_label: "Ixgħel il-mistoqsija u l-istatistika",
     tags_einstellung_schalter_label: "Uri l-filtru tat-tags fil-ħarsa ġenerali",
+    zufallsrezept_einstellung_schalter_label: "Uri l-buttuna Riċetta każwali fil-ħarsa ġenerali",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Uri l-buttuna tat-tabella tal-konverżjoni fil-ħarsa ġenerali",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Għall-kategorija stabbilita għal riċetti Amerikani, it-tabella tal-konverżjoni xorta tidher fir-riċetta u fil-modalità tat-tisjir, anke jekk din il-buttuna hawn tkun mitfija.",
     us_kategorie_einstellung_label: "Kategorija għal riċetti Amerikani",
     us_kategorie_einstellung_text: "Ir-riċetti b'din il-kategorija juru wkoll buttuna għat-tabella tal-konverżjoni fir-riċetta nnifisha u fil-modalità tat-tisjir.",
     us_kategorie_einstellung_keine: "— Xejn —",
@@ -5513,6 +5567,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Tutaj możesz ustawić, czy po wyjściu z przepisu masz być pytany, czy go przygotowałeś/aś, i czy wynikające z tego statystyki są wyświetlane na tej karcie.",
     statistik_einstellungen_schalter_label: "Włącz pytanie i statystyki",
     tags_einstellung_schalter_label: "Pokaż filtr tagów w przeglądzie",
+    zufallsrezept_einstellung_schalter_label: "Pokaż przycisk Losowy przepis w przeglądzie",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Pokaż przycisk tabeli przeliczeń w przeglądzie",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Dla ustawionej kategorii przepisów amerykańskich tabela przeliczeń nadal pojawia się w przepisie i w trybie gotowania, nawet jeśli ten przycisk jest tutaj wyłączony.",
     us_kategorie_einstellung_label: "Kategoria dla przepisów amerykańskich",
     us_kategorie_einstellung_text: "Przy przepisach z tą kategorią dodatkowo pojawia się przycisk tabeli przeliczeń bezpośrednio w przepisie i w trybie gotowania.",
     us_kategorie_einstellung_keine: "— Brak —",
@@ -5797,6 +5854,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Aqui podes definir se, ao saíres de uma receita, te é perguntado se a preparaste, e se as estatísticas resultantes são exibidas neste cartão.",
     statistik_einstellungen_schalter_label: "Ativar pergunta e estatísticas",
     tags_einstellung_schalter_label: "Mostrar filtro de etiquetas na visão geral",
+    zufallsrezept_einstellung_schalter_label: "Mostrar botão de receita aleatória na visão geral",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Mostrar botão da tabela de conversão na visão geral",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Para a categoria definida para receitas americanas, a tabela de conversão continua a aparecer na receita e no modo de cozinha, mesmo que este botão esteja desativado aqui.",
     us_kategorie_einstellung_label: "Categoria para receitas americanas",
     us_kategorie_einstellung_text: "As receitas com esta categoria mostram também um botão para a tabela de conversão na própria receita e no modo de cozinha.",
     us_kategorie_einstellung_keine: "— Nenhuma —",
@@ -6080,6 +6140,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Aici poți stabili dacă, la părăsirea unei rețete, ești întrebat dacă ai preparat-o, și dacă statisticile rezultate sunt afișate pe acest card.",
     statistik_einstellungen_schalter_label: "Activează întrebarea și statisticile",
     tags_einstellung_schalter_label: "Afișează filtrul de etichete în prezentare",
+    zufallsrezept_einstellung_schalter_label: "Afișează butonul Rețetă aleatorie în prezentare",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Afișează butonul tabelului de conversie în prezentare",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Pentru categoria setată pentru rețetele americane, tabelul de conversie continuă să apară în rețetă și în modul de gătit, chiar dacă acest buton este dezactivat aici.",
     us_kategorie_einstellung_label: "Categorie pentru rețete americane",
     us_kategorie_einstellung_text: "Rețetele din această categorie afișează suplimentar un buton pentru tabelul de conversie chiar în rețetă și în modul de gătit.",
     us_kategorie_einstellung_keine: "— Niciuna —",
@@ -6363,6 +6426,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Tu môžeš nastaviť, či sa ťa po opustení receptu spýtame, či si ho pripravil(a), a či sa zobrazuje z toho vzniknutá štatistika na tejto karte.",
     statistik_einstellungen_schalter_label: "Zapnúť otázku a štatistiku",
     tags_einstellung_schalter_label: "Zobraziť filter značiek v prehľade",
+    zufallsrezept_einstellung_schalter_label: "Zobraziť tlačidlo Náhodný recept v prehľade",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Zobraziť tlačidlo prevodnej tabuľky v prehľade",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Pre nastavenú kategóriu pre americké recepty sa prevodná tabuľka naďalej zobrazuje v recepte a v režime varenia, aj keď je toto tlačidlo tu vypnuté.",
     us_kategorie_einstellung_label: "Kategória pre americké recepty",
     us_kategorie_einstellung_text: "Pri receptoch s touto kategóriou sa navyše zobrazí tlačidlo prevodnej tabuľky priamo v recepte a v režime varenia.",
     us_kategorie_einstellung_keine: "— Žiadna —",
@@ -6646,6 +6712,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Tukaj lahko določiš, ali te bo ob zapustitvi recepta vprašalo, ali si ga pripravil/a, in ali se prikazuje statistika, ki iz tega izhaja, na tej kartici.",
     statistik_einstellungen_schalter_label: "Vklopi vprašanje in statistiko",
     tags_einstellung_schalter_label: "Prikaži filter oznak v pregledu",
+    zufallsrezept_einstellung_schalter_label: "Pokaži gumb Naključni recept v pregledu",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Pokaži gumb pretvorbene tabele v pregledu",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Za nastavljeno kategorijo za ameriške recepte se pretvorbena tabela še vedno prikazuje v receptu in v načinu kuhanja, tudi če je ta gumb tukaj izklopljen.",
     us_kategorie_einstellung_label: "Kategorija za ameriške recepte",
     us_kategorie_einstellung_text: "Pri receptih s to kategorijo se dodatno prikaže gumb za pretvorbeno tabelo neposredno v receptu in v kuharskem načinu.",
     us_kategorie_einstellung_keine: "— Brez —",
@@ -6929,6 +6998,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Aquí puedes elegir si, al salir de una receta, se te pregunta si la preparaste, y si las estadísticas resultantes se muestran en esta tarjeta.",
     statistik_einstellungen_schalter_label: "Activar pregunta y estadísticas",
     tags_einstellung_schalter_label: "Mostrar filtro de etiquetas en la vista general",
+    zufallsrezept_einstellung_schalter_label: "Mostrar botón de receta aleatoria en la vista general",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Mostrar botón de tabla de conversión en la vista general",
+    umrechnungstabelle_kopf_einstellung_hinweis: "Para la categoría configurada para recetas americanas, la tabla de conversión sigue apareciendo en la receta y en el modo de cocina, incluso si este botón está desactivado aquí.",
     us_kategorie_einstellung_label: "Categoría para recetas americanas",
     us_kategorie_einstellung_text: "Las recetas con esta categoría muestran también un botón para la tabla de conversión en la propia receta y en el modo cocina.",
     us_kategorie_einstellung_keine: "— Ninguna —",
@@ -7212,6 +7284,9 @@ const UEBERSETZUNGEN = {
     statistik_einstellungen_text: "Här kan du välja om du blir tillfrågad, när du lämnar ett recept, om du lagade det, och om den resulterande statistiken visas på det här kortet.",
     statistik_einstellungen_schalter_label: "Aktivera fråga och statistik",
     tags_einstellung_schalter_label: "Visa taggfilter i översikten",
+    zufallsrezept_einstellung_schalter_label: "Visa knappen Slumpmässigt recept i översikten",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Visa knappen för omräkningstabell i översikten",
+    umrechnungstabelle_kopf_einstellung_hinweis: "För den inställda kategorin för amerikanska recept visas omräkningstabellen fortfarande i receptet och i matlagningsläget, även om den här knappen är avstängd här.",
     us_kategorie_einstellung_label: "Kategori för amerikanska recept",
     us_kategorie_einstellung_text: "Recept med denna kategori visar även en knapp för omvandlingstabellen direkt i receptet och i lagningsläget.",
     us_kategorie_einstellung_keine: "— Ingen —",
@@ -8900,7 +8975,10 @@ class RezeptbuchCard extends HTMLElement {
   // und trägt ihn in seiner eigenen Sprache ein, ein Raten (z.B. über
   // Dichte) widerspräche genau dem Grundsatz hinter der Umrechnungstabelle.
   _einstellungenAusItem(item) {
-    const standard = { erfassungAktiv: true, amerikanischeKategorie: "", eigeneUmrechnungen: [], tagsAnzeigen: true };
+    const standard = {
+      erfassungAktiv: true, amerikanischeKategorie: "", eigeneUmrechnungen: [], tagsAnzeigen: true,
+      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true,
+    };
     if (!item || !item.description) return standard;
     try {
       const geparst = JSON.parse(item.description);
@@ -8909,6 +8987,8 @@ class RezeptbuchCard extends HTMLElement {
       else if (typeof geparst.showStatistics === "boolean") ergebnis.erfassungAktiv = geparst.showStatistics;
       if (typeof geparst.amerikanischeKategorie === "string") ergebnis.amerikanischeKategorie = geparst.amerikanischeKategorie;
       if (typeof geparst.tagsAnzeigen === "boolean") ergebnis.tagsAnzeigen = geparst.tagsAnzeigen;
+      if (typeof geparst.zufallsrezeptAnzeigen === "boolean") ergebnis.zufallsrezeptAnzeigen = geparst.zufallsrezeptAnzeigen;
+      if (typeof geparst.umrechnungstabelleKopfAnzeigen === "boolean") ergebnis.umrechnungstabelleKopfAnzeigen = geparst.umrechnungstabelleKopfAnzeigen;
       if (Array.isArray(geparst.eigeneUmrechnungen)) {
         ergebnis.eigeneUmrechnungen = geparst.eigeneUmrechnungen.filter(
           (e) => e && typeof e.name === "string" && e.name.trim() !== ""
@@ -10991,7 +11071,13 @@ class RezeptbuchCard extends HTMLElement {
         </div>`
       : "";
 
-    const kochbuecherZeile = (this._rezepte.length || (this._kochbuecher || []).length)
+    // Ein "Kochbuch" speichert eine ganze Filterkombination inkl. aktiver
+    // Tags - ohne eingeblendeten Tag-Filter (tagsAnzeigen) ergibt das
+    // Abspeichern/Anwenden solcher Kombinationen für den Nutzer keinen Sinn
+    // mehr, deshalb blendet die Karte die gesamte Zeile dann aus. Bereits
+    // gespeicherte Kochbücher gehen dabei NICHT verloren - sie erscheinen
+    // einfach wieder, sobald der Tag-Filter erneut aktiviert wird.
+    const kochbuecherZeile = this._einstellungen.tagsAnzeigen !== false && (this._rezepte.length || (this._kochbuecher || []).length)
       ? `<div class="kochbuecher-zeile" id="kochbuecher-zeile">
           ${(this._kochbuecher || []).map((kb, i) => `
             <span class="chip kochbuch-chip" data-index="${i}">📚 ${this._escape(kb.name)}</span>
@@ -11023,9 +11109,9 @@ class RezeptbuchCard extends HTMLElement {
           <div class="kopf-aktionen">
             ${this._rezepte.length ? `<button class="sekundaer" id="sichern-btn">${this._t("kopf_sichern_btn")}</button>` : ""}
             ${this._rezepte.length ? `<button class="sekundaer" id="sammel-pdf-btn">${this._t("kopf_sammel_pdf_btn")}</button>` : ""}
-            ${this._rezepte.length ? `<button class="sekundaer" id="zufallsrezept-btn">${this._t("kopf_zufallsrezept_btn")}</button>` : ""}
+            ${this._rezepte.length && this._einstellungen.zufallsrezeptAnzeigen !== false ? `<button class="sekundaer" id="zufallsrezept-btn">${this._t("kopf_zufallsrezept_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
-            <button class="sekundaer" id="umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>
+            ${this._einstellungen.umrechnungstabelleKopfAnzeigen !== false ? `<button class="sekundaer" id="umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>` : ""}
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
             ${this._rezepte.length && this._statistikAktiv() ? `<button class="sekundaer" id="statistik-btn">${this._t("statistik_btn")}</button>` : ""}
             <button class="primaer" id="neu-btn">${this._t("kopf_neu_btn")}</button>
@@ -11112,6 +11198,23 @@ class RezeptbuchCard extends HTMLElement {
                 <span>${this._einstellungen.tagsAnzeigen !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
               </label>
             </div>
+            <hr class="detail-trenner trenner-voll">
+            <div class="schalter-zeile">
+              <span class="schalter-label">${this._t("zufallsrezept_einstellung_schalter_label")}</span>
+              <label class="schalter-btn ${this._einstellungen.zufallsrezeptAnzeigen !== false ? "schalter-btn-aktiv" : ""}">
+                <input type="checkbox" id="zufallsrezept-einstellungen-schalter" ${this._einstellungen.zufallsrezeptAnzeigen !== false ? "checked" : ""}>
+                <span>${this._einstellungen.zufallsrezeptAnzeigen !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
+              </label>
+            </div>
+            <hr class="detail-trenner trenner-voll">
+            <div class="schalter-zeile">
+              <span class="schalter-label">${this._t("umrechnungstabelle_kopf_einstellung_schalter_label")}</span>
+              <label class="schalter-btn ${this._einstellungen.umrechnungstabelleKopfAnzeigen !== false ? "schalter-btn-aktiv" : ""}">
+                <input type="checkbox" id="umrechnungstabelle-kopf-einstellungen-schalter" ${this._einstellungen.umrechnungstabelleKopfAnzeigen !== false ? "checked" : ""}>
+                <span>${this._einstellungen.umrechnungstabelleKopfAnzeigen !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
+              </label>
+            </div>
+            <p class="hinweis" style="text-align:left; margin-top:0;">${this._t("umrechnungstabelle_kopf_einstellung_hinweis")}</p>
             <hr class="detail-trenner trenner-voll">
             <p style="text-align:left;">${this._t("us_kategorie_einstellung_text")}</p>
             <div class="feld-zeile">
@@ -11603,6 +11706,26 @@ class RezeptbuchCard extends HTMLElement {
         // _gefilterteRezepte), ohne dass das für den Nutzer erkennbar wäre.
         if (!aktiv) this._aktiveTags = new Set();
         await this._einstellungenAktualisieren((stand) => ({ ...stand, tagsAnzeigen: aktiv }));
+        this._render();
+      });
+    }
+    const zufallsrezeptEinstellungenSchalter = this.shadowRoot.getElementById("zufallsrezept-einstellungen-schalter");
+    if (zufallsrezeptEinstellungenSchalter) {
+      zufallsrezeptEinstellungenSchalter.addEventListener("change", async (ev) => {
+        const aktiv = ev.target.checked;
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, zufallsrezeptAnzeigen: aktiv }));
+        this._render();
+      });
+    }
+    const umrechnungstabelleKopfEinstellungenSchalter = this.shadowRoot.getElementById("umrechnungstabelle-kopf-einstellungen-schalter");
+    if (umrechnungstabelleKopfEinstellungenSchalter) {
+      umrechnungstabelleKopfEinstellungenSchalter.addEventListener("change", async (ev) => {
+        const aktiv = ev.target.checked;
+        // Betrifft bewusst NUR den Knopf im Kopf der Übersicht - der
+        // Umrechnungstabellen-Knopf bei der eingestellten "Kategorie für
+        // amerikanische Rezepte" (Detailansicht/Kochmodus) bleibt davon
+        // unberührt und erscheint dort unabhängig von dieser Einstellung.
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, umrechnungstabelleKopfAnzeigen: aktiv }));
         this._render();
       });
     }
