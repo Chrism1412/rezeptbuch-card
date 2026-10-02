@@ -10969,6 +10969,12 @@ class RezeptbuchCard extends HTMLElement {
            (.umrechnungstabelle-liste), damit Überschrift, Hinweistext,
            Suchfeld und die Schließen-Schaltfläche immer sichtbar bleiben. */
         .modal-box-hoch { display:flex; flex-direction:column; max-height:85vh; }
+        /* Für Modals, deren Inhalt insgesamt (statt nur ein einzelner
+           Teilbereich wie bei .modal-box-hoch) höher werden kann als der
+           Bildschirm - z.B. das Einstellungen-Modal mit mehreren Schaltern.
+           Ohne das war der "Schließen"-Knopf am Ende auf kleinen Bildschirmen
+           nicht erreichbar, weil der Modal-Inhalt selbst nicht scrollte. */
+        .modal-box-scroll { max-height:85vh; overflow-y:auto; }
         #umrechnungstabelle-suche-feld { width:100%; box-sizing:border-box; margin-bottom:10px; }
         .umrechnungstabelle-liste { overflow-y:auto; flex:1 1 auto; min-height:0; border:1px solid var(--divider-color, #ddd); border-radius:8px; }
         .umrechnungstabelle-tabelle { width:100%; border-collapse:collapse; font-size:0.92em; }
@@ -11180,7 +11186,7 @@ class RezeptbuchCard extends HTMLElement {
         </div>
 
         <div class="modal-overlay" id="statistik-einstellungen-modal" style="display:${this._einstellungenModalSichtbar ? "flex" : "none"};">
-          <div class="modal-box modal-box-breit">
+          <div class="modal-box modal-box-breit modal-box-scroll">
             <h3 style="margin-top:0;">${this._t("statistik_einstellungen_titel")}</h3>
             <p style="text-align:left;">${this._t("statistik_einstellungen_text")}</p>
             <div class="schalter-zeile">

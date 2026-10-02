@@ -3480,6 +3480,37 @@ async function testNeueKategorieKnopfHervorgehoben(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: das Einstellungen-Modal ist bei viel Inhalt (mehrere Schalter)
+// scrollbar, statt über den Bildschirmrand hinauszuwachsen und den
+// "Schließen"-Knopf unerreichbar zu machen (gemeldet: Modal zu groß,
+// nicht scrollbar, kam nicht mehr zurück/konnte nicht schließen).
+// ---------------------------------------------------------------------
+async function testEinstellungenModalIstScrollbar(browser) {
+  console.log("\nTest: Einstellungen-Modal ist scrollbar und dadurch immer schließbar");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    const ergebnis = await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const box = window.__karte.shadowRoot.getElementById("statistik-einstellungen-modal").querySelector(".modal-box");
+      const stil = getComputedStyle(box);
+      return {
+        hatKlasse: box.classList.contains("modal-box-scroll"),
+        overflowY: stil.overflowY,
+        maxHeight: stil.maxHeight,
+        schliessenBtnVorhanden: !!window.__karte.shadowRoot.getElementById("statistik-einstellungen-schliessen-btn"),
+      };
+    });
+    assert(ergebnis.hatKlasse, "Das Einstellungen-Modal trägt die Klasse 'modal-box-scroll'");
+    assert(ergebnis.overflowY === "auto" || ergebnis.overflowY === "scroll", "Das Einstellungen-Modal ist bei zu viel Inhalt vertikal scrollbar (overflow-y: " + ergebnis.overflowY + ")");
+    assert(ergebnis.maxHeight !== "none", "Das Einstellungen-Modal hat eine maximale Höhe, statt beliebig über den Bildschirmrand hinauszuwachsen");
+    assert(ergebnis.schliessenBtnVorhanden, "Der 'Schließen'-Knopf ist im DOM vorhanden (und dank Scrollbarkeit erreichbar)");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 31: alte Rezepte ohne tags-Feld (schemaVersion 1) werden migriert und
 // erscheinen korrekt mit leerem tags-Array - kein Absturz beim Filtern.
 // ---------------------------------------------------------------------
@@ -6338,6 +6369,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testTagFilterSichtbarkeitEinstellung(browser);
     await testKochbuecherZeileNurSichtbarWennTagsAktiv(browser);
     await testNeueKategorieKnopfHervorgehoben(browser);
+    await testEinstellungenModalIstScrollbar(browser);
     await testAlteRezepteOhneTagsWerdenMigriert(browser);
     await testKochbuecherSpeichernAnwendenLoeschen(browser);
     await testBarrierefreiheitVerbesserungen(browser);

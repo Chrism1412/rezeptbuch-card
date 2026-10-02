@@ -46,6 +46,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   "Alle" unsichtbar bestehen und schränkte die Liste weiter ein, obwohl das
   nicht erkennbar war - bislang nur durch Neuladen der Karte behebbar. Ein
   Klick auf "Alle" setzt jetzt auch einen noch aktiven Tag-Filter zurück.
+- **Einstellungen-Modal durch mehr Inhalt nicht mehr scrollbar**: durch die
+  neu hinzugekommenen Schalter wurde das Einstellungen-Modal auf kleineren
+  Bildschirmen höher als der sichtbare Bereich, ohne dass sich der Inhalt
+  scrollen ließ - der "Schließen"-Knopf am Ende war dadurch nicht mehr
+  erreichbar. Das Modal begrenzt seine Höhe jetzt und scrollt bei Bedarf.
 
 ## [2.1.0] - 2026-10-01
 
