@@ -258,6 +258,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Nur {{name}} (oder ein Admin) kann dieses Rezept bearbeiten oder löschen.",
     detail_ersteller_unbekannt: "der/die Ersteller:in",
     modal_zubereitet_frage: "Hast du \"{{titel}}\" zubereitet?",
+    modal_drucken_bild_frage: "Rezeptbild mit ausgeben?",
+    modal_drucken_ohne_bild_btn: "Ohne Bild",
+    modal_drucken_mit_bild_btn: "Mit Bild",
     statistik_btn: "📊 Statistik",
     statistik_titel: "Koch-Statistik",
     statistik_info_aria: "Erklärung zur Statistik anzeigen",
@@ -605,6 +608,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Nur {{name}} (oder en Admin) cha das Rezäpt bearbeite oder lösche.",
     detail_ersteller_unbekannt: "de/die Ersteller:in",
     modal_zubereitet_frage: "Hesch \"{{titel}}\" zubereitet?",
+    modal_drucken_bild_frage: "Rezeptbild mit usgeh?",
+    modal_drucken_ohne_bild_btn: "Ohni Bild",
+    modal_drucken_mit_bild_btn: "Mit Bild",
     statistik_btn: "📊 Statistik",
     statistik_titel: "Koch-Statistik",
     statistik_info_aria: "Erklärig zur Statistik zeige",
@@ -932,6 +938,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Only {{name}} (or an admin) can edit or delete this recipe.",
     detail_ersteller_unbekannt: "the creator",
     modal_zubereitet_frage: "Did you cook \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Include the recipe image?",
+    modal_drucken_ohne_bild_btn: "Without image",
+    modal_drucken_mit_bild_btn: "With image",
     statistik_btn: "📊 Statistics",
     statistik_titel: "Cooking statistics",
     statistik_info_aria: "Show explanation of the statistics",
@@ -1238,6 +1247,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Само {{name}} (или администратор) може да редактира или изтрие тази рецепта.",
     detail_ersteller_unbekannt: "създателя/създателката",
     modal_zubereitet_frage: "Приготви ли \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Да се включи ли снимката на рецептата?",
+    modal_drucken_ohne_bild_btn: "Без снимка",
+    modal_drucken_mit_bild_btn: "Със снимка",
     statistik_btn: "📊 Статистика",
     statistik_titel: "Статистика за готвене",
     statistik_info_aria: "Показване на обяснение за статистиката",
@@ -1517,6 +1529,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Samo {{name}} (ili administrator) može uređivati ili izbrisati ovaj recept.",
     detail_ersteller_unbekannt: "tvorac/tvorka recepta",
     modal_zubereitet_frage: "Jesi li pripremio/la \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Uključiti sliku recepta?",
+    modal_drucken_ohne_bild_btn: "Bez slike",
+    modal_drucken_mit_bild_btn: "Sa slikom",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika kuhanja",
     statistik_info_aria: "Prikaži objašnjenje statistike",
@@ -1796,6 +1811,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Tento recept může upravit nebo smazat pouze {{name}} (nebo administrátor).",
     detail_ersteller_unbekannt: "tvůrce/tvůrkyně",
     modal_zubereitet_frage: "Připravil(a) jste \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Zahrnout obrázek receptu?",
+    modal_drucken_ohne_bild_btn: "Bez obrázku",
+    modal_drucken_mit_bild_btn: "S obrázkem",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika vaření",
     statistik_info_aria: "Zobrazit vysvětlení statistiky",
@@ -2075,6 +2093,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Kun {{name}} (eller en administrator) kan redigere eller slette denne opskrift.",
     detail_ersteller_unbekannt: "den/dem der oprettede opskriften",
     modal_zubereitet_frage: "Tilberedte du \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Skal billedet af retten inkluderes?",
+    modal_drucken_ohne_bild_btn: "Uden billede",
+    modal_drucken_mit_bild_btn: "Med billede",
     statistik_btn: "📊 Statistik",
     statistik_titel: "Madlavningsstatistik",
     statistik_info_aria: "Vis forklaring af statistikken",
@@ -2354,6 +2375,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Alleen {{name}} (of een beheerder) kan dit recept bewerken of verwijderen.",
     detail_ersteller_unbekannt: "de maker",
     modal_zubereitet_frage: "Heb je \"{{titel}}\" bereid?",
+    modal_drucken_bild_frage: "Afbeelding van het recept meenemen?",
+    modal_drucken_ohne_bild_btn: "Zonder afbeelding",
+    modal_drucken_mit_bild_btn: "Met afbeelding",
     statistik_btn: "📊 Statistiek",
     statistik_titel: "Kookstatistiek",
     statistik_info_aria: "Uitleg over de statistiek tonen",
@@ -2633,6 +2657,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Ainult {{name}} (või administraator) saab seda retsepti muuta või kustutada.",
     detail_ersteller_unbekannt: "looja",
     modal_zubereitet_frage: "Kas valmistasid \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Kas lisada retsepti pilt?",
+    modal_drucken_ohne_bild_btn: "Pildita",
+    modal_drucken_mit_bild_btn: "Pildiga",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Toiduvalmistamise statistika",
     statistik_info_aria: "Näita statistika selgitust",
@@ -2912,6 +2939,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Vain {{name}} (tai ylläpitäjä) voi muokata tai poistaa tämän reseptin.",
     detail_ersteller_unbekannt: "tekijä",
     modal_zubereitet_frage: "Valmistitko reseptin \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Lisätäänkö reseptin kuva mukaan?",
+    modal_drucken_ohne_bild_btn: "Ei kuvaa",
+    modal_drucken_mit_bild_btn: "Kuvan kanssa",
     statistik_btn: "📊 Tilastot",
     statistik_titel: "Ruoanlaittotilastot",
     statistik_info_aria: "Näytä selitys tilastoista",
@@ -3192,6 +3222,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Seul(e) {{name}} (ou un administrateur) peut modifier ou supprimer cette recette.",
     detail_ersteller_unbekannt: "l'auteur/autrice",
     modal_zubereitet_frage: "As-tu préparé \"{{titel}}\" ?",
+    modal_drucken_bild_frage: "Inclure la photo de la recette ?",
+    modal_drucken_ohne_bild_btn: "Sans photo",
+    modal_drucken_mit_bild_btn: "Avec photo",
     statistik_btn: "📊 Statistiques",
     statistik_titel: "Statistiques de cuisine",
     statistik_info_aria: "Afficher l'explication des statistiques",
@@ -3472,6 +3505,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Μόνο ο/η {{name}} (ή διαχειριστής) μπορεί να επεξεργαστεί ή να διαγράψει αυτή τη συνταγή.",
     detail_ersteller_unbekannt: "ο/η δημιουργός",
     modal_zubereitet_frage: "Παρασκεύασες το \"{{titel}}\";",
+    modal_drucken_bild_frage: "Να συμπεριληφθεί η εικόνα της συνταγής;",
+    modal_drucken_ohne_bild_btn: "Χωρίς εικόνα",
+    modal_drucken_mit_bild_btn: "Με εικόνα",
     statistik_btn: "📊 Στατιστικά",
     statistik_titel: "Στατιστικά μαγειρικής",
     statistik_info_aria: "Εμφάνιση επεξήγησης των στατιστικών",
@@ -3752,6 +3788,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Csak {{name}} (vagy egy adminisztrátor) szerkesztheti vagy törölheti ezt a receptet.",
     detail_ersteller_unbekannt: "a létrehozó",
     modal_zubereitet_frage: "Elkészítetted a(z) \"{{titel}}\" receptet?",
+    modal_drucken_bild_frage: "Szerepeljen a recept képe?",
+    modal_drucken_ohne_bild_btn: "Kép nélkül",
+    modal_drucken_mit_bild_btn: "Képpel",
     statistik_btn: "📊 Statisztika",
     statistik_titel: "Főzési statisztika",
     statistik_info_aria: "A statisztika magyarázatának megjelenítése",
@@ -4032,6 +4071,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Ní féidir ach le {{name}} (nó riarthóir) an t-oideas seo a chur in eagar nó a scriosadh.",
     detail_ersteller_unbekannt: "an cruthaitheoir",
     modal_zubereitet_frage: "Ar ullmhaigh tú \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Cuir íomhá an oideasa san áireamh?",
+    modal_drucken_ohne_bild_btn: "Gan íomhá",
+    modal_drucken_mit_bild_btn: "Le híomhá",
     statistik_btn: "📊 Staitisticí",
     statistik_titel: "Staitisticí cócaireachta",
     statistik_info_aria: "Taispeáin míniú na staitisticí",
@@ -4312,6 +4354,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Solo {{name}} (o un amministratore) può modificare o eliminare questa ricetta.",
     detail_ersteller_unbekannt: "chi l'ha creata",
     modal_zubereitet_frage: "Hai preparato \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Includere la foto della ricetta?",
+    modal_drucken_ohne_bild_btn: "Senza foto",
+    modal_drucken_mit_bild_btn: "Con foto",
     statistik_btn: "📊 Statistiche",
     statistik_titel: "Statistiche di cucina",
     statistik_info_aria: "Mostra la spiegazione delle statistiche",
@@ -4591,6 +4636,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Šo recepti drīkst rediģēt vai dzēst tikai {{name}} (vai administrators).",
     detail_ersteller_unbekannt: "autors/autore",
     modal_zubereitet_frage: "Vai pagatavoji \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Vai pievienot receptes attēlu?",
+    modal_drucken_ohne_bild_btn: "Bez attēla",
+    modal_drucken_mit_bild_btn: "Ar attēlu",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Gatavošanas statistika",
     statistik_info_aria: "Rādīt statistikas skaidrojumu",
@@ -4870,6 +4918,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Šį receptą redaguoti ar ištrinti gali tik {{name}} (arba administratorius).",
     detail_ersteller_unbekannt: "autorius (-ė)",
     modal_zubereitet_frage: "Ar pagaminai \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Įtraukti recepto nuotrauką?",
+    modal_drucken_ohne_bild_btn: "Be nuotraukos",
+    modal_drucken_mit_bild_btn: "Su nuotrauka",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Gaminimo statistika",
     statistik_info_aria: "Rodyti statistikos paaiškinimą",
@@ -5150,6 +5201,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Din ir-riċetta tista' tiġi editjata jew imħassra biss minn {{name}} (jew amministratur).",
     detail_ersteller_unbekannt: "min ħolqot/ħalaq ir-riċetta",
     modal_zubereitet_frage: "Ħejjejt \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Tinkludi r-ritratt tar-riċetta?",
+    modal_drucken_ohne_bild_btn: "Mingħajr ritratt",
+    modal_drucken_mit_bild_btn: "Bir-ritratt",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika tat-tisjir",
     statistik_info_aria: "Uri spjegazzjoni tal-istatistika",
@@ -5429,6 +5483,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Tylko {{name}} (lub administrator) może edytować lub usunąć ten przepis.",
     detail_ersteller_unbekannt: "autor(ka)",
     modal_zubereitet_frage: "Czy przygotowałeś/aś \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Dołączyć zdjęcie przepisu?",
+    modal_drucken_ohne_bild_btn: "Bez zdjęcia",
+    modal_drucken_mit_bild_btn: "Ze zdjęciem",
     statistik_btn: "📊 Statystyki",
     statistik_titel: "Statystyki gotowania",
     statistik_info_aria: "Pokaż wyjaśnienie statystyk",
@@ -5709,6 +5766,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Apenas {{name}} (ou um administrador) pode editar ou eliminar esta receita.",
     detail_ersteller_unbekannt: "quem criou a receita",
     modal_zubereitet_frage: "Preparaste a receita \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Incluir a imagem da receita?",
+    modal_drucken_ohne_bild_btn: "Sem imagem",
+    modal_drucken_mit_bild_btn: "Com imagem",
     statistik_btn: "📊 Estatísticas",
     statistik_titel: "Estatísticas de cozinha",
     statistik_info_aria: "Mostrar explicação das estatísticas",
@@ -5988,6 +6048,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Doar {{name}} (sau un administrator) poate edita sau șterge această rețetă.",
     detail_ersteller_unbekannt: "autorul/autoarea",
     modal_zubereitet_frage: "Ai preparat \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Se include imaginea rețetei?",
+    modal_drucken_ohne_bild_btn: "Fără imagine",
+    modal_drucken_mit_bild_btn: "Cu imagine",
     statistik_btn: "📊 Statistici",
     statistik_titel: "Statistici de gătit",
     statistik_info_aria: "Afișează explicația statisticii",
@@ -6267,6 +6330,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Tento recept môže upraviť alebo vymazať iba {{name}} (alebo administrátor).",
     detail_ersteller_unbekannt: "tvorca/tvorkyňa",
     modal_zubereitet_frage: "Pripravili ste \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Zahrnúť obrázok receptu?",
+    modal_drucken_ohne_bild_btn: "Bez obrázka",
+    modal_drucken_mit_bild_btn: "S obrázkom",
     statistik_btn: "📊 Štatistika",
     statistik_titel: "Štatistika varenia",
     statistik_info_aria: "Zobraziť vysvetlenie štatistiky",
@@ -6546,6 +6612,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Samo {{name}} (ali skrbnik) lahko ureja ali izbriše ta recept.",
     detail_ersteller_unbekannt: "avtor(ica)",
     modal_zubereitet_frage: "Si pripravil(a) \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Naj se vključi slika recepta?",
+    modal_drucken_ohne_bild_btn: "Brez slike",
+    modal_drucken_mit_bild_btn: "S sliko",
     statistik_btn: "📊 Statistika",
     statistik_titel: "Statistika kuhanja",
     statistik_info_aria: "Prikaži razlago statistike",
@@ -6825,6 +6894,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Solo {{name}} (o un administrador) puede editar o eliminar esta receta.",
     detail_ersteller_unbekannt: "quien la creó",
     modal_zubereitet_frage: "¿Preparaste \"{{titel}}\"?",
+    modal_drucken_bild_frage: "¿Incluir la foto de la receta?",
+    modal_drucken_ohne_bild_btn: "Sin foto",
+    modal_drucken_mit_bild_btn: "Con foto",
     statistik_btn: "📊 Estadísticas",
     statistik_titel: "Estadísticas de cocina",
     statistik_info_aria: "Mostrar explicación de las estadísticas",
@@ -7104,6 +7176,9 @@ const UEBERSETZUNGEN = {
     detail_bearbeiten_hinweis: "Endast {{name}} (eller en administratör) kan redigera eller ta bort detta recept.",
     detail_ersteller_unbekannt: "den som skapade det",
     modal_zubereitet_frage: "Lagade du \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Ska receptbilden inkluderas?",
+    modal_drucken_ohne_bild_btn: "Utan bild",
+    modal_drucken_mit_bild_btn: "Med bild",
     statistik_btn: "📊 Statistik",
     statistik_titel: "Matlagningsstatistik",
     statistik_info_aria: "Visa förklaring av statistiken",
@@ -7321,7 +7396,7 @@ const SCHEMA_VERSION = 2;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "2.1.2";
+const CARD_VERSION = "2.1.1";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v2.0.0".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
@@ -12208,14 +12283,14 @@ class RezeptbuchCard extends HTMLElement {
     }
   }
 
-  async _pdfErstellen(r) {
+  async _pdfErstellen(r, bilderMitdrucken = true) {
     const jsPDFKlasse = await this._jsPdfLaden();
     const doc = new jsPDFKlasse({ unit: "mm", format: "a4" });
     const margin = 20;
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
 
-    await this._rezeptContentInPdfZeichnen(doc, r);
+    await this._rezeptContentInPdfZeichnen(doc, r, bilderMitdrucken);
     this._pdfAlleSeitenWasserzeichenZeichnen(doc, pageWidth, pageHeight, margin);
 
     const dateiname = `${r.title.replace(/[^a-zA-Z0-9äöüÄÖÜß]+/g, "_")}.pdf`;
@@ -12303,7 +12378,7 @@ class RezeptbuchCard extends HTMLElement {
     return { blob: doc.output("blob"), dateiname, mimeType: "application/pdf" };
   }
 
-  async _htmlDateiErstellen(r) {
+  async _htmlDateiErstellen(r, bilderMitdrucken = true) {
     const basisPortionen = r.servings || 1;
     const zeilenHtml = (r.ingredients || [])
       .map((z) => {
@@ -12320,7 +12395,7 @@ class RezeptbuchCard extends HTMLElement {
     // erzeugte HTML-Datei wird eigenständig geteilt/heruntergeladen und hat
     // dann keinen Zugriff mehr auf die Home-Assistant-Instanz, um ein
     // "/local/..."-Bild nachzuladen.
-    const bild = r.image ? await this._bildAlsDatenUrlLaden(r.image) : null;
+    const bild = (bilderMitdrucken && r.image) ? await this._bildAlsDatenUrlLaden(r.image) : null;
     // Dezenter "Rezeptbuch-Card"-Schriftzug unten rechts im Bild - nur in
     // dieser eigenständig geteilten/gedruckten Datei, nicht im normalen
     // Bild in der App selbst.
@@ -12371,14 +12446,14 @@ class RezeptbuchCard extends HTMLElement {
     return { blob: new Blob([htmlDatei], { type: "text/html" }), dateiname, mimeType: "text/html" };
   }
 
-  async _rezeptDrucken(r) {
+  async _rezeptDrucken(r, bilderMitdrucken = true) {
     try {
       let ergebnis;
       try {
-        ergebnis = await this._pdfErstellen(r);
+        ergebnis = await this._pdfErstellen(r, bilderMitdrucken);
       } catch (pdfFehler) {
         console.error("Rezeptbuch: PDF-Erstellung fehlgeschlagen, nutze HTML als Rückfallebene", pdfFehler);
-        ergebnis = await this._htmlDateiErstellen(r);
+        ergebnis = await this._htmlDateiErstellen(r, bilderMitdrucken);
       }
       const { blob, dateiname, mimeType } = ergebnis;
 
@@ -12701,6 +12776,16 @@ class RezeptbuchCard extends HTMLElement {
         ` : `<div class="bearbeiten-hinweis">${this._t("detail_bearbeiten_hinweis", { name: r.creatorName ? this._escape(r.creatorName) : this._t("detail_ersteller_unbekannt") })}</div>`}
        </div>
 
+        <div class="modal-overlay" id="drucken-bilder-modal" style="display:none;">
+          <div class="modal-box">
+            <p>${this._t("modal_drucken_bild_frage")}</p>
+            <div class="modal-aktionen">
+              <button class="sekundaer" id="drucken-bilder-nein-btn">${this._t("modal_drucken_ohne_bild_btn")}</button>
+              <button class="primaer" id="drucken-bilder-ja-btn">${this._t("modal_drucken_mit_bild_btn")}</button>
+            </div>
+          </div>
+        </div>
+
         <div class="modal-overlay" id="zubereitet-modal" style="display:none;">
           <div class="modal-box">
             <p>${this._t("modal_zubereitet_frage", { titel: this._escape(r.title) })}</p>
@@ -12796,7 +12881,30 @@ class RezeptbuchCard extends HTMLElement {
         this._navigationZurueck();
       }
     });
-    this.shadowRoot.getElementById("drucken-btn").addEventListener("click", () => this._rezeptDrucken(r));
+    this.shadowRoot.getElementById("drucken-btn").addEventListener("click", () => {
+      // Die Nachfrage lohnt sich nur, wenn überhaupt ein Bild vorhanden ist -
+      // ohne Bild sofort wie bisher direkt teilen/drucken, ohne unnötigen
+      // Zwischenschritt.
+      if (!r.image) {
+        this._rezeptDrucken(r);
+        return;
+      }
+      this.shadowRoot.getElementById("drucken-bilder-modal").style.display = "flex";
+    });
+    const druckenBilderJaBtn = this.shadowRoot.getElementById("drucken-bilder-ja-btn");
+    if (druckenBilderJaBtn) {
+      druckenBilderJaBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("drucken-bilder-modal").style.display = "none";
+        this._rezeptDrucken(r, true);
+      });
+    }
+    const druckenBilderNeinBtn = this.shadowRoot.getElementById("drucken-bilder-nein-btn");
+    if (druckenBilderNeinBtn) {
+      druckenBilderNeinBtn.addEventListener("click", () => {
+        this.shadowRoot.getElementById("drucken-bilder-modal").style.display = "none";
+        this._rezeptDrucken(r, false);
+      });
+    }
     const kochmodusBtn = this.shadowRoot.getElementById("kochmodus-btn");
     if (kochmodusBtn) {
       kochmodusBtn.addEventListener("click", () => this._kochmodusOeffnen());

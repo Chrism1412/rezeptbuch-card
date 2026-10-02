@@ -4009,6 +4009,107 @@ async function testTeilenDruckenOhneWebShareApiOeffnetNeuesFenster(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Test: der "Teilen/Drucken"-Knopf in der Detailansicht fragt (nur bei
+// einem Rezept MIT Bild) kurz nach, ob das Bild mit ausgegeben werden
+// soll - analog zur Checkbox beim Sammel-PDF. Ohne Bild entfällt die
+// Nachfrage, da sie dort nichts zu entscheiden gäbe.
+// ---------------------------------------------------------------------
+async function testTeilenDruckenFragtBeiBildNach(browser) {
+  console.log("\nTest: 'Teilen/Drucken' fragt bei einem Rezept mit Bild nach, ob das Bild mit ausgegeben werden soll");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uidMitBild = await rezeptDirektAnlegen(page, {
+      title: "Mit Bild", payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    const uidOhneBild = await rezeptDirektAnlegen(page, { title: "Ohne Bild", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    // Ohne Bild: kein Zwischenschritt, _rezeptDrucken wird direkt aufgerufen.
+    const ergebnisOhneBild = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const aufrufe = [];
+      karte._rezeptDrucken = (...args) => { aufrufe.push(args); return Promise.resolve(); };
+      karte._rezeptOeffnen(karte._rezepte.find((r) => r.uid === uid));
+      karte.shadowRoot.getElementById("drucken-btn").click();
+      return {
+        aufrufe: aufrufe.length,
+        modalSichtbar: karte.shadowRoot.getElementById("drucken-bilder-modal").style.display === "flex",
+      };
+    }, uidOhneBild);
+    assert(ergebnisOhneBild.aufrufe === 1, "ohne Bild wird 'Teilen/Drucken' direkt ausgelöst, ohne Nachfrage");
+    assert(!ergebnisOhneBild.modalSichtbar, "ohne Bild erscheint keine Bild-Nachfrage");
+
+    // Mit Bild: Nachfrage erscheint, "Mit Bild" und "Ohne Bild" lösen
+    // _rezeptDrucken mit dem jeweils erwarteten zweiten Argument aus.
+    const ergebnisMitBild = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const aufrufe = [];
+      karte._rezeptDrucken = (...args) => { aufrufe.push(args); return Promise.resolve(); };
+      karte._rezeptOeffnen(karte._rezepte.find((r) => r.uid === uid));
+      karte.shadowRoot.getElementById("drucken-btn").click();
+      const modalNachKlickSichtbar = karte.shadowRoot.getElementById("drucken-bilder-modal").style.display === "flex";
+
+      karte.shadowRoot.getElementById("drucken-bilder-nein-btn").click();
+      const modalNachOhneBildVersteckt = karte.shadowRoot.getElementById("drucken-bilder-modal").style.display === "none";
+
+      karte.shadowRoot.getElementById("drucken-btn").click();
+      karte.shadowRoot.getElementById("drucken-bilder-ja-btn").click();
+
+      return { modalNachKlickSichtbar, modalNachOhneBildVersteckt, aufrufe };
+    }, uidMitBild);
+
+    assert(ergebnisMitBild.modalNachKlickSichtbar, "mit Bild erscheint die Nachfrage statt direkt zu drucken");
+    assert(ergebnisMitBild.modalNachOhneBildVersteckt, "das Modal schließt sich wieder nach der Wahl");
+    assert(ergebnisMitBild.aufrufe.length === 2, "beide Klicks lösen jeweils genau einen Druck-Aufruf aus");
+    assert(ergebnisMitBild.aufrufe[0][1] === false, "'Ohne Bild' übergibt bilderMitdrucken=false");
+    assert(ergebnisMitBild.aufrufe[1][1] === true, "'Mit Bild' übergibt bilderMitdrucken=true");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: die Wahl "Ohne Bild" wirkt sich tatsächlich auf das erzeugte PDF
+// aus - kein addImage()-Aufruf, wenn bilderMitdrucken=false übergeben
+// wird (Ende-zu-Ende-Gegenprobe zur UI-Prüfung oben).
+// ---------------------------------------------------------------------
+async function testEinzelPdfOhneBildRuftAddImageNichtAuf(browser) {
+  console.log("\nTest: _rezeptDrucken(r, false) erzeugt ein PDF ohne addImage()-Aufruf");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const uid = await rezeptDirektAnlegen(page, {
+      title: "Testrezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async (uid) => {
+      const karte = window.__karte;
+      const rezept = karte._rezepte.find((r) => r.uid === uid);
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA", breite: 800, hoehe: 450,
+      });
+      const addImageAufrufe = [];
+      class FakeJsPdf {
+        constructor() { this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } }; }
+        setFont() {} setFontSize() {} setTextColor() {} setDrawColor() {} setLineWidth() {}
+        line() {} text() {} getTextWidth(t) { return (t || "").length * 1.5; }
+        splitTextToSize(text) { return [text]; } addPage() {}
+        addImage(datenUrl, format, x, y, breite, hoehe) { addImageAufrufe.push({ x, y, breite, hoehe }); }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+
+      await karte._pdfErstellen(rezept, false);
+      return { addImageAufrufe };
+    }, uid);
+
+    assert(ergebnis.addImageAufrufe.length === 0, "mit bilderMitdrucken=false wird addImage() nicht aufgerufen");
+  } finally {
+    await page.close();
+  }
+}
+
 async function testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiertWird(browser) {
   console.log("\nTest: Teilen/Drucken nutzt Download-Link, falls window.open() blockiert wird (z.B. Popup-Blocker)");
   const page = await neueTestUmgebung(browser);
@@ -6039,6 +6140,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSpracheWechseltOhneNeuzeichnen(browser);
     await testPlatzhalterMitDollarZeichen(browser);
     await testTeilenDruckenOhneWebShareApiOeffnetNeuesFenster(browser);
+    await testTeilenDruckenFragtBeiBildNach(browser);
+    await testEinzelPdfOhneBildRuftAddImageNichtAuf(browser);
     await testTeilenDruckenFaelltAufDownloadLinkZurueckWennFensterBlockiertWird(browser);
     await testPdfBildWirdProportionalSkaliertOhneVerzerrung(browser);
     await testPdfZweispaltigesLayoutBeiKurzemRezept(browser);
