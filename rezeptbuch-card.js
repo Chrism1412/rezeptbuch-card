@@ -10576,6 +10576,10 @@ class RezeptbuchCard extends HTMLElement {
         .detail-trenner {
           border:none; height:2px; width:56px; background: var(--kb-terrakotta); border-radius:2px; margin:6px 0 14px;
         }
+        /* In Modals als Abschnittstrenner verwendet (z. B. Einstellungen-Modal) -
+           dort soll die Linie über die gesamte Breite des Fensters laufen statt
+           wie unter dem Rezepttitel nur ein kurzer dekorativer Strich zu sein. */
+        .detail-trenner.trenner-voll { width:100%; }
 
         .portionen-zeile {
           display:flex; align-items:center; gap:14px; margin:14px 0 18px;
@@ -11100,7 +11104,7 @@ class RezeptbuchCard extends HTMLElement {
                 <span>${this._einstellungen.erfassungAktiv !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
               </label>
             </div>
-            <hr class="detail-trenner">
+            <hr class="detail-trenner trenner-voll">
             <div class="schalter-zeile">
               <span class="schalter-label">${this._t("tags_einstellung_schalter_label")}</span>
               <label class="schalter-btn ${this._einstellungen.tagsAnzeigen !== false ? "schalter-btn-aktiv" : ""}">
@@ -11108,7 +11112,7 @@ class RezeptbuchCard extends HTMLElement {
                 <span>${this._einstellungen.tagsAnzeigen !== false ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
               </label>
             </div>
-            <hr class="detail-trenner">
+            <hr class="detail-trenner trenner-voll">
             <p style="text-align:left;">${this._t("us_kategorie_einstellung_text")}</p>
             <div class="feld-zeile">
               <label for="us-kategorie-feld">${this._t("us_kategorie_einstellung_label")}</label>
