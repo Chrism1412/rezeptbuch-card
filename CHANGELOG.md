@@ -4,6 +4,17 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.1.2] - 2026-10-02
+
+### Hinzugefügt
+- **Bilder im Sammel-PDF abwählbar**: beim Export erscheint jetzt eine
+  Checkbox "Bilder mit ins PDF aufnehmen" (Standard: angehakt, bisheriges
+  Verhalten bleibt also unverändert). Abgewählt werden weder die Fotos der
+  einzelnen Rezeptseiten noch die Bildercollage auf dem Deckblatt gezeichnet
+  - praktisch für einen Ausdruck zum reinen Nachlesen, ohne Tinte/Toner für
+  Fotos zu verbrauchen (vergleichbar mit der Druckansicht vieler
+  Rezept-Webseiten).
+
 ## [2.1.1] - 2026-10-02
 
 ### Hinzugefügt

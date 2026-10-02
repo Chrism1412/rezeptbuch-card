@@ -4800,6 +4800,115 @@ async function testSammelPdfModalJaZeigtNameEingabeUndErstelltMitToc(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Test: die Checkbox "Bilder mit ins PDF aufnehmen" im Sammel-PDF-Modal
+// (gemeldeter Wunsch: Druckansicht wie bei vielen Rezept-Webseiten, bei
+// der man Bilder beim Drucken abwählen kann) steuert tatsächlich, ob
+// Rezeptbilder gezeichnet werden - sowohl in den einzelnen Rezeptseiten
+// als auch in der Bildercollage auf dem Deckblatt. Per Vorgabe (Checkbox
+// angehakt) bleibt das bisherige Verhalten unverändert.
+// ---------------------------------------------------------------------
+async function testSammelPdfBilderCheckboxLaesstBilderWeg(browser) {
+  console.log("\nTest: 'Bilder mit ins PDF aufnehmen' abwählen lässt Rezept- und Deckblattbilder im Sammel-PDF weg");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA", breite: 800, hoehe: 450,
+      });
+
+      const addImageAufrufe = [];
+      class FakeJsPdf {
+        constructor() { this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } }; }
+        setFont() {} setFontSize() {} setTextColor() {} setDrawColor() {} setLineWidth() {} setFillColor() {}
+        line() {} text(t) {} getTextWidth(t) { return (t || "").length * 1.5; }
+        roundedRect() {} splitTextToSize(text) { return [text]; } addPage() {}
+        addImage(datenUrl, format, x, y, breite, hoehe) { addImageAufrufe.push({ x, y, breite, hoehe }); }
+        setPage() {} getNumberOfPages() { return 1; }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+      window.open = () => ({});
+
+      karte.shadowRoot.getElementById("sammel-pdf-btn").click();
+      karte.shadowRoot.getElementById("sammel-pdf-alle-btn").click();
+      // Checkbox ausschalten, dann MIT Inhaltsverzeichnis exportieren, damit
+      // auch das Deckblatt (inkl. Bildercollage) tatsächlich gezeichnet wird.
+      karte.shadowRoot.getElementById("sammel-pdf-bilder-checkbox").checked = false;
+      karte.shadowRoot.getElementById("sammel-pdf-ja-toc-btn").click();
+      karte.shadowRoot.getElementById("sammel-pdf-name-feld").value = "Mein Kochbuch";
+      karte.shadowRoot.getElementById("sammel-pdf-name-erstellen-btn").click();
+      await new Promise((r) => setTimeout(r, 20));
+
+      return { addImageAufrufe };
+    });
+
+    assert(
+      ergebnis.addImageAufrufe.length === 0,
+      "bei abgewählter Checkbox wird addImage() weder für das Rezept noch für die Deckblatt-Collage aufgerufen (tatsächlich: " +
+        ergebnis.addImageAufrufe.length + " Aufrufe)"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: Gegenprobe zu obigem Test - mit angehakter (Standard-)Checkbox
+// bleibt das Bild weiterhin im Sammel-PDF enthalten.
+// ---------------------------------------------------------------------
+async function testSammelPdfBilderCheckboxStandardBehaeltBilder(browser) {
+  console.log("\nTest: Standardmäßig angehakte 'Bilder mitdrucken'-Checkbox lässt Rezeptbilder im Sammel-PDF wie bisher enthalten");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Testrezept", payload: leererPayload({ image: "data:image/png;base64,AAAA" }),
+    });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._bildAlsDatenUrlLaden = () => Promise.resolve({
+        datenUrl: "data:image/jpeg;base64,AAAA", breite: 800, hoehe: 450,
+      });
+      const addImageAufrufe = [];
+      class FakeJsPdf {
+        constructor() { this.internal = { pageSize: { getWidth: () => 210, getHeight: () => 297 } }; }
+        setFont() {} setFontSize() {} setTextColor() {} setDrawColor() {} setLineWidth() {} setFillColor() {}
+        line() {} text() {} getTextWidth(t) { return (t || "").length * 1.5; }
+        roundedRect() {} splitTextToSize(text) { return [text]; } addPage() {}
+        addImage(datenUrl, format, x, y, breite, hoehe) { addImageAufrufe.push({ x, y, breite, hoehe }); }
+        setPage() {} getNumberOfPages() { return 1; }
+        output() { return new Blob(); }
+      }
+      karte._jsPdfLaden = () => Promise.resolve(FakeJsPdf);
+      window.open = () => ({});
+
+      karte.shadowRoot.getElementById("sammel-pdf-btn").click();
+      const angehaktBeimOeffnen = karte.shadowRoot.getElementById("sammel-pdf-bilder-checkbox").checked;
+      karte.shadowRoot.getElementById("sammel-pdf-alle-btn").click();
+      karte.shadowRoot.getElementById("sammel-pdf-nein-toc-btn").click();
+      await new Promise((r) => setTimeout(r, 20));
+
+      return { addImageAufrufe, angehaktBeimOeffnen };
+    });
+
+    assert(ergebnis.angehaktBeimOeffnen, "die Checkbox ist beim Öffnen des Modals standardmäßig angehakt");
+    assert(
+      ergebnis.addImageAufrufe.length > 0,
+      "mit angehakter Checkbox wird das Rezeptbild weiterhin ins PDF gezeichnet"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testSammelPdfModalAbbrechenExportiertNichts(browser) {
   console.log("\nTest: Sammel-PDF-Modal 'Abbrechen' bei der Namenseingabe exportiert nichts");
   const page = await neueTestUmgebung(browser);
@@ -5952,6 +6061,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfModalAuswahlExportiertNurAngehakteRezepte(browser);
     await testSammelPdfModalAlleAuswaehlenUndKeineAuswaehlenLinks(browser);
     await testSammelPdfModalJaZeigtNameEingabeUndErstelltMitToc(browser);
+    await testSammelPdfBilderCheckboxLaesstBilderWeg(browser);
+    await testSammelPdfBilderCheckboxStandardBehaeltBilder(browser);
     await testSammelPdfModalAbbrechenExportiertNichts(browser);
     await testSammelPdfModalWahlAbbrechenSchliesstOhneWeitereSchritte(browser);
     await testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser);

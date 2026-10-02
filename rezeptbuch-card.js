@@ -442,6 +442,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Alle auswählen",
     sammel_pdf_keine_auswaehlen_link: "Keine auswählen",
     sammel_pdf_weiter_btn: "Weiter",
+    sammel_pdf_bilder_mitdrucken_label: "Bilder mit ins PDF aufnehmen",
     sammel_pdf_auswahl_keine_hinweis: "Bitte mindestens ein Rezept auswählen.",
   },
 
@@ -788,6 +789,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Alli uswähle",
     sammel_pdf_keine_auswaehlen_link: "Kes uswähle",
     sammel_pdf_weiter_btn: "Wiiter",
+    sammel_pdf_bilder_mitdrucken_label: "Bilder mit ins PDF ufneh",
     sammel_pdf_auswahl_keine_hinweis: "Bitte mindischtens ei Rezept uswähle.",
   },
   en: {
@@ -1108,6 +1110,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Select all",
     sammel_pdf_keine_auswaehlen_link: "Select none",
     sammel_pdf_weiter_btn: "Next",
+    sammel_pdf_bilder_mitdrucken_label: "Include images in the PDF",
     sammel_pdf_auswahl_keine_hinweis: "Please select at least one recipe.",
   },
   bg: {
@@ -1386,6 +1389,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Избери всички",
     sammel_pdf_keine_auswaehlen_link: "Изчисти избора",
     sammel_pdf_weiter_btn: "Напред",
+    sammel_pdf_bilder_mitdrucken_label: "Включване на снимки в PDF файла",
     sammel_pdf_auswahl_keine_hinweis: "Моля, изберете поне една рецепта.",
   },
   hr: {
@@ -1664,6 +1668,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Odaberi sve",
     sammel_pdf_keine_auswaehlen_link: "Ukloni odabir",
     sammel_pdf_weiter_btn: "Dalje",
+    sammel_pdf_bilder_mitdrucken_label: "Uključi slike u PDF",
     sammel_pdf_auswahl_keine_hinweis: "Odaberite bar jedan recept.",
   },
   cs: {
@@ -1942,6 +1947,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Vybrat vše",
     sammel_pdf_keine_auswaehlen_link: "Zrušit výběr",
     sammel_pdf_weiter_btn: "Další",
+    sammel_pdf_bilder_mitdrucken_label: "Zahrnout obrázky do PDF",
     sammel_pdf_auswahl_keine_hinweis: "Vyberte prosím alespoň jeden recept.",
   },
   da: {
@@ -2220,6 +2226,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Vælg alle",
     sammel_pdf_keine_auswaehlen_link: "Fravælg alle",
     sammel_pdf_weiter_btn: "Næste",
+    sammel_pdf_bilder_mitdrucken_label: "Inkludér billeder i PDF'en",
     sammel_pdf_auswahl_keine_hinweis: "Vælg mindst én opskrift.",
   },
   nl: {
@@ -2498,6 +2505,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Alles selecteren",
     sammel_pdf_keine_auswaehlen_link: "Niets selecteren",
     sammel_pdf_weiter_btn: "Verder",
+    sammel_pdf_bilder_mitdrucken_label: "Afbeeldingen in de PDF opnemen",
     sammel_pdf_auswahl_keine_hinweis: "Selecteer minstens één recept.",
   },
   et: {
@@ -2776,6 +2784,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Vali kõik",
     sammel_pdf_keine_auswaehlen_link: "Tühista valik",
     sammel_pdf_weiter_btn: "Edasi",
+    sammel_pdf_bilder_mitdrucken_label: "Lisa pildid PDF-i",
     sammel_pdf_auswahl_keine_hinweis: "Palun vali vähemalt üks retsept.",
   },
   fi: {
@@ -3054,6 +3063,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Valitse kaikki",
     sammel_pdf_keine_auswaehlen_link: "Poista valinnat",
     sammel_pdf_weiter_btn: "Seuraava",
+    sammel_pdf_bilder_mitdrucken_label: "Sisällytä kuvat PDF:ään",
     sammel_pdf_auswahl_keine_hinweis: "Valitse vähintään yksi resepti.",
   },
   fr: {
@@ -3333,6 +3343,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Tout sélectionner",
     sammel_pdf_keine_auswaehlen_link: "Tout désélectionner",
     sammel_pdf_weiter_btn: "Suivant",
+    sammel_pdf_bilder_mitdrucken_label: "Inclure les images dans le PDF",
     sammel_pdf_auswahl_keine_hinweis: "Veuillez sélectionner au moins une recette.",
   },
   el: {
@@ -3612,6 +3623,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Επιλογή όλων",
     sammel_pdf_keine_auswaehlen_link: "Καμία επιλογή",
     sammel_pdf_weiter_btn: "Επόμενο",
+    sammel_pdf_bilder_mitdrucken_label: "Συμπερίληψη εικόνων στο PDF",
     sammel_pdf_auswahl_keine_hinweis: "Επιλέξτε τουλάχιστον μία συνταγή.",
   },
   hu: {
@@ -3891,6 +3903,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Összes kijelölése",
     sammel_pdf_keine_auswaehlen_link: "Kijelölés törlése",
     sammel_pdf_weiter_btn: "Tovább",
+    sammel_pdf_bilder_mitdrucken_label: "Képek belefoglalása a PDF-be",
     sammel_pdf_auswahl_keine_hinweis: "Válassz ki legalább egy receptet.",
   },
   ga: {
@@ -4170,6 +4183,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Roghnaigh gach ceann",
     sammel_pdf_keine_auswaehlen_link: "Bain gach rogha",
     sammel_pdf_weiter_btn: "Ar aghaidh",
+    sammel_pdf_bilder_mitdrucken_label: "Cuir íomhánna san PDF",
     sammel_pdf_auswahl_keine_hinweis: "Roghnaigh ceann amháin oide ar a laghad.",
   },
   it: {
@@ -4449,6 +4463,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Seleziona tutto",
     sammel_pdf_keine_auswaehlen_link: "Deseleziona tutto",
     sammel_pdf_weiter_btn: "Avanti",
+    sammel_pdf_bilder_mitdrucken_label: "Includi le immagini nel PDF",
     sammel_pdf_auswahl_keine_hinweis: "Seleziona almeno una ricetta.",
   },
   lv: {
@@ -4727,6 +4742,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Izvēlēties visas",
     sammel_pdf_keine_auswaehlen_link: "Noņemt visas",
     sammel_pdf_weiter_btn: "Tālāk",
+    sammel_pdf_bilder_mitdrucken_label: "Iekļaut attēlus PDF failā",
     sammel_pdf_auswahl_keine_hinweis: "Lūdzu, izvēlieties vismaz vienu recepti.",
   },
   lt: {
@@ -5005,6 +5021,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Pasirinkti visus",
     sammel_pdf_keine_auswaehlen_link: "Atžymėti visus",
     sammel_pdf_weiter_btn: "Toliau",
+    sammel_pdf_bilder_mitdrucken_label: "Įtraukti nuotraukas į PDF",
     sammel_pdf_auswahl_keine_hinweis: "Pasirinkite bent vieną receptą.",
   },
   mt: {
@@ -5284,6 +5301,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Agħżel kollox",
     sammel_pdf_keine_auswaehlen_link: "Neħħi l-għażla",
     sammel_pdf_weiter_btn: "Li jmiss",
+    sammel_pdf_bilder_mitdrucken_label: "Inkludi r-ritratti fil-PDF",
     sammel_pdf_auswahl_keine_hinweis: "Jekk jogħġbok agħżel mill-inqas riċetta waħda.",
   },
   pl: {
@@ -5562,6 +5580,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Wybierz wszystkie",
     sammel_pdf_keine_auswaehlen_link: "Odznacz wszystkie",
     sammel_pdf_weiter_btn: "Dalej",
+    sammel_pdf_bilder_mitdrucken_label: "Dołącz zdjęcia do PDF",
     sammel_pdf_auswahl_keine_hinweis: "Wybierz przynajmniej jeden przepis.",
   },
   pt: {
@@ -5841,6 +5860,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Selecionar tudo",
     sammel_pdf_keine_auswaehlen_link: "Desmarcar tudo",
     sammel_pdf_weiter_btn: "Seguinte",
+    sammel_pdf_bilder_mitdrucken_label: "Incluir imagens no PDF",
     sammel_pdf_auswahl_keine_hinweis: "Selecione pelo menos uma receita.",
   },
   ro: {
@@ -6119,6 +6139,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Selectează tot",
     sammel_pdf_keine_auswaehlen_link: "Deselectează tot",
     sammel_pdf_weiter_btn: "Continuă",
+    sammel_pdf_bilder_mitdrucken_label: "Include imaginile în PDF",
     sammel_pdf_auswahl_keine_hinweis: "Selectează cel puțin o rețetă.",
   },
   sk: {
@@ -6397,6 +6418,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Vybrať všetko",
     sammel_pdf_keine_auswaehlen_link: "Zrušiť výber",
     sammel_pdf_weiter_btn: "Ďalej",
+    sammel_pdf_bilder_mitdrucken_label: "Zahrnúť obrázky do PDF",
     sammel_pdf_auswahl_keine_hinweis: "Vyberte aspoň jeden recept.",
   },
   sl: {
@@ -6675,6 +6697,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Izberi vse",
     sammel_pdf_keine_auswaehlen_link: "Počisti izbor",
     sammel_pdf_weiter_btn: "Naprej",
+    sammel_pdf_bilder_mitdrucken_label: "Vključi slike v PDF",
     sammel_pdf_auswahl_keine_hinweis: "Izberite vsaj en recept.",
   },
   es: {
@@ -6953,6 +6976,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Seleccionar todas",
     sammel_pdf_keine_auswaehlen_link: "Deseleccionar todas",
     sammel_pdf_weiter_btn: "Siguiente",
+    sammel_pdf_bilder_mitdrucken_label: "Incluir imágenes en el PDF",
     sammel_pdf_auswahl_keine_hinweis: "Selecciona al menos una receta.",
   },
   sv: {
@@ -7231,6 +7255,7 @@ const UEBERSETZUNGEN = {
     sammel_pdf_alle_auswaehlen_link: "Markera alla",
     sammel_pdf_keine_auswaehlen_link: "Avmarkera alla",
     sammel_pdf_weiter_btn: "Nästa",
+    sammel_pdf_bilder_mitdrucken_label: "Inkludera bilder i PDF:en",
     sammel_pdf_auswahl_keine_hinweis: "Välj minst ett recept.",
   },
 };
@@ -7296,7 +7321,7 @@ const SCHEMA_VERSION = 2;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "2.1.1";
+const CARD_VERSION = "2.1.2";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v2.0.0".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
@@ -10620,6 +10645,10 @@ class RezeptbuchCard extends HTMLElement {
         .sammel-pdf-auswahl-zeile { display:flex; align-items:center; gap:8px; padding:6px 0; cursor:pointer; }
         .sammel-pdf-auswahl-zeile input { flex-shrink:0; }
         .sammel-pdf-auswahl-zeile span { color: var(--primary-text-color); }
+        .sammel-pdf-bilder-checkbox { display:flex; align-items:center; gap:8px; justify-content:center;
+          margin-top:12px; cursor:pointer; }
+        .sammel-pdf-bilder-checkbox input { flex-shrink:0; }
+        .sammel-pdf-bilder-checkbox span { color: var(--primary-text-color); }
         .tags-liste { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
         .tag-chip {
           display:inline-flex; align-items:center; gap:4px; background: var(--kb-terrakotta-hell);
@@ -11012,6 +11041,10 @@ class RezeptbuchCard extends HTMLElement {
           </div>
           <div class="modal-box" id="sammel-pdf-frage-box" style="display:none;">
             <p style="margin-top:0;">${this._t("sammel_pdf_frage_toc")}</p>
+            <label class="sammel-pdf-bilder-checkbox">
+              <input type="checkbox" id="sammel-pdf-bilder-checkbox" checked>
+              <span>${this._t("sammel_pdf_bilder_mitdrucken_label")}</span>
+            </label>
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="sekundaer" id="sammel-pdf-nein-toc-btn">${this._t("sammel_pdf_nein_toc_btn")}</button>
               <button type="button" class="primaer" id="sammel-pdf-ja-toc-btn">${this._t("sammel_pdf_ja_toc_btn")}</button>
@@ -11126,8 +11159,10 @@ class RezeptbuchCard extends HTMLElement {
     if (sammelPdfNeinTocBtn) {
       sammelPdfNeinTocBtn.addEventListener("click", () => {
         const rezepte = this._sammelPdfExportListeErmitteln();
+        const bilderCheckbox = this.shadowRoot.getElementById("sammel-pdf-bilder-checkbox");
+        const bilderMitdrucken = !bilderCheckbox || bilderCheckbox.checked;
         this._sammelPdfModalSchliessen();
-        this._sammelPdfExport({ inhaltsverzeichnis: false, rezepte });
+        this._sammelPdfExport({ inhaltsverzeichnis: false, rezepte, bilderMitdrucken });
       });
     }
 
@@ -11151,8 +11186,10 @@ class RezeptbuchCard extends HTMLElement {
         const nameFeld = this.shadowRoot.getElementById("sammel-pdf-name-feld");
         const titel = (nameFeld && nameFeld.value.trim()) || this._t("sammel_pdf_name_placeholder");
         const rezepte = this._sammelPdfExportListeErmitteln();
+        const bilderCheckbox = this.shadowRoot.getElementById("sammel-pdf-bilder-checkbox");
+        const bilderMitdrucken = !bilderCheckbox || bilderCheckbox.checked;
         this._sammelPdfModalSchliessen();
-        this._sammelPdfExport({ inhaltsverzeichnis: true, titel, rezepte });
+        this._sammelPdfExport({ inhaltsverzeichnis: true, titel, rezepte, bilderMitdrucken });
       });
     }
 
@@ -11759,7 +11796,7 @@ class RezeptbuchCard extends HTMLElement {
   // lose hingelegte Polaroids in unterschiedlichen Größen überlappend
   // angeordnet (siehe _sammelPdfDeckblattCollageZeichnen).
   // Gibt es kein einziges Foto, bleibt nur der Titel auf der Seite.
-  async _sammelPdfDeckblattZeichnen(doc, titel, rezepte, margin, pageWidth, pageHeight) {
+  async _sammelPdfDeckblattZeichnen(doc, titel, rezepte, margin, pageWidth, pageHeight, bilderMitdrucken = true) {
     const usableWidth = pageWidth - margin * 2;
 
     // Für den Kochbuch-Namen wird eine gerade, fette Times-Schrift genutzt.
@@ -11795,7 +11832,7 @@ class RezeptbuchCard extends HTMLElement {
     const flaecheHoehe = pageHeight - margin - y;
     if (flaecheHoehe <= 0) return;
 
-    const bildQuellen = rezepte.map((r) => r.image).filter(Boolean).slice(0, 6);
+    const bildQuellen = bilderMitdrucken ? rezepte.map((r) => r.image).filter(Boolean).slice(0, 6) : [];
     if (!bildQuellen.length) return;
 
     const rand = Math.min(flaecheBreite, flaecheHoehe) * 0.04;
@@ -11933,14 +11970,20 @@ class RezeptbuchCard extends HTMLElement {
   // mehrerer Rezepte (_sammelPdfErstellen) verwendet werden kann. Legt
   // selbst keine neue Seite an - das entscheidet die aufrufende Stelle
   // (bei mehreren Rezepten also VOR jedem weiteren Aufruf doc.addPage()).
-  async _rezeptContentInPdfZeichnen(doc, r) {
+  // bilderMitdrucken (Standard: true) steuert, ob ein vorhandenes Rezeptbild
+  // überhaupt geladen/gezeichnet wird - false lässt es komplett weg (siehe
+  // _sammelPdfErstellen/_sammelPdfModalOeffnen: Sparvariante ohne Bilder,
+  // analog zur Druckansicht vieler Rezept-Webseiten). Da ALLES weiter unten
+  // nur noch über die lokale "bild"-Variable verzweigt, reicht dieser eine
+  // Schalter ganz oben, ohne den Rest der Layout-Logik anzufassen.
+  async _rezeptContentInPdfZeichnen(doc, r, bilderMitdrucken = true) {
     const margin = 20;
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     const usableWidth = pageWidth - margin * 2;
     const basisPortionen = r.servings || 1;
     const schritte = (r.steps || []).filter((s) => s && s.trim());
-    const bild = r.image ? await this._bildAlsDatenUrlLaden(r.image) : null;
+    const bild = (bilderMitdrucken && r.image) ? await this._bildAlsDatenUrlLaden(r.image) : null;
 
     // Kopfbereich (Titel + Portionen/Kategorie + Trennlinie) ist in beiden
     // Layouts unten identisch und rückt y immer um denselben, festen Betrag
@@ -12238,7 +12281,7 @@ class RezeptbuchCard extends HTMLElement {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     if (optionen.inhaltsverzeichnis) {
-      await this._sammelPdfDeckblattZeichnen(doc, optionen.titel || dateinameBasis, rezepteSortiert, margin, pageWidth, pageHeight);
+      await this._sammelPdfDeckblattZeichnen(doc, optionen.titel || dateinameBasis, rezepteSortiert, margin, pageWidth, pageHeight, optionen.bilderMitdrucken !== false);
       doc.addPage();
       this._sammelPdfInhaltsverzeichnisZeichnen(doc, optionen.titel || dateinameBasis, rezepteSortiert, margin, pageWidth);
     }
@@ -12248,7 +12291,7 @@ class RezeptbuchCard extends HTMLElement {
       for (let i = 0; i < rezepteSortiert.length; i++) {
         if (i > 0 || optionen.inhaltsverzeichnis) doc.addPage();
         this._portionen = rezepteSortiert[i].servings || 1;
-        await this._rezeptContentInPdfZeichnen(doc, rezepteSortiert[i]);
+        await this._rezeptContentInPdfZeichnen(doc, rezepteSortiert[i], optionen.bilderMitdrucken !== false);
       }
     } finally {
       this._portionen = portionenVorher;
@@ -12423,6 +12466,10 @@ class RezeptbuchCard extends HTMLElement {
     this._sammelPdfWahlModus = "alle";
     const nameFeld = this.shadowRoot.getElementById("sammel-pdf-name-feld");
     if (nameFeld) nameFeld.value = "";
+    // Bild-Checkbox bei jedem Öffnen frisch auf "an" zurücksetzen, damit eine
+    // frühere Abwahl nicht unbemerkt für den nächsten Export übernommen wird.
+    const bilderCheckbox = this.shadowRoot.getElementById("sammel-pdf-bilder-checkbox");
+    if (bilderCheckbox) bilderCheckbox.checked = true;
     this._sammelPdfSchrittZeigen("wahl");
     const modal = this.shadowRoot.getElementById("sammel-pdf-modal");
     if (modal) modal.style.display = "flex";
