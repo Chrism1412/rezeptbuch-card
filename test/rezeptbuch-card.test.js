@@ -5010,6 +5010,69 @@ async function testSammelPdfBilderCheckboxStandardBehaeltBilder(browser) {
   }
 }
 
+// ---------------------------------------------------------------------
+// Test: Zufallsrezept-Knopf berücksichtigt die aktuell gefilterte Liste
+// (Suche/Kategorie/Tags) - bei zwei Rezepten, von denen nur eines zum
+// Suchbegriff passt, muss der Knopf immer genau dieses eine öffnen.
+// ---------------------------------------------------------------------
+async function testZufallsrezeptBeruecksichtigtFilter(browser) {
+  console.log("\nTest: Zufallsrezept-Knopf öffnet nur ein Rezept aus der aktuell gefilterten Liste");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Kürbissuppe", payload: leererPayload() });
+    await rezeptDirektAnlegen(page, { title: "Apfelkuchen", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._suchbegriff = "kürbis";
+      karte._render();
+      // Bei genau einem Treffer in der gefilterten Liste ist das Ergebnis
+      // deterministisch - ein einziger Klick reicht, um zu prüfen, dass
+      // ausschließlich aus den gefilterten Treffern gewählt wird.
+      karte.shadowRoot.getElementById("zufallsrezept-btn").click();
+      return { ansicht: karte._ansicht, titel: karte._aktivesRezept && karte._aktivesRezept.title };
+    });
+
+    assert(ergebnis.ansicht === "detail", "Klick auf den Zufallsrezept-Knopf öffnet die Detailansicht");
+    assert(
+      ergebnis.titel === "Kürbissuppe",
+      "bei aktivem Suchfilter wählt der Zufallsrezept-Knopf ausschließlich aus den gefilterten Treffern (tatsächlich geöffnet: " +
+        ergebnis.titel + ")"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: Gegenprobe - führt der aktive Filter zu KEINEM Treffer, fällt der
+// Zufallsrezept-Knopf auf alle Rezepte zurück, statt folgenlos zu bleiben.
+// ---------------------------------------------------------------------
+async function testZufallsrezeptFaelltBeiLeererFilterungZurueck(browser) {
+  console.log("\nTest: Zufallsrezept-Knopf fällt bei leerer Filterung auf alle Rezepte zurück");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Nudelauflauf", payload: leererPayload() });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._suchbegriff = "treffer-fuer-keinen-eintrag";
+      karte._render();
+      karte.shadowRoot.getElementById("zufallsrezept-btn").click();
+      return { ansicht: karte._ansicht, titel: karte._aktivesRezept && karte._aktivesRezept.title };
+    });
+
+    assert(
+      ergebnis.ansicht === "detail" && ergebnis.titel === "Nudelauflauf",
+      "ohne Treffer in der gefilterten Liste öffnet der Knopf trotzdem ein Rezept aus allen vorhandenen (Fallback)"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
 async function testSammelPdfModalAbbrechenExportiertNichts(browser) {
   console.log("\nTest: Sammel-PDF-Modal 'Abbrechen' bei der Namenseingabe exportiert nichts");
   const page = await neueTestUmgebung(browser);
@@ -6166,6 +6229,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testSammelPdfModalJaZeigtNameEingabeUndErstelltMitToc(browser);
     await testSammelPdfBilderCheckboxLaesstBilderWeg(browser);
     await testSammelPdfBilderCheckboxStandardBehaeltBilder(browser);
+    await testZufallsrezeptBeruecksichtigtFilter(browser);
+    await testZufallsrezeptFaelltBeiLeererFilterungZurueck(browser);
     await testSammelPdfModalAbbrechenExportiertNichts(browser);
     await testSammelPdfModalWahlAbbrechenSchliesstOhneWeitereSchritte(browser);
     await testSammelPdfInhaltsverzeichnisSeiteEnthaeltTitelUndRezeptliste(browser);

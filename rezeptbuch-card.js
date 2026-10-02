@@ -166,6 +166,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Rezeptbuch",
     kopf_sichern_btn: "💾 Sichern",
     kopf_wochenplan_btn: "📅 Wochenplan",
+    kopf_zufallsrezept_btn: "🎲 Zufallsrezept",
     umrechnungstabelle_btn: "📐 Umrechnungstabelle",
     umrechnungstabelle_titel: "Umrechnungstabelle",
     umrechnungstabelle_hinweis: "Richtwerte in Gramm für häufige Küchenzutaten - abhängig von Marke und Konsistenz, deshalb nur zum Nachschlagen. Diese Werte werden NICHT automatisch auf deine Rezepte angewendet.",
@@ -516,6 +517,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Rezäptbuech",
     kopf_sichern_btn: "💾 Sichere",
     kopf_wochenplan_btn: "📅 Wuchepla",
+    kopf_zufallsrezept_btn: "🎲 Zuckerle-Rezept",
     umrechnungstabelle_btn: "📐 Umrechnungstabälle",
     umrechnungstabelle_titel: "Umrechnungstabälle",
     umrechnungstabelle_hinweis: "Richtwärt in Gramm für häufig Küchezutate - je nach Marke und Konsischtänz anders, drum nume zum Nahgucke. Die Wärt wärde NID automatisch uf dini Rezäpt aagwändet.",
@@ -853,6 +855,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Recipe Book",
     kopf_sichern_btn: "💾 Backup",
     kopf_wochenplan_btn: "📅 Meal plan",
+    kopf_zufallsrezept_btn: "🎲 Random recipe",
     umrechnungstabelle_btn: "📐 Conversion table",
     umrechnungstabelle_titel: "Conversion table",
     umrechnungstabelle_hinweis: "Approximate gram values for common kitchen ingredients - these vary by brand and consistency, so treat them as reference only. They are NOT applied automatically to your recipes.",
@@ -1173,6 +1176,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Готварска книга",
     kopf_sichern_btn: "💾 Резервно копие",
     kopf_wochenplan_btn: "📅 Седмичен план",
+    kopf_zufallsrezept_btn: "🎲 Произволна рецепта",
     umrechnungstabelle_btn: "📐 Таблица за преобразуване",
     umrechnungstabelle_titel: "Таблица за преобразуване",
     umrechnungstabelle_hinweis: "Приблизителни стойности в грамове за често срещани кухненски продукти - варират по марка и консистенция, затова служат само за справка. Те НЕ се прилагат автоматично към твоите рецепти.",
@@ -1455,6 +1459,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuharica",
     kopf_sichern_btn: "💾 Sigurnosna kopija",
     kopf_wochenplan_btn: "📅 Tjedni plan",
+    kopf_zufallsrezept_btn: "🎲 Nasumičan recept",
     umrechnungstabelle_btn: "📐 Tablica preračunavanja",
     umrechnungstabelle_titel: "Tablica preračunavanja",
     umrechnungstabelle_hinweis: "Približne vrijednosti u gramima za česte kuhinjske sastojke - ovise o marki i gustoći, pa služe samo za orijentaciju. NE primjenjuju se automatski na tvoje recepte.",
@@ -1737,6 +1742,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuchařka",
     kopf_sichern_btn: "💾 Záloha",
     kopf_wochenplan_btn: "📅 Týdenní plán",
+    kopf_zufallsrezept_btn: "🎲 Náhodný recept",
     umrechnungstabelle_btn: "📐 Převodní tabulka",
     umrechnungstabelle_titel: "Převodní tabulka",
     umrechnungstabelle_hinweis: "Přibližné hodnoty v gramech pro běžné kuchyňské suroviny - liší se podle značky a konzistence, slouží jen k nahlédnutí. NEjsou automaticky použity na tvé recepty.",
@@ -2019,6 +2025,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kogebog",
     kopf_sichern_btn: "💾 Sikkerhedskopi",
     kopf_wochenplan_btn: "📅 Ugeplan",
+    kopf_zufallsrezept_btn: "🎲 Tilfældig opskrift",
     umrechnungstabelle_btn: "📐 Omregningstabel",
     umrechnungstabelle_titel: "Omregningstabel",
     umrechnungstabelle_hinweis: "Vejledende værdier i gram for almindelige køkkeningredienser - varierer efter mærke og konsistens, kun til opslag. Bruges IKKE automatisk på dine opskrifter.",
@@ -2301,6 +2308,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kookboek",
     kopf_sichern_btn: "💾 Back-up",
     kopf_wochenplan_btn: "📅 Weekmenu",
+    kopf_zufallsrezept_btn: "🎲 Willekeurig recept",
     umrechnungstabelle_btn: "📐 Omrekentabel",
     umrechnungstabelle_titel: "Omrekentabel",
     umrechnungstabelle_hinweis: "Richtwaarden in gram voor veelgebruikte keukeningrediënten - afhankelijk van merk en consistentie, dus alleen als naslag. Worden NIET automatisch op je recepten toegepast.",
@@ -2583,6 +2591,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Retseptiraamat",
     kopf_sichern_btn: "💾 Varukoopia",
     kopf_wochenplan_btn: "📅 Nädalaplaan",
+    kopf_zufallsrezept_btn: "🎲 Juhuslik retsept",
     umrechnungstabelle_btn: "📐 Teisendustabel",
     umrechnungstabelle_titel: "Teisendustabel",
     umrechnungstabelle_hinweis: "Ligikaudsed grammiväärtused levinud köögikoostisosade jaoks - sõltuvad margist ja konsistentsist, seega vaid viitena. Neid EI rakendata automaatselt sinu retseptidele.",
@@ -2865,6 +2874,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Reseptikirja",
     kopf_sichern_btn: "💾 Varmuuskopio",
     kopf_wochenplan_btn: "📅 Viikkosuunnitelma",
+    kopf_zufallsrezept_btn: "🎲 Satunnainen resepti",
     umrechnungstabelle_btn: "📐 Muuntotaulukko",
     umrechnungstabelle_titel: "Muuntotaulukko",
     umrechnungstabelle_hinweis: "Suuntaa antavat gramma-arvot yleisille keittiön raaka-aineille - vaihtelevat merkin ja koostumuksen mukaan, siis vain viitteeksi. Niitä EI sovelleta automaattisesti resepteihisi.",
@@ -3147,6 +3157,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Livre de recettes",
     kopf_sichern_btn: "💾 Sauvegarde",
     kopf_wochenplan_btn: "📅 Planning de la semaine",
+    kopf_zufallsrezept_btn: "🎲 Recette aléatoire",
     umrechnungstabelle_btn: "📐 Table de conversion",
     umrechnungstabelle_titel: "Table de conversion",
     umrechnungstabelle_hinweis: "Valeurs approximatives en grammes pour des ingrédients courants - elles varient selon la marque et la consistance, donc à titre indicatif uniquement. Elles ne sont PAS appliquées automatiquement à tes recettes.",
@@ -3430,6 +3441,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Βιβλίο συνταγών",
     kopf_sichern_btn: "💾 Αντίγραφο ασφαλείας",
     kopf_wochenplan_btn: "📅 Εβδομαδιαίος προγραμματισμός",
+    kopf_zufallsrezept_btn: "🎲 Τυχαία συνταγή",
     umrechnungstabelle_btn: "📐 Πίνακας μετατροπής",
     umrechnungstabelle_titel: "Πίνακας μετατροπής",
     umrechnungstabelle_hinweis: "Κατά προσέγγιση τιμές σε γραμμάρια για συνηθισμένα υλικά κουζίνας - διαφέρουν ανά μάρκα και σύσταση, άρα μόνο για αναφορά. ΔΕΝ εφαρμόζονται αυτόματα στις συνταγές σου.",
@@ -3713,6 +3725,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Szakácskönyv",
     kopf_sichern_btn: "💾 Biztonsági mentés",
     kopf_wochenplan_btn: "📅 Heti étrend",
+    kopf_zufallsrezept_btn: "🎲 Véletlen recept",
     umrechnungstabelle_btn: "📐 Átváltási táblázat",
     umrechnungstabelle_titel: "Átváltási táblázat",
     umrechnungstabelle_hinweis: "Hozzávetőleges grammértékek gyakori konyhai alapanyagokhoz - márkától és állapottól függően változhatnak, csak útmutatóként. NEM kerülnek automatikusan a receptjeidre.",
@@ -3996,6 +4009,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Leabhar Cócaireachta",
     kopf_sichern_btn: "💾 Cúltaca",
     kopf_wochenplan_btn: "📅 Plean seachtainiúil",
+    kopf_zufallsrezept_btn: "🎲 Oideas randamach",
     umrechnungstabelle_btn: "📐 Tábla tiontaithe",
     umrechnungstabelle_titel: "Tábla tiontaithe",
     umrechnungstabelle_hinweis: "Luachanna garaimm thuairisciúla do chomhábhair choitianta cistine - athraíonn siad de réir branda agus comhdhlúis, mar sin ní bhaineann siad ach le tagairt. NÍ chuirtear i bhfeidhm go huathoibríoch ar do chuid oidis iad.",
@@ -4279,6 +4293,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Ricettario",
     kopf_sichern_btn: "💾 Backup",
     kopf_wochenplan_btn: "📅 Piano settimanale",
+    kopf_zufallsrezept_btn: "🎲 Ricetta casuale",
     umrechnungstabelle_btn: "📐 Tabella di conversione",
     umrechnungstabelle_titel: "Tabella di conversione",
     umrechnungstabelle_hinweis: "Valori approssimativi in grammi per ingredienti comuni in cucina - variano in base a marca e consistenza, quindi solo come riferimento. NON vengono applicati automaticamente alle tue ricette.",
@@ -4562,6 +4577,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Pavārgrāmata",
     kopf_sichern_btn: "💾 Rezerves kopija",
     kopf_wochenplan_btn: "📅 Nedēļas plāns",
+    kopf_zufallsrezept_btn: "🎲 Nejaušā recepte",
     umrechnungstabelle_btn: "📐 Pārrēķina tabula",
     umrechnungstabelle_titel: "Pārrēķina tabula",
     umrechnungstabelle_hinweis: "Orientējošas vērtības gramos biežāk lietotām virtuves sastāvdaļām - atšķiras atkarībā no markas un konsistences, tāpēc tikai uzziņai. Tās NETIEK automātiski piemērotas tavām receptēm.",
@@ -4844,6 +4860,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Receptų knyga",
     kopf_sichern_btn: "💾 Atsarginė kopija",
     kopf_wochenplan_btn: "📅 Savaitės planas",
+    kopf_zufallsrezept_btn: "🎲 Atsitiktinis receptas",
     umrechnungstabelle_btn: "📐 Perskaičiavimo lentelė",
     umrechnungstabelle_titel: "Perskaičiavimo lentelė",
     umrechnungstabelle_hinweis: "Orientacinės gramų vertės dažnai naudojamų virtuvės produktų - skiriasi pagal gamintoją ir konsistenciją, todėl tik informacijai. Jos NĖRA automatiškai pritaikomos tavo receptams.",
@@ -5126,6 +5143,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Ktieb tar-Riċetti",
     kopf_sichern_btn: "💾 Kopja ta' Sigurtà",
     kopf_wochenplan_btn: "📅 Pjan tal-Ġimgħa",
+    kopf_zufallsrezept_btn: "🎲 Riċetta każwali",
     umrechnungstabelle_btn: "📐 Tabella tal-konverżjoni",
     umrechnungstabelle_titel: "Tabella tal-konverżjoni",
     umrechnungstabelle_hinweis: "Valuri indikattivi fi grammi għal ingredjenti komuni tal-kċina - ivarjaw skont il-marka u l-konsistenza, għalhekk biss ta' referenza. Ma jiġux applikati awtomatikament fuq ir-riċetti tiegħek.",
@@ -5409,6 +5427,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Książka kucharska",
     kopf_sichern_btn: "💾 Kopia zapasowa",
     kopf_wochenplan_btn: "📅 Plan tygodnia",
+    kopf_zufallsrezept_btn: "🎲 Losowy przepis",
     umrechnungstabelle_btn: "📐 Tabela przeliczeń",
     umrechnungstabelle_titel: "Tabela przeliczeń",
     umrechnungstabelle_hinweis: "Orientacyjne wartości w gramach dla często używanych produktów kuchennych - różnią się w zależności od marki i konsystencji, więc służą tylko do wglądu. NIE są automatycznie stosowane w twoich przepisach.",
@@ -5691,6 +5710,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Livro de Receitas",
     kopf_sichern_btn: "💾 Cópia de segurança",
     kopf_wochenplan_btn: "📅 Plano semanal",
+    kopf_zufallsrezept_btn: "🎲 Receita aleatória",
     umrechnungstabelle_btn: "📐 Tabela de conversão",
     umrechnungstabelle_titel: "Tabela de conversão",
     umrechnungstabelle_hinweis: "Valores aproximados em gramas para ingredientes comuns na cozinha - variam por marca e consistência, por isso servem apenas de referência. NÃO são aplicados automaticamente às tuas receitas.",
@@ -5974,6 +5994,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Carte de rețete",
     kopf_sichern_btn: "💾 Copie de rezervă",
     kopf_wochenplan_btn: "📅 Plan săptămânal",
+    kopf_zufallsrezept_btn: "🎲 Rețetă aleatorie",
     umrechnungstabelle_btn: "📐 Tabel de conversie",
     umrechnungstabelle_titel: "Tabel de conversie",
     umrechnungstabelle_hinweis: "Valori orientative în grame pentru ingrediente comune de bucătărie - variază în funcție de marcă și consistență, deci doar pentru consultare. NU sunt aplicate automat rețetelor tale.",
@@ -6256,6 +6277,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuchárska kniha",
     kopf_sichern_btn: "💾 Záloha",
     kopf_wochenplan_btn: "📅 Týždenný plán",
+    kopf_zufallsrezept_btn: "🎲 Náhodný recept",
     umrechnungstabelle_btn: "📐 Prevodná tabuľka",
     umrechnungstabelle_titel: "Prevodná tabuľka",
     umrechnungstabelle_hinweis: "Orientačné hodnoty v gramoch pre bežné kuchynské suroviny - líšia sa podľa značky a konzistencie, slúžia len na nahliadnutie. NEaplikujú sa automaticky na tvoje recepty.",
@@ -6538,6 +6560,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kuharska knjiga",
     kopf_sichern_btn: "💾 Varnostna kopija",
     kopf_wochenplan_btn: "📅 Tedenski načrt",
+    kopf_zufallsrezept_btn: "🎲 Naključni recept",
     umrechnungstabelle_btn: "📐 Pretvorbena tabela",
     umrechnungstabelle_titel: "Pretvorbena tabela",
     umrechnungstabelle_hinweis: "Približne vrednosti v gramih za pogoste kuhinjske sestavine - razlikujejo se glede na znamko in gostoto, zato služijo le kot napotek. NISO samodejno uporabljene na tvojih receptih.",
@@ -6820,6 +6843,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Libro de recetas",
     kopf_sichern_btn: "💾 Copia de seguridad",
     kopf_wochenplan_btn: "📅 Plan semanal",
+    kopf_zufallsrezept_btn: "🎲 Receta aleatoria",
     umrechnungstabelle_btn: "📐 Tabla de conversión",
     umrechnungstabelle_titel: "Tabla de conversión",
     umrechnungstabelle_hinweis: "Valores orientativos en gramos para ingredientes habituales de cocina - varían según la marca y la consistencia, por lo que son solo de referencia. NO se aplican automáticamente a tus recetas.",
@@ -7102,6 +7126,7 @@ const UEBERSETZUNGEN = {
     kopf_titel_standard: "Kokbok",
     kopf_sichern_btn: "💾 Säkerhetskopia",
     kopf_wochenplan_btn: "📅 Veckoplan",
+    kopf_zufallsrezept_btn: "🎲 Slumpmässigt recept",
     umrechnungstabelle_btn: "📐 Omvandlingstabell",
     umrechnungstabelle_titel: "Omvandlingstabell",
     umrechnungstabelle_hinweis: "Ungefärliga gramvärden för vanliga köksingredienser - varierar beroende på märke och konsistens, så endast som referens. Används INTE automatiskt på dina recept.",
@@ -9546,6 +9571,21 @@ class RezeptbuchCard extends HTMLElement {
     this._render();
   }
 
+  // Wählt zufällig ein Rezept aus und öffnet dessen Detailansicht - bezieht
+  // sich bewusst auf die GEFILTERTE Liste (_gefilterteRezepte), damit eine
+  // aktive Kategorie/Tag-Auswahl oder Suche berücksichtigt wird ("Zufalls-
+  // rezept" innerhalb der aktuell sichtbaren Auswahl, nicht aus dem
+  // gesamten Rezeptbuch). Ist die gefilterte Liste leer (z. B. Suchbegriff
+  // ohne Treffer), fällt es auf alle Rezepte zurück, damit der Knopf nie
+  // folgenlos bleibt.
+  _zufallsrezeptOeffnen() {
+    const auswahl = this._gefilterteRezepte();
+    const liste = auswahl.length ? auswahl : this._rezepte;
+    if (!liste.length) return;
+    const zufall = liste[Math.floor(Math.random() * liste.length)];
+    this._rezeptOeffnen(zufall);
+  }
+
   async _rezeptAlsZubereitetMarkieren(rezept) {
     // Konflikt-Schutz wie bei Kommentar/Bewertung: frisch laden, dann erst
     // senden, erst bei Erfolg lokal übernehmen - vorher wurde cookLog auch
@@ -10979,6 +11019,7 @@ class RezeptbuchCard extends HTMLElement {
           <div class="kopf-aktionen">
             ${this._rezepte.length ? `<button class="sekundaer" id="sichern-btn">${this._t("kopf_sichern_btn")}</button>` : ""}
             ${this._rezepte.length ? `<button class="sekundaer" id="sammel-pdf-btn">${this._t("kopf_sammel_pdf_btn")}</button>` : ""}
+            ${this._rezepte.length ? `<button class="sekundaer" id="zufallsrezept-btn">${this._t("kopf_zufallsrezept_btn")}</button>` : ""}
             <button class="sekundaer" id="wochenplan-btn">${this._t("kopf_wochenplan_btn")}</button>
             <button class="sekundaer" id="umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>
             ${this._rezepte.length ? `<button class="sekundaer" id="einkaufsmodus-btn">${this._einkaufslistenModus ? this._t("einkaufsmodus_beenden_btn") : this._t("einkaufsmodus_start_btn")}</button>` : ""}
@@ -11163,6 +11204,11 @@ class RezeptbuchCard extends HTMLElement {
 
     this.shadowRoot.getElementById("neu-btn").addEventListener("click", () => this._neuesRezeptFormular());
     this.shadowRoot.getElementById("wochenplan-btn").addEventListener("click", () => this._wochenplanAnzeigen());
+
+    const zufallsrezeptBtn = this.shadowRoot.getElementById("zufallsrezept-btn");
+    if (zufallsrezeptBtn) {
+      zufallsrezeptBtn.addEventListener("click", () => this._zufallsrezeptOeffnen());
+    }
 
     const sichernBtn = this.shadowRoot.getElementById("sichern-btn");
     if (sichernBtn) {

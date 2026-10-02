@@ -7,6 +7,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 ## [2.1.1] - 2026-10-02
 
 ### Hinzugefügt
+- **Zufallsrezept-Knopf**: neuer Knopf 🎲 im Kopf der Rezeptübersicht öffnet
+  direkt ein zufälliges Rezept. Berücksichtigt dabei eine aktive
+  Kategorie-/Tag-Auswahl oder Suche (wählt nur aus den aktuell sichtbaren
+  Treffern); ergibt die Filterung keinen Treffer, wählt der Knopf
+  stattdessen aus allen vorhandenen Rezepten.
 - **Tag-Filter ein-/ausblendbar**: neue Einstellung (⚙️-Knopf → Einstellungen)
   blendet die Tag-Filterzeile in der Rezeptübersicht komplett aus, für alle,
   die lieber nur über Kategorien oder die Suche arbeiten. Rein optisch - die

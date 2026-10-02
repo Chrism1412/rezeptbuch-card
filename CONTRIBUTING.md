@@ -103,7 +103,7 @@ demselben Muster wie die bestehenden 24 Sprachen:
    bekommen, sonst greift beim Rendern automatisch der deutsche Rückfall aus
    `RezeptbuchCard._t()` (kein Fehler, aber eine unvollständig übersetzte
    Oberfläche). Ein kurzes Node-Skript, das `Object.keys()` aller
-   Sprachblöcke vergleicht, hilft beim Prüfen auf Vollständigkeit (259
+   Sprachblöcke vergleicht, hilft beim Prüfen auf Vollständigkeit (260
    Schlüssel je Sprache, Stand 2.1.1).
 2. Den neuen Sprachcode in `UNTERSTUETZTE_SPRACHEN` (direkt unterhalb von
    `UEBERSETZUNGEN`) ergänzen, damit `RezeptbuchCard._sprache()` die neue
