@@ -3292,6 +3292,118 @@ async function testTagVorschlagsListeOhneKategorien(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: ein Klick auf die Kategorie "Alle" setzt auch einen noch aktiven
+// Tag-Filter zurück (gemeldet: nach dem Wechsel durch mehrere Kategorien
+// zeigte "Alle" plötzlich gar kein Rezept mehr an, weil ein in einer
+// anderen Kategorie gesetzter Tag-Filter unsichtbar weiterlief - erst ein
+// Neuladen der Karte half, weil das den Tag-Filter zurücksetzt).
+// ---------------------------------------------------------------------
+async function testAlleKategorieSetztTagFilterZurueck(browser) {
+  console.log("\nTest: Klick auf 'Alle' setzt einen noch aktiven Tag-Filter zurück");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, {
+      title: "Gemüsecurry", payload: leererPayload({ category: "Hauptgericht", tags: ["vegetarisch"] }),
+    });
+    await rezeptDirektAnlegen(page, {
+      title: "Braten", payload: leererPayload({ category: "Hauptgericht", tags: [] }),
+    });
+    await page.evaluate(() => window.__karte._render());
+
+    // In der Kategorie "Hauptgericht" den Tag "vegetarisch" aktivieren -
+    // dadurch verschwindet "Braten" aus der Liste (hat den Tag nicht).
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelector('.kategorie-filter .chip[data-kategorie="Hauptgericht"]').click();
+      window.__karte.shadowRoot.querySelector('.tag-filter .chip[data-tag="vegetarisch"]').click();
+    });
+    const nachTagFilter = await page.evaluate(() => window.__karte._gefilterteRezepte().map((r) => r.title));
+    assert(
+      nachTagFilter.length === 1 && nachTagFilter[0] === "Gemüsecurry",
+      "Der Tag-Filter grenzt innerhalb der Kategorie wie erwartet ein"
+    );
+
+    // Jetzt auf "Alle" klicken - der Tag-Filter darf nicht unsichtbar
+    // bestehen bleiben, sonst fehlt "Braten" auch hier fälschlich.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.querySelector('.kategorie-filter .chip[data-kategorie="Alle"]').click();
+    });
+    const nachAlle = await page.evaluate(() => ({
+      titel: window.__karte._gefilterteRezepte().map((r) => r.title),
+      aktiveTags: Array.from(window.__karte._aktiveTags),
+      tagChipNochAktiv: !!window.__karte.shadowRoot.querySelector('.tag-filter .chip[data-tag="vegetarisch"]').classList.contains("chip-aktiv"),
+    }));
+    assert(nachAlle.aktiveTags.length === 0, "Der Tag-Filter wird beim Klick auf 'Alle' zurückgesetzt");
+    assert(!nachAlle.tagChipNochAktiv, "Der Tag-Chip zeigt optisch ebenfalls wieder den inaktiven Zustand");
+    assert(
+      nachAlle.titel.length === 2 && nachAlle.titel.includes("Braten") && nachAlle.titel.includes("Gemüsecurry"),
+      "'Alle' zeigt danach wirklich wieder alle Rezepte (tatsächlich: " + JSON.stringify(nachAlle.titel) + ")"
+    );
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: die Sichtbarkeit der Tag-Filterzeile in der Übersicht lässt sich
+// über eine eigene Einstellung aus- und wieder einschalten (gemeldeter
+// Wunsch: wer lieber über Kategorien/Suche arbeitet, möchte die Tag-Chips
+// gar nicht erst sehen) - ohne dass dabei an den Rezepten selbst
+// vergebene Tags verändert oder gelöscht werden.
+// ---------------------------------------------------------------------
+async function testTagFilterSichtbarkeitEinstellung(browser) {
+  console.log("\nTest: Tag-Filterzeile lässt sich über eine Einstellung aus-/einblenden");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Gemüsecurry", payload: leererPayload({ tags: ["vegetarisch"] }) });
+    await page.evaluate(() => window.__karte._render());
+
+    const anfangsZustand = await page.evaluate(() => !!window.__karte.shadowRoot.getElementById("tag-filter"));
+    assert(anfangsZustand, "Standardmäßig ist die Tag-Filterzeile sichtbar");
+
+    // Über den Einstellungen-Dialog ausschalten.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      window.__karte._aktiveTags = new Set(["vegetarisch"]);
+      const schalter = window.__karte.shadowRoot.getElementById("tags-einstellungen-schalter");
+      schalter.checked = false;
+      schalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !window.__karte.shadowRoot.getElementById("tag-filter"), { timeout: 2000 });
+    const nachAusschalten = await page.evaluate((uid) => ({
+      filterSichtbar: !!window.__karte.shadowRoot.getElementById("tag-filter"),
+      aktiveTags: Array.from(window.__karte._aktiveTags),
+      tagImRezeptErhalten: window.__karte._rezepte.find((r) => r.title === "Gemüsecurry").tags.includes("vegetarisch"),
+    }));
+    assert(!nachAusschalten.filterSichtbar, "Die Tag-Filterzeile ist nach dem Ausschalten nicht mehr vorhanden");
+    assert(nachAusschalten.aktiveTags.length === 0, "Ein noch aktiver Tag-Filter wird beim Ausblenden zurückgesetzt, damit nicht unsichtbar weitergefiltert wird");
+    assert(nachAusschalten.tagImRezeptErhalten, "Der am Rezept selbst gespeicherte Tag bleibt dabei unverändert erhalten");
+
+    // Neu laden simulieren - die Einstellung ist persistent.
+    await page.evaluate(async () => {
+      await window.__karte._rezepteLaden();
+      window.__karte._render();
+    });
+    const nachNeuLaden = await page.evaluate(() => !!window.__karte.shadowRoot.getElementById("tag-filter"));
+    assert(!nachNeuLaden, "Die ausgeblendete Tag-Filterzeile bleibt nach dem Neuladen ausgeblendet (persistent)");
+
+    // Wieder einschalten -> Filterzeile erscheint wieder, mit demselben Tag.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      const schalter = window.__karte.shadowRoot.getElementById("tags-einstellungen-schalter");
+      schalter.checked = true;
+      schalter.dispatchEvent(new Event("change"));
+    });
+    await page.waitForFunction(() => !!window.__karte.shadowRoot.getElementById("tag-filter"), { timeout: 2000 });
+    const nachWiederEinschalten = await page.evaluate(() =>
+      Array.from(window.__karte.shadowRoot.querySelectorAll('.tag-filter .chip')).map((c) => c.dataset.tag)
+    );
+    assert(nachWiederEinschalten.includes("vegetarisch"), "Nach dem Wiedereinschalten erscheint der unverändert gebliebene Tag wieder als Filter-Chip");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test: der "+ Neue Kategorie"-Knopf hebt sich optisch von den normalen
 // Kategorie-Filter-Chips ab (gemeldet: ging zwischen vielen Kategorien
 // zu leicht unter).
@@ -5804,6 +5916,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testTagsHinzufuegenSpeichernUndFiltern(browser);
     await testVorhandeneTagsWerdenAlsVorschlagAngezeigt(browser);
     await testTagVorschlagsListeOhneKategorien(browser);
+    await testAlleKategorieSetztTagFilterZurueck(browser);
+    await testTagFilterSichtbarkeitEinstellung(browser);
     await testNeueKategorieKnopfHervorgehoben(browser);
     await testAlteRezepteOhneTagsWerdenMigriert(browser);
     await testKochbuecherSpeichernAnwendenLoeschen(browser);

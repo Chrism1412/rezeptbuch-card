@@ -4,6 +4,22 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.1.1] - 2026-10-02
+
+### Hinzugefügt
+- **Tag-Filter ein-/ausblendbar**: neue Einstellung (⚙️-Knopf → Einstellungen)
+  blendet die Tag-Filterzeile in der Rezeptübersicht komplett aus, für alle,
+  die lieber nur über Kategorien oder die Suche arbeiten. Rein optisch - die
+  an den Rezepten selbst vergebenen Tags bleiben davon unberührt und
+  erscheinen beim Wiedereinschalten unverändert.
+
+### Behoben
+- **"Alle" zeigte nach Kategorie-/Tag-Wechsel teils keine Rezepte mehr**: ein
+  in einer anderen Kategorie noch aktiver Tag-Filter blieb beim Klick auf
+  "Alle" unsichtbar bestehen und schränkte die Liste weiter ein, obwohl das
+  nicht erkennbar war - bislang nur durch Neuladen der Karte behebbar. Ein
+  Klick auf "Alle" setzt jetzt auch einen noch aktiven Tag-Filter zurück.
+
 ## [2.1.0] - 2026-10-01
 
 Erstes Update seit `v2.0.0` - vier über die GitHub-Issue-Vorlage
