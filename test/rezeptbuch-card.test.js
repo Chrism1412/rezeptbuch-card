@@ -3480,6 +3480,85 @@ async function testNeueKategorieKnopfHervorgehoben(browser) {
 }
 
 // ---------------------------------------------------------------------
+// Test: einzelne Farben der Karte lassen sich in den Einstellungen ändern,
+// bleiben persistent, passen die Schriftfarbe auf hellen Flächen automatisch
+// an und lassen sich per "Alles zurücksetzen" wieder auf Standard bringen.
+// ---------------------------------------------------------------------
+async function testFarbenAnpassenUndZuruecksetzen(browser) {
+  console.log("\nTest: Farben lassen sich einzeln anpassen und komplett zurücksetzen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Testrezept", payload: leererPayload() });
+    const stilText = () => page.evaluate(() => window.__karte.shadowRoot.querySelector("style").textContent);
+
+    const vorher = await stilText();
+    assert(!vorher.includes(":host { --kb-terrakotta:"), "Ohne Anpassung gibt es keine Farb-Überschreibung");
+
+    const farbeSetzen = async (schluessel, wert) => {
+      await page.evaluate(({ schluessel, wert }) => {
+        window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+        const feld = window.__karte.shadowRoot.querySelector('.farben-feld[data-farbe="' + schluessel + '"]');
+        feld.value = wert;
+        feld.dispatchEvent(new Event("change", { bubbles: true }));
+      }, { schluessel, wert });
+      await page.waitForFunction(({ schluessel, wert }) => {
+        const f = window.__karte._einstellungen.farben || {};
+        return f[schluessel] === wert;
+      }, { schluessel, wert }, { timeout: 2000 });
+    };
+
+    await farbeSetzen("akzent", "#2b7cb2");
+    await farbeSetzen("sterne", "#ff0000");
+    let stil = await stilText();
+    assert(stil.includes("--kb-terrakotta: #2b7cb2"), "Die Hauptfarbe wird als CSS-Variable übernommen");
+    assert(stil.includes("--kb-sterne: #ff0000"), "Die Sternefarbe wird einzeln übernommen");
+    assert(stil.includes("--kb-auf-akzent: #ffffff"), "Auf dunkler Hauptfarbe bleibt die Schrift weiß");
+
+    await farbeSetzen("akzent", "#ffee00");
+    stil = await stilText();
+    assert(stil.includes("--kb-auf-akzent: #1a1a1a"), "Auf sehr heller Hauptfarbe wird die Schrift automatisch dunkel");
+
+    // Persistenz: Neu laden.
+    await page.evaluate(async () => { await window.__karte._rezepteLaden(); window.__karte._render(); });
+    stil = await stilText();
+    assert(stil.includes("--kb-terrakotta: #ffee00") && stil.includes("--kb-sterne: #ff0000"), "Die Farben bleiben nach dem Neuladen erhalten");
+
+    // Alles zurücksetzen.
+    await page.evaluate(() => {
+      window.__karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      window.__karte.shadowRoot.getElementById("farben-zuruecksetzen-btn").click();
+    });
+    await page.waitForFunction(() => Object.keys(window.__karte._einstellungen.farben || {}).length === 0, { timeout: 2000 });
+    stil = await stilText();
+    assert(!stil.includes(":host { --kb-terrakotta:") && !stil.includes("--kb-sterne: #ff0000"), "Nach 'Alles zurücksetzen' gelten wieder die Standardfarben");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
+// Test: manipulierte Farbwerte in den gespeicherten Einstellungen werden
+// verworfen (kein CSS-Injection-Weg über das Marker-Item).
+// ---------------------------------------------------------------------
+async function testUngueltigeFarbwerteWerdenVerworfen(browser) {
+  console.log("\nTest: Ungültige/manipulierte Farbwerte werden verworfen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      const item = { description: JSON.stringify({ farben: {
+        akzent: "red; } body { display:none", sterne: "#12345", titel: "#AbCdEf", unbekannt: "#000000",
+      } }) };
+      return window.__karte._einstellungenAusItem(item).farben;
+    });
+    assert(!("akzent" in ergebnis) && !("sterne" in ergebnis), "Nicht streng als #rrggbb formatierte Werte werden verworfen");
+    assert(ergebnis.titel === "#abcdef", "Gültige Werte werden übernommen (kleingeschrieben)");
+    assert(!("unbekannt" in ergebnis), "Unbekannte Farb-Schlüssel werden ignoriert");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test: das Einstellungen-Modal ist bei viel Inhalt (mehrere Schalter)
 // scrollbar, statt über den Bildschirmrand hinauszuwachsen und den
 // "Schließen"-Knopf unerreichbar zu machen (gemeldet: Modal zu groß,
@@ -6370,6 +6449,8 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochbuecherZeileNurSichtbarWennTagsAktiv(browser);
     await testNeueKategorieKnopfHervorgehoben(browser);
     await testEinstellungenModalIstScrollbar(browser);
+    await testFarbenAnpassenUndZuruecksetzen(browser);
+    await testUngueltigeFarbwerteWerdenVerworfen(browser);
     await testAlteRezepteOhneTagsWerdenMigriert(browser);
     await testKochbuecherSpeichernAnwendenLoeschen(browser);
     await testBarrierefreiheitVerbesserungen(browser);

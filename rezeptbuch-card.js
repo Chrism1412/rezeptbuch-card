@@ -273,6 +273,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Zufallsrezept-Knopf in der Übersicht anzeigen",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Umrechnungstabelle-Knopf in der Übersicht anzeigen",
     umrechnungstabelle_kopf_einstellung_hinweis: "Bei der eingestellten Kategorie für amerikanische Rezepte erscheint die Umrechnungstabelle im Rezept und im Kochmodus weiterhin, auch wenn dieser Knopf hier ausgeschaltet ist.",
+    farben_abschnitt_titel: "Farben",
+    farben_hinweis: "Passe einzelne Farben der Karte an. Mit Alles zurücksetzen kehren alle Farben zum Standard zurück.",
+    farben_akzent_label: "Hauptfarbe (Knöpfe, aktive Filter)",
+    farben_akzent_text_label: "Akzentfarbe für Texte und Ränder",
+    farben_loeschen_label: "Löschen / Warnung",
+    farben_sterne_label: "Bewertungssterne",
+    farben_titel_label: "Überschriften",
+    farben_zuruecksetzen_btn: "Alles zurücksetzen",
     us_kategorie_einstellung_label: "Kategorie für amerikanische Rezepte",
     us_kategorie_einstellung_text: "Bei Rezepten mit dieser Kategorie erscheint zusätzlich im Rezept selbst und im Kochmodus ein Knopf für die Umrechnungstabelle.",
     us_kategorie_einstellung_keine: "— Keine —",
@@ -627,6 +635,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Zuckerle-Rezept-Knopf i de Übersicht zeige",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Umrechnigstabälle-Knopf i de Übersicht zeige",
     umrechnungstabelle_kopf_einstellung_hinweis: "Bi de iigstellte Kategorie für amerikanischi Rezept erschiint d'Umrechnigstabälle im Rezept und im Chochmodus wyterhin, au wenn de Knopf da usgschalted isch.",
+    farben_abschnitt_titel: "Farbe",
+    farben_hinweis: "Pass einzelni Farbe vo de Charte aa. Mit Alles zrüggsetze gönd alli Farbe zrugg uf de Standard.",
+    farben_akzent_label: "Hauptfarb (Chnöpf, aktivi Filter)",
+    farben_akzent_text_label: "Akzentfarb für Text und Ränder",
+    farben_loeschen_label: "Lösche / Warnig",
+    farben_sterne_label: "Bewärtigssterne",
+    farben_titel_label: "Überschrifte",
+    farben_zuruecksetzen_btn: "Alles zrüggsetze",
     us_kategorie_einstellung_label: "Kategorie für amerikanischi Rezept",
     us_kategorie_einstellung_text: "Bi Rezäpt mit dere Kategorie erschiint zuesätzlich im Rezäpt sälber und im Kochmodus en Knopf für d'Umrechnigstabälle.",
     us_kategorie_einstellung_keine: "— Kei —",
@@ -961,6 +977,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Show random recipe button in overview",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Show conversion table button in overview",
     umrechnungstabelle_kopf_einstellung_hinweis: "For the configured category for American recipes, the conversion table still appears in the recipe and in cooking mode, even if this button is switched off here.",
+    farben_abschnitt_titel: "Colors",
+    farben_hinweis: "Customize individual colors of the card. Reset all returns every color to its default.",
+    farben_akzent_label: "Main color (buttons, active filters)",
+    farben_akzent_text_label: "Accent color for text and borders",
+    farben_loeschen_label: "Delete / warning",
+    farben_sterne_label: "Rating stars",
+    farben_titel_label: "Headings",
+    farben_zuruecksetzen_btn: "Reset all",
     us_kategorie_einstellung_label: "Category for American recipes",
     us_kategorie_einstellung_text: "Recipes with this category also get a conversion table button in the recipe itself and in cooking mode.",
     us_kategorie_einstellung_keine: "— None —",
@@ -1274,6 +1298,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Показване на бутона за произволна рецепта в прегледа",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Показване на бутона за таблица за преобразуване в прегледа",
     umrechnungstabelle_kopf_einstellung_hinweis: "За зададената категория за американски рецепти таблицата за преобразуване продължава да се показва в рецептата и в режим готвене, дори ако този бутон е изключен тук.",
+    farben_abschnitt_titel: "Цветове",
+    farben_hinweis: "Настройте отделни цветове на картата. С Нулиране на всички всички цветове се връщат към стандартните.",
+    farben_akzent_label: "Основен цвят (бутони, активни филтри)",
+    farben_akzent_text_label: "Акцентен цвят за текст и рамки",
+    farben_loeschen_label: "Изтриване / предупреждение",
+    farben_sterne_label: "Звезди за оценка",
+    farben_titel_label: "Заглавия",
+    farben_zuruecksetzen_btn: "Нулиране на всички",
     us_kategorie_einstellung_label: "Категория за американски рецепти",
     us_kategorie_einstellung_text: "При рецепти с тази категория се появява допълнителен бутон за таблицата за преобразуване в самата рецепта и в режим готвене.",
     us_kategorie_einstellung_keine: "— Няма —",
@@ -1560,6 +1592,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Prikaži gumb za nasumičan recept u pregledu",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Prikaži gumb za tablicu pretvorbe u pregledu",
     umrechnungstabelle_kopf_einstellung_hinweis: "Za postavljenu kategoriju za američke recepte tablica pretvorbe i dalje se prikazuje u receptu i u načinu kuhanja, čak i ako je ovaj gumb ovdje isključen.",
+    farben_abschnitt_titel: "Boje",
+    farben_hinweis: "Prilagodite pojedine boje kartice. Poništi sve vraća sve boje na zadano.",
+    farben_akzent_label: "Glavna boja (gumbi, aktivni filtri)",
+    farben_akzent_text_label: "Naglasna boja za tekst i rubove",
+    farben_loeschen_label: "Brisanje / upozorenje",
+    farben_sterne_label: "Zvjezdice ocjene",
+    farben_titel_label: "Naslovi",
+    farben_zuruecksetzen_btn: "Poništi sve",
     us_kategorie_einstellung_label: "Kategorija za američke recepte",
     us_kategorie_einstellung_text: "Kod recepata s ovom kategorijom dodatno se pojavljuje gumb za tablicu preračunavanja u samom receptu i u načinu kuhanja.",
     us_kategorie_einstellung_keine: "— Nijedna —",
@@ -1846,6 +1886,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Zobrazit tlačítko Náhodný recept v přehledu",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Zobrazit tlačítko převodní tabulky v přehledu",
     umrechnungstabelle_kopf_einstellung_hinweis: "U nastavené kategorie pro americké recepty se převodní tabulka v receptu a v režimu vaření zobrazuje i nadále, i když je toto tlačítko zde vypnuté.",
+    farben_abschnitt_titel: "Barvy",
+    farben_hinweis: "Upravte jednotlivé barvy karty. Obnovit vše vrátí všechny barvy na výchozí.",
+    farben_akzent_label: "Hlavní barva (tlačítka, aktivní filtry)",
+    farben_akzent_text_label: "Zvýrazňovací barva textu a okrajů",
+    farben_loeschen_label: "Smazání / varování",
+    farben_sterne_label: "Hvězdičky hodnocení",
+    farben_titel_label: "Nadpisy",
+    farben_zuruecksetzen_btn: "Obnovit vše",
     us_kategorie_einstellung_label: "Kategorie pro americké recepty",
     us_kategorie_einstellung_text: "U receptů s touto kategorií se navíc zobrazí tlačítko pro převodní tabulku přímo v receptu a v režimu vaření.",
     us_kategorie_einstellung_keine: "— Žádná —",
@@ -2132,6 +2180,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Vis knappen Tilfældig opskrift i overblikket",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Vis knappen til omregningstabel i overblikket",
     umrechnungstabelle_kopf_einstellung_hinweis: "For den valgte kategori til amerikanske opskrifter vises omregningstabellen fortsat i opskriften og i tilberedningstilstand, selvom denne knap er slået fra her.",
+    farben_abschnitt_titel: "Farver",
+    farben_hinweis: "Tilpas kortets enkelte farver. Nulstil alt sætter alle farver tilbage til standard.",
+    farben_akzent_label: "Hovedfarve (knapper, aktive filtre)",
+    farben_akzent_text_label: "Accentfarve til tekst og kanter",
+    farben_loeschen_label: "Slet / advarsel",
+    farben_sterne_label: "Vurderingsstjerner",
+    farben_titel_label: "Overskrifter",
+    farben_zuruecksetzen_btn: "Nulstil alt",
     us_kategorie_einstellung_label: "Kategori til amerikanske opskrifter",
     us_kategorie_einstellung_text: "Opskrifter med denne kategori får desuden en knap til omregningstabellen i selve opskriften og i tilberedningstilstand.",
     us_kategorie_einstellung_keine: "— Ingen —",
@@ -2418,6 +2474,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Knop 'Willekeurig recept' in overzicht weergeven",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Knop voor omrekentabel in overzicht weergeven",
     umrechnungstabelle_kopf_einstellung_hinweis: "Bij de ingestelde categorie voor Amerikaanse recepten verschijnt de omrekentabel nog steeds in het recept en in de kookmodus, ook als deze knop hier is uitgeschakeld.",
+    farben_abschnitt_titel: "Kleuren",
+    farben_hinweis: "Pas afzonderlijke kleuren van de kaart aan. Alles resetten zet alle kleuren terug naar de standaardwaarde.",
+    farben_akzent_label: "Hoofdkleur (knoppen, actieve filters)",
+    farben_akzent_text_label: "Accentkleur voor tekst en randen",
+    farben_loeschen_label: "Verwijderen / waarschuwing",
+    farben_sterne_label: "Beoordelingssterren",
+    farben_titel_label: "Koppen",
+    farben_zuruecksetzen_btn: "Alles resetten",
     us_kategorie_einstellung_label: "Categorie voor Amerikaanse recepten",
     us_kategorie_einstellung_text: "Recepten met deze categorie krijgen ook een knop voor de omrekentabel in het recept zelf en in de kookmodus.",
     us_kategorie_einstellung_keine: "— Geen —",
@@ -2704,6 +2768,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Kuva juhusliku retsepti nupp ülevaates",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Kuva teisendustabeli nupp ülevaates",
     umrechnungstabelle_kopf_einstellung_hinweis: "Ameerika retseptide jaoks määratud kategooria puhul kuvatakse teisendustabel retseptis ja kokkamise režiimis endiselt, isegi kui see nupp on siin välja lülitatud.",
+    farben_abschnitt_titel: "Värvid",
+    farben_hinweis: "Kohanda kaardi üksikuid värve. Lähtesta kõik taastab kõik värvid vaikeväärtusele.",
+    farben_akzent_label: "Põhivärv (nupud, aktiivsed filtrid)",
+    farben_akzent_text_label: "Rõhuvärv tekstile ja äärtele",
+    farben_loeschen_label: "Kustutamine / hoiatus",
+    farben_sterne_label: "Hindamistähed",
+    farben_titel_label: "Pealkirjad",
+    farben_zuruecksetzen_btn: "Lähtesta kõik",
     us_kategorie_einstellung_label: "Kategooria Ameerika retseptidele",
     us_kategorie_einstellung_text: "Selle kategooria retseptidel kuvatakse lisaks teisendustabeli nupp ka retseptis endas ja köögirežiimis.",
     us_kategorie_einstellung_keine: "— Puudub —",
@@ -2990,6 +3062,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Näytä Satunnainen resepti -painike yleiskatsauksessa",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Näytä muuntotaulukon painike yleiskatsauksessa",
     umrechnungstabelle_kopf_einstellung_hinweis: "Amerikkalaisille resepteille asetetussa kategoriassa muuntotaulukko näkyy edelleen reseptissä ja kokkaustilassa, vaikka tämä painike olisi täällä pois päältä.",
+    farben_abschnitt_titel: "Värit",
+    farben_hinweis: "Muokkaa kortin yksittäisiä värejä. Palauta kaikki palauttaa kaikki värit oletusarvoihin.",
+    farben_akzent_label: "Pääväri (painikkeet, aktiiviset suodattimet)",
+    farben_akzent_text_label: "Korostusväri teksteille ja reunoille",
+    farben_loeschen_label: "Poisto / varoitus",
+    farben_sterne_label: "Arvostelutähdet",
+    farben_titel_label: "Otsikot",
+    farben_zuruecksetzen_btn: "Palauta kaikki",
     us_kategorie_einstellung_label: "Kategoria amerikkalaisille resepteille",
     us_kategorie_einstellung_text: "Tämän kategorian resepteissä näkyy lisäksi muuntotaulukon painike itse reseptissä ja keittiötilassa.",
     us_kategorie_einstellung_keine: "— Ei mikään —",
@@ -3277,6 +3357,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Afficher le bouton Recette aléatoire dans l'aperçu",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Afficher le bouton du tableau de conversion dans l'aperçu",
     umrechnungstabelle_kopf_einstellung_hinweis: "Pour la catégorie configurée pour les recettes américaines, le tableau de conversion continue d'apparaître dans la recette et en mode cuisine, même si ce bouton est désactivé ici.",
+    farben_abschnitt_titel: "Couleurs",
+    farben_hinweis: "Personnalisez les couleurs de la carte une à une. Tout réinitialiser rétablit toutes les couleurs par défaut.",
+    farben_akzent_label: "Couleur principale (boutons, filtres actifs)",
+    farben_akzent_text_label: "Couleur d'accent pour textes et bordures",
+    farben_loeschen_label: "Suppression / avertissement",
+    farben_sterne_label: "Étoiles de notation",
+    farben_titel_label: "Titres",
+    farben_zuruecksetzen_btn: "Tout réinitialiser",
     us_kategorie_einstellung_label: "Catégorie pour les recettes américaines",
     us_kategorie_einstellung_text: "Les recettes de cette catégorie affichent aussi un bouton pour la table de conversion directement dans la recette et en mode cuisine.",
     us_kategorie_einstellung_keine: "— Aucune —",
@@ -3564,6 +3652,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Εμφάνιση κουμπιού τυχαίας συνταγής στην επισκόπηση",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Εμφάνιση κουμπιού πίνακα μετατροπών στην επισκόπηση",
     umrechnungstabelle_kopf_einstellung_hinweis: "Για την καθορισμένη κατηγορία αμερικανικών συνταγών, ο πίνακας μετατροπών συνεχίζει να εμφανίζεται στη συνταγή και στη λειτουργία μαγειρέματος, ακόμη κι αν αυτό το κουμπί είναι απενεργοποιημένο εδώ.",
+    farben_abschnitt_titel: "Χρώματα",
+    farben_hinweis: "Προσαρμόστε μεμονωμένα χρώματα της κάρτας. Η επαναφορά όλων επαναφέρει όλα τα χρώματα στις προεπιλογές.",
+    farben_akzent_label: "Βασικό χρώμα (κουμπιά, ενεργά φίλτρα)",
+    farben_akzent_text_label: "Χρώμα έμφασης για κείμενα και περιγράμματα",
+    farben_loeschen_label: "Διαγραφή / προειδοποίηση",
+    farben_sterne_label: "Αστέρια αξιολόγησης",
+    farben_titel_label: "Επικεφαλίδες",
+    farben_zuruecksetzen_btn: "Επαναφορά όλων",
     us_kategorie_einstellung_label: "Κατηγορία για αμερικανικές συνταγές",
     us_kategorie_einstellung_text: "Οι συνταγές αυτής της κατηγορίας εμφανίζουν επιπλέον ένα κουμπί για τον πίνακα μετατροπής μέσα στη συνταγή και στη λειτουργία μαγειρέματος.",
     us_kategorie_einstellung_keine: "— Καμία —",
@@ -3851,6 +3947,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Véletlen recept gomb megjelenítése az áttekintőben",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Átváltási táblázat gomb megjelenítése az áttekintőben",
     umrechnungstabelle_kopf_einstellung_hinweis: "Az amerikai receptekhez beállított kategóriánál az átváltási táblázat továbbra is megjelenik a receptnél és főzési módban, még akkor is, ha ez a gomb itt ki van kapcsolva.",
+    farben_abschnitt_titel: "Színek",
+    farben_hinweis: "Állítsa be a kártya egyes színeit. A Mindent visszaállít minden színt az alapértelmezettre állít.",
+    farben_akzent_label: "Fő szín (gombok, aktív szűrők)",
+    farben_akzent_text_label: "Kiemelő szín szövegekhez és szegélyekhez",
+    farben_loeschen_label: "Törlés / figyelmeztetés",
+    farben_sterne_label: "Értékelő csillagok",
+    farben_titel_label: "Címsorok",
+    farben_zuruecksetzen_btn: "Mindent visszaállít",
     us_kategorie_einstellung_label: "Kategória amerikai receptekhez",
     us_kategorie_einstellung_text: "Az ebbe a kategóriába tartozó receptek a receptben magában és a főzési módban is megjelenítenek egy átváltási táblázat gombot.",
     us_kategorie_einstellung_keine: "— Nincs —",
@@ -4138,6 +4242,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Taispeáin an cnaipe Oideas randamach sa forbhreathnú",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Taispeáin an cnaipe tábla tiontaithe sa forbhreathnú",
     umrechnungstabelle_kopf_einstellung_hinweis: "Maidir leis an gcatagóir atá socraithe le haghaidh oidis Mheiriceánacha, leanann an tábla tiontaithe de bheith le feiceáil san oideas agus sa mhód cócaireachta, fiú má tá an cnaipe seo múchta anseo.",
+    farben_abschnitt_titel: "Dathanna",
+    farben_hinweis: "Saincheap dathanna aonair an chárta. Athshocraíonn Athshocraigh gach rud gach dath go dtí an réamhshocrú.",
+    farben_akzent_label: "Príomhdhath (cnaipí, scagairí gníomhacha)",
+    farben_akzent_text_label: "Dath aibhsithe le haghaidh téacs agus imill",
+    farben_loeschen_label: "Scriosadh / rabhadh",
+    farben_sterne_label: "Réaltaí rátála",
+    farben_titel_label: "Ceannteidil",
+    farben_zuruecksetzen_btn: "Athshocraigh gach rud",
     us_kategorie_einstellung_label: "Catagóir d'oidis Mheiriceánacha",
     us_kategorie_einstellung_text: "Taispeánann oidis sa chatagóir seo cnaipe breise don tábla tiontaithe san oideas féin agus sa mhód cócaireachta.",
     us_kategorie_einstellung_keine: "— Ceann ar bith —",
@@ -4425,6 +4537,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Mostra il pulsante Ricetta casuale nella panoramica",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Mostra il pulsante della tabella di conversione nella panoramica",
     umrechnungstabelle_kopf_einstellung_hinweis: "Per la categoria impostata per le ricette americane, la tabella di conversione continua a comparire nella ricetta e in modalità cottura, anche se questo pulsante qui è disattivato.",
+    farben_abschnitt_titel: "Colori",
+    farben_hinweis: "Personalizza i singoli colori della scheda. Ripristina tutto riporta tutti i colori a quelli predefiniti.",
+    farben_akzent_label: "Colore principale (pulsanti, filtri attivi)",
+    farben_akzent_text_label: "Colore di accento per testi e bordi",
+    farben_loeschen_label: "Elimina / avviso",
+    farben_sterne_label: "Stelle di valutazione",
+    farben_titel_label: "Titoli",
+    farben_zuruecksetzen_btn: "Ripristina tutto",
     us_kategorie_einstellung_label: "Categoria per ricette americane",
     us_kategorie_einstellung_text: "Le ricette con questa categoria mostrano anche un pulsante per la tabella di conversione nella ricetta stessa e in modalità cottura.",
     us_kategorie_einstellung_keine: "— Nessuna —",
@@ -4711,6 +4831,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Rādīt pogu 'Nejaušā recepte' pārskatā",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Rādīt pārrēķinu tabulas pogu pārskatā",
     umrechnungstabelle_kopf_einstellung_hinweis: "Iestatītajai amerikāņu recepšu kategorijai pārrēķinu tabula receptē un gatavošanas režīmā tiek rādīta joprojām, pat ja šī poga šeit ir izslēgta.",
+    farben_abschnitt_titel: "Krāsas",
+    farben_hinweis: "Pielāgojiet atsevišķas kartes krāsas. Atiestatīt visu atgriež visas krāsas noklusējumā.",
+    farben_akzent_label: "Pamatkrāsa (pogas, aktīvie filtri)",
+    farben_akzent_text_label: "Akcenta krāsa tekstam un malām",
+    farben_loeschen_label: "Dzēšana / brīdinājums",
+    farben_sterne_label: "Vērtējuma zvaigznes",
+    farben_titel_label: "Virsraksti",
+    farben_zuruecksetzen_btn: "Atiestatīt visu",
     us_kategorie_einstellung_label: "Kategorija amerikāņu receptēm",
     us_kategorie_einstellung_text: "Receptēm ar šo kategoriju papildus parādās pārrēķina tabulas poga pašā receptē un gatavošanas režīmā.",
     us_kategorie_einstellung_keine: "— Nav —",
@@ -4997,6 +5125,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Rodyti atsitiktinio recepto mygtuką apžvalgoje",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Rodyti perskaičiavimo lentelės mygtuką apžvalgoje",
     umrechnungstabelle_kopf_einstellung_hinweis: "Nustatytai amerikietiškų receptų kategorijai perskaičiavimo lentelė ir toliau rodoma recepte bei gaminimo režime, net jei šis mygtukas čia išjungtas.",
+    farben_abschnitt_titel: "Spalvos",
+    farben_hinweis: "Pritaikykite atskiras kortelės spalvas. Atstatyti viską grąžina visas spalvas į numatytąsias.",
+    farben_akzent_label: "Pagrindinė spalva (mygtukai, aktyvūs filtrai)",
+    farben_akzent_text_label: "Akcento spalva tekstui ir kraštinėms",
+    farben_loeschen_label: "Ištrynimas / įspėjimas",
+    farben_sterne_label: "Įvertinimo žvaigždutės",
+    farben_titel_label: "Antraštės",
+    farben_zuruecksetzen_btn: "Atstatyti viską",
     us_kategorie_einstellung_label: "Kategorija Amerikos receptams",
     us_kategorie_einstellung_text: "Prie šios kategorijos receptų papildomai rodomas perskaičiavimo lentelės mygtukas pačiame recepte ir gaminimo režimu.",
     us_kategorie_einstellung_keine: "— Jokios —",
@@ -5284,6 +5420,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Uri l-buttuna Riċetta każwali fil-ħarsa ġenerali",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Uri l-buttuna tat-tabella tal-konverżjoni fil-ħarsa ġenerali",
     umrechnungstabelle_kopf_einstellung_hinweis: "Għall-kategorija stabbilita għal riċetti Amerikani, it-tabella tal-konverżjoni xorta tidher fir-riċetta u fil-modalità tat-tisjir, anke jekk din il-buttuna hawn tkun mitfija.",
+    farben_abschnitt_titel: "Kuluri",
+    farben_hinweis: "Ippersonalizza kuluri individwali tal-karta. Irrisettja kollox terġa' tqiegħed il-kuluri kollha fuq id-default.",
+    farben_akzent_label: "Kulur ewlieni (buttuni, filtri attivi)",
+    farben_akzent_text_label: "Kulur tal-aċċent għat-test u l-bordijiet",
+    farben_loeschen_label: "Tħassir / twissija",
+    farben_sterne_label: "Stilel tal-valutazzjoni",
+    farben_titel_label: "Titli",
+    farben_zuruecksetzen_btn: "Irrisettja kollox",
     us_kategorie_einstellung_label: "Kategorija għal riċetti Amerikani",
     us_kategorie_einstellung_text: "Ir-riċetti b'din il-kategorija juru wkoll buttuna għat-tabella tal-konverżjoni fir-riċetta nnifisha u fil-modalità tat-tisjir.",
     us_kategorie_einstellung_keine: "— Xejn —",
@@ -5570,6 +5714,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Pokaż przycisk Losowy przepis w przeglądzie",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Pokaż przycisk tabeli przeliczeń w przeglądzie",
     umrechnungstabelle_kopf_einstellung_hinweis: "Dla ustawionej kategorii przepisów amerykańskich tabela przeliczeń nadal pojawia się w przepisie i w trybie gotowania, nawet jeśli ten przycisk jest tutaj wyłączony.",
+    farben_abschnitt_titel: "Kolory",
+    farben_hinweis: "Dostosuj poszczególne kolory karty. Zresetuj wszystko przywraca wszystkie kolory domyślne.",
+    farben_akzent_label: "Kolor główny (przyciski, aktywne filtry)",
+    farben_akzent_text_label: "Kolor akcentu dla tekstów i obramowań",
+    farben_loeschen_label: "Usuwanie / ostrzeżenie",
+    farben_sterne_label: "Gwiazdki oceny",
+    farben_titel_label: "Nagłówki",
+    farben_zuruecksetzen_btn: "Zresetuj wszystko",
     us_kategorie_einstellung_label: "Kategoria dla przepisów amerykańskich",
     us_kategorie_einstellung_text: "Przy przepisach z tą kategorią dodatkowo pojawia się przycisk tabeli przeliczeń bezpośrednio w przepisie i w trybie gotowania.",
     us_kategorie_einstellung_keine: "— Brak —",
@@ -5857,6 +6009,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Mostrar botão de receita aleatória na visão geral",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Mostrar botão da tabela de conversão na visão geral",
     umrechnungstabelle_kopf_einstellung_hinweis: "Para a categoria definida para receitas americanas, a tabela de conversão continua a aparecer na receita e no modo de cozinha, mesmo que este botão esteja desativado aqui.",
+    farben_abschnitt_titel: "Cores",
+    farben_hinweis: "Personalize cada cor do cartão. Repor tudo devolve todas as cores ao padrão.",
+    farben_akzent_label: "Cor principal (botões, filtros ativos)",
+    farben_akzent_text_label: "Cor de destaque para textos e contornos",
+    farben_loeschen_label: "Eliminar / aviso",
+    farben_sterne_label: "Estrelas de avaliação",
+    farben_titel_label: "Títulos",
+    farben_zuruecksetzen_btn: "Repor tudo",
     us_kategorie_einstellung_label: "Categoria para receitas americanas",
     us_kategorie_einstellung_text: "As receitas com esta categoria mostram também um botão para a tabela de conversão na própria receita e no modo de cozinha.",
     us_kategorie_einstellung_keine: "— Nenhuma —",
@@ -6143,6 +6303,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Afișează butonul Rețetă aleatorie în prezentare",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Afișează butonul tabelului de conversie în prezentare",
     umrechnungstabelle_kopf_einstellung_hinweis: "Pentru categoria setată pentru rețetele americane, tabelul de conversie continuă să apară în rețetă și în modul de gătit, chiar dacă acest buton este dezactivat aici.",
+    farben_abschnitt_titel: "Culori",
+    farben_hinweis: "Personalizați culorile individuale ale cardului. Resetează tot readuce toate culorile la valorile implicite.",
+    farben_akzent_label: "Culoare principală (butoane, filtre active)",
+    farben_akzent_text_label: "Culoare de accent pentru text și margini",
+    farben_loeschen_label: "Ștergere / avertizare",
+    farben_sterne_label: "Stele de evaluare",
+    farben_titel_label: "Titluri",
+    farben_zuruecksetzen_btn: "Resetează tot",
     us_kategorie_einstellung_label: "Categorie pentru rețete americane",
     us_kategorie_einstellung_text: "Rețetele din această categorie afișează suplimentar un buton pentru tabelul de conversie chiar în rețetă și în modul de gătit.",
     us_kategorie_einstellung_keine: "— Niciuna —",
@@ -6429,6 +6597,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Zobraziť tlačidlo Náhodný recept v prehľade",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Zobraziť tlačidlo prevodnej tabuľky v prehľade",
     umrechnungstabelle_kopf_einstellung_hinweis: "Pre nastavenú kategóriu pre americké recepty sa prevodná tabuľka naďalej zobrazuje v recepte a v režime varenia, aj keď je toto tlačidlo tu vypnuté.",
+    farben_abschnitt_titel: "Farby",
+    farben_hinweis: "Prispôsobte jednotlivé farby karty. Obnoviť všetko vráti všetky farby na predvolené.",
+    farben_akzent_label: "Hlavná farba (tlačidlá, aktívne filtre)",
+    farben_akzent_text_label: "Zvýrazňovacia farba textu a okrajov",
+    farben_loeschen_label: "Odstránenie / upozornenie",
+    farben_sterne_label: "Hviezdičky hodnotenia",
+    farben_titel_label: "Nadpisy",
+    farben_zuruecksetzen_btn: "Obnoviť všetko",
     us_kategorie_einstellung_label: "Kategória pre americké recepty",
     us_kategorie_einstellung_text: "Pri receptoch s touto kategóriou sa navyše zobrazí tlačidlo prevodnej tabuľky priamo v recepte a v režime varenia.",
     us_kategorie_einstellung_keine: "— Žiadna —",
@@ -6715,6 +6891,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Pokaži gumb Naključni recept v pregledu",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Pokaži gumb pretvorbene tabele v pregledu",
     umrechnungstabelle_kopf_einstellung_hinweis: "Za nastavljeno kategorijo za ameriške recepte se pretvorbena tabela še vedno prikazuje v receptu in v načinu kuhanja, tudi če je ta gumb tukaj izklopljen.",
+    farben_abschnitt_titel: "Barve",
+    farben_hinweis: "Prilagodite posamezne barve kartice. Ponastavi vse vrne vse barve na privzete.",
+    farben_akzent_label: "Glavna barva (gumbi, aktivni filtri)",
+    farben_akzent_text_label: "Poudarjena barva za besedilo in robove",
+    farben_loeschen_label: "Brisanje / opozorilo",
+    farben_sterne_label: "Zvezdice ocene",
+    farben_titel_label: "Naslovi",
+    farben_zuruecksetzen_btn: "Ponastavi vse",
     us_kategorie_einstellung_label: "Kategorija za ameriške recepte",
     us_kategorie_einstellung_text: "Pri receptih s to kategorijo se dodatno prikaže gumb za pretvorbeno tabelo neposredno v receptu in v kuharskem načinu.",
     us_kategorie_einstellung_keine: "— Brez —",
@@ -7001,6 +7185,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Mostrar botón de receta aleatoria en la vista general",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Mostrar botón de tabla de conversión en la vista general",
     umrechnungstabelle_kopf_einstellung_hinweis: "Para la categoría configurada para recetas americanas, la tabla de conversión sigue apareciendo en la receta y en el modo de cocina, incluso si este botón está desactivado aquí.",
+    farben_abschnitt_titel: "Colores",
+    farben_hinweis: "Personaliza los colores de la tarjeta uno a uno. Restablecer todo devuelve todos los colores a los valores predeterminados.",
+    farben_akzent_label: "Color principal (botones, filtros activos)",
+    farben_akzent_text_label: "Color de acento para textos y bordes",
+    farben_loeschen_label: "Eliminar / advertencia",
+    farben_sterne_label: "Estrellas de valoración",
+    farben_titel_label: "Títulos",
+    farben_zuruecksetzen_btn: "Restablecer todo",
     us_kategorie_einstellung_label: "Categoría para recetas americanas",
     us_kategorie_einstellung_text: "Las recetas con esta categoría muestran también un botón para la tabla de conversión en la propia receta y en el modo cocina.",
     us_kategorie_einstellung_keine: "— Ninguna —",
@@ -7287,6 +7479,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Visa knappen Slumpmässigt recept i översikten",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Visa knappen för omräkningstabell i översikten",
     umrechnungstabelle_kopf_einstellung_hinweis: "För den inställda kategorin för amerikanska recept visas omräkningstabellen fortfarande i receptet och i matlagningsläget, även om den här knappen är avstängd här.",
+    farben_abschnitt_titel: "Färger",
+    farben_hinweis: "Anpassa kortets enskilda färger. Återställ allt sätter alla färger till standard.",
+    farben_akzent_label: "Huvudfärg (knappar, aktiva filter)",
+    farben_akzent_text_label: "Accentfärg för text och kanter",
+    farben_loeschen_label: "Radera / varning",
+    farben_sterne_label: "Betygsstjärnor",
+    farben_titel_label: "Rubriker",
+    farben_zuruecksetzen_btn: "Återställ allt",
     us_kategorie_einstellung_label: "Kategori för amerikanska recept",
     us_kategorie_einstellung_text: "Recept med denna kategori visar även en knapp för omvandlingstabellen direkt i receptet och i lagningsläget.",
     us_kategorie_einstellung_keine: "— Ingen —",
@@ -8284,6 +8484,39 @@ function rezeptAusTextErkennen(rohtext) {
   return { title, servings, category, ingredients, steps };
 }
 
+// Anpassbare Farben (Einstellungen -> Farben). Jede Rolle ersetzt eine
+// CSS-Variable der Karte; ohne gespeicherten Wert gilt die Standardfarbe.
+// "standard" dient nur als Startwert des Farbwählers - gespeichert wird
+// ausschließlich, was der Nutzer tatsächlich geändert hat.
+const FARB_ROLLEN = [
+  { schluessel: "akzent", standard: "#b25d2b", labelSchluessel: "farben_akzent_label" },
+  { schluessel: "akzentText", standard: "#96481f", labelSchluessel: "farben_akzent_text_label" },
+  { schluessel: "loeschen", standard: "#a8402a", labelSchluessel: "farben_loeschen_label" },
+  { schluessel: "sterne", standard: "#d9a441", labelSchluessel: "farben_sterne_label" },
+  { schluessel: "titel", standard: "#3a3a3a", labelSchluessel: "farben_titel_label" },
+];
+
+// Nur streng geprüfte #rrggbb-Werte dürfen ins CSS - schließt
+// CSS-Injection über manipulierte Einstellungen aus.
+function hexFarbeGueltig(wert) {
+  return typeof wert === "string" && /^#[0-9a-fA-F]{6}$/.test(wert);
+}
+
+function hexZuRgb(hex) {
+  return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+}
+
+// Weiß oder fast Schwarz als Schriftfarbe, je nachdem was auf der Fläche
+// besser lesbar ist (WCAG-Leuchtdichte).
+function schriftfarbeAuf(hex) {
+  const [r, g, b] = hexZuRgb(hex).map((k) => {
+    const c = k / 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+  const leuchtdichte = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return leuchtdichte > 0.4 ? "#1a1a1a" : "#ffffff";
+}
+
 class RezeptbuchCard extends HTMLElement {
   constructor() {
     super();
@@ -8977,18 +9210,24 @@ class RezeptbuchCard extends HTMLElement {
   _einstellungenAusItem(item) {
     const standard = {
       erfassungAktiv: true, amerikanischeKategorie: "", eigeneUmrechnungen: [], tagsAnzeigen: true,
-      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true,
+      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true, farben: {},
     };
     if (!item || !item.description) return standard;
     try {
       const geparst = JSON.parse(item.description);
-      const ergebnis = { ...standard };
+      const ergebnis = { ...standard, farben: {} };
       if (typeof geparst.erfassungAktiv === "boolean") ergebnis.erfassungAktiv = geparst.erfassungAktiv;
       else if (typeof geparst.showStatistics === "boolean") ergebnis.erfassungAktiv = geparst.showStatistics;
       if (typeof geparst.amerikanischeKategorie === "string") ergebnis.amerikanischeKategorie = geparst.amerikanischeKategorie;
       if (typeof geparst.tagsAnzeigen === "boolean") ergebnis.tagsAnzeigen = geparst.tagsAnzeigen;
       if (typeof geparst.zufallsrezeptAnzeigen === "boolean") ergebnis.zufallsrezeptAnzeigen = geparst.zufallsrezeptAnzeigen;
       if (typeof geparst.umrechnungstabelleKopfAnzeigen === "boolean") ergebnis.umrechnungstabelleKopfAnzeigen = geparst.umrechnungstabelleKopfAnzeigen;
+      if (geparst.farben && typeof geparst.farben === "object") {
+        for (const rolle of FARB_ROLLEN) {
+          const wert = geparst.farben[rolle.schluessel];
+          if (hexFarbeGueltig(wert)) ergebnis.farben[rolle.schluessel] = wert.toLowerCase();
+        }
+      }
       if (Array.isArray(geparst.eigeneUmrechnungen)) {
         ergebnis.eigeneUmrechnungen = geparst.eigeneUmrechnungen.filter(
           (e) => e && typeof e.name === "string" && e.name.trim() !== ""
@@ -10491,6 +10730,44 @@ class RezeptbuchCard extends HTMLElement {
     });
   }
 
+  // Speichert eine Farbänderung und rendert neu. Die Scrollposition des
+  // Einstellungen-Modals bleibt erhalten (der Neuaufbau würde sonst ganz nach
+  // oben springen, obwohl die Farbfelder am Ende des Modals liegen).
+  async _farbenAendern(aenderungFn) {
+    const box = this.shadowRoot.querySelector("#statistik-einstellungen-modal .modal-box");
+    const scrollTop = box ? box.scrollTop : 0;
+    await this._einstellungenAktualisieren((stand) => ({ ...stand, farben: aenderungFn(stand.farben || {}) }));
+    this._render();
+    const neueBox = this.shadowRoot.querySelector("#statistik-einstellungen-modal .modal-box");
+    if (neueBox) neueBox.scrollTop = scrollTop;
+  }
+
+  // CSS-Überschreibungen für die vom Nutzer geänderten Farben (leer, solange
+  // nichts geändert wurde). Steht im Stil NACH dem :host-Standardblock und
+  // gewinnt dadurch. Schriftfarbe auf Akzent-/Lösch-Flächen wird automatisch
+  // hell oder dunkel gewählt, damit die Beschriftung lesbar bleibt.
+  _farbenCss() {
+    const f = (this._einstellungen && this._einstellungen.farben) || {};
+    const regeln = [];
+    if (hexFarbeGueltig(f.akzent)) {
+      const [r, g, b] = hexZuRgb(f.akzent);
+      regeln.push(
+        `--kb-terrakotta: ${f.akzent}`,
+        `--kb-terrakotta-hell: rgba(${r}, ${g}, ${b}, 0.12)`,
+        `--kb-terrakotta-hell2: rgba(${r}, ${g}, ${b}, 0.06)`,
+        `--kb-akzent-schatten: rgba(${r}, ${g}, ${b}, 0.35)`,
+        `--kb-auf-akzent: ${schriftfarbeAuf(f.akzent)}`
+      );
+    }
+    if (hexFarbeGueltig(f.akzentText)) regeln.push(`--kb-terrakotta-dunkel: ${f.akzentText}`);
+    if (hexFarbeGueltig(f.loeschen)) {
+      regeln.push(`--kb-loeschen: ${f.loeschen}`, `--kb-auf-loeschen: ${schriftfarbeAuf(f.loeschen)}`);
+    }
+    if (hexFarbeGueltig(f.sterne)) regeln.push(`--kb-sterne: ${f.sterne}`);
+    if (hexFarbeGueltig(f.titel)) regeln.push(`--kb-titel: ${f.titel}`);
+    return regeln.length ? `:host { ${regeln.join("; ")}; }` : "";
+  }
+
   _render() {
     if (!this.shadowRoot) return;
     const stil = `
@@ -10508,8 +10785,15 @@ class RezeptbuchCard extends HTMLElement {
           --kb-terrakotta-dunkel: #96481f;
           --kb-terrakotta-hell: rgba(178, 93, 43, 0.12);
           --kb-terrakotta-hell2: rgba(178, 93, 43, 0.06);
+          --kb-auf-akzent: #fff;
+          --kb-loeschen: #a8402a;
+          --kb-auf-loeschen: #fff;
+          --kb-sterne: #d9a441;
+          --kb-titel: var(--primary-text-color);
+          --kb-akzent-schatten: rgba(193,101,47,0.35);
           --kb-schrift-titel: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
         }
+        ${this._farbenCss()}
         ha-card { padding: 18px; }
         /* Detail-/Formular-Ansicht: bei sehr breiten Containern (z.B. Panel-Ansicht
            auf einem großen Monitor) nicht auf volle Breite strecken - lange
@@ -10519,7 +10803,7 @@ class RezeptbuchCard extends HTMLElement {
         .kopf { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:8px; flex-wrap:wrap; }
         .kopf h2 {
           margin:0; font-size:1.5em; font-family: var(--kb-schrift-titel); font-weight:700;
-          color: var(--primary-text-color);
+          color: var(--kb-titel);
         }
         .such-feld {
           width:100%; box-sizing:border-box; padding:11px 16px; margin-bottom:16px;
@@ -10561,9 +10845,9 @@ class RezeptbuchCard extends HTMLElement {
           margin-bottom:14px; font-size:0.9em; color: var(--kb-terrakotta-dunkel);
         }
         button.primaer {
-          background: var(--kb-terrakotta); color:#fff;
+          background: var(--kb-terrakotta); color: var(--kb-auf-akzent);
           border:none; border-radius:999px; padding:9px 18px; cursor:pointer; font-size:0.9em; font-weight:600;
-          box-shadow: 0 2px 6px rgba(193,101,47,0.35); white-space:nowrap;
+          box-shadow: 0 2px 6px var(--kb-akzent-schatten); white-space:nowrap;
         }
         button.sekundaer {
           background: transparent; color: var(--kb-terrakotta); border:1.5px solid var(--kb-terrakotta);
@@ -10571,7 +10855,7 @@ class RezeptbuchCard extends HTMLElement {
         }
         button.klein { padding:5px 12px; font-size:0.8em; }
         button.gefahr {
-          background:#a8402a; color:#fff; border:none; border-radius:999px; padding:8px 16px; cursor:pointer; font-weight:600; white-space:nowrap;
+          background: var(--kb-loeschen); color: var(--kb-auf-loeschen); border:none; border-radius:999px; padding:8px 16px; cursor:pointer; font-weight:600; white-space:nowrap;
         }
         .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,240px)); gap:16px; justify-content: start; }
         .kachel {
@@ -10615,7 +10899,7 @@ class RezeptbuchCard extends HTMLElement {
           margin-left:auto; background:none; border:none; cursor:pointer; font-size:1em;
           color: var(--secondary-text-color); line-height:1; padding:2px 4px;
         }
-        .fehler { text-align:center; color:#a8402a; padding: 24px 0; font-size:0.9em; }
+        .fehler { text-align:center; color: var(--kb-loeschen); padding: 24px 0; font-size:0.9em; }
 
         /* max-height als Anteil der sichtbaren Bildschirm-HÖHE (nicht nur
            Breite): das Bild skaliert über aspect-ratio sonst rein mit der
@@ -10651,7 +10935,7 @@ class RezeptbuchCard extends HTMLElement {
         }
         .detail-titel {
           font-family: var(--kb-schrift-titel); font-size:1.7em; font-weight:700; margin:0 0 4px;
-          color: var(--primary-text-color);
+          color: var(--kb-titel);
         }
         .detail-trenner {
           border:none; height:2px; width:56px; background: var(--kb-terrakotta); border-radius:2px; margin:6px 0 14px;
@@ -10667,7 +10951,7 @@ class RezeptbuchCard extends HTMLElement {
         }
         .portionen-zeile button {
           width:32px; height:32px; border-radius:50%; border:none;
-          background: var(--kb-terrakotta); color:#fff; font-size:1.1em; cursor:pointer; line-height:1;
+          background: var(--kb-terrakotta); color: var(--kb-auf-akzent); font-size:1.1em; cursor:pointer; line-height:1;
         }
         .portionen-zeile span { font-size:0.95em; color: var(--primary-text-color); }
 
@@ -10698,7 +10982,7 @@ class RezeptbuchCard extends HTMLElement {
         ol.schritte-liste li:last-child { border-left-color: transparent; padding-bottom:2px; }
         ol.schritte-liste li::before {
           content: counter(schritt); position:absolute; left:-16px; top:-2px;
-          width:30px; height:30px; border-radius:50%; background: var(--kb-terrakotta); color:#fff;
+          width:30px; height:30px; border-radius:50%; background: var(--kb-terrakotta); color: var(--kb-auf-akzent);
           font-weight:700; font-size:0.85em; display:flex; align-items:center; justify-content:center;
         }
 
@@ -10721,7 +11005,7 @@ class RezeptbuchCard extends HTMLElement {
         .zutat-zeile input.menge-feld { flex: 0 0 70px; }
         .zutat-zeile input.einheit-feld { flex: 0 0 70px; }
         .zutat-zeile button, .schritt-zeile button {
-          flex:0 0 32px; border:none; border-radius:8px; background:#a8402a; color:#fff; cursor:pointer;
+          flex:0 0 32px; border:none; border-radius:8px; background: var(--kb-loeschen); color: var(--kb-auf-loeschen); cursor:pointer;
         }
         .schritt-zeile button.schritt-verschieben {
           background: var(--kb-terrakotta-hell); color: var(--kb-terrakotta-dunkel); flex:0 0 28px;
@@ -10729,7 +11013,7 @@ class RezeptbuchCard extends HTMLElement {
         .schritt-zeile button.schritt-verschieben:disabled { opacity:0.35; cursor:default; }
         .schritt-zeile { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
         .schritt-zeile .schritt-nummer {
-          flex:0 0 24px; height:24px; border-radius:50%; background: var(--kb-terrakotta); color:#fff;
+          flex:0 0 24px; height:24px; border-radius:50%; background: var(--kb-terrakotta); color: var(--kb-auf-akzent);
           font-size:0.8em; font-weight:700; display:flex; align-items:center; justify-content:center;
         }
         .schritt-zeile input { flex:1; }
@@ -10742,7 +11026,7 @@ class RezeptbuchCard extends HTMLElement {
 
         .sterne { display:inline-flex; gap:2px; }
         .sterne-klein { font-size:0.7em; }
-        .stern-voll { color:#d9a441; }
+        .stern-voll { color: var(--kb-sterne); }
         .stern-leer { color: var(--divider-color); }
         /* Jetzt <button>- statt <span>-Elemente (Barrierefreiheit: Tastatur-
            bedienbar, siehe _sterneInteraktivHtml) - Browser-Standardstil für
@@ -10789,7 +11073,7 @@ class RezeptbuchCard extends HTMLElement {
           color: var(--kb-terrakotta-dunkel); border-radius:999px; padding:5px 13px; font-size:0.8em;
           cursor:pointer; font-weight:600;
         }
-        .chip-aktiv { background: var(--kb-terrakotta); color:#fff; border-color: var(--kb-terrakotta); }
+        .chip-aktiv { background: var(--kb-terrakotta); color: var(--kb-auf-akzent); border-color: var(--kb-terrakotta); }
         /* "+ Neue Kategorie" soll zwischen den Kategorie-Chips nicht
            untergehen (gemeldet: zu unauffällig) - gestrichelter statt
            durchgezogener Rand als dezentes, aber klares "Aktion statt
@@ -10821,14 +11105,14 @@ class RezeptbuchCard extends HTMLElement {
         }
         .schalter-btn input { position:absolute; opacity:0; width:0; height:0; }
         .schalter-btn.schalter-btn-aktiv {
-          background: var(--kb-terrakotta); color:#fff; border-color: var(--kb-terrakotta);
-          box-shadow: 0 2px 6px rgba(193,101,47,0.35);
+          background: var(--kb-terrakotta); color: var(--kb-auf-akzent); border-color: var(--kb-terrakotta);
+          box-shadow: 0 2px 6px var(--kb-akzent-schatten);
         }
         .schalter-btn:focus-within { outline:2px solid var(--kb-terrakotta-dunkel); outline-offset:2px; }
         .kochbuecher-zeile { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:16px; }
         .kochbuch-chip { cursor:pointer; }
         .kochbuch-loeschen {
-          border:none; background:transparent; color:#a8402a; cursor:pointer; font-size:0.85em;
+          border:none; background:transparent; color: var(--kb-loeschen); cursor:pointer; font-size:0.85em;
           margin-right:4px; padding:0 2px;
         }
         #kochbuch-speichern-bereich input { width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px;
@@ -10865,7 +11149,7 @@ class RezeptbuchCard extends HTMLElement {
           background: rgba(255,255,255,0.92); border:2px solid var(--kb-terrakotta); display:flex;
           align-items:center; justify-content:center; font-weight:700; color: var(--kb-terrakotta); font-size:0.9em;
         }
-        .kachel-checkbox.checkbox-aktiv { background: var(--kb-terrakotta); color:#fff; }
+        .kachel-checkbox.checkbox-aktiv { background: var(--kb-terrakotta); color: var(--kb-auf-akzent); }
         .wochentag-zeile { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px dashed var(--kb-terrakotta-hell); flex-wrap:wrap; }
         .wochentag-zeile:last-child { border-bottom:none; }
         .wochentag-label { flex:0 0 90px; font-weight:700; color: var(--primary-text-color); }
@@ -10917,7 +11201,7 @@ class RezeptbuchCard extends HTMLElement {
         }
         .kochmodus-schliessen-btn:focus-visible { outline:2px solid var(--kb-terrakotta); outline-offset:2px; }
         .kochmodus-werkzeuge { display:flex; gap:8px; margin:10px 0; flex-wrap:wrap; }
-        .kochmodus-werkzeuge button.aktiv { background: var(--kb-terrakotta); color:#fff; }
+        .kochmodus-werkzeuge button.aktiv { background: var(--kb-terrakotta); color: var(--kb-auf-akzent); }
         .kochmodus-zutaten-panel {
           background: var(--kb-terrakotta-hell); border-radius:12px; padding:12px 16px;
           margin-bottom:10px; max-height:32vh; overflow-y:auto; flex-shrink:0;
@@ -11229,6 +11513,17 @@ class RezeptbuchCard extends HTMLElement {
                 <option value="">${this._t("us_kategorie_einstellung_keine")}</option>
                 ${this._alleKategorien().map((k) => `<option value="${this._escape(k)}" ${this._einstellungen.amerikanischeKategorie === k ? "selected" : ""}>${this._escape(this._kategorieLabel(k))}</option>`).join("")}
               </select>
+            </div>
+            <hr class="detail-trenner trenner-voll">
+            <h4 style="margin:0 0 6px; text-align:left;">${this._t("farben_abschnitt_titel")}</h4>
+            <p class="hinweis" style="text-align:left; margin-top:0;">${this._t("farben_hinweis")}</p>
+            ${FARB_ROLLEN.map((rolle) => `
+              <div class="schalter-zeile">
+                <span class="schalter-label">${this._t(rolle.labelSchluessel)}</span>
+                <input type="color" class="farben-feld" data-farbe="${rolle.schluessel}" value="${(this._einstellungen.farben && this._einstellungen.farben[rolle.schluessel]) || rolle.standard}" aria-label="${this._t(rolle.labelSchluessel)}">
+              </div>`).join("")}
+            <div class="modal-aktionen" style="margin-top:10px; justify-content:flex-start;">
+              <button type="button" class="sekundaer klein" id="farben-zuruecksetzen-btn" ${Object.keys(this._einstellungen.farben || {}).length ? "" : "disabled"}>${this._t("farben_zuruecksetzen_btn")}</button>
             </div>
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="primaer" id="statistik-einstellungen-schliessen-btn">${this._t("allgemein_schliessen")}</button>
@@ -11734,6 +12029,18 @@ class RezeptbuchCard extends HTMLElement {
         await this._einstellungenAktualisieren((stand) => ({ ...stand, umrechnungstabelleKopfAnzeigen: aktiv }));
         this._render();
       });
+    }
+    this.shadowRoot.querySelectorAll(".farben-feld").forEach((feld) => {
+      feld.addEventListener("change", async (ev) => {
+        const schluessel = ev.target.dataset.farbe;
+        const wert = ev.target.value;
+        if (!FARB_ROLLEN.some((r) => r.schluessel === schluessel) || !hexFarbeGueltig(wert)) return;
+        await this._farbenAendern((farben) => ({ ...farben, [schluessel]: wert.toLowerCase() }));
+      });
+    });
+    const farbenZuruecksetzenBtn = this.shadowRoot.getElementById("farben-zuruecksetzen-btn");
+    if (farbenZuruecksetzenBtn) {
+      farbenZuruecksetzenBtn.addEventListener("click", () => this._farbenAendern(() => ({})));
     }
     const usKategorieFeld = this.shadowRoot.getElementById("us-kategorie-feld");
     if (usKategorieFeld) {

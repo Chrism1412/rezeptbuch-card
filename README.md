@@ -92,6 +92,11 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
   rein informativ, nie automatisch auf ein Rezept angewendet. Fehlende
   Zutaten lassen sich selbst ergänzen und nachträglich bearbeiten ("+
   Eigene Zutat hinzufügen" bzw. ✎)
+- **Anpassbare Farben**: in den Einstellungen (⚙️) lassen sich Hauptfarbe,
+  Akzentfarbe für Texte/Ränder, Löschen-/Warnfarbe, Bewertungssterne und
+  Überschriften einzeln ändern; "Alles zurücksetzen" stellt die
+  Standardfarben wieder her. Die Schrift auf Knöpfen wird automatisch hell
+  oder dunkel gewählt, damit sie lesbar bleibt
 - Eigene Kommentare lassen sich nachträglich bearbeiten und löschen
   (ein HA-Admin darf das zusätzlich bei jedem Kommentar); Zubereitungs-
   schritte im Formular per ▲/▼ verschieben; fehlt beim Anlegen eines

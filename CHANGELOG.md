@@ -7,6 +7,13 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 ## [2.1.1] - 2026-10-02
 
 ### Hinzugefügt
+- **Farben anpassbar**: neuer Abschnitt "Farben" in den Einstellungen
+  (⚙️-Knopf). Hauptfarbe (Knöpfe, aktive Filter), Akzentfarbe für Texte und
+  Ränder, Löschen-/Warnfarbe, Bewertungssterne und Überschriften lassen sich
+  einzeln ändern; "Alles zurücksetzen" stellt die Standardfarben wieder her.
+  Die Schriftfarbe auf Knöpfen wird bei sehr hellen Farben automatisch
+  dunkel gewählt. Die Farben werden wie die übrigen Einstellungen in der
+  To-do-Liste gespeichert und gelten damit auf allen Geräten.
 - **Zufallsrezept-Knopf**: neuer Knopf 🎲 im Kopf der Rezeptübersicht öffnet
   direkt ein zufälliges Rezept. Berücksichtigt dabei eine aktive
   Kategorie-/Tag-Auswahl oder Suche (wählt nur aus den aktuell sichtbaren
