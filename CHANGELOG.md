@@ -4,7 +4,7 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [2.1.1] - 2026-10-02
+## [2.2.0] - 2026-10-08
 
 ### Hinzugefügt
 - **Farben anpassbar**: neuer Abschnitt "Farben" in den Einstellungen
