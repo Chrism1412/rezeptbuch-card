@@ -7,6 +7,10 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 ## [2.2.0] - 2026-10-08
 
 ### Hinzugefügt
+- **README mit Screenshots**: Übersicht, Detailansicht, Kochmodus,
+  Umrechnungstabelle, Einstellungen, eigene Farben, Dunkelmodus und
+  Handy-Ansicht - alle mit erfundenen Demo-Rezepten. Neu erzeugbar mit
+  `node scripts/screenshots_erzeugen.js`.
 - **Farben anpassbar**: neuer Abschnitt "Farben" in den Einstellungen
   (⚙️-Knopf). Hauptfarbe (Knöpfe, aktive Filter), Akzentfarbe für Texte und
   Ränder, Löschen-/Warnfarbe, Bewertungssterne und Überschriften lassen sich

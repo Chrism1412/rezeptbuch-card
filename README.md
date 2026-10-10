@@ -4,13 +4,25 @@
   <img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/logo/logo-wortmarke.png" alt="Rezeptbuch-Karte Logo: aufgeschlagenes Buch, davor überkreuz Kochlöffel und Schneebesen" width="480">
 </p>
 
-[![Tests](https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/test.yml/badge.svg)](https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/test.yml)
-[![HACS-Validierung](https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/hacs.yml/badge.svg)](https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/hacs.yml)
-[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue.svg)](LICENSE)
+<p align="center">
+  <a href="https://github.com/Chrism1412/rezeptbuch-card/releases/latest"><img src="https://img.shields.io/github/v/release/Chrism1412/rezeptbuch-card?label=Version" alt="Neueste Version"></a>
+  <a href="https://github.com/Chrism1412/rezeptbuch-card/releases"><img src="https://img.shields.io/github/downloads/Chrism1412/rezeptbuch-card/total?label=Downloads" alt="Downloads"></a>
+  <a href="https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/test.yml"><img src="https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/test.yml/badge.svg" alt="Tests"></a>
+  <a href="https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/hacs.yml"><img src="https://github.com/Chrism1412/rezeptbuch-card/actions/workflows/hacs.yml/badge.svg" alt="HACS-Validierung"></a>
+  <a href="https://hacs.xyz/"><img src="https://img.shields.io/badge/HACS-Custom-orange.svg" alt="HACS Custom Repository"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Lizenz-MIT-blue.svg" alt="Lizenz: MIT"></a>
+</p>
 
 Eine Custom-Lovelace-Karte für [Home Assistant](https://www.home-assistant.io/),
 die ein komplettes Rezeptbuch verwaltet - Zutaten, Zubereitungsschritte,
 Fotos, Bewertungen, Kommentare, Koch-Historie und PDF-Export inklusive.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/uebersicht.png" alt="Rezeptübersicht mit Kategorie- und Tag-Filtern, Suche und Rezeptkacheln mit Foto, Bewertung und Portionen" width="760">
+</p>
+
+> Die Screenshots zeigen ausschließlich erfundene Demo-Rezepte mit selbst
+> erzeugten Platzhalter-Grafiken.
 
 **Bewusst minimalistischer Ansatz:** Die Karte speichert alle Rezepte als
 JSON in der `description` eines Eintrags einer ganz normalen Home-Assistant-
@@ -19,6 +31,61 @@ keine Datenbank, keine externe Cloud - nur Home Assistants eingebaute,
 seit Jahren stabile To-do-Dienste. Ein paar optionale Python-Skripte (siehe
 unten) ergänzen Backup, Fotoverwaltung und automatischen Rezept-Import,
 sind für den Grundbetrieb der Karte aber nicht erforderlich.
+
+## Inhalt
+
+- [Auf einen Blick](#auf-einen-blick)
+- [Funktionen](#funktionen)
+- [Installation](#installation)
+- [Projektstruktur](#projektstruktur)
+- [Testen](#testen) · [Changelog](#changelog) · [Rechtliches](#rechtliches) · [Mitmachen](#mitmachen)
+
+## Auf einen Blick
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <b>Rezept-Detailansicht</b><br>
+      Foto, Zutaten mit Portionen-Rechner, nummerierte Zubereitungsschritte,
+      Bewertungen, Kommentare, Koch-Historie, Teilen/Drucken als PDF und
+      Übernahme von Zutaten auf die Einkaufsliste.<br><br>
+      <img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/rezept-detail.png" alt="Detailansicht eines Rezepts mit Foto, Zutatenliste, Portionen-Rechner und Zubereitungsschritten">
+    </td>
+    <td width="50%" valign="top">
+      <b>Kochmodus</b><br>
+      Vollbild, ein Schritt nach dem anderen, große Schrift, einblendbare
+      Zutatenliste, eingebauter Timer und wachgehaltener Bildschirm -
+      ideal für das Tablet in der Küche.<br><br>
+      <img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/kochmodus.png" alt="Kochmodus mit Zutatenliste und großem Zubereitungsschritt"><br><br>
+      <b>Umrechnungstabelle</b><br>
+      Durchsuchbare Richtwerte für Tassen, Esslöffel und Teelöffel.<br><br>
+      <img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/umrechnungstabelle.png" alt="Durchsuchbare Umrechnungstabelle für Tasse, Esslöffel und Teelöffel in Gramm">
+    </td>
+  </tr>
+</table>
+
+### Eigene Farben und Dunkelmodus
+
+Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
+Überschriften lassen sich in den Einstellungen (⚙️) einzeln anpassen,
+"Alles zurücksetzen" stellt die Standardfarben wieder her. Die Karte
+übernimmt außerdem Hell-/Dunkelmodus deines Home-Assistant-Themes.
+
+<table>
+  <tr>
+    <td width="50%" valign="top"><img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/uebersicht-eigene-farben.png" alt="Rezeptübersicht mit blau angepasster Hauptfarbe"></td>
+    <td width="50%" valign="top"><img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/uebersicht-dunkel.png" alt="Rezeptübersicht im Dunkelmodus"></td>
+  </tr>
+</table>
+
+### Einstellungen und mobile Ansicht
+
+<table>
+  <tr>
+    <td width="60%" valign="top"><img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/einstellungen-farben.png" alt="Einstellungen mit Schaltern für Tag-Filter, Zufallsrezept, Umrechnungstabelle und dem Abschnitt Farben"></td>
+    <td width="40%" valign="top"><img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/uebersicht-mobil.png" alt="Rezeptübersicht in der schmalen Handy-Ansicht"></td>
+  </tr>
+</table>
 
 ## Funktionen
 
@@ -92,6 +159,14 @@ sind für den Grundbetrieb der Karte aber nicht erforderlich.
   rein informativ, nie automatisch auf ein Rezept angewendet. Fehlende
   Zutaten lassen sich selbst ergänzen und nachträglich bearbeiten ("+
   Eigene Zutat hinzufügen" bzw. ✎)
+- **Zufallsrezept-Knopf**: öffnet ein zufälliges Rezept aus der aktuell
+  gefilterten Auswahl (Kategorie/Tags/Suche), sonst aus allen Rezepten
+- **Übersicht nach Geschmack**: Tag-Filter, Zufallsrezept- und
+  Umrechnungstabelle-Knopf lassen sich in den Einstellungen ausblenden;
+  die "Smarte Sammlung" (gespeicherte Filterkombinationen) gehört zum
+  Tag-Filter und verschwindet mit ihm
+- **PDF ohne Bilder**: beim Sammel-PDF und beim Teilen/Drucken eines
+  Rezepts lässt sich wählen, ob die Fotos mit ausgegeben werden
 - **Anpassbare Farben**: in den Einstellungen (⚙️) lassen sich Hauptfarbe,
   Akzentfarbe für Texte/Ränder, Löschen-/Warnfarbe, Bewertungssterne und
   Überschriften einzeln ändern; "Alles zurücksetzen" stellt die
@@ -406,7 +481,10 @@ scripts/                    Optionale Python-Hilfsskripte (Backup, Restore,
                              Fotoauslagerung, URL-Import) - alle ohne
                              Drittanbieter-Abhängigkeiten, nur Standardbibliothek
 examples/                   Beispiel-YAML zum Einbinden in die eigene HA-Konfiguration
-docs/                       Ausführliche Installations-/Nutzungsanleitung
+docs/                       Ausführliche Installations-/Nutzungsanleitung,
+                             Logo und Screenshots (docs/screenshots/, mit
+                             erfundenen Demo-Rezepten - neu erzeugbar über
+                             `node scripts/screenshots_erzeugen.js`)
 test/                       Playwright-Testsuite für die Karte (echter Browser)
 ```
 
