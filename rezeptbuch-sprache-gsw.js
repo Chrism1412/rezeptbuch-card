@@ -6,13 +6,8 @@
   Hinweis: Übersetzung von Englisch und Deutsch abgesehen KI-generiert und noch nicht von Muttersprachler:innen gegengelesen -
   Korrekturen per Issue oder Pull Request sind willkommen.
 */
-// Schwiizerdütsch (gsw) - es git kei einheitlichi amtlichi Schriibwiis
-// für Schwiizerdütsch (jedi Region schriibt anders). Da wird e einzigi,
-// in sich konsistenti, alltagstauglichi Schriibwiis verwendet (wie
-// WhatsApp-Schwiizerdütsch), keni wüsseschaftlichi Transkription.
 (window.__rezeptbuchSprachen = window.__rezeptbuchSprachen || {}).gsw = {
   texte: {
-    // Allgemein/mehrfach verwendet
     allgemein_zurueck: "← Zrugg",
     allgemein_ja: "Ja",
     allgemein_nein: "Nei",
@@ -26,10 +21,6 @@
     allgemein_oeffnen: "Öffne",
     allgemein_unbekannt: "Unbekannt",
     allgemein_schliessen: "Schliesse",
-
-    // Kategorien (Anzeige-Bezeichnungen - der intern gespeicherte/verglichene
-    // Wert bleibt unabhängig von der Sprache immer der deutsche String aus
-    // KATEGORIEN, siehe _kategorieLabel()).
     kategorie_hauptgericht: "Hauptgricht",
     kategorie_vorspeise: "Vorspys",
     kategorie_suppe: "Suppe",
@@ -52,9 +43,6 @@
     kategorie_bearbeiten_aria: "Kategorie {{name}} umbenenne",
     kategorie_umbenennen_titel: "Kategorie \"{{name}}\" umbenenne:",
     fehler_kategorie_wird_verwendet: "Die Kategorie wird no vo {{anzahl}}x bruucht - bitte zersch en anderi Kategorie zuedeile.",
-
-    // Wochentage (Anzeige - der interne Schlüssel in WOCHENTAGE bleibt
-    // sprachunabhängig "montag" usw., siehe _wochentagLabel()).
     wochentag_montag: "Määntig",
     wochentag_dienstag: "Zischtig",
     wochentag_mittwoch: "Mittwuch",
@@ -62,15 +50,11 @@
     wochentag_freitag: "Fritig",
     wochentag_samstag: "Samschtig",
     wochentag_sonntag: "Sunntig",
-
-    // Sortier-Optionen
     sortier_titel: "Alphabetisch (A-Z)",
     sortier_bewertung: "Beschti Bewertig zerscht",
     sortier_kategorie: "Nach Kategorie",
     sortier_neu: "Nöischt zerscht",
     sortieren_label: "Sortiere:",
-
-    // Kopfbereich der Listenansicht
     kopf_titel_standard: "Rezäptbuech",
     kopf_sichern_btn: "💾 Sichere",
     kopf_wochenplan_btn: "📅 Wuchepla",
@@ -98,8 +82,6 @@
     einkaufsmodus_beenden_btn: "✕ Uswahl beende",
     kopf_neu_btn: "+ Nöis",
     suche_placeholder: "🔍 Rezäpt oder Zuetate (z.B. Mehl, Eier)…",
-
-    // Kochbücher (gespeicherte Filter)
     kochbuch_loeschen_title: "Sammlig lösche",
     kochbuch_loeschen_aria: "Sammlig {{name}} lösche",
     kochbuch_speichern_btn: "+ Schlau Sammlig spichere",
@@ -107,48 +89,26 @@
     fehler_kochbuch_name_fehlt: "Bitte en Name für die Sammlig yyge.",
     kochbuch_info_aria: "Erklärig zu schlaue Sammlige zeige",
     kochbuch_info_titel: "Was isch e schlaui Sammlig?",
-    kochbuch_info_text:
-      "E schlaui Sammlig spicheret kei feschti Liste vo Rezäpt, sondern " +
-      "e Kombination us Kategorie, Tags und Suechbegriff, genau so wie " +
-      "si grad iigstellt isch. Si aktualisiert sich danach vo elei: es " +
-      "nöis Rezäpt, wo passt, taucht automatisch mit uuf, und es Rezäpt, " +
-      "wo Kategorie oder Tags sich änderet, cha genauso automatisch " +
-      "wieder verschwinde.",
-
-    // Einkaufslisten-Auswahlmodus
+    kochbuch_info_text: "E schlaui Sammlig spicheret kei feschti Liste vo Rezäpt, sondern e Kombination us Kategorie, Tags und Suechbegriff, genau so wie si grad iigstellt isch. Si aktualisiert sich danach vo elei: es nöis Rezäpt, wo passt, taucht automatisch mit uuf, und es Rezäpt, wo Kategorie oder Tags sich änderet, cha genauso automatisch wieder verschwinde.",
     einkaufs_zaehler: "{{anzahl}} usgwählt",
     einkaufsliste_erstellen_btn: "Yychaufsliste erstelle",
-    fehler_einkaufsliste_keine_konfiguration:
-      "Für d Yychaufsliste fehlt no d Konfiguration: bitte 'shopping_list_entity' " +
-      "i de Charte-Konfiguration aagäh (z.B. shopping_list_entity: todo.einkaufsliste) - " +
-      "dafür bruucht's e ZWEITI Lokali To-do-Liste als Hälfer. Lueg i ANLEITUNG-Backup.md, Abschnitt 18.",
+    fehler_einkaufsliste_keine_konfiguration: "S isch kei Yychaufsliste gfunde worde. Leg si i de Ystellige (⚙️) under «Yrichtig & Wartig» mit eim Klick a – oder gib 'shopping_list_entity' i de Chartekonfiguration a.",
     fehler_einkaufsliste_keine_auswahl: "Bitte mindeschtens es Rezäpt uswähle.",
     fehler_einkaufsliste_keine_auswahl_zutaten: "Bitte mindeschtens eini Zutat uswähle.",
     zutaten_fehlend_einkaufsliste_btn: "Usgwählti zur Yychaufsliste hinzuefüege",
     fehler_einkaufsliste_keine_zutaten: "D usgwählte Rezäpt händ kei Zuetate.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen:
-      "Konnt \"{{zeile}}\" nöd zur Yychaufsliste hinzuefüege:\n{{fehler}}\n\nScho hinzuegfüegti Zuetate bliibed i de Yychaufsliste.",
+    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Konnt \"{{zeile}}\" nöd zur Yychaufsliste hinzuefüege:\n{{fehler}}\n\nScho hinzuegfüegti Zuetate bliibed i de Yychaufsliste.",
     einkaufsliste_hinzugefuegt: "{{anzahl}} Zuetat(e) zu \"{{entity}}\" hinzuegfüegt.",
-
-    // Rückgängig-Banner (nach Löschen)
     undo_geloescht: "\"{{titel}}\" glöscht.",
     undo_rueckgaengig_btn: "Rückgängig",
-
-    // Leerzustände / Fehleranzeige der Listenansicht
     leer_keine_rezepte: "No kei Rezäpt – leg los mit \"+ Neu\"",
     leer_keine_treffer: "Kei Rezäpt gfunde für \"{{begriff}}\"",
     fehler_liste_laden_titel: "Konnt \"{{entity}}\" nöd lade.",
     fehler_liste_laden_hinweis: "Git's die To-do-Liste überhaupt? (Yystellige → Geräte & Dienscht → Hälfer)",
-
-    // Rezept-Kacheln
     kachel_aria_label_oeffnen: "Rezäpt {{titel}} öffne",
-
-    // Sterne-Bewertung
     sterne_aria_label_gruppe: "Eigeti Bewertig",
     sterne_aria_label: "{{zahl}} vo 5 Stärne",
     fehler_kein_benutzer_bewertung: "Konnt dyy Benutzer nöd ermittle - Bewertig nöd möglich.",
-
-    // Detailansicht
     detail_teilen_drucken_btn: "📤 Teile / Drucke",
     detail_erstellt_von: "👤 Erstellt vo {{name}}",
     detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} Bewertig)",
@@ -193,8 +153,7 @@
     us_kategorie_einstellung_text: "Bi Rezäpt mit dere Kategorie erschiint zuesätzlich im Rezäpt sälber und im Kochmodus en Knopf für d'Umrechnigstabälle.",
     us_kategorie_einstellung_keine: "— Kei —",
     statistik_info_titel: "Wie wird die Statistik berechnet?",
-    statistik_info_text:
-      "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über de Schalter i de Statistik-Iistellige (⚙️) deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
+    statistik_info_text: "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über de Schalter i de Statistik-Iistellige (⚙️) deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
     statistik_dieses_jahr: "Du hesch im {{jahr}} {{anzahl}}x us dim Rezeptbuech kocht",
     statistik_gesamt: "Du hesch insgesamt {{anzahl}}x us dim Rezeptbuech kocht",
     statistik_top_titel: "Am meischte gkocht",
@@ -202,17 +161,12 @@
     modal_loeschen_frage: "\"{{titel}}\" wirklich lösche?",
     modal_loeschen_ja_btn: "Ja, lösche",
     modal_kommentar_loeschen_frage: "Dä Kommentar wirklich lösche?",
-
-    // Wochenplan
     wochenplan_titel: "Wuchepla",
     wochenplan_tab_diese: "Die Wuche",
     wochenplan_tab_folgewoche: "Nächschti Wuche",
-    wochenplan_hinweis_folgewoche:
-      "Plaan hie scho jetzt d chuu Wuche - sie rutscht automatisch zu \"Die Wuche\" nache, sobald d aktuelli Wuche verbii isch.",
-    wochenplan_hinweis_diese:
-      "Scho vergangeni Täg werded automatisch gleert (s Rezäpt sälber bliibt erhalte, nur d Zueordnig verschwindet).",
-    wochenplan_hinweis_speicherung:
-      "Wird geräteübergryfend gspeichert (als unsichtbare Zuesatzyytrag i derselbe Rezäptliste, kein wyterer Hälfer nötig).",
+    wochenplan_hinweis_folgewoche: "Plaan hie scho jetzt d chuu Wuche - sie rutscht automatisch zu \"Die Wuche\" nache, sobald d aktuelli Wuche verbii isch.",
+    wochenplan_hinweis_diese: "Scho vergangeni Täg werded automatisch gleert (s Rezäpt sälber bliibt erhalte, nur d Zueordnig verschwindet).",
+    wochenplan_hinweis_speicherung: "Wird geräteübergryfend gspeichert (als unsichtbare Zuesatzyytrag i derselbe Rezäptliste, kein wyterer Hälfer nötig).",
     wochenplan_leer: "No kei Rezäpt vorhande - zerscht welchi aalege.",
     wochenplan_kein_rezept_option: "– kes Rezäpt –",
     wochenplan_einkaufsliste_btn: "Yychaufsliste us {{ziel}} erstelle",
@@ -220,54 +174,24 @@
     wochenplan_folgewoche_wort: "Nächschti Wuche",
     wochenplan_aktuelle_woche_wort: "aktuelli Wuche",
     wochenplan_keine_zuweisung: "D {{zeitraum}} het no kei zuegwiesni Rezäpt.",
-
-    // Formular (neues/bearbeiten Rezept)
     formular_titel_neu: "Nöis Rezäpt",
     formular_titel_bearbeiten: "Rezäpt bearbeite",
     formular_url_import_btn: "🌐 Rezäpt-URL importiere",
     formular_url_label: "Link zur Rezäpt-Website",
     formular_url_placeholder: "https://www.byspiil-rezäpt.de/mys-rezäpt",
-    formular_url_hinweis:
-      "Lädt d Syte und liist die dört sowieso yygbauete " +
-      "Rezäpt-Strukturdate us (die gliiche Date, mit dene z.B. " +
-      "Google d Sterne-Bewertige i de Suechi aazeigt) - meischtens " +
-      "zueverlässiger als Text-Erkennig. Funktioniert nur bi Syte, " +
-      "die sonig Date parat händ, und die automatisierti Aafroge " +
-      "nöd blockiered.",
+    formular_url_hinweis: "Lädt d Syte und liist die dört sowieso yygbauete Rezäpt-Strukturdate us (die gliiche Date, mit dene z.B. Google d Sterne-Bewertige i de Suechi aazeigt) - meischtens zueverlässiger als Text-Erkennig. Funktioniert nur bi Syte, die sonig Date parat händ, und die automatisierti Aafroge nöd blockiered.",
     formular_url_importieren_btn: "Importiere",
     formular_url_laedt: "Lädt …",
     formular_text_einfuegen_btn: "🔍 Rezäpttext yyfüege (automatisch erkenne)",
     formular_text_label: "Rezäpttext da yyfüege (z.B. vo re Rezäpt-Website kopiert)",
     formular_text_placeholder: "Titel, Zuetate, Zuebereitig - eifach de ganz Text da yynecopiere",
-    formular_text_hinweis:
-      "Rein automatischi Erkennig ohni KI - funktioniert am beschte mit " +
-      "\"Zuetate\"- und \"Zuebereitig\"-Überschrifte im Text. Bitte s " +
-      "Ergäbnis nachher churz prüefe, es cha unvollständig sy.",
+    formular_text_hinweis: "Rein automatischi Erkennig ohni KI - funktioniert am beschte mit \"Zuetate\"- und \"Zuebereitig\"-Überschrifte im Text. Bitte s Ergäbnis nachher churz prüefe, es cha unvollständig sy.",
     formular_text_erkennen_btn: "Erkenne",
     formular_json_einfuegen_btn: "📋 Vo re KI erzügts JSON yyfüege",
     formular_json_info_aria: "Passende Prompt für e KI aazeige",
     json_info_titel: "Prompt für e KI",
-    json_info_erklaerung:
-      "Da Text kopiere, i e KI vo dyner Wahl (z.B. ChatGPT oder " +
-      "Claude) yyfüege, dyy Rezäpttext aahänge und d Antwort nachher " +
-      "obe bi \"JSON da yyfüege\" yyfüege.",
-    json_info_prompt:
-      "Wandle de Rezäpttext, wo ich dir gliich schicke, i EIS einzigs " +
-      "JSON-Objekt um - ohni Erklärig, ohni Text davor oder danach, nur " +
-      "s JSON. Bruuch genau das Format:\n\n" +
-      "{\n" +
-      '  "title": "Name vom Rezäpt",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "eini vo: {{kategorien}}",\n' +
-      '  "ingredients": ["ei Zuetat pro Yytrag, z.B. 200 g Mehl"],\n' +
-      '  "steps": ["ei Zuebereitigsschritt pro Yytrag"],\n' +
-      '  "tags": ["optionali Stichwort, z.B. vegetarisch"]\n' +
-      "}\n\n" +
-      'Räägle: "category" mues GENAU eine vo de obe gnennte Wärt sy ' +
-      "(unverändert übernäh, au wenn de Rezäpttext i re anderi " +
-      'Sprach isch). "tags" isch optional, notfalls es leers Array. ' +
-      "Erfind kei Zuetate oder Schritt, wo nöd im Text stönd. " +
-      "Da isch de Rezäpttext:",
+    json_info_erklaerung: "Da Text kopiere, i e KI vo dyner Wahl (z.B. ChatGPT oder Claude) yyfüege, dyy Rezäpttext aahänge und d Antwort nachher obe bi \"JSON da yyfüege\" yyfüege.",
+    json_info_prompt: "Wandle de Rezäpttext, wo ich dir gliich schicke, i EIS einzigs JSON-Objekt um - ohni Erklärig, ohni Text davor oder danach, nur s JSON. Bruuch genau das Format:\n\n{\n  \"title\": \"Name vom Rezäpt\",\n  \"servings\": 4,\n  \"category\": \"eini vo: {{kategorien}}\",\n  \"ingredients\": [\"ei Zuetat pro Yytrag, z.B. 200 g Mehl\"],\n  \"steps\": [\"ei Zuebereitigsschritt pro Yytrag\"],\n  \"tags\": [\"optionali Stichwort, z.B. vegetarisch\"]\n}\n\nRäägle: \"category\" mues GENAU eine vo de obe gnennte Wärt sy (unverändert übernäh, au wenn de Rezäpttext i re anderi Sprach isch). \"tags\" isch optional, notfalls es leers Array. Erfind kei Zuetate oder Schritt, wo nöd im Text stönd. Da isch de Rezäpttext:",
     json_info_kopieren_btn: "📋 Prompt kopiere",
     json_info_kopiert: "Kopiert!",
     formular_json_label: "JSON da yyfüege",
@@ -292,40 +216,24 @@
     formular_schritt_entfernen_aria: "Schritt entferne",
     formular_schritt_hoch_aria: "Schritt nache obe verschiebe",
     formular_schritt_runter_aria: "Schritt nache unge verschiebe",
-    formular_label_bild: "Bild",
-    formular_bild_vorhanden_hinweis: "(vorhande – nöis File ersetzt s)",
-    formular_bild_hinweis: "S aktuälle Bild bliibt erhalte, falls kes nöis File usgwählt wird.",
     formular_bild_verkleinern_text: "Bild wird verchlyneret…",
-
-    // Fehler-/Hinweismeldungen des Formulars
     fehler_url_ungueltig: "Bitte e vollständigi Adrässe mit http:// oder https:// aagäh.",
     fehler_url_apostroph: "Die Adrässe het en Apostroph (') und cha leider nöd importiert wärde.",
-    fehler_url_keine_ausgabe:
-      "S Skript het kei Usgab gliifered. Isch 'rezeptbuch_url_importieren' in configuration.yaml " +
-      "yygrichtet und Home Assistant syt dem einisch komplett neu gstartet worde?",
+    fehler_url_keine_ausgabe: "S Skript het kei Usgab gliifered. Isch 'rezeptbuch_url_importieren' in configuration.yaml yygrichtet und Home Assistant syt dem einisch komplett neu gstartet worde?",
     fehler_url_kein_json: "D Antwort vom Import-Skript isch kes gültigs JSON gsi.",
     fehler_url_import_fehlgeschlagen: "URL-Import fehlgschlage: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden:
-      "Konnt im yyfüegte Text leider nüt erkenne. Bitte d Fälder unte vo Hand usfülle.",
-    warnung_texterkennung_unvollstaendig:
-      "Erkennig isch unvollständig gsi (Zuetate oder Schritt fehled/sind evtl. falsch zuegordnet) - bitte im Formular prüefe und ergänze.",
+    fehler_texterkennung_nichts_gefunden: "Konnt im yyfüegte Text leider nüt erkenne. Bitte d Fälder unte vo Hand usfülle.",
+    warnung_texterkennung_unvollstaendig: "Erkennig isch unvollständig gsi (Zuetate oder Schritt fehled/sind evtl. falsch zuegordnet) - bitte im Formular prüefe und ergänze.",
     fehler_json_ungueltig: "S yyfüegte JSON isch ungültig. Bitte prüefe und nomal versueche.",
     fehler_json_titel_fehlt: "Im JSON fehlt mindeschtens s Fäld 'title'.",
     fehler_titel_fehlt: "Bitte en Titel yygäh.",
     fehler_unerwartet: "Unerwarteter Fehler:\n{{fehler}}",
-    fehler_konflikt_geloescht:
-      "\"{{titel}}\" isch mittlerwyle vo öpper anderem glöscht worde. Dyyni Änderige sind nöd gspichert worde.",
-    fehler_konflikt_geaendert:
-      "\"{{titel}}\" isch mittlerwyle vo öpper anderem gänderet worde (z. B. Kommentar, Bewertig " +
-      "oder eigeni Bearbeitig).\n\nDamit drum nüt überschriibe wird, sind dyyni Änderige " +
-      "NÖD gspichert worde. Bitte öffne s Rezäpt nomal und träg dyyni Änderige nomal y.",
+    fehler_konflikt_geloescht: "\"{{titel}}\" isch mittlerwyle vo öpper anderem glöscht worde. Dyyni Änderige sind nöd gspichert worde.",
+    fehler_konflikt_geaendert: "\"{{titel}}\" isch mittlerwyle vo öpper anderem gänderet worde (z. B. Kommentar, Bewertig oder eigeni Bearbeitig).\n\nDamit drum nüt überschriibe wird, sind dyyni Änderige NÖD gspichert worde. Bitte öffne s Rezäpt nomal und träg dyyni Änderige nomal y.",
     fehler_vorgang_fehlgeschlagen: "Vorgang fehlgschlage:\n{{fehler}}",
     fehler_teilen_drucken: "Unerwarteter Fehler bim Teile/Drucke:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Bitte 'entity' i de Charte-Konfiguration aagäh, z.B. entity: todo.rezepte",
     fehler_bild_lesen: "Foti het nöd gläse wärde chöne (File beschädiget oder nöd unterstützt).",
     fehler_bild_verarbeiten: "Foti het nöd als Bild verarbeitet wärde chöne (nöd unterstützts Format?).",
-
-    // Teilen (Text-Variante) / PDF-/HTML-Export
     teilen_ueberschrift_zutaten: "ZUETATE",
     teilen_ueberschrift_zubereitung: "ZUEBEREITIG",
     seite_zurueck_btn: "← Zrugg",
@@ -367,24 +275,122 @@
     sammel_pdf_weiter_btn: "Wiiter",
     sammel_pdf_bilder_mitdrucken_label: "Bilder mit ins PDF ufneh",
     sammel_pdf_auswahl_keine_hinweis: "Bitte mindischtens ei Rezept uswähle.",
+    setup_titel: "Willkomme im Rezäptbuech",
+    setup_text: "D To-do-Lischte «{{entity}}», wo d Rezäpt drin gspeicheret wärde, git’s no nöd. Söll si jetzt automatisch aagleit wärde?",
+    setup_btn: "Jetzt automatisch yrichte",
+    setup_laeuft: "Wird ygrichtet …",
+    setup_nur_admin: "D Lischte muess zersch vo me Administrator aagleit wärde – bitte en Administrator, die Charte einisch z öffne.",
+    setup_fehler: "Yrichtig fählgschlage: {{fehler}}",
+    einrichtung_abschnitt_titel: "Yrichtig & Wartig",
+    einrichtung_abschnitt_hinweis: "Do gsehsch, was s Rezäptbuech scho säuber erlediget het – und chasch Fählends mit eim Klick nachhole.",
+    einrichtung_rezeptliste: "Rezäptlischte: {{entity}}",
+    einrichtung_einkaufsliste: "Yychaufsliste: {{entity}}",
+    einrichtung_einkaufsliste_fehlt: "Kei Yychaufsliste gfunde",
+    einrichtung_sicherung_vorhanden: "Tägligi Sicherig: zletscht {{datum}} ({{anzahl}} gspeicheret)",
+    einrichtung_sicherung_noch_keine: "no kei",
+    einrichtung_sicherung_fehlt: "Tägligi Sicherig isch no nöd yrichtet",
+    einrichtung_sicherung_jetzt_btn: "Jetzt sichere",
+    einrichtung_sicherung_wiederherstellen_btn: "Wiederherstelle …",
+    einrichtung_sicherung_auto_label: "Jede Tag automatisch sichere",
+    einrichtung_sicherung_erstellt: "D Sicherig isch erstellt worde.",
+    einrichtung_sicherung_fehlgeschlagen: "D Sicherig het nöd chöne erstellt wärde.",
+    einrichtung_einrichten_btn: "Yrichte",
+    einrichtung_angelegt: "D Lischte «{{entity}}» isch aagleit worde.",
+    einrichtung_fotos_ok: "Foti: alles i Ornig",
+    einrichtung_fotos_offen: "{{anzahl}} Foti stecke no als Text im Rezäpt",
+    einrichtung_fotos_auslagern_btn: "Jetzt uslagere",
+    einrichtung_fotos_ausgelagert: "{{anzahl}} Foti sind uslageret worde.",
+    einrichtung_fotos_nichts_ausgelagert: "S het kes Foti chöne uslageret wärde.",
+    einrichtung_url_import_ok: "URL-Import: yrichtet",
+    einrichtung_url_import_fehlt: "URL-Import: nöd yrichtet (optional, gsehsch README)",
+    einrichtung_nur_admin: "Defür bruchts Administrator-Rächt.",
+    einrichtung_fehler: "Das het nöd klappet: {{fehler}}",
+    einrichtung_fehler_unerwartet: "Home Assistant het d Yrichtig nöd wie erwartet abgschlosse.",
+    einrichtung_fehler_entity_fehlt: "D Lischte isch aagleit worde, aber d Entität «{{entity}}» isch nöd ufgtaucht. Bitte i de Chartekonfiguration de tatsächlich Name aagäh.",
+    sicherung_modal_titel: "Sicherig wiederherstelle",
+    sicherung_modal_hinweis: "Fählendi Rezäpt wärde us de gwählte Sicherig ergänzt. Scho vorhandeni Rezäpt blybe unverändert.",
+    sicherung_modal_rezepte: "{{anzahl}} Rezäpt",
+    sicherung_modal_ergaenzen_btn: "Fählendi ergänze",
+    sicherung_modal_ergebnis: "{{anzahl}} Rezäpt sind ergänzt worde.",
+    sicherung_modal_nichts_fehlt: "Es fählt nüt – alli Rezäpt us dere Sicherig sind vorhande.",
+    formular_label_fotos: "Foti (bis zu {{max}}, s erschte isch s Titelbild)",
+    formular_fotos_hinweis: "Du chasch mehreri Foti uf eimal uswähle. Mit ⭐ wird es Foti zum Titelbild.",
+    formular_foto_titelbild: "Titelbild",
+    formular_foto_als_titelbild_title: "Als Titelbild bruuche",
+    formular_foto_entfernen_aria: "Foti entferne",
+    formular_fotos_maximum: "Es sind höchstens {{max}} Foti pro Rezäpt möglich.",
+    detail_foto_aria: "Foti {{nummer}} vo {{anzahl}} aazeige",
   },
-
-  // Anzeigenamen der Umrechnungstabelle-Zutaten, GENAU in der Reihenfolge von
-  // UMRECHNUNGSTABELLE_ZUTATEN in rezeptbuch-card.js.
   zutaten: [
-    "Mehl (Weize, Type 405)", "Zucker (Kristallzucker)", "Puderzucker", "Brune Zucker (fescht packt)",
-    "Angge", "Honig", "Ahornsirup", "Pflanzeöl", "Olivenöl", "Milch", "Nidle (Schlagnidle)", "Wasser",
-    "Natur-Joghurt", "Suuri Nidle", "Frischchäs", "Riis, ungkochet (Langkorn)", "Haferflocke", "Kakaopulver",
-    "Bagpulver", "Natron", "Salz, fiin", "Hefe, trochne", "Mandle, gmahle", "Nüssli (Baumnüss), ghackt",
-    "Haselnüss, ghackt", "Rosine", "Schoggistückli", "Brösmeli, trochne", "Parmesan, gribe",
-    "Chäs, gribe (z.B. Gouda, Cheddar)", "Quinoa, ungkochet", "Linse, trochnet", "Couscous, trochne",
-    "Erdnussbutter", "Tomatemark", "Essig", "Zitronesaft", "Vanilleextrakt", "Zimt, gmahle",
-    "Ingwer, gmahle", "Paprikapulver", "Pfeffer, gmahle", "Chnobli-Pulver", "Kurkuma, gmahle", "Sesam",
-    "Leisome", "Chiasome", "Kokosflocke, ungsüesst", "Kokosmilch (Büchs, flüssig)", "Maisstärchi",
-    "Vollkornmehl (Weize)", "Dinkelmehl", "Grieß (Hartweize)", "Senf (Dijon)", "Sojasauce", "Ketchup",
-    "Mayonnaise", "Buttermilch", "Kondensmilch, gsüesst", "Peterli, frisch, ghackt",
-    "Basilikum, frisch, ghackt", "Oregano, trochnet", "Thymian, trochnet", "Muskat, gmahle",
-    "Kreuzchümmel, gmahle", "Cayennepfeffer", "Pekannüss, ghackt", "Cashewkern, ghackt", "Pistazie, ghackt",
+    "Mehl (Weize, Type 405)",
+    "Zucker (Kristallzucker)",
+    "Puderzucker",
+    "Brune Zucker (fescht packt)",
+    "Angge",
+    "Honig",
+    "Ahornsirup",
+    "Pflanzeöl",
+    "Olivenöl",
+    "Milch",
+    "Nidle (Schlagnidle)",
+    "Wasser",
+    "Natur-Joghurt",
+    "Suuri Nidle",
+    "Frischchäs",
+    "Riis, ungkochet (Langkorn)",
+    "Haferflocke",
+    "Kakaopulver",
+    "Bagpulver",
+    "Natron",
+    "Salz, fiin",
+    "Hefe, trochne",
+    "Mandle, gmahle",
+    "Nüssli (Baumnüss), ghackt",
+    "Haselnüss, ghackt",
+    "Rosine",
+    "Schoggistückli",
+    "Brösmeli, trochne",
+    "Parmesan, gribe",
+    "Chäs, gribe (z.B. Gouda, Cheddar)",
+    "Quinoa, ungkochet",
+    "Linse, trochnet",
+    "Couscous, trochne",
+    "Erdnussbutter",
+    "Tomatemark",
+    "Essig",
+    "Zitronesaft",
+    "Vanilleextrakt",
+    "Zimt, gmahle",
+    "Ingwer, gmahle",
+    "Paprikapulver",
+    "Pfeffer, gmahle",
+    "Chnobli-Pulver",
+    "Kurkuma, gmahle",
+    "Sesam",
+    "Leisome",
+    "Chiasome",
+    "Kokosflocke, ungsüesst",
+    "Kokosmilch (Büchs, flüssig)",
+    "Maisstärchi",
+    "Vollkornmehl (Weize)",
+    "Dinkelmehl",
+    "Grieß (Hartweize)",
+    "Senf (Dijon)",
+    "Sojasauce",
+    "Ketchup",
+    "Mayonnaise",
+    "Buttermilch",
+    "Kondensmilch, gsüesst",
+    "Peterli, frisch, ghackt",
+    "Basilikum, frisch, ghackt",
+    "Oregano, trochnet",
+    "Thymian, trochnet",
+    "Muskat, gmahle",
+    "Kreuzchümmel, gmahle",
+    "Cayennepfeffer",
+    "Pekannüss, ghackt",
+    "Cashewkern, ghackt",
+    "Pistazie, ghackt",
     "Panko (grobi Brösmeli)",
   ],
 };
