@@ -1,0 +1,364 @@
+/*
+  Rezeptbuch-Karte - Sprachdatei Englisch (en)
+  Wird von rezeptbuch-card.js nur bei Bedarf nachgeladen (siehe
+  CONTRIBUTING.md, Abschnitt "Eine neue Sprache ergänzen"). Liegt im
+  selben Ordner wie rezeptbuch-card.js.
+  Hinweis: Englisch ist die Rückfall-Sprache für alle Sprachen ohne eigene Sprachdatei -
+  Korrekturen per Issue oder Pull Request sind willkommen.
+*/
+(window.__rezeptbuchSprachen = window.__rezeptbuchSprachen || {}).en = {
+  texte: {
+    allgemein_zurueck: "← Back",
+    allgemein_ja: "Yes",
+    allgemein_nein: "No",
+    allgemein_an: "On",
+    allgemein_aus: "Off",
+    allgemein_speichern: "Save",
+    allgemein_speichert: "Saving…",
+    allgemein_abbrechen: "Cancel",
+    allgemein_bearbeiten: "Edit",
+    allgemein_loeschen: "Delete",
+    allgemein_oeffnen: "Open",
+    allgemein_unbekannt: "Unknown",
+    allgemein_schliessen: "Close",
+
+    kategorie_hauptgericht: "Main course",
+    kategorie_vorspeise: "Starter",
+    kategorie_suppe: "Soup",
+    kategorie_salat: "Salad",
+    kategorie_beilage: "Side dish",
+    kategorie_dessert: "Dessert",
+    kategorie_kuchen_gebaeck: "Cakes & baking",
+    kategorie_fruehstueck: "Breakfast",
+    kategorie_snack: "Snack",
+    kategorie_getraenk: "Drink",
+    kategorie_sonstiges: "Other",
+    kategorie_filter_alle: "All",
+    kategorie_neu_btn: "+ New category",
+    kategorie_name_placeholder: "Category name",
+    fehler_kategorie_name_fehlt: "Please enter a name for the category.",
+    fehler_kategorie_existiert_bereits: "This category already exists.",
+    kategorie_loeschen_title: "Delete category",
+    kategorie_loeschen_aria: "Delete category {{name}}",
+    kategorie_bearbeiten_title: "Rename category",
+    kategorie_bearbeiten_aria: "Rename category {{name}}",
+    kategorie_umbenennen_titel: "Rename category \"{{name}}\":",
+    fehler_kategorie_wird_verwendet: "This category is still used by {{anzahl}}x recipes - please reassign them to another category first.",
+
+    wochentag_montag: "Monday",
+    wochentag_dienstag: "Tuesday",
+    wochentag_mittwoch: "Wednesday",
+    wochentag_donnerstag: "Thursday",
+    wochentag_freitag: "Friday",
+    wochentag_samstag: "Saturday",
+    wochentag_sonntag: "Sunday",
+
+    sortier_titel: "Alphabetical (A-Z)",
+    sortier_bewertung: "Best rating first",
+    sortier_kategorie: "By category",
+    sortier_neu: "Newest first",
+    sortieren_label: "Sort by:",
+
+    kopf_titel_standard: "Recipe Book",
+    kopf_sichern_btn: "💾 Backup",
+    kopf_wochenplan_btn: "📅 Meal plan",
+    kopf_zufallsrezept_btn: "🎲 Random recipe",
+    umrechnungstabelle_btn: "📐 Conversion table",
+    umrechnungstabelle_titel: "Conversion table",
+    umrechnungstabelle_hinweis: "Approximate gram values for common kitchen ingredients - these vary by brand and consistency, so treat them as reference only. They are NOT applied automatically to your recipes.",
+    umrechnungstabelle_suche_placeholder: "Search ingredient …",
+    umrechnungstabelle_spalte_zutat: "Ingredient",
+    umrechnungstabelle_spalte_tasse: "1 cup",
+    umrechnungstabelle_spalte_el: "1 tbsp",
+    umrechnungstabelle_spalte_tl: "1 tsp",
+    umrechnungstabelle_gramm_wert: "{{wert}} g",
+    umrechnungstabelle_keine_treffer: "No ingredient found.",
+    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Add custom ingredient",
+    umrechnungstabelle_eigene_name_platzhalter: "Ingredient name",
+    umrechnungstabelle_eigene_tasse_platzhalter: "g/cup",
+    umrechnungstabelle_eigene_el_platzhalter: "g/tbsp",
+    umrechnungstabelle_eigene_tl_platzhalter: "g/tsp",
+    umrechnungstabelle_eigene_loeschen_titel: "Delete custom ingredient",
+    umrechnungstabelle_eigene_bearbeiten_titel: "Edit custom ingredient",
+    umrechnungstabelle_eigene_name_fehlt: "Please enter a name.",
+    umrechnungstabelle_eigene_hinweis: "Missing an ingredient whose conversion value you know yourself? Add it here manually - we deliberately don't offer automatic conversion between volume and weight, since that would mean guessing based on ingredient, brand and density.",
+    einkaufsmodus_start_btn: "🛒 Shopping list",
+    einkaufsmodus_beenden_btn: "✕ Cancel selection",
+    kopf_neu_btn: "+ New",
+    suche_placeholder: "🔍 Recipe or ingredients (e.g. flour, eggs)…",
+
+    kochbuch_loeschen_title: "Delete collection",
+    kochbuch_loeschen_aria: "Delete collection {{name}}",
+    kochbuch_speichern_btn: "+ Save as smart collection",
+    kochbuch_name_placeholder: "Name for this collection, e.g. Autumn recipes",
+    fehler_kochbuch_name_fehlt: "Please enter a name for the collection.",
+    kochbuch_info_aria: "Show explanation of smart collections",
+    kochbuch_info_titel: "What is a smart collection?",
+    kochbuch_info_text:
+      "A smart collection doesn't store a fixed list of recipes - it " +
+      "stores a combination of category, tags and search term, exactly " +
+      "as they're set when you save it. It then updates itself " +
+      "automatically: a new recipe that matches shows up on its own, and " +
+      "a recipe whose category or tags change can just as automatically " +
+      "disappear again.",
+
+    einkaufs_zaehler: "{{anzahl}} selected",
+    einkaufsliste_erstellen_btn: "Create shopping list",
+    fehler_einkaufsliste_keine_konfiguration:
+      "The shopping list still needs to be configured: please set 'shopping_list_entity' " +
+      "in the card configuration (e.g. shopping_list_entity: todo.shopping_list) - " +
+      "this requires a SECOND Local To-do List helper. See ANLEITUNG-Backup.md, section 18.",
+    fehler_einkaufsliste_keine_auswahl: "Please select at least one recipe.",
+    fehler_einkaufsliste_keine_auswahl_zutaten: "Please select at least one ingredient.",
+    zutaten_fehlend_einkaufsliste_btn: "Add selected to shopping list",
+    fehler_einkaufsliste_keine_zutaten: "The selected recipes don't contain any ingredients.",
+    fehler_einkaufsliste_eintrag_fehlgeschlagen:
+      "Could not add \"{{zeile}}\" to the shopping list:\n{{fehler}}\n\nIngredients already added remain on the shopping list.",
+    einkaufsliste_hinzugefuegt: "{{anzahl}} ingredient(s) added to \"{{entity}}\".",
+
+    undo_geloescht: "\"{{titel}}\" deleted.",
+    undo_rueckgaengig_btn: "Undo",
+
+    leer_keine_rezepte: "No recipes yet – get started with \"+ New\"",
+    leer_keine_treffer: "No recipes found for \"{{begriff}}\"",
+    fehler_liste_laden_titel: "Could not load \"{{entity}}\".",
+    fehler_liste_laden_hinweis: "Does this to-do list exist? (Settings → Devices & Services → Helpers)",
+
+    kachel_aria_label_oeffnen: "Open recipe {{titel}}",
+
+    sterne_aria_label_gruppe: "Your rating",
+    sterne_aria_label: "{{zahl}} of 5 stars",
+    fehler_kein_benutzer_bewertung: "Could not determine your user - rating not possible.",
+
+    detail_teilen_drucken_btn: "📤 Share / Print",
+    detail_erstellt_von: "👤 Created by {{name}}",
+    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} rating)",
+    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} ratings)",
+    detail_keine_bewertungen: "No ratings yet",
+    detail_deine_bewertung: "Your rating:",
+    detail_zubereitet_x: "🍳 cooked {{anzahl}}x",
+    detail_portionen_suffix: "servings",
+    abschnitt_titel_zutaten: "Ingredients",
+    abschnitt_titel_zubereitung: "Instructions",
+    keine_zutaten: "No ingredients listed",
+    detail_kommentare_titel: "Comments",
+    detail_keine_kommentare: "No comments yet",
+    detail_kommentar_placeholder: "Add a note, tip or comment…",
+    detail_kommentar_hinzufuegen_btn: "Add comment",
+    detail_bearbeiten_hinweis: "Only {{name}} (or an admin) can edit or delete this recipe.",
+    detail_ersteller_unbekannt: "the creator",
+    modal_zubereitet_frage: "Did you cook \"{{titel}}\"?",
+    modal_drucken_bild_frage: "Include the recipe image?",
+    modal_drucken_ohne_bild_btn: "Without image",
+    modal_drucken_mit_bild_btn: "With image",
+    statistik_btn: "📊 Statistics",
+    statistik_titel: "Cooking statistics",
+    statistik_info_aria: "Show explanation of the statistics",
+    statistik_einstellungen_btn_title: "Cooking log settings",
+    statistik_einstellungen_titel: "Cooking log settings",
+    statistik_einstellungen_text: "Here you can choose whether you're asked, after leaving a recipe, if you cooked it, and whether the resulting statistics are shown on this card.",
+    statistik_einstellungen_schalter_label: "Enable question & statistics",
+    tags_einstellung_schalter_label: "Show tag filter in overview",
+    zufallsrezept_einstellung_schalter_label: "Show random recipe button in overview",
+    umrechnungstabelle_kopf_einstellung_schalter_label: "Show conversion table button in overview",
+    umrechnungstabelle_kopf_einstellung_hinweis: "For the configured category for American recipes, the conversion table still appears in the recipe and in cooking mode, even if this button is switched off here.",
+    farben_abschnitt_titel: "Colors",
+    farben_hinweis: "Customize individual colors of the card. Reset all returns every color to its default.",
+    farben_akzent_label: "Main color (buttons, active filters)",
+    farben_akzent_text_label: "Accent color for text and borders",
+    farben_loeschen_label: "Delete / warning",
+    farben_sterne_label: "Rating stars",
+    farben_titel_label: "Headings",
+    farben_zuruecksetzen_btn: "Reset all",
+    us_kategorie_einstellung_label: "Category for American recipes",
+    us_kategorie_einstellung_text: "Recipes with this category also get a conversion table button in the recipe itself and in cooking mode.",
+    us_kategorie_einstellung_keine: "— None —",
+    statistik_info_titel: "How is this statistic calculated?",
+    statistik_info_text:
+      "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the switch in the statistics settings (⚙️), the numbers stop growing, but already recorded preparations are kept.",
+    statistik_dieses_jahr: "You've cooked {{anzahl}}x from your recipe book in {{jahr}}",
+    statistik_gesamt: "You've cooked {{anzahl}}x from your recipe book in total",
+    statistik_top_titel: "Most cooked",
+    statistik_keine_daten: "No preparations recorded yet.",
+    modal_loeschen_frage: "Really delete \"{{titel}}\"?",
+    modal_loeschen_ja_btn: "Yes, delete",
+    modal_kommentar_loeschen_frage: "Really delete this comment?",
+
+    wochenplan_titel: "Meal plan",
+    wochenplan_tab_diese: "This week",
+    wochenplan_tab_folgewoche: "Next week",
+    wochenplan_hinweis_folgewoche:
+      "Plan the coming week here already - it will automatically move to \"This week\" once the current week is over.",
+    wochenplan_hinweis_diese:
+      "Past days are automatically cleared (the recipe itself is kept, only the day assignment disappears).",
+    wochenplan_hinweis_speicherung:
+      "Saved across devices (as a hidden extra entry in the same recipe list, no additional helper needed).",
+    wochenplan_leer: "No recipes yet - create some first.",
+    wochenplan_kein_rezept_option: "– no recipe –",
+    wochenplan_einkaufsliste_btn: "Create shopping list from {{ziel}}",
+    wochenplan_wort: "meal plan",
+    wochenplan_folgewoche_wort: "next week",
+    wochenplan_aktuelle_woche_wort: "current week",
+    wochenplan_keine_zuweisung: "The {{zeitraum}} doesn't have any recipes assigned yet.",
+
+    formular_titel_neu: "New recipe",
+    formular_titel_bearbeiten: "Edit recipe",
+    formular_url_import_btn: "🌐 Import recipe URL",
+    formular_url_label: "Link to the recipe website",
+    formular_url_placeholder: "https://www.example-recipes.com/my-recipe",
+    formular_url_hinweis:
+      "Loads the page and reads the recipe structured data already embedded in it " +
+      "(the same data e.g. Google uses to show star ratings in search results) - " +
+      "usually more reliable than text recognition. Only works on sites that " +
+      "provide such data and don't block automated requests.",
+    formular_url_importieren_btn: "Import",
+    formular_url_laedt: "Loading …",
+    formular_text_einfuegen_btn: "🔍 Paste recipe text (auto-detect)",
+    formular_text_label: "Paste recipe text here (e.g. copied from a recipe website)",
+    formular_text_placeholder: "Title, ingredients, instructions - just paste the whole text",
+    formular_text_hinweis:
+      "Purely automatic recognition without AI - works best with " +
+      "\"Ingredients\" and \"Instructions\" headings in the text. Please " +
+      "briefly check the result afterwards, it may be incomplete.",
+    formular_text_erkennen_btn: "Detect",
+    formular_json_einfuegen_btn: "📋 Paste AI-generated JSON",
+    formular_json_info_aria: "Show a ready-made prompt for an AI",
+    json_info_titel: "Prompt for an AI",
+    json_info_erklaerung:
+      "Copy this text, paste it into an AI of your choice (e.g. ChatGPT " +
+      "or Claude), attach your recipe text, and paste the answer above " +
+      'under "Paste AI-generated JSON".',
+    json_info_prompt:
+      "Convert the recipe text I'm about to send you into ONE single " +
+      "JSON object - no explanation, no text before or after, just the " +
+      "JSON. Use exactly this format:\n\n" +
+      "{\n" +
+      '  "title": "recipe name",\n' +
+      '  "servings": 4,\n' +
+      '  "category": "one of: {{kategorien}}",\n' +
+      '  "ingredients": ["one ingredient per entry, e.g. 200g flour"],\n' +
+      '  "steps": ["one instruction step per entry"],\n' +
+      '  "tags": ["optional keywords, e.g. vegetarian"]\n' +
+      "}\n\n" +
+      'Rules: "category" must be EXACTLY one of the values listed above ' +
+      "(copy it unchanged, even if the recipe text is in another " +
+      'language - these are fixed internal values). "tags" is optional, ' +
+      "an empty array is fine. Don't invent ingredients or steps that " +
+      "aren't in the text. Here is the recipe text:",
+    json_info_kopieren_btn: "📋 Copy prompt",
+    json_info_kopiert: "Copied!",
+    formular_json_label: "Paste JSON here",
+    formular_json_uebernehmen_btn: "Apply",
+    formular_label_titel: "Title",
+    formular_label_kategorie: "Category",
+    formular_label_tags: "Tags (multiple possible, e.g. \"vegetarian\", \"quick\")",
+    formular_tag_placeholder: "Enter and add a tag",
+    formular_tag_hinzufuegen_btn: "+ Tag",
+    formular_tag_entfernen_aria: "Remove tag {{tag}}",
+    formular_label_portionen: "Servings (base)",
+    formular_label_zutaten: "Ingredients",
+    formular_zutat_hinzufuegen_btn: "+ Ingredient",
+    formular_zutat_menge_placeholder: "Amount",
+    formular_zutat_einheit_placeholder: "Unit",
+    formular_zutat_name_placeholder: "Ingredient",
+    formular_zutat_entfernen_aria: "Remove ingredient",
+    formular_label_zubereitung: "Instructions (steps)",
+    formular_schritt_hinzufuegen_btn: "+ Step",
+    formular_schritt_placeholder_beispiel: "e.g. wash and chop vegetables",
+    formular_schritt_placeholder_naechster: "next step",
+    formular_schritt_entfernen_aria: "Remove step",
+    formular_schritt_hoch_aria: "Move step up",
+    formular_schritt_runter_aria: "Move step down",
+    formular_label_bild: "Photo",
+    formular_bild_vorhanden_hinweis: "(present – a new file will replace it)",
+    formular_bild_hinweis: "The current photo is kept if you don't choose a new file.",
+    formular_bild_verkleinern_text: "Resizing photo…",
+
+    fehler_url_ungueltig: "Please enter a full address starting with http:// or https://.",
+    fehler_url_apostroph: "This address contains an apostrophe (') and unfortunately can't be imported.",
+    fehler_url_keine_ausgabe:
+      "The script didn't return any output. Is 'rezeptbuch_url_importieren' set up in configuration.yaml, " +
+      "and has Home Assistant been fully restarted since then?",
+    fehler_url_kein_json: "The import script's response wasn't valid JSON.",
+    fehler_url_import_fehlgeschlagen: "URL import failed: {{fehler}}",
+    fehler_texterkennung_nichts_gefunden:
+      "Couldn't detect anything in the pasted text. Please fill in the fields below by hand.",
+    warnung_texterkennung_unvollstaendig:
+      "Detection was incomplete (ingredients or steps are missing or may be assigned incorrectly) - please check and complete the form.",
+    fehler_json_ungueltig: "The pasted JSON is invalid. Please check and try again.",
+    fehler_json_titel_fehlt: "The JSON is missing at least the 'title' field.",
+    fehler_titel_fehlt: "Please enter a title.",
+    fehler_unerwartet: "Unexpected error:\n{{fehler}}",
+    fehler_konflikt_geloescht:
+      "\"{{titel}}\" has since been deleted by someone else. Your changes were not saved.",
+    fehler_konflikt_geaendert:
+      "\"{{titel}}\" has since been changed by someone else (e.g. a comment, rating " +
+      "or their own edit).\n\nTo avoid overwriting that, your changes were NOT saved. " +
+      "Please open the recipe again and re-enter your changes.",
+    fehler_vorgang_fehlgeschlagen: "Action failed:\n{{fehler}}",
+    fehler_teilen_drucken: "Unexpected error while sharing/printing:\n{{fehler}}",
+    fehler_config_entity_fehlt: "Please specify 'entity' in the card configuration, e.g. entity: todo.rezepte",
+    fehler_bild_lesen: "Couldn't read the photo (file corrupted or unsupported).",
+    fehler_bild_verarbeiten: "Couldn't process the photo as an image (unsupported format?).",
+
+    teilen_ueberschrift_zutaten: "INGREDIENTS",
+    teilen_ueberschrift_zubereitung: "INSTRUCTIONS",
+    seite_zurueck_btn: "← Back",
+    seite_weiter_btn: "Next →",
+    seite_anzeige: "Page {{aktuell}} of {{gesamt}}",
+    update_neue_version: "New version available: {{version}}",
+    update_ansehen_btn: "View",
+    update_schliessen_aria: "Dismiss notice",
+    ressourcen_version_hinweis: "⚠️ This card was updated, but the resource URL wasn't changed (still \"?v={{version}}\"). Other browsers/devices may therefore keep loading the old, cached file - increase the version number in the resource URL (Settings → Dashboards → Resources).",
+    detail_kochmodus_btn: "🍳 Cook Mode",
+    kochmodus_schritt_anzeige: "Step {{aktuell}} of {{gesamt}}",
+    kochmodus_schliessen_aria: "Close cook mode",
+    kochmodus_schritt_zurueck_aria: "Previous step",
+    kochmodus_schritt_weiter_aria: "Next step",
+    kochmodus_zutaten_ein_aria: "Show ingredients",
+    kochmodus_zutaten_aus_aria: "Hide ingredients",
+    kochmodus_timer_ein_aria: "Show timer",
+    kochmodus_timer_aus_aria: "Hide timer",
+    kochmodus_timer_minuten_aria: "Minutes",
+    kochmodus_timer_start_btn: "Start",
+    kochmodus_timer_abbrechen_btn: "Cancel",
+    kochmodus_timer_abgelaufen_text: "⏰ Timer finished!",
+    kochmodus_timer_ok_btn: "OK",
+    kochmodus_timer_preset_aria: "Start {{minuten}} min timer",
+    kopf_sammel_pdf_btn: "📚 Collected PDF",
+    sammel_pdf_keine_rezepte: "No recipes found to export.",
+    sammel_pdf_frage_toc: "Create a table of contents for the selected recipes?",
+    sammel_pdf_ja_toc_btn: "Yes, create a table of contents",
+    sammel_pdf_nein_toc_btn: "No, no table of contents",
+    sammel_pdf_name_placeholder: "Cookbook name",
+    sammel_pdf_erstellen_btn: "Create PDF",
+    abschnitt_titel_inhaltsverzeichnis: "Table of Contents",
+    sammel_pdf_frage_umfang: "Which recipes should go into the combined PDF?",
+    sammel_pdf_alle_rezepte_btn: "All shown recipes",
+    sammel_pdf_auswahl_btn: "Select specific recipes",
+    sammel_pdf_auswahl_titel: "Select recipes",
+    sammel_pdf_alle_auswaehlen_link: "Select all",
+    sammel_pdf_keine_auswaehlen_link: "Select none",
+    sammel_pdf_weiter_btn: "Next",
+    sammel_pdf_bilder_mitdrucken_label: "Include images in the PDF",
+    sammel_pdf_auswahl_keine_hinweis: "Please select at least one recipe.",
+  },
+
+  // Anzeigenamen der Umrechnungstabelle-Zutaten, GENAU in der Reihenfolge von
+  // UMRECHNUNGSTABELLE_ZUTATEN in rezeptbuch-card.js.
+  zutaten: [
+    "Flour (all-purpose)", "Sugar (granulated)", "Powdered sugar", "Brown sugar (packed)", "Butter", "Honey",
+    "Maple syrup", "Vegetable oil", "Olive oil", "Milk", "Heavy cream", "Water", "Plain yogurt",
+    "Sour cream", "Cream cheese", "Rice, uncooked (long grain)", "Rolled oats", "Cocoa powder",
+    "Baking powder", "Baking soda", "Salt, fine", "Yeast, dry", "Almonds, ground", "Walnuts, chopped",
+    "Hazelnuts, chopped", "Raisins", "Chocolate chips", "Breadcrumbs, dry", "Parmesan, grated",
+    "Cheese, shredded (e.g. cheddar)", "Quinoa, uncooked", "Lentils, dried", "Couscous, dry",
+    "Peanut butter", "Tomato paste", "Vinegar", "Lemon juice", "Vanilla extract", "Cinnamon, ground",
+    "Ginger, ground", "Paprika", "Pepper, ground", "Garlic powder", "Turmeric, ground", "Sesame seeds",
+    "Flaxseed", "Chia seeds", "Coconut flakes, unsweetened", "Coconut milk (canned, liquid)", "Cornstarch",
+    "Whole wheat flour", "Spelt flour", "Semolina", "Mustard (Dijon)", "Soy sauce", "Ketchup", "Mayonnaise",
+    "Buttermilk", "Sweetened condensed milk", "Parsley, fresh, chopped", "Basil, fresh, chopped",
+    "Oregano, dried", "Thyme, dried", "Nutmeg, ground", "Cumin, ground", "Cayenne pepper", "Pecans, chopped",
+    "Cashews, chopped", "Pistachios, chopped", "Panko (coarse breadcrumbs)",
+  ],
+};

@@ -23,7 +23,16 @@
 const path = require("path");
 const { chromium } = require("playwright");
 
-const KARTEN_DATEI = path.join(__dirname, "..", "rezeptbuch-card.js");
+const fs = require("fs");
+
+const WURZEL = path.join(__dirname, "..");
+const KARTEN_DATEI = path.join(WURZEL, "rezeptbuch-card.js");
+// Alle Sprachdateien (rezeptbuch-sprache-<code>.js) im Projektstamm.
+const SPRACH_DATEIEN = fs
+  .readdirSync(WURZEL)
+  .filter((name) => /^rezeptbuch-sprache-[a-z]+\.js$/.test(name))
+  .sort()
+  .map((name) => path.join(WURZEL, name));
 
 let bestanden = 0;
 let fehlgeschlagen = 0;
@@ -43,13 +52,23 @@ function assert(bedingung, name) {
 // Erzeugt eine frische Seite mit der echten Karte + simuliertem hass-Objekt.
 // Jeder Test bekommt seine eigene Seite (eigener, leerer Speicher), damit
 // sich Tests nicht gegenseitig beeinflussen.
-async function neueTestUmgebung(browser, zusatzConfig = {}) {
+async function neueTestUmgebung(browser, zusatzConfig = {}, optionen = {}) {
   const page = await browser.newPage();
 
   // console.error/warn aus der Karte sichtbar machen, falls ein Test
   // unerwartet einen Fehler wirft (hilft bei der Fehlersuche).
   page.on("pageerror", (fehler) => console.error("  [Browser-Fehler]", fehler));
 
+  // Die Sprachdateien (rezeptbuch-sprache-<code>.js) werden von der Karte
+  // normalerweise bei Bedarf nachgeladen. In den meisten Tests laden wir sie
+  // deshalb einfach alle vorab (deterministisch, kein Netzwerkzugriff) - der
+  // Nachlade-Mechanismus selbst wird separat getestet (optionen.sprachenVorladen
+  // = false, siehe testSprachdateienWerdenNachgeladen).
+  if (optionen.sprachenVorladen !== false) {
+    for (const sprachDatei of SPRACH_DATEIEN) {
+      await page.addScriptTag({ path: sprachDatei });
+    }
+  }
   await page.addScriptTag({ path: KARTEN_DATEI });
 
   await page.evaluate((zusatzConfig) => {
@@ -150,6 +169,9 @@ async function neueTestUmgebung(browser, zusatzConfig = {}) {
     karte.setConfig({ entity: "todo.rezepte", ...window.__zusatzConfig });
     document.body.appendChild(karte);
     karte.hass = window.__fakeHass; // löst _rezepteLaden() aus
+    // Die Karte meldet Hinweise (Ersatz für alert()) zusätzlich als Ereignis -
+    // die Tests lesen sie wie früher aus window.__alertAufrufe.
+    karte.addEventListener("rezeptbuch-hinweis", (ev) => window.__alertAufrufe.push(ev.detail.text));
     window.__karte = karte;
   }, zusatzConfig);
 
@@ -1762,17 +1784,23 @@ async function testAttributInjectionWirdVerhindert(browser) {
       return {
         xssTitelAusgefuehrt: window.__xssTitel === true,
         xssBildAusgefuehrt: window.__xssBild === true,
-        // class + src + alt (alt="" wurde für Barrierefreiheit ergänzt, siehe CHANGELOG)
-        kachelHatNurSrcAttribut: kachelBild ? kachelBild.getAttributeNames().length === 3 : null,
-        detailHatNurSrcAttribut: detailBild ? detailBild.getAttributeNames().length === 3 : null,
+        // Erlaubt sind nur die von der Karte selbst gesetzten Attribute
+        // (class, id, src, srcset, sizes, loading, decoding, alt) - ein
+        // eingeschleustes on...-Attribut o.ä. würde hier auffallen.
+        kachelHatNurSrcAttribut: kachelBild
+          ? kachelBild.getAttributeNames().every((n) => ["class", "src", "srcset", "sizes", "loading", "decoding", "alt"].includes(n))
+          : null,
+        detailHatNurSrcAttribut: detailBild
+          ? detailBild.getAttributeNames().every((n) => ["class", "id", "src", "alt"].includes(n))
+          : null,
         titelWertKorrektAusgelesen: titelFeld ? titelFeld.value : null,
       };
     }, uid);
 
     assert(ergebnis.xssTitelAusgefuehrt === false, "Eingeschleuster onmouseover-Handler über den Titel wird NICHT ausgeführt");
     assert(ergebnis.xssBildAusgefuehrt === false, "Eingeschleuster onerror-Handler über die Bild-URL wird NICHT ausgeführt");
-    assert(ergebnis.kachelHatNurSrcAttribut === true, "Kachel-Bild bekommt kein zusätzlich eingeschleustes Attribut (nur class+src)");
-    assert(ergebnis.detailHatNurSrcAttribut === true, "Detail-Bild bekommt kein zusätzlich eingeschleustes Attribut (nur class+src)");
+    assert(ergebnis.kachelHatNurSrcAttribut === true, "Kachel-Bild bekommt kein zusätzlich eingeschleustes Attribut (nur erwartete Attribute)");
+    assert(ergebnis.detailHatNurSrcAttribut === true, "Detail-Bild bekommt kein zusätzlich eingeschleustes Attribut (nur erwartete Attribute)");
     assert(ergebnis.titelWertKorrektAusgelesen === boesarterTitel, "Titel-Eingabefeld liest den ursprünglichen Titel korrekt zurück (kein Ausbruch, keine Doppel-Kodierung)");
   } finally {
     await page.close();
@@ -3820,11 +3848,11 @@ async function testInternationalisierung(browser) {
     assert(englischListe.ersterSternLabel === "1 of 5 stars", "Englisch: aria-label eines einzelnen Sterns ist englisch ('1 of 5 stars')");
     assert(englischListe.zurueckBtnText === "← Back", "Englisch: Zurück-Knopf zeigt '← Back'");
 
-    // Eine NICHT unterstützte Sprache (z.B. Türkisch) fällt mangels eigener
-    // Übersetzung auf Englisch zurück (siehe _sprache()). Seit v1.6.0 sind
-    // alle 24 offiziellen EU-Sprachen abgedeckt, Türkisch gehört nicht dazu.
+    // Eine NICHT unterstützte Sprache (z.B. Arabisch) fällt mangels eigener
+    // Übersetzung auf Englisch zurück (siehe _sprache()). Unterstützt werden
+    // die 24 EU-Amtssprachen, Schwiizerdütsch, Russisch und Türkisch.
     await page.evaluate(async () => {
-      window.__karte._hass = { ...window.__karte._hass, language: "tr" };
+      window.__karte._hass = { ...window.__karte._hass, language: "ar" };
       await window.__karte._zurListe();
     });
     const tuerkischFaelltAufEnglischZurueck = await page.evaluate(() => {
@@ -3833,7 +3861,7 @@ async function testInternationalisierung(browser) {
     });
     assert(
       tuerkischFaelltAufEnglischZurueck === "+ New",
-      "Nicht unterstützte Sprache ('tr') fällt auf Englisch zurück (keine eigene Übersetzung vorhanden)"
+      "Nicht unterstützte Sprache ('ar') fällt auf Englisch zurück (keine eigene Übersetzung vorhanden)"
     );
   } finally {
     await page.close();

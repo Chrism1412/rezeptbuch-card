@@ -92,7 +92,7 @@
 // Übersetzungen (i18n): Deutsch ist die Standard-/Rückfallsprache dieses
 // Projekts (siehe CONTRIBUTING.md) - jeder Text, den eine Nutzerin/ein
 // Nutzer tatsächlich zu sehen bekommt (Knopfbeschriftungen, Platzhalter,
-// alert()/confirm()-Texte, aria-label/title-Attribute, Leerzustände,
+// Hinweis-/confirm()-Texte, aria-label/title-Attribute, Leerzustände,
 // PDF-/HTML-Export-Überschriften usw.) lebt hier als Übersetzungs-
 // Schlüssel, NICHT als hart codierter String im restlichen Code. Interne,
 // nicht sichtbare Dinge (JSON-Datenschlüssel wie "title"/"category",
@@ -102,6 +102,14 @@
 // Klasse für die Auflösung/Anwendung. Um eine weitere Sprache zu
 // ergänzen: siehe CONTRIBUTING.md, Abschnitt "Eine neue Sprache
 // ergänzen".
+//
+// Seit Version 2.3.0 enthält diese Datei NUR NOCH Deutsch (Standard und
+// Rückfall). Alle anderen Sprachen liegen als eigene Dateien
+// "rezeptbuch-sprache-<code>.js" im selben Ordner wie diese Datei und
+// werden nur dann nachgeladen, wenn die Home-Assistant-Sprache des
+// jeweiligen Nutzers sie braucht (siehe _sprachdateiSicherstellen()) - die
+// Hauptdatei ist dadurch deutlich kleiner und schneller. Fehlt eine
+// Sprachdatei, zeigt die Karte schlicht Deutsch an.
 const UEBERSETZUNGEN = {
   de: {
     // Allgemein/mehrfach verwendet
@@ -211,9 +219,7 @@ const UEBERSETZUNGEN = {
     einkaufs_zaehler: "{{anzahl}} ausgewählt",
     einkaufsliste_erstellen_btn: "Einkaufsliste erstellen",
     fehler_einkaufsliste_keine_konfiguration:
-      "Für die Einkaufsliste fehlt noch die Konfiguration: bitte 'shopping_list_entity' " +
-      "in der Kartenkonfiguration angeben (z.B. shopping_list_entity: todo.einkaufsliste) - " +
-      "dafür wird eine ZWEITE Lokale To-do-Liste als Helfer benötigt. Siehe ANLEITUNG-Backup.md, Abschnitt 18.",
+      "Es wurde keine Einkaufsliste gefunden. Lege sie in den Einstellungen (⚙️) unter „Einrichtung & Wartung“ mit einem Klick an – oder gib 'shopping_list_entity' in der Kartenkonfiguration an.",
     fehler_einkaufsliste_keine_auswahl: "Bitte mindestens ein Rezept auswählen.",
     fehler_einkaufsliste_keine_auswahl_zutaten: "Bitte mindestens eine Zutat auswählen.",
     zutaten_fehlend_einkaufsliste_btn: "Ausgewählte zur Einkaufsliste hinzufügen",
@@ -384,9 +390,6 @@ const UEBERSETZUNGEN = {
     formular_schritt_entfernen_aria: "Schritt entfernen",
     formular_schritt_hoch_aria: "Schritt nach oben verschieben",
     formular_schritt_runter_aria: "Schritt nach unten verschieben",
-    formular_label_bild: "Bild",
-    formular_bild_vorhanden_hinweis: "(vorhanden – neue Datei ersetzt es)",
-    formular_bild_hinweis: "Aktuelles Bild bleibt erhalten, falls du keine neue Datei wählst.",
     formular_bild_verkleinern_text: "Bild wird verkleinert…",
 
     // Fehler-/Hinweismeldungen des Formulars
@@ -413,7 +416,6 @@ const UEBERSETZUNGEN = {
       "NICHT gespeichert. Bitte öffne das Rezept erneut und trage deine Änderungen nochmal ein.",
     fehler_vorgang_fehlgeschlagen: "Vorgang fehlgeschlagen:\n{{fehler}}",
     fehler_teilen_drucken: "Unerwarteter Fehler beim Teilen/Drucken:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Bitte 'entity' in der Kartenkonfiguration angeben, z.B. entity: todo.rezepte",
     fehler_bild_lesen: "Foto konnte nicht gelesen werden (Datei beschädigt oder nicht unterstützt).",
     fehler_bild_verarbeiten: "Foto konnte nicht als Bild verarbeitet werden (nicht unterstütztes Format?).",
 
@@ -459,7184 +461,60 @@ const UEBERSETZUNGEN = {
     sammel_pdf_weiter_btn: "Weiter",
     sammel_pdf_bilder_mitdrucken_label: "Bilder mit ins PDF aufnehmen",
     sammel_pdf_auswahl_keine_hinweis: "Bitte mindestens ein Rezept auswählen.",
-  },
 
-  // Schwiizerdütsch (gsw) - es git kei einheitlichi amtlichi Schriibwiis
-  // für Schwiizerdütsch (jedi Region schriibt anders). Da wird e einzigi,
-  // in sich konsistenti, alltagstauglichi Schriibwiis verwendet (wie
-  // WhatsApp-Schwiizerdütsch), keni wüsseschaftlichi Transkription.
-  gsw: {
-    // Allgemein/mehrfach verwendet
-    allgemein_zurueck: "← Zrugg",
-    allgemein_ja: "Ja",
-    allgemein_nein: "Nei",
-    allgemein_an: "A",
-    allgemein_aus: "Us",
-    allgemein_speichern: "Speichere",
-    allgemein_speichert: "Speicheret…",
-    allgemein_abbrechen: "Abbräche",
-    allgemein_bearbeiten: "Bearbeite",
-    allgemein_loeschen: "Lösche",
-    allgemein_oeffnen: "Öffne",
-    allgemein_unbekannt: "Unbekannt",
-    allgemein_schliessen: "Schliesse",
-
-    // Kategorien (Anzeige-Bezeichnungen - der intern gespeicherte/verglichene
-    // Wert bleibt unabhängig von der Sprache immer der deutsche String aus
-    // KATEGORIEN, siehe _kategorieLabel()).
-    kategorie_hauptgericht: "Hauptgricht",
-    kategorie_vorspeise: "Vorspys",
-    kategorie_suppe: "Suppe",
-    kategorie_salat: "Salat",
-    kategorie_beilage: "Byylag",
-    kategorie_dessert: "Dessert",
-    kategorie_kuchen_gebaeck: "Chueche & Gebäck",
-    kategorie_fruehstueck: "Zmorge",
-    kategorie_snack: "Znüni/Zvieri",
-    kategorie_getraenk: "Getränk",
-    kategorie_sonstiges: "Anders",
-    kategorie_filter_alle: "Alli",
-    kategorie_neu_btn: "+ Nöi Kategorie",
-    kategorie_name_placeholder: "Name vo de Kategorie",
-    fehler_kategorie_name_fehlt: "Bitte gib en Name für d'Kategorie i.",
-    fehler_kategorie_existiert_bereits: "Die Kategorie gits scho.",
-    kategorie_loeschen_title: "Kategorie lösche",
-    kategorie_loeschen_aria: "Kategorie {{name}} lösche",
-    kategorie_bearbeiten_title: "Kategorie umbenenne",
-    kategorie_bearbeiten_aria: "Kategorie {{name}} umbenenne",
-    kategorie_umbenennen_titel: "Kategorie \"{{name}}\" umbenenne:",
-    fehler_kategorie_wird_verwendet: "Die Kategorie wird no vo {{anzahl}}x bruucht - bitte zersch en anderi Kategorie zuedeile.",
-
-    // Wochentage (Anzeige - der interne Schlüssel in WOCHENTAGE bleibt
-    // sprachunabhängig "montag" usw., siehe _wochentagLabel()).
-    wochentag_montag: "Määntig",
-    wochentag_dienstag: "Zischtig",
-    wochentag_mittwoch: "Mittwuch",
-    wochentag_donnerstag: "Donnschtig",
-    wochentag_freitag: "Fritig",
-    wochentag_samstag: "Samschtig",
-    wochentag_sonntag: "Sunntig",
-
-    // Sortier-Optionen
-    sortier_titel: "Alphabetisch (A-Z)",
-    sortier_bewertung: "Beschti Bewertig zerscht",
-    sortier_kategorie: "Nach Kategorie",
-    sortier_neu: "Nöischt zerscht",
-    sortieren_label: "Sortiere:",
-
-    // Kopfbereich der Listenansicht
-    kopf_titel_standard: "Rezäptbuech",
-    kopf_sichern_btn: "💾 Sichere",
-    kopf_wochenplan_btn: "📅 Wuchepla",
-    kopf_zufallsrezept_btn: "🎲 Zuckerle-Rezept",
-    umrechnungstabelle_btn: "📐 Umrechnungstabälle",
-    umrechnungstabelle_titel: "Umrechnungstabälle",
-    umrechnungstabelle_hinweis: "Richtwärt in Gramm für häufig Küchezutate - je nach Marke und Konsischtänz anders, drum nume zum Nahgucke. Die Wärt wärde NID automatisch uf dini Rezäpt aagwändet.",
-    umrechnungstabelle_suche_placeholder: "Zutat sueche …",
-    umrechnungstabelle_spalte_zutat: "Zutat",
-    umrechnungstabelle_spalte_tasse: "1 Tasse",
-    umrechnungstabelle_spalte_el: "1 EL",
-    umrechnungstabelle_spalte_tl: "1 TL",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Kei Zutat gfunde.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Eigeni Zutat dezuefüege",
-    umrechnungstabelle_eigene_name_platzhalter: "Name vo der Zutat",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/Tasse",
-    umrechnungstabelle_eigene_el_platzhalter: "g/EL",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/TL",
-    umrechnungstabelle_eigene_loeschen_titel: "Eigeni Zutat lösche",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Eigeni Zutat bearbeite",
-    umrechnungstabelle_eigene_name_fehlt: "Bitte en Name iigeh.",
-    umrechnungstabelle_eigene_hinweis: "Fehlt e Zutat, wo du dr Umrechnigswärt sälber weisch? Füeg si hie vo Hand dezue - e automatischi Umrechnig zwüsche Volumen und Gwicht biete mir bewusst nid a, wil das je nach Zutat, Marke und Dichti ghätti bruucht.",
-    einkaufsmodus_start_btn: "🛒 Yychaufsliste",
-    einkaufsmodus_beenden_btn: "✕ Uswahl beende",
-    kopf_neu_btn: "+ Nöis",
-    suche_placeholder: "🔍 Rezäpt oder Zuetate (z.B. Mehl, Eier)…",
-
-    // Kochbücher (gespeicherte Filter)
-    kochbuch_loeschen_title: "Sammlig lösche",
-    kochbuch_loeschen_aria: "Sammlig {{name}} lösche",
-    kochbuch_speichern_btn: "+ Schlau Sammlig spichere",
-    kochbuch_name_placeholder: "Name für die Sammlig, z.B. Herbschtrezäpt",
-    fehler_kochbuch_name_fehlt: "Bitte en Name für die Sammlig yyge.",
-    kochbuch_info_aria: "Erklärig zu schlaue Sammlige zeige",
-    kochbuch_info_titel: "Was isch e schlaui Sammlig?",
-    kochbuch_info_text:
-      "E schlaui Sammlig spicheret kei feschti Liste vo Rezäpt, sondern " +
-      "e Kombination us Kategorie, Tags und Suechbegriff, genau so wie " +
-      "si grad iigstellt isch. Si aktualisiert sich danach vo elei: es " +
-      "nöis Rezäpt, wo passt, taucht automatisch mit uuf, und es Rezäpt, " +
-      "wo Kategorie oder Tags sich änderet, cha genauso automatisch " +
-      "wieder verschwinde.",
-
-    // Einkaufslisten-Auswahlmodus
-    einkaufs_zaehler: "{{anzahl}} usgwählt",
-    einkaufsliste_erstellen_btn: "Yychaufsliste erstelle",
-    fehler_einkaufsliste_keine_konfiguration:
-      "Für d Yychaufsliste fehlt no d Konfiguration: bitte 'shopping_list_entity' " +
-      "i de Charte-Konfiguration aagäh (z.B. shopping_list_entity: todo.einkaufsliste) - " +
-      "dafür bruucht's e ZWEITI Lokali To-do-Liste als Hälfer. Lueg i ANLEITUNG-Backup.md, Abschnitt 18.",
-    fehler_einkaufsliste_keine_auswahl: "Bitte mindeschtens es Rezäpt uswähle.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Bitte mindeschtens eini Zutat uswähle.",
-    zutaten_fehlend_einkaufsliste_btn: "Usgwählti zur Yychaufsliste hinzuefüege",
-    fehler_einkaufsliste_keine_zutaten: "D usgwählte Rezäpt händ kei Zuetate.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen:
-      "Konnt \"{{zeile}}\" nöd zur Yychaufsliste hinzuefüege:\n{{fehler}}\n\nScho hinzuegfüegti Zuetate bliibed i de Yychaufsliste.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} Zuetat(e) zu \"{{entity}}\" hinzuegfüegt.",
-
-    // Rückgängig-Banner (nach Löschen)
-    undo_geloescht: "\"{{titel}}\" glöscht.",
-    undo_rueckgaengig_btn: "Rückgängig",
-
-    // Leerzustände / Fehleranzeige der Listenansicht
-    leer_keine_rezepte: "No kei Rezäpt – leg los mit \"+ Neu\"",
-    leer_keine_treffer: "Kei Rezäpt gfunde für \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Konnt \"{{entity}}\" nöd lade.",
-    fehler_liste_laden_hinweis: "Git's die To-do-Liste überhaupt? (Yystellige → Geräte & Dienscht → Hälfer)",
-
-    // Rezept-Kacheln
-    kachel_aria_label_oeffnen: "Rezäpt {{titel}} öffne",
-
-    // Sterne-Bewertung
-    sterne_aria_label_gruppe: "Eigeti Bewertig",
-    sterne_aria_label: "{{zahl}} vo 5 Stärne",
-    fehler_kein_benutzer_bewertung: "Konnt dyy Benutzer nöd ermittle - Bewertig nöd möglich.",
-
-    // Detailansicht
-    detail_teilen_drucken_btn: "📤 Teile / Drucke",
-    detail_erstellt_von: "👤 Erstellt vo {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} Bewertig)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} Bewertige)",
-    detail_keine_bewertungen: "No kei Bewertige",
-    detail_deine_bewertung: "Dyy Bewertig:",
-    detail_zubereitet_x: "🍳 {{anzahl}}x zubereitet",
-    detail_portionen_suffix: "Portione",
-    abschnitt_titel_zutaten: "Zuetate",
-    abschnitt_titel_zubereitung: "Zuebereitig",
-    keine_zutaten: "Kei Zuetate hinterlegt",
-    detail_kommentare_titel: "Kommentar",
-    detail_keine_kommentare: "No kei Kommentar",
-    detail_kommentar_placeholder: "Ergänzig, Tipp oder Aamerkig…",
-    detail_kommentar_hinzufuegen_btn: "Kommentar hinzuefüege",
-    detail_bearbeiten_hinweis: "Nur {{name}} (oder en Admin) cha das Rezäpt bearbeite oder lösche.",
-    detail_ersteller_unbekannt: "de/die Ersteller:in",
-    modal_zubereitet_frage: "Hesch \"{{titel}}\" zubereitet?",
-    modal_drucken_bild_frage: "Rezeptbild mit usgeh?",
-    modal_drucken_ohne_bild_btn: "Ohni Bild",
-    modal_drucken_mit_bild_btn: "Mit Bild",
-    statistik_btn: "📊 Statistik",
-    statistik_titel: "Koch-Statistik",
-    statistik_info_aria: "Erklärig zur Statistik zeige",
-    statistik_einstellungen_btn_title: "Zubereitigs-Erfassig",
-    statistik_einstellungen_titel: "Zubereitigs-Erfassig",
-    statistik_einstellungen_text: "Da chasch feschtlege, ob nach em Verlaa vomene Rezept gfrogt wird, ob de's zubereitet hesch, und ob die Statistik i dere Charte azeigt wird.",
-    statistik_einstellungen_schalter_label: "Abfrag & Statistik ischalte",
-    tags_einstellung_schalter_label: "Tag-Filter in der Übersicht zeige",
-    zufallsrezept_einstellung_schalter_label: "Zuckerle-Rezept-Knopf i de Übersicht zeige",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Umrechnigstabälle-Knopf i de Übersicht zeige",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Bi de iigstellte Kategorie für amerikanischi Rezept erschiint d'Umrechnigstabälle im Rezept und im Chochmodus wyterhin, au wenn de Knopf da usgschalted isch.",
-    farben_abschnitt_titel: "Farbe",
-    farben_hinweis: "Pass einzelni Farbe vo de Charte aa. Mit Alles zrüggsetze gönd alli Farbe zrugg uf de Standard.",
-    farben_akzent_label: "Hauptfarb (Chnöpf, aktivi Filter)",
-    farben_akzent_text_label: "Akzentfarb für Text und Ränder",
-    farben_loeschen_label: "Lösche / Warnig",
-    farben_sterne_label: "Bewärtigssterne",
-    farben_titel_label: "Überschrifte",
-    farben_zuruecksetzen_btn: "Alles zrüggsetze",
-    us_kategorie_einstellung_label: "Kategorie für amerikanischi Rezept",
-    us_kategorie_einstellung_text: "Bi Rezäpt mit dere Kategorie erschiint zuesätzlich im Rezäpt sälber und im Kochmodus en Knopf für d'Umrechnigstabälle.",
-    us_kategorie_einstellung_keine: "— Kei —",
-    statistik_info_titel: "Wie wird die Statistik berechnet?",
-    statistik_info_text:
-      "Die Uswärtig zellt jedi Bestätigung vo de Frag „Hesch zubereitet?“ - unabhängig vo de Portionegrössi oder wie oft am gliiche Tag. Isch die Frag über de Schalter i de Statistik-Iistellige (⚙️) deaktiviert, wachsed d'Zahle nüm wiiter, scho erfasti Zubereitige bliebed aber erhalte.",
-    statistik_dieses_jahr: "Du hesch im {{jahr}} {{anzahl}}x us dim Rezeptbuech kocht",
-    statistik_gesamt: "Du hesch insgesamt {{anzahl}}x us dim Rezeptbuech kocht",
-    statistik_top_titel: "Am meischte gkocht",
-    statistik_keine_daten: "No kei Zubereitige erfasst.",
-    modal_loeschen_frage: "\"{{titel}}\" wirklich lösche?",
-    modal_loeschen_ja_btn: "Ja, lösche",
-    modal_kommentar_loeschen_frage: "Dä Kommentar wirklich lösche?",
-
-    // Wochenplan
-    wochenplan_titel: "Wuchepla",
-    wochenplan_tab_diese: "Die Wuche",
-    wochenplan_tab_folgewoche: "Nächschti Wuche",
-    wochenplan_hinweis_folgewoche:
-      "Plaan hie scho jetzt d chuu Wuche - sie rutscht automatisch zu \"Die Wuche\" nache, sobald d aktuelli Wuche verbii isch.",
-    wochenplan_hinweis_diese:
-      "Scho vergangeni Täg werded automatisch gleert (s Rezäpt sälber bliibt erhalte, nur d Zueordnig verschwindet).",
-    wochenplan_hinweis_speicherung:
-      "Wird geräteübergryfend gspeichert (als unsichtbare Zuesatzyytrag i derselbe Rezäptliste, kein wyterer Hälfer nötig).",
-    wochenplan_leer: "No kei Rezäpt vorhande - zerscht welchi aalege.",
-    wochenplan_kein_rezept_option: "– kes Rezäpt –",
-    wochenplan_einkaufsliste_btn: "Yychaufsliste us {{ziel}} erstelle",
-    wochenplan_wort: "Wuchepla",
-    wochenplan_folgewoche_wort: "Nächschti Wuche",
-    wochenplan_aktuelle_woche_wort: "aktuelli Wuche",
-    wochenplan_keine_zuweisung: "D {{zeitraum}} het no kei zuegwiesni Rezäpt.",
-
-    // Formular (neues/bearbeiten Rezept)
-    formular_titel_neu: "Nöis Rezäpt",
-    formular_titel_bearbeiten: "Rezäpt bearbeite",
-    formular_url_import_btn: "🌐 Rezäpt-URL importiere",
-    formular_url_label: "Link zur Rezäpt-Website",
-    formular_url_placeholder: "https://www.byspiil-rezäpt.de/mys-rezäpt",
-    formular_url_hinweis:
-      "Lädt d Syte und liist die dört sowieso yygbauete " +
-      "Rezäpt-Strukturdate us (die gliiche Date, mit dene z.B. " +
-      "Google d Sterne-Bewertige i de Suechi aazeigt) - meischtens " +
-      "zueverlässiger als Text-Erkennig. Funktioniert nur bi Syte, " +
-      "die sonig Date parat händ, und die automatisierti Aafroge " +
-      "nöd blockiered.",
-    formular_url_importieren_btn: "Importiere",
-    formular_url_laedt: "Lädt …",
-    formular_text_einfuegen_btn: "🔍 Rezäpttext yyfüege (automatisch erkenne)",
-    formular_text_label: "Rezäpttext da yyfüege (z.B. vo re Rezäpt-Website kopiert)",
-    formular_text_placeholder: "Titel, Zuetate, Zuebereitig - eifach de ganz Text da yynecopiere",
-    formular_text_hinweis:
-      "Rein automatischi Erkennig ohni KI - funktioniert am beschte mit " +
-      "\"Zuetate\"- und \"Zuebereitig\"-Überschrifte im Text. Bitte s " +
-      "Ergäbnis nachher churz prüefe, es cha unvollständig sy.",
-    formular_text_erkennen_btn: "Erkenne",
-    formular_json_einfuegen_btn: "📋 Vo re KI erzügts JSON yyfüege",
-    formular_json_info_aria: "Passende Prompt für e KI aazeige",
-    json_info_titel: "Prompt für e KI",
-    json_info_erklaerung:
-      "Da Text kopiere, i e KI vo dyner Wahl (z.B. ChatGPT oder " +
-      "Claude) yyfüege, dyy Rezäpttext aahänge und d Antwort nachher " +
-      "obe bi \"JSON da yyfüege\" yyfüege.",
-    json_info_prompt:
-      "Wandle de Rezäpttext, wo ich dir gliich schicke, i EIS einzigs " +
-      "JSON-Objekt um - ohni Erklärig, ohni Text davor oder danach, nur " +
-      "s JSON. Bruuch genau das Format:\n\n" +
-      "{\n" +
-      '  "title": "Name vom Rezäpt",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "eini vo: {{kategorien}}",\n' +
-      '  "ingredients": ["ei Zuetat pro Yytrag, z.B. 200 g Mehl"],\n' +
-      '  "steps": ["ei Zuebereitigsschritt pro Yytrag"],\n' +
-      '  "tags": ["optionali Stichwort, z.B. vegetarisch"]\n' +
-      "}\n\n" +
-      'Räägle: "category" mues GENAU eine vo de obe gnennte Wärt sy ' +
-      "(unverändert übernäh, au wenn de Rezäpttext i re anderi " +
-      'Sprach isch). "tags" isch optional, notfalls es leers Array. ' +
-      "Erfind kei Zuetate oder Schritt, wo nöd im Text stönd. " +
-      "Da isch de Rezäpttext:",
-    json_info_kopieren_btn: "📋 Prompt kopiere",
-    json_info_kopiert: "Kopiert!",
-    formular_json_label: "JSON da yyfüege",
-    formular_json_uebernehmen_btn: "Übernäh",
-    formular_label_titel: "Titel",
-    formular_label_kategorie: "Kategorie",
-    formular_label_tags: "Tags (mehreri möglich, z.B. \"vegetarisch\", \"schnäll\")",
-    formular_tag_placeholder: "Tag yygäh und hinzuefüege",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Tag {{tag}} entferne",
-    formular_label_portionen: "Portione (Basis)",
-    formular_label_zutaten: "Zuetate",
-    formular_zutat_hinzufuegen_btn: "+ Zuetat",
-    formular_zutat_menge_placeholder: "Mängi",
-    formular_zutat_einheit_placeholder: "Einheit",
-    formular_zutat_name_placeholder: "Zuetat",
-    formular_zutat_entfernen_aria: "Zuetat entferne",
-    formular_label_zubereitung: "Zuebereitig (Schritt)",
-    formular_schritt_hinzufuegen_btn: "+ Schritt",
-    formular_schritt_placeholder_beispiel: "z.B. Gmües wäsche und schniide",
-    formular_schritt_placeholder_naechster: "nächschte Schritt",
-    formular_schritt_entfernen_aria: "Schritt entferne",
-    formular_schritt_hoch_aria: "Schritt nache obe verschiebe",
-    formular_schritt_runter_aria: "Schritt nache unge verschiebe",
-    formular_label_bild: "Bild",
-    formular_bild_vorhanden_hinweis: "(vorhande – nöis File ersetzt s)",
-    formular_bild_hinweis: "S aktuälle Bild bliibt erhalte, falls kes nöis File usgwählt wird.",
-    formular_bild_verkleinern_text: "Bild wird verchlyneret…",
-
-    // Fehler-/Hinweismeldungen des Formulars
-    fehler_url_ungueltig: "Bitte e vollständigi Adrässe mit http:// oder https:// aagäh.",
-    fehler_url_apostroph: "Die Adrässe het en Apostroph (') und cha leider nöd importiert wärde.",
-    fehler_url_keine_ausgabe:
-      "S Skript het kei Usgab gliifered. Isch 'rezeptbuch_url_importieren' in configuration.yaml " +
-      "yygrichtet und Home Assistant syt dem einisch komplett neu gstartet worde?",
-    fehler_url_kein_json: "D Antwort vom Import-Skript isch kes gültigs JSON gsi.",
-    fehler_url_import_fehlgeschlagen: "URL-Import fehlgschlage: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden:
-      "Konnt im yyfüegte Text leider nüt erkenne. Bitte d Fälder unte vo Hand usfülle.",
-    warnung_texterkennung_unvollstaendig:
-      "Erkennig isch unvollständig gsi (Zuetate oder Schritt fehled/sind evtl. falsch zuegordnet) - bitte im Formular prüefe und ergänze.",
-    fehler_json_ungueltig: "S yyfüegte JSON isch ungültig. Bitte prüefe und nomal versueche.",
-    fehler_json_titel_fehlt: "Im JSON fehlt mindeschtens s Fäld 'title'.",
-    fehler_titel_fehlt: "Bitte en Titel yygäh.",
-    fehler_unerwartet: "Unerwarteter Fehler:\n{{fehler}}",
-    fehler_konflikt_geloescht:
-      "\"{{titel}}\" isch mittlerwyle vo öpper anderem glöscht worde. Dyyni Änderige sind nöd gspichert worde.",
-    fehler_konflikt_geaendert:
-      "\"{{titel}}\" isch mittlerwyle vo öpper anderem gänderet worde (z. B. Kommentar, Bewertig " +
-      "oder eigeni Bearbeitig).\n\nDamit drum nüt überschriibe wird, sind dyyni Änderige " +
-      "NÖD gspichert worde. Bitte öffne s Rezäpt nomal und träg dyyni Änderige nomal y.",
-    fehler_vorgang_fehlgeschlagen: "Vorgang fehlgschlage:\n{{fehler}}",
-    fehler_teilen_drucken: "Unerwarteter Fehler bim Teile/Drucke:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Bitte 'entity' i de Charte-Konfiguration aagäh, z.B. entity: todo.rezepte",
-    fehler_bild_lesen: "Foti het nöd gläse wärde chöne (File beschädiget oder nöd unterstützt).",
-    fehler_bild_verarbeiten: "Foti het nöd als Bild verarbeitet wärde chöne (nöd unterstützts Format?).",
-
-    // Teilen (Text-Variante) / PDF-/HTML-Export
-    teilen_ueberschrift_zutaten: "ZUETATE",
-    teilen_ueberschrift_zubereitung: "ZUEBEREITIG",
-    seite_zurueck_btn: "← Zrugg",
-    seite_weiter_btn: "Wieter →",
-    seite_anzeige: "Siite {{aktuell}} vo {{gesamt}}",
-    update_neue_version: "Neui Version verfüegbar: {{version}}",
-    update_ansehen_btn: "Aluege",
-    update_schliessen_aria: "Hiwiis usblände",
-    ressourcen_version_hinweis: "⚠️ Die Charte isch aktualisiert worde, aber d'Ressource-URL het sich nid gänderet (immer no \"?v={{version}}\"). Angeri Browser/Geräht lönd drum evtl. immer no die alt, zwüscheg'speicherti Datei - erhöh d'Versionsnummere i de Ressource-URL (Ischtellige → Dashboards → Ressource).",
-    detail_kochmodus_btn: "🍳 Kochmodus",
-    kochmodus_schritt_anzeige: "Schritt {{aktuell}} vo {{gesamt}}",
-    kochmodus_schliessen_aria: "Kochmodus schliesse",
-    kochmodus_schritt_zurueck_aria: "Vorherige Schritt",
-    kochmodus_schritt_weiter_aria: "Nächschte Schritt",
-    kochmodus_zutaten_ein_aria: "Zuetate iblände",
-    kochmodus_zutaten_aus_aria: "Zuetate usblände",
-    kochmodus_timer_ein_aria: "Timer iblände",
-    kochmodus_timer_aus_aria: "Timer usblände",
-    kochmodus_timer_minuten_aria: "Minute",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Abbräche",
-    kochmodus_timer_abgelaufen_text: "⏰ Timer isch fertig!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "{{minuten}} Min.-Timer starte",
-    kopf_sammel_pdf_btn: "📚 Sammel-PDF",
-    sammel_pdf_keine_rezepte: "Kei Rezept zum Exportiere gfunde.",
-    sammel_pdf_frage_toc: "Sölled mer es Inhaltsverzeichnis vo de usgwählte Rezept erstelle?",
-    sammel_pdf_ja_toc_btn: "Ja, Inhaltsverzeichnis erstelle",
-    sammel_pdf_nein_toc_btn: "Nei, kes Inhaltsverzeichnis",
-    sammel_pdf_name_placeholder: "Name vom Kochbuech",
-    sammel_pdf_erstellen_btn: "PDF erstelle",
-    abschnitt_titel_inhaltsverzeichnis: "Inhaltsverzeichnis",
-    sammel_pdf_frage_umfang: "Weli Rezept sölled ins Sammel-PDF?",
-    sammel_pdf_alle_rezepte_btn: "Alli aazeigte Rezept",
-    sammel_pdf_auswahl_btn: "Bstimmti Rezept uswähle",
-    sammel_pdf_auswahl_titel: "Rezept uswähle",
-    sammel_pdf_alle_auswaehlen_link: "Alli uswähle",
-    sammel_pdf_keine_auswaehlen_link: "Kes uswähle",
-    sammel_pdf_weiter_btn: "Wiiter",
-    sammel_pdf_bilder_mitdrucken_label: "Bilder mit ins PDF ufneh",
-    sammel_pdf_auswahl_keine_hinweis: "Bitte mindischtens ei Rezept uswähle.",
-  },
-  en: {
-    allgemein_zurueck: "← Back",
-    allgemein_ja: "Yes",
-    allgemein_nein: "No",
-    allgemein_an: "On",
-    allgemein_aus: "Off",
-    allgemein_speichern: "Save",
-    allgemein_speichert: "Saving…",
-    allgemein_abbrechen: "Cancel",
-    allgemein_bearbeiten: "Edit",
-    allgemein_loeschen: "Delete",
-    allgemein_oeffnen: "Open",
-    allgemein_unbekannt: "Unknown",
-    allgemein_schliessen: "Close",
-
-    kategorie_hauptgericht: "Main course",
-    kategorie_vorspeise: "Starter",
-    kategorie_suppe: "Soup",
-    kategorie_salat: "Salad",
-    kategorie_beilage: "Side dish",
-    kategorie_dessert: "Dessert",
-    kategorie_kuchen_gebaeck: "Cakes & baking",
-    kategorie_fruehstueck: "Breakfast",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Drink",
-    kategorie_sonstiges: "Other",
-    kategorie_filter_alle: "All",
-    kategorie_neu_btn: "+ New category",
-    kategorie_name_placeholder: "Category name",
-    fehler_kategorie_name_fehlt: "Please enter a name for the category.",
-    fehler_kategorie_existiert_bereits: "This category already exists.",
-    kategorie_loeschen_title: "Delete category",
-    kategorie_loeschen_aria: "Delete category {{name}}",
-    kategorie_bearbeiten_title: "Rename category",
-    kategorie_bearbeiten_aria: "Rename category {{name}}",
-    kategorie_umbenennen_titel: "Rename category \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "This category is still used by {{anzahl}}x recipes - please reassign them to another category first.",
-
-    wochentag_montag: "Monday",
-    wochentag_dienstag: "Tuesday",
-    wochentag_mittwoch: "Wednesday",
-    wochentag_donnerstag: "Thursday",
-    wochentag_freitag: "Friday",
-    wochentag_samstag: "Saturday",
-    wochentag_sonntag: "Sunday",
-
-    sortier_titel: "Alphabetical (A-Z)",
-    sortier_bewertung: "Best rating first",
-    sortier_kategorie: "By category",
-    sortier_neu: "Newest first",
-    sortieren_label: "Sort by:",
-
-    kopf_titel_standard: "Recipe Book",
-    kopf_sichern_btn: "💾 Backup",
-    kopf_wochenplan_btn: "📅 Meal plan",
-    kopf_zufallsrezept_btn: "🎲 Random recipe",
-    umrechnungstabelle_btn: "📐 Conversion table",
-    umrechnungstabelle_titel: "Conversion table",
-    umrechnungstabelle_hinweis: "Approximate gram values for common kitchen ingredients - these vary by brand and consistency, so treat them as reference only. They are NOT applied automatically to your recipes.",
-    umrechnungstabelle_suche_placeholder: "Search ingredient …",
-    umrechnungstabelle_spalte_zutat: "Ingredient",
-    umrechnungstabelle_spalte_tasse: "1 cup",
-    umrechnungstabelle_spalte_el: "1 tbsp",
-    umrechnungstabelle_spalte_tl: "1 tsp",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "No ingredient found.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Add custom ingredient",
-    umrechnungstabelle_eigene_name_platzhalter: "Ingredient name",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/cup",
-    umrechnungstabelle_eigene_el_platzhalter: "g/tbsp",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tsp",
-    umrechnungstabelle_eigene_loeschen_titel: "Delete custom ingredient",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Edit custom ingredient",
-    umrechnungstabelle_eigene_name_fehlt: "Please enter a name.",
-    umrechnungstabelle_eigene_hinweis: "Missing an ingredient whose conversion value you know yourself? Add it here manually - we deliberately don't offer automatic conversion between volume and weight, since that would mean guessing based on ingredient, brand and density.",
-    einkaufsmodus_start_btn: "🛒 Shopping list",
-    einkaufsmodus_beenden_btn: "✕ Cancel selection",
-    kopf_neu_btn: "+ New",
-    suche_placeholder: "🔍 Recipe or ingredients (e.g. flour, eggs)…",
-
-    kochbuch_loeschen_title: "Delete collection",
-    kochbuch_loeschen_aria: "Delete collection {{name}}",
-    kochbuch_speichern_btn: "+ Save as smart collection",
-    kochbuch_name_placeholder: "Name for this collection, e.g. Autumn recipes",
-    fehler_kochbuch_name_fehlt: "Please enter a name for the collection.",
-    kochbuch_info_aria: "Show explanation of smart collections",
-    kochbuch_info_titel: "What is a smart collection?",
-    kochbuch_info_text:
-      "A smart collection doesn't store a fixed list of recipes - it " +
-      "stores a combination of category, tags and search term, exactly " +
-      "as they're set when you save it. It then updates itself " +
-      "automatically: a new recipe that matches shows up on its own, and " +
-      "a recipe whose category or tags change can just as automatically " +
-      "disappear again.",
-
-    einkaufs_zaehler: "{{anzahl}} selected",
-    einkaufsliste_erstellen_btn: "Create shopping list",
-    fehler_einkaufsliste_keine_konfiguration:
-      "The shopping list still needs to be configured: please set 'shopping_list_entity' " +
-      "in the card configuration (e.g. shopping_list_entity: todo.shopping_list) - " +
-      "this requires a SECOND Local To-do List helper. See ANLEITUNG-Backup.md, section 18.",
-    fehler_einkaufsliste_keine_auswahl: "Please select at least one recipe.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Please select at least one ingredient.",
-    zutaten_fehlend_einkaufsliste_btn: "Add selected to shopping list",
-    fehler_einkaufsliste_keine_zutaten: "The selected recipes don't contain any ingredients.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen:
-      "Could not add \"{{zeile}}\" to the shopping list:\n{{fehler}}\n\nIngredients already added remain on the shopping list.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingredient(s) added to \"{{entity}}\".",
-
-    undo_geloescht: "\"{{titel}}\" deleted.",
-    undo_rueckgaengig_btn: "Undo",
-
-    leer_keine_rezepte: "No recipes yet – get started with \"+ New\"",
-    leer_keine_treffer: "No recipes found for \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Could not load \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Does this to-do list exist? (Settings → Devices & Services → Helpers)",
-
-    kachel_aria_label_oeffnen: "Open recipe {{titel}}",
-
-    sterne_aria_label_gruppe: "Your rating",
-    sterne_aria_label: "{{zahl}} of 5 stars",
-    fehler_kein_benutzer_bewertung: "Could not determine your user - rating not possible.",
-
-    detail_teilen_drucken_btn: "📤 Share / Print",
-    detail_erstellt_von: "👤 Created by {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} rating)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} ratings)",
-    detail_keine_bewertungen: "No ratings yet",
-    detail_deine_bewertung: "Your rating:",
-    detail_zubereitet_x: "🍳 cooked {{anzahl}}x",
-    detail_portionen_suffix: "servings",
-    abschnitt_titel_zutaten: "Ingredients",
-    abschnitt_titel_zubereitung: "Instructions",
-    keine_zutaten: "No ingredients listed",
-    detail_kommentare_titel: "Comments",
-    detail_keine_kommentare: "No comments yet",
-    detail_kommentar_placeholder: "Add a note, tip or comment…",
-    detail_kommentar_hinzufuegen_btn: "Add comment",
-    detail_bearbeiten_hinweis: "Only {{name}} (or an admin) can edit or delete this recipe.",
-    detail_ersteller_unbekannt: "the creator",
-    modal_zubereitet_frage: "Did you cook \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Include the recipe image?",
-    modal_drucken_ohne_bild_btn: "Without image",
-    modal_drucken_mit_bild_btn: "With image",
-    statistik_btn: "📊 Statistics",
-    statistik_titel: "Cooking statistics",
-    statistik_info_aria: "Show explanation of the statistics",
-    statistik_einstellungen_btn_title: "Cooking log settings",
-    statistik_einstellungen_titel: "Cooking log settings",
-    statistik_einstellungen_text: "Here you can choose whether you're asked, after leaving a recipe, if you cooked it, and whether the resulting statistics are shown on this card.",
-    statistik_einstellungen_schalter_label: "Enable question & statistics",
-    tags_einstellung_schalter_label: "Show tag filter in overview",
-    zufallsrezept_einstellung_schalter_label: "Show random recipe button in overview",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Show conversion table button in overview",
-    umrechnungstabelle_kopf_einstellung_hinweis: "For the configured category for American recipes, the conversion table still appears in the recipe and in cooking mode, even if this button is switched off here.",
-    farben_abschnitt_titel: "Colors",
-    farben_hinweis: "Customize individual colors of the card. Reset all returns every color to its default.",
-    farben_akzent_label: "Main color (buttons, active filters)",
-    farben_akzent_text_label: "Accent color for text and borders",
-    farben_loeschen_label: "Delete / warning",
-    farben_sterne_label: "Rating stars",
-    farben_titel_label: "Headings",
-    farben_zuruecksetzen_btn: "Reset all",
-    us_kategorie_einstellung_label: "Category for American recipes",
-    us_kategorie_einstellung_text: "Recipes with this category also get a conversion table button in the recipe itself and in cooking mode.",
-    us_kategorie_einstellung_keine: "— None —",
-    statistik_info_titel: "How is this statistic calculated?",
-    statistik_info_text:
-      "This evaluation counts every confirmed \"Did you cook this?\" answer - regardless of serving size or how often it happened on the same day. If that question is disabled via the switch in the statistics settings (⚙️), the numbers stop growing, but already recorded preparations are kept.",
-    statistik_dieses_jahr: "You've cooked {{anzahl}}x from your recipe book in {{jahr}}",
-    statistik_gesamt: "You've cooked {{anzahl}}x from your recipe book in total",
-    statistik_top_titel: "Most cooked",
-    statistik_keine_daten: "No preparations recorded yet.",
-    modal_loeschen_frage: "Really delete \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Yes, delete",
-    modal_kommentar_loeschen_frage: "Really delete this comment?",
-
-    wochenplan_titel: "Meal plan",
-    wochenplan_tab_diese: "This week",
-    wochenplan_tab_folgewoche: "Next week",
-    wochenplan_hinweis_folgewoche:
-      "Plan the coming week here already - it will automatically move to \"This week\" once the current week is over.",
-    wochenplan_hinweis_diese:
-      "Past days are automatically cleared (the recipe itself is kept, only the day assignment disappears).",
-    wochenplan_hinweis_speicherung:
-      "Saved across devices (as a hidden extra entry in the same recipe list, no additional helper needed).",
-    wochenplan_leer: "No recipes yet - create some first.",
-    wochenplan_kein_rezept_option: "– no recipe –",
-    wochenplan_einkaufsliste_btn: "Create shopping list from {{ziel}}",
-    wochenplan_wort: "meal plan",
-    wochenplan_folgewoche_wort: "next week",
-    wochenplan_aktuelle_woche_wort: "current week",
-    wochenplan_keine_zuweisung: "The {{zeitraum}} doesn't have any recipes assigned yet.",
-
-    formular_titel_neu: "New recipe",
-    formular_titel_bearbeiten: "Edit recipe",
-    formular_url_import_btn: "🌐 Import recipe URL",
-    formular_url_label: "Link to the recipe website",
-    formular_url_placeholder: "https://www.example-recipes.com/my-recipe",
-    formular_url_hinweis:
-      "Loads the page and reads the recipe structured data already embedded in it " +
-      "(the same data e.g. Google uses to show star ratings in search results) - " +
-      "usually more reliable than text recognition. Only works on sites that " +
-      "provide such data and don't block automated requests.",
-    formular_url_importieren_btn: "Import",
-    formular_url_laedt: "Loading …",
-    formular_text_einfuegen_btn: "🔍 Paste recipe text (auto-detect)",
-    formular_text_label: "Paste recipe text here (e.g. copied from a recipe website)",
-    formular_text_placeholder: "Title, ingredients, instructions - just paste the whole text",
-    formular_text_hinweis:
-      "Purely automatic recognition without AI - works best with " +
-      "\"Ingredients\" and \"Instructions\" headings in the text. Please " +
-      "briefly check the result afterwards, it may be incomplete.",
-    formular_text_erkennen_btn: "Detect",
-    formular_json_einfuegen_btn: "📋 Paste AI-generated JSON",
-    formular_json_info_aria: "Show a ready-made prompt for an AI",
-    json_info_titel: "Prompt for an AI",
-    json_info_erklaerung:
-      "Copy this text, paste it into an AI of your choice (e.g. ChatGPT " +
-      "or Claude), attach your recipe text, and paste the answer above " +
-      'under "Paste AI-generated JSON".',
-    json_info_prompt:
-      "Convert the recipe text I'm about to send you into ONE single " +
-      "JSON object - no explanation, no text before or after, just the " +
-      "JSON. Use exactly this format:\n\n" +
-      "{\n" +
-      '  "title": "recipe name",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "one of: {{kategorien}}",\n' +
-      '  "ingredients": ["one ingredient per entry, e.g. 200g flour"],\n' +
-      '  "steps": ["one instruction step per entry"],\n' +
-      '  "tags": ["optional keywords, e.g. vegetarian"]\n' +
-      "}\n\n" +
-      'Rules: "category" must be EXACTLY one of the values listed above ' +
-      "(copy it unchanged, even if the recipe text is in another " +
-      'language - these are fixed internal values). "tags" is optional, ' +
-      "an empty array is fine. Don't invent ingredients or steps that " +
-      "aren't in the text. Here is the recipe text:",
-    json_info_kopieren_btn: "📋 Copy prompt",
-    json_info_kopiert: "Copied!",
-    formular_json_label: "Paste JSON here",
-    formular_json_uebernehmen_btn: "Apply",
-    formular_label_titel: "Title",
-    formular_label_kategorie: "Category",
-    formular_label_tags: "Tags (multiple possible, e.g. \"vegetarian\", \"quick\")",
-    formular_tag_placeholder: "Enter and add a tag",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Remove tag {{tag}}",
-    formular_label_portionen: "Servings (base)",
-    formular_label_zutaten: "Ingredients",
-    formular_zutat_hinzufuegen_btn: "+ Ingredient",
-    formular_zutat_menge_placeholder: "Amount",
-    formular_zutat_einheit_placeholder: "Unit",
-    formular_zutat_name_placeholder: "Ingredient",
-    formular_zutat_entfernen_aria: "Remove ingredient",
-    formular_label_zubereitung: "Instructions (steps)",
-    formular_schritt_hinzufuegen_btn: "+ Step",
-    formular_schritt_placeholder_beispiel: "e.g. wash and chop vegetables",
-    formular_schritt_placeholder_naechster: "next step",
-    formular_schritt_entfernen_aria: "Remove step",
-    formular_schritt_hoch_aria: "Move step up",
-    formular_schritt_runter_aria: "Move step down",
-    formular_label_bild: "Photo",
-    formular_bild_vorhanden_hinweis: "(present – a new file will replace it)",
-    formular_bild_hinweis: "The current photo is kept if you don't choose a new file.",
-    formular_bild_verkleinern_text: "Resizing photo…",
-
-    fehler_url_ungueltig: "Please enter a full address starting with http:// or https://.",
-    fehler_url_apostroph: "This address contains an apostrophe (') and unfortunately can't be imported.",
-    fehler_url_keine_ausgabe:
-      "The script didn't return any output. Is 'rezeptbuch_url_importieren' set up in configuration.yaml, " +
-      "and has Home Assistant been fully restarted since then?",
-    fehler_url_kein_json: "The import script's response wasn't valid JSON.",
-    fehler_url_import_fehlgeschlagen: "URL import failed: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden:
-      "Couldn't detect anything in the pasted text. Please fill in the fields below by hand.",
-    warnung_texterkennung_unvollstaendig:
-      "Detection was incomplete (ingredients or steps are missing or may be assigned incorrectly) - please check and complete the form.",
-    fehler_json_ungueltig: "The pasted JSON is invalid. Please check and try again.",
-    fehler_json_titel_fehlt: "The JSON is missing at least the 'title' field.",
-    fehler_titel_fehlt: "Please enter a title.",
-    fehler_unerwartet: "Unexpected error:\n{{fehler}}",
-    fehler_konflikt_geloescht:
-      "\"{{titel}}\" has since been deleted by someone else. Your changes were not saved.",
-    fehler_konflikt_geaendert:
-      "\"{{titel}}\" has since been changed by someone else (e.g. a comment, rating " +
-      "or their own edit).\n\nTo avoid overwriting that, your changes were NOT saved. " +
-      "Please open the recipe again and re-enter your changes.",
-    fehler_vorgang_fehlgeschlagen: "Action failed:\n{{fehler}}",
-    fehler_teilen_drucken: "Unexpected error while sharing/printing:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Please specify 'entity' in the card configuration, e.g. entity: todo.rezepte",
-    fehler_bild_lesen: "Couldn't read the photo (file corrupted or unsupported).",
-    fehler_bild_verarbeiten: "Couldn't process the photo as an image (unsupported format?).",
-
-    teilen_ueberschrift_zutaten: "INGREDIENTS",
-    teilen_ueberschrift_zubereitung: "INSTRUCTIONS",
-    seite_zurueck_btn: "← Back",
-    seite_weiter_btn: "Next →",
-    seite_anzeige: "Page {{aktuell}} of {{gesamt}}",
-    update_neue_version: "New version available: {{version}}",
-    update_ansehen_btn: "View",
-    update_schliessen_aria: "Dismiss notice",
-    ressourcen_version_hinweis: "⚠️ This card was updated, but the resource URL wasn't changed (still \"?v={{version}}\"). Other browsers/devices may therefore keep loading the old, cached file - increase the version number in the resource URL (Settings → Dashboards → Resources).",
-    detail_kochmodus_btn: "🍳 Cook Mode",
-    kochmodus_schritt_anzeige: "Step {{aktuell}} of {{gesamt}}",
-    kochmodus_schliessen_aria: "Close cook mode",
-    kochmodus_schritt_zurueck_aria: "Previous step",
-    kochmodus_schritt_weiter_aria: "Next step",
-    kochmodus_zutaten_ein_aria: "Show ingredients",
-    kochmodus_zutaten_aus_aria: "Hide ingredients",
-    kochmodus_timer_ein_aria: "Show timer",
-    kochmodus_timer_aus_aria: "Hide timer",
-    kochmodus_timer_minuten_aria: "Minutes",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Cancel",
-    kochmodus_timer_abgelaufen_text: "⏰ Timer finished!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Start {{minuten}} min timer",
-    kopf_sammel_pdf_btn: "📚 Collected PDF",
-    sammel_pdf_keine_rezepte: "No recipes found to export.",
-    sammel_pdf_frage_toc: "Create a table of contents for the selected recipes?",
-    sammel_pdf_ja_toc_btn: "Yes, create a table of contents",
-    sammel_pdf_nein_toc_btn: "No, no table of contents",
-    sammel_pdf_name_placeholder: "Cookbook name",
-    sammel_pdf_erstellen_btn: "Create PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Table of Contents",
-    sammel_pdf_frage_umfang: "Which recipes should go into the combined PDF?",
-    sammel_pdf_alle_rezepte_btn: "All shown recipes",
-    sammel_pdf_auswahl_btn: "Select specific recipes",
-    sammel_pdf_auswahl_titel: "Select recipes",
-    sammel_pdf_alle_auswaehlen_link: "Select all",
-    sammel_pdf_keine_auswaehlen_link: "Select none",
-    sammel_pdf_weiter_btn: "Next",
-    sammel_pdf_bilder_mitdrucken_label: "Include images in the PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Please select at least one recipe.",
-  },
-  bg: {
-    allgemein_zurueck: "← Назад",
-    allgemein_ja: "Да",
-    allgemein_nein: "Не",
-    allgemein_an: "Вкл.",
-    allgemein_aus: "Изкл.",
-    allgemein_speichern: "Запази",
-    allgemein_speichert: "Запазва се…",
-    allgemein_abbrechen: "Отказ",
-    allgemein_bearbeiten: "Редактирай",
-    allgemein_loeschen: "Изтрий",
-    allgemein_oeffnen: "Отвори",
-    allgemein_unbekannt: "Неизвестно",
-    allgemein_schliessen: "Затвори",
-    kategorie_hauptgericht: "Основно ястие",
-    kategorie_vorspeise: "Предястие",
-    kategorie_suppe: "Супа",
-    kategorie_salat: "Салата",
-    kategorie_beilage: "Гарнитура",
-    kategorie_dessert: "Десерт",
-    kategorie_kuchen_gebaeck: "Торти и сладкиши",
-    kategorie_fruehstueck: "Закуска",
-    kategorie_snack: "Снак",
-    kategorie_getraenk: "Напитка",
-    kategorie_sonstiges: "Друго",
-    kategorie_filter_alle: "Всички",
-    kategorie_neu_btn: "+ Нова категория",
-    kategorie_name_placeholder: "Име на категорията",
-    fehler_kategorie_name_fehlt: "Моля, въведете име за категорията.",
-    fehler_kategorie_existiert_bereits: "Тази категория вече съществува.",
-    kategorie_loeschen_title: "Изтриване на категория",
-    kategorie_loeschen_aria: "Изтриване на категория {{name}}",
-    kategorie_bearbeiten_title: "Преименуване на категория",
-    kategorie_bearbeiten_aria: "Преименуване на категория {{name}}",
-    kategorie_umbenennen_titel: "Преименуване на категория \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Тази категория все още се използва от {{anzahl}}x рецепти - моля, първо им задайте друга категория.",
-    wochentag_montag: "Понеделник",
-    wochentag_dienstag: "Вторник",
-    wochentag_mittwoch: "Сряда",
-    wochentag_donnerstag: "Четвъртък",
-    wochentag_freitag: "Петък",
-    wochentag_samstag: "Събота",
-    wochentag_sonntag: "Неделя",
-    sortier_titel: "По азбучен ред (А-Я)",
-    sortier_bewertung: "Първо най-високо оценени",
-    sortier_kategorie: "По категория",
-    sortier_neu: "Първо най-новите",
-    sortieren_label: "Подреди по:",
-    kopf_titel_standard: "Готварска книга",
-    kopf_sichern_btn: "💾 Резервно копие",
-    kopf_wochenplan_btn: "📅 Седмичен план",
-    kopf_zufallsrezept_btn: "🎲 Произволна рецепта",
-    umrechnungstabelle_btn: "📐 Таблица за преобразуване",
-    umrechnungstabelle_titel: "Таблица за преобразуване",
-    umrechnungstabelle_hinweis: "Приблизителни стойности в грамове за често срещани кухненски продукти - варират по марка и консистенция, затова служат само за справка. Те НЕ се прилагат автоматично към твоите рецепти.",
-    umrechnungstabelle_suche_placeholder: "Търсене на продукт …",
-    umrechnungstabelle_spalte_zutat: "Продукт",
-    umrechnungstabelle_spalte_tasse: "1 чаша",
-    umrechnungstabelle_spalte_el: "1 с.л.",
-    umrechnungstabelle_spalte_tl: "1 ч.л.",
-    umrechnungstabelle_gramm_wert: "{{wert}} г",
-    umrechnungstabelle_keine_treffer: "Няма намерен продукт.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Добави собствен продукт",
-    umrechnungstabelle_eigene_name_platzhalter: "Име на продукта",
-    umrechnungstabelle_eigene_tasse_platzhalter: "г/чаша",
-    umrechnungstabelle_eigene_el_platzhalter: "г/с.л.",
-    umrechnungstabelle_eigene_tl_platzhalter: "г/ч.л.",
-    umrechnungstabelle_eigene_loeschen_titel: "Изтрий собствения продукт",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Редактирай собствения продукт",
-    umrechnungstabelle_eigene_name_fehlt: "Моля, въведи име.",
-    umrechnungstabelle_eigene_hinweis: "Липсва продукт, чиято стойност за преобразуване знаеш сам? Добави го тук ръчно - съзнателно не предлагаме автоматично преобразуване между обем и тегло, тъй като това би означавало да гадаем в зависимост от продукта, марката и плътността.",
-    einkaufsmodus_start_btn: "🛒 Списък за пазаруване",
-    einkaufsmodus_beenden_btn: "✕ Прекрати избора",
-    kopf_neu_btn: "+ Ново",
-    suche_placeholder: "🔍 Рецепта или съставки (напр. брашно, яйца)…",
-    kochbuch_loeschen_title: "Изтриване на колекция",
-    kochbuch_loeschen_aria: "Изтриване на колекция {{name}}",
-    kochbuch_speichern_btn: "+ Запази като умна колекция",
-    kochbuch_name_placeholder: "Име за тази колекция, напр. Есенни рецепти",
-    fehler_kochbuch_name_fehlt: "Моля, въведете име за колекцията.",
-    kochbuch_info_aria: "Показване на обяснение за умни колекции",
-    kochbuch_info_titel: "Какво е умна колекция?",
-    kochbuch_info_text:
-      "Умната колекция не съхранява фиксиран списък с рецепти, а " +
-      "комбинация от категория, етикети и търсен термин, точно както " +
-      "са зададени в момента на запазването. След това тя се " +
-      "актуализира сама: нова рецепта, която отговаря на условията, " +
-      "се появява автоматично, а рецепта, чиято категория или етикети " +
-      "се променят, може също толкова автоматично да изчезне отново.",
-    einkaufs_zaehler: "{{anzahl}} избрани",
-    einkaufsliste_erstellen_btn: "Създай списък за пазаруване",
-    fehler_einkaufsliste_keine_konfiguration: "За списъка за пазаруване все още липсва конфигурация: моля, задайте 'shopping_list_entity' в конфигурацията на картата (напр. shopping_list_entity: todo.einkaufsliste) - за това е необходим ВТОРИ помощник \"Локален списък със задачи\". Вижте ANLEITUNG-Backup.md, раздел 18.",
-    fehler_einkaufsliste_keine_auswahl: "Моля, изберете поне една рецепта.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Моля, изберете поне една съставка.",
-    zutaten_fehlend_einkaufsliste_btn: "Добави избраните в списъка за пазаруване",
-    fehler_einkaufsliste_keine_zutaten: "Избраните рецепти не съдържат съставки.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Не можа да се добави \"{{zeile}}\" към списъка за пазаруване:\n{{fehler}}\n\nВече добавените съставки остават в списъка.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} съставка(и) добавени към \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" изтрита.",
-    undo_rueckgaengig_btn: "Отмени",
-    leer_keine_rezepte: "Все още няма рецепти – започни с \"+ Ново\"",
-    leer_keine_treffer: "Няма намерени рецепти за \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Не можа да се зареди \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Съществува ли този списък със задачи? (Настройки → Устройства и услуги → Помощници)",
-    kachel_aria_label_oeffnen: "Отвори рецепта {{titel}}",
-    sterne_aria_label_gruppe: "Собствена оценка",
-    sterne_aria_label: "{{zahl}} от 5 звезди",
-    fehler_kein_benutzer_bewertung: "Не можа да се определи потребителят ти - оценяването не е възможно.",
-    detail_teilen_drucken_btn: "📤 Сподели / Разпечатай",
-    detail_erstellt_von: "👤 Създадено от {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} оценка)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} оценки)",
-    detail_keine_bewertungen: "Все още няма оценки",
-    detail_deine_bewertung: "Твоята оценка:",
-    detail_zubereitet_x: "🍳 приготвено {{anzahl}} пъти",
-    detail_portionen_suffix: "порции",
-    abschnitt_titel_zutaten: "Съставки",
-    abschnitt_titel_zubereitung: "Приготвяне",
-    keine_zutaten: "Няма въведени съставки",
-    detail_kommentare_titel: "Коментари",
-    detail_keine_kommentare: "Все още няма коментари",
-    detail_kommentar_placeholder: "Допълнение, съвет или бележка…",
-    detail_kommentar_hinzufuegen_btn: "Добави коментар",
-    detail_bearbeiten_hinweis: "Само {{name}} (или администратор) може да редактира или изтрие тази рецепта.",
-    detail_ersteller_unbekannt: "създателя/създателката",
-    modal_zubereitet_frage: "Приготви ли \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Да се включи ли снимката на рецептата?",
-    modal_drucken_ohne_bild_btn: "Без снимка",
-    modal_drucken_mit_bild_btn: "Със снимка",
-    statistik_btn: "📊 Статистика",
-    statistik_titel: "Статистика за готвене",
-    statistik_info_aria: "Показване на обяснение за статистиката",
-    statistik_einstellungen_btn_title: "Настройки на записа за готвене",
-    statistik_einstellungen_titel: "Настройки на записа за готвене",
-    statistik_einstellungen_text: "Тук можете да зададете дали да бъдете питани, след като напуснете рецепта, дали сте я приготвили, и дали получената статистика да се показва в тази карта.",
-    statistik_einstellungen_schalter_label: "Активиране на въпрос и статистика",
-    tags_einstellung_schalter_label: "Показване на филтъра по тагове в прегледа",
-    zufallsrezept_einstellung_schalter_label: "Показване на бутона за произволна рецепта в прегледа",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Показване на бутона за таблица за преобразуване в прегледа",
-    umrechnungstabelle_kopf_einstellung_hinweis: "За зададената категория за американски рецепти таблицата за преобразуване продължава да се показва в рецептата и в режим готвене, дори ако този бутон е изключен тук.",
-    farben_abschnitt_titel: "Цветове",
-    farben_hinweis: "Настройте отделни цветове на картата. С Нулиране на всички всички цветове се връщат към стандартните.",
-    farben_akzent_label: "Основен цвят (бутони, активни филтри)",
-    farben_akzent_text_label: "Акцентен цвят за текст и рамки",
-    farben_loeschen_label: "Изтриване / предупреждение",
-    farben_sterne_label: "Звезди за оценка",
-    farben_titel_label: "Заглавия",
-    farben_zuruecksetzen_btn: "Нулиране на всички",
-    us_kategorie_einstellung_label: "Категория за американски рецепти",
-    us_kategorie_einstellung_text: "При рецепти с тази категория се появява допълнителен бутон за таблицата за преобразуване в самата рецепта и в режим готвене.",
-    us_kategorie_einstellung_keine: "— Няма —",
-    statistik_info_titel: "Как се изчислява тази статистика?",
-    statistik_info_text:
-      "Тази статистика брои всяко потвърждение на въпроса „Приготви ли го?“ - независимо от размера на порцията или колко пъти в един и същи ден. Ако този въпрос е деактивиран чрез превключвателя в настройките на статистиката (⚙️), числата спират да растат, но вече записаните приготвяния се запазват.",
-    statistik_dieses_jahr: "Готвил(а) си {{anzahl}}x от готварската си книга през {{jahr}}",
-    statistik_gesamt: "Готвил(а) си общо {{anzahl}}x от готварската си книга",
-    statistik_top_titel: "Най-често готвено",
-    statistik_keine_daten: "Все още няма записани приготвяния.",
-    modal_loeschen_frage: "Наистина ли да изтрия \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Да, изтрий",
-    modal_kommentar_loeschen_frage: "Наистина ли да изтриете този коментар?",
-    wochenplan_titel: "Седмичен план",
-    wochenplan_tab_diese: "Тази седмица",
-    wochenplan_tab_folgewoche: "Следваща седмица",
-    wochenplan_hinweis_folgewoche: "Планирай тук вече и предстоящата седмица - тя автоматично се премества в \"Тази седмица\", щом текущата седмица приключи.",
-    wochenplan_hinweis_diese: "Изминалите дни се изчистват автоматично (самата рецепта се запазва, изчезва само присвояването).",
-    wochenplan_hinweis_speicherung: "Запазва се на всички устройства (като невидим допълнителен запис в същия списък с рецепти, не е нужен друг помощник).",
-    wochenplan_leer: "Все още няма рецепти - първо създай няколко.",
-    wochenplan_kein_rezept_option: "– няма рецепта –",
-    wochenplan_einkaufsliste_btn: "Създай списък за пазаруване от {{ziel}}",
-    wochenplan_wort: "седмичен план",
-    wochenplan_folgewoche_wort: "следваща седмица",
-    wochenplan_aktuelle_woche_wort: "текущата седмица",
-    wochenplan_keine_zuweisung: "{{zeitraum}} все още не съдържа присвоени рецепти.",
-    formular_titel_neu: "Нова рецепта",
-    formular_titel_bearbeiten: "Редактирай рецепта",
-    formular_url_import_btn: "🌐 Импортирай URL адрес на рецепта",
-    formular_url_label: "Връзка към уебсайта с рецептата",
-    formular_url_placeholder: "https://www.primer-recepti.bg/moyata-recepta",
-    formular_url_hinweis: "Зарежда страницата и чете структурираните данни за рецептата, вградени в нея (същите данни, с които напр. Google показва звездни оценки в търсенето) - обикновено по-надеждно от разпознаване на текст. Работи само при страници, които предоставят такива данни и не блокират автоматизирани заявки.",
-    formular_url_importieren_btn: "Импортирай",
-    formular_url_laedt: "Зарежда се …",
-    formular_text_einfuegen_btn: "🔍 Постави текст на рецепта (автоматично разпознаване)",
-    formular_text_label: "Постави тук текста на рецептата (напр. копиран от уебсайт с рецепти)",
-    formular_text_placeholder: "Заглавие, съставки, приготвяне - просто постави целия текст",
-    formular_text_hinweis: "Чисто автоматично разпознаване без ИИ - работи най-добре със заглавия \"Съставки\" и \"Приготвяне\" в текста. Моля, провери резултата след това, може да е непълен.",
-    formular_text_erkennen_btn: "Разпознай",
-    formular_json_einfuegen_btn: "📋 Постави JSON, генериран от ИИ",
-    formular_json_info_aria: "Показване на готов промпт за ИИ",
-    json_info_titel: "Промпт за ИИ",
-    json_info_erklaerung:
-      "Копирай този текст, постави го в ИИ по твой избор (напр. ChatGPT или Claude), добави текста на рецептата и постави отговора после горе в „Постави JSON тук“.",
-    json_info_prompt:
-      "Преобразувай текста на рецептата, който ще ти изпратя веднага, в ЕДИН единствен JSON обект - без обяснение, без текст преди или след него, само JSON. Използвай точно този формат:\n\n" +
-      "{\n" +
-      '  "title": "име на рецептата",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "едно от: {{kategorien}}",\n' +
-      '  "ingredients": ["по една съставка на запис, напр. 200 г брашно"],\n' +
-      '  "steps": ["една стъпка на запис"],\n' +
-      '  "tags": ["незадължителни етикети, напр. вегетарианско"]\n' +
-      "}\n\n" +
-      "Правила: „category“ трябва да е ТОЧНО една от изброените по-горе стойности (копирай я непроменена, дори ако текстът на рецептата е на друг език - това са фиксирани вътрешни стойности). " +
-      "„tags“ е незадължително поле, при нужда - празен масив. " +
-      "Не измисляй съставки или стъпки, които не са в текста. " +
-      "Ето текста на рецептата:",
-    json_info_kopieren_btn: "📋 Копирай промпта",
-    json_info_kopiert: "Копирано!",
-    formular_json_label: "Постави JSON тук",
-    formular_json_uebernehmen_btn: "Приложи",
-    formular_label_titel: "Заглавие",
-    formular_label_kategorie: "Категория",
-    formular_label_tags: "Тагове (възможни са няколко, напр. \"вегетарианско\", \"бързо\")",
-    formular_tag_placeholder: "Въведи и добави таг",
-    formular_tag_hinzufuegen_btn: "+ Таг",
-    formular_tag_entfernen_aria: "Премахни тага {{tag}}",
-    formular_label_portionen: "Порции (базово количество)",
-    formular_label_zutaten: "Съставки",
-    formular_zutat_hinzufuegen_btn: "+ Съставка",
-    formular_zutat_menge_placeholder: "Количество",
-    formular_zutat_einheit_placeholder: "Мярка",
-    formular_zutat_name_placeholder: "Съставка",
-    formular_zutat_entfernen_aria: "Премахни съставката",
-    formular_label_zubereitung: "Приготвяне (стъпки)",
-    formular_schritt_hinzufuegen_btn: "+ Стъпка",
-    formular_schritt_placeholder_beispiel: "напр. измий и нарежи зеленчуците",
-    formular_schritt_placeholder_naechster: "следваща стъпка",
-    formular_schritt_entfernen_aria: "Премахни стъпката",
-    formular_schritt_hoch_aria: "Премести стъпката нагоре",
-    formular_schritt_runter_aria: "Премести стъпката надолу",
-    formular_label_bild: "Снимка",
-    formular_bild_vorhanden_hinweis: "(налична – нов файл ще я замени)",
-    formular_bild_hinweis: "Текущата снимка се запазва, ако не избереш нов файл.",
-    formular_bild_verkleinern_text: "Снимката се намалява…",
-    fehler_url_ungueltig: "Моля, въведи пълен адрес, започващ с http:// или https://.",
-    fehler_url_apostroph: "Този адрес съдържа апостроф (') и за съжаление не може да бъде импортиран.",
-    fehler_url_keine_ausgabe: "Скриптът не върна изход. Настроен ли е 'rezeptbuch_url_importieren' в configuration.yaml и рестартиран ли е Home Assistant напълно оттогава?",
-    fehler_url_kein_json: "Отговорът на скрипта за импортиране не беше валиден JSON.",
-    fehler_url_import_fehlgeschlagen: "Импортирането на URL адреса неуспешно: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "За съжаление в поставения текст не можа да бъде разпознато нищо. Моля, попълни полетата по-долу ръчно.",
-    warnung_texterkennung_unvollstaendig: "Разпознаването беше непълно (липсват съставки или стъпки, или са присвоени неправилно) - моля, провери и допълни във формуляра.",
-    fehler_json_ungueltig: "Поставеният JSON е невалиден. Моля, провери и опитай отново.",
-    fehler_json_titel_fehlt: "В JSON липсва поне полето 'title'.",
-    fehler_titel_fehlt: "Моля, въведи заглавие.",
-    fehler_unerwartet: "Неочаквана грешка:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" вече е изтрита от някой друг междувременно. Промените ти не бяха запазени.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" вече е променена от някой друг междувременно (напр. коментар, оценка или собствена редакция).\n\nЗа да не бъде нещо презаписано, промените ти НЕ бяха запазени. Моля, отвори рецептата отново и въведи промените си пак.",
-    fehler_vorgang_fehlgeschlagen: "Действието неуспешно:\n{{fehler}}",
-    fehler_teilen_drucken: "Неочаквана грешка при споделяне/печат:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Моля, въведи 'entity' в конфигурацията на картата, напр. entity: todo.rezepte",
-    fehler_bild_lesen: "Снимката не можа да бъде прочетена (файлът е повреден или неподдържан).",
-    fehler_bild_verarbeiten: "Снимката не можа да бъде обработена като изображение (неподдържан формат?).",
-    teilen_ueberschrift_zutaten: "СЪСТАВКИ",
-    teilen_ueberschrift_zubereitung: "ПРИГОТВЯНЕ",
-    seite_zurueck_btn: "← Назад",
-    seite_weiter_btn: "Напред →",
-    seite_anzeige: "Страница {{aktuell}} от {{gesamt}}",
-    update_neue_version: "Налична е нова версия: {{version}}",
-    update_ansehen_btn: "Преглед",
-    update_schliessen_aria: "Скриване на съобщението",
-    ressourcen_version_hinweis: "⚠️ Тази карта беше актуализирана, но URL адресът на ресурса не беше променен (все още \"?v={{version}}\"). Затова други браузъри/устройства може да продължат да зареждат стария, кеширан файл - увеличете номера на версията в URL адреса на ресурса (Настройки → Табла → Ресурси).",
-    detail_kochmodus_btn: "🍳 Режим готвене",
-    kochmodus_schritt_anzeige: "Стъпка {{aktuell}} от {{gesamt}}",
-    kochmodus_schliessen_aria: "Затвори режим готвене",
-    kochmodus_schritt_zurueck_aria: "Предишна стъпка",
-    kochmodus_schritt_weiter_aria: "Следваща стъпка",
-    kochmodus_zutaten_ein_aria: "Покажи съставките",
-    kochmodus_zutaten_aus_aria: "Скрий съставките",
-    kochmodus_timer_ein_aria: "Покажи таймер",
-    kochmodus_timer_aus_aria: "Скрий таймер",
-    kochmodus_timer_minuten_aria: "Минути",
-    kochmodus_timer_start_btn: "Старт",
-    kochmodus_timer_abbrechen_btn: "Отказ",
-    kochmodus_timer_abgelaufen_text: "⏰ Таймерът изтече!",
-    kochmodus_timer_ok_btn: "ОК",
-    kochmodus_timer_preset_aria: "Стартирай таймер за {{minuten}} мин",
-    kopf_sammel_pdf_btn: "📚 Общ PDF",
-    sammel_pdf_keine_rezepte: "Няма намерени рецепти за експортиране.",
-    sammel_pdf_frage_toc: "Да се създаде ли съдържание на избраните рецепти?",
-    sammel_pdf_ja_toc_btn: "Да, създай съдържание",
-    sammel_pdf_nein_toc_btn: "Не, без съдържание",
-    sammel_pdf_name_placeholder: "Име на готварската книга",
-    sammel_pdf_erstellen_btn: "Създай PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Съдържание",
-    sammel_pdf_frage_umfang: "Кои рецепти да влязат в общия PDF?",
-    sammel_pdf_alle_rezepte_btn: "Всички показани рецепти",
-    sammel_pdf_auswahl_btn: "Избор на определени рецепти",
-    sammel_pdf_auswahl_titel: "Избор на рецепти",
-    sammel_pdf_alle_auswaehlen_link: "Избери всички",
-    sammel_pdf_keine_auswaehlen_link: "Изчисти избора",
-    sammel_pdf_weiter_btn: "Напред",
-    sammel_pdf_bilder_mitdrucken_label: "Включване на снимки в PDF файла",
-    sammel_pdf_auswahl_keine_hinweis: "Моля, изберете поне една рецепта.",
-  },
-  hr: {
-    allgemein_zurueck: "← Natrag",
-    allgemein_ja: "Da",
-    allgemein_nein: "Ne",
-    allgemein_an: "Uklj.",
-    allgemein_aus: "Isklj.",
-    allgemein_speichern: "Spremi",
-    allgemein_speichert: "Spremanje…",
-    allgemein_abbrechen: "Odustani",
-    allgemein_bearbeiten: "Uredi",
-    allgemein_loeschen: "Izbriši",
-    allgemein_oeffnen: "Otvori",
-    allgemein_unbekannt: "Nepoznato",
-    allgemein_schliessen: "Zatvori",
-    kategorie_hauptgericht: "Glavno jelo",
-    kategorie_vorspeise: "Predjelo",
-    kategorie_suppe: "Juha",
-    kategorie_salat: "Salata",
-    kategorie_beilage: "Prilog",
-    kategorie_dessert: "Desert",
-    kategorie_kuchen_gebaeck: "Kolači i pecivo",
-    kategorie_fruehstueck: "Doručak",
-    kategorie_snack: "Užina",
-    kategorie_getraenk: "Piće",
-    kategorie_sonstiges: "Ostalo",
-    kategorie_filter_alle: "Sve",
-    kategorie_neu_btn: "+ Nova kategorija",
-    kategorie_name_placeholder: "Naziv kategorije",
-    fehler_kategorie_name_fehlt: "Unesite naziv kategorije.",
-    fehler_kategorie_existiert_bereits: "Ova kategorija već postoji.",
-    kategorie_loeschen_title: "Izbriši kategoriju",
-    kategorie_loeschen_aria: "Izbriši kategoriju {{name}}",
-    kategorie_bearbeiten_title: "Preimenuj kategoriju",
-    kategorie_bearbeiten_aria: "Preimenuj kategoriju {{name}}",
-    kategorie_umbenennen_titel: "Preimenovanje kategorije \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Ovu kategoriju još uvijek koristi {{anzahl}}x recepata - prvo im dodijelite drugu kategoriju.",
-    wochentag_montag: "Ponedjeljak",
-    wochentag_dienstag: "Utorak",
-    wochentag_mittwoch: "Srijeda",
-    wochentag_donnerstag: "Četvrtak",
-    wochentag_freitag: "Petak",
-    wochentag_samstag: "Subota",
-    wochentag_sonntag: "Nedjelja",
-    sortier_titel: "Abecedno (A-Ž)",
-    sortier_bewertung: "Najbolje ocijenjeno prvo",
-    sortier_kategorie: "Prema kategoriji",
-    sortier_neu: "Najnovije prvo",
-    sortieren_label: "Poredaj:",
-    kopf_titel_standard: "Kuharica",
-    kopf_sichern_btn: "💾 Sigurnosna kopija",
-    kopf_wochenplan_btn: "📅 Tjedni plan",
-    kopf_zufallsrezept_btn: "🎲 Nasumičan recept",
-    umrechnungstabelle_btn: "📐 Tablica preračunavanja",
-    umrechnungstabelle_titel: "Tablica preračunavanja",
-    umrechnungstabelle_hinweis: "Približne vrijednosti u gramima za česte kuhinjske sastojke - ovise o marki i gustoći, pa služe samo za orijentaciju. NE primjenjuju se automatski na tvoje recepte.",
-    umrechnungstabelle_suche_placeholder: "Pretraži sastojak …",
-    umrechnungstabelle_spalte_zutat: "Sastojak",
-    umrechnungstabelle_spalte_tasse: "1 šalica",
-    umrechnungstabelle_spalte_el: "1 žl.",
-    umrechnungstabelle_spalte_tl: "1 žličica",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Nijedan sastojak nije pronađen.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Dodaj svoj sastojak",
-    umrechnungstabelle_eigene_name_platzhalter: "Naziv sastojka",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/šalica",
-    umrechnungstabelle_eigene_el_platzhalter: "g/žl.",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/žličica",
-    umrechnungstabelle_eigene_loeschen_titel: "Izbriši svoj sastojak",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Uredi svoj sastojak",
-    umrechnungstabelle_eigene_name_fehlt: "Unesi naziv.",
-    umrechnungstabelle_eigene_hinweis: "Nedostaje sastojak čiju vrijednost pretvorbe sam znaš? Dodaj ga ovdje ručno - automatsku pretvorbu između volumena i mase svjesno ne nudimo, jer bi to značilo nagađanje ovisno o sastojku, marki i gustoći.",
-    einkaufsmodus_start_btn: "🛒 Popis za kupovinu",
-    einkaufsmodus_beenden_btn: "✕ Prekini odabir",
-    kopf_neu_btn: "+ Novo",
-    suche_placeholder: "🔍 Recept ili sastojci (npr. brašno, jaja)…",
-    kochbuch_loeschen_title: "Izbriši zbirku",
-    kochbuch_loeschen_aria: "Izbriši zbirku {{name}}",
-    kochbuch_speichern_btn: "+ Spremi kao pametnu zbirku",
-    kochbuch_name_placeholder: "Naziv za ovu zbirku, npr. Jesenski recepti",
-    fehler_kochbuch_name_fehlt: "Unesi naziv za zbirku.",
-    kochbuch_info_aria: "Prikaži objašnjenje pametnih zbirki",
-    kochbuch_info_titel: "Što je pametna zbirka?",
-    kochbuch_info_text:
-      "Pametna zbirka ne sprema fiksni popis recepata, već kombinaciju " +
-      "kategorije, oznaka i pojma za pretraživanje, onako kako su " +
-      "postavljeni u trenutku spremanja. Nakon toga se sama ažurira: " +
-      "novi recept koji odgovara automatski se pojavljuje, a recept " +
-      "čija se kategorija ili oznake promijene može isto tako " +
-      "automatski ponovno nestati.",
-    einkaufs_zaehler: "{{anzahl}} odabrano",
-    einkaufsliste_erstellen_btn: "Izradi popis za kupovinu",
-    fehler_einkaufsliste_keine_konfiguration: "Za popis za kupovinu još nedostaje konfiguracija: unesi 'shopping_list_entity' u konfiguraciji kartice (npr. shopping_list_entity: todo.einkaufsliste) - za to je potreban DRUGI pomoćnik \"Lokalni popis obaveza\". Pogledaj ANLEITUNG-Backup.md, odjeljak 18.",
-    fehler_einkaufsliste_keine_auswahl: "Odaberi barem jedan recept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Odaberi barem jedan sastojak.",
-    zutaten_fehlend_einkaufsliste_btn: "Dodaj odabrano na popis za kupovinu",
-    fehler_einkaufsliste_keine_zutaten: "Odabrani recepti ne sadrže sastojke.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nije moguće dodati \"{{zeile}}\" na popis za kupovinu:\n{{fehler}}\n\nVeć dodani sastojci ostaju na popisu.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} sastojak(a) dodano na \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" izbrisano.",
-    undo_rueckgaengig_btn: "Poništi",
-    leer_keine_rezepte: "Još nema recepata – započni s \"+ Novo\"",
-    leer_keine_treffer: "Nema recepata za \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Nije moguće učitati \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Postoji li ovaj popis obaveza? (Postavke → Uređaji i usluge → Pomoćnici)",
-    kachel_aria_label_oeffnen: "Otvori recept {{titel}}",
-    sterne_aria_label_gruppe: "Tvoja ocjena",
-    sterne_aria_label: "{{zahl}} od 5 zvjezdica",
-    fehler_kein_benutzer_bewertung: "Nije moguće utvrditi tvog korisnika - ocjenjivanje nije moguće.",
-    detail_teilen_drucken_btn: "📤 Podijeli / Ispiši",
-    detail_erstellt_von: "👤 Izradio/la {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} ocjena)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} ocjena)",
-    detail_keine_bewertungen: "Još nema ocjena",
-    detail_deine_bewertung: "Tvoja ocjena:",
-    detail_zubereitet_x: "🍳 pripremljeno {{anzahl}}x",
-    detail_portionen_suffix: "porcije",
-    abschnitt_titel_zutaten: "Sastojci",
-    abschnitt_titel_zubereitung: "Priprema",
-    keine_zutaten: "Nema unesenih sastojaka",
-    detail_kommentare_titel: "Komentari",
-    detail_keine_kommentare: "Još nema komentara",
-    detail_kommentar_placeholder: "Dodatak, savjet ili napomena…",
-    detail_kommentar_hinzufuegen_btn: "Dodaj komentar",
-    detail_bearbeiten_hinweis: "Samo {{name}} (ili administrator) može uređivati ili izbrisati ovaj recept.",
-    detail_ersteller_unbekannt: "tvorac/tvorka recepta",
-    modal_zubereitet_frage: "Jesi li pripremio/la \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Uključiti sliku recepta?",
-    modal_drucken_ohne_bild_btn: "Bez slike",
-    modal_drucken_mit_bild_btn: "Sa slikom",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Statistika kuhanja",
-    statistik_info_aria: "Prikaži objašnjenje statistike",
-    statistik_einstellungen_btn_title: "Postavke evidencije kuhanja",
-    statistik_einstellungen_titel: "Postavke evidencije kuhanja",
-    statistik_einstellungen_text: "Ovdje možeš odrediti hoće li te se, nakon napuštanja recepta, pitati jesi li ga pripremio/la, i hoće li se prikazivati statistika koja iz toga proizlazi.",
-    statistik_einstellungen_schalter_label: "Uključi pitanje i statistiku",
-    tags_einstellung_schalter_label: "Prikaži filtar oznaka u pregledu",
-    zufallsrezept_einstellung_schalter_label: "Prikaži gumb za nasumičan recept u pregledu",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Prikaži gumb za tablicu pretvorbe u pregledu",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Za postavljenu kategoriju za američke recepte tablica pretvorbe i dalje se prikazuje u receptu i u načinu kuhanja, čak i ako je ovaj gumb ovdje isključen.",
-    farben_abschnitt_titel: "Boje",
-    farben_hinweis: "Prilagodite pojedine boje kartice. Poništi sve vraća sve boje na zadano.",
-    farben_akzent_label: "Glavna boja (gumbi, aktivni filtri)",
-    farben_akzent_text_label: "Naglasna boja za tekst i rubove",
-    farben_loeschen_label: "Brisanje / upozorenje",
-    farben_sterne_label: "Zvjezdice ocjene",
-    farben_titel_label: "Naslovi",
-    farben_zuruecksetzen_btn: "Poništi sve",
-    us_kategorie_einstellung_label: "Kategorija za američke recepte",
-    us_kategorie_einstellung_text: "Kod recepata s ovom kategorijom dodatno se pojavljuje gumb za tablicu preračunavanja u samom receptu i u načinu kuhanja.",
-    us_kategorie_einstellung_keine: "— Nijedna —",
-    statistik_info_titel: "Kako se izračunava ova statistika?",
-    statistik_info_text:
-      "Ova statistika broji svaku potvrdu pitanja „Jesi li pripremio/la?“ - bez obzira na veličinu porcije ili koliko puta istog dana. Ako je to pitanje onemogućeno putem prekidača u postavkama statistike (⚙️), brojevi prestaju rasti, ali već zabilježene pripreme ostaju sačuvane.",
-    statistik_dieses_jahr: "Kuhao/la si {{anzahl}}x iz svoje kuharice u {{jahr}}",
-    statistik_gesamt: "Ukupno si kuhao/la {{anzahl}}x iz svoje kuharice",
-    statistik_top_titel: "Najčešće pripremano",
-    statistik_keine_daten: "Još nema zabilježenih priprema.",
-    modal_loeschen_frage: "Stvarno izbrisati \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Da, izbriši",
-    modal_kommentar_loeschen_frage: "Stvarno želite izbrisati ovaj komentar?",
-    wochenplan_titel: "Tjedni plan",
-    wochenplan_tab_diese: "Ovaj tjedan",
-    wochenplan_tab_folgewoche: "Sljedeći tjedan",
-    wochenplan_hinweis_folgewoche: "Ovdje već sada planiraj nadolazeći tjedan - automatski će se pomaknuti na \"Ovaj tjedan\" čim trenutni tjedan završi.",
-    wochenplan_hinweis_diese: "Prošli dani se automatski brišu (recept ostaje sačuvan, nestaje samo dodjela).",
-    wochenplan_hinweis_speicherung: "Sprema se na svim uređajima (kao skriveni dodatni unos u istom popisu recepata, nije potreban dodatni pomoćnik).",
-    wochenplan_leer: "Još nema recepata - prvo ih izradi.",
-    wochenplan_kein_rezept_option: "– nema recepta –",
-    wochenplan_einkaufsliste_btn: "Izradi popis za kupovinu iz {{ziel}}",
-    wochenplan_wort: "tjedni plan",
-    wochenplan_folgewoche_wort: "sljedeći tjedan",
-    wochenplan_aktuelle_woche_wort: "trenutni tjedan",
-    wochenplan_keine_zuweisung: "{{zeitraum}} još ne sadrži dodijeljene recepte.",
-    formular_titel_neu: "Novi recept",
-    formular_titel_bearbeiten: "Uredi recept",
-    formular_url_import_btn: "🌐 Uvezi URL recepta",
-    formular_url_label: "Poveznica na web stranicu recepta",
-    formular_url_placeholder: "https://www.primjer-recepti.hr/moj-recept",
-    formular_url_hinweis: "Učitava stranicu i čita podatke o receptu koji su već ugrađeni u nju (isti podaci kojima npr. Google prikazuje ocjene zvjezdicama u pretraživanju) - obično pouzdanije od prepoznavanja teksta. Radi samo na stranicama koje pružaju takve podatke i ne blokiraju automatizirane zahtjeve.",
-    formular_url_importieren_btn: "Uvezi",
-    formular_url_laedt: "Učitavanje …",
-    formular_text_einfuegen_btn: "🔍 Zalijepi tekst recepta (automatsko prepoznavanje)",
-    formular_text_label: "Zalijepi ovdje tekst recepta (npr. kopiran s web stranice recepta)",
-    formular_text_placeholder: "Naslov, sastojci, priprema - jednostavno zalijepi cijeli tekst",
-    formular_text_hinweis: "Čisto automatsko prepoznavanje bez UI - najbolje radi s naslovima \"Sastojci\" i \"Priprema\" u tekstu. Nakon toga ukratko provjeri rezultat, može biti nepotpun.",
-    formular_text_erkennen_btn: "Prepoznaj",
-    formular_json_einfuegen_btn: "📋 Zalijepi JSON generiran od strane UI-a",
-    formular_json_info_aria: "Prikaži gotov prompt za UI",
-    json_info_titel: "Prompt za UI",
-    json_info_erklaerung:
-      "Kopiraj ovaj tekst, zalijepi ga u UI po izboru (npr. ChatGPT ili Claude), dodaj svoj tekst recepta i zatim zalijepi odgovor gore pod „Zalijepi JSON ovdje“.",
-    json_info_prompt:
-      "Pretvori tekst recepta koji ću ti sada poslati u JEDAN jedini JSON objekt - bez objašnjenja, bez teksta prije ili poslije, samo JSON. Koristi točno ovaj format:\n\n" +
-      "{\n" +
-      '  "title": "naziv recepta",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "jedno od: {{kategorien}}",\n' +
-      '  "ingredients": ["jedan sastojak po unosu, npr. 200 g brašna"],\n' +
-      '  "steps": ["jedan korak pripreme po unosu"],\n' +
-      '  "tags": ["neobavezne oznake, npr. vegetarijansko"]\n' +
-      "}\n\n" +
-      "Pravila: „category“ mora biti TOČNO jedna od gore navedenih vrijednosti (prenesi je nepromijenjenu, čak i ako je tekst recepta na drugom jeziku - to su fiksne interne vrijednosti). " +
-      "„tags“ je neobavezno, po potrebi prazan niz. " +
-      "Ne izmišljaj sastojke ili korake kojih nema u tekstu. " +
-      "Evo teksta recepta:",
-    json_info_kopieren_btn: "📋 Kopiraj prompt",
-    json_info_kopiert: "Kopirano!",
-    formular_json_label: "Zalijepi JSON ovdje",
-    formular_json_uebernehmen_btn: "Primijeni",
-    formular_label_titel: "Naslov",
-    formular_label_kategorie: "Kategorija",
-    formular_label_tags: "Oznake (moguće je više, npr. \"vegetarijansko\", \"brzo\")",
-    formular_tag_placeholder: "Unesi i dodaj oznaku",
-    formular_tag_hinzufuegen_btn: "+ Oznaka",
-    formular_tag_entfernen_aria: "Ukloni oznaku {{tag}}",
-    formular_label_portionen: "Porcije (osnovno)",
-    formular_label_zutaten: "Sastojci",
-    formular_zutat_hinzufuegen_btn: "+ Sastojak",
-    formular_zutat_menge_placeholder: "Količina",
-    formular_zutat_einheit_placeholder: "Jedinica",
-    formular_zutat_name_placeholder: "Sastojak",
-    formular_zutat_entfernen_aria: "Ukloni sastojak",
-    formular_label_zubereitung: "Priprema (koraci)",
-    formular_schritt_hinzufuegen_btn: "+ Korak",
-    formular_schritt_placeholder_beispiel: "npr. operi i nareži povrće",
-    formular_schritt_placeholder_naechster: "sljedeći korak",
-    formular_schritt_entfernen_aria: "Ukloni korak",
-    formular_schritt_hoch_aria: "Pomakni korak gore",
-    formular_schritt_runter_aria: "Pomakni korak dolje",
-    formular_label_bild: "Slika",
-    formular_bild_vorhanden_hinweis: "(postoji – nova datoteka će je zamijeniti)",
-    formular_bild_hinweis: "Trenutna slika ostaje sačuvana ako ne odabereš novu datoteku.",
-    formular_bild_verkleinern_text: "Smanjivanje slike…",
-    fehler_url_ungueltig: "Unesi potpunu adresu koja počinje s http:// ili https://.",
-    fehler_url_apostroph: "Ova adresa sadrži apostrof (') i nažalost se ne može uvesti.",
-    fehler_url_keine_ausgabe: "Skripta nije vratila izlaz. Je li 'rezeptbuch_url_importieren' postavljen u configuration.yaml i je li Home Assistant otad u potpunosti ponovno pokrenut?",
-    fehler_url_kein_json: "Odgovor uvozne skripte nije bio valjani JSON.",
-    fehler_url_import_fehlgeschlagen: "Uvoz URL-a nije uspio: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Nažalost, u zalijepljenom tekstu nije moguće ništa prepoznati. Ispuni polja ispod ručno.",
-    warnung_texterkennung_unvollstaendig: "Prepoznavanje je nepotpuno (nedostaju sastojci ili koraci, možda su pogrešno dodijeljeni) - provjeri i dopuni u obrascu.",
-    fehler_json_ungueltig: "Zalijepljeni JSON nije valjan. Provjeri i pokušaj ponovno.",
-    fehler_json_titel_fehlt: "U JSON-u nedostaje barem polje 'title'.",
-    fehler_titel_fehlt: "Unesi naslov.",
-    fehler_unerwartet: "Neočekivana pogreška:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" je u međuvremenu izbrisao netko drugi. Tvoje promjene nisu spremljene.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" je u međuvremenu promijenio netko drugi (npr. komentar, ocjena ili vlastita izmjena).\n\nKako se ništa ne bi prepisalo, tvoje promjene NISU spremljene. Ponovno otvori recept i unesi svoje promjene još jednom.",
-    fehler_vorgang_fehlgeschlagen: "Radnja nije uspjela:\n{{fehler}}",
-    fehler_teilen_drucken: "Neočekivana pogreška pri dijeljenju/ispisu:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Unesi 'entity' u konfiguraciji kartice, npr. entity: todo.rezepte",
-    fehler_bild_lesen: "Fotografiju nije moguće pročitati (datoteka oštećena ili nepodržana).",
-    fehler_bild_verarbeiten: "Fotografiju nije moguće obraditi kao sliku (nepodržani format?).",
-    teilen_ueberschrift_zutaten: "SASTOJCI",
-    teilen_ueberschrift_zubereitung: "PRIPREMA",
-    seite_zurueck_btn: "← Natrag",
-    seite_weiter_btn: "Dalje →",
-    seite_anzeige: "Stranica {{aktuell}} od {{gesamt}}",
-    update_neue_version: "Dostupna je nova verzija: {{version}}",
-    update_ansehen_btn: "Pogledaj",
-    update_schliessen_aria: "Sakrij obavijest",
-    ressourcen_version_hinweis: "⚠️ Ova kartica je ažurirana, ali URL resursa nije promijenjen (i dalje \"?v={{version}}\"). Drugi preglednici/uređaji stoga možda i dalje učitavaju staru, predmemoriranu datoteku - povećaj broj verzije u URL-u resursa (Postavke → Nadzorne ploče → Resursi).",
-    detail_kochmodus_btn: "🍳 Način kuhanja",
-    kochmodus_schritt_anzeige: "Korak {{aktuell}} od {{gesamt}}",
-    kochmodus_schliessen_aria: "Zatvori način kuhanja",
-    kochmodus_schritt_zurueck_aria: "Prethodni korak",
-    kochmodus_schritt_weiter_aria: "Sljedeći korak",
-    kochmodus_zutaten_ein_aria: "Prikaži sastojke",
-    kochmodus_zutaten_aus_aria: "Sakrij sastojke",
-    kochmodus_timer_ein_aria: "Prikaži mjerač vremena",
-    kochmodus_timer_aus_aria: "Sakrij mjerač vremena",
-    kochmodus_timer_minuten_aria: "Minute",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Odustani",
-    kochmodus_timer_abgelaufen_text: "⏰ Vrijeme je isteklo!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Pokreni mjerač za {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 Zbirni PDF",
-    sammel_pdf_keine_rezepte: "Nema recepata za izvoz.",
-    sammel_pdf_frage_toc: "Želite li izraditi sadržaj odabranih recepata?",
-    sammel_pdf_ja_toc_btn: "Da, izradi sadržaj",
-    sammel_pdf_nein_toc_btn: "Ne, bez sadržaja",
-    sammel_pdf_name_placeholder: "Naziv kuharice",
-    sammel_pdf_erstellen_btn: "Izradi PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Sadržaj",
-    sammel_pdf_frage_umfang: "Koji recepti trebaju u zbirni PDF?",
-    sammel_pdf_alle_rezepte_btn: "Svi prikazani recepti",
-    sammel_pdf_auswahl_btn: "Odabir određenih recepata",
-    sammel_pdf_auswahl_titel: "Odaberite recepte",
-    sammel_pdf_alle_auswaehlen_link: "Odaberi sve",
-    sammel_pdf_keine_auswaehlen_link: "Ukloni odabir",
-    sammel_pdf_weiter_btn: "Dalje",
-    sammel_pdf_bilder_mitdrucken_label: "Uključi slike u PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Odaberite bar jedan recept.",
-  },
-  cs: {
-    allgemein_zurueck: "← Zpět",
-    allgemein_ja: "Ano",
-    allgemein_nein: "Ne",
-    allgemein_an: "Zap",
-    allgemein_aus: "Vyp",
-    allgemein_speichern: "Uložit",
-    allgemein_speichert: "Ukládá se…",
-    allgemein_abbrechen: "Zrušit",
-    allgemein_bearbeiten: "Upravit",
-    allgemein_loeschen: "Smazat",
-    allgemein_oeffnen: "Otevřít",
-    allgemein_unbekannt: "Neznámé",
-    allgemein_schliessen: "Zavřít",
-    kategorie_hauptgericht: "Hlavní jídlo",
-    kategorie_vorspeise: "Předkrm",
-    kategorie_suppe: "Polévka",
-    kategorie_salat: "Salát",
-    kategorie_beilage: "Příloha",
-    kategorie_dessert: "Dezert",
-    kategorie_kuchen_gebaeck: "Koláče a pečivo",
-    kategorie_fruehstueck: "Snídaně",
-    kategorie_snack: "Svačina",
-    kategorie_getraenk: "Nápoj",
-    kategorie_sonstiges: "Ostatní",
-    kategorie_filter_alle: "Vše",
-    kategorie_neu_btn: "+ Nová kategorie",
-    kategorie_name_placeholder: "Název kategorie",
-    fehler_kategorie_name_fehlt: "Zadejte prosím název kategorie.",
-    fehler_kategorie_existiert_bereits: "Tato kategorie již existuje.",
-    kategorie_loeschen_title: "Smazat kategorii",
-    kategorie_loeschen_aria: "Smazat kategorii {{name}}",
-    kategorie_bearbeiten_title: "Přejmenovat kategorii",
-    kategorie_bearbeiten_aria: "Přejmenovat kategorii {{name}}",
-    kategorie_umbenennen_titel: "Přejmenování kategorie \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Tuto kategorii stále používá {{anzahl}}x receptů - nejprve jim přiřaďte jinou kategorii.",
-    wochentag_montag: "Pondělí",
-    wochentag_dienstag: "Úterý",
-    wochentag_mittwoch: "Středa",
-    wochentag_donnerstag: "Čtvrtek",
-    wochentag_freitag: "Pátek",
-    wochentag_samstag: "Sobota",
-    wochentag_sonntag: "Neděle",
-    sortier_titel: "Abecedně (A-Z)",
-    sortier_bewertung: "Nejlépe hodnocené první",
-    sortier_kategorie: "Podle kategorie",
-    sortier_neu: "Nejnovější první",
-    sortieren_label: "Řadit podle:",
-    kopf_titel_standard: "Kuchařka",
-    kopf_sichern_btn: "💾 Záloha",
-    kopf_wochenplan_btn: "📅 Týdenní plán",
-    kopf_zufallsrezept_btn: "🎲 Náhodný recept",
-    umrechnungstabelle_btn: "📐 Převodní tabulka",
-    umrechnungstabelle_titel: "Převodní tabulka",
-    umrechnungstabelle_hinweis: "Přibližné hodnoty v gramech pro běžné kuchyňské suroviny - liší se podle značky a konzistence, slouží jen k nahlédnutí. NEjsou automaticky použity na tvé recepty.",
-    umrechnungstabelle_suche_placeholder: "Hledat surovinu …",
-    umrechnungstabelle_spalte_zutat: "Surovina",
-    umrechnungstabelle_spalte_tasse: "1 hrnek",
-    umrechnungstabelle_spalte_el: "1 lžíce",
-    umrechnungstabelle_spalte_tl: "1 lžička",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Žádná surovina nenalezena.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Přidat vlastní surovinu",
-    umrechnungstabelle_eigene_name_platzhalter: "Název suroviny",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/hrnek",
-    umrechnungstabelle_eigene_el_platzhalter: "g/lžíce",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/lžička",
-    umrechnungstabelle_eigene_loeschen_titel: "Smazat vlastní surovinu",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Upravit vlastní surovinu",
-    umrechnungstabelle_eigene_name_fehlt: "Zadej prosím název.",
-    umrechnungstabelle_eigene_hinweis: "Chybí surovina, jejíž převodní hodnotu znáš sám? Přidej ji sem ručně - automatický převod mezi objemem a hmotností vědomě nenabízíme, protože by to znamenalo hádat podle suroviny, značky a hustoty.",
-    einkaufsmodus_start_btn: "🛒 Nákupní seznam",
-    einkaufsmodus_beenden_btn: "✕ Ukončit výběr",
-    kopf_neu_btn: "+ Nový",
-    suche_placeholder: "🔍 Recept nebo suroviny (např. mouka, vejce)…",
-    kochbuch_loeschen_title: "Smazat kolekci",
-    kochbuch_loeschen_aria: "Smazat kolekci {{name}}",
-    kochbuch_speichern_btn: "+ Uložit jako chytrou kolekci",
-    kochbuch_name_placeholder: "Název pro tuto kolekci, např. Podzimní recepty",
-    fehler_kochbuch_name_fehlt: "Zadejte prosím název kolekce.",
-    kochbuch_info_aria: "Zobrazit vysvětlení chytrých kolekcí",
-    kochbuch_info_titel: "Co je chytrá kolekce?",
-    kochbuch_info_text:
-      "Chytrá kolekce neukládá pevný seznam receptů, ale kombinaci " +
-      "kategorie, štítků a hledaného výrazu, přesně tak, jak jsou " +
-      "nastaveny v okamžiku uložení. Poté se sama aktualizuje: nový " +
-      "recept, který odpovídá, se automaticky objeví, a recept, jehož " +
-      "kategorie nebo štítky se změní, může stejně automaticky zase " +
-      "zmizet.",
-    einkaufs_zaehler: "{{anzahl}} vybráno",
-    einkaufsliste_erstellen_btn: "Vytvořit nákupní seznam",
-    fehler_einkaufsliste_keine_konfiguration: "Pro nákupní seznam ještě chybí konfigurace: zadejte prosím 'shopping_list_entity' v konfiguraci karty (např. shopping_list_entity: todo.einkaufsliste) - k tomu je potřeba DRUHÝ pomocník Místní seznam úkolů. Viz ANLEITUNG-Backup.md, oddíl 18.",
-    fehler_einkaufsliste_keine_auswahl: "Vyberte prosím alespoň jeden recept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Vyberte prosím alespoň jednu surovinu.",
-    zutaten_fehlend_einkaufsliste_btn: "Přidat vybrané do nákupního seznamu",
-    fehler_einkaufsliste_keine_zutaten: "Vybrané recepty neobsahují žádné suroviny.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nepodařilo se přidat \"{{zeile}}\" do nákupního seznamu:\n{{fehler}}\n\nJiž přidané suroviny zůstávají v seznamu.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} surovin(y) přidáno do \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" smazáno.",
-    undo_rueckgaengig_btn: "Zpět",
-    leer_keine_rezepte: "Zatím žádné recepty – začněte pomocí \"+ Nový\"",
-    leer_keine_treffer: "Nenalezeny žádné recepty pro \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Nepodařilo se načíst \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Existuje tento seznam úkolů? (Nastavení → Zařízení a služby → Pomocníci)",
-    kachel_aria_label_oeffnen: "Otevřít recept {{titel}}",
-    sterne_aria_label_gruppe: "Vaše hodnocení",
-    sterne_aria_label: "{{zahl}} z 5 hvězdiček",
-    fehler_kein_benutzer_bewertung: "Nepodařilo se zjistit vašeho uživatele - hodnocení není možné.",
-    detail_teilen_drucken_btn: "📤 Sdílet / Tisknout",
-    detail_erstellt_von: "👤 Vytvořil(a) {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} hodnocení)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} hodnocení)",
-    detail_keine_bewertungen: "Zatím žádná hodnocení",
-    detail_deine_bewertung: "Vaše hodnocení:",
-    detail_zubereitet_x: "🍳 připraveno {{anzahl}}x",
-    detail_portionen_suffix: "porcí",
-    abschnitt_titel_zutaten: "Suroviny",
-    abschnitt_titel_zubereitung: "Postup",
-    keine_zutaten: "Žádné suroviny nejsou uvedeny",
-    detail_kommentare_titel: "Komentáře",
-    detail_keine_kommentare: "Zatím žádné komentáře",
-    detail_kommentar_placeholder: "Doplnění, tip nebo poznámka…",
-    detail_kommentar_hinzufuegen_btn: "Přidat komentář",
-    detail_bearbeiten_hinweis: "Tento recept může upravit nebo smazat pouze {{name}} (nebo administrátor).",
-    detail_ersteller_unbekannt: "tvůrce/tvůrkyně",
-    modal_zubereitet_frage: "Připravil(a) jste \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Zahrnout obrázek receptu?",
-    modal_drucken_ohne_bild_btn: "Bez obrázku",
-    modal_drucken_mit_bild_btn: "S obrázkem",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Statistika vaření",
-    statistik_info_aria: "Zobrazit vysvětlení statistiky",
-    statistik_einstellungen_btn_title: "Nastavení zaznamenávání vaření",
-    statistik_einstellungen_titel: "Nastavení zaznamenávání vaření",
-    statistik_einstellungen_text: "Zde můžeš nastavit, zda se tě po opuštění receptu zeptáme, jestli jsi ho připravil(a), a zda se zobrazuje statistika, která z toho vzniká.",
-    statistik_einstellungen_schalter_label: "Zapnout otázku a statistiku",
-    tags_einstellung_schalter_label: "Zobrazit filtr štítků v přehledu",
-    zufallsrezept_einstellung_schalter_label: "Zobrazit tlačítko Náhodný recept v přehledu",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Zobrazit tlačítko převodní tabulky v přehledu",
-    umrechnungstabelle_kopf_einstellung_hinweis: "U nastavené kategorie pro americké recepty se převodní tabulka v receptu a v režimu vaření zobrazuje i nadále, i když je toto tlačítko zde vypnuté.",
-    farben_abschnitt_titel: "Barvy",
-    farben_hinweis: "Upravte jednotlivé barvy karty. Obnovit vše vrátí všechny barvy na výchozí.",
-    farben_akzent_label: "Hlavní barva (tlačítka, aktivní filtry)",
-    farben_akzent_text_label: "Zvýrazňovací barva textu a okrajů",
-    farben_loeschen_label: "Smazání / varování",
-    farben_sterne_label: "Hvězdičky hodnocení",
-    farben_titel_label: "Nadpisy",
-    farben_zuruecksetzen_btn: "Obnovit vše",
-    us_kategorie_einstellung_label: "Kategorie pro americké recepty",
-    us_kategorie_einstellung_text: "U receptů s touto kategorií se navíc zobrazí tlačítko pro převodní tabulku přímo v receptu a v režimu vaření.",
-    us_kategorie_einstellung_keine: "— Žádná —",
-    statistik_info_titel: "Jak se tato statistika počítá?",
-    statistik_info_text:
-      "Toto vyhodnocení počítá každé potvrzení otázky „Připravil(a) jste?“ - bez ohledu na velikost porce nebo počet za stejný den. Pokud je tato otázka vypnuta pomocí přepínače v nastavení statistiky (⚙️), čísla dál nerostou, ale již zaznamenané přípravy zůstávají zachovány.",
-    statistik_dieses_jahr: "V roce {{jahr}} jsi ze své kuchařky vařil(a) {{anzahl}}x",
-    statistik_gesamt: "Celkem jsi ze své kuchařky vařil(a) {{anzahl}}x",
-    statistik_top_titel: "Nejčastěji připravováno",
-    statistik_keine_daten: "Zatím nejsou zaznamenány žádné přípravy.",
-    modal_loeschen_frage: "Opravdu smazat \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Ano, smazat",
-    modal_kommentar_loeschen_frage: "Opravdu smazat tento komentář?",
-    wochenplan_titel: "Týdenní plán",
-    wochenplan_tab_diese: "Tento týden",
-    wochenplan_tab_folgewoche: "Příští týden",
-    wochenplan_hinweis_folgewoche: "Naplánujte si zde už teď nadcházející týden - jakmile aktuální týden skončí, automaticky se přesune do \"Tento týden\".",
-    wochenplan_hinweis_diese: "Uplynulé dny se automaticky vyprázdní (samotný recept zůstává zachován, zmizí pouze přiřazení).",
-    wochenplan_hinweis_speicherung: "Ukládá se napříč zařízeními (jako skrytý doplňkový záznam ve stejném seznamu receptů, není potřeba žádný další pomocník).",
-    wochenplan_leer: "Zatím žádné recepty - nejprve nějaké vytvořte.",
-    wochenplan_kein_rezept_option: "– žádný recept –",
-    wochenplan_einkaufsliste_btn: "Vytvořit nákupní seznam z {{ziel}}",
-    wochenplan_wort: "týdenní plán",
-    wochenplan_folgewoche_wort: "příští týden",
-    wochenplan_aktuelle_woche_wort: "aktuální týden",
-    wochenplan_keine_zuweisung: "{{zeitraum}} zatím neobsahuje žádné přiřazené recepty.",
-    formular_titel_neu: "Nový recept",
-    formular_titel_bearbeiten: "Upravit recept",
-    formular_url_import_btn: "🌐 Importovat URL receptu",
-    formular_url_label: "Odkaz na webovou stránku receptu",
-    formular_url_placeholder: "https://www.priklad-recepty.cz/muj-recept",
-    formular_url_hinweis: "Načte stránku a přečte strukturovaná data receptu, která jsou do ní již vložena (stejná data, kterými např. Google zobrazuje hvězdičková hodnocení ve vyhledávání) - obvykle spolehlivější než rozpoznávání textu. Funguje pouze na stránkách, které taková data poskytují a neblokují automatizované požadavky.",
-    formular_url_importieren_btn: "Importovat",
-    formular_url_laedt: "Načítá se …",
-    formular_text_einfuegen_btn: "🔍 Vložit text receptu (automatické rozpoznání)",
-    formular_text_label: "Vložte zde text receptu (např. zkopírovaný z webové stránky receptu)",
-    formular_text_placeholder: "Název, suroviny, postup - jednoduše vložte celý text",
-    formular_text_hinweis: "Čistě automatické rozpoznávání bez AI - funguje nejlépe s nadpisy \"Suroviny\" a \"Postup\" v textu. Výsledek si prosím poté krátce zkontrolujte, může být neúplný.",
-    formular_text_erkennen_btn: "Rozpoznat",
-    formular_json_einfuegen_btn: "📋 Vložit JSON vygenerovaný AI",
-    formular_json_info_aria: "Zobrazit hotový prompt pro AI",
-    json_info_titel: "Prompt pro AI",
-    json_info_erklaerung:
-      "Zkopíruj tento text, vlož ho do AI dle výběru (např. ChatGPT nebo Claude), připoj svůj text receptu a odpověď pak vlož nahoře do „Vložte JSON zde“.",
-    json_info_prompt:
-      "Převeď text receptu, který ti hned pošlu, na JEDEN jediný JSON objekt - bez vysvětlení, bez textu před ani po, jen JSON. Použij přesně tento formát:\n\n" +
-      "{\n" +
-      '  "title": "název receptu",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "jedna z: {{kategorien}}",\n' +
-      '  "ingredients": ["jedna surovina na položku, např. 200 g mouky"],\n' +
-      '  "steps": ["jeden krok přípravy na položku"],\n' +
-      '  "tags": ["volitelné štítky, např. vegetariánské"]\n' +
-      "}\n\n" +
-      "Pravidla: „category“ musí být PŘESNĚ jedna z výše uvedených hodnot (převezmi ji beze změny, i když je text receptu v jiném jazyce - jde o pevné interní hodnoty). " +
-      "„tags“ je volitelné, klidně prázdné pole. " +
-      "Nevymýšlej suroviny ani kroky, které v textu nejsou. " +
-      "Zde je text receptu:",
-    json_info_kopieren_btn: "📋 Kopírovat prompt",
-    json_info_kopiert: "Zkopírováno!",
-    formular_json_label: "Vložte JSON zde",
-    formular_json_uebernehmen_btn: "Použít",
-    formular_label_titel: "Název",
-    formular_label_kategorie: "Kategorie",
-    formular_label_tags: "Štítky (možné je více, např. \"vegetariánské\", \"rychlé\")",
-    formular_tag_placeholder: "Zadejte a přidejte štítek",
-    formular_tag_hinzufuegen_btn: "+ Štítek",
-    formular_tag_entfernen_aria: "Odebrat štítek {{tag}}",
-    formular_label_portionen: "Porce (základ)",
-    formular_label_zutaten: "Suroviny",
-    formular_zutat_hinzufuegen_btn: "+ Surovina",
-    formular_zutat_menge_placeholder: "Množství",
-    formular_zutat_einheit_placeholder: "Jednotka",
-    formular_zutat_name_placeholder: "Surovina",
-    formular_zutat_entfernen_aria: "Odebrat surovinu",
-    formular_label_zubereitung: "Postup (kroky)",
-    formular_schritt_hinzufuegen_btn: "+ Krok",
-    formular_schritt_placeholder_beispiel: "např. umýt a nakrájet zeleninu",
-    formular_schritt_placeholder_naechster: "další krok",
-    formular_schritt_entfernen_aria: "Odebrat krok",
-    formular_schritt_hoch_aria: "Posunout krok nahoru",
-    formular_schritt_runter_aria: "Posunout krok dolů",
-    formular_label_bild: "Fotka",
-    formular_bild_vorhanden_hinweis: "(existuje – nový soubor ji nahradí)",
-    formular_bild_hinweis: "Aktuální fotka zůstane zachována, pokud nevyberete nový soubor.",
-    formular_bild_verkleinern_text: "Fotka se zmenšuje…",
-    fehler_url_ungueltig: "Zadejte prosím úplnou adresu začínající na http:// nebo https://.",
-    fehler_url_apostroph: "Tato adresa obsahuje apostrof (') a bohužel ji nelze importovat.",
-    fehler_url_keine_ausgabe: "Skript nevrátil žádný výstup. Je 'rezeptbuch_url_importieren' nastaven v configuration.yaml a byl od té doby Home Assistant kompletně restartován?",
-    fehler_url_kein_json: "Odpověď importovacího skriptu nebyla platný JSON.",
-    fehler_url_import_fehlgeschlagen: "Import URL se nezdařil: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Ve vloženém textu se bohužel nepodařilo nic rozpoznat. Vyplňte prosím pole níže ručně.",
-    warnung_texterkennung_unvollstaendig: "Rozpoznání bylo neúplné (chybí suroviny nebo kroky, případně jsou přiřazeny nesprávně) - zkontrolujte prosím a doplňte ve formuláři.",
-    fehler_json_ungueltig: "Vložený JSON je neplatný. Zkontrolujte jej prosím a zkuste to znovu.",
-    fehler_json_titel_fehlt: "V JSON chybí alespoň pole 'title'.",
-    fehler_titel_fehlt: "Zadejte prosím název.",
-    fehler_unerwartet: "Neočekávaná chyba:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" mezitím smazal někdo jiný. Vaše změny nebyly uloženy.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" mezitím změnil někdo jiný (např. komentář, hodnocení nebo vlastní úprava).\n\nAby nedošlo k přepsání, vaše změny NEBYLY uloženy. Otevřete prosím recept znovu a zadejte změny znovu.",
-    fehler_vorgang_fehlgeschlagen: "Akce se nezdařila:\n{{fehler}}",
-    fehler_teilen_drucken: "Neočekávaná chyba při sdílení/tisku:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Zadejte prosím 'entity' v konfiguraci karty, např. entity: todo.rezepte",
-    fehler_bild_lesen: "Fotku se nepodařilo přečíst (soubor je poškozený nebo nepodporovaný).",
-    fehler_bild_verarbeiten: "Fotku se nepodařilo zpracovat jako obrázek (nepodporovaný formát?).",
-    teilen_ueberschrift_zutaten: "SUROVINY",
-    teilen_ueberschrift_zubereitung: "POSTUP",
-    seite_zurueck_btn: "← Zpět",
-    seite_weiter_btn: "Další →",
-    seite_anzeige: "Strana {{aktuell}} z {{gesamt}}",
-    update_neue_version: "Je dostupná nová verze: {{version}}",
-    update_ansehen_btn: "Zobrazit",
-    update_schliessen_aria: "Skrýt upozornění",
-    ressourcen_version_hinweis: "⚠️ Tato karta byla aktualizována, ale URL zdroje se nezměnila (stále \"?v={{version}}\"). Jiné prohlížeče/zařízení proto mohou dál načítat starý, uložený soubor - zvyš číslo verze v URL zdroje (Nastavení → Dashboardy → Zdroje).",
-    detail_kochmodus_btn: "🍳 Režim vaření",
-    kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
-    kochmodus_schliessen_aria: "Zavřít režim vaření",
-    kochmodus_schritt_zurueck_aria: "Předchozí krok",
-    kochmodus_schritt_weiter_aria: "Další krok",
-    kochmodus_zutaten_ein_aria: "Zobrazit suroviny",
-    kochmodus_zutaten_aus_aria: "Skrýt suroviny",
-    kochmodus_timer_ein_aria: "Zobrazit časovač",
-    kochmodus_timer_aus_aria: "Skrýt časovač",
-    kochmodus_timer_minuten_aria: "Minuty",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Zrušit",
-    kochmodus_timer_abgelaufen_text: "⏰ Čas vypršel!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Spustit časovač na {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 Souhrnné PDF",
-    sammel_pdf_keine_rezepte: "Nebyly nalezeny žádné recepty k exportu.",
-    sammel_pdf_frage_toc: "Vytvořit obsah vybraných receptů?",
-    sammel_pdf_ja_toc_btn: "Ano, vytvořit obsah",
-    sammel_pdf_nein_toc_btn: "Ne, bez obsahu",
-    sammel_pdf_name_placeholder: "Název kuchařky",
-    sammel_pdf_erstellen_btn: "Vytvořit PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Obsah",
-    sammel_pdf_frage_umfang: "Které recepty mají být ve společném PDF?",
-    sammel_pdf_alle_rezepte_btn: "Všechny zobrazené recepty",
-    sammel_pdf_auswahl_btn: "Vybrat konkrétní recepty",
-    sammel_pdf_auswahl_titel: "Vybrat recepty",
-    sammel_pdf_alle_auswaehlen_link: "Vybrat vše",
-    sammel_pdf_keine_auswaehlen_link: "Zrušit výběr",
-    sammel_pdf_weiter_btn: "Další",
-    sammel_pdf_bilder_mitdrucken_label: "Zahrnout obrázky do PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Vyberte prosím alespoň jeden recept.",
-  },
-  da: {
-    allgemein_zurueck: "← Tilbage",
-    allgemein_ja: "Ja",
-    allgemein_nein: "Nej",
-    allgemein_an: "Til",
-    allgemein_aus: "Fra",
-    allgemein_speichern: "Gem",
-    allgemein_speichert: "Gemmer…",
-    allgemein_abbrechen: "Annuller",
-    allgemein_bearbeiten: "Rediger",
-    allgemein_loeschen: "Slet",
-    allgemein_oeffnen: "Åbn",
-    allgemein_unbekannt: "Ukendt",
-    allgemein_schliessen: "Luk",
-    kategorie_hauptgericht: "Hovedret",
-    kategorie_vorspeise: "Forret",
-    kategorie_suppe: "Suppe",
-    kategorie_salat: "Salat",
-    kategorie_beilage: "Tilbehør",
-    kategorie_dessert: "Dessert",
-    kategorie_kuchen_gebaeck: "Kager og bagværk",
-    kategorie_fruehstueck: "Morgenmad",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Drikkevare",
-    kategorie_sonstiges: "Andet",
-    kategorie_filter_alle: "Alle",
-    kategorie_neu_btn: "+ Ny kategori",
-    kategorie_name_placeholder: "Kategorinavn",
-    fehler_kategorie_name_fehlt: "Angiv venligst et navn til kategorien.",
-    fehler_kategorie_existiert_bereits: "Denne kategori findes allerede.",
-    kategorie_loeschen_title: "Slet kategori",
-    kategorie_loeschen_aria: "Slet kategori {{name}}",
-    kategorie_bearbeiten_title: "Omdøb kategori",
-    kategorie_bearbeiten_aria: "Omdøb kategori {{name}}",
-    kategorie_umbenennen_titel: "Omdøb kategori \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Denne kategori bruges stadig af {{anzahl}}x opskrifter - tildel dem venligst en anden kategori først.",
-    wochentag_montag: "Mandag",
-    wochentag_dienstag: "Tirsdag",
-    wochentag_mittwoch: "Onsdag",
-    wochentag_donnerstag: "Torsdag",
-    wochentag_freitag: "Fredag",
-    wochentag_samstag: "Lørdag",
-    wochentag_sonntag: "Søndag",
-    sortier_titel: "Alfabetisk (A-Å)",
-    sortier_bewertung: "Bedst bedømte først",
-    sortier_kategorie: "Efter kategori",
-    sortier_neu: "Nyeste først",
-    sortieren_label: "Sortér efter:",
-    kopf_titel_standard: "Kogebog",
-    kopf_sichern_btn: "💾 Sikkerhedskopi",
-    kopf_wochenplan_btn: "📅 Ugeplan",
-    kopf_zufallsrezept_btn: "🎲 Tilfældig opskrift",
-    umrechnungstabelle_btn: "📐 Omregningstabel",
-    umrechnungstabelle_titel: "Omregningstabel",
-    umrechnungstabelle_hinweis: "Vejledende værdier i gram for almindelige køkkeningredienser - varierer efter mærke og konsistens, kun til opslag. Bruges IKKE automatisk på dine opskrifter.",
-    umrechnungstabelle_suche_placeholder: "Søg ingrediens …",
-    umrechnungstabelle_spalte_zutat: "Ingrediens",
-    umrechnungstabelle_spalte_tasse: "1 kop",
-    umrechnungstabelle_spalte_el: "1 spsk.",
-    umrechnungstabelle_spalte_tl: "1 tsk.",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Ingen ingrediens fundet.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Tilføj egen ingrediens",
-    umrechnungstabelle_eigene_name_platzhalter: "Ingrediensens navn",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/kop",
-    umrechnungstabelle_eigene_el_platzhalter: "g/spsk.",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tsk.",
-    umrechnungstabelle_eigene_loeschen_titel: "Slet egen ingrediens",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Rediger egen ingrediens",
-    umrechnungstabelle_eigene_name_fehlt: "Angiv venligst et navn.",
-    umrechnungstabelle_eigene_hinweis: "Mangler der en ingrediens, hvis omregningsværdi du selv kender? Tilføj den her manuelt - vi tilbyder bevidst ikke automatisk omregning mellem volumen og vægt, da det ville kræve et gæt baseret på ingrediens, mærke og konsistens.",
-    einkaufsmodus_start_btn: "🛒 Indkøbsliste",
-    einkaufsmodus_beenden_btn: "✕ Afslut valg",
-    kopf_neu_btn: "+ Ny",
-    suche_placeholder: "🔍 Opskrift eller ingredienser (f.eks. mel, æg)…",
-    kochbuch_loeschen_title: "Slet samling",
-    kochbuch_loeschen_aria: "Slet samling {{name}}",
-    kochbuch_speichern_btn: "+ Gem som smart samling",
-    kochbuch_name_placeholder: "Navn til denne samling, f.eks. Efterårsopskrifter",
-    fehler_kochbuch_name_fehlt: "Angiv venligst et navn til samlingen.",
-    kochbuch_info_aria: "Vis forklaring af smarte samlinger",
-    kochbuch_info_titel: "Hvad er en smart samling?",
-    kochbuch_info_text:
-      "En smart samling gemmer ikke en fast liste over opskrifter, " +
-      "men en kombination af kategori, tags og søgeord, præcis som de " +
-      "er indstillet, når du gemmer den. Den opdaterer sig derefter " +
-      "selv: en ny opskrift, der passer, dukker automatisk op, og en " +
-      "opskrift, hvis kategori eller tags ændres, kan lige så " +
-      "automatisk forsvinde igen.",
-    einkaufs_zaehler: "{{anzahl}} valgt",
-    einkaufsliste_erstellen_btn: "Opret indkøbsliste",
-    fehler_einkaufsliste_keine_konfiguration: "Indkøbslisten mangler stadig konfiguration: angiv venligst 'shopping_list_entity' i kortkonfigurationen (f.eks. shopping_list_entity: todo.einkaufsliste) - dette kræver en ANDEN Lokal to-do-liste-hjælper. Se ANLEITUNG-Backup.md, afsnit 18.",
-    fehler_einkaufsliste_keine_auswahl: "Vælg venligst mindst én opskrift.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Vælg venligst mindst én ingrediens.",
-    zutaten_fehlend_einkaufsliste_btn: "Tilføj valgte til indkøbslisten",
-    fehler_einkaufsliste_keine_zutaten: "De valgte opskrifter indeholder ingen ingredienser.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Kunne ikke tilføje \"{{zeile}}\" til indkøbslisten:\n{{fehler}}\n\nAllerede tilføjede ingredienser forbliver på indkøbslisten.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediens(er) tilføjet til \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" slettet.",
-    undo_rueckgaengig_btn: "Fortryd",
-    leer_keine_rezepte: "Ingen opskrifter endnu – kom i gang med \"+ Ny\"",
-    leer_keine_treffer: "Ingen opskrifter fundet for \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Kunne ikke indlæse \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Findes denne to-do-liste? (Indstillinger → Enheder og tjenester → Hjælpere)",
-    kachel_aria_label_oeffnen: "Åbn opskrift {{titel}}",
-    sterne_aria_label_gruppe: "Din bedømmelse",
-    sterne_aria_label: "{{zahl}} af 5 stjerner",
-    fehler_kein_benutzer_bewertung: "Kunne ikke bestemme din bruger - bedømmelse ikke mulig.",
-    detail_teilen_drucken_btn: "📤 Del / Udskriv",
-    detail_erstellt_von: "👤 Oprettet af {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} bedømmelse)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} bedømmelser)",
-    detail_keine_bewertungen: "Ingen bedømmelser endnu",
-    detail_deine_bewertung: "Din bedømmelse:",
-    detail_zubereitet_x: "🍳 tilberedt {{anzahl}} gange",
-    detail_portionen_suffix: "portioner",
-    abschnitt_titel_zutaten: "Ingredienser",
-    abschnitt_titel_zubereitung: "Fremgangsmåde",
-    keine_zutaten: "Ingen ingredienser angivet",
-    detail_kommentare_titel: "Kommentarer",
-    detail_keine_kommentare: "Ingen kommentarer endnu",
-    detail_kommentar_placeholder: "Tilføjelse, tip eller bemærkning…",
-    detail_kommentar_hinzufuegen_btn: "Tilføj kommentar",
-    detail_bearbeiten_hinweis: "Kun {{name}} (eller en administrator) kan redigere eller slette denne opskrift.",
-    detail_ersteller_unbekannt: "den/dem der oprettede opskriften",
-    modal_zubereitet_frage: "Tilberedte du \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Skal billedet af retten inkluderes?",
-    modal_drucken_ohne_bild_btn: "Uden billede",
-    modal_drucken_mit_bild_btn: "Med billede",
-    statistik_btn: "📊 Statistik",
-    statistik_titel: "Madlavningsstatistik",
-    statistik_info_aria: "Vis forklaring af statistikken",
-    statistik_einstellungen_btn_title: "Indstillinger for tilberedningslog",
-    statistik_einstellungen_titel: "Indstillinger for tilberedningslog",
-    statistik_einstellungen_text: "Her kan du vælge, om du bliver spurgt, når du forlader en opskrift, om du tilberedte den, og om den resulterende statistik vises på dette kort.",
-    statistik_einstellungen_schalter_label: "Aktivér spørgsmål og statistik",
-    tags_einstellung_schalter_label: "Vis tag-filter i overblikket",
-    zufallsrezept_einstellung_schalter_label: "Vis knappen Tilfældig opskrift i overblikket",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Vis knappen til omregningstabel i overblikket",
-    umrechnungstabelle_kopf_einstellung_hinweis: "For den valgte kategori til amerikanske opskrifter vises omregningstabellen fortsat i opskriften og i tilberedningstilstand, selvom denne knap er slået fra her.",
-    farben_abschnitt_titel: "Farver",
-    farben_hinweis: "Tilpas kortets enkelte farver. Nulstil alt sætter alle farver tilbage til standard.",
-    farben_akzent_label: "Hovedfarve (knapper, aktive filtre)",
-    farben_akzent_text_label: "Accentfarve til tekst og kanter",
-    farben_loeschen_label: "Slet / advarsel",
-    farben_sterne_label: "Vurderingsstjerner",
-    farben_titel_label: "Overskrifter",
-    farben_zuruecksetzen_btn: "Nulstil alt",
-    us_kategorie_einstellung_label: "Kategori til amerikanske opskrifter",
-    us_kategorie_einstellung_text: "Opskrifter med denne kategori får desuden en knap til omregningstabellen i selve opskriften og i tilberedningstilstand.",
-    us_kategorie_einstellung_keine: "— Ingen —",
-    statistik_info_titel: "Hvordan beregnes denne statistik?",
-    statistik_info_text:
-      "Denne opgørelse tæller hver bekræftelse af spørgsmålet „Tilberedte du den?“ - uanset portionsstørrelse eller hvor mange gange samme dag. Hvis spørgsmålet er deaktiveret via kontakten i statistikindstillingerne (⚙️), holder tallene op med at stige, men allerede registrerede tilberedninger bevares.",
-    statistik_dieses_jahr: "Du har lavet mad {{anzahl}}x fra din opskriftsbog i {{jahr}}",
-    statistik_gesamt: "Du har i alt lavet mad {{anzahl}}x fra din opskriftsbog",
-    statistik_top_titel: "Mest tilberedt",
-    statistik_keine_daten: "Endnu ingen tilberedninger registreret.",
-    modal_loeschen_frage: "Vil du virkelig slette \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Ja, slet",
-    modal_kommentar_loeschen_frage: "Vil du virkelig slette denne kommentar?",
-    wochenplan_titel: "Ugeplan",
-    wochenplan_tab_diese: "Denne uge",
-    wochenplan_tab_folgewoche: "Næste uge",
-    wochenplan_hinweis_folgewoche: "Planlæg allerede nu den kommende uge her - den rykker automatisk til \"Denne uge\", når den aktuelle uge er slut.",
-    wochenplan_hinweis_diese: "Tidligere dage tømmes automatisk (selve opskriften bevares, kun tildelingen forsvinder).",
-    wochenplan_hinweis_speicherung: "Gemmes på tværs af enheder (som en skjult ekstra post i samme opskriftsliste, ingen yderligere hjælper nødvendig).",
-    wochenplan_leer: "Ingen opskrifter endnu - opret nogle først.",
-    wochenplan_kein_rezept_option: "– ingen opskrift –",
-    wochenplan_einkaufsliste_btn: "Opret indkøbsliste fra {{ziel}}",
-    wochenplan_wort: "ugeplan",
-    wochenplan_folgewoche_wort: "næste uge",
-    wochenplan_aktuelle_woche_wort: "aktuelle uge",
-    wochenplan_keine_zuweisung: "{{zeitraum}} indeholder endnu ingen tildelte opskrifter.",
-    formular_titel_neu: "Ny opskrift",
-    formular_titel_bearbeiten: "Rediger opskrift",
-    formular_url_import_btn: "🌐 Importér opskrifts-URL",
-    formular_url_label: "Link til opskriftswebsiden",
-    formular_url_placeholder: "https://www.eksempel-opskrifter.dk/min-opskrift",
-    formular_url_hinweis: "Indlæser siden og læser opskriftens strukturerede data, der allerede er indlejret i den (samme data som f.eks. Google bruger til at vise stjernebedømmelser i søgeresultater) - som regel mere pålideligt end tekstgenkendelse. Virker kun på sider, der leverer sådanne data og ikke blokerer automatiske forespørgsler.",
-    formular_url_importieren_btn: "Importér",
-    formular_url_laedt: "Indlæser …",
-    formular_text_einfuegen_btn: "🔍 Indsæt opskriftstekst (automatisk genkendelse)",
-    formular_text_label: "Indsæt opskriftsteksten her (f.eks. kopieret fra en opskriftswebside)",
-    formular_text_placeholder: "Titel, ingredienser, fremgangsmåde - indsæt bare hele teksten",
-    formular_text_hinweis: "Ren automatisk genkendelse uden AI - fungerer bedst med overskrifterne \"Ingredienser\" og \"Fremgangsmåde\" i teksten. Tjek venligst resultatet bagefter, det kan være ufuldstændigt.",
-    formular_text_erkennen_btn: "Genkend",
-    formular_json_einfuegen_btn: "📋 Indsæt AI-genereret JSON",
-    formular_json_info_aria: "Vis en færdig prompt til en AI",
-    json_info_titel: "Prompt til en AI",
-    json_info_erklaerung:
-      "Kopiér denne tekst, indsæt den i en AI efter eget valg (f.eks. ChatGPT eller Claude), vedhæft din opskriftstekst, og indsæt derefter svaret ovenfor under „Indsæt JSON her“.",
-    json_info_prompt:
-      "Omdan opskriftsteksten, jeg sender lige om lidt, til ÉT enkelt JSON-objekt - uden forklaring, uden tekst før eller efter, kun JSON'en. Brug præcis dette format:\n\n" +
-      "{\n" +
-      '  "title": "opskriftens navn",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "en af: {{kategorien}}",\n' +
-      '  "ingredients": ["én ingrediens pr. post, f.eks. 200 g mel"],\n' +
-      '  "steps": ["ét tilberedningstrin pr. post"],\n' +
-      '  "tags": ["valgfrie stikord, f.eks. vegetarisk"]\n' +
-      "}\n\n" +
-      "Regler: „category“ skal være PRÆCIS en af værdierne nævnt ovenfor (overføres uændret, også selvom opskriftsteksten er på et andet sprog - det er faste interne værdier). " +
-      "„tags“ er valgfrit, et tomt array er fint. " +
-      "Find ikke på ingredienser eller trin, der ikke står i teksten. " +
-      "Her er opskriftsteksten:",
-    json_info_kopieren_btn: "📋 Kopiér prompt",
-    json_info_kopiert: "Kopieret!",
-    formular_json_label: "Indsæt JSON her",
-    formular_json_uebernehmen_btn: "Anvend",
-    formular_label_titel: "Titel",
-    formular_label_kategorie: "Kategori",
-    formular_label_tags: "Tags (flere mulige, f.eks. \"vegetarisk\", \"hurtig\")",
-    formular_tag_placeholder: "Indtast og tilføj et tag",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Fjern tag {{tag}}",
-    formular_label_portionen: "Portioner (basis)",
-    formular_label_zutaten: "Ingredienser",
-    formular_zutat_hinzufuegen_btn: "+ Ingrediens",
-    formular_zutat_menge_placeholder: "Mængde",
-    formular_zutat_einheit_placeholder: "Enhed",
-    formular_zutat_name_placeholder: "Ingrediens",
-    formular_zutat_entfernen_aria: "Fjern ingrediens",
-    formular_label_zubereitung: "Fremgangsmåde (trin)",
-    formular_schritt_hinzufuegen_btn: "+ Trin",
-    formular_schritt_placeholder_beispiel: "f.eks. vask og skær grøntsager",
-    formular_schritt_placeholder_naechster: "næste trin",
-    formular_schritt_entfernen_aria: "Fjern trin",
-    formular_schritt_hoch_aria: "Flyt trin op",
-    formular_schritt_runter_aria: "Flyt trin ned",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(findes – ny fil erstatter det)",
-    formular_bild_hinweis: "Det nuværende foto bevares, hvis du ikke vælger en ny fil.",
-    formular_bild_verkleinern_text: "Foto formindskes…",
-    fehler_url_ungueltig: "Angiv venligst en fuldstændig adresse med http:// eller https://.",
-    fehler_url_apostroph: "Denne adresse indeholder en apostrof (') og kan desværre ikke importeres.",
-    fehler_url_keine_ausgabe: "Scriptet returnerede intet output. Er 'rezeptbuch_url_importieren' konfigureret i configuration.yaml, og er Home Assistant blevet fuldstændig genstartet siden da?",
-    fehler_url_kein_json: "Importscriptets svar var ikke gyldig JSON.",
-    fehler_url_import_fehlgeschlagen: "URL-import mislykkedes: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Kunne desværre ikke genkende noget i den indsatte tekst. Udfyld venligst felterne nedenfor manuelt.",
-    warnung_texterkennung_unvollstaendig: "Genkendelsen var ufuldstændig (ingredienser eller trin mangler/er muligvis forkert tildelt) - tjek og suppler venligst i formularen.",
-    fehler_json_ungueltig: "Den indsatte JSON er ugyldig. Tjek den venligst og prøv igen.",
-    fehler_json_titel_fehlt: "JSON'en mangler mindst feltet 'title'.",
-    fehler_titel_fehlt: "Angiv venligst en titel.",
-    fehler_unerwartet: "Uventet fejl:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" er i mellemtiden blevet slettet af en anden. Dine ændringer blev ikke gemt.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" er i mellemtiden blevet ændret af en anden (f.eks. en kommentar, bedømmelse eller egen redigering).\n\nFor at undgå at noget bliver overskrevet, blev dine ændringer IKKE gemt. Åbn venligst opskriften igen, og indtast dine ændringer igen.",
-    fehler_vorgang_fehlgeschlagen: "Handlingen mislykkedes:\n{{fehler}}",
-    fehler_teilen_drucken: "Uventet fejl ved deling/udskrivning:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Angiv venligst 'entity' i kortkonfigurationen, f.eks. entity: todo.rezepte",
-    fehler_bild_lesen: "Fotoet kunne ikke læses (filen er beskadiget eller understøttes ikke).",
-    fehler_bild_verarbeiten: "Fotoet kunne ikke behandles som et billede (ikke understøttet format?).",
-    teilen_ueberschrift_zutaten: "INGREDIENSER",
-    teilen_ueberschrift_zubereitung: "FREMGANGSMÅDE",
-    seite_zurueck_btn: "← Tilbage",
-    seite_weiter_btn: "Næste →",
-    seite_anzeige: "Side {{aktuell}} af {{gesamt}}",
-    update_neue_version: "Ny version tilgængelig: {{version}}",
-    update_ansehen_btn: "Vis",
-    update_schliessen_aria: "Skjul meddelelse",
-    ressourcen_version_hinweis: "⚠️ Dette kort er blevet opdateret, men ressource-URL'en blev ikke ændret (stadig \"?v={{version}}\"). Andre browsere/enheder indlæser derfor muligvis stadig den gamle, cachede fil - øg versionsnummeret i ressource-URL'en (Indstillinger → Dashboards → Ressourcer).",
-    detail_kochmodus_btn: "🍳 Tilberedningstilstand",
-    kochmodus_schritt_anzeige: "Trin {{aktuell}} af {{gesamt}}",
-    kochmodus_schliessen_aria: "Luk tilberedningstilstand",
-    kochmodus_schritt_zurueck_aria: "Forrige trin",
-    kochmodus_schritt_weiter_aria: "Næste trin",
-    kochmodus_zutaten_ein_aria: "Vis ingredienser",
-    kochmodus_zutaten_aus_aria: "Skjul ingredienser",
-    kochmodus_timer_ein_aria: "Vis timer",
-    kochmodus_timer_aus_aria: "Skjul timer",
-    kochmodus_timer_minuten_aria: "Minutter",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Annuller",
-    kochmodus_timer_abgelaufen_text: "⏰ Timeren er færdig!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Start {{minuten}} min. timer",
-    kopf_sammel_pdf_btn: "📚 Samlet PDF",
-    sammel_pdf_keine_rezepte: "Ingen opskrifter fundet til eksport.",
-    sammel_pdf_frage_toc: "Vil du oprette en indholdsfortegnelse for de valgte opskrifter?",
-    sammel_pdf_ja_toc_btn: "Ja, opret indholdsfortegnelse",
-    sammel_pdf_nein_toc_btn: "Nej, ingen indholdsfortegnelse",
-    sammel_pdf_name_placeholder: "Navn på kogebogen",
-    sammel_pdf_erstellen_btn: "Opret PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Indholdsfortegnelse",
-    sammel_pdf_frage_umfang: "Hvilke opskrifter skal med i den samlede PDF?",
-    sammel_pdf_alle_rezepte_btn: "Alle viste opskrifter",
-    sammel_pdf_auswahl_btn: "Vælg bestemte opskrifter",
-    sammel_pdf_auswahl_titel: "Vælg opskrifter",
-    sammel_pdf_alle_auswaehlen_link: "Vælg alle",
-    sammel_pdf_keine_auswaehlen_link: "Fravælg alle",
-    sammel_pdf_weiter_btn: "Næste",
-    sammel_pdf_bilder_mitdrucken_label: "Inkludér billeder i PDF'en",
-    sammel_pdf_auswahl_keine_hinweis: "Vælg mindst én opskrift.",
-  },
-  nl: {
-    allgemein_zurueck: "← Terug",
-    allgemein_ja: "Ja",
-    allgemein_nein: "Nee",
-    allgemein_an: "Aan",
-    allgemein_aus: "Uit",
-    allgemein_speichern: "Opslaan",
-    allgemein_speichert: "Bezig met opslaan…",
-    allgemein_abbrechen: "Annuleren",
-    allgemein_bearbeiten: "Bewerken",
-    allgemein_loeschen: "Verwijderen",
-    allgemein_oeffnen: "Openen",
-    allgemein_unbekannt: "Onbekend",
-    allgemein_schliessen: "Sluiten",
-    kategorie_hauptgericht: "Hoofdgerecht",
-    kategorie_vorspeise: "Voorgerecht",
-    kategorie_suppe: "Soep",
-    kategorie_salat: "Salade",
-    kategorie_beilage: "Bijgerecht",
-    kategorie_dessert: "Dessert",
-    kategorie_kuchen_gebaeck: "Taarten & gebak",
-    kategorie_fruehstueck: "Ontbijt",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Drankje",
-    kategorie_sonstiges: "Overig",
-    kategorie_filter_alle: "Alle",
-    kategorie_neu_btn: "+ Nieuwe categorie",
-    kategorie_name_placeholder: "Categorienaam",
-    fehler_kategorie_name_fehlt: "Voer een naam voor de categorie in.",
-    fehler_kategorie_existiert_bereits: "Deze categorie bestaat al.",
-    kategorie_loeschen_title: "Categorie verwijderen",
-    kategorie_loeschen_aria: "Categorie {{name}} verwijderen",
-    kategorie_bearbeiten_title: "Categorie hernoemen",
-    kategorie_bearbeiten_aria: "Categorie {{name}} hernoemen",
-    kategorie_umbenennen_titel: "Categorie \"{{name}}\" hernoemen:",
-    fehler_kategorie_wird_verwendet: "Deze categorie wordt nog gebruikt door {{anzahl}}x recepten - wijs ze eerst een andere categorie toe.",
-    wochentag_montag: "Maandag",
-    wochentag_dienstag: "Dinsdag",
-    wochentag_mittwoch: "Woensdag",
-    wochentag_donnerstag: "Donderdag",
-    wochentag_freitag: "Vrijdag",
-    wochentag_samstag: "Zaterdag",
-    wochentag_sonntag: "Zondag",
-    sortier_titel: "Alfabetisch (A-Z)",
-    sortier_bewertung: "Beste beoordeling eerst",
-    sortier_kategorie: "Op categorie",
-    sortier_neu: "Nieuwste eerst",
-    sortieren_label: "Sorteren:",
-    kopf_titel_standard: "Kookboek",
-    kopf_sichern_btn: "💾 Back-up",
-    kopf_wochenplan_btn: "📅 Weekmenu",
-    kopf_zufallsrezept_btn: "🎲 Willekeurig recept",
-    umrechnungstabelle_btn: "📐 Omrekentabel",
-    umrechnungstabelle_titel: "Omrekentabel",
-    umrechnungstabelle_hinweis: "Richtwaarden in gram voor veelgebruikte keukeningrediënten - afhankelijk van merk en consistentie, dus alleen als naslag. Worden NIET automatisch op je recepten toegepast.",
-    umrechnungstabelle_suche_placeholder: "Ingrediënt zoeken …",
-    umrechnungstabelle_spalte_zutat: "Ingrediënt",
-    umrechnungstabelle_spalte_tasse: "1 kop",
-    umrechnungstabelle_spalte_el: "1 el.",
-    umrechnungstabelle_spalte_tl: "1 tl.",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Geen ingrediënt gevonden.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Eigen ingrediënt toevoegen",
-    umrechnungstabelle_eigene_name_platzhalter: "Naam van het ingrediënt",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/kop",
-    umrechnungstabelle_eigene_el_platzhalter: "g/el.",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tl.",
-    umrechnungstabelle_eigene_loeschen_titel: "Eigen ingrediënt verwijderen",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Eigen ingrediënt bewerken",
-    umrechnungstabelle_eigene_name_fehlt: "Voer een naam in.",
-    umrechnungstabelle_eigene_hinweis: "Mis je een ingrediënt waarvan je de omrekenwaarde zelf weet? Voeg het hier handmatig toe - we bieden bewust geen automatische omrekening tussen volume en gewicht aan, omdat dat zou neerkomen op gokken op basis van ingrediënt, merk en consistentie.",
-    einkaufsmodus_start_btn: "🛒 Boodschappenlijst",
-    einkaufsmodus_beenden_btn: "✕ Selectie beëindigen",
-    kopf_neu_btn: "+ Nieuw",
-    suche_placeholder: "🔍 Recept of ingrediënten (bijv. bloem, eieren)…",
-    kochbuch_loeschen_title: "Verzameling verwijderen",
-    kochbuch_loeschen_aria: "Verzameling {{name}} verwijderen",
-    kochbuch_speichern_btn: "+ Opslaan als slimme verzameling",
-    kochbuch_name_placeholder: "Naam voor deze verzameling, bijv. Herfstrecepten",
-    fehler_kochbuch_name_fehlt: "Vul een naam in voor de verzameling.",
-    kochbuch_info_aria: "Uitleg over slimme verzamelingen tonen",
-    kochbuch_info_titel: "Wat is een slimme verzameling?",
-    kochbuch_info_text:
-      "Een slimme verzameling slaat geen vaste lijst met recepten op, " +
-      "maar een combinatie van categorie, tags en zoekterm, precies " +
-      "zoals die is ingesteld op het moment van opslaan. Daarna werkt " +
-      "hij zichzelf automatisch bij: een nieuw recept dat past, " +
-      "verschijnt vanzelf, en een recept waarvan de categorie of tags " +
-      "veranderen, kan net zo automatisch weer verdwijnen.",
-    einkaufs_zaehler: "{{anzahl}} geselecteerd",
-    einkaufsliste_erstellen_btn: "Boodschappenlijst maken",
-    fehler_einkaufsliste_keine_konfiguration: "Voor de boodschappenlijst ontbreekt nog de configuratie: geef 'shopping_list_entity' op in de kaartconfiguratie (bijv. shopping_list_entity: todo.einkaufsliste) - hiervoor is een TWEEDE Lokale to-do-lijst-helper nodig. Zie ANLEITUNG-Backup.md, sectie 18.",
-    fehler_einkaufsliste_keine_auswahl: "Selecteer minstens één recept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Selecteer minstens één ingrediënt.",
-    zutaten_fehlend_einkaufsliste_btn: "Geselecteerde toevoegen aan boodschappenlijst",
-    fehler_einkaufsliste_keine_zutaten: "De geselecteerde recepten bevatten geen ingrediënten.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Kon \"{{zeile}}\" niet toevoegen aan de boodschappenlijst:\n{{fehler}}\n\nReeds toegevoegde ingrediënten blijven op de lijst staan.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediënt(en) toegevoegd aan \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" verwijderd.",
-    undo_rueckgaengig_btn: "Ongedaan maken",
-    leer_keine_rezepte: "Nog geen recepten – begin met \"+ Nieuw\"",
-    leer_keine_treffer: "Geen recepten gevonden voor \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Kon \"{{entity}}\" niet laden.",
-    fehler_liste_laden_hinweis: "Bestaat deze to-do-lijst? (Instellingen → Apparaten & diensten → Hulpmiddelen)",
-    kachel_aria_label_oeffnen: "Recept {{titel}} openen",
-    sterne_aria_label_gruppe: "Jouw beoordeling",
-    sterne_aria_label: "{{zahl}} van 5 sterren",
-    fehler_kein_benutzer_bewertung: "Kon je gebruiker niet bepalen - beoordelen niet mogelijk.",
-    detail_teilen_drucken_btn: "📤 Delen / Afdrukken",
-    detail_erstellt_von: "👤 Aangemaakt door {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} beoordeling)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} beoordelingen)",
-    detail_keine_bewertungen: "Nog geen beoordelingen",
-    detail_deine_bewertung: "Jouw beoordeling:",
-    detail_zubereitet_x: "🍳 {{anzahl}}x bereid",
-    detail_portionen_suffix: "porties",
-    abschnitt_titel_zutaten: "Ingrediënten",
-    abschnitt_titel_zubereitung: "Bereiding",
-    keine_zutaten: "Geen ingrediënten opgegeven",
-    detail_kommentare_titel: "Reacties",
-    detail_keine_kommentare: "Nog geen reacties",
-    detail_kommentar_placeholder: "Aanvulling, tip of opmerking…",
-    detail_kommentar_hinzufuegen_btn: "Reactie toevoegen",
-    detail_bearbeiten_hinweis: "Alleen {{name}} (of een beheerder) kan dit recept bewerken of verwijderen.",
-    detail_ersteller_unbekannt: "de maker",
-    modal_zubereitet_frage: "Heb je \"{{titel}}\" bereid?",
-    modal_drucken_bild_frage: "Afbeelding van het recept meenemen?",
-    modal_drucken_ohne_bild_btn: "Zonder afbeelding",
-    modal_drucken_mit_bild_btn: "Met afbeelding",
-    statistik_btn: "📊 Statistiek",
-    statistik_titel: "Kookstatistiek",
-    statistik_info_aria: "Uitleg over de statistiek tonen",
-    statistik_einstellungen_btn_title: "Instellingen bereidingsregistratie",
-    statistik_einstellungen_titel: "Instellingen bereidingsregistratie",
-    statistik_einstellungen_text: "Hier kun je instellen of je, na het verlaten van een recept, wordt gevraagd of je het hebt bereid, en of de bijbehorende statistiek op deze kaart wordt weergegeven.",
-    statistik_einstellungen_schalter_label: "Vraag & statistiek inschakelen",
-    tags_einstellung_schalter_label: "Tagfilter in overzicht weergeven",
-    zufallsrezept_einstellung_schalter_label: "Knop 'Willekeurig recept' in overzicht weergeven",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Knop voor omrekentabel in overzicht weergeven",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Bij de ingestelde categorie voor Amerikaanse recepten verschijnt de omrekentabel nog steeds in het recept en in de kookmodus, ook als deze knop hier is uitgeschakeld.",
-    farben_abschnitt_titel: "Kleuren",
-    farben_hinweis: "Pas afzonderlijke kleuren van de kaart aan. Alles resetten zet alle kleuren terug naar de standaardwaarde.",
-    farben_akzent_label: "Hoofdkleur (knoppen, actieve filters)",
-    farben_akzent_text_label: "Accentkleur voor tekst en randen",
-    farben_loeschen_label: "Verwijderen / waarschuwing",
-    farben_sterne_label: "Beoordelingssterren",
-    farben_titel_label: "Koppen",
-    farben_zuruecksetzen_btn: "Alles resetten",
-    us_kategorie_einstellung_label: "Categorie voor Amerikaanse recepten",
-    us_kategorie_einstellung_text: "Recepten met deze categorie krijgen ook een knop voor de omrekentabel in het recept zelf en in de kookmodus.",
-    us_kategorie_einstellung_keine: "— Geen —",
-    statistik_info_titel: "Hoe wordt deze statistiek berekend?",
-    statistik_info_text:
-      "Deze weergave telt elke bevestiging van de vraag „Heb je het bereid?“ - ongeacht portiegrootte of hoe vaak op dezelfde dag. Als deze vraag is uitgeschakeld via de schakelaar in de statistiekinstellingen (⚙️), groeien de aantallen niet meer, maar al geregistreerde bereidingen blijven behouden.",
-    statistik_dieses_jahr: "Je hebt {{anzahl}}x uit je receptenboek gekookt in {{jahr}}",
-    statistik_gesamt: "Je hebt in totaal {{anzahl}}x uit je receptenboek gekookt",
-    statistik_top_titel: "Meest bereid",
-    statistik_keine_daten: "Nog geen bereidingen geregistreerd.",
-    modal_loeschen_frage: "\"{{titel}}\" echt verwijderen?",
-    modal_loeschen_ja_btn: "Ja, verwijderen",
-    modal_kommentar_loeschen_frage: "Deze reactie echt verwijderen?",
-    wochenplan_titel: "Weekmenu",
-    wochenplan_tab_diese: "Deze week",
-    wochenplan_tab_folgewoche: "Volgende week",
-    wochenplan_hinweis_folgewoche: "Plan hier alvast de komende week - deze schuift automatisch door naar \"Deze week\" zodra de huidige week voorbij is.",
-    wochenplan_hinweis_diese: "Verstreken dagen worden automatisch geleegd (het recept zelf blijft behouden, alleen de toewijzing verdwijnt).",
-    wochenplan_hinweis_speicherung: "Wordt op alle apparaten opgeslagen (als onzichtbare extra invoer in dezelfde receptenlijst, geen extra helper nodig).",
-    wochenplan_leer: "Nog geen recepten - maak er eerst een paar aan.",
-    wochenplan_kein_rezept_option: "– geen recept –",
-    wochenplan_einkaufsliste_btn: "Boodschappenlijst maken van {{ziel}}",
-    wochenplan_wort: "weekmenu",
-    wochenplan_folgewoche_wort: "volgende week",
-    wochenplan_aktuelle_woche_wort: "huidige week",
-    wochenplan_keine_zuweisung: "{{zeitraum}} bevat nog geen toegewezen recepten.",
-    formular_titel_neu: "Nieuw recept",
-    formular_titel_bearbeiten: "Recept bewerken",
-    formular_url_import_btn: "🌐 Recept-URL importeren",
-    formular_url_label: "Link naar de receptwebsite",
-    formular_url_placeholder: "https://www.voorbeeld-recepten.nl/mijn-recept",
-    formular_url_hinweis: "Laadt de pagina en leest de receptstructuurdata die er al in zijn ingebouwd (dezelfde data waarmee bijv. Google sterbeoordelingen in de zoekresultaten toont) - meestal betrouwbaarder dan tekstherkenning. Werkt alleen op pagina's die dergelijke data aanbieden en geautomatiseerde verzoeken niet blokkeren.",
-    formular_url_importieren_btn: "Importeren",
-    formular_url_laedt: "Laden …",
-    formular_text_einfuegen_btn: "🔍 Recepttekst plakken (automatisch herkennen)",
-    formular_text_label: "Plak hier de recepttekst (bijv. gekopieerd van een receptwebsite)",
-    formular_text_placeholder: "Titel, ingrediënten, bereiding - plak gewoon de hele tekst",
-    formular_text_hinweis: "Puur automatische herkenning zonder AI - werkt het beste met de koppen \"Ingrediënten\" en \"Bereiding\" in de tekst. Controleer het resultaat daarna kort, het kan onvolledig zijn.",
-    formular_text_erkennen_btn: "Herkennen",
-    formular_json_einfuegen_btn: "📋 Door AI gegenereerde JSON plakken",
-    formular_json_info_aria: "Kant-en-klare prompt voor een AI tonen",
-    json_info_titel: "Prompt voor een AI",
-    json_info_erklaerung:
-      "Kopieer deze tekst, plak hem in een AI naar keuze (bijv. ChatGPT of Claude), voeg je recepttekst toe en plak het antwoord daarna hierboven bij „Plak hier de JSON“.",
-    json_info_prompt:
-      "Zet de recepttekst die ik zo naar je stuur om in ÉÉN enkel JSON-object - zonder uitleg, zonder tekst ervoor of erna, alleen de JSON. Gebruik precies dit formaat:\n\n" +
-      "{\n" +
-      '  "title": "naam van het recept",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "één van: {{kategorien}}",\n' +
-      '  "ingredients": ["één ingrediënt per item, bijv. 200 g bloem"],\n' +
-      '  "steps": ["één bereidingsstap per item"],\n' +
-      '  "tags": ["optionele trefwoorden, bijv. vegetarisch"]\n' +
-      "}\n\n" +
-      "Regels: „category“ moet PRECIES een van de hierboven genoemde waarden zijn (ongewijzigd overnemen, ook als de recepttekst in een andere taal is - dit zijn vaste interne waarden). " +
-      "„tags“ is optioneel, een lege array mag ook. " +
-      "Verzin geen ingrediënten of stappen die niet in de tekst staan. " +
-      "Hier is de recepttekst:",
-    json_info_kopieren_btn: "📋 Prompt kopiëren",
-    json_info_kopiert: "Gekopieerd!",
-    formular_json_label: "Plak hier de JSON",
-    formular_json_uebernehmen_btn: "Overnemen",
-    formular_label_titel: "Titel",
-    formular_label_kategorie: "Categorie",
-    formular_label_tags: "Tags (meerdere mogelijk, bijv. \"vegetarisch\", \"snel\")",
-    formular_tag_placeholder: "Tag invoeren en toevoegen",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Tag {{tag}} verwijderen",
-    formular_label_portionen: "Porties (basis)",
-    formular_label_zutaten: "Ingrediënten",
-    formular_zutat_hinzufuegen_btn: "+ Ingrediënt",
-    formular_zutat_menge_placeholder: "Hoeveelheid",
-    formular_zutat_einheit_placeholder: "Eenheid",
-    formular_zutat_name_placeholder: "Ingrediënt",
-    formular_zutat_entfernen_aria: "Ingrediënt verwijderen",
-    formular_label_zubereitung: "Bereiding (stappen)",
-    formular_schritt_hinzufuegen_btn: "+ Stap",
-    formular_schritt_placeholder_beispiel: "bijv. groenten wassen en snijden",
-    formular_schritt_placeholder_naechster: "volgende stap",
-    formular_schritt_entfernen_aria: "Stap verwijderen",
-    formular_schritt_hoch_aria: "Stap omhoog verplaatsen",
-    formular_schritt_runter_aria: "Stap omlaag verplaatsen",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(aanwezig – nieuw bestand vervangt deze)",
-    formular_bild_hinweis: "De huidige foto blijft behouden als je geen nieuw bestand kiest.",
-    formular_bild_verkleinern_text: "Foto wordt verkleind…",
-    fehler_url_ungueltig: "Vul een volledig adres in dat begint met http:// of https://.",
-    fehler_url_apostroph: "Dit adres bevat een apostrof (') en kan helaas niet worden geïmporteerd.",
-    fehler_url_keine_ausgabe: "Het script heeft geen uitvoer geleverd. Is 'rezeptbuch_url_importieren' ingesteld in configuration.yaml en is Home Assistant sindsdien volledig opnieuw opgestart?",
-    fehler_url_kein_json: "Het antwoord van het importscript was geen geldige JSON.",
-    fehler_url_import_fehlgeschlagen: "URL-import mislukt: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Kon helaas niets herkennen in de geplakte tekst. Vul de velden hieronder handmatig in.",
-    warnung_texterkennung_unvollstaendig: "De herkenning was onvolledig (ingrediënten of stappen ontbreken/zijn mogelijk verkeerd toegewezen) - controleer en vul aan in het formulier.",
-    fehler_json_ungueltig: "De geplakte JSON is ongeldig. Controleer deze en probeer het opnieuw.",
-    fehler_json_titel_fehlt: "In de JSON ontbreekt minstens het veld 'title'.",
-    fehler_titel_fehlt: "Vul een titel in.",
-    fehler_unerwartet: "Onverwachte fout:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" is inmiddels door iemand anders verwijderd. Je wijzigingen zijn niet opgeslagen.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" is inmiddels door iemand anders gewijzigd (bijv. een reactie, beoordeling of eigen bewerking).\n\nOm te voorkomen dat er iets wordt overschreven, zijn je wijzigingen NIET opgeslagen. Open het recept opnieuw en voer je wijzigingen opnieuw in.",
-    fehler_vorgang_fehlgeschlagen: "Actie mislukt:\n{{fehler}}",
-    fehler_teilen_drucken: "Onverwachte fout bij delen/afdrukken:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Geef 'entity' op in de kaartconfiguratie, bijv. entity: todo.rezepte",
-    fehler_bild_lesen: "De foto kon niet worden gelezen (bestand beschadigd of niet ondersteund).",
-    fehler_bild_verarbeiten: "De foto kon niet als afbeelding worden verwerkt (niet-ondersteund formaat?).",
-    teilen_ueberschrift_zutaten: "INGREDIËNTEN",
-    teilen_ueberschrift_zubereitung: "BEREIDING",
-    seite_zurueck_btn: "← Terug",
-    seite_weiter_btn: "Volgende →",
-    seite_anzeige: "Pagina {{aktuell}} van {{gesamt}}",
-    update_neue_version: "Nieuwe versie beschikbaar: {{version}}",
-    update_ansehen_btn: "Bekijken",
-    update_schliessen_aria: "Melding verbergen",
-    ressourcen_version_hinweis: "⚠️ Deze kaart is bijgewerkt, maar de resource-URL is niet gewijzigd (nog steeds \"?v={{version}}\"). Andere browsers/apparaten laden daardoor mogelijk nog steeds het oude, gecachte bestand - verhoog het versienummer in de resource-URL (Instellingen → Dashboards → Bronnen).",
-    detail_kochmodus_btn: "🍳 Kookmodus",
-    kochmodus_schritt_anzeige: "Stap {{aktuell}} van {{gesamt}}",
-    kochmodus_schliessen_aria: "Kookmodus sluiten",
-    kochmodus_schritt_zurueck_aria: "Vorige stap",
-    kochmodus_schritt_weiter_aria: "Volgende stap",
-    kochmodus_zutaten_ein_aria: "Ingrediënten tonen",
-    kochmodus_zutaten_aus_aria: "Ingrediënten verbergen",
-    kochmodus_timer_ein_aria: "Timer tonen",
-    kochmodus_timer_aus_aria: "Timer verbergen",
-    kochmodus_timer_minuten_aria: "Minuten",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Annuleren",
-    kochmodus_timer_abgelaufen_text: "⏰ Timer afgelopen!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Timer van {{minuten}} min. starten",
-    kopf_sammel_pdf_btn: "📚 Verzamel-PDF",
-    sammel_pdf_keine_rezepte: "Geen recepten gevonden om te exporteren.",
-    sammel_pdf_frage_toc: "Inhoudsopgave maken voor de geselecteerde recepten?",
-    sammel_pdf_ja_toc_btn: "Ja, inhoudsopgave maken",
-    sammel_pdf_nein_toc_btn: "Nee, geen inhoudsopgave",
-    sammel_pdf_name_placeholder: "Naam van het kookboek",
-    sammel_pdf_erstellen_btn: "PDF maken",
-    abschnitt_titel_inhaltsverzeichnis: "Inhoudsopgave",
-    sammel_pdf_frage_umfang: "Welke recepten moeten in de verzamel-PDF?",
-    sammel_pdf_alle_rezepte_btn: "Alle getoonde recepten",
-    sammel_pdf_auswahl_btn: "Bepaalde recepten selecteren",
-    sammel_pdf_auswahl_titel: "Recepten selecteren",
-    sammel_pdf_alle_auswaehlen_link: "Alles selecteren",
-    sammel_pdf_keine_auswaehlen_link: "Niets selecteren",
-    sammel_pdf_weiter_btn: "Verder",
-    sammel_pdf_bilder_mitdrucken_label: "Afbeeldingen in de PDF opnemen",
-    sammel_pdf_auswahl_keine_hinweis: "Selecteer minstens één recept.",
-  },
-  et: {
-    allgemein_zurueck: "← Tagasi",
-    allgemein_ja: "Jah",
-    allgemein_nein: "Ei",
-    allgemein_an: "Sees",
-    allgemein_aus: "Väljas",
-    allgemein_speichern: "Salvesta",
-    allgemein_speichert: "Salvestamine…",
-    allgemein_abbrechen: "Loobu",
-    allgemein_bearbeiten: "Muuda",
-    allgemein_loeschen: "Kustuta",
-    allgemein_oeffnen: "Ava",
-    allgemein_unbekannt: "Teadmata",
-    allgemein_schliessen: "Sulge",
-    kategorie_hauptgericht: "Pearoog",
-    kategorie_vorspeise: "Eelroog",
-    kategorie_suppe: "Supp",
-    kategorie_salat: "Salat",
-    kategorie_beilage: "Lisand",
-    kategorie_dessert: "Magustoit",
-    kategorie_kuchen_gebaeck: "Koogid ja küpsetised",
-    kategorie_fruehstueck: "Hommikusöök",
-    kategorie_snack: "Suupiste",
-    kategorie_getraenk: "Jook",
-    kategorie_sonstiges: "Muu",
-    kategorie_filter_alle: "Kõik",
-    kategorie_neu_btn: "+ Uus kategooria",
-    kategorie_name_placeholder: "Kategooria nimi",
-    fehler_kategorie_name_fehlt: "Palun sisesta kategooria nimi.",
-    fehler_kategorie_existiert_bereits: "See kategooria on juba olemas.",
-    kategorie_loeschen_title: "Kustuta kategooria",
-    kategorie_loeschen_aria: "Kustuta kategooria {{name}}",
-    kategorie_bearbeiten_title: "Nimeta kategooria",
-    kategorie_bearbeiten_aria: "Nimeta kategooria {{name}}",
-    kategorie_umbenennen_titel: "Kategooria \"{{name}}\" ümbernimetamine:",
-    fehler_kategorie_wird_verwendet: "Seda kategooriat kasutab veel {{anzahl}}x retsepti - määra neile kõigepealt teine kategooria.",
-    wochentag_montag: "Esmaspäev",
-    wochentag_dienstag: "Teisipäev",
-    wochentag_mittwoch: "Kolmapäev",
-    wochentag_donnerstag: "Neljapäev",
-    wochentag_freitag: "Reede",
-    wochentag_samstag: "Laupäev",
-    wochentag_sonntag: "Pühapäev",
-    sortier_titel: "Tähestikuline (A-Ü)",
-    sortier_bewertung: "Parima hinnanguga eespool",
-    sortier_kategorie: "Kategooria järgi",
-    sortier_neu: "Uusim eespool",
-    sortieren_label: "Sordi:",
-    kopf_titel_standard: "Retseptiraamat",
-    kopf_sichern_btn: "💾 Varukoopia",
-    kopf_wochenplan_btn: "📅 Nädalaplaan",
-    kopf_zufallsrezept_btn: "🎲 Juhuslik retsept",
-    umrechnungstabelle_btn: "📐 Teisendustabel",
-    umrechnungstabelle_titel: "Teisendustabel",
-    umrechnungstabelle_hinweis: "Ligikaudsed grammiväärtused levinud köögikoostisosade jaoks - sõltuvad margist ja konsistentsist, seega vaid viitena. Neid EI rakendata automaatselt sinu retseptidele.",
-    umrechnungstabelle_suche_placeholder: "Otsi koostisosa …",
-    umrechnungstabelle_spalte_zutat: "Koostisosa",
-    umrechnungstabelle_spalte_tasse: "1 tass",
-    umrechnungstabelle_spalte_el: "1 spl",
-    umrechnungstabelle_spalte_tl: "1 tl",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Koostisosa ei leitud.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Lisa oma koostisosa",
-    umrechnungstabelle_eigene_name_platzhalter: "Koostisosa nimi",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/tass",
-    umrechnungstabelle_eigene_el_platzhalter: "g/spl",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tl",
-    umrechnungstabelle_eigene_loeschen_titel: "Kustuta oma koostisosa",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Muuda oma koostisosa",
-    umrechnungstabelle_eigene_name_fehlt: "Palun sisesta nimi.",
-    umrechnungstabelle_eigene_hinweis: "Kas puudub koostisosa, mille teisendusväärtust sa tead? Lisa see siia käsitsi - teadlikult ei pakume automaatset teisendust mahu ja kaalu vahel, kuna see tähendaks arvamist sõltuvalt koostisosast, margist ja konsistentsist.",
-    einkaufsmodus_start_btn: "🛒 Ostunimekiri",
-    einkaufsmodus_beenden_btn: "✕ Lõpeta valimine",
-    kopf_neu_btn: "+ Uus",
-    suche_placeholder: "🔍 Retsept või koostisosad (nt jahu, munad)…",
-    kochbuch_loeschen_title: "Kustuta kogumik",
-    kochbuch_loeschen_aria: "Kustuta kogumik {{name}}",
-    kochbuch_speichern_btn: "+ Salvesta targa kogumikuna",
-    kochbuch_name_placeholder: "Selle kogumiku nimi, nt Sügisretseptid",
-    fehler_kochbuch_name_fehlt: "Sisesta kogumikule nimi.",
-    kochbuch_info_aria: "Näita targa kogumiku selgitust",
-    kochbuch_info_titel: "Mis on tark kogumik?",
-    kochbuch_info_text:
-      "Tark kogumik ei salvesta kindlat retseptide loendit, vaid " +
-      "kategooria, siltide ja otsingusõna kombinatsiooni täpselt " +
-      "sellisena, nagu see on salvestamise hetkel seatud. Seejärel " +
-      "uueneb see iseenesest: uus sobiv retsept ilmub automaatselt ja " +
-      "retsept, mille kategooria või sildid muutuvad, võib samamoodi " +
-      "automaatselt uuesti kaduda.",
-    einkaufs_zaehler: "{{anzahl}} valitud",
-    einkaufsliste_erstellen_btn: "Loo ostunimekiri",
-    fehler_einkaufsliste_keine_konfiguration: "Ostunimekirja jaoks puudub veel seadistus: sisesta kaardi seadistuses 'shopping_list_entity' (nt shopping_list_entity: todo.einkaufsliste) - selleks on vaja TEIST Kohaliku ülesannete nimekirja abistajat. Vaata ANLEITUNG-Backup.md, jaotis 18.",
-    fehler_einkaufsliste_keine_auswahl: "Vali vähemalt üks retsept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Vali vähemalt üks koostisosa.",
-    zutaten_fehlend_einkaufsliste_btn: "Lisa valitud ostunimekirja",
-    fehler_einkaufsliste_keine_zutaten: "Valitud retseptidel pole koostisosi.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "\"{{zeile}}\" lisamine ostunimekirja ebaõnnestus:\n{{fehler}}\n\nJuba lisatud koostisosad jäävad nimekirja alles.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} koostisosa lisatud nimekirja \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" kustutatud.",
-    undo_rueckgaengig_btn: "Tühista",
-    leer_keine_rezepte: "Retsepte pole veel – alusta nupuga \"+ Uus\"",
-    leer_keine_treffer: "Retsepte otsingule \"{{begriff}}\" ei leitud",
-    fehler_liste_laden_titel: "\"{{entity}}\" laadimine ebaõnnestus.",
-    fehler_liste_laden_hinweis: "Kas see ülesannete nimekiri on olemas? (Seaded → Seadmed ja teenused → Abistajad)",
-    kachel_aria_label_oeffnen: "Ava retsept {{titel}}",
-    sterne_aria_label_gruppe: "Sinu hinnang",
-    sterne_aria_label: "{{zahl}} 5-st tärnist",
-    fehler_kein_benutzer_bewertung: "Sinu kasutajat ei õnnestunud tuvastada - hindamine pole võimalik.",
-    detail_teilen_drucken_btn: "📤 Jaga / Prindi",
-    detail_erstellt_von: "👤 Lisanud {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} hinnang)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} hinnangut)",
-    detail_keine_bewertungen: "Hinnanguid pole veel",
-    detail_deine_bewertung: "Sinu hinnang:",
-    detail_zubereitet_x: "🍳 valmistatud {{anzahl}} korda",
-    detail_portionen_suffix: "portsjonit",
-    abschnitt_titel_zutaten: "Koostisosad",
-    abschnitt_titel_zubereitung: "Valmistamine",
-    keine_zutaten: "Koostisosi pole lisatud",
-    detail_kommentare_titel: "Kommentaarid",
-    detail_keine_kommentare: "Kommentaare pole veel",
-    detail_kommentar_placeholder: "Täiendus, näpunäide või märkus…",
-    detail_kommentar_hinzufuegen_btn: "Lisa kommentaar",
-    detail_bearbeiten_hinweis: "Ainult {{name}} (või administraator) saab seda retsepti muuta või kustutada.",
-    detail_ersteller_unbekannt: "looja",
-    modal_zubereitet_frage: "Kas valmistasid \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Kas lisada retsepti pilt?",
-    modal_drucken_ohne_bild_btn: "Pildita",
-    modal_drucken_mit_bild_btn: "Pildiga",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Toiduvalmistamise statistika",
-    statistik_info_aria: "Näita statistika selgitust",
-    statistik_einstellungen_btn_title: "Valmistamise jälgimise seaded",
-    statistik_einstellungen_titel: "Valmistamise jälgimise seaded",
-    statistik_einstellungen_text: "Siin saad valida, kas retseptist väljumisel küsitakse, kas valmistasid selle, ja kas sellest tekkiv statistika kuvatakse sellel kaardil.",
-    statistik_einstellungen_schalter_label: "Luba küsimus ja statistika",
-    tags_einstellung_schalter_label: "Kuva märksõnafilter ülevaates",
-    zufallsrezept_einstellung_schalter_label: "Kuva juhusliku retsepti nupp ülevaates",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Kuva teisendustabeli nupp ülevaates",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Ameerika retseptide jaoks määratud kategooria puhul kuvatakse teisendustabel retseptis ja kokkamise režiimis endiselt, isegi kui see nupp on siin välja lülitatud.",
-    farben_abschnitt_titel: "Värvid",
-    farben_hinweis: "Kohanda kaardi üksikuid värve. Lähtesta kõik taastab kõik värvid vaikeväärtusele.",
-    farben_akzent_label: "Põhivärv (nupud, aktiivsed filtrid)",
-    farben_akzent_text_label: "Rõhuvärv tekstile ja äärtele",
-    farben_loeschen_label: "Kustutamine / hoiatus",
-    farben_sterne_label: "Hindamistähed",
-    farben_titel_label: "Pealkirjad",
-    farben_zuruecksetzen_btn: "Lähtesta kõik",
-    us_kategorie_einstellung_label: "Kategooria Ameerika retseptidele",
-    us_kategorie_einstellung_text: "Selle kategooria retseptidel kuvatakse lisaks teisendustabeli nupp ka retseptis endas ja köögirežiimis.",
-    us_kategorie_einstellung_keine: "— Puudub —",
-    statistik_info_titel: "Kuidas seda statistikat arvutatakse?",
-    statistik_info_text:
-      "See ülevaade loeb kokku iga kinnituse küsimusele „Kas valmistasid?“ - sõltumata portsjoni suurusest või sellest, mitu korda samal päeval. Kui see küsimus on statistika seadete lülitiga (⚙️) välja lülitatud, arvud enam ei kasva, kuid juba salvestatud valmistamised säilivad.",
-    statistik_dieses_jahr: "Sa oled {{jahr}} aastal oma retseptiraamatust valmistanud toitu {{anzahl}} korda",
-    statistik_gesamt: "Kokku oled oma retseptiraamatust valmistanud toitu {{anzahl}} korda",
-    statistik_top_titel: "Enim valmistatud",
-    statistik_keine_daten: "Valmistamisi pole veel salvestatud.",
-    modal_loeschen_frage: "Kas tõesti kustutada \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Jah, kustuta",
-    modal_kommentar_loeschen_frage: "Kustutada see kommentaar tõesti?",
-    wochenplan_titel: "Nädalaplaan",
-    wochenplan_tab_diese: "See nädal",
-    wochenplan_tab_folgewoche: "Järgmine nädal",
-    wochenplan_hinweis_folgewoche: "Planeeri siin juba nüüd tulevat nädalat - see nihkub automaatselt kirjeks \"See nädal\" niipea, kui praegune nädal on läbi.",
-    wochenplan_hinweis_diese: "Möödunud päevad tühjendatakse automaatselt (retsept ise säilib, ainult määramine kaob).",
-    wochenplan_hinweis_speicherung: "Salvestatakse kõikides seadmetes (peidetud lisakirjena samas retseptinimekirjas, täiendavat abistajat pole vaja).",
-    wochenplan_leer: "Retsepte pole veel - loo esmalt mõni.",
-    wochenplan_kein_rezept_option: "– retsepti pole –",
-    wochenplan_einkaufsliste_btn: "Loo ostunimekiri allikast {{ziel}}",
-    wochenplan_wort: "nädalaplaan",
-    wochenplan_folgewoche_wort: "järgmine nädal",
-    wochenplan_aktuelle_woche_wort: "praegune nädal",
-    wochenplan_keine_zuweisung: "{{zeitraum}} ei sisalda veel määratud retsepte.",
-    formular_titel_neu: "Uus retsept",
-    formular_titel_bearbeiten: "Muuda retsepti",
-    formular_url_import_btn: "🌐 Impordi retsepti URL",
-    formular_url_label: "Link retsepti veebilehele",
-    formular_url_placeholder: "https://www.naide-retseptid.ee/minu-retsept",
-    formular_url_hinweis: "Laadib lehe ja loeb sellel juba olemasolevaid struktureeritud retseptiandmeid (samu andmeid, mille abil nt Google kuvab otsingus tärnihinnanguid) - tavaliselt usaldusväärsem kui tekstituvastus. Toimib ainult lehtedel, mis sellised andmed pakuvad ega blokeeri automaatseid päringuid.",
-    formular_url_importieren_btn: "Impordi",
-    formular_url_laedt: "Laadimine …",
-    formular_text_einfuegen_btn: "🔍 Kleebi retseptitekst (automaatne tuvastus)",
-    formular_text_label: "Kleebi siia retseptitekst (nt retsepti veebilehelt kopeeritud)",
-    formular_text_placeholder: "Pealkiri, koostisosad, valmistamine - kleebi lihtsalt kogu tekst",
-    formular_text_hinweis: "Puhtalt automaatne tuvastus ilma tehisintellektita - toimib kõige paremini, kui tekstis on pealkirjad \"Koostisosad\" ja \"Valmistamine\". Palun kontrolli tulemust pärast lühidalt, see võib olla puudulik.",
-    formular_text_erkennen_btn: "Tuvasta",
-    formular_json_einfuegen_btn: "📋 Kleebi tehisintellekti loodud JSON",
-    formular_json_info_aria: "Näita valmis prompti tehisintellektile",
-    json_info_titel: "Prompt tehisintellektile",
-    json_info_erklaerung:
-      "Kopeeri see tekst, kleebi see enda valitud tehisintellekti (nt ChatGPT või Claude), lisa oma retsepti tekst ning kleebi vastus seejärel üleval väljale „Kleebi JSON siia“.",
-    json_info_prompt:
-      "Teisenda retseptitekst, mille ma kohe saadan, ÜHEKS ainsaks JSON-objektiks - ilma selgituseta, ilma tekstita enne või pärast, ainult JSON. Kasuta täpselt seda vormingut:\n\n" +
-      "{\n" +
-      '  "title": "retsepti nimi",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "üks järgmistest: {{kategorien}}",\n' +
-      '  "ingredients": ["üks koostisosa kirje kohta, nt 200 g jahu"],\n' +
-      '  "steps": ["üks valmistusetapp kirje kohta"],\n' +
-      '  "tags": ["valikulised märksõnad, nt taimetoit"]\n' +
-      "}\n\n" +
-      "Reeglid: „category“ peab olema TÄPSELT üks ülal nimetatud väärtustest (kopeeri muutmata kujul, isegi kui retseptitekst on mõnes muus keeles - need on fikseeritud sisemised väärtused). " +
-      "„tags“ on valikuline, vajadusel sobib tühi massiiv. " +
-      "Ära mõtle välja koostisosi ega samme, mida tekstis pole. " +
-      "Siin on retseptitekst:",
-    json_info_kopieren_btn: "📋 Kopeeri prompt",
-    json_info_kopiert: "Kopeeritud!",
-    formular_json_label: "Kleebi JSON siia",
-    formular_json_uebernehmen_btn: "Rakenda",
-    formular_label_titel: "Pealkiri",
-    formular_label_kategorie: "Kategooria",
-    formular_label_tags: "Sildid (mitu võimalik, nt \"vegetaarne\", \"kiire\")",
-    formular_tag_placeholder: "Sisesta ja lisa silt",
-    formular_tag_hinzufuegen_btn: "+ Silt",
-    formular_tag_entfernen_aria: "Eemalda silt {{tag}}",
-    formular_label_portionen: "Portsjonid (baas)",
-    formular_label_zutaten: "Koostisosad",
-    formular_zutat_hinzufuegen_btn: "+ Koostisosa",
-    formular_zutat_menge_placeholder: "Kogus",
-    formular_zutat_einheit_placeholder: "Ühik",
-    formular_zutat_name_placeholder: "Koostisosa",
-    formular_zutat_entfernen_aria: "Eemalda koostisosa",
-    formular_label_zubereitung: "Valmistamine (sammud)",
-    formular_schritt_hinzufuegen_btn: "+ Samm",
-    formular_schritt_placeholder_beispiel: "nt pese ja tükelda köögiviljad",
-    formular_schritt_placeholder_naechster: "järgmine samm",
-    formular_schritt_entfernen_aria: "Eemalda samm",
-    formular_schritt_hoch_aria: "Liiguta sammu üles",
-    formular_schritt_runter_aria: "Liiguta sammu alla",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(olemas – uus fail asendab selle)",
-    formular_bild_hinweis: "Praegune foto säilib, kui sa uut faili ei vali.",
-    formular_bild_verkleinern_text: "Foto vähendamine…",
-    fehler_url_ungueltig: "Sisesta täielik aadress, mis algab http:// või https://.",
-    fehler_url_apostroph: "See aadress sisaldab ülakoma (') ja seda kahjuks ei saa importida.",
-    fehler_url_keine_ausgabe: "Skript ei tagastanud väljundit. Kas 'rezeptbuch_url_importieren' on seadistatud failis configuration.yaml ja kas Home Assistant on seejärel täielikult taaskäivitatud?",
-    fehler_url_kein_json: "Impordiskripti vastus polnud kehtiv JSON.",
-    fehler_url_import_fehlgeschlagen: "URL-i import ebaõnnestus: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Kahjuks ei õnnestunud kleebitud tekstist midagi tuvastada. Palun täida allolevad väljad käsitsi.",
-    warnung_texterkennung_unvollstaendig: "Tuvastus oli puudulik (koostisosad või sammud puuduvad või on valesti määratud) - palun kontrolli ja täienda vormil.",
-    fehler_json_ungueltig: "Kleebitud JSON on kehtetu. Palun kontrolli ja proovi uuesti.",
-    fehler_json_titel_fehlt: "JSON-ist puudub vähemalt väli 'title'.",
-    fehler_titel_fehlt: "Sisesta pealkiri.",
-    fehler_unerwartet: "Ootamatu viga:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" on vahepeal kellegi teise poolt kustutatud. Sinu muudatusi ei salvestatud.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" on vahepeal kellegi teise poolt muudetud (nt kommentaar, hinnang või oma muudatus).\n\nSelleks et miski üle ei kirjutataks, sinu muudatusi EI salvestatud. Palun ava retsept uuesti ja sisesta oma muudatused uuesti.",
-    fehler_vorgang_fehlgeschlagen: "Toiming ebaõnnestus:\n{{fehler}}",
-    fehler_teilen_drucken: "Ootamatu viga jagamisel/printimisel:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Sisesta kaardi seadistuses 'entity', nt entity: todo.rezepte",
-    fehler_bild_lesen: "Fotot ei õnnestunud lugeda (fail on rikutud või ei toetata seda).",
-    fehler_bild_verarbeiten: "Fotot ei õnnestunud pildina töödelda (toetamata vorming?).",
-    teilen_ueberschrift_zutaten: "KOOSTISOSAD",
-    teilen_ueberschrift_zubereitung: "VALMISTAMINE",
-    seite_zurueck_btn: "← Tagasi",
-    seite_weiter_btn: "Edasi →",
-    seite_anzeige: "Lehekülg {{aktuell}} / {{gesamt}}",
-    update_neue_version: "Uus versioon saadaval: {{version}}",
-    update_ansehen_btn: "Vaata",
-    update_schliessen_aria: "Peida teavitus",
-    ressourcen_version_hinweis: "⚠️ Seda kaarti värskendati, kuid ressursi URL ei muutunud (endiselt \"?v={{version}}\"). Teised brauserid/seadmed võivad seetõttu jätkuvalt laadida vana, vahemällu salvestatud faili - suurenda versiooninumbrit ressursi URL-is (Seaded → Töölauad → Ressursid).",
-    detail_kochmodus_btn: "🍳 Küpsetusrežiim",
-    kochmodus_schritt_anzeige: "Samm {{aktuell}} / {{gesamt}}",
-    kochmodus_schliessen_aria: "Sulge küpsetusrežiim",
-    kochmodus_schritt_zurueck_aria: "Eelmine samm",
-    kochmodus_schritt_weiter_aria: "Järgmine samm",
-    kochmodus_zutaten_ein_aria: "Näita koostisosi",
-    kochmodus_zutaten_aus_aria: "Peida koostisosad",
-    kochmodus_timer_ein_aria: "Näita taimerit",
-    kochmodus_timer_aus_aria: "Peida taimer",
-    kochmodus_timer_minuten_aria: "Minutit",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Tühista",
-    kochmodus_timer_abgelaufen_text: "⏰ Taimer lõppes!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Käivita {{minuten}} min taimer",
-    kopf_sammel_pdf_btn: "📚 Koond-PDF",
-    sammel_pdf_keine_rezepte: "Eksportimiseks retsepte ei leitud.",
-    sammel_pdf_frage_toc: "Kas luua valitud retseptide sisukord?",
-    sammel_pdf_ja_toc_btn: "Jah, loo sisukord",
-    sammel_pdf_nein_toc_btn: "Ei, ilma sisukorrata",
-    sammel_pdf_name_placeholder: "Kokaraamatu nimi",
-    sammel_pdf_erstellen_btn: "Loo PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Sisukord",
-    sammel_pdf_frage_umfang: "Millised retseptid peaksid koond-PDF-i minema?",
-    sammel_pdf_alle_rezepte_btn: "Kõik kuvatud retseptid",
-    sammel_pdf_auswahl_btn: "Vali konkreetsed retseptid",
-    sammel_pdf_auswahl_titel: "Vali retseptid",
-    sammel_pdf_alle_auswaehlen_link: "Vali kõik",
-    sammel_pdf_keine_auswaehlen_link: "Tühista valik",
-    sammel_pdf_weiter_btn: "Edasi",
-    sammel_pdf_bilder_mitdrucken_label: "Lisa pildid PDF-i",
-    sammel_pdf_auswahl_keine_hinweis: "Palun vali vähemalt üks retsept.",
-  },
-  fi: {
-    allgemein_zurueck: "← Takaisin",
-    allgemein_ja: "Kyllä",
-    allgemein_nein: "Ei",
-    allgemein_an: "Päällä",
-    allgemein_aus: "Pois",
-    allgemein_speichern: "Tallenna",
-    allgemein_speichert: "Tallennetaan…",
-    allgemein_abbrechen: "Peruuta",
-    allgemein_bearbeiten: "Muokkaa",
-    allgemein_loeschen: "Poista",
-    allgemein_oeffnen: "Avaa",
-    allgemein_unbekannt: "Tuntematon",
-    allgemein_schliessen: "Sulje",
-    kategorie_hauptgericht: "Pääruoka",
-    kategorie_vorspeise: "Alkuruoka",
-    kategorie_suppe: "Keitto",
-    kategorie_salat: "Salaatti",
-    kategorie_beilage: "Lisuke",
-    kategorie_dessert: "Jälkiruoka",
-    kategorie_kuchen_gebaeck: "Kakut ja leivonnaiset",
-    kategorie_fruehstueck: "Aamiainen",
-    kategorie_snack: "Välipala",
-    kategorie_getraenk: "Juoma",
-    kategorie_sonstiges: "Muu",
-    kategorie_filter_alle: "Kaikki",
-    kategorie_neu_btn: "+ Uusi kategoria",
-    kategorie_name_placeholder: "Kategorian nimi",
-    fehler_kategorie_name_fehlt: "Anna kategorialle nimi.",
-    fehler_kategorie_existiert_bereits: "Tämä kategoria on jo olemassa.",
-    kategorie_loeschen_title: "Poista kategoria",
-    kategorie_loeschen_aria: "Poista kategoria {{name}}",
-    kategorie_bearbeiten_title: "Nimeä kategoria uudelleen",
-    kategorie_bearbeiten_aria: "Nimeä kategoria {{name}} uudelleen",
-    kategorie_umbenennen_titel: "Nimeä kategoria \"{{name}}\" uudelleen:",
-    fehler_kategorie_wird_verwendet: "Tätä kategoriaa käyttää vielä {{anzahl}}x reseptiä - anna niille ensin toinen kategoria.",
-    wochentag_montag: "Maanantai",
-    wochentag_dienstag: "Tiistai",
-    wochentag_mittwoch: "Keskiviikko",
-    wochentag_donnerstag: "Torstai",
-    wochentag_freitag: "Perjantai",
-    wochentag_samstag: "Lauantai",
-    wochentag_sonntag: "Sunnuntai",
-    sortier_titel: "Aakkosjärjestys (A-Ö)",
-    sortier_bewertung: "Parhaiten arvioidut ensin",
-    sortier_kategorie: "Kategorian mukaan",
-    sortier_neu: "Uusimmat ensin",
-    sortieren_label: "Järjestä:",
-    kopf_titel_standard: "Reseptikirja",
-    kopf_sichern_btn: "💾 Varmuuskopio",
-    kopf_wochenplan_btn: "📅 Viikkosuunnitelma",
-    kopf_zufallsrezept_btn: "🎲 Satunnainen resepti",
-    umrechnungstabelle_btn: "📐 Muuntotaulukko",
-    umrechnungstabelle_titel: "Muuntotaulukko",
-    umrechnungstabelle_hinweis: "Suuntaa antavat gramma-arvot yleisille keittiön raaka-aineille - vaihtelevat merkin ja koostumuksen mukaan, siis vain viitteeksi. Niitä EI sovelleta automaattisesti resepteihisi.",
-    umrechnungstabelle_suche_placeholder: "Hae raaka-ainetta …",
-    umrechnungstabelle_spalte_zutat: "Raaka-aine",
-    umrechnungstabelle_spalte_tasse: "1 kupillinen",
-    umrechnungstabelle_spalte_el: "1 rkl",
-    umrechnungstabelle_spalte_tl: "1 tl",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Raaka-ainetta ei löytynyt.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Lisää oma raaka-aine",
-    umrechnungstabelle_eigene_name_platzhalter: "Raaka-aineen nimi",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/kupillinen",
-    umrechnungstabelle_eigene_el_platzhalter: "g/rkl",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tl",
-    umrechnungstabelle_eigene_loeschen_titel: "Poista oma raaka-aine",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Muokkaa omaa raaka-ainetta",
-    umrechnungstabelle_eigene_name_fehlt: "Anna nimi.",
-    umrechnungstabelle_eigene_hinweis: "Puuttuuko raaka-aine, jonka muuntoarvon tiedät itse? Lisää se tähän manuaalisesti - emme tarjoa tarkoituksella automaattista muunnosta tilavuuden ja painon välillä, koska se vaatisi arvailua raaka-aineen, merkin ja koostumuksen mukaan.",
-    einkaufsmodus_start_btn: "🛒 Ostoslista",
-    einkaufsmodus_beenden_btn: "✕ Lopeta valinta",
-    kopf_neu_btn: "+ Uusi",
-    suche_placeholder: "🔍 Resepti tai ainekset (esim. jauho, kananmunat)…",
-    kochbuch_loeschen_title: "Poista kokoelma",
-    kochbuch_loeschen_aria: "Poista kokoelma {{name}}",
-    kochbuch_speichern_btn: "+ Tallenna älykkäänä kokoelmana",
-    kochbuch_name_placeholder: "Tämän kokoelman nimi, esim. Syksyn reseptit",
-    fehler_kochbuch_name_fehlt: "Anna kokoelmalle nimi.",
-    kochbuch_info_aria: "Näytä selitys älykkäistä kokoelmista",
-    kochbuch_info_titel: "Mikä on älykäs kokoelma?",
-    kochbuch_info_text:
-      "Älykäs kokoelma ei tallenna kiinteää reseptiluetteloa, vaan " +
-      "kategorian, tunnisteiden ja hakusanan yhdistelmän juuri " +
-      "sellaisena kuin se on asetettu tallennushetkellä. Sen jälkeen " +
-      "se päivittyy itsestään: uusi sopiva resepti ilmestyy " +
-      "automaattisesti, ja resepti, jonka kategoria tai tunnisteet " +
-      "muuttuvat, voi yhtä automaattisesti kadota jälleen.",
-    einkaufs_zaehler: "{{anzahl}} valittu",
-    einkaufsliste_erstellen_btn: "Luo ostoslista",
-    fehler_einkaufsliste_keine_konfiguration: "Ostoslistan määrityksiä puuttuu vielä: määritä 'shopping_list_entity' kortin asetuksissa (esim. shopping_list_entity: todo.einkaufsliste) - tähän tarvitaan TOINEN Paikallinen tehtävälista -apuri. Katso ANLEITUNG-Backup.md, osio 18.",
-    fehler_einkaufsliste_keine_auswahl: "Valitse vähintään yksi resepti.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Valitse vähintään yksi aines.",
-    zutaten_fehlend_einkaufsliste_btn: "Lisää valitut ostoslistaan",
-    fehler_einkaufsliste_keine_zutaten: "Valituissa resepteissä ei ole aineksia.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Kohteen \"{{zeile}}\" lisääminen ostoslistalle epäonnistui:\n{{fehler}}\n\nJo lisätyt ainekset jäävät ostoslistalle.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ainesosaa lisätty listaan \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" poistettu.",
-    undo_rueckgaengig_btn: "Kumoa",
-    leer_keine_rezepte: "Ei vielä reseptejä – aloita painamalla \"+ Uusi\"",
-    leer_keine_treffer: "Reseptejä ei löytynyt haulla \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Kohteen \"{{entity}}\" lataaminen epäonnistui.",
-    fehler_liste_laden_hinweis: "Onko tämä tehtävälista olemassa? (Asetukset → Laitteet ja palvelut → Apuohjelmat)",
-    kachel_aria_label_oeffnen: "Avaa resepti {{titel}}",
-    sterne_aria_label_gruppe: "Oma arviosi",
-    sterne_aria_label: "{{zahl}} / 5 tähteä",
-    fehler_kein_benutzer_bewertung: "Käyttäjääsi ei voitu tunnistaa - arvostelu ei ole mahdollinen.",
-    detail_teilen_drucken_btn: "📤 Jaa / Tulosta",
-    detail_erstellt_von: "👤 Luonut {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} arvio)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} arviota)",
-    detail_keine_bewertungen: "Ei vielä arvioita",
-    detail_deine_bewertung: "Oma arviosi:",
-    detail_zubereitet_x: "🍳 valmistettu {{anzahl}} kertaa",
-    detail_portionen_suffix: "annosta",
-    abschnitt_titel_zutaten: "Ainekset",
-    abschnitt_titel_zubereitung: "Valmistus",
-    keine_zutaten: "Aineksia ei ole lisätty",
-    detail_kommentare_titel: "Kommentit",
-    detail_keine_kommentare: "Ei vielä kommentteja",
-    detail_kommentar_placeholder: "Lisäys, vinkki tai huomautus…",
-    detail_kommentar_hinzufuegen_btn: "Lisää kommentti",
-    detail_bearbeiten_hinweis: "Vain {{name}} (tai ylläpitäjä) voi muokata tai poistaa tämän reseptin.",
-    detail_ersteller_unbekannt: "tekijä",
-    modal_zubereitet_frage: "Valmistitko reseptin \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Lisätäänkö reseptin kuva mukaan?",
-    modal_drucken_ohne_bild_btn: "Ei kuvaa",
-    modal_drucken_mit_bild_btn: "Kuvan kanssa",
-    statistik_btn: "📊 Tilastot",
-    statistik_titel: "Ruoanlaittotilastot",
-    statistik_info_aria: "Näytä selitys tilastoista",
-    statistik_einstellungen_btn_title: "Valmistuksen kirjaamisen asetukset",
-    statistik_einstellungen_titel: "Valmistuksen kirjaamisen asetukset",
-    statistik_einstellungen_text: "Tässä voit valita, kysytäänkö reseptistä poistuttaessa, valmistitko sen, ja näytetäänkö siitä syntyvä tilasto tällä kortilla.",
-    statistik_einstellungen_schalter_label: "Ota kysymys ja tilastot käyttöön",
-    tags_einstellung_schalter_label: "Näytä tägisuodatin yleiskatsauksessa",
-    zufallsrezept_einstellung_schalter_label: "Näytä Satunnainen resepti -painike yleiskatsauksessa",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Näytä muuntotaulukon painike yleiskatsauksessa",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Amerikkalaisille resepteille asetetussa kategoriassa muuntotaulukko näkyy edelleen reseptissä ja kokkaustilassa, vaikka tämä painike olisi täällä pois päältä.",
-    farben_abschnitt_titel: "Värit",
-    farben_hinweis: "Muokkaa kortin yksittäisiä värejä. Palauta kaikki palauttaa kaikki värit oletusarvoihin.",
-    farben_akzent_label: "Pääväri (painikkeet, aktiiviset suodattimet)",
-    farben_akzent_text_label: "Korostusväri teksteille ja reunoille",
-    farben_loeschen_label: "Poisto / varoitus",
-    farben_sterne_label: "Arvostelutähdet",
-    farben_titel_label: "Otsikot",
-    farben_zuruecksetzen_btn: "Palauta kaikki",
-    us_kategorie_einstellung_label: "Kategoria amerikkalaisille resepteille",
-    us_kategorie_einstellung_text: "Tämän kategorian resepteissä näkyy lisäksi muuntotaulukon painike itse reseptissä ja keittiötilassa.",
-    us_kategorie_einstellung_keine: "— Ei mikään —",
-    statistik_info_titel: "Miten tämä tilasto lasketaan?",
-    statistik_info_text:
-      "Tämä yhteenveto laskee jokaisen vahvistuksen kysymykseen „Valmistitko sen?“ - annoskoosta tai saman päivän toistokerroista riippumatta. Jos tämä kysymys on poistettu käytöstä tilastoasetusten kytkimellä (⚙️), luvut eivät enää kasva, mutta jo tallennetut valmistuskerrat säilyvät.",
-    statistik_dieses_jahr: "Olet kokannut {{anzahl}}x reseptikirjastasi vuonna {{jahr}}",
-    statistik_gesamt: "Olet kokannut yhteensä {{anzahl}}x reseptikirjastasi",
-    statistik_top_titel: "Eniten valmistetut",
-    statistik_keine_daten: "Valmistuskertoja ei ole vielä tallennettu.",
-    modal_loeschen_frage: "Poistetaanko \"{{titel}}\" varmasti?",
-    modal_loeschen_ja_btn: "Kyllä, poista",
-    modal_kommentar_loeschen_frage: "Poistetaanko tämä kommentti varmasti?",
-    wochenplan_titel: "Viikkosuunnitelma",
-    wochenplan_tab_diese: "Tämä viikko",
-    wochenplan_tab_folgewoche: "Seuraava viikko",
-    wochenplan_hinweis_folgewoche: "Suunnittele täällä jo tuleva viikko - se siirtyy automaattisesti kohtaan \"Tämä viikko\", kun nykyinen viikko on ohi.",
-    wochenplan_hinweis_diese: "Menneet päivät tyhjennetään automaattisesti (resepti itse säilyy, vain kohdistus katoaa).",
-    wochenplan_hinweis_speicherung: "Tallennetaan laitteiden välillä (piilotettuna lisämerkintänä samassa reseptilistassa, ei tarvita lisäapuria).",
-    wochenplan_leer: "Ei vielä reseptejä - luo ensin joitain.",
-    wochenplan_kein_rezept_option: "– ei reseptiä –",
-    wochenplan_einkaufsliste_btn: "Luo ostoslista kohteesta {{ziel}}",
-    wochenplan_wort: "viikkosuunnitelma",
-    wochenplan_folgewoche_wort: "seuraava viikko",
-    wochenplan_aktuelle_woche_wort: "nykyinen viikko",
-    wochenplan_keine_zuweisung: "{{zeitraum}} ei sisällä vielä kohdistettuja reseptejä.",
-    formular_titel_neu: "Uusi resepti",
-    formular_titel_bearbeiten: "Muokkaa reseptiä",
-    formular_url_import_btn: "🌐 Tuo reseptin URL-osoite",
-    formular_url_label: "Linkki reseptisivustoon",
-    formular_url_placeholder: "https://www.esimerkki-reseptit.fi/oma-resepti",
-    formular_url_hinweis: "Lataa sivun ja lukee siihen jo sisällytetyt reseptin rakenteiset tiedot (samat tiedot, joilla esim. Google näyttää tähtiarviot hakutuloksissa) - yleensä luotettavampi kuin tekstintunnistus. Toimii vain sivustoilla, jotka tarjoavat tällaisia tietoja eivätkä estä automaattisia pyyntöjä.",
-    formular_url_importieren_btn: "Tuo",
-    formular_url_laedt: "Ladataan …",
-    formular_text_einfuegen_btn: "🔍 Liitä reseptiteksti (automaattinen tunnistus)",
-    formular_text_label: "Liitä reseptiteksti tähän (esim. kopioitu reseptisivustolta)",
-    formular_text_placeholder: "Otsikko, ainekset, valmistus - liitä vain koko teksti",
-    formular_text_hinweis: "Täysin automaattinen tunnistus ilman tekoälyä - toimii parhaiten, kun tekstissä on otsikot \"Ainekset\" ja \"Valmistus\". Tarkista tulos vielä lyhyesti jälkikäteen, se voi olla puutteellinen.",
-    formular_text_erkennen_btn: "Tunnista",
-    formular_json_einfuegen_btn: "📋 Liitä tekoälyn luoma JSON",
-    formular_json_info_aria: "Näytä valmis prompti tekoälylle",
-    json_info_titel: "Prompti tekoälylle",
-    json_info_erklaerung:
-      "Kopioi tämä teksti, liitä se valitsemaasi tekoälyyn (esim. ChatGPT tai Claude), liitä perään oma reseptitekstisi ja liitä vastaus sen jälkeen yllä olevaan kohtaan „Liitä JSON tähän“.",
-    json_info_prompt:
-      "Muunna reseptiteksti, jonka lähetän kohta, YHDEKSI ainoaksi JSON-objektiksi - ilman selitystä, ilman tekstiä ennen tai jälkeen, pelkkä JSON. Käytä täsmälleen tätä muotoa:\n\n" +
-      "{\n" +
-      '  "title": "reseptin nimi",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "yksi seuraavista: {{kategorien}}",\n' +
-      '  "ingredients": ["yksi ainesosa per rivi, esim. 200 g jauhoja"],\n' +
-      '  "steps": ["yksi valmistusvaihe per rivi"],\n' +
-      '  "tags": ["valinnaiset avainsanat, esim. kasvisruoka"]\n' +
-      "}\n\n" +
-      "Säännöt: „category“-arvon on oltava TÄSMÄLLEEN yksi yllä luetelluista arvoista (kopioi se muuttamattomana, vaikka reseptiteksti olisikin toisella kielellä - nämä ovat kiinteitä sisäisiä arvoja). " +
-      "„tags“ on valinnainen, tyhjä taulukko käy myös. " +
-      "Älä keksi ainesosia tai vaiheita, joita tekstissä ei ole. " +
-      "Tässä on reseptiteksti:",
-    json_info_kopieren_btn: "📋 Kopioi prompti",
-    json_info_kopiert: "Kopioitu!",
-    formular_json_label: "Liitä JSON tähän",
-    formular_json_uebernehmen_btn: "Käytä",
-    formular_label_titel: "Otsikko",
-    formular_label_kategorie: "Kategoria",
-    formular_label_tags: "Tunnisteet (useita mahdollisia, esim. \"kasvis\", \"nopea\")",
-    formular_tag_placeholder: "Kirjoita ja lisää tunniste",
-    formular_tag_hinzufuegen_btn: "+ Tunniste",
-    formular_tag_entfernen_aria: "Poista tunniste {{tag}}",
-    formular_label_portionen: "Annokset (perusmäärä)",
-    formular_label_zutaten: "Ainekset",
-    formular_zutat_hinzufuegen_btn: "+ Aines",
-    formular_zutat_menge_placeholder: "Määrä",
-    formular_zutat_einheit_placeholder: "Yksikkö",
-    formular_zutat_name_placeholder: "Aines",
-    formular_zutat_entfernen_aria: "Poista aines",
-    formular_label_zubereitung: "Valmistus (vaiheet)",
-    formular_schritt_hinzufuegen_btn: "+ Vaihe",
-    formular_schritt_placeholder_beispiel: "esim. pese ja pilko vihannekset",
-    formular_schritt_placeholder_naechster: "seuraava vaihe",
-    formular_schritt_entfernen_aria: "Poista vaihe",
-    formular_schritt_hoch_aria: "Siirrä vaihetta ylös",
-    formular_schritt_runter_aria: "Siirrä vaihetta alas",
-    formular_label_bild: "Kuva",
-    formular_bild_vorhanden_hinweis: "(olemassa – uusi tiedosto korvaa sen)",
-    formular_bild_hinweis: "Nykyinen kuva säilyy, jos et valitse uutta tiedostoa.",
-    formular_bild_verkleinern_text: "Kuvaa pienennetään…",
-    fehler_url_ungueltig: "Anna täydellinen osoite, joka alkaa http:// tai https://.",
-    fehler_url_apostroph: "Tämä osoite sisältää heittomerkin (') eikä sitä valitettavasti voida tuoda.",
-    fehler_url_keine_ausgabe: "Skripti ei palauttanut tulostetta. Onko 'rezeptbuch_url_importieren' määritetty tiedostossa configuration.yaml ja onko Home Assistant käynnistetty sen jälkeen kokonaan uudelleen?",
-    fehler_url_kein_json: "Tuontiskriptin vastaus ei ollut kelvollinen JSON.",
-    fehler_url_import_fehlgeschlagen: "URL-tuonti epäonnistui: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Liitetystä tekstistä ei valitettavasti tunnistettu mitään. Täytä kentät alla käsin.",
-    warnung_texterkennung_unvollstaendig: "Tunnistus oli puutteellinen (aineksia tai vaiheita puuttuu / ne on ehkä kohdistettu väärin) - tarkista ja täydennä lomakkeessa.",
-    fehler_json_ungueltig: "Liitetty JSON on virheellinen. Tarkista se ja yritä uudelleen.",
-    fehler_json_titel_fehlt: "JSON-tiedostosta puuttuu ainakin kenttä 'title'.",
-    fehler_titel_fehlt: "Anna otsikko.",
-    fehler_unerwartet: "Odottamaton virhe:\n{{fehler}}",
-    fehler_konflikt_geloescht: "Jonkun toisen käyttäjä on sillä välin poistanut kohteen \"{{titel}}\". Muutoksiasi ei tallennettu.",
-    fehler_konflikt_geaendert: "Jonkun toisen käyttäjä on sillä välin muuttanut kohdetta \"{{titel}}\" (esim. kommentti, arvio tai oma muokkaus).\n\nJotta mitään ei kirjoiteta yli, muutoksiasi EI tallennettu. Avaa resepti uudelleen ja syötä muutoksesi uudelleen.",
-    fehler_vorgang_fehlgeschlagen: "Toiminto epäonnistui:\n{{fehler}}",
-    fehler_teilen_drucken: "Odottamaton virhe jaettaessa/tulostettaessa:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Määritä 'entity' kortin asetuksissa, esim. entity: todo.rezepte",
-    fehler_bild_lesen: "Kuvaa ei voitu lukea (tiedosto vioittunut tai ei tuettu).",
-    fehler_bild_verarbeiten: "Kuvaa ei voitu käsitellä kuvana (tukematon muoto?).",
-    teilen_ueberschrift_zutaten: "AINEKSET",
-    teilen_ueberschrift_zubereitung: "VALMISTUS",
-    seite_zurueck_btn: "← Edellinen",
-    seite_weiter_btn: "Seuraava →",
-    seite_anzeige: "Sivu {{aktuell}}/{{gesamt}}",
-    update_neue_version: "Uusi versio saatavilla: {{version}}",
-    update_ansehen_btn: "Katso",
-    update_schliessen_aria: "Piilota ilmoitus",
-    ressourcen_version_hinweis: "⚠️ Tämä kortti päivitettiin, mutta resurssin URL-osoitetta ei muutettu (edelleen \"?v={{version}}\"). Muut selaimet/laitteet saattavat siksi ladata edelleen vanhan, välimuistiin tallennetun tiedoston - kasvata versionumeroa resurssin URL-osoitteessa (Asetukset → Kojelaudat → Resurssit).",
-    detail_kochmodus_btn: "🍳 Kokkaustila",
-    kochmodus_schritt_anzeige: "Vaihe {{aktuell}}/{{gesamt}}",
-    kochmodus_schliessen_aria: "Sulje kokkaustila",
-    kochmodus_schritt_zurueck_aria: "Edellinen vaihe",
-    kochmodus_schritt_weiter_aria: "Seuraava vaihe",
-    kochmodus_zutaten_ein_aria: "Näytä ainekset",
-    kochmodus_zutaten_aus_aria: "Piilota ainekset",
-    kochmodus_timer_ein_aria: "Näytä ajastin",
-    kochmodus_timer_aus_aria: "Piilota ajastin",
-    kochmodus_timer_minuten_aria: "Minuuttia",
-    kochmodus_timer_start_btn: "Käynnistä",
-    kochmodus_timer_abbrechen_btn: "Peruuta",
-    kochmodus_timer_abgelaufen_text: "⏰ Ajastin päättyi!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Käynnistä {{minuten}} min ajastin",
-    kopf_sammel_pdf_btn: "📚 Kokoelma-PDF",
-    sammel_pdf_keine_rezepte: "Vietäviä reseptejä ei löytynyt.",
-    sammel_pdf_frage_toc: "Luodaanko sisällysluettelo valituille resepteille?",
-    sammel_pdf_ja_toc_btn: "Kyllä, luo sisällysluettelo",
-    sammel_pdf_nein_toc_btn: "Ei, ilman sisällysluetteloa",
-    sammel_pdf_name_placeholder: "Keittokirjan nimi",
-    sammel_pdf_erstellen_btn: "Luo PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Sisällysluettelo",
-    sammel_pdf_frage_umfang: "Mitkä reseptit kokoomapdf:ään?",
-    sammel_pdf_alle_rezepte_btn: "Kaikki näytetyt reseptit",
-    sammel_pdf_auswahl_btn: "Valitse tietyt reseptit",
-    sammel_pdf_auswahl_titel: "Valitse reseptit",
-    sammel_pdf_alle_auswaehlen_link: "Valitse kaikki",
-    sammel_pdf_keine_auswaehlen_link: "Poista valinnat",
-    sammel_pdf_weiter_btn: "Seuraava",
-    sammel_pdf_bilder_mitdrucken_label: "Sisällytä kuvat PDF:ään",
-    sammel_pdf_auswahl_keine_hinweis: "Valitse vähintään yksi resepti.",
-  },
-  fr: {
-    allgemein_zurueck: "← Retour",
-    allgemein_ja: "Oui",
-    allgemein_nein: "Non",
-    allgemein_an: "Activé",
-    allgemein_aus: "Désactivé",
-    allgemein_speichern: "Enregistrer",
-    allgemein_speichert: "Enregistrement…",
-    allgemein_abbrechen: "Annuler",
-    allgemein_bearbeiten: "Modifier",
-    allgemein_loeschen: "Supprimer",
-    allgemein_oeffnen: "Ouvrir",
-    allgemein_unbekannt: "Inconnu",
-    allgemein_schliessen: "Fermer",
-    kategorie_hauptgericht: "Plat principal",
-    kategorie_vorspeise: "Entrée",
-    kategorie_suppe: "Soupe",
-    kategorie_salat: "Salade",
-    kategorie_beilage: "Accompagnement",
-    kategorie_dessert: "Dessert",
-    kategorie_kuchen_gebaeck: "Gâteaux & pâtisserie",
-    kategorie_fruehstueck: "Petit-déjeuner",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Boisson",
-    kategorie_sonstiges: "Autre",
-    kategorie_filter_alle: "Tous",
-    kategorie_neu_btn: "+ Nouvelle catégorie",
-    kategorie_name_placeholder: "Nom de la catégorie",
-    fehler_kategorie_name_fehlt: "Veuillez saisir un nom pour la catégorie.",
-    fehler_kategorie_existiert_bereits: "Cette catégorie existe déjà.",
-    kategorie_loeschen_title: "Supprimer la catégorie",
-    kategorie_loeschen_aria: "Supprimer la catégorie {{name}}",
-    kategorie_bearbeiten_title: "Renommer la catégorie",
-    kategorie_bearbeiten_aria: "Renommer la catégorie {{name}}",
-    kategorie_umbenennen_titel: "Renommer la catégorie \"{{name}}\" :",
-    fehler_kategorie_wird_verwendet: "Cette catégorie est encore utilisée par {{anzahl}}x recettes - veuillez d'abord leur attribuer une autre catégorie.",
-    wochentag_montag: "Lundi",
-    wochentag_dienstag: "Mardi",
-    wochentag_mittwoch: "Mercredi",
-    wochentag_donnerstag: "Jeudi",
-    wochentag_freitag: "Vendredi",
-    wochentag_samstag: "Samedi",
-    wochentag_sonntag: "Dimanche",
-    sortier_titel: "Alphabétique (A-Z)",
-    sortier_bewertung: "Meilleure note en premier",
-    sortier_kategorie: "Par catégorie",
-    sortier_neu: "Plus récent en premier",
-    sortieren_label: "Trier par :",
-    kopf_titel_standard: "Livre de recettes",
-    kopf_sichern_btn: "💾 Sauvegarde",
-    kopf_wochenplan_btn: "📅 Planning de la semaine",
-    kopf_zufallsrezept_btn: "🎲 Recette aléatoire",
-    umrechnungstabelle_btn: "📐 Table de conversion",
-    umrechnungstabelle_titel: "Table de conversion",
-    umrechnungstabelle_hinweis: "Valeurs approximatives en grammes pour des ingrédients courants - elles varient selon la marque et la consistance, donc à titre indicatif uniquement. Elles ne sont PAS appliquées automatiquement à tes recettes.",
-    umrechnungstabelle_suche_placeholder: "Rechercher un ingrédient …",
-    umrechnungstabelle_spalte_zutat: "Ingrédient",
-    umrechnungstabelle_spalte_tasse: "1 tasse",
-    umrechnungstabelle_spalte_el: "1 c. à s.",
-    umrechnungstabelle_spalte_tl: "1 c. à c.",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Aucun ingrédient trouvé.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Ajouter un ingrédient personnalisé",
-    umrechnungstabelle_eigene_name_platzhalter: "Nom de l'ingrédient",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/tasse",
-    umrechnungstabelle_eigene_el_platzhalter: "g/c. à s.",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/c. à c.",
-    umrechnungstabelle_eigene_loeschen_titel: "Supprimer l'ingrédient personnalisé",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Modifier l'ingrédient personnalisé",
-    umrechnungstabelle_eigene_name_fehlt: "Merci de saisir un nom.",
-    umrechnungstabelle_eigene_hinweis: "Il manque un ingrédient dont tu connais la valeur de conversion ? Ajoute-le ici manuellement - nous ne proposons volontairement pas de conversion automatique entre volume et poids, car cela reviendrait à deviner selon l'ingrédient, la marque et la consistance.",
-    einkaufsmodus_start_btn: "🛒 Liste de courses",
-    einkaufsmodus_beenden_btn: "✕ Terminer la sélection",
-    kopf_neu_btn: "+ Nouveau",
-    suche_placeholder: "🔍 Recette ou ingrédients (p. ex. farine, œufs)…",
-    kochbuch_loeschen_title: "Supprimer la collection",
-    kochbuch_loeschen_aria: "Supprimer la collection {{name}}",
-    kochbuch_speichern_btn: "+ Enregistrer comme collection intelligente",
-    kochbuch_name_placeholder: "Nom de cette collection, p. ex. Recettes d'automne",
-    fehler_kochbuch_name_fehlt: "Merci d'indiquer un nom pour la collection.",
-    kochbuch_info_aria: "Afficher l'explication des collections intelligentes",
-    kochbuch_info_titel: "Qu'est-ce qu'une collection intelligente ?",
-    kochbuch_info_text:
-      "Une collection intelligente ne stocke pas une liste fixe de " +
-      "recettes, mais une combinaison de catégorie, de tags et de " +
-      "terme de recherche, telle qu'elle est réglée au moment de " +
-      "l'enregistrement. Elle se met ensuite à jour d'elle-même : une " +
-      "nouvelle recette qui correspond apparaît automatiquement, et " +
-      "une recette dont la catégorie ou les tags changent peut tout " +
-      "aussi automatiquement disparaître à nouveau.",
-    einkaufs_zaehler: "{{anzahl}} sélectionné(s)",
-    einkaufsliste_erstellen_btn: "Créer la liste de courses",
-    fehler_einkaufsliste_keine_konfiguration: "La configuration de la liste de courses est encore manquante : merci d'indiquer 'shopping_list_entity' dans la configuration de la carte (p. ex. shopping_list_entity: todo.einkaufsliste) - cela nécessite un DEUXIÈME assistant Liste de tâches locale. Voir ANLEITUNG-Backup.md, section 18.",
-    fehler_einkaufsliste_keine_auswahl: "Merci de sélectionner au moins une recette.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Merci de sélectionner au moins un ingrédient.",
-    zutaten_fehlend_einkaufsliste_btn: "Ajouter la sélection à la liste de courses",
-    fehler_einkaufsliste_keine_zutaten: "Les recettes sélectionnées ne contiennent aucun ingrédient.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Impossible d'ajouter \"{{zeile}}\" à la liste de courses :\n{{fehler}}\n\nLes ingrédients déjà ajoutés restent dans la liste.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrédient(s) ajouté(s) à \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" supprimée.",
-    undo_rueckgaengig_btn: "Annuler",
-    leer_keine_rezepte: "Pas encore de recettes – commencez avec \"+ Nouveau\"",
-    leer_keine_treffer: "Aucune recette trouvée pour \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Impossible de charger \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Cette liste de tâches existe-t-elle ? (Paramètres → Appareils et services → Assistants)",
-    kachel_aria_label_oeffnen: "Ouvrir la recette {{titel}}",
-    sterne_aria_label_gruppe: "Votre note",
-    sterne_aria_label: "{{zahl}} sur 5 étoiles",
-    fehler_kein_benutzer_bewertung: "Impossible de déterminer votre utilisateur - notation impossible.",
-    detail_teilen_drucken_btn: "📤 Partager / Imprimer",
-    detail_erstellt_von: "👤 Créée par {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} avis)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} avis)",
-    detail_keine_bewertungen: "Pas encore d'avis",
-    detail_deine_bewertung: "Votre avis :",
-    detail_zubereitet_x: "🍳 préparée {{anzahl}} fois",
-    detail_portionen_suffix: "portions",
-    abschnitt_titel_zutaten: "Ingrédients",
-    abschnitt_titel_zubereitung: "Préparation",
-    keine_zutaten: "Aucun ingrédient renseigné",
-    detail_kommentare_titel: "Commentaires",
-    detail_keine_kommentare: "Pas encore de commentaires",
-    detail_kommentar_placeholder: "Complément, astuce ou remarque…",
-    detail_kommentar_hinzufuegen_btn: "Ajouter un commentaire",
-    detail_bearbeiten_hinweis: "Seul(e) {{name}} (ou un administrateur) peut modifier ou supprimer cette recette.",
-    detail_ersteller_unbekannt: "l'auteur/autrice",
-    modal_zubereitet_frage: "As-tu préparé \"{{titel}}\" ?",
-    modal_drucken_bild_frage: "Inclure la photo de la recette ?",
-    modal_drucken_ohne_bild_btn: "Sans photo",
-    modal_drucken_mit_bild_btn: "Avec photo",
-    statistik_btn: "📊 Statistiques",
-    statistik_titel: "Statistiques de cuisine",
-    statistik_info_aria: "Afficher l'explication des statistiques",
-    statistik_einstellungen_btn_title: "Paramètres du suivi de préparation",
-    statistik_einstellungen_titel: "Paramètres du suivi de préparation",
-    statistik_einstellungen_text: "Ici, tu peux choisir si on te demande, en quittant une recette, si tu l'as préparée, et si les statistiques qui en résultent sont affichées sur cette carte.",
-    statistik_einstellungen_schalter_label: "Activer la question et les statistiques",
-    tags_einstellung_schalter_label: "Afficher le filtre par tags dans l'aperçu",
-    zufallsrezept_einstellung_schalter_label: "Afficher le bouton Recette aléatoire dans l'aperçu",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Afficher le bouton du tableau de conversion dans l'aperçu",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Pour la catégorie configurée pour les recettes américaines, le tableau de conversion continue d'apparaître dans la recette et en mode cuisine, même si ce bouton est désactivé ici.",
-    farben_abschnitt_titel: "Couleurs",
-    farben_hinweis: "Personnalisez les couleurs de la carte une à une. Tout réinitialiser rétablit toutes les couleurs par défaut.",
-    farben_akzent_label: "Couleur principale (boutons, filtres actifs)",
-    farben_akzent_text_label: "Couleur d'accent pour textes et bordures",
-    farben_loeschen_label: "Suppression / avertissement",
-    farben_sterne_label: "Étoiles de notation",
-    farben_titel_label: "Titres",
-    farben_zuruecksetzen_btn: "Tout réinitialiser",
-    us_kategorie_einstellung_label: "Catégorie pour les recettes américaines",
-    us_kategorie_einstellung_text: "Les recettes de cette catégorie affichent aussi un bouton pour la table de conversion directement dans la recette et en mode cuisine.",
-    us_kategorie_einstellung_keine: "— Aucune —",
-    statistik_info_titel: "Comment cette statistique est-elle calculée ?",
-    statistik_info_text:
-      "Ce bilan comptabilise chaque confirmation de la question « As-tu préparé ? » - quelle que soit la taille des portions ou le nombre de fois le même jour. Si cette question est désactivée via l'interrupteur des paramètres de statistiques (⚙️), les chiffres cessent d'augmenter, mais les préparations déjà enregistrées sont conservées.",
-    statistik_dieses_jahr: "Tu as cuisiné {{anzahl}}x depuis ton livre de recettes en {{jahr}}",
-    statistik_gesamt: "Tu as cuisiné {{anzahl}}x depuis ton livre de recettes au total",
-    statistik_top_titel: "Les plus préparées",
-    statistik_keine_daten: "Aucune préparation enregistrée pour l'instant.",
-    modal_loeschen_frage: "Vraiment supprimer \"{{titel}}\" ?",
-    modal_loeschen_ja_btn: "Oui, supprimer",
-    modal_kommentar_loeschen_frage: "Vraiment supprimer ce commentaire ?",
-    wochenplan_titel: "Planning de la semaine",
-    wochenplan_tab_diese: "Cette semaine",
-    wochenplan_tab_folgewoche: "Semaine suivante",
-    wochenplan_hinweis_folgewoche: "Planifiez déjà ici la semaine à venir - elle basculera automatiquement vers \"Cette semaine\" une fois la semaine en cours terminée.",
-    wochenplan_hinweis_diese: "Les jours passés sont vidés automatiquement (la recette elle-même reste conservée, seule l'affectation disparaît).",
-    wochenplan_hinweis_speicherung: "Enregistré sur tous les appareils (comme entrée supplémentaire invisible dans la même liste de recettes, aucun autre assistant requis).",
-    wochenplan_leer: "Pas encore de recettes - créez-en d'abord quelques-unes.",
-    wochenplan_kein_rezept_option: "– aucune recette –",
-    wochenplan_einkaufsliste_btn: "Créer une liste de courses à partir de {{ziel}}",
-    wochenplan_wort: "planning de la semaine",
-    wochenplan_folgewoche_wort: "semaine suivante",
-    wochenplan_aktuelle_woche_wort: "semaine en cours",
-    wochenplan_keine_zuweisung: "{{zeitraum}} ne contient encore aucune recette affectée.",
-    formular_titel_neu: "Nouvelle recette",
-    formular_titel_bearbeiten: "Modifier la recette",
-    formular_url_import_btn: "🌐 Importer l'URL d'une recette",
-    formular_url_label: "Lien vers le site web de la recette",
-    formular_url_placeholder: "https://www.exemple-recettes.fr/ma-recette",
-    formular_url_hinweis: "Charge la page et lit les données structurées de la recette déjà intégrées (les mêmes données que, par exemple, Google utilise pour afficher les notes en étoiles dans les résultats de recherche) - généralement plus fiable que la reconnaissance de texte. Fonctionne uniquement sur les sites qui fournissent ces données et ne bloquent pas les requêtes automatisées.",
-    formular_url_importieren_btn: "Importer",
-    formular_url_laedt: "Chargement …",
-    formular_text_einfuegen_btn: "🔍 Coller le texte de la recette (détection automatique)",
-    formular_text_label: "Colle ici le texte de la recette (p. ex. copié depuis un site de recettes)",
-    formular_text_placeholder: "Titre, ingrédients, préparation - colle simplement tout le texte",
-    formular_text_hinweis: "Reconnaissance purement automatique sans IA - fonctionne mieux avec les titres \"Ingrédients\" et \"Préparation\" dans le texte. Merci de vérifier brièvement le résultat ensuite, il peut être incomplet.",
-    formular_text_erkennen_btn: "Détecter",
-    formular_json_einfuegen_btn: "📋 Coller un JSON généré par IA",
-    formular_json_info_aria: "Afficher un prompt prêt à l'emploi pour une IA",
-    json_info_titel: "Prompt pour une IA",
-    json_info_erklaerung:
-      "Copie ce texte, colle-le dans une IA de ton choix (par ex. ChatGPT ou Claude), ajoute le texte de ta recette, puis colle la réponse ci-dessus dans « Coller le JSON ici ».",
-    json_info_prompt:
-      "Transforme le texte de recette que je vais t'envoyer en UN seul objet JSON - sans explication, sans texte avant ni après, juste le JSON. Utilise exactement ce format :\n\n" +
-      "{\n" +
-      '  "title": "nom de la recette",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "une valeur parmi : {{kategorien}}",\n' +
-      '  "ingredients": ["un ingrédient par entrée, par ex. 200 g de farine"],\n' +
-      '  "steps": ["une étape de préparation par entrée"],\n' +
-      '  "tags": ["mots-clés facultatifs, par ex. végétarien"]\n' +
-      "}\n\n" +
-      "Règles : « category » doit être EXACTEMENT l'une des valeurs listées ci-dessus (à reprendre telle quelle, même si le texte de la recette est dans une autre langue - ce sont des valeurs internes fixes). " +
-      "« tags » est facultatif, un tableau vide convient aussi. " +
-      "N'invente pas d'ingrédients ou d'étapes qui ne figurent pas dans le texte. " +
-      "Voici le texte de la recette :",
-    json_info_kopieren_btn: "📋 Copier le prompt",
-    json_info_kopiert: "Copié !",
-    formular_json_label: "Coller le JSON ici",
-    formular_json_uebernehmen_btn: "Appliquer",
-    formular_label_titel: "Titre",
-    formular_label_kategorie: "Catégorie",
-    formular_label_tags: "Tags (plusieurs possibles, p. ex. \"végétarien\", \"rapide\")",
-    formular_tag_placeholder: "Saisir et ajouter un tag",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Supprimer le tag {{tag}}",
-    formular_label_portionen: "Portions (base)",
-    formular_label_zutaten: "Ingrédients",
-    formular_zutat_hinzufuegen_btn: "+ Ingrédient",
-    formular_zutat_menge_placeholder: "Quantité",
-    formular_zutat_einheit_placeholder: "Unité",
-    formular_zutat_name_placeholder: "Ingrédient",
-    formular_zutat_entfernen_aria: "Supprimer l'ingrédient",
-    formular_label_zubereitung: "Préparation (étapes)",
-    formular_schritt_hinzufuegen_btn: "+ Étape",
-    formular_schritt_placeholder_beispiel: "p. ex. laver et couper les légumes",
-    formular_schritt_placeholder_naechster: "étape suivante",
-    formular_schritt_entfernen_aria: "Supprimer l'étape",
-    formular_schritt_hoch_aria: "Déplacer l'étape vers le haut",
-    formular_schritt_runter_aria: "Déplacer l'étape vers le bas",
-    formular_label_bild: "Photo",
-    formular_bild_vorhanden_hinweis: "(présente – un nouveau fichier la remplacera)",
-    formular_bild_hinweis: "La photo actuelle est conservée si tu ne choisis pas de nouveau fichier.",
-    formular_bild_verkleinern_text: "Réduction de la photo…",
-    fehler_url_ungueltig: "Merci d'indiquer une adresse complète commençant par http:// ou https://.",
-    fehler_url_apostroph: "Cette adresse contient une apostrophe (') et ne peut malheureusement pas être importée.",
-    fehler_url_keine_ausgabe: "Le script n'a fourni aucune sortie. 'rezeptbuch_url_importieren' est-il configuré dans configuration.yaml et Home Assistant a-t-il été entièrement redémarré depuis ?",
-    fehler_url_kein_json: "La réponse du script d'import n'était pas un JSON valide.",
-    fehler_url_import_fehlgeschlagen: "Échec de l'import de l'URL : {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Malheureusement, rien n'a pu être détecté dans le texte collé. Merci de remplir les champs ci-dessous manuellement.",
-    warnung_texterkennung_unvollstaendig: "La détection était incomplète (ingrédients ou étapes manquants ou éventuellement mal affectés) - merci de vérifier et de compléter dans le formulaire.",
-    fehler_json_ungueltig: "Le JSON collé est invalide. Merci de le vérifier et de réessayer.",
-    fehler_json_titel_fehlt: "Il manque au moins le champ 'title' dans le JSON.",
-    fehler_titel_fehlt: "Merci de saisir un titre.",
-    fehler_unerwartet: "Erreur inattendue :\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" a entre-temps été supprimée par quelqu'un d'autre. Tes modifications n'ont pas été enregistrées.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" a entre-temps été modifiée par quelqu'un d'autre (p. ex. un commentaire, une note ou une modification personnelle).\n\nAfin d'éviter d'écraser quoi que ce soit, tes modifications N'ONT PAS été enregistrées. Merci d'ouvrir à nouveau la recette et de ressaisir tes modifications.",
-    fehler_vorgang_fehlgeschlagen: "Échec de l'opération :\n{{fehler}}",
-    fehler_teilen_drucken: "Erreur inattendue lors du partage/de l'impression :\n{{fehler}}",
-    fehler_config_entity_fehlt: "Merci d'indiquer 'entity' dans la configuration de la carte, p. ex. entity: todo.rezepte",
-    fehler_bild_lesen: "Impossible de lire la photo (fichier corrompu ou non pris en charge).",
-    fehler_bild_verarbeiten: "Impossible de traiter la photo comme une image (format non pris en charge ?).",
-    teilen_ueberschrift_zutaten: "INGRÉDIENTS",
-    teilen_ueberschrift_zubereitung: "PRÉPARATION",
-    seite_zurueck_btn: "← Précédent",
-    seite_weiter_btn: "Suivant →",
-    seite_anzeige: "Page {{aktuell}} sur {{gesamt}}",
-    update_neue_version: "Nouvelle version disponible : {{version}}",
-    update_ansehen_btn: "Voir",
-    update_schliessen_aria: "Masquer la notification",
-    ressourcen_version_hinweis: "⚠️ Cette carte a été mise à jour, mais l'URL de la ressource n'a pas changé (toujours \"?v={{version}}\"). D'autres navigateurs/appareils risquent donc de continuer à charger l'ancien fichier mis en cache - augmente le numéro de version dans l'URL de la ressource (Paramètres → Tableaux de bord → Ressources).",
-    detail_kochmodus_btn: "🍳 Mode cuisine",
-    kochmodus_schritt_anzeige: "Étape {{aktuell}} sur {{gesamt}}",
-    kochmodus_schliessen_aria: "Fermer le mode cuisine",
-    kochmodus_schritt_zurueck_aria: "Étape précédente",
-    kochmodus_schritt_weiter_aria: "Étape suivante",
-    kochmodus_zutaten_ein_aria: "Afficher les ingrédients",
-    kochmodus_zutaten_aus_aria: "Masquer les ingrédients",
-    kochmodus_timer_ein_aria: "Afficher le minuteur",
-    kochmodus_timer_aus_aria: "Masquer le minuteur",
-    kochmodus_timer_minuten_aria: "Minutes",
-    kochmodus_timer_start_btn: "Démarrer",
-    kochmodus_timer_abbrechen_btn: "Annuler",
-    kochmodus_timer_abgelaufen_text: "⏰ Le minuteur est terminé !",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Démarrer un minuteur de {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 PDF groupé",
-    sammel_pdf_keine_rezepte: "Aucune recette trouvée à exporter.",
-    sammel_pdf_frage_toc: "Créer une table des matières pour les recettes sélectionnées ?",
-    sammel_pdf_ja_toc_btn: "Oui, créer une table des matières",
-    sammel_pdf_nein_toc_btn: "Non, sans table des matières",
-    sammel_pdf_name_placeholder: "Nom du livre de cuisine",
-    sammel_pdf_erstellen_btn: "Créer le PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Table des matières",
-    sammel_pdf_frage_umfang: "Quelles recettes inclure dans le PDF groupé ?",
-    sammel_pdf_alle_rezepte_btn: "Toutes les recettes affichées",
-    sammel_pdf_auswahl_btn: "Choisir des recettes précises",
-    sammel_pdf_auswahl_titel: "Choisir les recettes",
-    sammel_pdf_alle_auswaehlen_link: "Tout sélectionner",
-    sammel_pdf_keine_auswaehlen_link: "Tout désélectionner",
-    sammel_pdf_weiter_btn: "Suivant",
-    sammel_pdf_bilder_mitdrucken_label: "Inclure les images dans le PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Veuillez sélectionner au moins une recette.",
-  },
-  el: {
-    allgemein_zurueck: "← Πίσω",
-    allgemein_ja: "Ναι",
-    allgemein_nein: "Όχι",
-    allgemein_an: "Ενεργό",
-    allgemein_aus: "Ανενεργό",
-    allgemein_speichern: "Αποθήκευση",
-    allgemein_speichert: "Αποθήκευση…",
-    allgemein_abbrechen: "Ακύρωση",
-    allgemein_bearbeiten: "Επεξεργασία",
-    allgemein_loeschen: "Διαγραφή",
-    allgemein_oeffnen: "Άνοιγμα",
-    allgemein_unbekannt: "Άγνωστο",
-    allgemein_schliessen: "Κλείσιμο",
-    kategorie_hauptgericht: "Κυρίως πιάτο",
-    kategorie_vorspeise: "Ορεκτικό",
-    kategorie_suppe: "Σούπα",
-    kategorie_salat: "Σαλάτα",
-    kategorie_beilage: "Συνοδευτικό",
-    kategorie_dessert: "Επιδόρπιο",
-    kategorie_kuchen_gebaeck: "Κέικ & γλυκά",
-    kategorie_fruehstueck: "Πρωινό",
-    kategorie_snack: "Σνακ",
-    kategorie_getraenk: "Ρόφημα",
-    kategorie_sonstiges: "Άλλο",
-    kategorie_filter_alle: "Όλα",
-    kategorie_neu_btn: "+ Νέα κατηγορία",
-    kategorie_name_placeholder: "Όνομα κατηγορίας",
-    fehler_kategorie_name_fehlt: "Παρακαλώ εισάγετε ένα όνομα για την κατηγορία.",
-    fehler_kategorie_existiert_bereits: "Αυτή η κατηγορία υπάρχει ήδη.",
-    kategorie_loeschen_title: "Διαγραφή κατηγορίας",
-    kategorie_loeschen_aria: "Διαγραφή κατηγορίας {{name}}",
-    kategorie_bearbeiten_title: "Μετονομασία κατηγορίας",
-    kategorie_bearbeiten_aria: "Μετονομασία κατηγορίας {{name}}",
-    kategorie_umbenennen_titel: "Μετονομασία κατηγορίας \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Αυτή η κατηγορία χρησιμοποιείται ακόμα από {{anzahl}}x συνταγές - παρακαλώ δώστε τους πρώτα άλλη κατηγορία.",
-    wochentag_montag: "Δευτέρα",
-    wochentag_dienstag: "Τρίτη",
-    wochentag_mittwoch: "Τετάρτη",
-    wochentag_donnerstag: "Πέμπτη",
-    wochentag_freitag: "Παρασκευή",
-    wochentag_samstag: "Σάββατο",
-    wochentag_sonntag: "Κυριακή",
-    sortier_titel: "Αλφαβητικά (Α-Ω)",
-    sortier_bewertung: "Καλύτερη βαθμολογία πρώτα",
-    sortier_kategorie: "Κατά κατηγορία",
-    sortier_neu: "Νεότερα πρώτα",
-    sortieren_label: "Ταξινόμηση:",
-    kopf_titel_standard: "Βιβλίο συνταγών",
-    kopf_sichern_btn: "💾 Αντίγραφο ασφαλείας",
-    kopf_wochenplan_btn: "📅 Εβδομαδιαίος προγραμματισμός",
-    kopf_zufallsrezept_btn: "🎲 Τυχαία συνταγή",
-    umrechnungstabelle_btn: "📐 Πίνακας μετατροπής",
-    umrechnungstabelle_titel: "Πίνακας μετατροπής",
-    umrechnungstabelle_hinweis: "Κατά προσέγγιση τιμές σε γραμμάρια για συνηθισμένα υλικά κουζίνας - διαφέρουν ανά μάρκα και σύσταση, άρα μόνο για αναφορά. ΔΕΝ εφαρμόζονται αυτόματα στις συνταγές σου.",
-    umrechnungstabelle_suche_placeholder: "Αναζήτηση υλικού …",
-    umrechnungstabelle_spalte_zutat: "Υλικό",
-    umrechnungstabelle_spalte_tasse: "1 φλιτζάνι",
-    umrechnungstabelle_spalte_el: "1 κ.σ.",
-    umrechnungstabelle_spalte_tl: "1 κ.γ.",
-    umrechnungstabelle_gramm_wert: "{{wert}} γρ.",
-    umrechnungstabelle_keine_treffer: "Δεν βρέθηκε υλικό.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Προσθήκη δικού σου υλικού",
-    umrechnungstabelle_eigene_name_platzhalter: "Όνομα υλικού",
-    umrechnungstabelle_eigene_tasse_platzhalter: "γρ./φλιτζάνι",
-    umrechnungstabelle_eigene_el_platzhalter: "γρ./κ.σ.",
-    umrechnungstabelle_eigene_tl_platzhalter: "γρ./κ.γ.",
-    umrechnungstabelle_eigene_loeschen_titel: "Διαγραφή δικού σου υλικού",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Επεξεργασία δικού σου υλικού",
-    umrechnungstabelle_eigene_name_fehlt: "Παρακαλώ εισάγετε ένα όνομα.",
-    umrechnungstabelle_eigene_hinweis: "Λείπει ένα υλικό του οποίου γνωρίζεις την τιμή μετατροπής; Πρόσθεσέ το εδώ χειροκίνητα - δεν προσφέρουμε σκόπιμα αυτόματη μετατροπή μεταξύ όγκου και βάρους, καθώς αυτό θα σήμαινε να μαντεύουμε ανάλογα με το υλικό, τη μάρκα και την πυκνότητα.",
-    einkaufsmodus_start_btn: "🛒 Λίστα αγορών",
-    einkaufsmodus_beenden_btn: "✕ Τερματισμός επιλογής",
-    kopf_neu_btn: "+ Νέα",
-    suche_placeholder: "🔍 Συνταγή ή υλικά (π.χ. αλεύρι, αυγά)…",
-    kochbuch_loeschen_title: "Διαγραφή συλλογής",
-    kochbuch_loeschen_aria: "Διαγραφή συλλογής {{name}}",
-    kochbuch_speichern_btn: "+ Αποθήκευση ως έξυπνη συλλογή",
-    kochbuch_name_placeholder: "Όνομα για αυτή τη συλλογή, π.χ. Φθινοπωρινές συνταγές",
-    fehler_kochbuch_name_fehlt: "Δώσε ένα όνομα για τη συλλογή.",
-    kochbuch_info_aria: "Εμφάνιση επεξήγησης έξυπνων συλλογών",
-    kochbuch_info_titel: "Τι είναι μια έξυπνη συλλογή;",
-    kochbuch_info_text:
-      "Μια έξυπνη συλλογή δεν αποθηκεύει μια σταθερή λίστα συνταγών, " +
-      "αλλά έναν συνδυασμό κατηγορίας, ετικετών και όρου αναζήτησης, " +
-      "ακριβώς όπως έχουν οριστεί τη στιγμή της αποθήκευσης. Στη " +
-      "συνέχεια ενημερώνεται μόνη της: μια νέα συνταγή που ταιριάζει " +
-      "εμφανίζεται αυτόματα, και μια συνταγή της οποίας η κατηγορία ή " +
-      "οι ετικέτες αλλάζουν μπορεί εξίσου αυτόματα να εξαφανιστεί " +
-      "ξανά.",
-    einkaufs_zaehler: "{{anzahl}} επιλεγμένα",
-    einkaufsliste_erstellen_btn: "Δημιουργία λίστας αγορών",
-    fehler_einkaufsliste_keine_konfiguration: "Λείπει ακόμη η διαμόρφωση για τη λίστα αγορών: όρισε 'shopping_list_entity' στη διαμόρφωση της κάρτας (π.χ. shopping_list_entity: todo.einkaufsliste) - για αυτό χρειάζεται μια ΔΕΥΤΕΡΗ βοηθητική «Τοπική λίστα εργασιών». Δες το ANLEITUNG-Backup.md, ενότητα 18.",
-    fehler_einkaufsliste_keine_auswahl: "Επίλεξε τουλάχιστον μία συνταγή.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Επίλεξε τουλάχιστον ένα υλικό.",
-    zutaten_fehlend_einkaufsliste_btn: "Προσθήκη επιλεγμένων στη λίστα αγορών",
-    fehler_einkaufsliste_keine_zutaten: "Οι επιλεγμένες συνταγές δεν περιέχουν υλικά.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Δεν ήταν δυνατή η προσθήκη του \"{{zeile}}\" στη λίστα αγορών:\n{{fehler}}\n\nΤα ήδη προστιθέμενα υλικά παραμένουν στη λίστα.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} υλικό/ά προστέθηκαν στο \"{{entity}}\".",
-    undo_geloescht: "Το \"{{titel}}\" διαγράφηκε.",
-    undo_rueckgaengig_btn: "Αναίρεση",
-    leer_keine_rezepte: "Δεν υπάρχουν ακόμη συνταγές – ξεκίνα με \"+ Νέα\"",
-    leer_keine_treffer: "Δεν βρέθηκαν συνταγές για \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Δεν ήταν δυνατή η φόρτωση του \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Υπάρχει αυτή η λίστα εργασιών; (Ρυθμίσεις → Συσκευές & υπηρεσίες → Βοηθοί)",
-    kachel_aria_label_oeffnen: "Άνοιγμα συνταγής {{titel}}",
-    sterne_aria_label_gruppe: "Η δική σου βαθμολογία",
-    sterne_aria_label: "{{zahl}} από 5 αστέρια",
-    fehler_kein_benutzer_bewertung: "Δεν ήταν δυνατός ο προσδιορισμός του χρήστη σου - η βαθμολόγηση δεν είναι δυνατή.",
-    detail_teilen_drucken_btn: "📤 Κοινοποίηση / Εκτύπωση",
-    detail_erstellt_von: "👤 Δημιουργήθηκε από τον/την {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} αξιολόγηση)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} αξιολογήσεις)",
-    detail_keine_bewertungen: "Δεν υπάρχουν ακόμη αξιολογήσεις",
-    detail_deine_bewertung: "Η βαθμολογία σου:",
-    detail_zubereitet_x: "🍳 παρασκευάστηκε {{anzahl}} φορές",
-    detail_portionen_suffix: "μερίδες",
-    abschnitt_titel_zutaten: "Υλικά",
-    abschnitt_titel_zubereitung: "Εκτέλεση",
-    keine_zutaten: "Δεν έχουν καταχωριστεί υλικά",
-    detail_kommentare_titel: "Σχόλια",
-    detail_keine_kommentare: "Δεν υπάρχουν ακόμη σχόλια",
-    detail_kommentar_placeholder: "Προσθήκη, συμβουλή ή σημείωση…",
-    detail_kommentar_hinzufuegen_btn: "Προσθήκη σχολίου",
-    detail_bearbeiten_hinweis: "Μόνο ο/η {{name}} (ή διαχειριστής) μπορεί να επεξεργαστεί ή να διαγράψει αυτή τη συνταγή.",
-    detail_ersteller_unbekannt: "ο/η δημιουργός",
-    modal_zubereitet_frage: "Παρασκεύασες το \"{{titel}}\";",
-    modal_drucken_bild_frage: "Να συμπεριληφθεί η εικόνα της συνταγής;",
-    modal_drucken_ohne_bild_btn: "Χωρίς εικόνα",
-    modal_drucken_mit_bild_btn: "Με εικόνα",
-    statistik_btn: "📊 Στατιστικά",
-    statistik_titel: "Στατιστικά μαγειρικής",
-    statistik_info_aria: "Εμφάνιση επεξήγησης των στατιστικών",
-    statistik_einstellungen_btn_title: "Ρυθμίσεις καταγραφής μαγειρέματος",
-    statistik_einstellungen_titel: "Ρυθμίσεις καταγραφής μαγειρέματος",
-    statistik_einstellungen_text: "Εδώ μπορείς να ορίσεις αν θα σε ρωτά, όταν βγαίνεις από μια συνταγή, αν τη μαγείρεψες, και αν θα εμφανίζονται τα στατιστικά που προκύπτουν σε αυτήν την κάρτα.",
-    statistik_einstellungen_schalter_label: "Ενεργοποίηση ερώτησης & στατιστικών",
-    tags_einstellung_schalter_label: "Εμφάνιση φίλτρου ετικετών στην επισκόπηση",
-    zufallsrezept_einstellung_schalter_label: "Εμφάνιση κουμπιού τυχαίας συνταγής στην επισκόπηση",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Εμφάνιση κουμπιού πίνακα μετατροπών στην επισκόπηση",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Για την καθορισμένη κατηγορία αμερικανικών συνταγών, ο πίνακας μετατροπών συνεχίζει να εμφανίζεται στη συνταγή και στη λειτουργία μαγειρέματος, ακόμη κι αν αυτό το κουμπί είναι απενεργοποιημένο εδώ.",
-    farben_abschnitt_titel: "Χρώματα",
-    farben_hinweis: "Προσαρμόστε μεμονωμένα χρώματα της κάρτας. Η επαναφορά όλων επαναφέρει όλα τα χρώματα στις προεπιλογές.",
-    farben_akzent_label: "Βασικό χρώμα (κουμπιά, ενεργά φίλτρα)",
-    farben_akzent_text_label: "Χρώμα έμφασης για κείμενα και περιγράμματα",
-    farben_loeschen_label: "Διαγραφή / προειδοποίηση",
-    farben_sterne_label: "Αστέρια αξιολόγησης",
-    farben_titel_label: "Επικεφαλίδες",
-    farben_zuruecksetzen_btn: "Επαναφορά όλων",
-    us_kategorie_einstellung_label: "Κατηγορία για αμερικανικές συνταγές",
-    us_kategorie_einstellung_text: "Οι συνταγές αυτής της κατηγορίας εμφανίζουν επιπλέον ένα κουμπί για τον πίνακα μετατροπής μέσα στη συνταγή και στη λειτουργία μαγειρέματος.",
-    us_kategorie_einstellung_keine: "— Καμία —",
-    statistik_info_titel: "Πώς υπολογίζεται αυτή η στατιστική;",
-    statistik_info_text:
-      "Αυτή η αξιολόγηση μετρά κάθε επιβεβαίωση της ερώτησης «Το παρασκεύασες;» - ανεξάρτητα από το μέγεθος της μερίδας ή το πόσες φορές την ίδια ημέρα. Αν αυτή η ερώτηση είναι απενεργοποιημένη μέσω του διακόπτη στις ρυθμίσεις στατιστικών (⚙️), οι αριθμοί σταματούν να αυξάνονται, αλλά οι ήδη καταγεγραμμένες παρασκευές διατηρούνται.",
-    statistik_dieses_jahr: "Μαγείρεψες {{anzahl}}x από το βιβλίο συνταγών σου το {{jahr}}",
-    statistik_gesamt: "Μαγείρεψες συνολικά {{anzahl}}x από το βιβλίο συνταγών σου",
-    statistik_top_titel: "Πιο συχνά παρασκευασμένα",
-    statistik_keine_daten: "Δεν έχουν καταγραφεί ακόμη παρασκευές.",
-    modal_loeschen_frage: "Να διαγραφεί πραγματικά το \"{{titel}}\";",
-    modal_loeschen_ja_btn: "Ναι, διαγραφή",
-    modal_kommentar_loeschen_frage: "Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;",
-    wochenplan_titel: "Εβδομαδιαίος προγραμματισμός",
-    wochenplan_tab_diese: "Αυτή την εβδομάδα",
-    wochenplan_tab_folgewoche: "Επόμενη εβδομάδα",
-    wochenplan_hinweis_folgewoche: "Προγραμμάτισε εδώ ήδη την επόμενη εβδομάδα - μετακινείται αυτόματα στο \"Αυτή την εβδομάδα\" μόλις τελειώσει η τρέχουσα εβδομάδα.",
-    wochenplan_hinweis_diese: "Οι ημέρες που έχουν περάσει αδειάζουν αυτόματα (η ίδια η συνταγή παραμένει, εξαφανίζεται μόνο η ανάθεση).",
-    wochenplan_hinweis_speicherung: "Αποθηκεύεται σε όλες τις συσκευές (ως κρυφή επιπλέον καταχώριση στην ίδια λίστα συνταγών, δεν χρειάζεται επιπλέον βοηθός).",
-    wochenplan_leer: "Δεν υπάρχουν ακόμη συνταγές - δημιούργησε πρώτα μερικές.",
-    wochenplan_kein_rezept_option: "– καμία συνταγή –",
-    wochenplan_einkaufsliste_btn: "Δημιουργία λίστας αγορών από {{ziel}}",
-    wochenplan_wort: "εβδομαδιαίος προγραμματισμός",
-    wochenplan_folgewoche_wort: "επόμενη εβδομάδα",
-    wochenplan_aktuelle_woche_wort: "τρέχουσα εβδομάδα",
-    wochenplan_keine_zuweisung: "{{zeitraum}} δεν περιέχει ακόμη ανατεθειμένες συνταγές.",
-    formular_titel_neu: "Νέα συνταγή",
-    formular_titel_bearbeiten: "Επεξεργασία συνταγής",
-    formular_url_import_btn: "🌐 Εισαγωγή URL συνταγής",
-    formular_url_label: "Σύνδεσμος προς την ιστοσελίδα της συνταγής",
-    formular_url_placeholder: "https://www.paradeigma-syntages.gr/i-syntagi-mou",
-    formular_url_hinweis: "Φορτώνει τη σελίδα και διαβάζει τα δομημένα δεδομένα της συνταγής που είναι ήδη ενσωματωμένα σε αυτήν (τα ίδια δεδομένα με τα οποία π.χ. η Google εμφανίζει βαθμολογίες με αστέρια στην αναζήτηση) - συνήθως πιο αξιόπιστο από την αναγνώριση κειμένου. Λειτουργεί μόνο σε σελίδες που παρέχουν τέτοια δεδομένα και δεν αποκλείουν αυτοματοποιημένα αιτήματα.",
-    formular_url_importieren_btn: "Εισαγωγή",
-    formular_url_laedt: "Φόρτωση …",
-    formular_text_einfuegen_btn: "🔍 Επικόλληση κειμένου συνταγής (αυτόματη αναγνώριση)",
-    formular_text_label: "Επικόλλησε εδώ το κείμενο της συνταγής (π.χ. αντιγραμμένο από ιστοσελίδα συνταγών)",
-    formular_text_placeholder: "Τίτλος, υλικά, εκτέλεση - απλώς επικόλλησε όλο το κείμενο",
-    formular_text_hinweis: "Καθαρά αυτόματη αναγνώριση χωρίς ΤΝ - λειτουργεί καλύτερα με τους τίτλους \"Υλικά\" και \"Εκτέλεση\" στο κείμενο. Έλεγξε σύντομα το αποτέλεσμα στη συνέχεια, μπορεί να είναι ελλιπές.",
-    formular_text_erkennen_btn: "Αναγνώριση",
-    formular_json_einfuegen_btn: "📋 Επικόλληση JSON που δημιουργήθηκε από ΤΝ",
-    formular_json_info_aria: "Εμφάνιση έτοιμης εντολής (prompt) για ΤΝ",
-    json_info_titel: "Prompt για ΤΝ",
-    json_info_erklaerung:
-      "Αντέγραψε αυτό το κείμενο, επικόλλησέ το σε μια ΤΝ της επιλογής σου (π.χ. ChatGPT ή Claude), πρόσθεσε το κείμενο της συνταγής σου και μετά επικόλλησε την απάντηση παραπάνω στο «Επικόλλησε το JSON εδώ».",
-    json_info_prompt:
-      "Μετέτρεψε το κείμενο της συνταγής που θα σου στείλω αμέσως σε ΕΝΑ μοναδικό αντικείμενο JSON - χωρίς εξήγηση, χωρίς κείμενο πριν ή μετά, μόνο το JSON. Χρησιμοποίησε ακριβώς αυτή τη μορφή:\n\n" +
-      "{\n" +
-      '  "title": "όνομα συνταγής",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "μία από: {{kategorien}}",\n' +
-      '  "ingredients": ["ένα υλικό ανά καταχώριση, π.χ. 200 γρ. αλεύρι"],\n' +
-      '  "steps": ["ένα βήμα παρασκευής ανά καταχώριση"],\n' +
-      '  "tags": ["προαιρετικές ετικέτες, π.χ. χορτοφαγικό"]\n' +
-      "}\n\n" +
-      "Κανόνες: το «category» πρέπει να είναι ΑΚΡΙΒΩΣ μία από τις παραπάνω τιμές (αντέγραψέ την αναλλοίωτη, ακόμη κι αν το κείμενο της συνταγής είναι σε άλλη γλώσσα - πρόκειται για σταθερές εσωτερικές τιμές). " +
-      "Το «tags» είναι προαιρετικό, ένας κενός πίνακας είναι εντάξει. " +
-      "Μην επινοείς υλικά ή βήματα που δεν υπάρχουν στο κείμενο. " +
-      "Ορίστε το κείμενο της συνταγής:",
-    json_info_kopieren_btn: "📋 Αντιγραφή prompt",
-    json_info_kopiert: "Αντιγράφηκε!",
-    formular_json_label: "Επικόλλησε το JSON εδώ",
-    formular_json_uebernehmen_btn: "Εφαρμογή",
-    formular_label_titel: "Τίτλος",
-    formular_label_kategorie: "Κατηγορία",
-    formular_label_tags: "Ετικέτες (πολλαπλές δυνατές, π.χ. \"χορτοφαγικό\", \"γρήγορο\")",
-    formular_tag_placeholder: "Πληκτρολόγησε και πρόσθεσε μια ετικέτα",
-    formular_tag_hinzufuegen_btn: "+ Ετικέτα",
-    formular_tag_entfernen_aria: "Αφαίρεση ετικέτας {{tag}}",
-    formular_label_portionen: "Μερίδες (βάση)",
-    formular_label_zutaten: "Υλικά",
-    formular_zutat_hinzufuegen_btn: "+ Υλικό",
-    formular_zutat_menge_placeholder: "Ποσότητα",
-    formular_zutat_einheit_placeholder: "Μονάδα",
-    formular_zutat_name_placeholder: "Υλικό",
-    formular_zutat_entfernen_aria: "Αφαίρεση υλικού",
-    formular_label_zubereitung: "Εκτέλεση (βήματα)",
-    formular_schritt_hinzufuegen_btn: "+ Βήμα",
-    formular_schritt_placeholder_beispiel: "π.χ. πλύνε και κόψε τα λαχανικά",
-    formular_schritt_placeholder_naechster: "επόμενο βήμα",
-    formular_schritt_entfernen_aria: "Αφαίρεση βήματος",
-    formular_schritt_hoch_aria: "Μετακίνηση βήματος προς τα πάνω",
-    formular_schritt_runter_aria: "Μετακίνηση βήματος προς τα κάτω",
-    formular_label_bild: "Φωτογραφία",
-    formular_bild_vorhanden_hinweis: "(υπάρχει – ένα νέο αρχείο θα την αντικαταστήσει)",
-    formular_bild_hinweis: "Η τρέχουσα φωτογραφία διατηρείται αν δεν επιλέξεις νέο αρχείο.",
-    formular_bild_verkleinern_text: "Σμίκρυνση φωτογραφίας…",
-    fehler_url_ungueltig: "Δώσε μια πλήρη διεύθυνση που να ξεκινά με http:// ή https://.",
-    fehler_url_apostroph: "Αυτή η διεύθυνση περιέχει απόστροφο (') και δυστυχώς δεν μπορεί να εισαχθεί.",
-    fehler_url_keine_ausgabe: "Το σενάριο δεν επέστρεψε καμία έξοδο. Έχει ρυθμιστεί το 'rezeptbuch_url_importieren' στο configuration.yaml και έχει γίνει πλήρης επανεκκίνηση του Home Assistant έκτοτε;",
-    fehler_url_kein_json: "Η απάντηση του σεναρίου εισαγωγής δεν ήταν έγκυρο JSON.",
-    fehler_url_import_fehlgeschlagen: "Η εισαγωγή URL απέτυχε: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Δυστυχώς δεν αναγνωρίστηκε τίποτα στο επικολλημένο κείμενο. Συμπλήρωσε τα παρακάτω πεδία χειροκίνητα.",
-    warnung_texterkennung_unvollstaendig: "Η αναγνώριση ήταν ελλιπής (λείπουν υλικά ή βήματα ή μπορεί να έχουν αντιστοιχιστεί λανθασμένα) - έλεγξε και συμπλήρωσε στη φόρμα.",
-    fehler_json_ungueltig: "Το επικολλημένο JSON δεν είναι έγκυρο. Έλεγξέ το και προσπάθησε ξανά.",
-    fehler_json_titel_fehlt: "Στο JSON λείπει τουλάχιστον το πεδίο 'title'.",
-    fehler_titel_fehlt: "Δώσε έναν τίτλο.",
-    fehler_unerwartet: "Απρόσμενο σφάλμα:\n{{fehler}}",
-    fehler_konflikt_geloescht: "Το \"{{titel}}\" έχει διαγραφεί εν τω μεταξύ από κάποιον άλλον. Οι αλλαγές σου δεν αποθηκεύτηκαν.",
-    fehler_konflikt_geaendert: "Το \"{{titel}}\" έχει τροποποιηθεί εν τω μεταξύ από κάποιον άλλον (π.χ. σχόλιο, βαθμολογία ή δική του επεξεργασία).\n\nΓια να μην αντικατασταθεί κάτι, οι αλλαγές σου ΔΕΝ αποθηκεύτηκαν. Άνοιξε ξανά τη συνταγή και εισήγαγε ξανά τις αλλαγές σου.",
-    fehler_vorgang_fehlgeschlagen: "Η ενέργεια απέτυχε:\n{{fehler}}",
-    fehler_teilen_drucken: "Απρόσμενο σφάλμα κατά την κοινοποίηση/εκτύπωση:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Όρισε 'entity' στη διαμόρφωση της κάρτας, π.χ. entity: todo.rezepte",
-    fehler_bild_lesen: "Δεν ήταν δυνατή η ανάγνωση της φωτογραφίας (κατεστραμμένο ή μη υποστηριζόμενο αρχείο).",
-    fehler_bild_verarbeiten: "Δεν ήταν δυνατή η επεξεργασία της φωτογραφίας ως εικόνα (μη υποστηριζόμενη μορφή;).",
-    teilen_ueberschrift_zutaten: "ΥΛΙΚΑ",
-    teilen_ueberschrift_zubereitung: "ΕΚΤΕΛΕΣΗ",
-    seite_zurueck_btn: "← Πίσω",
-    seite_weiter_btn: "Επόμενο →",
-    seite_anzeige: "Σελίδα {{aktuell}} από {{gesamt}}",
-    update_neue_version: "Διατίθεται νέα έκδοση: {{version}}",
-    update_ansehen_btn: "Προβολή",
-    update_schliessen_aria: "Απόκρυψη ειδοποίησης",
-    ressourcen_version_hinweis: "⚠️ Αυτή η κάρτα ενημερώθηκε, αλλά το URL του πόρου δεν άλλαξε (παραμένει \"?v={{version}}\"). Άλλα προγράμματα περιήγησης/συσκευές ενδέχεται επομένως να συνεχίσουν να φορτώνουν το παλιό, αποθηκευμένο στην προσωρινή μνήμη αρχείο - αύξησε τον αριθμό έκδοσης στο URL του πόρου (Ρυθμίσεις → Πίνακες ελέγχου → Πόροι).",
-    detail_kochmodus_btn: "🍳 Λειτουργία μαγειρέματος",
-    kochmodus_schritt_anzeige: "Βήμα {{aktuell}} από {{gesamt}}",
-    kochmodus_schliessen_aria: "Κλείσιμο λειτουργίας μαγειρέματος",
-    kochmodus_schritt_zurueck_aria: "Προηγούμενο βήμα",
-    kochmodus_schritt_weiter_aria: "Επόμενο βήμα",
-    kochmodus_zutaten_ein_aria: "Εμφάνιση υλικών",
-    kochmodus_zutaten_aus_aria: "Απόκρυψη υλικών",
-    kochmodus_timer_ein_aria: "Εμφάνιση χρονομέτρου",
-    kochmodus_timer_aus_aria: "Απόκρυψη χρονομέτρου",
-    kochmodus_timer_minuten_aria: "Λεπτά",
-    kochmodus_timer_start_btn: "Έναρξη",
-    kochmodus_timer_abbrechen_btn: "Ακύρωση",
-    kochmodus_timer_abgelaufen_text: "⏰ Ο χρόνος έληξε!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Έναρξη χρονομέτρου {{minuten}} λεπτών",
-    kopf_sammel_pdf_btn: "📚 Συγκεντρωτικό PDF",
-    sammel_pdf_keine_rezepte: "Δεν βρέθηκαν συνταγές για εξαγωγή.",
-    sammel_pdf_frage_toc: "Δημιουργία πίνακα περιεχομένων για τις επιλεγμένες συνταγές;",
-    sammel_pdf_ja_toc_btn: "Ναι, δημιουργία πίνακα περιεχομένων",
-    sammel_pdf_nein_toc_btn: "Όχι, χωρίς πίνακα περιεχομένων",
-    sammel_pdf_name_placeholder: "Όνομα βιβλίου μαγειρικής",
-    sammel_pdf_erstellen_btn: "Δημιουργία PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Πίνακας περιεχομένων",
-    sammel_pdf_frage_umfang: "Ποιες συνταγές να μπουν στο συνολικό PDF;",
-    sammel_pdf_alle_rezepte_btn: "Όλες οι εμφανιζόμενες συνταγές",
-    sammel_pdf_auswahl_btn: "Επιλογή συγκεκριμένων συνταγών",
-    sammel_pdf_auswahl_titel: "Επιλογή συνταγών",
-    sammel_pdf_alle_auswaehlen_link: "Επιλογή όλων",
-    sammel_pdf_keine_auswaehlen_link: "Καμία επιλογή",
-    sammel_pdf_weiter_btn: "Επόμενο",
-    sammel_pdf_bilder_mitdrucken_label: "Συμπερίληψη εικόνων στο PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Επιλέξτε τουλάχιστον μία συνταγή.",
-  },
-  hu: {
-    allgemein_zurueck: "← Vissza",
-    allgemein_ja: "Igen",
-    allgemein_nein: "Nem",
-    allgemein_an: "Be",
-    allgemein_aus: "Ki",
-    allgemein_speichern: "Mentés",
-    allgemein_speichert: "Mentés…",
-    allgemein_abbrechen: "Mégse",
-    allgemein_bearbeiten: "Szerkesztés",
-    allgemein_loeschen: "Törlés",
-    allgemein_oeffnen: "Megnyitás",
-    allgemein_unbekannt: "Ismeretlen",
-    allgemein_schliessen: "Bezárás",
-    kategorie_hauptgericht: "Főétel",
-    kategorie_vorspeise: "Előétel",
-    kategorie_suppe: "Leves",
-    kategorie_salat: "Saláta",
-    kategorie_beilage: "Köret",
-    kategorie_dessert: "Desszert",
-    kategorie_kuchen_gebaeck: "Sütemények és péksütemények",
-    kategorie_fruehstueck: "Reggeli",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Ital",
-    kategorie_sonstiges: "Egyéb",
-    kategorie_filter_alle: "Összes",
-    kategorie_neu_btn: "+ Új kategória",
-    kategorie_name_placeholder: "Kategória neve",
-    fehler_kategorie_name_fehlt: "Kérjük, adjon meg egy nevet a kategóriának.",
-    fehler_kategorie_existiert_bereits: "Ez a kategória már létezik.",
-    kategorie_loeschen_title: "Kategória törlése",
-    kategorie_loeschen_aria: "{{name}} kategória törlése",
-    kategorie_bearbeiten_title: "Kategória átnevezése",
-    kategorie_bearbeiten_aria: "Kategória {{name}} átnevezése",
-    kategorie_umbenennen_titel: "\"{{name}}\" kategória átnevezése:",
-    fehler_kategorie_wird_verwendet: "Ezt a kategóriát még {{anzahl}}x recept használja - kérjük, először rendeljen hozzájuk másik kategóriát.",
-    wochentag_montag: "Hétfő",
-    wochentag_dienstag: "Kedd",
-    wochentag_mittwoch: "Szerda",
-    wochentag_donnerstag: "Csütörtök",
-    wochentag_freitag: "Péntek",
-    wochentag_samstag: "Szombat",
-    wochentag_sonntag: "Vasárnap",
-    sortier_titel: "Betűrend (A-Z)",
-    sortier_bewertung: "Legjobb értékelés elöl",
-    sortier_kategorie: "Kategória szerint",
-    sortier_neu: "Legújabb elöl",
-    sortieren_label: "Rendezés:",
-    kopf_titel_standard: "Szakácskönyv",
-    kopf_sichern_btn: "💾 Biztonsági mentés",
-    kopf_wochenplan_btn: "📅 Heti étrend",
-    kopf_zufallsrezept_btn: "🎲 Véletlen recept",
-    umrechnungstabelle_btn: "📐 Átváltási táblázat",
-    umrechnungstabelle_titel: "Átváltási táblázat",
-    umrechnungstabelle_hinweis: "Hozzávetőleges grammértékek gyakori konyhai alapanyagokhoz - márkától és állapottól függően változhatnak, csak útmutatóként. NEM kerülnek automatikusan a receptjeidre.",
-    umrechnungstabelle_suche_placeholder: "Alapanyag keresése …",
-    umrechnungstabelle_spalte_zutat: "Alapanyag",
-    umrechnungstabelle_spalte_tasse: "1 bögre",
-    umrechnungstabelle_spalte_el: "1 evőkanál",
-    umrechnungstabelle_spalte_tl: "1 teáskanál",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Nem található alapanyag.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Saját alapanyag hozzáadása",
-    umrechnungstabelle_eigene_name_platzhalter: "Alapanyag neve",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/bögre",
-    umrechnungstabelle_eigene_el_platzhalter: "g/evőkanál",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/teáskanál",
-    umrechnungstabelle_eigene_loeschen_titel: "Saját alapanyag törlése",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Saját alapanyag szerkesztése",
-    umrechnungstabelle_eigene_name_fehlt: "Adj meg egy nevet.",
-    umrechnungstabelle_eigene_hinweis: "Hiányzik egy alapanyag, amelynek átváltási értékét te magad ismered? Add hozzá itt kézzel - szándékosan nem kínálunk automatikus átváltást térfogat és tömeg között, mivel ez alapanyagtól, márkától és sűrűségtől függő tippelést jelentene.",
-    einkaufsmodus_start_btn: "🛒 Bevásárlólista",
-    einkaufsmodus_beenden_btn: "✕ Kiválasztás befejezése",
-    kopf_neu_btn: "+ Új",
-    suche_placeholder: "🔍 Recept vagy hozzávalók (pl. liszt, tojás)…",
-    kochbuch_loeschen_title: "Gyűjtemény törlése",
-    kochbuch_loeschen_aria: "{{name}} gyűjtemény törlése",
-    kochbuch_speichern_btn: "+ Mentés intelligens gyűjteményként",
-    kochbuch_name_placeholder: "Ennek a gyűjteménynek a neve, pl. Őszi receptek",
-    fehler_kochbuch_name_fehlt: "Adj meg egy nevet a gyűjteménynek.",
-    kochbuch_info_aria: "Intelligens gyűjtemények magyarázatának megjelenítése",
-    kochbuch_info_titel: "Mi az az intelligens gyűjtemény?",
-    kochbuch_info_text:
-      "Az intelligens gyűjtemény nem egy rögzített receptlistát tárol, " +
-      "hanem a kategória, a címkék és a keresési kifejezés " +
-      "kombinációját, pontosan úgy, ahogy azok a mentés pillanatában " +
-      "be vannak állítva. Ezt követően magától frissül: egy új, " +
-      "illeszkedő recept automatikusan megjelenik, egy olyan recept " +
-      "pedig, amelynek kategóriája vagy címkéi megváltoznak, " +
-      "ugyanolyan automatikusan el is tűnhet.",
-    einkaufs_zaehler: "{{anzahl}} kiválasztva",
-    einkaufsliste_erstellen_btn: "Bevásárlólista létrehozása",
-    fehler_einkaufsliste_keine_konfiguration: "A bevásárlólistához még hiányzik a konfiguráció: add meg a 'shopping_list_entity' beállítást a kártya konfigurációjában (pl. shopping_list_entity: todo.einkaufsliste) - ehhez egy MÁSODIK „Helyi teendőlista” segéd szükséges. Lásd az ANLEITUNG-Backup.md fájl 18. szakaszát.",
-    fehler_einkaufsliste_keine_auswahl: "Válassz ki legalább egy receptet.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Válassz ki legalább egy hozzávalót.",
-    zutaten_fehlend_einkaufsliste_btn: "Kiválasztottak hozzáadása a bevásárlólistához",
-    fehler_einkaufsliste_keine_zutaten: "A kiválasztott receptek nem tartalmaznak hozzávalókat.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nem sikerült hozzáadni a(z) \"{{zeile}}\" tételt a bevásárlólistához:\n{{fehler}}\n\nA már hozzáadott hozzávalók a listán maradnak.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} hozzávaló hozzáadva a(z) \"{{entity}}\" listához.",
-    undo_geloescht: "\"{{titel}}\" törölve.",
-    undo_rueckgaengig_btn: "Visszavonás",
-    leer_keine_rezepte: "Még nincsenek receptek – kezdd a \"+ Új\" gombbal",
-    leer_keine_treffer: "Nem található recept erre: \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Nem sikerült betölteni: \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Létezik ez a teendőlista? (Beállítások → Eszközök és szolgáltatások → Segédeszközök)",
-    kachel_aria_label_oeffnen: "{{titel}} recept megnyitása",
-    sterne_aria_label_gruppe: "Saját értékelésed",
-    sterne_aria_label: "{{zahl}} / 5 csillag",
-    fehler_kein_benutzer_bewertung: "Nem sikerült megállapítani a felhasználódat - az értékelés nem lehetséges.",
-    detail_teilen_drucken_btn: "📤 Megosztás / Nyomtatás",
-    detail_erstellt_von: "👤 Létrehozta: {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} értékelés)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} értékelés)",
-    detail_keine_bewertungen: "Még nincsenek értékelések",
-    detail_deine_bewertung: "Az értékelésed:",
-    detail_zubereitet_x: "🍳 {{anzahl}}x elkészítve",
-    detail_portionen_suffix: "adag",
-    abschnitt_titel_zutaten: "Hozzávalók",
-    abschnitt_titel_zubereitung: "Elkészítés",
-    keine_zutaten: "Nincsenek megadva hozzávalók",
-    detail_kommentare_titel: "Hozzászólások",
-    detail_keine_kommentare: "Még nincsenek hozzászólások",
-    detail_kommentar_placeholder: "Kiegészítés, tipp vagy megjegyzés…",
-    detail_kommentar_hinzufuegen_btn: "Hozzászólás hozzáadása",
-    detail_bearbeiten_hinweis: "Csak {{name}} (vagy egy adminisztrátor) szerkesztheti vagy törölheti ezt a receptet.",
-    detail_ersteller_unbekannt: "a létrehozó",
-    modal_zubereitet_frage: "Elkészítetted a(z) \"{{titel}}\" receptet?",
-    modal_drucken_bild_frage: "Szerepeljen a recept képe?",
-    modal_drucken_ohne_bild_btn: "Kép nélkül",
-    modal_drucken_mit_bild_btn: "Képpel",
-    statistik_btn: "📊 Statisztika",
-    statistik_titel: "Főzési statisztika",
-    statistik_info_aria: "A statisztika magyarázatának megjelenítése",
-    statistik_einstellungen_btn_title: "Elkészítés-naplózás beállításai",
-    statistik_einstellungen_titel: "Elkészítés-naplózás beállításai",
-    statistik_einstellungen_text: "Itt állíthatod be, hogy egy recept elhagyásakor megkérdezzük-e, elkészítetted-e, és hogy megjelenjen-e az ebből született statisztika ezen a kártyán.",
-    statistik_einstellungen_schalter_label: "Kérdés és statisztika bekapcsolása",
-    tags_einstellung_schalter_label: "Címkeszűrő megjelenítése az áttekintőben",
-    zufallsrezept_einstellung_schalter_label: "Véletlen recept gomb megjelenítése az áttekintőben",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Átváltási táblázat gomb megjelenítése az áttekintőben",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Az amerikai receptekhez beállított kategóriánál az átváltási táblázat továbbra is megjelenik a receptnél és főzési módban, még akkor is, ha ez a gomb itt ki van kapcsolva.",
-    farben_abschnitt_titel: "Színek",
-    farben_hinweis: "Állítsa be a kártya egyes színeit. A Mindent visszaállít minden színt az alapértelmezettre állít.",
-    farben_akzent_label: "Fő szín (gombok, aktív szűrők)",
-    farben_akzent_text_label: "Kiemelő szín szövegekhez és szegélyekhez",
-    farben_loeschen_label: "Törlés / figyelmeztetés",
-    farben_sterne_label: "Értékelő csillagok",
-    farben_titel_label: "Címsorok",
-    farben_zuruecksetzen_btn: "Mindent visszaállít",
-    us_kategorie_einstellung_label: "Kategória amerikai receptekhez",
-    us_kategorie_einstellung_text: "Az ebbe a kategóriába tartozó receptek a receptben magában és a főzési módban is megjelenítenek egy átváltási táblázat gombot.",
-    us_kategorie_einstellung_keine: "— Nincs —",
-    statistik_info_titel: "Hogyan számítjuk ki ezt a statisztikát?",
-    statistik_info_text:
-      "Ez a kiértékelés minden megerősítést számol az „Elkészítetted?“ kérdésre - függetlenül az adag méretétől vagy attól, hányszor ugyanazon a napon. Ha ez a kérdés ki van kapcsolva a statisztika beállításaiban található kapcsolóval (⚙️), a számok nem nőnek tovább, de a már rögzített elkészítések megmaradnak.",
-    statistik_dieses_jahr: "{{jahr}}-ban {{anzahl}}x főztél a receptkönyvedből",
-    statistik_gesamt: "Összesen {{anzahl}}x főztél a receptkönyvedből",
-    statistik_top_titel: "Leggyakrabban elkészítve",
-    statistik_keine_daten: "Még nincs rögzített elkészítés.",
-    modal_loeschen_frage: "Biztosan törlöd a(z) \"{{titel}}\" receptet?",
-    modal_loeschen_ja_btn: "Igen, törlés",
-    modal_kommentar_loeschen_frage: "Biztosan törli ezt a megjegyzést?",
-    wochenplan_titel: "Heti étrend",
-    wochenplan_tab_diese: "Ezen a héten",
-    wochenplan_tab_folgewoche: "Következő hét",
-    wochenplan_hinweis_folgewoche: "Tervezd itt már most a következő hetet - amint véget ér az aktuális hét, automatikusan átkerül az \"Ezen a héten\" nézetbe.",
-    wochenplan_hinweis_diese: "Az elmúlt napok automatikusan törlődnek (maga a recept megmarad, csak a hozzárendelés tűnik el).",
-    wochenplan_hinweis_speicherung: "Eszközök között szinkronizálva mentődik (rejtett további bejegyzésként ugyanabban a receptlistában, nincs szükség további segédre).",
-    wochenplan_leer: "Még nincsenek receptek - hozz létre először néhányat.",
-    wochenplan_kein_rezept_option: "– nincs recept –",
-    wochenplan_einkaufsliste_btn: "Bevásárlólista létrehozása innen: {{ziel}}",
-    wochenplan_wort: "heti étrend",
-    wochenplan_folgewoche_wort: "következő hét",
-    wochenplan_aktuelle_woche_wort: "aktuális hét",
-    wochenplan_keine_zuweisung: "A(z) {{zeitraum}} még nem tartalmaz hozzárendelt receptet.",
-    formular_titel_neu: "Új recept",
-    formular_titel_bearbeiten: "Recept szerkesztése",
-    formular_url_import_btn: "🌐 Recept URL importálása",
-    formular_url_label: "Link a recept weboldalára",
-    formular_url_placeholder: "https://www.pelda-receptek.hu/receptem",
-    formular_url_hinweis: "Betölti az oldalt, és beolvassa a benne már eleve beépített, strukturált receptadatokat (ugyanazokat az adatokat, amelyekkel pl. a Google csillagos értékeléseket jelenít meg a keresésben) - általában megbízhatóbb, mint a szövegfelismerés. Csak olyan oldalakon működik, amelyek ilyen adatokat biztosítanak, és nem blokkolják az automatizált lekéréseket.",
-    formular_url_importieren_btn: "Importálás",
-    formular_url_laedt: "Betöltés …",
-    formular_text_einfuegen_btn: "🔍 Recept szövegének beillesztése (automatikus felismerés)",
-    formular_text_label: "Illeszd be ide a recept szövegét (pl. egy recept weboldalról másolva)",
-    formular_text_placeholder: "Cím, hozzávalók, elkészítés - egyszerűen illeszd be az egész szöveget",
-    formular_text_hinweis: "Tisztán automatikus, AI nélküli felismerés - a szövegben szereplő \"Hozzávalók\" és \"Elkészítés\" címsorokkal működik a legjobban. Kérjük, utána röviden ellenőrizd az eredményt, lehet, hogy hiányos.",
-    formular_text_erkennen_btn: "Felismerés",
-    formular_json_einfuegen_btn: "📋 AI által generált JSON beillesztése",
-    formular_json_info_aria: "Kész prompt megjelenítése MI-hez",
-    json_info_titel: "Prompt MI-hez",
-    json_info_erklaerung:
-      "Másold ki ezt a szöveget, illeszd be egy tetszőleges MI-be (pl. ChatGPT vagy Claude), csatold hozzá a recept szövegét, majd a választ illeszd be fent az „Illeszd be ide a JSON-t” mezőbe.",
-    json_info_prompt:
-      "Alakítsd át a recept szövegét, amit mindjárt elküldök, EGYETLEN JSON objektummá - magyarázat nélkül, előtte vagy utána szöveg nélkül, csak a JSON-t. Pontosan ezt a formátumot használd:\n\n" +
-      "{\n" +
-      '  "title": "recept neve",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "az alábbiak egyike: {{kategorien}}",\n' +
-      '  "ingredients": ["soronként egy hozzávaló, pl. 200 g liszt"],\n' +
-      '  "steps": ["soronként egy elkészítési lépés"],\n' +
-      '  "tags": ["opcionális címkék, pl. vegetáriánus"]\n' +
-      "}\n\n" +
-      "Szabályok: a „category” PONTOSAN az egyik fent felsorolt érték legyen (változatlanul vedd át, még akkor is, ha a recept szövege más nyelven van - ezek rögzített belső értékek). " +
-      "A „tags” opcionális, üres tömb is megfelel. " +
-      "Ne találj ki olyan hozzávalókat vagy lépéseket, amelyek nincsenek a szövegben. " +
-      "Íme a recept szövege:",
-    json_info_kopieren_btn: "📋 Prompt másolása",
-    json_info_kopiert: "Másolva!",
-    formular_json_label: "Illeszd be ide a JSON-t",
-    formular_json_uebernehmen_btn: "Alkalmaz",
-    formular_label_titel: "Cím",
-    formular_label_kategorie: "Kategória",
-    formular_label_tags: "Címkék (több is lehet, pl. \"vegetáriánus\", \"gyors\")",
-    formular_tag_placeholder: "Írj be és adj hozzá egy címkét",
-    formular_tag_hinzufuegen_btn: "+ Címke",
-    formular_tag_entfernen_aria: "{{tag}} címke eltávolítása",
-    formular_label_portionen: "Adagok (alap)",
-    formular_label_zutaten: "Hozzávalók",
-    formular_zutat_hinzufuegen_btn: "+ Hozzávaló",
-    formular_zutat_menge_placeholder: "Mennyiség",
-    formular_zutat_einheit_placeholder: "Mértékegység",
-    formular_zutat_name_placeholder: "Hozzávaló",
-    formular_zutat_entfernen_aria: "Hozzávaló eltávolítása",
-    formular_label_zubereitung: "Elkészítés (lépések)",
-    formular_schritt_hinzufuegen_btn: "+ Lépés",
-    formular_schritt_placeholder_beispiel: "pl. mosd meg és vágd fel a zöldségeket",
-    formular_schritt_placeholder_naechster: "következő lépés",
-    formular_schritt_entfernen_aria: "Lépés eltávolítása",
-    formular_schritt_hoch_aria: "Lépés mozgatása felfelé",
-    formular_schritt_runter_aria: "Lépés mozgatása lefelé",
-    formular_label_bild: "Kép",
-    formular_bild_vorhanden_hinweis: "(van – egy új fájl le fogja cserélni)",
-    formular_bild_hinweis: "Az aktuális kép megmarad, ha nem választasz új fájlt.",
-    formular_bild_verkleinern_text: "A kép kicsinyítése folyamatban…",
-    fehler_url_ungueltig: "Adj meg egy teljes címet, amely http://-vel vagy https://-vel kezdődik.",
-    fehler_url_apostroph: "Ez a cím aposztrófot (') tartalmaz, ezért sajnos nem importálható.",
-    fehler_url_keine_ausgabe: "A szkript nem adott vissza kimenetet. Be van állítva a 'rezeptbuch_url_importieren' a configuration.yaml fájlban, és azóta teljesen újraindították a Home Assistantot?",
-    fehler_url_kein_json: "Az importáló szkript válasza nem volt érvényes JSON.",
-    fehler_url_import_fehlgeschlagen: "Az URL importálása sikertelen: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Sajnos semmit sem sikerült felismerni a beillesztett szövegben. Töltsd ki kézzel az alábbi mezőket.",
-    warnung_texterkennung_unvollstaendig: "A felismerés hiányos volt (hiányoznak a hozzávalók vagy lépések, esetleg hibásan lettek hozzárendelve) - ellenőrizd és egészítsd ki az űrlapon.",
-    fehler_json_ungueltig: "A beillesztett JSON érvénytelen. Ellenőrizd, és próbáld újra.",
-    fehler_json_titel_fehlt: "A JSON-ból legalább a 'title' mező hiányzik.",
-    fehler_titel_fehlt: "Adj meg egy címet.",
-    fehler_unerwartet: "Váratlan hiba:\n{{fehler}}",
-    fehler_konflikt_geloescht: "A(z) \"{{titel}}\" receptet időközben valaki más törölte. A módosításaid nem mentődtek el.",
-    fehler_konflikt_geaendert: "A(z) \"{{titel}}\" receptet időközben valaki más módosította (pl. hozzászólás, értékelés vagy saját szerkesztés).\n\nHogy semmi ne íródjon felül, a módosításaid NEM mentődtek el. Nyisd meg újra a receptet, és add meg újra a módosításaidat.",
-    fehler_vorgang_fehlgeschlagen: "A művelet sikertelen:\n{{fehler}}",
-    fehler_teilen_drucken: "Váratlan hiba a megosztás/nyomtatás során:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Add meg az 'entity' beállítást a kártya konfigurációjában, pl. entity: todo.rezepte",
-    fehler_bild_lesen: "A fotót nem sikerült beolvasni (a fájl sérült vagy nem támogatott).",
-    fehler_bild_verarbeiten: "A fotót nem sikerült képként feldolgozni (nem támogatott formátum?).",
-    teilen_ueberschrift_zutaten: "HOZZÁVALÓK",
-    teilen_ueberschrift_zubereitung: "ELKÉSZÍTÉS",
-    seite_zurueck_btn: "← Vissza",
-    seite_weiter_btn: "Tovább →",
-    seite_anzeige: "{{aktuell}}. oldal / {{gesamt}}",
-    update_neue_version: "Új verzió érhető el: {{version}}",
-    update_ansehen_btn: "Megnézem",
-    update_schliessen_aria: "Értesítés elrejtése",
-    ressourcen_version_hinweis: "⚠️ Ez a kártya frissült, de az erőforrás URL-je nem változott (továbbra is \"?v={{version}}\"). Más böngészők/eszközök emiatt esetleg továbbra is a régi, gyorsítótárazott fájlt töltik be - növeld a verziószámot az erőforrás URL-jében (Beállítások → Vezérlőpultok → Erőforrások).",
-    detail_kochmodus_btn: "🍳 Főzési mód",
-    kochmodus_schritt_anzeige: "{{aktuell}}. lépés / {{gesamt}}",
-    kochmodus_schliessen_aria: "Főzési mód bezárása",
-    kochmodus_schritt_zurueck_aria: "Előző lépés",
-    kochmodus_schritt_weiter_aria: "Következő lépés",
-    kochmodus_zutaten_ein_aria: "Hozzávalók megjelenítése",
-    kochmodus_zutaten_aus_aria: "Hozzávalók elrejtése",
-    kochmodus_timer_ein_aria: "Időzítő megjelenítése",
-    kochmodus_timer_aus_aria: "Időzítő elrejtése",
-    kochmodus_timer_minuten_aria: "Perc",
-    kochmodus_timer_start_btn: "Indítás",
-    kochmodus_timer_abbrechen_btn: "Mégse",
-    kochmodus_timer_abgelaufen_text: "⏰ Lejárt az idő!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "{{minuten}} perces időzítő indítása",
-    kopf_sammel_pdf_btn: "📚 Gyűjtő PDF",
-    sammel_pdf_keine_rezepte: "Nem található exportálható recept.",
-    sammel_pdf_frage_toc: "Létrehozzunk tartalomjegyzéket a kiválasztott receptekhez?",
-    sammel_pdf_ja_toc_btn: "Igen, tartalomjegyzék létrehozása",
-    sammel_pdf_nein_toc_btn: "Nem, tartalomjegyzék nélkül",
-    sammel_pdf_name_placeholder: "A szakácskönyv neve",
-    sammel_pdf_erstellen_btn: "PDF létrehozása",
-    abschnitt_titel_inhaltsverzeichnis: "Tartalomjegyzék",
-    sammel_pdf_frage_umfang: "Mely receptek kerüljenek a gyűjtő PDF-be?",
-    sammel_pdf_alle_rezepte_btn: "Az összes megjelenített recept",
-    sammel_pdf_auswahl_btn: "Bizonyos receptek kiválasztása",
-    sammel_pdf_auswahl_titel: "Receptek kiválasztása",
-    sammel_pdf_alle_auswaehlen_link: "Összes kijelölése",
-    sammel_pdf_keine_auswaehlen_link: "Kijelölés törlése",
-    sammel_pdf_weiter_btn: "Tovább",
-    sammel_pdf_bilder_mitdrucken_label: "Képek belefoglalása a PDF-be",
-    sammel_pdf_auswahl_keine_hinweis: "Válassz ki legalább egy receptet.",
-  },
-  ga: {
-    allgemein_zurueck: "← Siar",
-    allgemein_ja: "Tá",
-    allgemein_nein: "Níl",
-    allgemein_an: "Ar",
-    allgemein_aus: "Múchta",
-    allgemein_speichern: "Sábháil",
-    allgemein_speichert: "Ag sábháil…",
-    allgemein_abbrechen: "Cealaigh",
-    allgemein_bearbeiten: "Cuir in eagar",
-    allgemein_loeschen: "Scrios",
-    allgemein_oeffnen: "Oscail",
-    allgemein_unbekannt: "Anaithnid",
-    allgemein_schliessen: "Dún",
-    kategorie_hauptgericht: "Príomhchúrsa",
-    kategorie_vorspeise: "Réamhchúrsa",
-    kategorie_suppe: "Anraith",
-    kategorie_salat: "Sailéad",
-    kategorie_beilage: "Taobhrud",
-    kategorie_dessert: "Milseog",
-    kategorie_kuchen_gebaeck: "Cácaí agus bácáil",
-    kategorie_fruehstueck: "Bricfeasta",
-    kategorie_snack: "Sneaic",
-    kategorie_getraenk: "Deoch",
-    kategorie_sonstiges: "Eile",
-    kategorie_filter_alle: "Uile",
-    kategorie_neu_btn: "+ Catagóir nua",
-    kategorie_name_placeholder: "Ainm na catagóire",
-    fehler_kategorie_name_fehlt: "Cuir isteach ainm don chatagóir le do thoil.",
-    fehler_kategorie_existiert_bereits: "Tá an chatagóir seo ann cheana féin.",
-    kategorie_loeschen_title: "Scrios catagóir",
-    kategorie_loeschen_aria: "Scrios catagóir {{name}}",
-    kategorie_bearbeiten_title: "Athainmnigh an chatagóir",
-    kategorie_bearbeiten_aria: "Athainmnigh an chatagóir {{name}}",
-    kategorie_umbenennen_titel: "Ag athainmniú na catagóire \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Tá an chatagóir seo fós á húsáid ag {{anzahl}}x oideas - sann catagóir eile dóibh ar dtús le do thoil.",
-    wochentag_montag: "Dé Luain",
-    wochentag_dienstag: "Dé Máirt",
-    wochentag_mittwoch: "Dé Céadaoin",
-    wochentag_donnerstag: "Déardaoin",
-    wochentag_freitag: "Dé hAoine",
-    wochentag_samstag: "Dé Sathairn",
-    wochentag_sonntag: "Dé Domhnaigh",
-    sortier_titel: "In ord aibítre (A-Z)",
-    sortier_bewertung: "An rátáil is fearr ar dtús",
-    sortier_kategorie: "De réir catagóire",
-    sortier_neu: "An ceann is nuaí ar dtús",
-    sortieren_label: "Sórtáil de réir:",
-    kopf_titel_standard: "Leabhar Cócaireachta",
-    kopf_sichern_btn: "💾 Cúltaca",
-    kopf_wochenplan_btn: "📅 Plean seachtainiúil",
-    kopf_zufallsrezept_btn: "🎲 Oideas randamach",
-    umrechnungstabelle_btn: "📐 Tábla tiontaithe",
-    umrechnungstabelle_titel: "Tábla tiontaithe",
-    umrechnungstabelle_hinweis: "Luachanna garaimm thuairisciúla do chomhábhair choitianta cistine - athraíonn siad de réir branda agus comhdhlúis, mar sin ní bhaineann siad ach le tagairt. NÍ chuirtear i bhfeidhm go huathoibríoch ar do chuid oidis iad.",
-    umrechnungstabelle_suche_placeholder: "Cuardaigh comhábhar …",
-    umrechnungstabelle_spalte_zutat: "Comhábhar",
-    umrechnungstabelle_spalte_tasse: "1 chupán",
-    umrechnungstabelle_spalte_el: "1 spúnóg bhord",
-    umrechnungstabelle_spalte_tl: "1 taespúnóg",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Níor aimsíodh comhábhar.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Cuir comhábhar féin leis",
-    umrechnungstabelle_eigene_name_platzhalter: "Ainm an chomhábhair",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/chupán",
-    umrechnungstabelle_eigene_el_platzhalter: "g/spúnóg bhord",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/taespúnóg",
-    umrechnungstabelle_eigene_loeschen_titel: "Scrios comhábhar féin",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Cuir an comhábhar féin in eagar",
-    umrechnungstabelle_eigene_name_fehlt: "Cuir ainm isteach le do thoil.",
-    umrechnungstabelle_eigene_hinweis: "An bhfuil comhábhar ar eolas agat an luach tiontaithe dó? Cuir isteach de láimh anseo é - go hoiriúnach ní thugaimid tiontú uathoibríoch idir toirt agus meáchan, mar bheadh sé sin ina bhuille faoi thuairim ag brath ar an chomhábhar, an branda agus an dlús.",
-    einkaufsmodus_start_btn: "🛒 Liosta siopadóireachta",
-    einkaufsmodus_beenden_btn: "✕ Stop an roghnú",
-    kopf_neu_btn: "+ Nua",
-    suche_placeholder: "🔍 Oideas nó comhábhair (m.sh. plúr, uibheacha)…",
-    kochbuch_loeschen_title: "Scrios bailiúchán",
-    kochbuch_loeschen_aria: "Scrios bailiúchán {{name}}",
-    kochbuch_speichern_btn: "+ Sábháil mar bhailiúchán cliste",
-    kochbuch_name_placeholder: "Ainm don bhailiúchán seo, m.sh. Oidis fómhair",
-    fehler_kochbuch_name_fehlt: "Cuir isteach ainm don bhailiúchán, le do thoil.",
-    kochbuch_info_aria: "Taispeáin míniú ar bhailiúcháin chliste",
-    kochbuch_info_titel: "Cad is bailiúchán cliste ann?",
-    kochbuch_info_text:
-      "Ní stórálann bailiúchán cliste liosta seasta oidis, ach " +
-      "teaglaim de chatagóir, clibeanna agus téarma cuardaigh, díreach " +
-      "mar atá siad socraithe nuair a shábhálann tú é. Ina dhiaidh " +
-      "sin, déanann sé é féin a nuashonrú go huathoibríoch: nochtann " +
-      "oideas nua a oireann go huathoibríoch, agus is féidir le " +
-      "hoideas a n-athraíonn a chatagóir nó a chlibeanna imeacht as " +
-      "radharc go huathoibríoch freisin.",
-    einkaufs_zaehler: "{{anzahl}} roghnaithe",
-    einkaufsliste_erstellen_btn: "Cruthaigh liosta siopadóireachta",
-    fehler_einkaufsliste_keine_konfiguration: "Tá an chumraíocht don liosta siopadóireachta ar iarraidh fós: cuir isteach 'shopping_list_entity' i gcumraíocht an chárta le do thoil (m.sh. shopping_list_entity: todo.einkaufsliste) - teastaíonn DARA cuidí \"Liosta Le Déanamh Áitiúil\" chuige seo. Féach ANLEITUNG-Backup.md, alt 18.",
-    fehler_einkaufsliste_keine_auswahl: "Roghnaigh oideas amháin ar a laghad, le do thoil.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Roghnaigh comhábhar amháin ar a laghad, le do thoil.",
-    zutaten_fehlend_einkaufsliste_btn: "Cuir an rogha leis an liosta siopadóireachta",
-    fehler_einkaufsliste_keine_zutaten: "Níl aon chomhábhair sna hoidis roghnaithe.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Níorbh fhéidir \"{{zeile}}\" a chur leis an liosta siopadóireachta:\n{{fehler}}\n\nFanann na comhábhair atá curtha leis cheana féin ar an liosta.",
-    einkaufsliste_hinzugefuegt: "Cuireadh {{anzahl}} chomhábhar/chomhábhair leis an liosta \"{{entity}}\".",
-    undo_geloescht: "Scriosadh \"{{titel}}\".",
-    undo_rueckgaengig_btn: "Cealaigh",
-    leer_keine_rezepte: "Níl aon oidis ann fós – tosaigh le \"+ Nua\"",
-    leer_keine_treffer: "Níor aimsíodh aon oideas do \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Níorbh fhéidir \"{{entity}}\" a lódáil.",
-    fehler_liste_laden_hinweis: "An bhfuil an liosta le déanamh seo ann? (Socruithe → Feistí agus Seirbhísí → Cuidithe)",
-    kachel_aria_label_oeffnen: "Oscail oideas {{titel}}",
-    sterne_aria_label_gruppe: "Do rátáil féin",
-    sterne_aria_label: "{{zahl}} as 5 réalta",
-    fehler_kein_benutzer_bewertung: "Níorbh fhéidir d'úsáideoir a aimsiú - níl rátáil indéanta.",
-    detail_teilen_drucken_btn: "📤 Comhroinn / Priontáil",
-    detail_erstellt_von: "👤 Cruthaithe ag {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} rátáil)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} rátáil)",
-    detail_keine_bewertungen: "Níl aon rátálacha ann fós",
-    detail_deine_bewertung: "Do rátáil:",
-    detail_zubereitet_x: "🍳 ullmhaithe {{anzahl}}x",
-    detail_portionen_suffix: "cuid",
-    abschnitt_titel_zutaten: "Comhábhair",
-    abschnitt_titel_zubereitung: "Ullmhúchán",
-    keine_zutaten: "Níor liostáladh aon chomhábhair",
-    detail_kommentare_titel: "Tuairimí",
-    detail_keine_kommentare: "Níl aon tuairimí ann fós",
-    detail_kommentar_placeholder: "Tuilleadh eolais, leid nó nóta…",
-    detail_kommentar_hinzufuegen_btn: "Cuir tuairim leis",
-    detail_bearbeiten_hinweis: "Ní féidir ach le {{name}} (nó riarthóir) an t-oideas seo a chur in eagar nó a scriosadh.",
-    detail_ersteller_unbekannt: "an cruthaitheoir",
-    modal_zubereitet_frage: "Ar ullmhaigh tú \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Cuir íomhá an oideasa san áireamh?",
-    modal_drucken_ohne_bild_btn: "Gan íomhá",
-    modal_drucken_mit_bild_btn: "Le híomhá",
-    statistik_btn: "📊 Staitisticí",
-    statistik_titel: "Staitisticí cócaireachta",
-    statistik_info_aria: "Taispeáin míniú na staitisticí",
-    statistik_einstellungen_btn_title: "Socruithe logála cócaireachta",
-    statistik_einstellungen_titel: "Socruithe logála cócaireachta",
-    statistik_einstellungen_text: "Is féidir leat anseo a shocrú an bhfiafrófar díot, tar éis duit oideas a fhágáil, an ndearna tú é, agus an dtaispeánfar an staitisticí a eascraíonn as sin ar an gcárta seo.",
-    statistik_einstellungen_schalter_label: "Cumasaigh an cheist agus staitisticí",
-    tags_einstellung_schalter_label: "Taispeáin scagaire clibeanna sa forbhreathnú",
-    zufallsrezept_einstellung_schalter_label: "Taispeáin an cnaipe Oideas randamach sa forbhreathnú",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Taispeáin an cnaipe tábla tiontaithe sa forbhreathnú",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Maidir leis an gcatagóir atá socraithe le haghaidh oidis Mheiriceánacha, leanann an tábla tiontaithe de bheith le feiceáil san oideas agus sa mhód cócaireachta, fiú má tá an cnaipe seo múchta anseo.",
-    farben_abschnitt_titel: "Dathanna",
-    farben_hinweis: "Saincheap dathanna aonair an chárta. Athshocraíonn Athshocraigh gach rud gach dath go dtí an réamhshocrú.",
-    farben_akzent_label: "Príomhdhath (cnaipí, scagairí gníomhacha)",
-    farben_akzent_text_label: "Dath aibhsithe le haghaidh téacs agus imill",
-    farben_loeschen_label: "Scriosadh / rabhadh",
-    farben_sterne_label: "Réaltaí rátála",
-    farben_titel_label: "Ceannteidil",
-    farben_zuruecksetzen_btn: "Athshocraigh gach rud",
-    us_kategorie_einstellung_label: "Catagóir d'oidis Mheiriceánacha",
-    us_kategorie_einstellung_text: "Taispeánann oidis sa chatagóir seo cnaipe breise don tábla tiontaithe san oideas féin agus sa mhód cócaireachta.",
-    us_kategorie_einstellung_keine: "— Ceann ar bith —",
-    statistik_info_titel: "Conas a ríomhtar an staitistic seo?",
-    statistik_info_text:
-      "Áirítear sa mheasúnú seo gach deimhniú ar an gceist „Ar ullmhaigh tú é?“ - beag beann ar mhéid an fhreastail nó cé mhéad uair an lá céanna. Má tá an cheist seo díchumasaithe tríd an lasc i socruithe na staitisticí (⚙️), ní fhásfaidh na huimhreacha a thuilleadh, ach coinneofar na hullmhúcháin atá taifeadta cheana.",
-    statistik_dieses_jahr: "Rinne tú cócaireacht {{anzahl}}x ó do leabhar oideas in {{jahr}}",
-    statistik_gesamt: "Rinne tú cócaireacht {{anzahl}}x ó do leabhar oideas san iomlán",
-    statistik_top_titel: "Is mó a ullmhaíodh",
-    statistik_keine_daten: "Níl aon ullmhúcháin taifeadta fós.",
-    modal_loeschen_frage: "An bhfuil tú cinnte gur mian leat \"{{titel}}\" a scriosadh?",
-    modal_loeschen_ja_btn: "Tá, scrios",
-    modal_kommentar_loeschen_frage: "An bhfuil tú cinnte gur mian leat an nóta tráchta seo a scriosadh?",
-    wochenplan_titel: "Plean seachtainiúil",
-    wochenplan_tab_diese: "An tseachtain seo",
-    wochenplan_tab_folgewoche: "An tseachtain seo chugainn",
-    wochenplan_hinweis_folgewoche: "Pleanáil an tseachtain atá le teacht anseo cheana féin - aistreoidh sé go huathoibríoch go \"An tseachtain seo\" a luaithe a bheidh an tseachtain reatha thart.",
-    wochenplan_hinweis_diese: "Glantar laethanta atá thart go huathoibríoch (fanann an t-oideas féin ann, ní chailltear ach an sannadh).",
-    wochenplan_hinweis_speicherung: "Sábháiltear é ar fud gléasanna (mar iontráil bhreise fholaithe sa liosta oidis céanna, ní gá cuidí eile).",
-    wochenplan_leer: "Níl aon oidis ann fós - cruthaigh cúpla ceann ar dtús.",
-    wochenplan_kein_rezept_option: "– gan oideas –",
-    wochenplan_einkaufsliste_btn: "Cruthaigh liosta siopadóireachta ó {{ziel}}",
-    wochenplan_wort: "plean seachtainiúil",
-    wochenplan_folgewoche_wort: "an tseachtain seo chugainn",
-    wochenplan_aktuelle_woche_wort: "an tseachtain reatha",
-    wochenplan_keine_zuweisung: "Níl aon oidis sannta san {{zeitraum}} fós.",
-    formular_titel_neu: "Oideas nua",
-    formular_titel_bearbeiten: "Cuir oideas in eagar",
-    formular_url_import_btn: "🌐 Iompórtáil URL oidis",
-    formular_url_label: "Nasc chuig suíomh gréasáin an oidis",
-    formular_url_placeholder: "https://www.samplaoidis.ie/moideas",
-    formular_url_hinweis: "Lódálann sé an leathanach agus léann sé na sonraí struchtúrtha oidis atá leabaithe ann cheana féin (na sonraí céanna a úsáideann Google, mar shampla, chun rátálacha réaltaí a thaispeáint sa chuardach) - de ghnáth níos iontaofa ná aithint téacs. Ní oibríonn sé ach ar shuíomhanna a sholáthraíonn sonraí den sórt sin agus nach gcuireann bac ar iarratais uathoibrithe.",
-    formular_url_importieren_btn: "Iompórtáil",
-    formular_url_laedt: "Ag lódáil …",
-    formular_text_einfuegen_btn: "🔍 Greamaigh téacs an oidis (aithint uathoibríoch)",
-    formular_text_label: "Greamaigh téacs an oidis anseo (m.sh. cóipeáilte ó shuíomh gréasáin oidis)",
-    formular_text_placeholder: "Teideal, comhábhair, ullmhúchán - greamaigh an téacs iomlán díreach",
-    formular_text_hinweis: "Aithint uathoibríoch amháin gan AI - is fearr a oibríonn sé le ceannteidil \"Comhábhair\" agus \"Ullmhúchán\" sa téacs. Seiceáil an toradh go gairid ina dhiaidh sin, le do thoil, d'fhéadfadh sé a bheith neamhiomlán.",
-    formular_text_erkennen_btn: "Aithin",
-    formular_json_einfuegen_btn: "📋 Greamaigh JSON a ghin AI",
-    formular_json_info_aria: "Taispeáin leid réamhdhéanta le haghaidh IS",
-    json_info_titel: "Leid le haghaidh IS",
-    json_info_erklaerung:
-      "Cóipeáil an téacs seo, greamaigh é in IS de do rogha féin (m.sh. ChatGPT nó Claude), ceangail téacs d'oideas leis, agus greamaigh an freagra ansin thuas faoi „Greamaigh JSON anseo“.",
-    json_info_prompt:
-      "Athraigh téacs an oidis a sheolfaidh mé chugat ar ball ina AON réad JSON amháin - gan míniú, gan téacs roimhe ná ina dhiaidh, an JSON amháin. Bain úsáid as an bhformáid seo go beacht:\n\n" +
-      "{\n" +
-      '  "title": "ainm an oidis",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "ceann de: {{kategorien}}",\n' +
-      '  "ingredients": ["comhábhar amháin in aghaidh na hiontrála, m.sh. 200 g plúir"],\n' +
-      '  "steps": ["céim ullmhúcháin amháin in aghaidh na hiontrála"],\n' +
-      '  "tags": ["clibeanna roghnacha, m.sh. veigeatóireach"]\n' +
-      "}\n\n" +
-      "Rialacha: ní mór go mbeadh „category“ CINNTE ar cheann de na luachanna atá liostaithe thuas (cóipeáil gan athrú é, fiú má tá téacs an oidis i dteanga eile - is luachanna seasta inmheánacha iad seo). " +
-      "Tá „tags“ roghnach, is leor eagar folamh más gá. " +
-      "Ná cum comhábhair ná céimeanna nach bhfuil sa téacs. " +
-      "Seo téacs an oidis:",
-    json_info_kopieren_btn: "📋 Cóipeáil an leid",
-    json_info_kopiert: "Cóipeáilte!",
-    formular_json_label: "Greamaigh JSON anseo",
-    formular_json_uebernehmen_btn: "Cuir i bhfeidhm",
-    formular_label_titel: "Teideal",
-    formular_label_kategorie: "Catagóir",
-    formular_label_tags: "Clibeanna (is féidir níos mó ná ceann amháin, m.sh. \"veigeatórach\", \"gasta\")",
-    formular_tag_placeholder: "Cuir isteach agus cuir clib leis",
-    formular_tag_hinzufuegen_btn: "+ Clib",
-    formular_tag_entfernen_aria: "Bain clib {{tag}}",
-    formular_label_portionen: "Cuid (bonn)",
-    formular_label_zutaten: "Comhábhair",
-    formular_zutat_hinzufuegen_btn: "+ Comhábhar",
-    formular_zutat_menge_placeholder: "Méid",
-    formular_zutat_einheit_placeholder: "Aonad",
-    formular_zutat_name_placeholder: "Comhábhar",
-    formular_zutat_entfernen_aria: "Bain comhábhar",
-    formular_label_zubereitung: "Ullmhúchán (céimeanna)",
-    formular_schritt_hinzufuegen_btn: "+ Céim",
-    formular_schritt_placeholder_beispiel: "m.sh. nigh agus gearr na glasraí",
-    formular_schritt_placeholder_naechster: "an chéad chéim eile",
-    formular_schritt_entfernen_aria: "Bain céim",
-    formular_schritt_hoch_aria: "Bog an chéim suas",
-    formular_schritt_runter_aria: "Bog an chéim síos",
-    formular_label_bild: "Grianghraf",
-    formular_bild_vorhanden_hinweis: "(ann – cuirfidh comhad nua ina ionad)",
-    formular_bild_hinweis: "Fanann an grianghraf reatha ann mura roghnaíonn tú comhad nua.",
-    formular_bild_verkleinern_text: "Grianghraf á laghdú…",
-    fehler_url_ungueltig: "Cuir isteach seoladh iomlán a thosaíonn le http:// nó https://, le do thoil.",
-    fehler_url_apostroph: "Tá uaschamóg (') sa seoladh seo agus ní féidir é a iompórtáil ar an drochuair.",
-    fehler_url_keine_ausgabe: "Níor thug an script aon aschur ar ais. An bhfuil 'rezeptbuch_url_importieren' socraithe i configuration.yaml agus ar atosaíodh Home Assistant go hiomlán ó shin?",
-    fehler_url_kein_json: "Ní raibh freagra na scripte iompórtála ina JSON bailí.",
-    fehler_url_import_fehlgeschlagen: "Theip ar iompórtáil an URL: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Ar an drochuair, níorbh fhéidir aon rud a aithint sa téacs greamaithe. Líon na réimsí thíos de láimh, le do thoil.",
-    warnung_texterkennung_unvollstaendig: "Bhí an aithint neamhiomlán (comhábhair nó céimeanna in easnamh/sannta go mícheart b'fhéidir) - seiceáil agus comhlánaigh san fhoirm, le do thoil.",
-    fehler_json_ungueltig: "Tá an JSON greamaithe neamhbhailí. Seiceáil é agus bain triail eile as, le do thoil.",
-    fehler_json_titel_fehlt: "Tá an réimse 'title' ar a laghad in easnamh sa JSON.",
-    fehler_titel_fehlt: "Cuir isteach teideal, le do thoil.",
-    fehler_unerwartet: "Earráid gan choinne:\n{{fehler}}",
-    fehler_konflikt_geloescht: "Scrios duine eile \"{{titel}}\" idir an dá linn. Níor sábháladh do chuid athruithe.",
-    fehler_konflikt_geaendert: "D'athraigh duine eile \"{{titel}}\" idir an dá linn (m.sh. tuairim, rátáil nó eagarthóireacht féin).\n\nDe chun rud ar bith a fhorscríobh, NÍOR sábháladh do chuid athruithe. Oscail an t-oideas arís, le do thoil, agus cuir isteach do chuid athruithe arís.",
-    fehler_vorgang_fehlgeschlagen: "Theip ar an ngníomh:\n{{fehler}}",
-    fehler_teilen_drucken: "Earráid gan choinne agus é á chomhroinnt/á phriontáil:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Cuir isteach 'entity' i gcumraíocht an chárta, le do thoil, m.sh. entity: todo.rezepte",
-    fehler_bild_lesen: "Níorbh fhéidir an grianghraf a léamh (comhad truaillithe nó gan tacaíocht).",
-    fehler_bild_verarbeiten: "Níorbh fhéidir an grianghraf a phróiseáil mar íomhá (formáid gan tacaíocht?).",
-    teilen_ueberschrift_zutaten: "COMHÁBHAIR",
-    teilen_ueberschrift_zubereitung: "ULLMHÚCHÁN",
-    seite_zurueck_btn: "← Siar",
-    seite_weiter_btn: "Ar Aghaidh →",
-    seite_anzeige: "Leathanach {{aktuell}} de {{gesamt}}",
-    update_neue_version: "Leagan nua ar fáil: {{version}}",
-    update_ansehen_btn: "Amharc",
-    update_schliessen_aria: "Cuir an fógra i bhfolach",
-    ressourcen_version_hinweis: "⚠️ Nuashonraíodh an cárta seo, ach níor athraíodh URL na hacmhainne (fós \"?v={{version}}\"). D'fhéadfadh brabhsálaithe/gléasanna eile leanúint de bheith ag lódáil an tseanchomhaid taisce dá bharr - méadaigh an uimhir leagain in URL na hacmhainne (Socruithe → Deais → Acmhainní).",
-    detail_kochmodus_btn: "🍳 Mód Cócaireachta",
-    kochmodus_schritt_anzeige: "Céim {{aktuell}} de {{gesamt}}",
-    kochmodus_schliessen_aria: "Dún an mód cócaireachta",
-    kochmodus_schritt_zurueck_aria: "An chéim roimhe seo",
-    kochmodus_schritt_weiter_aria: "An chéad chéim eile",
-    kochmodus_zutaten_ein_aria: "Taispeáin comhábhair",
-    kochmodus_zutaten_aus_aria: "Folaigh comhábhair",
-    kochmodus_timer_ein_aria: "Taispeáin an t-amadóir",
-    kochmodus_timer_aus_aria: "Folaigh an t-amadóir",
-    kochmodus_timer_minuten_aria: "Nóiméad",
-    kochmodus_timer_start_btn: "Tosaigh",
-    kochmodus_timer_abbrechen_btn: "Cealaigh",
-    kochmodus_timer_abgelaufen_text: "⏰ Tá an t-am istigh!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Tosaigh amadóir {{minuten}} nóiméad",
-    kopf_sammel_pdf_btn: "📚 PDF Bailithe",
-    sammel_pdf_keine_rezepte: "Níor aimsíodh aon oideas le heaspórtáil.",
-    sammel_pdf_frage_toc: "Ar mhaith leat clár ábhair a chruthú do na hoidis roghnaithe?",
-    sammel_pdf_ja_toc_btn: "Tá, cruthaigh clár ábhair",
-    sammel_pdf_nein_toc_btn: "Níl, gan clár ábhair",
-    sammel_pdf_name_placeholder: "Ainm an leabhair chócaireachta",
-    sammel_pdf_erstellen_btn: "Cruthaigh PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Clár Ábhair",
-    sammel_pdf_frage_umfang: "Cé na oidis ba chóir a bheith san PDF comhcheangailte?",
-    sammel_pdf_alle_rezepte_btn: "Gach oide a thaispeántar",
-    sammel_pdf_auswahl_btn: "Roghnaigh oidis áirithe",
-    sammel_pdf_auswahl_titel: "Roghnaigh oidis",
-    sammel_pdf_alle_auswaehlen_link: "Roghnaigh gach ceann",
-    sammel_pdf_keine_auswaehlen_link: "Bain gach rogha",
-    sammel_pdf_weiter_btn: "Ar aghaidh",
-    sammel_pdf_bilder_mitdrucken_label: "Cuir íomhánna san PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Roghnaigh ceann amháin oide ar a laghad.",
-  },
-  it: {
-    allgemein_zurueck: "← Indietro",
-    allgemein_ja: "Sì",
-    allgemein_nein: "No",
-    allgemein_an: "Attivo",
-    allgemein_aus: "Disattivo",
-    allgemein_speichern: "Salva",
-    allgemein_speichert: "Salvataggio…",
-    allgemein_abbrechen: "Annulla",
-    allgemein_bearbeiten: "Modifica",
-    allgemein_loeschen: "Elimina",
-    allgemein_oeffnen: "Apri",
-    allgemein_unbekannt: "Sconosciuto",
-    allgemein_schliessen: "Chiudi",
-    kategorie_hauptgericht: "Piatto principale",
-    kategorie_vorspeise: "Antipasto",
-    kategorie_suppe: "Zuppa",
-    kategorie_salat: "Insalata",
-    kategorie_beilage: "Contorno",
-    kategorie_dessert: "Dessert",
-    kategorie_kuchen_gebaeck: "Torte e dolci",
-    kategorie_fruehstueck: "Colazione",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Bevanda",
-    kategorie_sonstiges: "Altro",
-    kategorie_filter_alle: "Tutti",
-    kategorie_neu_btn: "+ Nuova categoria",
-    kategorie_name_placeholder: "Nome della categoria",
-    fehler_kategorie_name_fehlt: "Inserisci un nome per la categoria.",
-    fehler_kategorie_existiert_bereits: "Questa categoria esiste già.",
-    kategorie_loeschen_title: "Elimina categoria",
-    kategorie_loeschen_aria: "Elimina categoria {{name}}",
-    kategorie_bearbeiten_title: "Rinomina categoria",
-    kategorie_bearbeiten_aria: "Rinomina categoria {{name}}",
-    kategorie_umbenennen_titel: "Rinomina categoria \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Questa categoria è ancora usata da {{anzahl}}x ricette - assegna prima loro un'altra categoria.",
-    wochentag_montag: "Lunedì",
-    wochentag_dienstag: "Martedì",
-    wochentag_mittwoch: "Mercoledì",
-    wochentag_donnerstag: "Giovedì",
-    wochentag_freitag: "Venerdì",
-    wochentag_samstag: "Sabato",
-    wochentag_sonntag: "Domenica",
-    sortier_titel: "Alfabetico (A-Z)",
-    sortier_bewertung: "Miglior voto per primo",
-    sortier_kategorie: "Per categoria",
-    sortier_neu: "Più recenti per primi",
-    sortieren_label: "Ordina per:",
-    kopf_titel_standard: "Ricettario",
-    kopf_sichern_btn: "💾 Backup",
-    kopf_wochenplan_btn: "📅 Piano settimanale",
-    kopf_zufallsrezept_btn: "🎲 Ricetta casuale",
-    umrechnungstabelle_btn: "📐 Tabella di conversione",
-    umrechnungstabelle_titel: "Tabella di conversione",
-    umrechnungstabelle_hinweis: "Valori approssimativi in grammi per ingredienti comuni in cucina - variano in base a marca e consistenza, quindi solo come riferimento. NON vengono applicati automaticamente alle tue ricette.",
-    umrechnungstabelle_suche_placeholder: "Cerca ingrediente …",
-    umrechnungstabelle_spalte_zutat: "Ingrediente",
-    umrechnungstabelle_spalte_tasse: "1 tazza",
-    umrechnungstabelle_spalte_el: "1 cucchiaio",
-    umrechnungstabelle_spalte_tl: "1 cucchiaino",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Nessun ingrediente trovato.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Aggiungi ingrediente personalizzato",
-    umrechnungstabelle_eigene_name_platzhalter: "Nome dell'ingrediente",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/tazza",
-    umrechnungstabelle_eigene_el_platzhalter: "g/cucchiaio",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/cucchiaino",
-    umrechnungstabelle_eigene_loeschen_titel: "Elimina ingrediente personalizzato",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Modifica ingrediente personalizzato",
-    umrechnungstabelle_eigene_name_fehlt: "Inserisci un nome.",
-    umrechnungstabelle_eigene_hinweis: "Manca un ingrediente di cui conosci tu stesso il valore di conversione? Aggiungilo qui manualmente - non offriamo volutamente una conversione automatica tra volume e peso, perché significherebbe indovinare in base a ingrediente, marca e consistenza.",
-    einkaufsmodus_start_btn: "🛒 Lista della spesa",
-    einkaufsmodus_beenden_btn: "✕ Termina selezione",
-    kopf_neu_btn: "+ Nuova",
-    suche_placeholder: "🔍 Ricetta o ingredienti (es. farina, uova)…",
-    kochbuch_loeschen_title: "Elimina raccolta",
-    kochbuch_loeschen_aria: "Elimina raccolta {{name}}",
-    kochbuch_speichern_btn: "+ Salva come raccolta smart",
-    kochbuch_name_placeholder: "Nome per questa raccolta, es. Ricette autunnali",
-    fehler_kochbuch_name_fehlt: "Inserisci un nome per la raccolta.",
-    kochbuch_info_aria: "Mostra spiegazione delle raccolte smart",
-    kochbuch_info_titel: "Cos'è una raccolta smart?",
-    kochbuch_info_text:
-      "Una raccolta smart non memorizza un elenco fisso di ricette, " +
-      "ma una combinazione di categoria, tag e termine di ricerca, " +
-      "così come sono impostati al momento del salvataggio. In " +
-      "seguito si aggiorna da sola: una nuova ricetta che corrisponde " +
-      "compare automaticamente, e una ricetta la cui categoria o i " +
-      "cui tag cambiano può altrettanto automaticamente scomparire di " +
-      "nuovo.",
-    einkaufs_zaehler: "{{anzahl}} selezionate",
-    einkaufsliste_erstellen_btn: "Crea lista della spesa",
-    fehler_einkaufsliste_keine_konfiguration: "Manca ancora la configurazione per la lista della spesa: indica 'shopping_list_entity' nella configurazione della card (es. shopping_list_entity: todo.einkaufsliste) - a tale scopo serve un SECONDO helper Lista di cose da fare locale. Vedi ANLEITUNG-Backup.md, sezione 18.",
-    fehler_einkaufsliste_keine_auswahl: "Seleziona almeno una ricetta.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Seleziona almeno un ingrediente.",
-    zutaten_fehlend_einkaufsliste_btn: "Aggiungi selezionati alla lista della spesa",
-    fehler_einkaufsliste_keine_zutaten: "Le ricette selezionate non contengono ingredienti.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Impossibile aggiungere \"{{zeile}}\" alla lista della spesa:\n{{fehler}}\n\nGli ingredienti già aggiunti restano nella lista.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediente/i aggiunto/i a \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" eliminata.",
-    undo_rueckgaengig_btn: "Annulla",
-    leer_keine_rezepte: "Ancora nessuna ricetta – inizia con \"+ Nuova\"",
-    leer_keine_treffer: "Nessuna ricetta trovata per \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Impossibile caricare \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Questa lista di cose da fare esiste? (Impostazioni → Dispositivi e servizi → Helper)",
-    kachel_aria_label_oeffnen: "Apri ricetta {{titel}}",
-    sterne_aria_label_gruppe: "La tua valutazione",
-    sterne_aria_label: "{{zahl}} su 5 stelle",
-    fehler_kein_benutzer_bewertung: "Impossibile determinare il tuo utente - valutazione non possibile.",
-    detail_teilen_drucken_btn: "📤 Condividi / Stampa",
-    detail_erstellt_von: "👤 Creata da {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} valutazione)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} valutazioni)",
-    detail_keine_bewertungen: "Ancora nessuna valutazione",
-    detail_deine_bewertung: "La tua valutazione:",
-    detail_zubereitet_x: "🍳 preparata {{anzahl}} volte",
-    detail_portionen_suffix: "porzioni",
-    abschnitt_titel_zutaten: "Ingredienti",
-    abschnitt_titel_zubereitung: "Preparazione",
-    keine_zutaten: "Nessun ingrediente indicato",
-    detail_kommentare_titel: "Commenti",
-    detail_keine_kommentare: "Ancora nessun commento",
-    detail_kommentar_placeholder: "Aggiunta, consiglio o nota…",
-    detail_kommentar_hinzufuegen_btn: "Aggiungi commento",
-    detail_bearbeiten_hinweis: "Solo {{name}} (o un amministratore) può modificare o eliminare questa ricetta.",
-    detail_ersteller_unbekannt: "chi l'ha creata",
-    modal_zubereitet_frage: "Hai preparato \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Includere la foto della ricetta?",
-    modal_drucken_ohne_bild_btn: "Senza foto",
-    modal_drucken_mit_bild_btn: "Con foto",
-    statistik_btn: "📊 Statistiche",
-    statistik_titel: "Statistiche di cucina",
-    statistik_info_aria: "Mostra la spiegazione delle statistiche",
-    statistik_einstellungen_btn_title: "Impostazioni registro preparazioni",
-    statistik_einstellungen_titel: "Impostazioni registro preparazioni",
-    statistik_einstellungen_text: "Qui puoi stabilire se, uscendo da una ricetta, ti viene chiesto se l'hai preparata, e se le statistiche che ne derivano vengono mostrate su questa scheda.",
-    statistik_einstellungen_schalter_label: "Attiva domanda e statistiche",
-    tags_einstellung_schalter_label: "Mostra il filtro tag nella panoramica",
-    zufallsrezept_einstellung_schalter_label: "Mostra il pulsante Ricetta casuale nella panoramica",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Mostra il pulsante della tabella di conversione nella panoramica",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Per la categoria impostata per le ricette americane, la tabella di conversione continua a comparire nella ricetta e in modalità cottura, anche se questo pulsante qui è disattivato.",
-    farben_abschnitt_titel: "Colori",
-    farben_hinweis: "Personalizza i singoli colori della scheda. Ripristina tutto riporta tutti i colori a quelli predefiniti.",
-    farben_akzent_label: "Colore principale (pulsanti, filtri attivi)",
-    farben_akzent_text_label: "Colore di accento per testi e bordi",
-    farben_loeschen_label: "Elimina / avviso",
-    farben_sterne_label: "Stelle di valutazione",
-    farben_titel_label: "Titoli",
-    farben_zuruecksetzen_btn: "Ripristina tutto",
-    us_kategorie_einstellung_label: "Categoria per ricette americane",
-    us_kategorie_einstellung_text: "Le ricette con questa categoria mostrano anche un pulsante per la tabella di conversione nella ricetta stessa e in modalità cottura.",
-    us_kategorie_einstellung_keine: "— Nessuna —",
-    statistik_info_titel: "Come viene calcolata questa statistica?",
-    statistik_info_text:
-      "Questo riepilogo conta ogni conferma alla domanda «Hai preparato?» - indipendentemente dalla dimensione delle porzioni o da quante volte nello stesso giorno. Se questa domanda è disattivata tramite l'interruttore nelle impostazioni statistiche (⚙️), i numeri smettono di crescere, ma le preparazioni già registrate vengono mantenute.",
-    statistik_dieses_jahr: "Hai cucinato {{anzahl}}x dal tuo ricettario nel {{jahr}}",
-    statistik_gesamt: "Hai cucinato {{anzahl}}x dal tuo ricettario in totale",
-    statistik_top_titel: "Più preparate",
-    statistik_keine_daten: "Nessuna preparazione registrata finora.",
-    modal_loeschen_frage: "Eliminare davvero \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Sì, elimina",
-    modal_kommentar_loeschen_frage: "Eliminare davvero questo commento?",
-    wochenplan_titel: "Piano settimanale",
-    wochenplan_tab_diese: "Questa settimana",
-    wochenplan_tab_folgewoche: "Settimana prossima",
-    wochenplan_hinweis_folgewoche: "Pianifica già qui la settimana successiva - passerà automaticamente a \"Questa settimana\" non appena la settimana corrente sarà finita.",
-    wochenplan_hinweis_diese: "I giorni trascorsi vengono svuotati automaticamente (la ricetta stessa resta conservata, scompare solo l'assegnazione).",
-    wochenplan_hinweis_speicherung: "Viene salvato su tutti i dispositivi (come voce aggiuntiva nascosta nella stessa lista di ricette, non serve nessun altro helper).",
-    wochenplan_leer: "Ancora nessuna ricetta - creane prima qualcuna.",
-    wochenplan_kein_rezept_option: "– nessuna ricetta –",
-    wochenplan_einkaufsliste_btn: "Crea lista della spesa da {{ziel}}",
-    wochenplan_wort: "piano settimanale",
-    wochenplan_folgewoche_wort: "settimana prossima",
-    wochenplan_aktuelle_woche_wort: "settimana corrente",
-    wochenplan_keine_zuweisung: "{{zeitraum}} non contiene ancora ricette assegnate.",
-    formular_titel_neu: "Nuova ricetta",
-    formular_titel_bearbeiten: "Modifica ricetta",
-    formular_url_import_btn: "🌐 Importa URL ricetta",
-    formular_url_label: "Link al sito web della ricetta",
-    formular_url_placeholder: "https://www.esempio-ricette.it/la-mia-ricetta",
-    formular_url_hinweis: "Carica la pagina e legge i dati strutturati della ricetta già integrati in essa (gli stessi dati con cui, ad esempio, Google mostra le valutazioni a stelle nella ricerca) - di solito più affidabile del riconoscimento del testo. Funziona solo su siti che forniscono tali dati e non bloccano le richieste automatizzate.",
-    formular_url_importieren_btn: "Importa",
-    formular_url_laedt: "Caricamento …",
-    formular_text_einfuegen_btn: "🔍 Incolla testo della ricetta (riconoscimento automatico)",
-    formular_text_label: "Incolla qui il testo della ricetta (es. copiato da un sito di ricette)",
-    formular_text_placeholder: "Titolo, ingredienti, preparazione - incolla semplicemente tutto il testo",
-    formular_text_hinweis: "Riconoscimento puramente automatico senza IA - funziona meglio con i titoli \"Ingredienti\" e \"Preparazione\" nel testo. Controlla brevemente il risultato in seguito, potrebbe essere incompleto.",
-    formular_text_erkennen_btn: "Riconosci",
-    formular_json_einfuegen_btn: "📋 Incolla JSON generato dall'IA",
-    formular_json_info_aria: "Mostra un prompt pronto per un'IA",
-    json_info_titel: "Prompt per un'IA",
-    json_info_erklaerung:
-      "Copia questo testo, incollalo in un'IA a tua scelta (es. ChatGPT o Claude), allega il testo della tua ricetta e poi incolla la risposta sopra in «Incolla qui il JSON».",
-    json_info_prompt:
-      "Trasforma il testo della ricetta che ti invierò tra poco in UN unico oggetto JSON - senza spiegazioni, senza testo prima o dopo, solo il JSON. Usa esattamente questo formato:\n\n" +
-      "{\n" +
-      '  "title": "nome della ricetta",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "uno tra: {{kategorien}}",\n' +
-      '  "ingredients": ["un ingrediente per voce, es. 200 g di farina"],\n' +
-      '  "steps": ["un passaggio di preparazione per voce"],\n' +
-      '  "tags": ["tag opzionali, es. vegetariano"]\n' +
-      "}\n\n" +
-      "Regole: «category» deve essere ESATTAMENTE uno dei valori sopra elencati (riportalo invariato, anche se il testo della ricetta è in un'altra lingua - sono valori interni fissi). " +
-      "«tags» è facoltativo, va bene anche un array vuoto. " +
-      "Non inventare ingredienti o passaggi che non compaiono nel testo. " +
-      "Ecco il testo della ricetta:",
-    json_info_kopieren_btn: "📋 Copia prompt",
-    json_info_kopiert: "Copiato!",
-    formular_json_label: "Incolla qui il JSON",
-    formular_json_uebernehmen_btn: "Applica",
-    formular_label_titel: "Titolo",
-    formular_label_kategorie: "Categoria",
-    formular_label_tags: "Tag (più possibili, es. \"vegetariano\", \"veloce\")",
-    formular_tag_placeholder: "Inserisci e aggiungi un tag",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Rimuovi tag {{tag}}",
-    formular_label_portionen: "Porzioni (base)",
-    formular_label_zutaten: "Ingredienti",
-    formular_zutat_hinzufuegen_btn: "+ Ingrediente",
-    formular_zutat_menge_placeholder: "Quantità",
-    formular_zutat_einheit_placeholder: "Unità",
-    formular_zutat_name_placeholder: "Ingrediente",
-    formular_zutat_entfernen_aria: "Rimuovi ingrediente",
-    formular_label_zubereitung: "Preparazione (passaggi)",
-    formular_schritt_hinzufuegen_btn: "+ Passaggio",
-    formular_schritt_placeholder_beispiel: "es. lavare e tagliare le verdure",
-    formular_schritt_placeholder_naechster: "passaggio successivo",
-    formular_schritt_entfernen_aria: "Rimuovi passaggio",
-    formular_schritt_hoch_aria: "Sposta il passaggio in alto",
-    formular_schritt_runter_aria: "Sposta il passaggio in basso",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(presente – un nuovo file la sostituirà)",
-    formular_bild_hinweis: "La foto attuale viene mantenuta se non scegli un nuovo file.",
-    formular_bild_verkleinern_text: "Riduzione della foto in corso…",
-    fehler_url_ungueltig: "Inserisci un indirizzo completo che inizi con http:// o https://.",
-    fehler_url_apostroph: "Questo indirizzo contiene un apostrofo (') e purtroppo non può essere importato.",
-    fehler_url_keine_ausgabe: "Lo script non ha restituito alcun output. 'rezeptbuch_url_importieren' è configurato in configuration.yaml e Home Assistant è stato riavviato completamente da allora?",
-    fehler_url_kein_json: "La risposta dello script di importazione non era un JSON valido.",
-    fehler_url_import_fehlgeschlagen: "Importazione URL non riuscita: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Purtroppo non è stato possibile riconoscere nulla nel testo incollato. Compila i campi sottostanti manualmente.",
-    warnung_texterkennung_unvollstaendig: "Il riconoscimento è stato incompleto (mancano ingredienti o passaggi, oppure potrebbero essere assegnati in modo errato) - controlla e completa nel modulo.",
-    fehler_json_ungueltig: "Il JSON incollato non è valido. Controllalo e riprova.",
-    fehler_json_titel_fehlt: "Nel JSON manca almeno il campo 'title'.",
-    fehler_titel_fehlt: "Inserisci un titolo.",
-    fehler_unerwartet: "Errore imprevisto:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" è stata nel frattempo eliminata da qualcun altro. Le tue modifiche non sono state salvate.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" è stata nel frattempo modificata da qualcun altro (es. un commento, una valutazione o una modifica propria).\n\nPer evitare che qualcosa venga sovrascritto, le tue modifiche NON sono state salvate. Apri di nuovo la ricetta e inserisci nuovamente le tue modifiche.",
-    fehler_vorgang_fehlgeschlagen: "Operazione non riuscita:\n{{fehler}}",
-    fehler_teilen_drucken: "Errore imprevisto durante la condivisione/stampa:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Indica 'entity' nella configurazione della card, es. entity: todo.rezepte",
-    fehler_bild_lesen: "Impossibile leggere la foto (file danneggiato o non supportato).",
-    fehler_bild_verarbeiten: "Impossibile elaborare la foto come immagine (formato non supportato?).",
-    teilen_ueberschrift_zutaten: "INGREDIENTI",
-    teilen_ueberschrift_zubereitung: "PREPARAZIONE",
-    seite_zurueck_btn: "← Indietro",
-    seite_weiter_btn: "Avanti →",
-    seite_anzeige: "Pagina {{aktuell}} di {{gesamt}}",
-    update_neue_version: "Nuova versione disponibile: {{version}}",
-    update_ansehen_btn: "Visualizza",
-    update_schliessen_aria: "Nascondi avviso",
-    ressourcen_version_hinweis: "⚠️ Questa scheda è stata aggiornata, ma l'URL della risorsa non è stato modificato (ancora \"?v={{version}}\"). Altri browser/dispositivi potrebbero quindi continuare a caricare il vecchio file memorizzato nella cache - aumenta il numero di versione nell'URL della risorsa (Impostazioni → Dashboard → Risorse).",
-    detail_kochmodus_btn: "🍳 Modalità cucina",
-    kochmodus_schritt_anzeige: "Passo {{aktuell}} di {{gesamt}}",
-    kochmodus_schliessen_aria: "Chiudi modalità cucina",
-    kochmodus_schritt_zurueck_aria: "Passo precedente",
-    kochmodus_schritt_weiter_aria: "Passo successivo",
-    kochmodus_zutaten_ein_aria: "Mostra ingredienti",
-    kochmodus_zutaten_aus_aria: "Nascondi ingredienti",
-    kochmodus_timer_ein_aria: "Mostra timer",
-    kochmodus_timer_aus_aria: "Nascondi timer",
-    kochmodus_timer_minuten_aria: "Minuti",
-    kochmodus_timer_start_btn: "Avvia",
-    kochmodus_timer_abbrechen_btn: "Annulla",
-    kochmodus_timer_abgelaufen_text: "⏰ Timer scaduto!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Avvia timer di {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 PDF raccolta",
-    sammel_pdf_keine_rezepte: "Nessuna ricetta trovata da esportare.",
-    sammel_pdf_frage_toc: "Creare un indice per le ricette selezionate?",
-    sammel_pdf_ja_toc_btn: "Sì, crea indice",
-    sammel_pdf_nein_toc_btn: "No, senza indice",
-    sammel_pdf_name_placeholder: "Nome del ricettario",
-    sammel_pdf_erstellen_btn: "Crea PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Indice",
-    sammel_pdf_frage_umfang: "Quali ricette devono finire nel PDF combinato?",
-    sammel_pdf_alle_rezepte_btn: "Tutte le ricette mostrate",
-    sammel_pdf_auswahl_btn: "Seleziona ricette specifiche",
-    sammel_pdf_auswahl_titel: "Seleziona le ricette",
-    sammel_pdf_alle_auswaehlen_link: "Seleziona tutto",
-    sammel_pdf_keine_auswaehlen_link: "Deseleziona tutto",
-    sammel_pdf_weiter_btn: "Avanti",
-    sammel_pdf_bilder_mitdrucken_label: "Includi le immagini nel PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Seleziona almeno una ricetta.",
-  },
-  lv: {
-    allgemein_zurueck: "← Atpakaļ",
-    allgemein_ja: "Jā",
-    allgemein_nein: "Nē",
-    allgemein_an: "Iesl.",
-    allgemein_aus: "Izsl.",
-    allgemein_speichern: "Saglabāt",
-    allgemein_speichert: "Saglabā…",
-    allgemein_abbrechen: "Atcelt",
-    allgemein_bearbeiten: "Rediģēt",
-    allgemein_loeschen: "Dzēst",
-    allgemein_oeffnen: "Atvērt",
-    allgemein_unbekannt: "Nezināms",
-    allgemein_schliessen: "Aizvērt",
-    kategorie_hauptgericht: "Galvenais ēdiens",
-    kategorie_vorspeise: "Priekšēdiens",
-    kategorie_suppe: "Zupa",
-    kategorie_salat: "Salāti",
-    kategorie_beilage: "Piedeva",
-    kategorie_dessert: "Deserts",
-    kategorie_kuchen_gebaeck: "Kūkas un cepumi",
-    kategorie_fruehstueck: "Brokastis",
-    kategorie_snack: "Uzkoda",
-    kategorie_getraenk: "Dzēriens",
-    kategorie_sonstiges: "Cits",
-    kategorie_filter_alle: "Visi",
-    kategorie_neu_btn: "+ Jauna kategorija",
-    kategorie_name_placeholder: "Kategorijas nosaukums",
-    fehler_kategorie_name_fehlt: "Lūdzu, ievadiet kategorijas nosaukumu.",
-    fehler_kategorie_existiert_bereits: "Šī kategorija jau pastāv.",
-    kategorie_loeschen_title: "Dzēst kategoriju",
-    kategorie_loeschen_aria: "Dzēst kategoriju {{name}}",
-    kategorie_bearbeiten_title: "Pārdēvēt kategoriju",
-    kategorie_bearbeiten_aria: "Pārdēvēt kategoriju {{name}}",
-    kategorie_umbenennen_titel: "Kategorijas \"{{name}}\" pārdēvēšana:",
-    fehler_kategorie_wird_verwendet: "Šo kategoriju joprojām izmanto {{anzahl}}x receptes - vispirms piešķiriet tām citu kategoriju.",
-    wochentag_montag: "Pirmdiena",
-    wochentag_dienstag: "Otrdiena",
-    wochentag_mittwoch: "Trešdiena",
-    wochentag_donnerstag: "Ceturtdiena",
-    wochentag_freitag: "Piektdiena",
-    wochentag_samstag: "Sestdiena",
-    wochentag_sonntag: "Svētdiena",
-    sortier_titel: "Alfabētiskā secībā (A-Z)",
-    sortier_bewertung: "Vispirms labākais vērtējums",
-    sortier_kategorie: "Pēc kategorijas",
-    sortier_neu: "Vispirms jaunākie",
-    sortieren_label: "Kārtot pēc:",
-    kopf_titel_standard: "Pavārgrāmata",
-    kopf_sichern_btn: "💾 Rezerves kopija",
-    kopf_wochenplan_btn: "📅 Nedēļas plāns",
-    kopf_zufallsrezept_btn: "🎲 Nejaušā recepte",
-    umrechnungstabelle_btn: "📐 Pārrēķina tabula",
-    umrechnungstabelle_titel: "Pārrēķina tabula",
-    umrechnungstabelle_hinweis: "Orientējošas vērtības gramos biežāk lietotām virtuves sastāvdaļām - atšķiras atkarībā no markas un konsistences, tāpēc tikai uzziņai. Tās NETIEK automātiski piemērotas tavām receptēm.",
-    umrechnungstabelle_suche_placeholder: "Meklēt sastāvdaļu …",
-    umrechnungstabelle_spalte_zutat: "Sastāvdaļa",
-    umrechnungstabelle_spalte_tasse: "1 glāze",
-    umrechnungstabelle_spalte_el: "1 ēd. k.",
-    umrechnungstabelle_spalte_tl: "1 tēj. k.",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Sastāvdaļa netika atrasta.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Pievienot savu sastāvdaļu",
-    umrechnungstabelle_eigene_name_platzhalter: "Sastāvdaļas nosaukums",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/glāze",
-    umrechnungstabelle_eigene_el_platzhalter: "g/ēd.k.",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tēj.k.",
-    umrechnungstabelle_eigene_loeschen_titel: "Dzēst savu sastāvdaļu",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Redigēt savu sastāvdaļu",
-    umrechnungstabelle_eigene_name_fehlt: "Lūdzu, ievadi nosaukumu.",
-    umrechnungstabelle_eigene_hinweis: "Trūkst sastāvdaļas, kuras pārrēķina vērtību zini pats? Pievieno to šeit manuāli - mēs apzināti nepiedāvājam automātisku pārrēķinu starp tilpumu un svaru, jo tas nozīmētu minēšanu atkarībā no sastāvdaļas, markas un blīvuma.",
-    einkaufsmodus_start_btn: "🛒 Iepirkumu saraksts",
-    einkaufsmodus_beenden_btn: "✕ Pārtraukt atlasi",
-    kopf_neu_btn: "+ Jauns",
-    suche_placeholder: "🔍 Recepte vai sastāvdaļas (piem., milti, olas)…",
-    kochbuch_loeschen_title: "Dzēst kolekciju",
-    kochbuch_loeschen_aria: "Dzēst kolekciju {{name}}",
-    kochbuch_speichern_btn: "+ Saglabāt kā gudru kolekciju",
-    kochbuch_name_placeholder: "Šīs kolekcijas nosaukums, piem., Rudens receptes",
-    fehler_kochbuch_name_fehlt: "Lūdzu, ievadi kolekcijas nosaukumu.",
-    kochbuch_info_aria: "Rādīt skaidrojumu par gudrām kolekcijām",
-    kochbuch_info_titel: "Kas ir gudra kolekcija?",
-    kochbuch_info_text:
-      "Gudra kolekcija nesaglabā fiksētu recepšu sarakstu, bet gan " +
-      "kategorijas, birku un meklēšanas termina kombināciju tieši " +
-      "tādu, kāda tā ir iestatīta saglabāšanas brīdī. Pēc tam tā pati " +
-      "atjauninās: jauna recepte, kas atbilst, parādās automātiski, " +
-      "un recepte, kuras kategorija vai birkas mainās, var tikpat " +
-      "automātiski atkal pazust.",
-    einkaufs_zaehler: "{{anzahl}} atlasīti",
-    einkaufsliste_erstellen_btn: "Izveidot iepirkumu sarakstu",
-    fehler_einkaufsliste_keine_konfiguration: "Iepirkumu sarakstam vēl trūkst konfigurācijas: lūdzu, norādi 'shopping_list_entity' kartītes konfigurācijā (piem., shopping_list_entity: todo.einkaufsliste) - tam nepieciešams OTRS \"Lokālā darāmo darbu saraksta\" palīgs. Skatīt ANLEITUNG-Backup.md, 18. sadaļu.",
-    fehler_einkaufsliste_keine_auswahl: "Lūdzu, izvēlies vismaz vienu recepti.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Lūdzu, izvēlies vismaz vienu sastāvdaļu.",
-    zutaten_fehlend_einkaufsliste_btn: "Pievienot atlasītos iepirkumu sarakstam",
-    fehler_einkaufsliste_keine_zutaten: "Izvēlētajās receptēs nav sastāvdaļu.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Neizdevās pievienot \"{{zeile}}\" iepirkumu sarakstam:\n{{fehler}}\n\nJau pievienotās sastāvdaļas paliek sarakstā.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} sastāvdaļa(s) pievienota(s) sarakstam \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" dzēsta.",
-    undo_rueckgaengig_btn: "Atsaukt",
-    leer_keine_rezepte: "Vēl nav recepšu – sāc ar \"+ Jauns\"",
-    leer_keine_treffer: "Netika atrasta neviena recepte \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Neizdevās ielādēt \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Vai šis darāmo darbu saraksts eksistē? (Iestatījumi → Ierīces un pakalpojumi → Palīgi)",
-    kachel_aria_label_oeffnen: "Atvērt recepti {{titel}}",
-    sterne_aria_label_gruppe: "Tavs vērtējums",
-    sterne_aria_label: "{{zahl}} no 5 zvaigznēm",
-    fehler_kein_benutzer_bewertung: "Neizdevās noteikt tavu lietotāju - vērtēšana nav iespējama.",
-    detail_teilen_drucken_btn: "📤 Kopīgot / Drukāt",
-    detail_erstellt_von: "👤 Izveidoja {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} vērtējums)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} vērtējumi)",
-    detail_keine_bewertungen: "Vēl nav vērtējumu",
-    detail_deine_bewertung: "Tavs vērtējums:",
-    detail_zubereitet_x: "🍳 pagatavota {{anzahl}} reizes",
-    detail_portionen_suffix: "porcijas",
-    abschnitt_titel_zutaten: "Sastāvdaļas",
-    abschnitt_titel_zubereitung: "Pagatavošana",
-    keine_zutaten: "Sastāvdaļas nav norādītas",
-    detail_kommentare_titel: "Komentāri",
-    detail_keine_kommentare: "Vēl nav komentāru",
-    detail_kommentar_placeholder: "Papildinājums, padoms vai piezīme…",
-    detail_kommentar_hinzufuegen_btn: "Pievienot komentāru",
-    detail_bearbeiten_hinweis: "Šo recepti drīkst rediģēt vai dzēst tikai {{name}} (vai administrators).",
-    detail_ersteller_unbekannt: "autors/autore",
-    modal_zubereitet_frage: "Vai pagatavoji \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Vai pievienot receptes attēlu?",
-    modal_drucken_ohne_bild_btn: "Bez attēla",
-    modal_drucken_mit_bild_btn: "Ar attēlu",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Gatavošanas statistika",
-    statistik_info_aria: "Rādīt statistikas skaidrojumu",
-    statistik_einstellungen_btn_title: "Gatavošanas žurnāla iestatījumi",
-    statistik_einstellungen_titel: "Gatavošanas žurnāla iestatījumi",
-    statistik_einstellungen_text: "Šeit vari iestatīt, vai, pametot recepti, tiek jautāts, vai to pagatavoji, un vai no tā izrietošā statistika tiek rādīta šajā kartītē.",
-    statistik_einstellungen_schalter_label: "Iespējot jautājumu un statistiku",
-    tags_einstellung_schalter_label: "Rādīt tagu filtru pārskatā",
-    zufallsrezept_einstellung_schalter_label: "Rādīt pogu 'Nejaušā recepte' pārskatā",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Rādīt pārrēķinu tabulas pogu pārskatā",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Iestatītajai amerikāņu recepšu kategorijai pārrēķinu tabula receptē un gatavošanas režīmā tiek rādīta joprojām, pat ja šī poga šeit ir izslēgta.",
-    farben_abschnitt_titel: "Krāsas",
-    farben_hinweis: "Pielāgojiet atsevišķas kartes krāsas. Atiestatīt visu atgriež visas krāsas noklusējumā.",
-    farben_akzent_label: "Pamatkrāsa (pogas, aktīvie filtri)",
-    farben_akzent_text_label: "Akcenta krāsa tekstam un malām",
-    farben_loeschen_label: "Dzēšana / brīdinājums",
-    farben_sterne_label: "Vērtējuma zvaigznes",
-    farben_titel_label: "Virsraksti",
-    farben_zuruecksetzen_btn: "Atiestatīt visu",
-    us_kategorie_einstellung_label: "Kategorija amerikāņu receptēm",
-    us_kategorie_einstellung_text: "Receptēm ar šo kategoriju papildus parādās pārrēķina tabulas poga pašā receptē un gatavošanas režīmā.",
-    us_kategorie_einstellung_keine: "— Nav —",
-    statistik_info_titel: "Kā tiek aprēķināta šī statistika?",
-    statistik_info_text:
-      "Šis apkopojums saskaita katru apstiprinājumu jautājumam „Vai pagatavoji?“ - neatkarīgi no porcijas lieluma vai reižu skaita tajā pašā dienā. Ja šis jautājums ir atspējots ar slēdzi statistikas iestatījumos (⚙️), skaitļi vairs nepieaug, bet jau reģistrētās gatavošanas reizes saglabājas.",
-    statistik_dieses_jahr: "Tu esi gatavojis/gatavojusi {{anzahl}}x no savas recepšu grāmatas {{jahr}} gadā",
-    statistik_gesamt: "Kopā tu esi gatavojis/gatavojusi {{anzahl}}x no savas recepšu grāmatas",
-    statistik_top_titel: "Visbiežāk gatavots",
-    statistik_keine_daten: "Vēl nav reģistrēta neviena gatavošana.",
-    modal_loeschen_frage: "Vai tiešām dzēst \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Jā, dzēst",
-    modal_kommentar_loeschen_frage: "Vai tiešām dzēst šo komentāru?",
-    wochenplan_titel: "Nedēļas plāns",
-    wochenplan_tab_diese: "Šī nedēļa",
-    wochenplan_tab_folgewoche: "Nākamā nedēļa",
-    wochenplan_hinweis_folgewoche: "Plāno šeit jau tagad nākamo nedēļu - tā automātiski pārvietosies uz \"Šī nedēļa\", tiklīdz pašreizējā nedēļa būs beigusies.",
-    wochenplan_hinweis_diese: "Pagājušās dienas tiek automātiski iztukšotas (pati recepte saglabājas, izzūd tikai piešķīrums).",
-    wochenplan_hinweis_speicherung: "Tiek saglabāts visās ierīcēs (kā slēpts papildu ieraksts tajā pašā recepšu sarakstā, papildu palīgs nav nepieciešams).",
-    wochenplan_leer: "Vēl nav recepšu - vispirms izveido dažas.",
-    wochenplan_kein_rezept_option: "– nav receptes –",
-    wochenplan_einkaufsliste_btn: "Izveidot iepirkumu sarakstu no {{ziel}}",
-    wochenplan_wort: "nedēļas plāns",
-    wochenplan_folgewoche_wort: "nākamā nedēļa",
-    wochenplan_aktuelle_woche_wort: "pašreizējā nedēļa",
-    wochenplan_keine_zuweisung: "{{zeitraum}} vēl nesatur piešķirtas receptes.",
-    formular_titel_neu: "Jauna recepte",
-    formular_titel_bearbeiten: "Rediģēt recepti",
-    formular_url_import_btn: "🌐 Importēt receptes URL",
-    formular_url_label: "Saite uz receptes tīmekļa vietni",
-    formular_url_placeholder: "https://www.piemera-receptes.lv/mana-recepte",
-    formular_url_hinweis: "Ielādē lapu un nolasa tajā jau iebūvētos receptes strukturētos datus (tos pašus datus, ar kuriem, piem., Google meklēšanā rāda zvaigžņu vērtējumus) - parasti uzticamāk nekā teksta atpazīšana. Darbojas tikai vietnēs, kas sniedz šādus datus un nebloķē automatizētus pieprasījumus.",
-    formular_url_importieren_btn: "Importēt",
-    formular_url_laedt: "Ielādē …",
-    formular_text_einfuegen_btn: "🔍 Ielīmēt receptes tekstu (automātiska atpazīšana)",
-    formular_text_label: "Ielīmē šeit receptes tekstu (piem., nokopētu no receptes tīmekļa vietnes)",
-    formular_text_placeholder: "Nosaukums, sastāvdaļas, pagatavošana - vienkārši ielīmē visu tekstu",
-    formular_text_hinweis: "Tīri automātiska atpazīšana bez MI - vislabāk darbojas ar virsrakstiem \"Sastāvdaļas\" un \"Pagatavošana\" tekstā. Lūdzu, pēc tam īsi pārbaudi rezultātu, tas var būt nepilnīgs.",
-    formular_text_erkennen_btn: "Atpazīt",
-    formular_json_einfuegen_btn: "📋 Ielīmēt MI izveidotu JSON",
-    formular_json_info_aria: "Rādīt gatavu uzvedni MI",
-    json_info_titel: "Uzvedne MI",
-    json_info_erklaerung:
-      "Nokopē šo tekstu, ielīmē to izvēlētā MI (piem., ChatGPT vai Claude), pievieno sava receptes tekstu un tad atbildi ielīmē augstāk laukā „Ielīmē JSON šeit“.",
-    json_info_prompt:
-      "Pārveido receptes tekstu, ko tūlīt nosūtīšu, par VIENU vienīgu JSON objektu - bez paskaidrojuma, bez teksta pirms vai pēc, tikai JSON. Izmanto tieši šo formātu:\n\n" +
-      "{\n" +
-      '  "title": "receptes nosaukums",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "viena no: {{kategorien}}",\n' +
-      '  "ingredients": ["viena sastāvdaļa katrā ierakstā, piem., 200 g miltu"],\n' +
-      '  "steps": ["viens gatavošanas solis katrā ierakstā"],\n' +
-      '  "tags": ["neobligātas atslēgvārdi, piem., veģetārs"]\n' +
-      "}\n\n" +
-      "Noteikumi: „category“ jābūt TIEŠI vienai no augstāk minētajām vērtībām (pārkopē to nemainītu, pat ja receptes teksts ir citā valodā - tās ir fiksētas iekšējās vērtības). " +
-      "„tags“ nav obligāts, der arī tukšs masīvs. " +
-      "Neizdomā sastāvdaļas vai soļus, kuru nav tekstā. " +
-      "Šeit ir receptes teksts:",
-    json_info_kopieren_btn: "📋 Kopēt uzvedni",
-    json_info_kopiert: "Nokopēts!",
-    formular_json_label: "Ielīmē JSON šeit",
-    formular_json_uebernehmen_btn: "Piemērot",
-    formular_label_titel: "Nosaukums",
-    formular_label_kategorie: "Kategorija",
-    formular_label_tags: "Birkas (iespējamas vairākas, piem., \"veģetārs\", \"ātrs\")",
-    formular_tag_placeholder: "Ievadi un pievieno birku",
-    formular_tag_hinzufuegen_btn: "+ Birka",
-    formular_tag_entfernen_aria: "Noņemt birku {{tag}}",
-    formular_label_portionen: "Porcijas (bāze)",
-    formular_label_zutaten: "Sastāvdaļas",
-    formular_zutat_hinzufuegen_btn: "+ Sastāvdaļa",
-    formular_zutat_menge_placeholder: "Daudzums",
-    formular_zutat_einheit_placeholder: "Mērvienība",
-    formular_zutat_name_placeholder: "Sastāvdaļa",
-    formular_zutat_entfernen_aria: "Noņemt sastāvdaļu",
-    formular_label_zubereitung: "Pagatavošana (soļi)",
-    formular_schritt_hinzufuegen_btn: "+ Solis",
-    formular_schritt_placeholder_beispiel: "piem., nomazgā un sagriez dārzeņus",
-    formular_schritt_placeholder_naechster: "nākamais solis",
-    formular_schritt_entfernen_aria: "Noņemt soli",
-    formular_schritt_hoch_aria: "Pārvietot soli augšup",
-    formular_schritt_runter_aria: "Pārvietot soli lejup",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(ir – jauns fails to aizstās)",
-    formular_bild_hinweis: "Pašreizējais foto saglabājas, ja neizvēlies jaunu failu.",
-    formular_bild_verkleinern_text: "Foto tiek samazināts…",
-    fehler_url_ungueltig: "Lūdzu, ievadi pilnu adresi, kas sākas ar http:// vai https://.",
-    fehler_url_apostroph: "Šī adrese satur apostrofu (') un diemžēl to nevar importēt.",
-    fehler_url_keine_ausgabe: "Skripts neatgrieza nekādu izvadi. Vai 'rezeptbuch_url_importieren' ir iestatīts failā configuration.yaml un vai Home Assistant kopš tā laika ir pilnībā pārstartēts?",
-    fehler_url_kein_json: "Importēšanas skripta atbilde nebija derīgs JSON.",
-    fehler_url_import_fehlgeschlagen: "URL importēšana neizdevās: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Diemžēl ielīmētajā tekstā neko neizdevās atpazīt. Lūdzu, aizpildi zemāk esošos laukus manuāli.",
-    warnung_texterkennung_unvollstaendig: "Atpazīšana bija nepilnīga (trūkst sastāvdaļu vai soļu, iespējams, tie ir nepareizi piešķirti) - lūdzu, pārbaudi un papildini veidlapā.",
-    fehler_json_ungueltig: "Ielīmētais JSON nav derīgs. Lūdzu, pārbaudi to un mēģini vēlreiz.",
-    fehler_json_titel_fehlt: "JSON trūkst vismaz lauka 'title'.",
-    fehler_titel_fehlt: "Lūdzu, ievadi nosaukumu.",
-    fehler_unerwartet: "Negaidīta kļūda:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" jau ir izdzēsusi kāda cita persona. Tavas izmaiņas netika saglabātas.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" jau ir mainījusi kāda cita persona (piem., komentārs, vērtējums vai sava rediģēšana).\n\nLai nekas netiktu pārrakstīts, tavas izmaiņas NETIKA saglabātas. Lūdzu, atver recepti vēlreiz un ievadi savas izmaiņas no jauna.",
-    fehler_vorgang_fehlgeschlagen: "Darbība neizdevās:\n{{fehler}}",
-    fehler_teilen_drucken: "Negaidīta kļūda, kopīgojot/drukājot:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Lūdzu, norādi 'entity' kartītes konfigurācijā, piem., entity: todo.rezepte",
-    fehler_bild_lesen: "Neizdevās nolasīt foto (fails bojāts vai neatbalstīts).",
-    fehler_bild_verarbeiten: "Neizdevās apstrādāt foto kā attēlu (neatbalstīts formāts?).",
-    teilen_ueberschrift_zutaten: "SASTĀVDAĻAS",
-    teilen_ueberschrift_zubereitung: "PAGATAVOŠANA",
-    seite_zurueck_btn: "← Atpakaļ",
-    seite_weiter_btn: "Tālāk →",
-    seite_anzeige: "{{aktuell}}. lappuse no {{gesamt}}",
-    update_neue_version: "Pieejama jauna versija: {{version}}",
-    update_ansehen_btn: "Skatīt",
-    update_schliessen_aria: "Slēpt paziņojumu",
-    ressourcen_version_hinweis: "⚠️ Šī kartīte tika atjaunināta, bet resursa URL netika mainīts (joprojām \"?v={{version}}\"). Citas pārlūkprogrammas/ierīces tāpēc var turpināt ielādēt veco, kešatmiņā saglabāto failu - palielini versijas numuru resursa URL (Iestatījumi → Paneļi → Resursi).",
-    detail_kochmodus_btn: "🍳 Gatavošanas režīms",
-    kochmodus_schritt_anzeige: "{{aktuell}}. solis no {{gesamt}}",
-    kochmodus_schliessen_aria: "Aizvērt gatavošanas režīmu",
-    kochmodus_schritt_zurueck_aria: "Iepriekšējais solis",
-    kochmodus_schritt_weiter_aria: "Nākamais solis",
-    kochmodus_zutaten_ein_aria: "Rādīt sastāvdaļas",
-    kochmodus_zutaten_aus_aria: "Slēpt sastāvdaļas",
-    kochmodus_timer_ein_aria: "Rādīt taimeri",
-    kochmodus_timer_aus_aria: "Slēpt taimeri",
-    kochmodus_timer_minuten_aria: "Minūtes",
-    kochmodus_timer_start_btn: "Sākt",
-    kochmodus_timer_abbrechen_btn: "Atcelt",
-    kochmodus_timer_abgelaufen_text: "⏰ Laiks beidzies!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Sākt {{minuten}} min taimeri",
-    kopf_sammel_pdf_btn: "📚 Kopīgais PDF",
-    sammel_pdf_keine_rezepte: "Netika atrasta neviena recepte eksportēšanai.",
-    sammel_pdf_frage_toc: "Vai izveidot izvēlēto recepšu satura rādītāju?",
-    sammel_pdf_ja_toc_btn: "Jā, izveidot satura rādītāju",
-    sammel_pdf_nein_toc_btn: "Nē, bez satura rādītāja",
-    sammel_pdf_name_placeholder: "Pavārgrāmatas nosaukums",
-    sammel_pdf_erstellen_btn: "Izveidot PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Satura rādītājs",
-    sammel_pdf_frage_umfang: "Kuras receptes iekļaut kopējā PDF?",
-    sammel_pdf_alle_rezepte_btn: "Visas parādītās receptes",
-    sammel_pdf_auswahl_btn: "Izvēlēties konkrētas receptes",
-    sammel_pdf_auswahl_titel: "Izvēlēties receptes",
-    sammel_pdf_alle_auswaehlen_link: "Izvēlēties visas",
-    sammel_pdf_keine_auswaehlen_link: "Noņemt visas",
-    sammel_pdf_weiter_btn: "Tālāk",
-    sammel_pdf_bilder_mitdrucken_label: "Iekļaut attēlus PDF failā",
-    sammel_pdf_auswahl_keine_hinweis: "Lūdzu, izvēlieties vismaz vienu recepti.",
-  },
-  lt: {
-    allgemein_zurueck: "← Atgal",
-    allgemein_ja: "Taip",
-    allgemein_nein: "Ne",
-    allgemein_an: "Įjungta",
-    allgemein_aus: "Išjungta",
-    allgemein_speichern: "Išsaugoti",
-    allgemein_speichert: "Išsaugoma…",
-    allgemein_abbrechen: "Atšaukti",
-    allgemein_bearbeiten: "Redaguoti",
-    allgemein_loeschen: "Ištrinti",
-    allgemein_oeffnen: "Atverti",
-    allgemein_unbekannt: "Nežinoma",
-    allgemein_schliessen: "Uždaryti",
-    kategorie_hauptgericht: "Pagrindinis patiekalas",
-    kategorie_vorspeise: "Priešpatiekalis",
-    kategorie_suppe: "Sriuba",
-    kategorie_salat: "Salotos",
-    kategorie_beilage: "Garnyras",
-    kategorie_dessert: "Desertas",
-    kategorie_kuchen_gebaeck: "Pyragai ir kepiniai",
-    kategorie_fruehstueck: "Pusryčiai",
-    kategorie_snack: "Užkandis",
-    kategorie_getraenk: "Gėrimas",
-    kategorie_sonstiges: "Kita",
-    kategorie_filter_alle: "Visi",
-    kategorie_neu_btn: "+ Nauja kategorija",
-    kategorie_name_placeholder: "Kategorijos pavadinimas",
-    fehler_kategorie_name_fehlt: "Įveskite kategorijos pavadinimą.",
-    fehler_kategorie_existiert_bereits: "Tokia kategorija jau yra.",
-    kategorie_loeschen_title: "Ištrinti kategoriją",
-    kategorie_loeschen_aria: "Ištrinti kategoriją {{name}}",
-    kategorie_bearbeiten_title: "Pervadinti kategoriją",
-    kategorie_bearbeiten_aria: "Pervadinti kategoriją {{name}}",
-    kategorie_umbenennen_titel: "Kategorijos \"{{name}}\" pervadinimas:",
-    fehler_kategorie_wird_verwendet: "Šią kategoriją vis dar naudoja {{anzahl}}x receptų - pirmiausia priskirkite jiems kitą kategoriją.",
-    wochentag_montag: "Pirmadienis",
-    wochentag_dienstag: "Antradienis",
-    wochentag_mittwoch: "Trečiadienis",
-    wochentag_donnerstag: "Ketvirtadienis",
-    wochentag_freitag: "Penktadienis",
-    wochentag_samstag: "Šeštadienis",
-    wochentag_sonntag: "Sekmadienis",
-    sortier_titel: "Abėcėlės tvarka (A-Ž)",
-    sortier_bewertung: "Geriausiai įvertinti pirmi",
-    sortier_kategorie: "Pagal kategoriją",
-    sortier_neu: "Naujausi pirmi",
-    sortieren_label: "Rikiuoti pagal:",
-    kopf_titel_standard: "Receptų knyga",
-    kopf_sichern_btn: "💾 Atsarginė kopija",
-    kopf_wochenplan_btn: "📅 Savaitės planas",
-    kopf_zufallsrezept_btn: "🎲 Atsitiktinis receptas",
-    umrechnungstabelle_btn: "📐 Perskaičiavimo lentelė",
-    umrechnungstabelle_titel: "Perskaičiavimo lentelė",
-    umrechnungstabelle_hinweis: "Orientacinės gramų vertės dažnai naudojamų virtuvės produktų - skiriasi pagal gamintoją ir konsistenciją, todėl tik informacijai. Jos NĖRA automatiškai pritaikomos tavo receptams.",
-    umrechnungstabelle_suche_placeholder: "Ieškoti produkto …",
-    umrechnungstabelle_spalte_zutat: "Produktas",
-    umrechnungstabelle_spalte_tasse: "1 puodelis",
-    umrechnungstabelle_spalte_el: "1 šaukštas",
-    umrechnungstabelle_spalte_tl: "1 šaukštelis",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Produktas nerastas.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Pridėti savo produktą",
-    umrechnungstabelle_eigene_name_platzhalter: "Produkto pavadinimas",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/puodelis",
-    umrechnungstabelle_eigene_el_platzhalter: "g/šaukštas",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/šaukštelis",
-    umrechnungstabelle_eigene_loeschen_titel: "Pašalinti savo produktą",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Redaguoti savo produktą",
-    umrechnungstabelle_eigene_name_fehlt: "Įveskite pavadinimą.",
-    umrechnungstabelle_eigene_hinweis: "Trūksta produkto, kurio perskaičiavimo reikšmę žinote patys? Pridėkite jį čia ranka - automatinio tūrio ir svorio perskaičiavimo sąmoningai nesiūlome, nes tai reikštų spėjimą pagal produktą, gamintoją ir konsistenciją.",
-    einkaufsmodus_start_btn: "🛒 Pirkinių sąrašas",
-    einkaufsmodus_beenden_btn: "✕ Baigti pasirinkimą",
-    kopf_neu_btn: "+ Naujas",
-    suche_placeholder: "🔍 Receptas ar ingredientai (pvz., miltai, kiaušiniai)…",
-    kochbuch_loeschen_title: "Ištrinti rinkinį",
-    kochbuch_loeschen_aria: "Ištrinti rinkinį {{name}}",
-    kochbuch_speichern_btn: "+ Išsaugoti kaip išmanųjį rinkinį",
-    kochbuch_name_placeholder: "Šio rinkinio pavadinimas, pvz., Rudens receptai",
-    fehler_kochbuch_name_fehlt: "Įvesk rinkinio pavadinimą.",
-    kochbuch_info_aria: "Rodyti išmaniųjų rinkinių paaiškinimą",
-    kochbuch_info_titel: "Kas yra išmanusis rinkinys?",
-    kochbuch_info_text:
-      "Išmanusis rinkinys nesaugo fiksuoto receptų sąrašo, o " +
-      "kategorijos, žymų ir paieškos termino derinį – tiksliai tokį, " +
-      "koks jis nustatytas išsaugojimo metu. Vėliau jis atsinaujina " +
-      "pats: naujas tinkantis receptas atsiranda automatiškai, o " +
-      "receptas, kurio kategorija ar žymos pasikeičia, gali taip pat " +
-      "automatiškai vėl išnykti.",
-    einkaufs_zaehler: "Pasirinkta: {{anzahl}}",
-    einkaufsliste_erstellen_btn: "Sukurti pirkinių sąrašą",
-    fehler_einkaufsliste_keine_konfiguration: "Pirkinių sąrašui dar trūksta konfigūracijos: nurodyk 'shopping_list_entity' kortelės konfigūracijoje (pvz., shopping_list_entity: todo.einkaufsliste) - tam reikalingas ANTRAS \"Vietinio užduočių sąrašo\" pagalbininkas. Žr. ANLEITUNG-Backup.md, 18 skyrių.",
-    fehler_einkaufsliste_keine_auswahl: "Pasirink bent vieną receptą.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Pasirink bent vieną produktą.",
-    zutaten_fehlend_einkaufsliste_btn: "Pridėti pasirinktus į pirkinių sąrašą",
-    fehler_einkaufsliste_keine_zutaten: "Pasirinktuose receptuose nėra ingredientų.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nepavyko pridėti \"{{zeile}}\" į pirkinių sąrašą:\n{{fehler}}\n\nJau pridėti ingredientai lieka sąraše.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingredientas(-ai) pridėta(-i) į \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" ištrinta.",
-    undo_rueckgaengig_btn: "Anuliuoti",
-    leer_keine_rezepte: "Receptų dar nėra – pradėk nuo \"+ Naujas\"",
-    leer_keine_treffer: "Receptų pagal \"{{begriff}}\" nerasta",
-    fehler_liste_laden_titel: "Nepavyko įkelti \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Ar šis užduočių sąrašas egzistuoja? (Nustatymai → Įrenginiai ir paslaugos → Pagalbininkai)",
-    kachel_aria_label_oeffnen: "Atverti receptą {{titel}}",
-    sterne_aria_label_gruppe: "Tavo įvertinimas",
-    sterne_aria_label: "{{zahl}} iš 5 žvaigždučių",
-    fehler_kein_benutzer_bewertung: "Nepavyko nustatyti tavo vartotojo - įvertinti negalima.",
-    detail_teilen_drucken_btn: "📤 Bendrinti / Spausdinti",
-    detail_erstellt_von: "👤 Sukūrė {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} įvertinimas)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} įvertinimai)",
-    detail_keine_bewertungen: "Įvertinimų dar nėra",
-    detail_deine_bewertung: "Tavo įvertinimas:",
-    detail_zubereitet_x: "🍳 pagaminta {{anzahl}} kartus",
-    detail_portionen_suffix: "porcijos",
-    abschnitt_titel_zutaten: "Ingredientai",
-    abschnitt_titel_zubereitung: "Gaminimas",
-    keine_zutaten: "Ingredientų nenurodyta",
-    detail_kommentare_titel: "Komentarai",
-    detail_keine_kommentare: "Komentarų dar nėra",
-    detail_kommentar_placeholder: "Papildymas, patarimas ar pastaba…",
-    detail_kommentar_hinzufuegen_btn: "Pridėti komentarą",
-    detail_bearbeiten_hinweis: "Šį receptą redaguoti ar ištrinti gali tik {{name}} (arba administratorius).",
-    detail_ersteller_unbekannt: "autorius (-ė)",
-    modal_zubereitet_frage: "Ar pagaminai \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Įtraukti recepto nuotrauką?",
-    modal_drucken_ohne_bild_btn: "Be nuotraukos",
-    modal_drucken_mit_bild_btn: "Su nuotrauka",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Gaminimo statistika",
-    statistik_info_aria: "Rodyti statistikos paaiškinimą",
-    statistik_einstellungen_btn_title: "Gaminimo žurnalo nustatymai",
-    statistik_einstellungen_titel: "Gaminimo žurnalo nustatymai",
-    statistik_einstellungen_text: "Čia gali nustatyti, ar išeinant iš recepto bus klausiama, ar jį paruošei, ir ar bus rodoma iš to atsirandanti statistika šioje kortelėje.",
-    statistik_einstellungen_schalter_label: "Įjungti klausimą ir statistiką",
-    tags_einstellung_schalter_label: "Rodyti žymų filtrą apžvalgoje",
-    zufallsrezept_einstellung_schalter_label: "Rodyti atsitiktinio recepto mygtuką apžvalgoje",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Rodyti perskaičiavimo lentelės mygtuką apžvalgoje",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Nustatytai amerikietiškų receptų kategorijai perskaičiavimo lentelė ir toliau rodoma recepte bei gaminimo režime, net jei šis mygtukas čia išjungtas.",
-    farben_abschnitt_titel: "Spalvos",
-    farben_hinweis: "Pritaikykite atskiras kortelės spalvas. Atstatyti viską grąžina visas spalvas į numatytąsias.",
-    farben_akzent_label: "Pagrindinė spalva (mygtukai, aktyvūs filtrai)",
-    farben_akzent_text_label: "Akcento spalva tekstui ir kraštinėms",
-    farben_loeschen_label: "Ištrynimas / įspėjimas",
-    farben_sterne_label: "Įvertinimo žvaigždutės",
-    farben_titel_label: "Antraštės",
-    farben_zuruecksetzen_btn: "Atstatyti viską",
-    us_kategorie_einstellung_label: "Kategorija Amerikos receptams",
-    us_kategorie_einstellung_text: "Prie šios kategorijos receptų papildomai rodomas perskaičiavimo lentelės mygtukas pačiame recepte ir gaminimo režimu.",
-    us_kategorie_einstellung_keine: "— Jokios —",
-    statistik_info_titel: "Kaip skaičiuojama ši statistika?",
-    statistik_info_text:
-      "Šioje apžvalgoje skaičiuojamas kiekvienas patvirtinimas į klausimą „Ar paruošei?“ - nepriklausomai nuo porcijos dydžio ar kartų skaičiaus tą pačią dieną. Jei šis klausimas išjungtas naudojant jungiklį statistikos nustatymuose (⚙️), skaičiai nebeauga, tačiau jau užfiksuoti gaminimai išlieka.",
-    statistik_dieses_jahr: "{{jahr}} m. gaminai {{anzahl}}x iš savo receptų knygos",
-    statistik_gesamt: "Iš viso gaminai {{anzahl}}x iš savo receptų knygos",
-    statistik_top_titel: "Dažniausiai gaminami",
-    statistik_keine_daten: "Kol kas neužfiksuota jokių gaminimų.",
-    modal_loeschen_frage: "Tikrai ištrinti \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Taip, ištrinti",
-    modal_kommentar_loeschen_frage: "Ar tikrai norite ištrinti šį komentarą?",
-    wochenplan_titel: "Savaitės planas",
-    wochenplan_tab_diese: "Ši savaitė",
-    wochenplan_tab_folgewoche: "Kita savaitė",
-    wochenplan_hinweis_folgewoche: "Suplanuok čia jau dabar ateinančią savaitę - ji automatiškai persikels į \"Ši savaitė\", vos tik pasibaigs dabartinė savaitė.",
-    wochenplan_hinweis_diese: "Praėjusios dienos automatiškai išvalomos (pats receptas išlieka, dingsta tik priskyrimas).",
-    wochenplan_hinweis_speicherung: "Išsaugoma visuose įrenginiuose (kaip paslėptas papildomas įrašas tame pačiame receptų sąraše, papildomas pagalbininkas nereikalingas).",
-    wochenplan_leer: "Receptų dar nėra - pirmiausia sukurk keletą.",
-    wochenplan_kein_rezept_option: "– nėra recepto –",
-    wochenplan_einkaufsliste_btn: "Sukurti pirkinių sąrašą iš {{ziel}}",
-    wochenplan_wort: "savaitės planas",
-    wochenplan_folgewoche_wort: "kita savaitė",
-    wochenplan_aktuelle_woche_wort: "dabartinė savaitė",
-    wochenplan_keine_zuweisung: "{{zeitraum}} dar neturi priskirtų receptų.",
-    formular_titel_neu: "Naujas receptas",
-    formular_titel_bearbeiten: "Redaguoti receptą",
-    formular_url_import_btn: "🌐 Importuoti recepto URL",
-    formular_url_label: "Nuoroda į recepto svetainę",
-    formular_url_placeholder: "https://www.pavyzdys-receptai.lt/mano-receptas",
-    formular_url_hinweis: "Įkelia puslapį ir nuskaito jame jau įtaisytus struktūrizuotus recepto duomenis (tuos pačius duomenis, kuriais, pvz., \"Google\" rodo žvaigždučių įvertinimus paieškoje) - paprastai patikimiau nei teksto atpažinimas. Veikia tik svetainėse, kurios pateikia tokius duomenis ir neblokuoja automatizuotų užklausų.",
-    formular_url_importieren_btn: "Importuoti",
-    formular_url_laedt: "Įkeliama …",
-    formular_text_einfuegen_btn: "🔍 Įklijuoti recepto tekstą (automatinis atpažinimas)",
-    formular_text_label: "Įklijuok čia recepto tekstą (pvz., nukopijuotą iš recepto svetainės)",
-    formular_text_placeholder: "Pavadinimas, ingredientai, gaminimas - tiesiog įklijuok visą tekstą",
-    formular_text_hinweis: "Grynai automatinis atpažinimas be DI - geriausiai veikia su antraštėmis \"Ingredientai\" ir \"Gaminimas\" tekste. Vėliau trumpai patikrink rezultatą, jis gali būti neišsamus.",
-    formular_text_erkennen_btn: "Atpažinti",
-    formular_json_einfuegen_btn: "📋 Įklijuoti DI sugeneruotą JSON",
-    formular_json_info_aria: "Rodyti paruoštą užklausą DI",
-    json_info_titel: "Užklausa DI",
-    json_info_erklaerung:
-      "Nukopijuok šį tekstą, įklijuok jį į pasirinktą DI (pvz., ChatGPT arba Claude), pridėk savo recepto tekstą, o gautą atsakymą tada įklijuok aukščiau, lauke „Įklijuok JSON čia“.",
-    json_info_prompt:
-      "Paverstk recepto tekstą, kurį tuoj atsiųsiu, į VIENĄ vienintelį JSON objektą - be paaiškinimų, be teksto prieš ar po jo, tik JSON. Naudok būtent tokį formatą:\n\n" +
-      "{\n" +
-      '  "title": "recepto pavadinimas",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "vieną iš: {{kategorien}}",\n' +
-      '  "ingredients": ["vienas ingredientas viename įraše, pvz., 200 g miltų"],\n' +
-      '  "steps": ["vienas gaminimo žingsnis viename įraše"],\n' +
-      '  "tags": ["neprivalomos žymos, pvz., vegetariška"]\n' +
-      "}\n\n" +
-      "Taisyklės: „category“ turi būti LYGIAI viena iš aukščiau išvardytų reikšmių (perkelk nepakeistą, net jei recepto tekstas yra kita kalba - tai fiksuotos vidinės reikšmės). " +
-      "„tags“ nebūtina, tinka ir tuščias masyvas. " +
-      "Neišgalvok ingredientų ar žingsnių, kurių nėra tekste. " +
-      "Štai recepto tekstas:",
-    json_info_kopieren_btn: "📋 Kopijuoti užklausą",
-    json_info_kopiert: "Nukopijuota!",
-    formular_json_label: "Įklijuok JSON čia",
-    formular_json_uebernehmen_btn: "Taikyti",
-    formular_label_titel: "Pavadinimas",
-    formular_label_kategorie: "Kategorija",
-    formular_label_tags: "Žymos (galimos kelios, pvz., \"vegetariška\", \"greita\")",
-    formular_tag_placeholder: "Įvesk ir pridėk žymą",
-    formular_tag_hinzufuegen_btn: "+ Žyma",
-    formular_tag_entfernen_aria: "Pašalinti žymą {{tag}}",
-    formular_label_portionen: "Porcijos (bazinis kiekis)",
-    formular_label_zutaten: "Ingredientai",
-    formular_zutat_hinzufuegen_btn: "+ Ingredientas",
-    formular_zutat_menge_placeholder: "Kiekis",
-    formular_zutat_einheit_placeholder: "Matavimo vienetas",
-    formular_zutat_name_placeholder: "Ingredientas",
-    formular_zutat_entfernen_aria: "Pašalinti ingredientą",
-    formular_label_zubereitung: "Gaminimas (žingsniai)",
-    formular_schritt_hinzufuegen_btn: "+ Žingsnis",
-    formular_schritt_placeholder_beispiel: "pvz., nuplauk ir supjaustyk daržoves",
-    formular_schritt_placeholder_naechster: "kitas žingsnis",
-    formular_schritt_entfernen_aria: "Pašalinti žingsnį",
-    formular_schritt_hoch_aria: "Perkelti žingsnį aukštyn",
-    formular_schritt_runter_aria: "Perkelti žingsnį žemyn",
-    formular_label_bild: "Nuotrauka",
-    formular_bild_vorhanden_hinweis: "(yra – naujas failas ją pakeis)",
-    formular_bild_hinweis: "Dabartinė nuotrauka išlieka, jei nepasirenki naujo failo.",
-    formular_bild_verkleinern_text: "Nuotrauka mažinama…",
-    fehler_url_ungueltig: "Įvesk pilną adresą, prasidedantį http:// arba https://.",
-    fehler_url_apostroph: "Šiame adrese yra apostrofas (') ir, deja, jo importuoti negalima.",
-    fehler_url_keine_ausgabe: "Skriptas negrąžino jokios išvesties. Ar 'rezeptbuch_url_importieren' sukonfigūruotas faile configuration.yaml ir ar nuo tada Home Assistant buvo visiškai perkrautas?",
-    fehler_url_kein_json: "Importavimo skripto atsakymas nebuvo tinkamas JSON.",
-    fehler_url_import_fehlgeschlagen: "Nepavyko importuoti URL: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Deja, įklijuotame tekste nepavyko nieko atpažinti. Užpildyk laukus žemiau ranka.",
-    warnung_texterkennung_unvollstaendig: "Atpažinimas buvo neišsamus (trūksta ingredientų ar žingsnių, galbūt jie priskirti neteisingai) - patikrink ir papildyk formoje.",
-    fehler_json_ungueltig: "Įklijuotas JSON netinkamas. Patikrink jį ir bandyk dar kartą.",
-    fehler_json_titel_fehlt: "JSON trūksta bent lauko 'title'.",
-    fehler_titel_fehlt: "Įvesk pavadinimą.",
-    fehler_unerwartet: "Netikėta klaida:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" tuo tarpu ištrynė kažkas kitas. Tavo pakeitimai neišsaugoti.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" tuo tarpu pakeitė kažkas kitas (pvz., komentaras, įvertinimas ar savas redagavimas).\n\nKad nieko neperrašytų, tavo pakeitimai NEBUVO išsaugoti. Atverk receptą iš naujo ir įvesk savo pakeitimus dar kartą.",
-    fehler_vorgang_fehlgeschlagen: "Veiksmas nepavyko:\n{{fehler}}",
-    fehler_teilen_drucken: "Netikėta klaida bendrinant / spausdinant:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Nurodyk 'entity' kortelės konfigūracijoje, pvz., entity: todo.rezepte",
-    fehler_bild_lesen: "Nepavyko perskaityti nuotraukos (failas sugadintas arba nepalaikomas).",
-    fehler_bild_verarbeiten: "Nepavyko apdoroti nuotraukos kaip paveikslėlio (nepalaikomas formatas?).",
-    teilen_ueberschrift_zutaten: "INGREDIENTAI",
-    teilen_ueberschrift_zubereitung: "GAMINIMAS",
-    seite_zurueck_btn: "← Atgal",
-    seite_weiter_btn: "Kitas →",
-    seite_anzeige: "{{aktuell}} psl. iš {{gesamt}}",
-    update_neue_version: "Yra nauja versija: {{version}}",
-    update_ansehen_btn: "Žiūrėti",
-    update_schliessen_aria: "Slėpti pranešimą",
-    ressourcen_version_hinweis: "⚠️ Ši kortelė buvo atnaujinta, bet ištekliaus URL nepasikeitė (vis dar \"?v={{version}}\"). Kitos naršyklės/įrenginiai dėl to gali toliau įkelti seną, podėlyje saugomą failą - padidink versijos numerį ištekliaus URL (Nustatymai → Prietaisų skydeliai → Ištekliai).",
-    detail_kochmodus_btn: "🍳 Gaminimo režimas",
-    kochmodus_schritt_anzeige: "{{aktuell}} veiksmas iš {{gesamt}}",
-    kochmodus_schliessen_aria: "Uždaryti gaminimo režimą",
-    kochmodus_schritt_zurueck_aria: "Ankstesnis veiksmas",
-    kochmodus_schritt_weiter_aria: "Kitas veiksmas",
-    kochmodus_zutaten_ein_aria: "Rodyti ingredientus",
-    kochmodus_zutaten_aus_aria: "Slėpti ingredientus",
-    kochmodus_timer_ein_aria: "Rodyti laikmatį",
-    kochmodus_timer_aus_aria: "Slėpti laikmatį",
-    kochmodus_timer_minuten_aria: "Minutės",
-    kochmodus_timer_start_btn: "Pradėti",
-    kochmodus_timer_abbrechen_btn: "Atšaukti",
-    kochmodus_timer_abgelaufen_text: "⏰ Laikas baigėsi!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Paleisti {{minuten}} min. laikmatį",
-    kopf_sammel_pdf_btn: "📚 Bendras PDF",
-    sammel_pdf_keine_rezepte: "Nerasta receptų eksportavimui.",
-    sammel_pdf_frage_toc: "Ar sukurti pasirinktų receptų turinį?",
-    sammel_pdf_ja_toc_btn: "Taip, sukurti turinį",
-    sammel_pdf_nein_toc_btn: "Ne, be turinio",
-    sammel_pdf_name_placeholder: "Receptų knygos pavadinimas",
-    sammel_pdf_erstellen_btn: "Sukurti PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Turinys",
-    sammel_pdf_frage_umfang: "Kurie receptai turėtų atsidurti bendrame PDF?",
-    sammel_pdf_alle_rezepte_btn: "Visi rodomi receptai",
-    sammel_pdf_auswahl_btn: "Pasirinkti konkrečius receptus",
-    sammel_pdf_auswahl_titel: "Pasirinkti receptus",
-    sammel_pdf_alle_auswaehlen_link: "Pasirinkti visus",
-    sammel_pdf_keine_auswaehlen_link: "Atžymėti visus",
-    sammel_pdf_weiter_btn: "Toliau",
-    sammel_pdf_bilder_mitdrucken_label: "Įtraukti nuotraukas į PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Pasirinkite bent vieną receptą.",
-  },
-  mt: {
-    allgemein_zurueck: "← Lura",
-    allgemein_ja: "Iva",
-    allgemein_nein: "Le",
-    allgemein_an: "Mixgħul",
-    allgemein_aus: "Mitfi",
-    allgemein_speichern: "Issejvja",
-    allgemein_speichert: "Qed jissejvja…",
-    allgemein_abbrechen: "Ikkanċella",
-    allgemein_bearbeiten: "Editja",
-    allgemein_loeschen: "Ħassar",
-    allgemein_oeffnen: "Iftaħ",
-    allgemein_unbekannt: "Mhux Magħruf",
-    allgemein_schliessen: "Agħlaq",
-    kategorie_hauptgericht: "Platt Prinċipali",
-    kategorie_vorspeise: "Dixx tal-bidu",
-    kategorie_suppe: "Soppa",
-    kategorie_salat: "Insalata",
-    kategorie_beilage: "Kontorn",
-    kategorie_dessert: "Ħelu",
-    kategorie_kuchen_gebaeck: "Kejkijiet u Ħami",
-    kategorie_fruehstueck: "Kolazzjon",
-    kategorie_snack: "Ikel ħafif",
-    kategorie_getraenk: "Xarba",
-    kategorie_sonstiges: "Oħrajn",
-    kategorie_filter_alle: "Kollha",
-    kategorie_neu_btn: "+ Kategorija ġdida",
-    kategorie_name_placeholder: "Isem tal-kategorija",
-    fehler_kategorie_name_fehlt: "Jekk jogħġbok daħħal isem għall-kategorija.",
-    fehler_kategorie_existiert_bereits: "Din il-kategorija diġà teżisti.",
-    kategorie_loeschen_title: "Ħassar il-kategorija",
-    kategorie_loeschen_aria: "Ħassar il-kategorija {{name}}",
-    kategorie_bearbeiten_title: "Semmi mill-ġdid il-kategorija",
-    kategorie_bearbeiten_aria: "Semmi mill-ġdid il-kategorija {{name}}",
-    kategorie_umbenennen_titel: "Qed tissemma mill-ġdid il-kategorija \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Din il-kategorija għadha tintuża minn {{anzahl}}x riċetti - jekk jogħġbok assenjalhom kategorija oħra l-ewwel.",
-    wochentag_montag: "It-Tnejn",
-    wochentag_dienstag: "It-Tlieta",
-    wochentag_mittwoch: "L-Erbgħa",
-    wochentag_donnerstag: "Il-Ħamis",
-    wochentag_freitag: "Il-Ġimgħa",
-    wochentag_samstag: "Is-Sibt",
-    wochentag_sonntag: "Il-Ħadd",
-    sortier_titel: "Alfabetiku (A-Ż)",
-    sortier_bewertung: "L-aħjar rating l-ewwel",
-    sortier_kategorie: "Skont il-kategorija",
-    sortier_neu: "L-aktar riċenti l-ewwel",
-    sortieren_label: "Issortja skont:",
-    kopf_titel_standard: "Ktieb tar-Riċetti",
-    kopf_sichern_btn: "💾 Kopja ta' Sigurtà",
-    kopf_wochenplan_btn: "📅 Pjan tal-Ġimgħa",
-    kopf_zufallsrezept_btn: "🎲 Riċetta każwali",
-    umrechnungstabelle_btn: "📐 Tabella tal-konverżjoni",
-    umrechnungstabelle_titel: "Tabella tal-konverżjoni",
-    umrechnungstabelle_hinweis: "Valuri indikattivi fi grammi għal ingredjenti komuni tal-kċina - ivarjaw skont il-marka u l-konsistenza, għalhekk biss ta' referenza. Ma jiġux applikati awtomatikament fuq ir-riċetti tiegħek.",
-    umrechnungstabelle_suche_placeholder: "Fittex ingredjent …",
-    umrechnungstabelle_spalte_zutat: "Ingredjent",
-    umrechnungstabelle_spalte_tasse: "1 tazza",
-    umrechnungstabelle_spalte_el: "1 mgħarfa",
-    umrechnungstabelle_spalte_tl: "1 mgħarfa tal-ikel żgħira",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "L-ebda ingredjent ma nstab.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Żid ingredjent tiegħek",
-    umrechnungstabelle_eigene_name_platzhalter: "Isem l-ingredjent",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/tazza",
-    umrechnungstabelle_eigene_el_platzhalter: "g/mgħarfa",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/mgħarfa żgħira",
-    umrechnungstabelle_eigene_loeschen_titel: "Ħassar l-ingredjent tiegħek",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Editja l-ingredjent tiegħek",
-    umrechnungstabelle_eigene_name_fehlt: "Jekk jogħġbok daħħal isem.",
-    umrechnungstabelle_eigene_hinweis: "Nieqes ingredjent li taf int stess il-valur tal-konverżjoni tiegħu? Żidu hawn manwalment - apposta ma noffrux konverżjoni awtomatika bejn il-volum u l-piż, għax dan ikun ifisser li nilagħbu x-xorti skont l-ingredjent, il-marka u l-konsistenza.",
-    einkaufsmodus_start_btn: "🛒 Lista tax-Xiri",
-    einkaufsmodus_beenden_btn: "✕ Waqqaf l-għażla",
-    kopf_neu_btn: "+ Ġdid",
-    suche_placeholder: "🔍 Riċetta jew ingredjenti (eż. dqiq, bajd)…",
-    kochbuch_loeschen_title: "Ħassar il-ġabra",
-    kochbuch_loeschen_aria: "Ħassar il-ġabra {{name}}",
-    kochbuch_speichern_btn: "+ Issejvja bħala ġabra intelliġenti",
-    kochbuch_name_placeholder: "Isem għal din il-ġabra, eż. Riċetti tal-Ħarifa",
-    fehler_kochbuch_name_fehlt: "Jekk jogħġbok daħħal isem għall-ġabra.",
-    kochbuch_info_aria: "Uri spjegazzjoni tal-ġabriet intelliġenti",
-    kochbuch_info_titel: "X'inhi ġabra intelliġenti?",
-    kochbuch_info_text:
-      "Ġabra intelliġenti ma taħżinx lista fissa ta' riċetti, iżda " +
-      "taħżen taħlita ta' kategorija, tikketti u terminu ta' " +
-      "tfittxija, eżatt kif huma stabbiliti fil-mument tas-salvataġġ. " +
-      "Wara dan tinbidel waħedha: riċetta ġdida li taqbel tidher " +
-      "awtomatikament, u riċetta li l-kategorija jew it-tikketti " +
-      "tagħha jinbidlu tista' bl-istess mod tisparixxi awtomatikament " +
-      "mill-ġdid.",
-    einkaufs_zaehler: "{{anzahl}} magħżula",
-    einkaufsliste_erstellen_btn: "Oħloq lista tax-xiri",
-    fehler_einkaufsliste_keine_konfiguration: "Il-konfigurazzjoni għal-lista tax-xiri għadha nieqsa: jekk jogħġbok speċifika 'shopping_list_entity' fil-konfigurazzjoni tal-kard (eż. shopping_list_entity: todo.einkaufsliste) - għal dan hemm bżonn TIENI għajnuna \"Lista ta' xogħol lokali\". Ara ANLEITUNG-Backup.md, taqsima 18.",
-    fehler_einkaufsliste_keine_auswahl: "Jekk jogħġbok agħżel mill-inqas riċetta waħda.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Jekk jogħġbok agħżel mill-inqas ingredjent wieħed.",
-    zutaten_fehlend_einkaufsliste_btn: "Żid l-ingredjenti magħżula mal-lista tax-xiri",
-    fehler_einkaufsliste_keine_zutaten: "Ir-riċetti magħżula ma fihom l-ebda ingredjent.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Ma setax jiżdied \"{{zeile}}\" mal-lista tax-xiri:\n{{fehler}}\n\nL-ingredjenti li diġà ġew miżjuda jibqgħu fil-lista.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingredjent(i) miżjuda ma' \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" tħassret.",
-    undo_rueckgaengig_btn: "Ħassar l-azzjoni",
-    leer_keine_rezepte: "Għadu m'hemm l-ebda riċetta – ibda b'\"+ Ġdid\"",
-    leer_keine_treffer: "Ma nstabet l-ebda riċetta għal \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Ma setax jitgħabba \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Din il-lista ta' xogħol teżisti? (Settings → Devices & Services → Helpers)",
-    kachel_aria_label_oeffnen: "Iftaħ ir-riċetta {{titel}}",
-    sterne_aria_label_gruppe: "Ir-rating tiegħek",
-    sterne_aria_label: "{{zahl}} minn 5 stilel",
-    fehler_kein_benutzer_bewertung: "Ma setax jiġi stabbilit l-utent tiegħek - ir-rating mhux possibbli.",
-    detail_teilen_drucken_btn: "📤 Aqsam / Ipprintja",
-    detail_erstellt_von: "👤 Maħluqa minn {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} rating)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} ratings)",
-    detail_keine_bewertungen: "Għad m'hemm l-ebda rating",
-    detail_deine_bewertung: "Ir-rating tiegħek:",
-    detail_zubereitet_x: "🍳 imħejjija {{anzahl}} darba/darbiet",
-    detail_portionen_suffix: "porzjonijiet",
-    abschnitt_titel_zutaten: "Ingredjenti",
-    abschnitt_titel_zubereitung: "Preparazzjoni",
-    keine_zutaten: "L-ebda ingredjent mniżżel",
-    detail_kommentare_titel: "Kummenti",
-    detail_keine_kommentare: "Għad m'hemm l-ebda kumment",
-    detail_kommentar_placeholder: "Żieda, parir jew nota…",
-    detail_kommentar_hinzufuegen_btn: "Żid kumment",
-    detail_bearbeiten_hinweis: "Din ir-riċetta tista' tiġi editjata jew imħassra biss minn {{name}} (jew amministratur).",
-    detail_ersteller_unbekannt: "min ħolqot/ħalaq ir-riċetta",
-    modal_zubereitet_frage: "Ħejjejt \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Tinkludi r-ritratt tar-riċetta?",
-    modal_drucken_ohne_bild_btn: "Mingħajr ritratt",
-    modal_drucken_mit_bild_btn: "Bir-ritratt",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Statistika tat-tisjir",
-    statistik_info_aria: "Uri spjegazzjoni tal-istatistika",
-    statistik_einstellungen_btn_title: "Settings tar-reġistrazzjoni tat-tisjir",
-    statistik_einstellungen_titel: "Settings tar-reġistrazzjoni tat-tisjir",
-    statistik_einstellungen_text: "Hawnhekk tista' tiddeċiedi jekk, wara li toħroġ minn riċetta, tintalabx tgħid jekk ħejjejtiex, u jekk l-istatistika li tirriżulta tintweriex f'din il-karta.",
-    statistik_einstellungen_schalter_label: "Ixgħel il-mistoqsija u l-istatistika",
-    tags_einstellung_schalter_label: "Uri l-filtru tat-tags fil-ħarsa ġenerali",
-    zufallsrezept_einstellung_schalter_label: "Uri l-buttuna Riċetta każwali fil-ħarsa ġenerali",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Uri l-buttuna tat-tabella tal-konverżjoni fil-ħarsa ġenerali",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Għall-kategorija stabbilita għal riċetti Amerikani, it-tabella tal-konverżjoni xorta tidher fir-riċetta u fil-modalità tat-tisjir, anke jekk din il-buttuna hawn tkun mitfija.",
-    farben_abschnitt_titel: "Kuluri",
-    farben_hinweis: "Ippersonalizza kuluri individwali tal-karta. Irrisettja kollox terġa' tqiegħed il-kuluri kollha fuq id-default.",
-    farben_akzent_label: "Kulur ewlieni (buttuni, filtri attivi)",
-    farben_akzent_text_label: "Kulur tal-aċċent għat-test u l-bordijiet",
-    farben_loeschen_label: "Tħassir / twissija",
-    farben_sterne_label: "Stilel tal-valutazzjoni",
-    farben_titel_label: "Titli",
-    farben_zuruecksetzen_btn: "Irrisettja kollox",
-    us_kategorie_einstellung_label: "Kategorija għal riċetti Amerikani",
-    us_kategorie_einstellung_text: "Ir-riċetti b'din il-kategorija juru wkoll buttuna għat-tabella tal-konverżjoni fir-riċetta nnifisha u fil-modalità tat-tisjir.",
-    us_kategorie_einstellung_keine: "— Xejn —",
-    statistik_info_titel: "Kif tiġi kkalkulata din l-istatistika?",
-    statistik_info_text:
-      "Din il-valutazzjoni tgħodd kull konferma tal-mistoqsija „Ħejjejtu?“ - irrispettivament mid-daqs tal-porzjon jew kemm-il darba fl-istess jum. Jekk din il-mistoqsija tkun diżattivata permezz tal-swiċċ fis-settings tal-istatistika (⚙️), in-numri jieqfu jikbru, iżda t-tħejjijiet diġà rreġistrati jibqgħu.",
-    statistik_dieses_jahr: "Sajjart {{anzahl}}x mill-ktieb tar-riċetti tiegħek fis-sena {{jahr}}",
-    statistik_gesamt: "Sajjart {{anzahl}}x mill-ktieb tar-riċetti tiegħek b'kollox",
-    statistik_top_titel: "L-aktar imħejji",
-    statistik_keine_daten: "Għadha ma ġiet irreġistrata l-ebda tħejjija.",
-    modal_loeschen_frage: "Tassew tħassar \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Iva, ħassar",
-    modal_kommentar_loeschen_frage: "Tassew tħassar dan il-kumment?",
-    wochenplan_titel: "Pjan tal-Ġimgħa",
-    wochenplan_tab_diese: "Din il-ġimgħa",
-    wochenplan_tab_folgewoche: "Il-ġimgħa d-dieħla",
-    wochenplan_hinweis_folgewoche: "Ippjana hawn diġà l-ġimgħa li ġejja - din tiċċaqlaq awtomatikament għal \"Din il-ġimgħa\" hekk kif tispiċċa l-ġimgħa attwali.",
-    wochenplan_hinweis_diese: "Il-ġranet li għaddew jitbattlu awtomatikament (ir-riċetta nnifisha tibqa' tinżamm, jgħib biss l-assenjament).",
-    wochenplan_hinweis_speicherung: "Jinżamm salvat fuq id-diversi apparati (bħala entrata addizzjonali moħbija fl-istess lista tar-riċetti, ma hemmx bżonn ta' għajnuna oħra).",
-    wochenplan_leer: "Għadu m'hemm l-ebda riċetta - l-ewwel oħloq xi wħud.",
-    wochenplan_kein_rezept_option: "– l-ebda riċetta –",
-    wochenplan_einkaufsliste_btn: "Oħloq lista tax-xiri minn {{ziel}}",
-    wochenplan_wort: "pjan tal-ġimgħa",
-    wochenplan_folgewoche_wort: "il-ġimgħa d-dieħla",
-    wochenplan_aktuelle_woche_wort: "il-ġimgħa attwali",
-    wochenplan_keine_zuweisung: "{{zeitraum}} għadu ma fihx riċetti assenjati.",
-    formular_titel_neu: "Riċetta ġdida",
-    formular_titel_bearbeiten: "Editja r-riċetta",
-    formular_url_import_btn: "🌐 Importa URL tar-riċetta",
-    formular_url_label: "Link għas-sit web tar-riċetta",
-    formular_url_placeholder: "https://www.ricetti-ezempju.mt/ir-ricetta-tieghi",
-    formular_url_hinweis: "Itella' l-paġna u jaqra d-dejta strutturata tar-riċetta li diġà tinsab imwaħħla fiha (l-istess dejta li, pereżempju, Google juża biex juri r-ratings bil-kwiekeb fit-tiftix) - ġeneralment aktar affidabbli mir-rikonoxximent tat-test. Jaħdem biss fuq siti li jipprovdu dejta bħal din u ma jimblukkawx talbiet awtomatizzati.",
-    formular_url_importieren_btn: "Importa",
-    formular_url_laedt: "Qed itella' …",
-    formular_text_einfuegen_btn: "🔍 Waħħal it-test tar-riċetta (rikonoxximent awtomatiku)",
-    formular_text_label: "Waħħal hawn it-test tar-riċetta (eż. ikkupjat minn sit web ta' riċetti)",
-    formular_text_placeholder: "Titlu, ingredjenti, preparazzjoni - sempliċiment waħħal it-test kollu",
-    formular_text_hinweis: "Rikonoxximent purament awtomatiku mingħajr AI - jaħdem l-aħjar bl-intestaturi \"Ingredjenti\" u \"Preparazzjoni\" fit-test. Jekk jogħġbok iċċekkja fil-qosor ir-riżultat wara, jista' jkun mhux komplut.",
-    formular_text_erkennen_btn: "Agħraf",
-    formular_json_einfuegen_btn: "📋 Waħħal JSON iġġenerat mill-AI",
-    formular_json_info_aria: "Uri prompt lest għal AI",
-    json_info_titel: "Prompt għal AI",
-    json_info_erklaerung:
-      "Ikkopja dan it-test, waħħlu f'AI tal-għażla tiegħek (eż. ChatGPT jew Claude), żid it-test tar-riċetta tiegħek u mbagħad waħħal it-tweġiba fuq f'„Waħħal il-JSON hawn“.",
-    json_info_prompt:
-      "Ibdel it-test tar-riċetta li ser nibgħatlek issa f'objett JSON WIEĦED biss - mingħajr spjegazzjoni, mingħajr test qabel jew wara, il-JSON biss. Uża eżatt dan il-format:\n\n" +
-      "{\n" +
-      '  "title": "isem ir-riċetta",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "waħda minn: {{kategorien}}",\n' +
-      '  "ingredients": ["ingredjent wieħed kull entrata, eż. 200 g dqiq"],\n' +
-      '  "steps": ["pass wieħed tal-preparazzjoni kull entrata"],\n' +
-      '  "tags": ["tikketti fakultattivi, eż. veġetarjan"]\n' +
-      "}\n\n" +
-      "Regoli: „category“ trid tkun EŻATT waħda mill-valuri elenkati hawn fuq (ikkopjaha bla tibdil, anke jekk it-test tar-riċetta jkun b'lingwa oħra - dawn huma valuri interni fissi). " +
-      "„tags“ mhix obbligatorja, arrejj vojt tajjeb ukoll. " +
-      "Tivvintax ingredjenti jew passi li mhumiex fit-test. " +
-      "Hawn hu t-test tar-riċetta:",
-    json_info_kopieren_btn: "📋 Ikkopja l-prompt",
-    json_info_kopiert: "Ikkopjat!",
-    formular_json_label: "Waħħal il-JSON hawn",
-    formular_json_uebernehmen_btn: "Applika",
-    formular_label_titel: "Titlu",
-    formular_label_kategorie: "Kategorija",
-    formular_label_tags: "Tags (jistgħu jintużaw aktar minn wieħed, eż. \"veġetarjan\", \"malajr\")",
-    formular_tag_placeholder: "Daħħal u żid tag",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Neħħi t-tag {{tag}}",
-    formular_label_portionen: "Porzjonijiet (bażi)",
-    formular_label_zutaten: "Ingredjenti",
-    formular_zutat_hinzufuegen_btn: "+ Ingredjent",
-    formular_zutat_menge_placeholder: "Kwantità",
-    formular_zutat_einheit_placeholder: "Unità",
-    formular_zutat_name_placeholder: "Ingredjent",
-    formular_zutat_entfernen_aria: "Neħħi l-ingredjent",
-    formular_label_zubereitung: "Preparazzjoni (passi)",
-    formular_schritt_hinzufuegen_btn: "+ Pass",
-    formular_schritt_placeholder_beispiel: "eż. aħsel u aqta' l-ħaxix",
-    formular_schritt_placeholder_naechster: "pass li jmiss",
-    formular_schritt_entfernen_aria: "Neħħi l-pass",
-    formular_schritt_hoch_aria: "Mexxi l-pass 'il fuq",
-    formular_schritt_runter_aria: "Mexxi l-pass 'l isfel",
-    formular_label_bild: "Ritratt",
-    formular_bild_vorhanden_hinweis: "(jeżisti – fajl ġdid se jissostitwih)",
-    formular_bild_hinweis: "Ir-ritratt attwali jibqa' jekk ma tagħżilx fajl ġdid.",
-    formular_bild_verkleinern_text: "Ir-ritratt qed jiġi mnaqqas…",
-    fehler_url_ungueltig: "Jekk jogħġbok daħħal indirizz sħiħ li jibda b'http:// jew https://.",
-    fehler_url_apostroph: "Dan l-indirizz fih apostrofu (') u sfortunatament ma jistax jiġi importat.",
-    fehler_url_keine_ausgabe: "L-iskript ma tax l-ebda output. 'rezeptbuch_url_importieren' hu kkonfigurat f'configuration.yaml u minn dakinhar Home Assistant ġie irriavvjat kompletament?",
-    fehler_url_kein_json: "It-tweġiba tal-iskript tal-importazzjoni ma kinitx JSON validu.",
-    fehler_url_import_fehlgeschlagen: "L-importazzjoni tal-URL falliet: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Sfortunatament ma setax jiġi rikonoxxut xejn fit-test imwaħħal. Jekk jogħġbok imla l-oqsma hawn taħt bl-idejn.",
-    warnung_texterkennung_unvollstaendig: "Ir-rikonoxximent kien mhux komplut (l-ingredjenti jew il-passi neqsin/jistgħu jkunu assenjati ħażin) - jekk jogħġbok iċċekkja u kkompleta fil-formola.",
-    fehler_json_ungueltig: "Il-JSON imwaħħal mhux validu. Jekk jogħġbok iċċekkjah u erġa' pprova.",
-    fehler_json_titel_fehlt: "Fil-JSON tal-inqas nieqes il-qasam 'title'.",
-    fehler_titel_fehlt: "Jekk jogħġbok daħħal titlu.",
-    fehler_unerwartet: "Żball mhux mistenni:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" sadanittant tħassret minn xi ħadd ieħor. Il-bidliet tiegħek ma ġewx salvati.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" sadanittant inbidlet minn xi ħadd ieħor (eż. kumment, rating jew editjar tiegħu stess).\n\nBiex xejn ma jiġi miktub fuqu, il-bidliet tiegħek MA ġewx salvati. Jekk jogħġbok erġa' iftaħ ir-riċetta u daħħal il-bidliet tiegħek mill-ġdid.",
-    fehler_vorgang_fehlgeschlagen: "L-azzjoni falliet:\n{{fehler}}",
-    fehler_teilen_drucken: "Żball mhux mistenni waqt il-qsim/l-istampar:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Jekk jogħġbok speċifika 'entity' fil-konfigurazzjoni tal-kard, eż. entity: todo.rezepte",
-    fehler_bild_lesen: "Ir-ritratt ma setax jinqara (fajl korrott jew mhux appoġġat).",
-    fehler_bild_verarbeiten: "Ir-ritratt ma setax jiġi pproċessat bħala immaġni (format mhux appoġġat?).",
-    teilen_ueberschrift_zutaten: "INGREDJENTI",
-    teilen_ueberschrift_zubereitung: "PREPARAZZJONI",
-    seite_zurueck_btn: "← Lura",
-    seite_weiter_btn: "Li jmiss →",
-    seite_anzeige: "Paġna {{aktuell}} minn {{gesamt}}",
-    update_neue_version: "Verżjoni ġdida disponibbli: {{version}}",
-    update_ansehen_btn: "Ara",
-    update_schliessen_aria: "Aħbi n-notifika",
-    ressourcen_version_hinweis: "⚠️ Din il-karta ġiet aġġornata, iżda l-URL tar-riżorsa ma nbidlitx (għadha \"?v={{version}}\"). Browsers/apparati oħra għalhekk jistgħu jibqgħu jtellgħu l-fajl qadim, maħżun fil-cache - żid in-numru tal-verżjoni fl-URL tar-riżorsa (Settings → Dashboards → Riżorsi).",
-    detail_kochmodus_btn: "🍳 Modalità tat-Tisjir",
-    kochmodus_schritt_anzeige: "Pass {{aktuell}} minn {{gesamt}}",
-    kochmodus_schliessen_aria: "Agħlaq il-modalità tat-tisjir",
-    kochmodus_schritt_zurueck_aria: "Pass ta' qabel",
-    kochmodus_schritt_weiter_aria: "Pass li jmiss",
-    kochmodus_zutaten_ein_aria: "Uri l-ingredjenti",
-    kochmodus_zutaten_aus_aria: "Aħbi l-ingredjenti",
-    kochmodus_timer_ein_aria: "Uri l-timer",
-    kochmodus_timer_aus_aria: "Aħbi t-timer",
-    kochmodus_timer_minuten_aria: "Minuti",
-    kochmodus_timer_start_btn: "Ibda",
-    kochmodus_timer_abbrechen_btn: "Ikkanċella",
-    kochmodus_timer_abgelaufen_text: "⏰ Il-ħin spiċċa!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Ibda timer ta' {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 PDF Miġbura",
-    sammel_pdf_keine_rezepte: "Ma nstab l-ebda riċetta biex tiġi esportata.",
-    sammel_pdf_frage_toc: "Toħloq werrej għar-riċetti magħżula?",
-    sammel_pdf_ja_toc_btn: "Iva, oħloq werrej",
-    sammel_pdf_nein_toc_btn: "Le, mingħajr werrej",
-    sammel_pdf_name_placeholder: "Isem tal-ktieb tat-tisjir",
-    sammel_pdf_erstellen_btn: "Oħloq PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Werrej",
-    sammel_pdf_frage_umfang: "Liema riċetti għandhom jidħlu fil-PDF ġenerali?",
-    sammel_pdf_alle_rezepte_btn: "Ir-riċetti kollha murija",
-    sammel_pdf_auswahl_btn: "Agħżel riċetti speċifiċi",
-    sammel_pdf_auswahl_titel: "Agħżel ir-riċetti",
-    sammel_pdf_alle_auswaehlen_link: "Agħżel kollox",
-    sammel_pdf_keine_auswaehlen_link: "Neħħi l-għażla",
-    sammel_pdf_weiter_btn: "Li jmiss",
-    sammel_pdf_bilder_mitdrucken_label: "Inkludi r-ritratti fil-PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Jekk jogħġbok agħżel mill-inqas riċetta waħda.",
-  },
-  pl: {
-    allgemein_zurueck: "← Wstecz",
-    allgemein_ja: "Tak",
-    allgemein_nein: "Nie",
-    allgemein_an: "Wł.",
-    allgemein_aus: "Wył.",
-    allgemein_speichern: "Zapisz",
-    allgemein_speichert: "Zapisywanie…",
-    allgemein_abbrechen: "Anuluj",
-    allgemein_bearbeiten: "Edytuj",
-    allgemein_loeschen: "Usuń",
-    allgemein_oeffnen: "Otwórz",
-    allgemein_unbekannt: "Nieznane",
-    allgemein_schliessen: "Zamknij",
-    kategorie_hauptgericht: "Danie główne",
-    kategorie_vorspeise: "Przystawka",
-    kategorie_suppe: "Zupa",
-    kategorie_salat: "Sałatka",
-    kategorie_beilage: "Dodatek",
-    kategorie_dessert: "Deser",
-    kategorie_kuchen_gebaeck: "Ciasta i wypieki",
-    kategorie_fruehstueck: "Śniadanie",
-    kategorie_snack: "Przekąska",
-    kategorie_getraenk: "Napój",
-    kategorie_sonstiges: "Inne",
-    kategorie_filter_alle: "Wszystkie",
-    kategorie_neu_btn: "+ Nowa kategoria",
-    kategorie_name_placeholder: "Nazwa kategorii",
-    fehler_kategorie_name_fehlt: "Podaj nazwę kategorii.",
-    fehler_kategorie_existiert_bereits: "Ta kategoria już istnieje.",
-    kategorie_loeschen_title: "Usuń kategorię",
-    kategorie_loeschen_aria: "Usuń kategorię {{name}}",
-    kategorie_bearbeiten_title: "Zmień nazwę kategorii",
-    kategorie_bearbeiten_aria: "Zmień nazwę kategorii {{name}}",
-    kategorie_umbenennen_titel: "Zmiana nazwy kategorii \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Ta kategoria jest nadal używana przez {{anzahl}}x przepisów - najpierw przypisz im inną kategorię.",
-    wochentag_montag: "Poniedziałek",
-    wochentag_dienstag: "Wtorek",
-    wochentag_mittwoch: "Środa",
-    wochentag_donnerstag: "Czwartek",
-    wochentag_freitag: "Piątek",
-    wochentag_samstag: "Sobota",
-    wochentag_sonntag: "Niedziela",
-    sortier_titel: "Alfabetycznie (A-Z)",
-    sortier_bewertung: "Najlepiej oceniane najpierw",
-    sortier_kategorie: "Według kategorii",
-    sortier_neu: "Najnowsze najpierw",
-    sortieren_label: "Sortuj według:",
-    kopf_titel_standard: "Książka kucharska",
-    kopf_sichern_btn: "💾 Kopia zapasowa",
-    kopf_wochenplan_btn: "📅 Plan tygodnia",
-    kopf_zufallsrezept_btn: "🎲 Losowy przepis",
-    umrechnungstabelle_btn: "📐 Tabela przeliczeń",
-    umrechnungstabelle_titel: "Tabela przeliczeń",
-    umrechnungstabelle_hinweis: "Orientacyjne wartości w gramach dla często używanych produktów kuchennych - różnią się w zależności od marki i konsystencji, więc służą tylko do wglądu. NIE są automatycznie stosowane w twoich przepisach.",
-    umrechnungstabelle_suche_placeholder: "Szukaj produktu …",
-    umrechnungstabelle_spalte_zutat: "Produkt",
-    umrechnungstabelle_spalte_tasse: "1 szklanka",
-    umrechnungstabelle_spalte_el: "1 łyżka",
-    umrechnungstabelle_spalte_tl: "1 łyżeczka",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Nie znaleziono produktu.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Dodaj własny produkt",
-    umrechnungstabelle_eigene_name_platzhalter: "Nazwa produktu",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/szklanka",
-    umrechnungstabelle_eigene_el_platzhalter: "g/łyżka",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/łyżeczka",
-    umrechnungstabelle_eigene_loeschen_titel: "Usuń własny produkt",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Edytuj własny produkt",
-    umrechnungstabelle_eigene_name_fehlt: "Podaj nazwę.",
-    umrechnungstabelle_eigene_hinweis: "Brakuje produktu, którego wartość przeliczeniową znasz sam? Dodaj go tutaj ręcznie - celowo nie oferujemy automatycznego przeliczania między objętością a masą, ponieważ oznaczałoby to zgadywanie w zależności od produktu, marki i konsystencji.",
-    einkaufsmodus_start_btn: "🛒 Lista zakupów",
-    einkaufsmodus_beenden_btn: "✕ Zakończ wybór",
-    kopf_neu_btn: "+ Nowy",
-    suche_placeholder: "🔍 Przepis lub składniki (np. mąka, jajka)…",
-    kochbuch_loeschen_title: "Usuń kolekcję",
-    kochbuch_loeschen_aria: "Usuń kolekcję {{name}}",
-    kochbuch_speichern_btn: "+ Zapisz jako inteligentną kolekcję",
-    kochbuch_name_placeholder: "Nazwa tej kolekcji, np. Przepisy jesienne",
-    fehler_kochbuch_name_fehlt: "Podaj nazwę kolekcji.",
-    kochbuch_info_aria: "Pokaż wyjaśnienie inteligentnych kolekcji",
-    kochbuch_info_titel: "Czym jest inteligentna kolekcja?",
-    kochbuch_info_text:
-      "Inteligentna kolekcja nie zapisuje stałej listy przepisów, " +
-      "lecz kombinację kategorii, tagów i wyszukiwanego hasła, " +
-      "dokładnie tak, jak są ustawione w momencie zapisu. Następnie " +
-      "aktualizuje się sama: nowy pasujący przepis pojawia się " +
-      "automatycznie, a przepis, którego kategoria lub tagi się " +
-      "zmienią, może równie automatycznie ponownie zniknąć.",
-    einkaufs_zaehler: "Wybrano: {{anzahl}}",
-    einkaufsliste_erstellen_btn: "Utwórz listę zakupów",
-    fehler_einkaufsliste_keine_konfiguration: "Brakuje jeszcze konfiguracji listy zakupów: podaj 'shopping_list_entity' w konfiguracji karty (np. shopping_list_entity: todo.einkaufsliste) - do tego potrzebny jest DRUGI pomocnik Lokalna lista zadań. Zobacz ANLEITUNG-Backup.md, sekcja 18.",
-    fehler_einkaufsliste_keine_auswahl: "Wybierz co najmniej jeden przepis.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Wybierz co najmniej jeden produkt.",
-    zutaten_fehlend_einkaufsliste_btn: "Dodaj wybrane do listy zakupów",
-    fehler_einkaufsliste_keine_zutaten: "Wybrane przepisy nie zawierają żadnych składników.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nie udało się dodać \"{{zeile}}\" do listy zakupów:\n{{fehler}}\n\nJuż dodane składniki pozostają na liście.",
-    einkaufsliste_hinzugefuegt: "Dodano {{anzahl}} składnik(ów) do \"{{entity}}\".",
-    undo_geloescht: "Usunięto \"{{titel}}\".",
-    undo_rueckgaengig_btn: "Cofnij",
-    leer_keine_rezepte: "Brak przepisów – zacznij od \"+ Nowy\"",
-    leer_keine_treffer: "Nie znaleziono przepisów dla \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Nie udało się załadować \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Czy ta lista zadań istnieje? (Ustawienia → Urządzenia i usługi → Pomocnicy)",
-    kachel_aria_label_oeffnen: "Otwórz przepis {{titel}}",
-    sterne_aria_label_gruppe: "Twoja ocena",
-    sterne_aria_label: "{{zahl}} z 5 gwiazdek",
-    fehler_kein_benutzer_bewertung: "Nie udało się ustalić Twojego użytkownika - ocenianie niemożliwe.",
-    detail_teilen_drucken_btn: "📤 Udostępnij / Drukuj",
-    detail_erstellt_von: "👤 Utworzone przez {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} ocena)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} ocen)",
-    detail_keine_bewertungen: "Brak ocen",
-    detail_deine_bewertung: "Twoja ocena:",
-    detail_zubereitet_x: "🍳 przygotowano {{anzahl}}x",
-    detail_portionen_suffix: "porcje",
-    abschnitt_titel_zutaten: "Składniki",
-    abschnitt_titel_zubereitung: "Przygotowanie",
-    keine_zutaten: "Brak podanych składników",
-    detail_kommentare_titel: "Komentarze",
-    detail_keine_kommentare: "Brak komentarzy",
-    detail_kommentar_placeholder: "Uzupełnienie, wskazówka lub uwaga…",
-    detail_kommentar_hinzufuegen_btn: "Dodaj komentarz",
-    detail_bearbeiten_hinweis: "Tylko {{name}} (lub administrator) może edytować lub usunąć ten przepis.",
-    detail_ersteller_unbekannt: "autor(ka)",
-    modal_zubereitet_frage: "Czy przygotowałeś/aś \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Dołączyć zdjęcie przepisu?",
-    modal_drucken_ohne_bild_btn: "Bez zdjęcia",
-    modal_drucken_mit_bild_btn: "Ze zdjęciem",
-    statistik_btn: "📊 Statystyki",
-    statistik_titel: "Statystyki gotowania",
-    statistik_info_aria: "Pokaż wyjaśnienie statystyk",
-    statistik_einstellungen_btn_title: "Ustawienia rejestrowania gotowania",
-    statistik_einstellungen_titel: "Ustawienia rejestrowania gotowania",
-    statistik_einstellungen_text: "Tutaj możesz ustawić, czy po wyjściu z przepisu masz być pytany, czy go przygotowałeś/aś, i czy wynikające z tego statystyki są wyświetlane na tej karcie.",
-    statistik_einstellungen_schalter_label: "Włącz pytanie i statystyki",
-    tags_einstellung_schalter_label: "Pokaż filtr tagów w przeglądzie",
-    zufallsrezept_einstellung_schalter_label: "Pokaż przycisk Losowy przepis w przeglądzie",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Pokaż przycisk tabeli przeliczeń w przeglądzie",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Dla ustawionej kategorii przepisów amerykańskich tabela przeliczeń nadal pojawia się w przepisie i w trybie gotowania, nawet jeśli ten przycisk jest tutaj wyłączony.",
-    farben_abschnitt_titel: "Kolory",
-    farben_hinweis: "Dostosuj poszczególne kolory karty. Zresetuj wszystko przywraca wszystkie kolory domyślne.",
-    farben_akzent_label: "Kolor główny (przyciski, aktywne filtry)",
-    farben_akzent_text_label: "Kolor akcentu dla tekstów i obramowań",
-    farben_loeschen_label: "Usuwanie / ostrzeżenie",
-    farben_sterne_label: "Gwiazdki oceny",
-    farben_titel_label: "Nagłówki",
-    farben_zuruecksetzen_btn: "Zresetuj wszystko",
-    us_kategorie_einstellung_label: "Kategoria dla przepisów amerykańskich",
-    us_kategorie_einstellung_text: "Przy przepisach z tą kategorią dodatkowo pojawia się przycisk tabeli przeliczeń bezpośrednio w przepisie i w trybie gotowania.",
-    us_kategorie_einstellung_keine: "— Brak —",
-    statistik_info_titel: "Jak obliczana jest ta statystyka?",
-    statistik_info_text:
-      "To zestawienie liczy każde potwierdzenie pytania „Czy przygotowałeś/aś?“ - niezależnie od wielkości porcji czy liczby powtórzeń tego samego dnia. Jeśli to pytanie jest wyłączone przełącznikiem w ustawieniach statystyk (⚙️), liczby przestają rosnąć, ale już zapisane przygotowania pozostają zachowane.",
-    statistik_dieses_jahr: "W {{jahr}} roku gotowałeś/aś {{anzahl}}x z własnej książki kucharskiej",
-    statistik_gesamt: "Łącznie gotowałeś/aś {{anzahl}}x z własnej książki kucharskiej",
-    statistik_top_titel: "Najczęściej przygotowywane",
-    statistik_keine_daten: "Nie zapisano jeszcze żadnych przygotowań.",
-    modal_loeschen_frage: "Czy na pewno usunąć \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Tak, usuń",
-    modal_kommentar_loeschen_frage: "Czy naprawdę usunąć ten komentarz?",
-    wochenplan_titel: "Plan tygodnia",
-    wochenplan_tab_diese: "Ten tydzień",
-    wochenplan_tab_folgewoche: "Następny tydzień",
-    wochenplan_hinweis_folgewoche: "Zaplanuj tutaj już teraz nadchodzący tydzień - automatycznie przejdzie do \"Ten tydzień\", gdy tylko bieżący tydzień się zakończy.",
-    wochenplan_hinweis_diese: "Miniony dni są automatycznie czyszczone (sam przepis pozostaje zachowany, znika tylko przypisanie).",
-    wochenplan_hinweis_speicherung: "Zapisywane na wszystkich urządzeniach (jako ukryty dodatkowy wpis na tej samej liście przepisów, nie jest potrzebny żaden dodatkowy pomocnik).",
-    wochenplan_leer: "Brak przepisów - najpierw utwórz kilka.",
-    wochenplan_kein_rezept_option: "– brak przepisu –",
-    wochenplan_einkaufsliste_btn: "Utwórz listę zakupów z {{ziel}}",
-    wochenplan_wort: "plan tygodnia",
-    wochenplan_folgewoche_wort: "następny tydzień",
-    wochenplan_aktuelle_woche_wort: "bieżący tydzień",
-    wochenplan_keine_zuweisung: "{{zeitraum}} nie zawiera jeszcze przypisanych przepisów.",
-    formular_titel_neu: "Nowy przepis",
-    formular_titel_bearbeiten: "Edytuj przepis",
-    formular_url_import_btn: "🌐 Importuj URL przepisu",
-    formular_url_label: "Link do strony internetowej przepisu",
-    formular_url_placeholder: "https://www.przyklad-przepisy.pl/moj-przepis",
-    formular_url_hinweis: "Wczytuje stronę i odczytuje osadzone już w niej ustrukturyzowane dane przepisu (te same dane, dzięki którym np. Google wyświetla oceny w gwiazdkach w wynikach wyszukiwania) - zwykle bardziej niezawodne niż rozpoznawanie tekstu. Działa tylko na stronach, które udostępniają takie dane i nie blokują zautomatyzowanych żądań.",
-    formular_url_importieren_btn: "Importuj",
-    formular_url_laedt: "Wczytywanie …",
-    formular_text_einfuegen_btn: "🔍 Wklej tekst przepisu (automatyczne rozpoznawanie)",
-    formular_text_label: "Wklej tutaj tekst przepisu (np. skopiowany ze strony z przepisami)",
-    formular_text_placeholder: "Tytuł, składniki, przygotowanie - po prostu wklej cały tekst",
-    formular_text_hinweis: "Czysto automatyczne rozpoznawanie bez AI - działa najlepiej z nagłówkami \"Składniki\" i \"Przygotowanie\" w tekście. Sprawdź potem krótko wynik, może być niekompletny.",
-    formular_text_erkennen_btn: "Rozpoznaj",
-    formular_json_einfuegen_btn: "📋 Wklej JSON wygenerowany przez AI",
-    formular_json_info_aria: "Pokaż gotowy prompt dla AI",
-    json_info_titel: "Prompt dla AI",
-    json_info_erklaerung:
-      "Skopiuj ten tekst, wklej go do wybranej AI (np. ChatGPT lub Claude), dodaj tekst swojego przepisu, a następnie wklej odpowiedź powyżej w polu „Wklej tutaj JSON“.",
-    json_info_prompt:
-      "Przekształć tekst przepisu, który zaraz wyślę, w JEDEN pojedynczy obiekt JSON - bez wyjaśnień, bez tekstu przed ani po, tylko JSON. Użyj dokładnie tego formatu:\n\n" +
-      "{\n" +
-      '  "title": "nazwa przepisu",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "jedna z: {{kategorien}}",\n' +
-      '  "ingredients": ["jeden składnik na wpis, np. 200 g mąki"],\n' +
-      '  "steps": ["jeden krok przygotowania na wpis"],\n' +
-      '  "tags": ["opcjonalne tagi, np. wegetariańskie"]\n' +
-      "}\n\n" +
-      "Zasady: „category“ musi być DOKŁADNIE jedną z wymienionych powyżej wartości (przepisz ją bez zmian, nawet jeśli tekst przepisu jest w innym języku - to stałe wartości wewnętrzne). " +
-      "„tags“ jest opcjonalne, pusta tablica też jest w porządku. " +
-      "Nie wymyślaj składników ani kroków, których nie ma w tekście. " +
-      "Oto tekst przepisu:",
-    json_info_kopieren_btn: "📋 Kopiuj prompt",
-    json_info_kopiert: "Skopiowano!",
-    formular_json_label: "Wklej tutaj JSON",
-    formular_json_uebernehmen_btn: "Zastosuj",
-    formular_label_titel: "Tytuł",
-    formular_label_kategorie: "Kategoria",
-    formular_label_tags: "Tagi (możliwych jest kilka, np. \"wegetariańskie\", \"szybkie\")",
-    formular_tag_placeholder: "Wpisz i dodaj tag",
-    formular_tag_hinzufuegen_btn: "+ Tag",
-    formular_tag_entfernen_aria: "Usuń tag {{tag}}",
-    formular_label_portionen: "Porcje (podstawa)",
-    formular_label_zutaten: "Składniki",
-    formular_zutat_hinzufuegen_btn: "+ Składnik",
-    formular_zutat_menge_placeholder: "Ilość",
-    formular_zutat_einheit_placeholder: "Jednostka",
-    formular_zutat_name_placeholder: "Składnik",
-    formular_zutat_entfernen_aria: "Usuń składnik",
-    formular_label_zubereitung: "Przygotowanie (kroki)",
-    formular_schritt_hinzufuegen_btn: "+ Krok",
-    formular_schritt_placeholder_beispiel: "np. umyj i pokrój warzywa",
-    formular_schritt_placeholder_naechster: "następny krok",
-    formular_schritt_entfernen_aria: "Usuń krok",
-    formular_schritt_hoch_aria: "Przesuń krok w górę",
-    formular_schritt_runter_aria: "Przesuń krok w dół",
-    formular_label_bild: "Zdjęcie",
-    formular_bild_vorhanden_hinweis: "(istnieje – nowy plik je zastąpi)",
-    formular_bild_hinweis: "Aktualne zdjęcie zostaje zachowane, jeśli nie wybierzesz nowego pliku.",
-    formular_bild_verkleinern_text: "Zmniejszanie zdjęcia…",
-    fehler_url_ungueltig: "Podaj pełny adres zaczynający się od http:// lub https://.",
-    fehler_url_apostroph: "Ten adres zawiera apostrof (') i niestety nie można go zaimportować.",
-    fehler_url_keine_ausgabe: "Skrypt nie zwrócił żadnych danych wyjściowych. Czy 'rezeptbuch_url_importieren' jest skonfigurowany w configuration.yaml i czy Home Assistant został od tego czasu w pełni zrestartowany?",
-    fehler_url_kein_json: "Odpowiedź skryptu importu nie była prawidłowym JSON-em.",
-    fehler_url_import_fehlgeschlagen: "Import adresu URL nie powiódł się: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Niestety nie udało się nic rozpoznać we wklejonym tekście. Wypełnij poniższe pola ręcznie.",
-    warnung_texterkennung_unvollstaendig: "Rozpoznawanie było niekompletne (brakuje składników lub kroków albo są przypisane niepoprawnie) - sprawdź i uzupełnij w formularzu.",
-    fehler_json_ungueltig: "Wklejony JSON jest nieprawidłowy. Sprawdź go i spróbuj ponownie.",
-    fehler_json_titel_fehlt: "W JSON-ie brakuje co najmniej pola 'title'.",
-    fehler_titel_fehlt: "Podaj tytuł.",
-    fehler_unerwartet: "Nieoczekiwany błąd:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" został w międzyczasie usunięty przez kogoś innego. Twoje zmiany nie zostały zapisane.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" został w międzyczasie zmieniony przez kogoś innego (np. komentarz, ocena lub własna edycja).\n\nAby nic nie zostało nadpisane, Twoje zmiany NIE zostały zapisane. Otwórz przepis ponownie i wprowadź swoje zmiany jeszcze raz.",
-    fehler_vorgang_fehlgeschlagen: "Operacja nie powiodła się:\n{{fehler}}",
-    fehler_teilen_drucken: "Nieoczekiwany błąd podczas udostępniania/drukowania:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Podaj 'entity' w konfiguracji karty, np. entity: todo.rezepte",
-    fehler_bild_lesen: "Nie udało się odczytać zdjęcia (plik uszkodzony lub nieobsługiwany).",
-    fehler_bild_verarbeiten: "Nie udało się przetworzyć zdjęcia jako obrazu (nieobsługiwany format?).",
-    teilen_ueberschrift_zutaten: "SKŁADNIKI",
-    teilen_ueberschrift_zubereitung: "PRZYGOTOWANIE",
-    seite_zurueck_btn: "← Wstecz",
-    seite_weiter_btn: "Dalej →",
-    seite_anzeige: "Strona {{aktuell}} z {{gesamt}}",
-    update_neue_version: "Dostępna nowa wersja: {{version}}",
-    update_ansehen_btn: "Zobacz",
-    update_schliessen_aria: "Ukryj powiadomienie",
-    ressourcen_version_hinweis: "⚠️ Ta karta została zaktualizowana, ale adres URL zasobu nie został zmieniony (nadal \"?v={{version}}\"). Inne przeglądarki/urządzenia mogą więc nadal wczytywać stary, zapisany w pamięci podręcznej plik - zwiększ numer wersji w adresie URL zasobu (Ustawienia → Panele → Zasoby).",
-    detail_kochmodus_btn: "🍳 Tryb gotowania",
-    kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
-    kochmodus_schliessen_aria: "Zamknij tryb gotowania",
-    kochmodus_schritt_zurueck_aria: "Poprzedni krok",
-    kochmodus_schritt_weiter_aria: "Następny krok",
-    kochmodus_zutaten_ein_aria: "Pokaż składniki",
-    kochmodus_zutaten_aus_aria: "Ukryj składniki",
-    kochmodus_timer_ein_aria: "Pokaż minutnik",
-    kochmodus_timer_aus_aria: "Ukryj minutnik",
-    kochmodus_timer_minuten_aria: "Minuty",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Anuluj",
-    kochmodus_timer_abgelaufen_text: "⏰ Czas minął!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Uruchom minutnik na {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 Zbiorczy PDF",
-    sammel_pdf_keine_rezepte: "Nie znaleziono przepisów do eksportu.",
-    sammel_pdf_frage_toc: "Utworzyć spis treści dla wybranych przepisów?",
-    sammel_pdf_ja_toc_btn: "Tak, utwórz spis treści",
-    sammel_pdf_nein_toc_btn: "Nie, bez spisu treści",
-    sammel_pdf_name_placeholder: "Nazwa książki kucharskiej",
-    sammel_pdf_erstellen_btn: "Utwórz PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Spis treści",
-    sammel_pdf_frage_umfang: "Które przepisy powinny znaleźć się we wspólnym PDF?",
-    sammel_pdf_alle_rezepte_btn: "Wszystkie wyświetlone przepisy",
-    sammel_pdf_auswahl_btn: "Wybierz konkretne przepisy",
-    sammel_pdf_auswahl_titel: "Wybierz przepisy",
-    sammel_pdf_alle_auswaehlen_link: "Wybierz wszystkie",
-    sammel_pdf_keine_auswaehlen_link: "Odznacz wszystkie",
-    sammel_pdf_weiter_btn: "Dalej",
-    sammel_pdf_bilder_mitdrucken_label: "Dołącz zdjęcia do PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Wybierz przynajmniej jeden przepis.",
-  },
-  pt: {
-    allgemein_zurueck: "← Voltar",
-    allgemein_ja: "Sim",
-    allgemein_nein: "Não",
-    allgemein_an: "Ligado",
-    allgemein_aus: "Desligado",
-    allgemein_speichern: "Guardar",
-    allgemein_speichert: "A guardar…",
-    allgemein_abbrechen: "Cancelar",
-    allgemein_bearbeiten: "Editar",
-    allgemein_loeschen: "Eliminar",
-    allgemein_oeffnen: "Abrir",
-    allgemein_unbekannt: "Desconhecido",
-    allgemein_schliessen: "Fechar",
-    kategorie_hauptgericht: "Prato principal",
-    kategorie_vorspeise: "Entrada",
-    kategorie_suppe: "Sopa",
-    kategorie_salat: "Salada",
-    kategorie_beilage: "Acompanhamento",
-    kategorie_dessert: "Sobremesa",
-    kategorie_kuchen_gebaeck: "Bolos e pastelaria",
-    kategorie_fruehstueck: "Pequeno-almoço",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Bebida",
-    kategorie_sonstiges: "Outro",
-    kategorie_filter_alle: "Todas",
-    kategorie_neu_btn: "+ Nova categoria",
-    kategorie_name_placeholder: "Nome da categoria",
-    fehler_kategorie_name_fehlt: "Introduza um nome para a categoria.",
-    fehler_kategorie_existiert_bereits: "Esta categoria já existe.",
-    kategorie_loeschen_title: "Eliminar categoria",
-    kategorie_loeschen_aria: "Eliminar categoria {{name}}",
-    kategorie_bearbeiten_title: "Renomear categoria",
-    kategorie_bearbeiten_aria: "Renomear categoria {{name}}",
-    kategorie_umbenennen_titel: "A renomear a categoria \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Esta categoria ainda é usada por {{anzahl}}x receitas - atribua-lhes primeiro outra categoria.",
-    wochentag_montag: "Segunda-feira",
-    wochentag_dienstag: "Terça-feira",
-    wochentag_mittwoch: "Quarta-feira",
-    wochentag_donnerstag: "Quinta-feira",
-    wochentag_freitag: "Sexta-feira",
-    wochentag_samstag: "Sábado",
-    wochentag_sonntag: "Domingo",
-    sortier_titel: "Alfabética (A-Z)",
-    sortier_bewertung: "Melhor avaliação primeiro",
-    sortier_kategorie: "Por categoria",
-    sortier_neu: "Mais recentes primeiro",
-    sortieren_label: "Ordenar por:",
-    kopf_titel_standard: "Livro de Receitas",
-    kopf_sichern_btn: "💾 Cópia de segurança",
-    kopf_wochenplan_btn: "📅 Plano semanal",
-    kopf_zufallsrezept_btn: "🎲 Receita aleatória",
-    umrechnungstabelle_btn: "📐 Tabela de conversão",
-    umrechnungstabelle_titel: "Tabela de conversão",
-    umrechnungstabelle_hinweis: "Valores aproximados em gramas para ingredientes comuns na cozinha - variam por marca e consistência, por isso servem apenas de referência. NÃO são aplicados automaticamente às tuas receitas.",
-    umrechnungstabelle_suche_placeholder: "Procurar ingrediente …",
-    umrechnungstabelle_spalte_zutat: "Ingrediente",
-    umrechnungstabelle_spalte_tasse: "1 chávena",
-    umrechnungstabelle_spalte_el: "1 col. de sopa",
-    umrechnungstabelle_spalte_tl: "1 col. de chá",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Nenhum ingrediente encontrado.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Adicionar ingrediente próprio",
-    umrechnungstabelle_eigene_name_platzhalter: "Nome do ingrediente",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/chávena",
-    umrechnungstabelle_eigene_el_platzhalter: "g/col. sopa",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/col. chá",
-    umrechnungstabelle_eigene_loeschen_titel: "Eliminar ingrediente próprio",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Editar ingrediente próprio",
-    umrechnungstabelle_eigene_name_fehlt: "Introduz um nome, por favor.",
-    umrechnungstabelle_eigene_hinweis: "Falta um ingrediente cujo valor de conversão conheces? Adiciona-o aqui manualmente - propositadamente não oferecemos conversão automática entre volume e peso, pois isso significaria adivinhar com base no ingrediente, na marca e na consistência.",
-    einkaufsmodus_start_btn: "🛒 Lista de compras",
-    einkaufsmodus_beenden_btn: "✕ Terminar seleção",
-    kopf_neu_btn: "+ Nova",
-    suche_placeholder: "🔍 Receita ou ingredientes (p. ex. farinha, ovos)…",
-    kochbuch_loeschen_title: "Eliminar coleção",
-    kochbuch_loeschen_aria: "Eliminar coleção {{name}}",
-    kochbuch_speichern_btn: "+ Guardar como coleção inteligente",
-    kochbuch_name_placeholder: "Nome para esta coleção, p. ex. Receitas de outono",
-    fehler_kochbuch_name_fehlt: "Indica um nome para a coleção.",
-    kochbuch_info_aria: "Mostrar explicação sobre coleções inteligentes",
-    kochbuch_info_titel: "O que é uma coleção inteligente?",
-    kochbuch_info_text:
-      "Uma coleção inteligente não guarda uma lista fixa de receitas, " +
-      "mas sim uma combinação de categoria, etiquetas e termo de " +
-      "pesquisa, exatamente como estão definidos no momento em que é " +
-      "guardada. Depois disso, atualiza-se sozinha: uma nova receita " +
-      "que corresponda aparece automaticamente, e uma receita cuja " +
-      "categoria ou etiquetas mudem pode desaparecer igualmente de " +
-      "forma automática.",
-    einkaufs_zaehler: "{{anzahl}} selecionada(s)",
-    einkaufsliste_erstellen_btn: "Criar lista de compras",
-    fehler_einkaufsliste_keine_konfiguration: "Falta ainda a configuração da lista de compras: indica 'shopping_list_entity' na configuração do cartão (p. ex. shopping_list_entity: todo.einkaufsliste) - para isso é necessário um SEGUNDO assistente Lista de tarefas local. Ver ANLEITUNG-Backup.md, secção 18.",
-    fehler_einkaufsliste_keine_auswahl: "Seleciona pelo menos uma receita.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Seleciona pelo menos um ingrediente.",
-    zutaten_fehlend_einkaufsliste_btn: "Adicionar selecionados à lista de compras",
-    fehler_einkaufsliste_keine_zutaten: "As receitas selecionadas não contêm ingredientes.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Não foi possível adicionar \"{{zeile}}\" à lista de compras:\n{{fehler}}\n\nOs ingredientes já adicionados permanecem na lista.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediente(s) adicionado(s) a \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" eliminada.",
-    undo_rueckgaengig_btn: "Anular",
-    leer_keine_rezepte: "Ainda não há receitas – começa com \"+ Nova\"",
-    leer_keine_treffer: "Nenhuma receita encontrada para \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Não foi possível carregar \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Esta lista de tarefas existe? (Definições → Dispositivos e serviços → Assistentes)",
-    kachel_aria_label_oeffnen: "Abrir receita {{titel}}",
-    sterne_aria_label_gruppe: "A tua avaliação",
-    sterne_aria_label: "{{zahl}} de 5 estrelas",
-    fehler_kein_benutzer_bewertung: "Não foi possível determinar o teu utilizador - avaliação não é possível.",
-    detail_teilen_drucken_btn: "📤 Partilhar / Imprimir",
-    detail_erstellt_von: "👤 Criada por {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} avaliação)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} avaliações)",
-    detail_keine_bewertungen: "Ainda não há avaliações",
-    detail_deine_bewertung: "A tua avaliação:",
-    detail_zubereitet_x: "🍳 preparada {{anzahl}}x",
-    detail_portionen_suffix: "doses",
-    abschnitt_titel_zutaten: "Ingredientes",
-    abschnitt_titel_zubereitung: "Preparação",
-    keine_zutaten: "Nenhum ingrediente indicado",
-    detail_kommentare_titel: "Comentários",
-    detail_keine_kommentare: "Ainda não há comentários",
-    detail_kommentar_placeholder: "Complemento, dica ou observação…",
-    detail_kommentar_hinzufuegen_btn: "Adicionar comentário",
-    detail_bearbeiten_hinweis: "Apenas {{name}} (ou um administrador) pode editar ou eliminar esta receita.",
-    detail_ersteller_unbekannt: "quem criou a receita",
-    modal_zubereitet_frage: "Preparaste a receita \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Incluir a imagem da receita?",
-    modal_drucken_ohne_bild_btn: "Sem imagem",
-    modal_drucken_mit_bild_btn: "Com imagem",
-    statistik_btn: "📊 Estatísticas",
-    statistik_titel: "Estatísticas de cozinha",
-    statistik_info_aria: "Mostrar explicação das estatísticas",
-    statistik_einstellungen_btn_title: "Configurações do registo de preparação",
-    statistik_einstellungen_titel: "Configurações do registo de preparação",
-    statistik_einstellungen_text: "Aqui podes definir se, ao saíres de uma receita, te é perguntado se a preparaste, e se as estatísticas resultantes são exibidas neste cartão.",
-    statistik_einstellungen_schalter_label: "Ativar pergunta e estatísticas",
-    tags_einstellung_schalter_label: "Mostrar filtro de etiquetas na visão geral",
-    zufallsrezept_einstellung_schalter_label: "Mostrar botão de receita aleatória na visão geral",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Mostrar botão da tabela de conversão na visão geral",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Para a categoria definida para receitas americanas, a tabela de conversão continua a aparecer na receita e no modo de cozinha, mesmo que este botão esteja desativado aqui.",
-    farben_abschnitt_titel: "Cores",
-    farben_hinweis: "Personalize cada cor do cartão. Repor tudo devolve todas as cores ao padrão.",
-    farben_akzent_label: "Cor principal (botões, filtros ativos)",
-    farben_akzent_text_label: "Cor de destaque para textos e contornos",
-    farben_loeschen_label: "Eliminar / aviso",
-    farben_sterne_label: "Estrelas de avaliação",
-    farben_titel_label: "Títulos",
-    farben_zuruecksetzen_btn: "Repor tudo",
-    us_kategorie_einstellung_label: "Categoria para receitas americanas",
-    us_kategorie_einstellung_text: "As receitas com esta categoria mostram também um botão para a tabela de conversão na própria receita e no modo de cozinha.",
-    us_kategorie_einstellung_keine: "— Nenhuma —",
-    statistik_info_titel: "Como é calculada esta estatística?",
-    statistik_info_text:
-      "Esta avaliação conta cada confirmação da pergunta «Preparaste?» - independentemente do tamanho da porção ou de quantas vezes no mesmo dia. Se esta pergunta estiver desativada através do interruptor nas configurações de estatísticas (⚙️), os números deixam de aumentar, mas as preparações já registadas são mantidas.",
-    statistik_dieses_jahr: "Cozinhaste {{anzahl}}x do teu livro de receitas em {{jahr}}",
-    statistik_gesamt: "Cozinhaste {{anzahl}}x do teu livro de receitas no total",
-    statistik_top_titel: "Mais preparado",
-    statistik_keine_daten: "Ainda não há preparações registadas.",
-    modal_loeschen_frage: "Eliminar mesmo \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Sim, eliminar",
-    modal_kommentar_loeschen_frage: "Eliminar mesmo este comentário?",
-    wochenplan_titel: "Plano semanal",
-    wochenplan_tab_diese: "Esta semana",
-    wochenplan_tab_folgewoche: "Próxima semana",
-    wochenplan_hinweis_folgewoche: "Planeia aqui já a próxima semana - ela passa automaticamente para \"Esta semana\" assim que a semana atual terminar.",
-    wochenplan_hinweis_diese: "Os dias já passados são limpos automaticamente (a receita em si permanece, só a atribuição desaparece).",
-    wochenplan_hinweis_speicherung: "É guardado entre dispositivos (como entrada adicional oculta na mesma lista de receitas, não é necessário mais nenhum assistente).",
-    wochenplan_leer: "Ainda não há receitas - cria primeiro algumas.",
-    wochenplan_kein_rezept_option: "– nenhuma receita –",
-    wochenplan_einkaufsliste_btn: "Criar lista de compras a partir de {{ziel}}",
-    wochenplan_wort: "plano semanal",
-    wochenplan_folgewoche_wort: "próxima semana",
-    wochenplan_aktuelle_woche_wort: "semana atual",
-    wochenplan_keine_zuweisung: "A {{zeitraum}} ainda não contém receitas atribuídas.",
-    formular_titel_neu: "Nova receita",
-    formular_titel_bearbeiten: "Editar receita",
-    formular_url_import_btn: "🌐 Importar URL de receita",
-    formular_url_label: "Ligação para o site da receita",
-    formular_url_placeholder: "https://www.exemplo-receitas.pt/a-minha-receita",
-    formular_url_hinweis: "Carrega a página e lê os dados estruturados da receita já incorporados nela (os mesmos dados com que, por exemplo, o Google apresenta avaliações em estrelas na pesquisa) - geralmente mais fiável do que o reconhecimento de texto. Só funciona em sites que fornecem esses dados e não bloqueiam pedidos automatizados.",
-    formular_url_importieren_btn: "Importar",
-    formular_url_laedt: "A carregar …",
-    formular_text_einfuegen_btn: "🔍 Colar texto da receita (reconhecimento automático)",
-    formular_text_label: "Cola aqui o texto da receita (p. ex. copiado de um site de receitas)",
-    formular_text_placeholder: "Título, ingredientes, preparação - basta colar todo o texto",
-    formular_text_hinweis: "Reconhecimento puramente automático sem IA - funciona melhor com os títulos \"Ingredientes\" e \"Preparação\" no texto. Verifica depois brevemente o resultado, pode estar incompleto.",
-    formular_text_erkennen_btn: "Reconhecer",
-    formular_json_einfuegen_btn: "📋 Colar JSON gerado por IA",
-    formular_json_info_aria: "Mostrar um prompt pronto para uma IA",
-    json_info_titel: "Prompt para uma IA",
-    json_info_erklaerung:
-      "Copia este texto, cola-o numa IA à tua escolha (p. ex. ChatGPT ou Claude), junta o texto da tua receita e depois cola a resposta acima em «Cola aqui o JSON».",
-    json_info_prompt:
-      "Converte o texto da receita que vou enviar a seguir num ÚNICO objeto JSON - sem explicações, sem texto antes ou depois, só o JSON. Usa exatamente este formato:\n\n" +
-      "{\n" +
-      '  "title": "nome da receita",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "uma de: {{kategorien}}",\n' +
-      '  "ingredients": ["um ingrediente por entrada, p. ex. 200 g de farinha"],\n' +
-      '  "steps": ["um passo de preparação por entrada"],\n' +
-      '  "tags": ["etiquetas opcionais, p. ex. vegetariano"]\n' +
-      "}\n\n" +
-      "Regras: «category» tem de ser EXATAMENTE um dos valores indicados acima (copia-o sem alterações, mesmo que o texto da receita esteja noutra língua - são valores internos fixos). " +
-      "«tags» é opcional, um array vazio também serve. " +
-      "Não inventes ingredientes ou passos que não estejam no texto. " +
-      "Aqui está o texto da receita:",
-    json_info_kopieren_btn: "📋 Copiar prompt",
-    json_info_kopiert: "Copiado!",
-    formular_json_label: "Cola aqui o JSON",
-    formular_json_uebernehmen_btn: "Aplicar",
-    formular_label_titel: "Título",
-    formular_label_kategorie: "Categoria",
-    formular_label_tags: "Etiquetas (várias possíveis, p. ex. \"vegetariano\", \"rápido\")",
-    formular_tag_placeholder: "Escreve e adiciona uma etiqueta",
-    formular_tag_hinzufuegen_btn: "+ Etiqueta",
-    formular_tag_entfernen_aria: "Remover etiqueta {{tag}}",
-    formular_label_portionen: "Doses (base)",
-    formular_label_zutaten: "Ingredientes",
-    formular_zutat_hinzufuegen_btn: "+ Ingrediente",
-    formular_zutat_menge_placeholder: "Quantidade",
-    formular_zutat_einheit_placeholder: "Unidade",
-    formular_zutat_name_placeholder: "Ingrediente",
-    formular_zutat_entfernen_aria: "Remover ingrediente",
-    formular_label_zubereitung: "Preparação (passos)",
-    formular_schritt_hinzufuegen_btn: "+ Passo",
-    formular_schritt_placeholder_beispiel: "p. ex. lavar e cortar os legumes",
-    formular_schritt_placeholder_naechster: "passo seguinte",
-    formular_schritt_entfernen_aria: "Remover passo",
-    formular_schritt_hoch_aria: "Mover passo para cima",
-    formular_schritt_runter_aria: "Mover passo para baixo",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(existente – um novo ficheiro irá substituí-la)",
-    formular_bild_hinweis: "A foto atual é mantida se não escolheres um novo ficheiro.",
-    formular_bild_verkleinern_text: "A reduzir a foto…",
-    fehler_url_ungueltig: "Indica um endereço completo que comece com http:// ou https://.",
-    fehler_url_apostroph: "Este endereço contém um apóstrofo (') e infelizmente não pode ser importado.",
-    fehler_url_keine_ausgabe: "O script não devolveu qualquer resultado. O 'rezeptbuch_url_importieren' está configurado no configuration.yaml e o Home Assistant foi totalmente reiniciado desde então?",
-    fehler_url_kein_json: "A resposta do script de importação não era um JSON válido.",
-    fehler_url_import_fehlgeschlagen: "A importação do URL falhou: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Infelizmente não foi possível reconhecer nada no texto colado. Preenche os campos abaixo manualmente.",
-    warnung_texterkennung_unvollstaendig: "O reconhecimento ficou incompleto (faltam ingredientes ou passos, ou podem estar atribuídos incorretamente) - verifica e completa no formulário.",
-    fehler_json_ungueltig: "O JSON colado é inválido. Verifica-o e tenta novamente.",
-    fehler_json_titel_fehlt: "No JSON falta pelo menos o campo 'title'.",
-    fehler_titel_fehlt: "Indica um título.",
-    fehler_unerwartet: "Erro inesperado:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" foi entretanto eliminada por outra pessoa. As tuas alterações não foram guardadas.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" foi entretanto alterada por outra pessoa (p. ex. um comentário, avaliação ou edição própria).\n\nPara evitar que algo seja substituído, as tuas alterações NÃO foram guardadas. Abre novamente a receita e insere as tuas alterações outra vez.",
-    fehler_vorgang_fehlgeschlagen: "A operação falhou:\n{{fehler}}",
-    fehler_teilen_drucken: "Erro inesperado ao partilhar/imprimir:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Indica 'entity' na configuração do cartão, p. ex. entity: todo.rezepte",
-    fehler_bild_lesen: "Não foi possível ler a foto (ficheiro corrompido ou não suportado).",
-    fehler_bild_verarbeiten: "Não foi possível processar a foto como imagem (formato não suportado?).",
-    teilen_ueberschrift_zutaten: "INGREDIENTES",
-    teilen_ueberschrift_zubereitung: "PREPARAÇÃO",
-    seite_zurueck_btn: "← Anterior",
-    seite_weiter_btn: "Seguinte →",
-    seite_anzeige: "Página {{aktuell}} de {{gesamt}}",
-    update_neue_version: "Nova versão disponível: {{version}}",
-    update_ansehen_btn: "Ver",
-    update_schliessen_aria: "Ocultar aviso",
-    ressourcen_version_hinweis: "⚠️ Este cartão foi atualizado, mas o URL do recurso não foi alterado (continua \"?v={{version}}\"). Outros navegadores/dispositivos podem por isso continuar a carregar o ficheiro antigo em cache - aumenta o número de versão no URL do recurso (Definições → Painéis → Recursos).",
-    detail_kochmodus_btn: "🍳 Modo de cozinha",
-    kochmodus_schritt_anzeige: "Passo {{aktuell}} de {{gesamt}}",
-    kochmodus_schliessen_aria: "Fechar modo de cozinha",
-    kochmodus_schritt_zurueck_aria: "Passo anterior",
-    kochmodus_schritt_weiter_aria: "Próximo passo",
-    kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
-    kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
-    kochmodus_timer_ein_aria: "Mostrar temporizador",
-    kochmodus_timer_aus_aria: "Ocultar temporizador",
-    kochmodus_timer_minuten_aria: "Minutos",
-    kochmodus_timer_start_btn: "Iniciar",
-    kochmodus_timer_abbrechen_btn: "Cancelar",
-    kochmodus_timer_abgelaufen_text: "⏰ Tempo esgotado!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Iniciar temporizador de {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 PDF coletivo",
-    sammel_pdf_keine_rezepte: "Nenhuma receita encontrada para exportar.",
-    sammel_pdf_frage_toc: "Criar um índice para as receitas selecionadas?",
-    sammel_pdf_ja_toc_btn: "Sim, criar índice",
-    sammel_pdf_nein_toc_btn: "Não, sem índice",
-    sammel_pdf_name_placeholder: "Nome do livro de receitas",
-    sammel_pdf_erstellen_btn: "Criar PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Índice",
-    sammel_pdf_frage_umfang: "Quais receitas devem entrar no PDF conjunto?",
-    sammel_pdf_alle_rezepte_btn: "Todas as receitas exibidas",
-    sammel_pdf_auswahl_btn: "Selecionar receitas específicas",
-    sammel_pdf_auswahl_titel: "Selecionar receitas",
-    sammel_pdf_alle_auswaehlen_link: "Selecionar tudo",
-    sammel_pdf_keine_auswaehlen_link: "Desmarcar tudo",
-    sammel_pdf_weiter_btn: "Seguinte",
-    sammel_pdf_bilder_mitdrucken_label: "Incluir imagens no PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Selecione pelo menos uma receita.",
-  },
-  ro: {
-    allgemein_zurueck: "← Înapoi",
-    allgemein_ja: "Da",
-    allgemein_nein: "Nu",
-    allgemein_an: "Activ",
-    allgemein_aus: "Dezactivat",
-    allgemein_speichern: "Salvează",
-    allgemein_speichert: "Se salvează…",
-    allgemein_abbrechen: "Anulează",
-    allgemein_bearbeiten: "Editează",
-    allgemein_loeschen: "Șterge",
-    allgemein_oeffnen: "Deschide",
-    allgemein_unbekannt: "Necunoscut",
-    allgemein_schliessen: "Închide",
-    kategorie_hauptgericht: "Fel principal",
-    kategorie_vorspeise: "Aperitiv",
-    kategorie_suppe: "Supă",
-    kategorie_salat: "Salată",
-    kategorie_beilage: "Garnitură",
-    kategorie_dessert: "Desert",
-    kategorie_kuchen_gebaeck: "Prăjituri și copturi",
-    kategorie_fruehstueck: "Mic dejun",
-    kategorie_snack: "Gustare",
-    kategorie_getraenk: "Băutură",
-    kategorie_sonstiges: "Altele",
-    kategorie_filter_alle: "Toate",
-    kategorie_neu_btn: "+ Categorie nouă",
-    kategorie_name_placeholder: "Numele categoriei",
-    fehler_kategorie_name_fehlt: "Introduceți un nume pentru categorie.",
-    fehler_kategorie_existiert_bereits: "Această categorie există deja.",
-    kategorie_loeschen_title: "Șterge categoria",
-    kategorie_loeschen_aria: "Șterge categoria {{name}}",
-    kategorie_bearbeiten_title: "Redenumește categoria",
-    kategorie_bearbeiten_aria: "Redenumește categoria {{name}}",
-    kategorie_umbenennen_titel: "Redenumire categorie \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Această categorie este încă folosită de {{anzahl}}x rețete - atribuiți-le mai întâi o altă categorie.",
-    wochentag_montag: "Luni",
-    wochentag_dienstag: "Marți",
-    wochentag_mittwoch: "Miercuri",
-    wochentag_donnerstag: "Joi",
-    wochentag_freitag: "Vineri",
-    wochentag_samstag: "Sâmbătă",
-    wochentag_sonntag: "Duminică",
-    sortier_titel: "Alfabetic (A-Z)",
-    sortier_bewertung: "Cea mai bună evaluare primul",
-    sortier_kategorie: "După categorie",
-    sortier_neu: "Cele mai noi primul",
-    sortieren_label: "Sortează după:",
-    kopf_titel_standard: "Carte de rețete",
-    kopf_sichern_btn: "💾 Copie de rezervă",
-    kopf_wochenplan_btn: "📅 Plan săptămânal",
-    kopf_zufallsrezept_btn: "🎲 Rețetă aleatorie",
-    umrechnungstabelle_btn: "📐 Tabel de conversie",
-    umrechnungstabelle_titel: "Tabel de conversie",
-    umrechnungstabelle_hinweis: "Valori orientative în grame pentru ingrediente comune de bucătărie - variază în funcție de marcă și consistență, deci doar pentru consultare. NU sunt aplicate automat rețetelor tale.",
-    umrechnungstabelle_suche_placeholder: "Caută ingredient …",
-    umrechnungstabelle_spalte_zutat: "Ingredient",
-    umrechnungstabelle_spalte_tasse: "1 cană",
-    umrechnungstabelle_spalte_el: "1 lingură",
-    umrechnungstabelle_spalte_tl: "1 linguriță",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Niciun ingredient găsit.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Adaugă ingredient propriu",
-    umrechnungstabelle_eigene_name_platzhalter: "Numele ingredientului",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/cană",
-    umrechnungstabelle_eigene_el_platzhalter: "g/lingură",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/linguriță",
-    umrechnungstabelle_eigene_loeschen_titel: "Șterge ingredientul propriu",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Editează ingredientul propriu",
-    umrechnungstabelle_eigene_name_fehlt: "Introdu un nume, te rog.",
-    umrechnungstabelle_eigene_hinweis: "Îți lipsește un ingredient a cărui valoare de conversie o cunoști? Adaugă-l aici manual - în mod deliberat nu oferim conversie automată între volum și greutate, pentru că ar însemna să ghicim în funcție de ingredient, marcă și consistență.",
-    einkaufsmodus_start_btn: "🛒 Listă de cumpărături",
-    einkaufsmodus_beenden_btn: "✕ Încheie selecția",
-    kopf_neu_btn: "+ Nou",
-    suche_placeholder: "🔍 Rețetă sau ingrediente (de ex. făină, ouă)…",
-    kochbuch_loeschen_title: "Șterge colecția",
-    kochbuch_loeschen_aria: "Șterge colecția {{name}}",
-    kochbuch_speichern_btn: "+ Salvează ca și colecție inteligentă",
-    kochbuch_name_placeholder: "Nume pentru această colecție, de ex. Rețete de toamnă",
-    fehler_kochbuch_name_fehlt: "Introdu un nume pentru colecție.",
-    kochbuch_info_aria: "Arată explicația colecțiilor inteligente",
-    kochbuch_info_titel: "Ce este o colecție inteligentă?",
-    kochbuch_info_text:
-      "O colecție inteligentă nu stochează o listă fixă de rețete, " +
-      "ci o combinație de categorie, etichete și termen de căutare, " +
-      "exact așa cum sunt setate în momentul salvării. După aceea se " +
-      "actualizează singură: o rețetă nouă care se potrivește apare " +
-      "automat, iar o rețetă a cărei categorie sau etichete se " +
-      "schimbă poate la fel de automat să dispară din nou.",
-    einkaufs_zaehler: "{{anzahl}} selectate",
-    einkaufsliste_erstellen_btn: "Creează lista de cumpărături",
-    fehler_einkaufsliste_keine_konfiguration: "Configurația pentru lista de cumpărături lipsește încă: te rugăm să specifici 'shopping_list_entity' în configurația cardului (de ex. shopping_list_entity: todo.einkaufsliste) - pentru aceasta este necesar un AL DOILEA ajutor Listă de sarcini locală. Vezi ANLEITUNG-Backup.md, secțiunea 18.",
-    fehler_einkaufsliste_keine_auswahl: "Selectează cel puțin o rețetă.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Selectează cel puțin un ingredient.",
-    zutaten_fehlend_einkaufsliste_btn: "Adaugă selectate în lista de cumpărături",
-    fehler_einkaufsliste_keine_zutaten: "Rețetele selectate nu conțin ingrediente.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nu s-a putut adăuga \"{{zeile}}\" la lista de cumpărături:\n{{fehler}}\n\nIngredientele deja adăugate rămân pe listă.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingredient(e) adăugat(e) la \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" a fost ștearsă.",
-    undo_rueckgaengig_btn: "Anulează",
-    leer_keine_rezepte: "Nicio rețetă încă – începe cu \"+ Nou\"",
-    leer_keine_treffer: "Nu s-au găsit rețete pentru \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Nu s-a putut încărca \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Această listă de sarcini există? (Setări → Dispozitive și servicii → Asistenți)",
-    kachel_aria_label_oeffnen: "Deschide rețeta {{titel}}",
-    sterne_aria_label_gruppe: "Evaluarea ta",
-    sterne_aria_label: "{{zahl}} din 5 stele",
-    fehler_kein_benutzer_bewertung: "Nu s-a putut determina utilizatorul tău - evaluarea nu este posibilă.",
-    detail_teilen_drucken_btn: "📤 Distribuie / Printează",
-    detail_erstellt_von: "👤 Creat de {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} evaluare)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} evaluări)",
-    detail_keine_bewertungen: "Nicio evaluare încă",
-    detail_deine_bewertung: "Evaluarea ta:",
-    detail_zubereitet_x: "🍳 preparată de {{anzahl}} ori",
-    detail_portionen_suffix: "porții",
-    abschnitt_titel_zutaten: "Ingrediente",
-    abschnitt_titel_zubereitung: "Preparare",
-    keine_zutaten: "Niciun ingredient adăugat",
-    detail_kommentare_titel: "Comentarii",
-    detail_keine_kommentare: "Niciun comentariu încă",
-    detail_kommentar_placeholder: "Completare, sfat sau observație…",
-    detail_kommentar_hinzufuegen_btn: "Adaugă comentariu",
-    detail_bearbeiten_hinweis: "Doar {{name}} (sau un administrator) poate edita sau șterge această rețetă.",
-    detail_ersteller_unbekannt: "autorul/autoarea",
-    modal_zubereitet_frage: "Ai preparat \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Se include imaginea rețetei?",
-    modal_drucken_ohne_bild_btn: "Fără imagine",
-    modal_drucken_mit_bild_btn: "Cu imagine",
-    statistik_btn: "📊 Statistici",
-    statistik_titel: "Statistici de gătit",
-    statistik_info_aria: "Afișează explicația statisticii",
-    statistik_einstellungen_btn_title: "Setări jurnal de gătit",
-    statistik_einstellungen_titel: "Setări jurnal de gătit",
-    statistik_einstellungen_text: "Aici poți stabili dacă, la părăsirea unei rețete, ești întrebat dacă ai preparat-o, și dacă statisticile rezultate sunt afișate pe acest card.",
-    statistik_einstellungen_schalter_label: "Activează întrebarea și statisticile",
-    tags_einstellung_schalter_label: "Afișează filtrul de etichete în prezentare",
-    zufallsrezept_einstellung_schalter_label: "Afișează butonul Rețetă aleatorie în prezentare",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Afișează butonul tabelului de conversie în prezentare",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Pentru categoria setată pentru rețetele americane, tabelul de conversie continuă să apară în rețetă și în modul de gătit, chiar dacă acest buton este dezactivat aici.",
-    farben_abschnitt_titel: "Culori",
-    farben_hinweis: "Personalizați culorile individuale ale cardului. Resetează tot readuce toate culorile la valorile implicite.",
-    farben_akzent_label: "Culoare principală (butoane, filtre active)",
-    farben_akzent_text_label: "Culoare de accent pentru text și margini",
-    farben_loeschen_label: "Ștergere / avertizare",
-    farben_sterne_label: "Stele de evaluare",
-    farben_titel_label: "Titluri",
-    farben_zuruecksetzen_btn: "Resetează tot",
-    us_kategorie_einstellung_label: "Categorie pentru rețete americane",
-    us_kategorie_einstellung_text: "Rețetele din această categorie afișează suplimentar un buton pentru tabelul de conversie chiar în rețetă și în modul de gătit.",
-    us_kategorie_einstellung_keine: "— Niciuna —",
-    statistik_info_titel: "Cum se calculează această statistică?",
-    statistik_info_text:
-      "Această evaluare numără fiecare confirmare a întrebării „Ai preparat?“ - indiferent de dimensiunea porției sau de câte ori în aceeași zi. Dacă această întrebare este dezactivată prin comutatorul din setările statisticii (⚙️), numerele nu mai cresc, dar preparările deja înregistrate rămân păstrate.",
-    statistik_dieses_jahr: "Ai gătit de {{anzahl}}x din cartea ta de rețete în {{jahr}}",
-    statistik_gesamt: "Ai gătit de {{anzahl}}x din cartea ta de rețete în total",
-    statistik_top_titel: "Cel mai des preparat",
-    statistik_keine_daten: "Încă nu sunt înregistrate preparări.",
-    modal_loeschen_frage: "Chiar vrei să ștergi \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Da, șterge",
-    modal_kommentar_loeschen_frage: "Sigur ștergeți acest comentariu?",
-    wochenplan_titel: "Plan săptămânal",
-    wochenplan_tab_diese: "Săptămâna aceasta",
-    wochenplan_tab_folgewoche: "Săptămâna viitoare",
-    wochenplan_hinweis_folgewoche: "Planifică aici deja săptămâna următoare - aceasta se va muta automat la \"Săptămâna aceasta\" imediat ce se încheie săptămâna curentă.",
-    wochenplan_hinweis_diese: "Zilele trecute sunt golite automat (rețeta în sine rămâne păstrată, dispare doar atribuirea).",
-    wochenplan_hinweis_speicherung: "Se salvează pe toate dispozitivele (ca intrare suplimentară ascunsă în aceeași listă de rețete, nu este nevoie de niciun alt ajutor).",
-    wochenplan_leer: "Nicio rețetă încă - creează mai întâi câteva.",
-    wochenplan_kein_rezept_option: "– nicio rețetă –",
-    wochenplan_einkaufsliste_btn: "Creează listă de cumpărături din {{ziel}}",
-    wochenplan_wort: "plan săptămânal",
-    wochenplan_folgewoche_wort: "săptămâna viitoare",
-    wochenplan_aktuelle_woche_wort: "săptămâna curentă",
-    wochenplan_keine_zuweisung: "{{zeitraum}} nu conține încă nicio rețetă atribuită.",
-    formular_titel_neu: "Rețetă nouă",
-    formular_titel_bearbeiten: "Editează rețeta",
-    formular_url_import_btn: "🌐 Importă URL rețetă",
-    formular_url_label: "Link către site-ul web al rețetei",
-    formular_url_placeholder: "https://www.exemplu-retete.ro/reteta-mea",
-    formular_url_hinweis: "Încarcă pagina și citește datele structurate ale rețetei deja integrate în ea (aceleași date cu care, de ex., Google afișează evaluări cu stele în căutare) - de obicei mai fiabil decât recunoașterea textului. Funcționează doar pe site-uri care furnizează astfel de date și nu blochează solicitările automate.",
-    formular_url_importieren_btn: "Importă",
-    formular_url_laedt: "Se încarcă …",
-    formular_text_einfuegen_btn: "🔍 Lipește textul rețetei (recunoaștere automată)",
-    formular_text_label: "Lipește aici textul rețetei (de ex. copiat de pe un site de rețete)",
-    formular_text_placeholder: "Titlu, ingrediente, preparare - lipește pur și simplu tot textul",
-    formular_text_hinweis: "Recunoaștere pur automată, fără IA - funcționează cel mai bine cu titlurile \"Ingrediente\" și \"Preparare\" în text. Te rugăm să verifici pe scurt rezultatul după aceea, poate fi incomplet.",
-    formular_text_erkennen_btn: "Recunoaște",
-    formular_json_einfuegen_btn: "📋 Lipește JSON generat de IA",
-    formular_json_info_aria: "Afișează un prompt gata făcut pentru un AI",
-    json_info_titel: "Prompt pentru un AI",
-    json_info_erklaerung:
-      "Copiază acest text, inserează-l într-un AI la alegere (de ex. ChatGPT sau Claude), adaugă textul rețetei tale și apoi lipește răspunsul mai sus la „Lipește JSON aici“.",
-    json_info_prompt:
-      "Transformă textul rețetei pe care ți-l trimit imediat într-UN singur obiect JSON - fără explicații, fără text înainte sau după, doar JSON-ul. Folosește exact acest format:\n\n" +
-      "{\n" +
-      '  "title": "numele rețetei",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "una dintre: {{kategorien}}",\n' +
-      '  "ingredients": ["un ingredient pe linie, de ex. 200 g făină"],\n' +
-      '  "steps": ["un pas de preparare pe linie"],\n' +
-      '  "tags": ["etichete opționale, de ex. vegetarian"]\n' +
-      "}\n\n" +
-      "Reguli: „category“ trebuie să fie EXACT una dintre valorile enumerate mai sus (preia-o neschimbată, chiar dacă textul rețetei este în altă limbă - acestea sunt valori interne fixe). " +
-      "„tags“ este opțional, un array gol este în regulă. " +
-      "Nu inventa ingrediente sau pași care nu apar în text. " +
-      "Iată textul rețetei:",
-    json_info_kopieren_btn: "📋 Copiază promptul",
-    json_info_kopiert: "Copiat!",
-    formular_json_label: "Lipește JSON aici",
-    formular_json_uebernehmen_btn: "Aplică",
-    formular_label_titel: "Titlu",
-    formular_label_kategorie: "Categorie",
-    formular_label_tags: "Etichete (mai multe posibile, de ex. \"vegetarian\", \"rapid\")",
-    formular_tag_placeholder: "Introdu și adaugă o etichetă",
-    formular_tag_hinzufuegen_btn: "+ Etichetă",
-    formular_tag_entfernen_aria: "Elimină eticheta {{tag}}",
-    formular_label_portionen: "Porții (de bază)",
-    formular_label_zutaten: "Ingrediente",
-    formular_zutat_hinzufuegen_btn: "+ Ingredient",
-    formular_zutat_menge_placeholder: "Cantitate",
-    formular_zutat_einheit_placeholder: "Unitate",
-    formular_zutat_name_placeholder: "Ingredient",
-    formular_zutat_entfernen_aria: "Elimină ingredientul",
-    formular_label_zubereitung: "Preparare (pași)",
-    formular_schritt_hinzufuegen_btn: "+ Pas",
-    formular_schritt_placeholder_beispiel: "de ex. spală și taie legumele",
-    formular_schritt_placeholder_naechster: "pasul următor",
-    formular_schritt_entfernen_aria: "Elimină pasul",
-    formular_schritt_hoch_aria: "Deplasează pasul mai sus",
-    formular_schritt_runter_aria: "Deplasează pasul mai jos",
-    formular_label_bild: "Fotografie",
-    formular_bild_vorhanden_hinweis: "(există – un fișier nou o va înlocui)",
-    formular_bild_hinweis: "Fotografia actuală rămâne păstrată dacă nu alegi un fișier nou.",
-    formular_bild_verkleinern_text: "Se micșorează fotografia…",
-    fehler_url_ungueltig: "Introdu o adresă completă care începe cu http:// sau https://.",
-    fehler_url_apostroph: "Această adresă conține un apostrof (') și, din păcate, nu poate fi importată.",
-    fehler_url_keine_ausgabe: "Scriptul nu a returnat nicio ieșire. Este 'rezeptbuch_url_importieren' configurat în configuration.yaml și a fost Home Assistant repornit complet de atunci?",
-    fehler_url_kein_json: "Răspunsul scriptului de import nu a fost JSON valid.",
-    fehler_url_import_fehlgeschlagen: "Importul URL-ului a eșuat: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Din păcate, nu s-a putut recunoaște nimic în textul lipit. Te rugăm să completezi manual câmpurile de mai jos.",
-    warnung_texterkennung_unvollstaendig: "Recunoașterea a fost incompletă (lipsesc ingrediente sau pași, sau pot fi atribuite greșit) - te rugăm să verifici și să completezi în formular.",
-    fehler_json_ungueltig: "JSON-ul lipit este nevalid. Te rugăm să-l verifici și să încerci din nou.",
-    fehler_json_titel_fehlt: "În JSON lipsește cel puțin câmpul 'title'.",
-    fehler_titel_fehlt: "Introdu un titlu.",
-    fehler_unerwartet: "Eroare neașteptată:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" a fost între timp ștearsă de altcineva. Modificările tale nu au fost salvate.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" a fost între timp modificată de altcineva (de ex. un comentariu, o evaluare sau o editare proprie).\n\nPentru a evita ca ceva să fie suprascris, modificările tale NU au fost salvate. Deschide din nou rețeta și introdu din nou modificările tale.",
-    fehler_vorgang_fehlgeschlagen: "Acțiunea a eșuat:\n{{fehler}}",
-    fehler_teilen_drucken: "Eroare neașteptată la distribuire/printare:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Specifică 'entity' în configurația cardului, de ex. entity: todo.rezepte",
-    fehler_bild_lesen: "Fotografia nu a putut fi citită (fișier deteriorat sau neacceptat).",
-    fehler_bild_verarbeiten: "Fotografia nu a putut fi procesată ca imagine (format neacceptat?).",
-    teilen_ueberschrift_zutaten: "INGREDIENTE",
-    teilen_ueberschrift_zubereitung: "PREPARARE",
-    seite_zurueck_btn: "← Înapoi",
-    seite_weiter_btn: "Înainte →",
-    seite_anzeige: "Pagina {{aktuell}} din {{gesamt}}",
-    update_neue_version: "Este disponibilă o versiune nouă: {{version}}",
-    update_ansehen_btn: "Vezi",
-    update_schliessen_aria: "Ascunde notificarea",
-    ressourcen_version_hinweis: "⚠️ Acest card a fost actualizat, dar URL-ul resursei nu a fost schimbat (rămâne \"?v={{version}}\"). Alte browsere/dispozitive ar putea astfel continua să încarce fișierul vechi, stocat în cache - crește numărul versiunii în URL-ul resursei (Setări → Panouri → Resurse).",
-    detail_kochmodus_btn: "🍳 Mod de gătit",
-    kochmodus_schritt_anzeige: "Pasul {{aktuell}} din {{gesamt}}",
-    kochmodus_schliessen_aria: "Închide modul de gătit",
-    kochmodus_schritt_zurueck_aria: "Pasul anterior",
-    kochmodus_schritt_weiter_aria: "Pasul următor",
-    kochmodus_zutaten_ein_aria: "Afișează ingredientele",
-    kochmodus_zutaten_aus_aria: "Ascunde ingredientele",
-    kochmodus_timer_ein_aria: "Afișează cronometrul",
-    kochmodus_timer_aus_aria: "Ascunde cronometrul",
-    kochmodus_timer_minuten_aria: "Minute",
-    kochmodus_timer_start_btn: "Start",
-    kochmodus_timer_abbrechen_btn: "Anulează",
-    kochmodus_timer_abgelaufen_text: "⏰ Timpul a expirat!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Pornește un cronometru de {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 PDF colectiv",
-    sammel_pdf_keine_rezepte: "Nu s-a găsit nicio rețetă de exportat.",
-    sammel_pdf_frage_toc: "Se creează un cuprins pentru rețetele selectate?",
-    sammel_pdf_ja_toc_btn: "Da, creează cuprins",
-    sammel_pdf_nein_toc_btn: "Nu, fără cuprins",
-    sammel_pdf_name_placeholder: "Numele cărții de bucate",
-    sammel_pdf_erstellen_btn: "Creează PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Cuprins",
-    sammel_pdf_frage_umfang: "Care rețete ar trebui incluse în PDF-ul comun?",
-    sammel_pdf_alle_rezepte_btn: "Toate rețetele afișate",
-    sammel_pdf_auswahl_btn: "Selectează rețete specifice",
-    sammel_pdf_auswahl_titel: "Selectează rețetele",
-    sammel_pdf_alle_auswaehlen_link: "Selectează tot",
-    sammel_pdf_keine_auswaehlen_link: "Deselectează tot",
-    sammel_pdf_weiter_btn: "Continuă",
-    sammel_pdf_bilder_mitdrucken_label: "Include imaginile în PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Selectează cel puțin o rețetă.",
-  },
-  sk: {
-    allgemein_zurueck: "← Späť",
-    allgemein_ja: "Áno",
-    allgemein_nein: "Nie",
-    allgemein_an: "Zap",
-    allgemein_aus: "Vyp",
-    allgemein_speichern: "Uložiť",
-    allgemein_speichert: "Ukladá sa…",
-    allgemein_abbrechen: "Zrušiť",
-    allgemein_bearbeiten: "Upraviť",
-    allgemein_loeschen: "Vymazať",
-    allgemein_oeffnen: "Otvoriť",
-    allgemein_unbekannt: "Neznáme",
-    allgemein_schliessen: "Zavrieť",
-    kategorie_hauptgericht: "Hlavné jedlo",
-    kategorie_vorspeise: "Predjedlo",
-    kategorie_suppe: "Polievka",
-    kategorie_salat: "Šalát",
-    kategorie_beilage: "Príloha",
-    kategorie_dessert: "Dezert",
-    kategorie_kuchen_gebaeck: "Koláče a pečivo",
-    kategorie_fruehstueck: "Raňajky",
-    kategorie_snack: "Desiata",
-    kategorie_getraenk: "Nápoj",
-    kategorie_sonstiges: "Ostatné",
-    kategorie_filter_alle: "Všetky",
-    kategorie_neu_btn: "+ Nová kategória",
-    kategorie_name_placeholder: "Názov kategórie",
-    fehler_kategorie_name_fehlt: "Zadajte názov kategórie.",
-    fehler_kategorie_existiert_bereits: "Táto kategória už existuje.",
-    kategorie_loeschen_title: "Odstrániť kategóriu",
-    kategorie_loeschen_aria: "Odstrániť kategóriu {{name}}",
-    kategorie_bearbeiten_title: "Premenovať kategóriu",
-    kategorie_bearbeiten_aria: "Premenovať kategóriu {{name}}",
-    kategorie_umbenennen_titel: "Premenovanie kategórie \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Túto kategóriu stále používa {{anzahl}}x receptov - najprv im priraďte inú kategóriu.",
-    wochentag_montag: "Pondelok",
-    wochentag_dienstag: "Utorok",
-    wochentag_mittwoch: "Streda",
-    wochentag_donnerstag: "Štvrtok",
-    wochentag_freitag: "Piatok",
-    wochentag_samstag: "Sobota",
-    wochentag_sonntag: "Nedeľa",
-    sortier_titel: "Abecedne (A-Z)",
-    sortier_bewertung: "Najlepšie hodnotené prvé",
-    sortier_kategorie: "Podľa kategórie",
-    sortier_neu: "Najnovšie prvé",
-    sortieren_label: "Zoradiť podľa:",
-    kopf_titel_standard: "Kuchárska kniha",
-    kopf_sichern_btn: "💾 Záloha",
-    kopf_wochenplan_btn: "📅 Týždenný plán",
-    kopf_zufallsrezept_btn: "🎲 Náhodný recept",
-    umrechnungstabelle_btn: "📐 Prevodná tabuľka",
-    umrechnungstabelle_titel: "Prevodná tabuľka",
-    umrechnungstabelle_hinweis: "Orientačné hodnoty v gramoch pre bežné kuchynské suroviny - líšia sa podľa značky a konzistencie, slúžia len na nahliadnutie. NEaplikujú sa automaticky na tvoje recepty.",
-    umrechnungstabelle_suche_placeholder: "Hľadať surovinu …",
-    umrechnungstabelle_spalte_zutat: "Surovina",
-    umrechnungstabelle_spalte_tasse: "1 hrnček",
-    umrechnungstabelle_spalte_el: "1 lyžica",
-    umrechnungstabelle_spalte_tl: "1 čajová lyžička",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Nenašla sa žiadna surovina.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Pridať vlastnú surovinu",
-    umrechnungstabelle_eigene_name_platzhalter: "Názov suroviny",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/hrnček",
-    umrechnungstabelle_eigene_el_platzhalter: "g/lyžica",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/čajová lyžička",
-    umrechnungstabelle_eigene_loeschen_titel: "Vymazať vlastnú surovinu",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Upraviť vlastnú surovinu",
-    umrechnungstabelle_eigene_name_fehlt: "Zadaj názov.",
-    umrechnungstabelle_eigene_hinweis: "Chýba surovina, ktorej prevodnú hodnotu poznáš sám? Pridaj ju sem ručne - automatický prevod medzi objemom a hmotnosťou vedome neponúkame, pretože by to znamenalo hádanie podľa suroviny, značky a konzistencie.",
-    einkaufsmodus_start_btn: "🛒 Nákupný zoznam",
-    einkaufsmodus_beenden_btn: "✕ Ukončiť výber",
-    kopf_neu_btn: "+ Nový",
-    suche_placeholder: "🔍 Recept alebo suroviny (napr. múka, vajcia)…",
-    kochbuch_loeschen_title: "Vymazať kolekciu",
-    kochbuch_loeschen_aria: "Vymazať kolekciu {{name}}",
-    kochbuch_speichern_btn: "+ Uložiť ako inteligentnú kolekciu",
-    kochbuch_name_placeholder: "Názov pre túto kolekciu, napr. Jesenné recepty",
-    fehler_kochbuch_name_fehlt: "Zadajte prosím názov kolekcie.",
-    kochbuch_info_aria: "Zobraziť vysvetlenie inteligentných kolekcií",
-    kochbuch_info_titel: "Čo je inteligentná kolekcia?",
-    kochbuch_info_text:
-      "Inteligentná kolekcia neukladá pevný zoznam receptov, ale " +
-      "kombináciu kategórie, štítkov a hľadaného výrazu presne tak, " +
-      "ako sú nastavené v okamihu uloženia. Následne sa sama " +
-      "aktualizuje: nový recept, ktorý zodpovedá, sa automaticky " +
-      "zobrazí, a recept, ktorého kategória alebo štítky sa zmenia, " +
-      "môže rovnako automaticky znova zmiznúť.",
-    einkaufs_zaehler: "{{anzahl}} vybraných",
-    einkaufsliste_erstellen_btn: "Vytvoriť nákupný zoznam",
-    fehler_einkaufsliste_keine_konfiguration: "Pre nákupný zoznam ešte chýba konfigurácia: zadajte prosím 'shopping_list_entity' v konfigurácii karty (napr. shopping_list_entity: todo.einkaufsliste) - na to je potrebný DRUHÝ pomocník Lokálny zoznam úloh. Pozri ANLEITUNG-Backup.md, oddiel 18.",
-    fehler_einkaufsliste_keine_auswahl: "Vyberte prosím aspoň jeden recept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Vyberte prosím aspoň jednu surovinu.",
-    zutaten_fehlend_einkaufsliste_btn: "Pridať vybrané do nákupného zoznamu",
-    fehler_einkaufsliste_keine_zutaten: "Vybrané recepty neobsahujú žiadne suroviny.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Nepodarilo sa pridať \"{{zeile}}\" do nákupného zoznamu:\n{{fehler}}\n\nUž pridané suroviny zostávajú v zozname.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} surovina/y pridané do \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" vymazané.",
-    undo_rueckgaengig_btn: "Späť",
-    leer_keine_rezepte: "Zatiaľ žiadne recepty – začnite pomocou \"+ Nový\"",
-    leer_keine_treffer: "Nenašli sa žiadne recepty pre \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Nepodarilo sa načítať \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Existuje tento zoznam úloh? (Nastavenia → Zariadenia a služby → Pomocníci)",
-    kachel_aria_label_oeffnen: "Otvoriť recept {{titel}}",
-    sterne_aria_label_gruppe: "Vaše hodnotenie",
-    sterne_aria_label: "{{zahl}} z 5 hviezdičiek",
-    fehler_kein_benutzer_bewertung: "Nepodarilo sa zistiť vášho používateľa - hodnotenie nie je možné.",
-    detail_teilen_drucken_btn: "📤 Zdieľať / Tlačiť",
-    detail_erstellt_von: "👤 Vytvoril(a) {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} hodnotenie)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} hodnotení)",
-    detail_keine_bewertungen: "Zatiaľ žiadne hodnotenia",
-    detail_deine_bewertung: "Vaše hodnotenie:",
-    detail_zubereitet_x: "🍳 pripravené {{anzahl}}x",
-    detail_portionen_suffix: "porcií",
-    abschnitt_titel_zutaten: "Suroviny",
-    abschnitt_titel_zubereitung: "Postup",
-    keine_zutaten: "Žiadne suroviny nie sú uvedené",
-    detail_kommentare_titel: "Komentáre",
-    detail_keine_kommentare: "Zatiaľ žiadne komentáre",
-    detail_kommentar_placeholder: "Doplnenie, tip alebo poznámka…",
-    detail_kommentar_hinzufuegen_btn: "Pridať komentár",
-    detail_bearbeiten_hinweis: "Tento recept môže upraviť alebo vymazať iba {{name}} (alebo administrátor).",
-    detail_ersteller_unbekannt: "tvorca/tvorkyňa",
-    modal_zubereitet_frage: "Pripravili ste \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Zahrnúť obrázok receptu?",
-    modal_drucken_ohne_bild_btn: "Bez obrázka",
-    modal_drucken_mit_bild_btn: "S obrázkom",
-    statistik_btn: "📊 Štatistika",
-    statistik_titel: "Štatistika varenia",
-    statistik_info_aria: "Zobraziť vysvetlenie štatistiky",
-    statistik_einstellungen_btn_title: "Nastavenia zaznamenávania varenia",
-    statistik_einstellungen_titel: "Nastavenia zaznamenávania varenia",
-    statistik_einstellungen_text: "Tu môžeš nastaviť, či sa ťa po opustení receptu spýtame, či si ho pripravil(a), a či sa zobrazuje z toho vzniknutá štatistika na tejto karte.",
-    statistik_einstellungen_schalter_label: "Zapnúť otázku a štatistiku",
-    tags_einstellung_schalter_label: "Zobraziť filter značiek v prehľade",
-    zufallsrezept_einstellung_schalter_label: "Zobraziť tlačidlo Náhodný recept v prehľade",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Zobraziť tlačidlo prevodnej tabuľky v prehľade",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Pre nastavenú kategóriu pre americké recepty sa prevodná tabuľka naďalej zobrazuje v recepte a v režime varenia, aj keď je toto tlačidlo tu vypnuté.",
-    farben_abschnitt_titel: "Farby",
-    farben_hinweis: "Prispôsobte jednotlivé farby karty. Obnoviť všetko vráti všetky farby na predvolené.",
-    farben_akzent_label: "Hlavná farba (tlačidlá, aktívne filtre)",
-    farben_akzent_text_label: "Zvýrazňovacia farba textu a okrajov",
-    farben_loeschen_label: "Odstránenie / upozornenie",
-    farben_sterne_label: "Hviezdičky hodnotenia",
-    farben_titel_label: "Nadpisy",
-    farben_zuruecksetzen_btn: "Obnoviť všetko",
-    us_kategorie_einstellung_label: "Kategória pre americké recepty",
-    us_kategorie_einstellung_text: "Pri receptoch s touto kategóriou sa navyše zobrazí tlačidlo prevodnej tabuľky priamo v recepte a v režime varenia.",
-    us_kategorie_einstellung_keine: "— Žiadna —",
-    statistik_info_titel: "Ako sa táto štatistika počíta?",
-    statistik_info_text:
-      "Toto vyhodnotenie počíta každé potvrdenie otázky „Pripravil(a) si?“ - bez ohľadu na veľkosť porcie alebo počet za rovnaký deň. Ak je táto otázka vypnutá pomocou prepínača v nastaveniach štatistiky (⚙️), čísla ďalej nerastú, ale už zaznamenané prípravy zostávajú zachované.",
-    statistik_dieses_jahr: "V roku {{jahr}} si z vlastnej kuchárky varil(a) {{anzahl}}x",
-    statistik_gesamt: "Celkovo si z vlastnej kuchárky varil(a) {{anzahl}}x",
-    statistik_top_titel: "Najčastejšie pripravované",
-    statistik_keine_daten: "Zatiaľ nie sú zaznamenané žiadne prípravy.",
-    modal_loeschen_frage: "Naozaj vymazať \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Áno, vymazať",
-    modal_kommentar_loeschen_frage: "Naozaj vymazať tento komentár?",
-    wochenplan_titel: "Týždenný plán",
-    wochenplan_tab_diese: "Tento týždeň",
-    wochenplan_tab_folgewoche: "Budúci týždeň",
-    wochenplan_hinweis_folgewoche: "Naplánujte si tu už teraz nadchádzajúci týždeň - akonáhle sa aktuálny týždeň skončí, automaticky sa presunie do \"Tento týždeň\".",
-    wochenplan_hinweis_diese: "Uplynulé dni sa automaticky vyprázdnia (samotný recept zostáva zachovaný, zmizne iba priradenie).",
-    wochenplan_hinweis_speicherung: "Ukladá sa naprieč zariadeniami (ako skrytý doplnkový záznam v rovnakom zozname receptov, nie je potrebný žiadny ďalší pomocník).",
-    wochenplan_leer: "Zatiaľ žiadne recepty - najprv nejaké vytvorte.",
-    wochenplan_kein_rezept_option: "– žiadny recept –",
-    wochenplan_einkaufsliste_btn: "Vytvoriť nákupný zoznam z {{ziel}}",
-    wochenplan_wort: "týždenný plán",
-    wochenplan_folgewoche_wort: "budúci týždeň",
-    wochenplan_aktuelle_woche_wort: "aktuálny týždeň",
-    wochenplan_keine_zuweisung: "{{zeitraum}} zatiaľ neobsahuje žiadne priradené recepty.",
-    formular_titel_neu: "Nový recept",
-    formular_titel_bearbeiten: "Upraviť recept",
-    formular_url_import_btn: "🌐 Importovať URL receptu",
-    formular_url_label: "Odkaz na webovú stránku receptu",
-    formular_url_placeholder: "https://www.priklad-recepty.sk/moj-recept",
-    formular_url_hinweis: "Načíta stránku a prečíta štruktúrované údaje receptu, ktoré sú do nej už vložené (rovnaké údaje, ktorými napr. Google zobrazuje hviezdičkové hodnotenia vo vyhľadávaní) - zvyčajne spoľahlivejšie ako rozpoznávanie textu. Funguje iba na stránkach, ktoré takéto údaje poskytujú a neblokujú automatizované požiadavky.",
-    formular_url_importieren_btn: "Importovať",
-    formular_url_laedt: "Načítava sa …",
-    formular_text_einfuegen_btn: "🔍 Vložiť text receptu (automatické rozpoznávanie)",
-    formular_text_label: "Vložte sem text receptu (napr. skopírovaný z webovej stránky receptu)",
-    formular_text_placeholder: "Názov, suroviny, postup - jednoducho vložte celý text",
-    formular_text_hinweis: "Čisto automatické rozpoznávanie bez AI - funguje najlepšie s nadpismi \"Suroviny\" a \"Postup\" v texte. Výsledok si prosím potom krátko skontrolujte, môže byť neúplný.",
-    formular_text_erkennen_btn: "Rozpoznať",
-    formular_json_einfuegen_btn: "📋 Vložiť JSON vygenerovaný AI",
-    formular_json_info_aria: "Zobraziť hotový prompt pre AI",
-    json_info_titel: "Prompt pre AI",
-    json_info_erklaerung:
-      "Skopíruj tento text, vlož ho do AI podľa výberu (napr. ChatGPT alebo Claude), pripoj text svojho receptu a odpoveď potom vlož vyššie do „Vložte JSON sem“.",
-    json_info_prompt:
-      "Premeň text receptu, ktorý ti hneď pošlem, na JEDEN jediný JSON objekt - bez vysvetlenia, bez textu pred alebo po, len JSON. Použi presne tento formát:\n\n" +
-      "{\n" +
-      '  "title": "názov receptu",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "jedna z: {{kategorien}}",\n' +
-      '  "ingredients": ["jedna surovina na položku, napr. 200 g múky"],\n' +
-      '  "steps": ["jeden krok prípravy na položku"],\n' +
-      '  "tags": ["voliteľné štítky, napr. vegetariánske"]\n' +
-      "}\n\n" +
-      "Pravidlá: „category“ musí byť PRESNE jedna z vyššie uvedených hodnôt (prevezmi ju nezmenenú, aj keď je text receptu v inom jazyku - ide o pevné interné hodnoty). " +
-      "„tags“ je voliteľné, prázdne pole je v poriadku. " +
-      "Nevymýšľaj suroviny ani kroky, ktoré v texte nie sú. " +
-      "Tu je text receptu:",
-    json_info_kopieren_btn: "📋 Kopírovať prompt",
-    json_info_kopiert: "Skopírované!",
-    formular_json_label: "Vložte JSON sem",
-    formular_json_uebernehmen_btn: "Použiť",
-    formular_label_titel: "Názov",
-    formular_label_kategorie: "Kategória",
-    formular_label_tags: "Štítky (možné je viac, napr. \"vegetariánske\", \"rýchle\")",
-    formular_tag_placeholder: "Zadajte a pridajte štítok",
-    formular_tag_hinzufuegen_btn: "+ Štítok",
-    formular_tag_entfernen_aria: "Odstrániť štítok {{tag}}",
-    formular_label_portionen: "Porcie (základ)",
-    formular_label_zutaten: "Suroviny",
-    formular_zutat_hinzufuegen_btn: "+ Surovina",
-    formular_zutat_menge_placeholder: "Množstvo",
-    formular_zutat_einheit_placeholder: "Jednotka",
-    formular_zutat_name_placeholder: "Surovina",
-    formular_zutat_entfernen_aria: "Odstrániť surovinu",
-    formular_label_zubereitung: "Postup (kroky)",
-    formular_schritt_hinzufuegen_btn: "+ Krok",
-    formular_schritt_placeholder_beispiel: "napr. umyte a nakrájajte zeleninu",
-    formular_schritt_placeholder_naechster: "ďalší krok",
-    formular_schritt_entfernen_aria: "Odstrániť krok",
-    formular_schritt_hoch_aria: "Posunúť krok nahor",
-    formular_schritt_runter_aria: "Posunúť krok nadol",
-    formular_label_bild: "Fotka",
-    formular_bild_vorhanden_hinweis: "(existuje – nový súbor ju nahradí)",
-    formular_bild_hinweis: "Aktuálna fotka zostane zachovaná, ak nevyberiete nový súbor.",
-    formular_bild_verkleinern_text: "Fotka sa zmenšuje…",
-    fehler_url_ungueltig: "Zadajte prosím úplnú adresu začínajúcu na http:// alebo https://.",
-    fehler_url_apostroph: "Táto adresa obsahuje apostrof (') a bohužiaľ ju nemožno importovať.",
-    fehler_url_keine_ausgabe: "Skript nevrátil žiadny výstup. Je 'rezeptbuch_url_importieren' nastavený v configuration.yaml a bol odvtedy Home Assistant úplne reštartovaný?",
-    fehler_url_kein_json: "Odpoveď importovacieho skriptu nebola platný JSON.",
-    fehler_url_import_fehlgeschlagen: "Import URL zlyhal: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Vo vloženom texte sa bohužiaľ nepodarilo nič rozpoznať. Vyplňte prosím polia nižšie ručne.",
-    warnung_texterkennung_unvollstaendig: "Rozpoznávanie bolo neúplné (chýbajú suroviny alebo kroky, prípadne sú priradené nesprávne) - skontrolujte prosím a doplňte vo formulári.",
-    fehler_json_ungueltig: "Vložený JSON je neplatný. Skontrolujte ho prosím a skúste to znova.",
-    fehler_json_titel_fehlt: "V JSON chýba aspoň pole 'title'.",
-    fehler_titel_fehlt: "Zadajte prosím názov.",
-    fehler_unerwartet: "Neočakávaná chyba:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" medzitým vymazal niekto iný. Vaše zmeny neboli uložené.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" medzitým zmenil niekto iný (napr. komentár, hodnotenie alebo vlastná úprava).\n\nAby nedošlo k prepísaniu, vaše zmeny NEBOLI uložené. Otvorte prosím recept znova a zadajte zmeny znova.",
-    fehler_vorgang_fehlgeschlagen: "Akcia zlyhala:\n{{fehler}}",
-    fehler_teilen_drucken: "Neočakávaná chyba pri zdieľaní/tlači:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Zadajte prosím 'entity' v konfigurácii karty, napr. entity: todo.rezepte",
-    fehler_bild_lesen: "Fotku sa nepodarilo prečítať (súbor je poškodený alebo nepodporovaný).",
-    fehler_bild_verarbeiten: "Fotku sa nepodarilo spracovať ako obrázok (nepodporovaný formát?).",
-    teilen_ueberschrift_zutaten: "SUROVINY",
-    teilen_ueberschrift_zubereitung: "POSTUP",
-    seite_zurueck_btn: "← Späť",
-    seite_weiter_btn: "Ďalej →",
-    seite_anzeige: "Strana {{aktuell}} z {{gesamt}}",
-    update_neue_version: "K dispozícii je nová verzia: {{version}}",
-    update_ansehen_btn: "Zobraziť",
-    update_schliessen_aria: "Skryť upozornenie",
-    ressourcen_version_hinweis: "⚠️ Táto karta bola aktualizovaná, ale URL zdroja sa nezmenila (stále \"?v={{version}}\"). Iné prehliadače/zariadenia preto môžu naďalej načítavať starý, uložený súbor - zvýš číslo verzie v URL zdroja (Nastavenia → Dashboardy → Zdroje).",
-    detail_kochmodus_btn: "🍳 Režim varenia",
-    kochmodus_schritt_anzeige: "Krok {{aktuell}} z {{gesamt}}",
-    kochmodus_schliessen_aria: "Zavrieť režim varenia",
-    kochmodus_schritt_zurueck_aria: "Predchádzajúci krok",
-    kochmodus_schritt_weiter_aria: "Ďalší krok",
-    kochmodus_zutaten_ein_aria: "Zobraziť suroviny",
-    kochmodus_zutaten_aus_aria: "Skryť suroviny",
-    kochmodus_timer_ein_aria: "Zobraziť časovač",
-    kochmodus_timer_aus_aria: "Skryť časovač",
-    kochmodus_timer_minuten_aria: "Minúty",
-    kochmodus_timer_start_btn: "Štart",
-    kochmodus_timer_abbrechen_btn: "Zrušiť",
-    kochmodus_timer_abgelaufen_text: "⏰ Čas vypršal!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Spustiť časovač na {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 Súhrnné PDF",
-    sammel_pdf_keine_rezepte: "Nenašli sa žiadne recepty na export.",
-    sammel_pdf_frage_toc: "Vytvoriť obsah pre vybrané recepty?",
-    sammel_pdf_ja_toc_btn: "Áno, vytvoriť obsah",
-    sammel_pdf_nein_toc_btn: "Nie, bez obsahu",
-    sammel_pdf_name_placeholder: "Názov kuchárskej knihy",
-    sammel_pdf_erstellen_btn: "Vytvoriť PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Obsah",
-    sammel_pdf_frage_umfang: "Ktoré recepty majú byť v spoločnom PDF?",
-    sammel_pdf_alle_rezepte_btn: "Všetky zobrazené recepty",
-    sammel_pdf_auswahl_btn: "Vybrať konkrétne recepty",
-    sammel_pdf_auswahl_titel: "Vybrať recepty",
-    sammel_pdf_alle_auswaehlen_link: "Vybrať všetko",
-    sammel_pdf_keine_auswaehlen_link: "Zrušiť výber",
-    sammel_pdf_weiter_btn: "Ďalej",
-    sammel_pdf_bilder_mitdrucken_label: "Zahrnúť obrázky do PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Vyberte aspoň jeden recept.",
-  },
-  sl: {
-    allgemein_zurueck: "← Nazaj",
-    allgemein_ja: "Da",
-    allgemein_nein: "Ne",
-    allgemein_an: "Vklj.",
-    allgemein_aus: "Izklj.",
-    allgemein_speichern: "Shrani",
-    allgemein_speichert: "Shranjevanje…",
-    allgemein_abbrechen: "Prekliči",
-    allgemein_bearbeiten: "Uredi",
-    allgemein_loeschen: "Izbriši",
-    allgemein_oeffnen: "Odpri",
-    allgemein_unbekannt: "Neznano",
-    allgemein_schliessen: "Zapri",
-    kategorie_hauptgericht: "Glavna jed",
-    kategorie_vorspeise: "Predjed",
-    kategorie_suppe: "Juha",
-    kategorie_salat: "Solata",
-    kategorie_beilage: "Priloga",
-    kategorie_dessert: "Sladica",
-    kategorie_kuchen_gebaeck: "Torte in pecivo",
-    kategorie_fruehstueck: "Zajtrk",
-    kategorie_snack: "Prigrizek",
-    kategorie_getraenk: "Pijača",
-    kategorie_sonstiges: "Drugo",
-    kategorie_filter_alle: "Vse",
-    kategorie_neu_btn: "+ Nova kategorija",
-    kategorie_name_placeholder: "Ime kategorije",
-    fehler_kategorie_name_fehlt: "Vnesite ime kategorije.",
-    fehler_kategorie_existiert_bereits: "Ta kategorija že obstaja.",
-    kategorie_loeschen_title: "Izbriši kategorijo",
-    kategorie_loeschen_aria: "Izbriši kategorijo {{name}}",
-    kategorie_bearbeiten_title: "Preimenuj kategorijo",
-    kategorie_bearbeiten_aria: "Preimenuj kategorijo {{name}}",
-    kategorie_umbenennen_titel: "Preimenovanje kategorije \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "To kategorijo še vedno uporablja {{anzahl}}x receptov - najprej jim dodelite drugo kategorijo.",
-    wochentag_montag: "Ponedeljek",
-    wochentag_dienstag: "Torek",
-    wochentag_mittwoch: "Sreda",
-    wochentag_donnerstag: "Četrtek",
-    wochentag_freitag: "Petek",
-    wochentag_samstag: "Sobota",
-    wochentag_sonntag: "Nedelja",
-    sortier_titel: "Po abecedi (A-Ž)",
-    sortier_bewertung: "Najboljša ocena najprej",
-    sortier_kategorie: "Po kategoriji",
-    sortier_neu: "Najnovejše najprej",
-    sortieren_label: "Razvrsti po:",
-    kopf_titel_standard: "Kuharska knjiga",
-    kopf_sichern_btn: "💾 Varnostna kopija",
-    kopf_wochenplan_btn: "📅 Tedenski načrt",
-    kopf_zufallsrezept_btn: "🎲 Naključni recept",
-    umrechnungstabelle_btn: "📐 Pretvorbena tabela",
-    umrechnungstabelle_titel: "Pretvorbena tabela",
-    umrechnungstabelle_hinweis: "Približne vrednosti v gramih za pogoste kuhinjske sestavine - razlikujejo se glede na znamko in gostoto, zato služijo le kot napotek. NISO samodejno uporabljene na tvojih receptih.",
-    umrechnungstabelle_suche_placeholder: "Iskanje sestavine …",
-    umrechnungstabelle_spalte_zutat: "Sestavina",
-    umrechnungstabelle_spalte_tasse: "1 skodelica",
-    umrechnungstabelle_spalte_el: "1 jed. žlica",
-    umrechnungstabelle_spalte_tl: "1 čaj. žlička",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Sestavina ni bila najdena.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Dodaj lastno sestavino",
-    umrechnungstabelle_eigene_name_platzhalter: "Ime sestavine",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/skodelica",
-    umrechnungstabelle_eigene_el_platzhalter: "g/jed. žlica",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/čaj. žlička",
-    umrechnungstabelle_eigene_loeschen_titel: "Izbriši lastno sestavino",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Uredi lastno sestavino",
-    umrechnungstabelle_eigene_name_fehlt: "Vnesi ime.",
-    umrechnungstabelle_eigene_hinweis: "Manjka sestavina, za katero sam poznaš pretvorbeno vrednost? Dodaj jo tukaj ročno - samodejne pretvorbe med prostornino in maso zavestno ne ponujamo, ker bi to pomenilo ugibanje glede na sestavino, znamko in gostoto.",
-    einkaufsmodus_start_btn: "🛒 Nakupovalni seznam",
-    einkaufsmodus_beenden_btn: "✕ Končaj izbiranje",
-    kopf_neu_btn: "+ Nov",
-    suche_placeholder: "🔍 Recept ali sestavine (npr. moka, jajca)…",
-    kochbuch_loeschen_title: "Izbriši zbirko",
-    kochbuch_loeschen_aria: "Izbriši zbirko {{name}}",
-    kochbuch_speichern_btn: "+ Shrani kot pametno zbirko",
-    kochbuch_name_placeholder: "Ime za to zbirko, npr. Jesenski recepti",
-    fehler_kochbuch_name_fehlt: "Vnesi ime za zbirko.",
-    kochbuch_info_aria: "Prikaži razlago pametnih zbirk",
-    kochbuch_info_titel: "Kaj je pametna zbirka?",
-    kochbuch_info_text:
-      "Pametna zbirka ne shranjuje fiksnega seznama receptov, temveč " +
-      "kombinacijo kategorije, oznak in iskalnega izraza, natanko " +
-      "tako, kot so nastavljeni v trenutku shranjevanja. Nato se " +
-      "samodejno posodablja: nov recept, ki ustreza, se samodejno " +
-      "prikaže, recept, čigar kategorija ali oznake se spremenijo, pa " +
-      "lahko prav tako samodejno spet izgine.",
-    einkaufs_zaehler: "{{anzahl}} izbranih",
-    einkaufsliste_erstellen_btn: "Ustvari nakupovalni seznam",
-    fehler_einkaufsliste_keine_konfiguration: "Za nakupovalni seznam še manjka konfiguracija: prosimo, navedi 'shopping_list_entity' v konfiguraciji kartice (npr. shopping_list_entity: todo.einkaufsliste) - za to je potreben DRUGI pomočnik Lokalni seznam opravil. Glej ANLEITUNG-Backup.md, razdelek 18.",
-    fehler_einkaufsliste_keine_auswahl: "Izberi vsaj en recept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Izberi vsaj eno sestavino.",
-    zutaten_fehlend_einkaufsliste_btn: "Dodaj izbrano na nakupovalni seznam",
-    fehler_einkaufsliste_keine_zutaten: "Izbrani recepti ne vsebujejo sestavin.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Ni bilo mogoče dodati \"{{zeile}}\" na nakupovalni seznam:\n{{fehler}}\n\nŽe dodane sestavine ostanejo na seznamu.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} sestavin(a) dodanih na seznam \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" izbrisano.",
-    undo_rueckgaengig_btn: "Razveljavi",
-    leer_keine_rezepte: "Še ni receptov – začni z \"+ Nov\"",
-    leer_keine_treffer: "Ni najdenih receptov za \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Ni bilo mogoče naložiti \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Ali ta seznam opravil obstaja? (Nastavitve → Naprave in storitve → Pomočniki)",
-    kachel_aria_label_oeffnen: "Odpri recept {{titel}}",
-    sterne_aria_label_gruppe: "Tvoja ocena",
-    sterne_aria_label: "{{zahl}} od 5 zvezdic",
-    fehler_kein_benutzer_bewertung: "Ni bilo mogoče ugotoviti tvojega uporabnika - ocenjevanje ni mogoče.",
-    detail_teilen_drucken_btn: "📤 Deli / Natisni",
-    detail_erstellt_von: "👤 Ustvaril(a) {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} ocena)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} ocen)",
-    detail_keine_bewertungen: "Še ni ocen",
-    detail_deine_bewertung: "Tvoja ocena:",
-    detail_zubereitet_x: "🍳 pripravljeno {{anzahl}}x",
-    detail_portionen_suffix: "porcij",
-    abschnitt_titel_zutaten: "Sestavine",
-    abschnitt_titel_zubereitung: "Priprava",
-    keine_zutaten: "Ni navedenih sestavin",
-    detail_kommentare_titel: "Komentarji",
-    detail_keine_kommentare: "Še ni komentarjev",
-    detail_kommentar_placeholder: "Dopolnitev, nasvet ali opomba…",
-    detail_kommentar_hinzufuegen_btn: "Dodaj komentar",
-    detail_bearbeiten_hinweis: "Samo {{name}} (ali skrbnik) lahko ureja ali izbriše ta recept.",
-    detail_ersteller_unbekannt: "avtor(ica)",
-    modal_zubereitet_frage: "Si pripravil(a) \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Naj se vključi slika recepta?",
-    modal_drucken_ohne_bild_btn: "Brez slike",
-    modal_drucken_mit_bild_btn: "S sliko",
-    statistik_btn: "📊 Statistika",
-    statistik_titel: "Statistika kuhanja",
-    statistik_info_aria: "Prikaži razlago statistike",
-    statistik_einstellungen_btn_title: "Nastavitve beleženja kuhanja",
-    statistik_einstellungen_titel: "Nastavitve beleženja kuhanja",
-    statistik_einstellungen_text: "Tukaj lahko določiš, ali te bo ob zapustitvi recepta vprašalo, ali si ga pripravil/a, in ali se prikazuje statistika, ki iz tega izhaja, na tej kartici.",
-    statistik_einstellungen_schalter_label: "Vklopi vprašanje in statistiko",
-    tags_einstellung_schalter_label: "Prikaži filter oznak v pregledu",
-    zufallsrezept_einstellung_schalter_label: "Pokaži gumb Naključni recept v pregledu",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Pokaži gumb pretvorbene tabele v pregledu",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Za nastavljeno kategorijo za ameriške recepte se pretvorbena tabela še vedno prikazuje v receptu in v načinu kuhanja, tudi če je ta gumb tukaj izklopljen.",
-    farben_abschnitt_titel: "Barve",
-    farben_hinweis: "Prilagodite posamezne barve kartice. Ponastavi vse vrne vse barve na privzete.",
-    farben_akzent_label: "Glavna barva (gumbi, aktivni filtri)",
-    farben_akzent_text_label: "Poudarjena barva za besedilo in robove",
-    farben_loeschen_label: "Brisanje / opozorilo",
-    farben_sterne_label: "Zvezdice ocene",
-    farben_titel_label: "Naslovi",
-    farben_zuruecksetzen_btn: "Ponastavi vse",
-    us_kategorie_einstellung_label: "Kategorija za ameriške recepte",
-    us_kategorie_einstellung_text: "Pri receptih s to kategorijo se dodatno prikaže gumb za pretvorbeno tabelo neposredno v receptu in v kuharskem načinu.",
-    us_kategorie_einstellung_keine: "— Brez —",
-    statistik_info_titel: "Kako se izračuna ta statistika?",
-    statistik_info_text:
-      "Ta pregled šteje vsako potrditev vprašanja „Si pripravil/a?“ - ne glede na velikost porcije ali kolikokrat isti dan. Če je to vprašanje onemogočeno s stikalom v nastavitvah statistike (⚙️), se števila ne povečujejo več, že zabeležene priprave pa ostanejo ohranjene.",
-    statistik_dieses_jahr: "V letu {{jahr}} si kuhal/a {{anzahl}}x iz svoje kuharske knjige",
-    statistik_gesamt: "Skupaj si kuhal/a {{anzahl}}x iz svoje kuharske knjige",
-    statistik_top_titel: "Največkrat pripravljeno",
-    statistik_keine_daten: "Še ni zabeleženih priprav.",
-    modal_loeschen_frage: "Res izbrisati \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Da, izbriši",
-    modal_kommentar_loeschen_frage: "Ali res želite izbrisati ta komentar?",
-    wochenplan_titel: "Tedenski načrt",
-    wochenplan_tab_diese: "Ta teden",
-    wochenplan_tab_folgewoche: "Naslednji teden",
-    wochenplan_hinweis_folgewoche: "Tukaj že zdaj načrtuj prihajajoči teden - samodejno se bo premaknil na \"Ta teden\", ko se trenutni teden konča.",
-    wochenplan_hinweis_diese: "Pretekli dnevi se samodejno počistijo (sam recept ostane ohranjen, izgine le dodelitev).",
-    wochenplan_hinweis_speicherung: "Shranjeno na vseh napravah (kot skrit dodatni vnos v istem seznamu receptov, dodaten pomočnik ni potreben).",
-    wochenplan_leer: "Še ni receptov - najprej ustvari nekaj.",
-    wochenplan_kein_rezept_option: "– ni recepta –",
-    wochenplan_einkaufsliste_btn: "Ustvari nakupovalni seznam iz {{ziel}}",
-    wochenplan_wort: "tedenski načrt",
-    wochenplan_folgewoche_wort: "naslednji teden",
-    wochenplan_aktuelle_woche_wort: "trenutni teden",
-    wochenplan_keine_zuweisung: "{{zeitraum}} še ne vsebuje dodeljenih receptov.",
-    formular_titel_neu: "Nov recept",
-    formular_titel_bearbeiten: "Uredi recept",
-    formular_url_import_btn: "🌐 Uvozi URL recepta",
-    formular_url_label: "Povezava do spletne strani recepta",
-    formular_url_placeholder: "https://www.primer-recepti.si/moj-recept",
-    formular_url_hinweis: "Naloži stran in prebere strukturirane podatke recepta, ki so že vgrajeni vanjo (isti podatki, s katerimi npr. Google v iskanju prikazuje ocene z zvezdicami) - običajno zanesljivejše kot prepoznavanje besedila. Deluje samo na straneh, ki take podatke zagotavljajo in ne blokirajo avtomatiziranih zahtev.",
-    formular_url_importieren_btn: "Uvozi",
-    formular_url_laedt: "Nalaganje …",
-    formular_text_einfuegen_btn: "🔍 Prilepi besedilo recepta (samodejno prepoznavanje)",
-    formular_text_label: "Prilepi sem besedilo recepta (npr. kopirano s spletne strani recepta)",
-    formular_text_placeholder: "Naslov, sestavine, priprava - preprosto prilepi celotno besedilo",
-    formular_text_hinweis: "Povsem samodejno prepoznavanje brez UI - najbolje deluje z naslovi \"Sestavine\" in \"Priprava\" v besedilu. Nato na kratko preveri rezultat, lahko je nepopoln.",
-    formular_text_erkennen_btn: "Prepoznaj",
-    formular_json_einfuegen_btn: "📋 Prilepi JSON, ki ga je ustvaril UI",
-    formular_json_info_aria: "Prikaži pripravljen poziv za UI",
-    json_info_titel: "Poziv za UI",
-    json_info_erklaerung:
-      "Kopiraj to besedilo, prilepi ga v UI po izbiri (npr. ChatGPT ali Claude), dodaj besedilo svojega recepta in nato odgovor prilepi zgoraj pod „Prilepi JSON tukaj“.",
-    json_info_prompt:
-      "Pretvori besedilo recepta, ki ti ga bom takoj poslal, v EN sam JSON objekt - brez razlage, brez besedila pred ali za njim, samo JSON. Uporabi točno ta format:\n\n" +
-      "{\n" +
-      '  "title": "ime recepta",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "ena izmed: {{kategorien}}",\n' +
-      '  "ingredients": ["ena sestavina na vnos, npr. 200 g moke"],\n' +
-      '  "steps": ["en korak priprave na vnos"],\n' +
-      '  "tags": ["neobvezne oznake, npr. vegetarijansko"]\n' +
-      "}\n\n" +
-      "Pravila: „category“ mora biti NATANČNO ena od zgoraj navedenih vrednosti (prenesi jo nespremenjeno, tudi če je besedilo recepta v drugem jeziku - gre za fiksne notranje vrednosti). " +
-      "„tags“ ni obvezen, prazno polje je v redu. " +
-      "Ne izmišljuj si sestavin ali korakov, ki jih ni v besedilu. " +
-      "Tukaj je besedilo recepta:",
-    json_info_kopieren_btn: "📋 Kopiraj poziv",
-    json_info_kopiert: "Kopirano!",
-    formular_json_label: "Prilepi JSON tukaj",
-    formular_json_uebernehmen_btn: "Uporabi",
-    formular_label_titel: "Naslov",
-    formular_label_kategorie: "Kategorija",
-    formular_label_tags: "Oznake (mogoče je več, npr. \"vegetarijansko\", \"hitro\")",
-    formular_tag_placeholder: "Vnesi in dodaj oznako",
-    formular_tag_hinzufuegen_btn: "+ Oznaka",
-    formular_tag_entfernen_aria: "Odstrani oznako {{tag}}",
-    formular_label_portionen: "Porcije (osnova)",
-    formular_label_zutaten: "Sestavine",
-    formular_zutat_hinzufuegen_btn: "+ Sestavina",
-    formular_zutat_menge_placeholder: "Količina",
-    formular_zutat_einheit_placeholder: "Enota",
-    formular_zutat_name_placeholder: "Sestavina",
-    formular_zutat_entfernen_aria: "Odstrani sestavino",
-    formular_label_zubereitung: "Priprava (koraki)",
-    formular_schritt_hinzufuegen_btn: "+ Korak",
-    formular_schritt_placeholder_beispiel: "npr. umij in nareži zelenjavo",
-    formular_schritt_placeholder_naechster: "naslednji korak",
-    formular_schritt_entfernen_aria: "Odstrani korak",
-    formular_schritt_hoch_aria: "Premakni korak navzgor",
-    formular_schritt_runter_aria: "Premakni korak navzdol",
-    formular_label_bild: "Slika",
-    formular_bild_vorhanden_hinweis: "(obstaja – nova datoteka jo bo nadomestila)",
-    formular_bild_hinweis: "Trenutna slika ostane ohranjena, če ne izbereš nove datoteke.",
-    formular_bild_verkleinern_text: "Slika se pomanjšuje…",
-    fehler_url_ungueltig: "Vnesi popoln naslov, ki se začne s http:// ali https://.",
-    fehler_url_apostroph: "Ta naslov vsebuje apostrof (') in ga na žalost ni mogoče uvoziti.",
-    fehler_url_keine_ausgabe: "Skript ni vrnil nobenega izpisa. Je 'rezeptbuch_url_importieren' nastavljen v configuration.yaml in je bil Home Assistant od takrat v celoti ponovno zagnan?",
-    fehler_url_kein_json: "Odgovor uvoznega skripta ni bil veljaven JSON.",
-    fehler_url_import_fehlgeschlagen: "Uvoz URL ni uspel: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "V prilepljenem besedilu na žalost ni bilo mogoče ničesar prepoznati. Prosimo, izpolni spodnja polja ročno.",
-    warnung_texterkennung_unvollstaendig: "Prepoznavanje je bilo nepopolno (sestavine ali koraki manjkajo/morda so napačno dodeljeni) - preveri in dopolni v obrazcu.",
-    fehler_json_ungueltig: "Prilepljen JSON ni veljaven. Preveri ga in poskusi znova.",
-    fehler_json_titel_fehlt: "V JSON manjka vsaj polje 'title'.",
-    fehler_titel_fehlt: "Vnesi naslov.",
-    fehler_unerwartet: "Nepričakovana napaka:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" je medtem izbrisal nekdo drug. Tvoje spremembe niso bile shranjene.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" je medtem spremenil nekdo drug (npr. komentar, ocena ali lastno urejanje).\n\nDa se nič ne prepiše, tvoje spremembe NISO bile shranjene. Ponovno odpri recept in znova vnesi svoje spremembe.",
-    fehler_vorgang_fehlgeschlagen: "Dejanje ni uspelo:\n{{fehler}}",
-    fehler_teilen_drucken: "Nepričakovana napaka pri deljenju/tiskanju:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Navedi 'entity' v konfiguraciji kartice, npr. entity: todo.rezepte",
-    fehler_bild_lesen: "Slike ni bilo mogoče prebrati (datoteka je poškodovana ali ni podprta).",
-    fehler_bild_verarbeiten: "Slike ni bilo mogoče obdelati kot sliko (nepodprta oblika?).",
-    teilen_ueberschrift_zutaten: "SESTAVINE",
-    teilen_ueberschrift_zubereitung: "PRIPRAVA",
-    seite_zurueck_btn: "← Nazaj",
-    seite_weiter_btn: "Naprej →",
-    seite_anzeige: "Stran {{aktuell}} od {{gesamt}}",
-    update_neue_version: "Na voljo je nova različica: {{version}}",
-    update_ansehen_btn: "Ogled",
-    update_schliessen_aria: "Skrij obvestilo",
-    ressourcen_version_hinweis: "⚠️ Ta kartica je bila posodobljena, vendar se URL vira ni spremenil (še vedno \"?v={{version}}\"). Drugi brskalniki/naprave zato morda še naprej nalagajo staro, predpomnjeno datoteko - povečaj številko različice v URL-ju vira (Nastavitve → Nadzorne plošče → Viri).",
-    detail_kochmodus_btn: "🍳 Način kuhanja",
-    kochmodus_schritt_anzeige: "Korak {{aktuell}} od {{gesamt}}",
-    kochmodus_schliessen_aria: "Zapri način kuhanja",
-    kochmodus_schritt_zurueck_aria: "Prejšnji korak",
-    kochmodus_schritt_weiter_aria: "Naslednji korak",
-    kochmodus_zutaten_ein_aria: "Prikaži sestavine",
-    kochmodus_zutaten_aus_aria: "Skrij sestavine",
-    kochmodus_timer_ein_aria: "Prikaži časovnik",
-    kochmodus_timer_aus_aria: "Skrij časovnik",
-    kochmodus_timer_minuten_aria: "Minute",
-    kochmodus_timer_start_btn: "Začni",
-    kochmodus_timer_abbrechen_btn: "Prekliči",
-    kochmodus_timer_abgelaufen_text: "⏰ Čas je potekel!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Zaženi {{minuten}} min. časovnik",
-    kopf_sammel_pdf_btn: "📚 Zbirni PDF",
-    sammel_pdf_keine_rezepte: "Ni najdenih receptov za izvoz.",
-    sammel_pdf_frage_toc: "Želite ustvariti kazalo za izbrane recepte?",
-    sammel_pdf_ja_toc_btn: "Da, ustvari kazalo",
-    sammel_pdf_nein_toc_btn: "Ne, brez kazala",
-    sammel_pdf_name_placeholder: "Ime kuharske knjige",
-    sammel_pdf_erstellen_btn: "Ustvari PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Kazalo",
-    sammel_pdf_frage_umfang: "Kateri recepti naj gredo v skupni PDF?",
-    sammel_pdf_alle_rezepte_btn: "Vsi prikazani recepti",
-    sammel_pdf_auswahl_btn: "Izberi določene recepte",
-    sammel_pdf_auswahl_titel: "Izberi recepte",
-    sammel_pdf_alle_auswaehlen_link: "Izberi vse",
-    sammel_pdf_keine_auswaehlen_link: "Počisti izbor",
-    sammel_pdf_weiter_btn: "Naprej",
-    sammel_pdf_bilder_mitdrucken_label: "Vključi slike v PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Izberite vsaj en recept.",
-  },
-  es: {
-    allgemein_zurueck: "← Volver",
-    allgemein_ja: "Sí",
-    allgemein_nein: "No",
-    allgemein_an: "Activado",
-    allgemein_aus: "Desactivado",
-    allgemein_speichern: "Guardar",
-    allgemein_speichert: "Guardando…",
-    allgemein_abbrechen: "Cancelar",
-    allgemein_bearbeiten: "Editar",
-    allgemein_loeschen: "Eliminar",
-    allgemein_oeffnen: "Abrir",
-    allgemein_unbekannt: "Desconocido",
-    allgemein_schliessen: "Cerrar",
-    kategorie_hauptgericht: "Plato principal",
-    kategorie_vorspeise: "Entrante",
-    kategorie_suppe: "Sopa",
-    kategorie_salat: "Ensalada",
-    kategorie_beilage: "Guarnición",
-    kategorie_dessert: "Postre",
-    kategorie_kuchen_gebaeck: "Pasteles y repostería",
-    kategorie_fruehstueck: "Desayuno",
-    kategorie_snack: "Snack",
-    kategorie_getraenk: "Bebida",
-    kategorie_sonstiges: "Otro",
-    kategorie_filter_alle: "Todas",
-    kategorie_neu_btn: "+ Nueva categoría",
-    kategorie_name_placeholder: "Nombre de la categoría",
-    fehler_kategorie_name_fehlt: "Introduce un nombre para la categoría.",
-    fehler_kategorie_existiert_bereits: "Esta categoría ya existe.",
-    kategorie_loeschen_title: "Eliminar categoría",
-    kategorie_loeschen_aria: "Eliminar categoría {{name}}",
-    kategorie_bearbeiten_title: "Renombrar categoría",
-    kategorie_bearbeiten_aria: "Renombrar categoría {{name}}",
-    kategorie_umbenennen_titel: "Renombrar categoría \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Esta categoría todavía la usan {{anzahl}}x recetas - asígnales primero otra categoría.",
-    wochentag_montag: "Lunes",
-    wochentag_dienstag: "Martes",
-    wochentag_mittwoch: "Miércoles",
-    wochentag_donnerstag: "Jueves",
-    wochentag_freitag: "Viernes",
-    wochentag_samstag: "Sábado",
-    wochentag_sonntag: "Domingo",
-    sortier_titel: "Alfabético (A-Z)",
-    sortier_bewertung: "Mejor valoración primero",
-    sortier_kategorie: "Por categoría",
-    sortier_neu: "Más reciente primero",
-    sortieren_label: "Ordenar por:",
-    kopf_titel_standard: "Libro de recetas",
-    kopf_sichern_btn: "💾 Copia de seguridad",
-    kopf_wochenplan_btn: "📅 Plan semanal",
-    kopf_zufallsrezept_btn: "🎲 Receta aleatoria",
-    umrechnungstabelle_btn: "📐 Tabla de conversión",
-    umrechnungstabelle_titel: "Tabla de conversión",
-    umrechnungstabelle_hinweis: "Valores orientativos en gramos para ingredientes habituales de cocina - varían según la marca y la consistencia, por lo que son solo de referencia. NO se aplican automáticamente a tus recetas.",
-    umrechnungstabelle_suche_placeholder: "Buscar ingrediente …",
-    umrechnungstabelle_spalte_zutat: "Ingrediente",
-    umrechnungstabelle_spalte_tasse: "1 taza",
-    umrechnungstabelle_spalte_el: "1 cda.",
-    umrechnungstabelle_spalte_tl: "1 cdta.",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "No se encontró ningún ingrediente.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Añadir ingrediente propio",
-    umrechnungstabelle_eigene_name_platzhalter: "Nombre del ingrediente",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/taza",
-    umrechnungstabelle_eigene_el_platzhalter: "g/cda.",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/cdta.",
-    umrechnungstabelle_eigene_loeschen_titel: "Eliminar ingrediente propio",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Editar ingrediente propio",
-    umrechnungstabelle_eigene_name_fehlt: "Introduce un nombre.",
-    umrechnungstabelle_eigene_hinweis: "¿Falta un ingrediente cuyo valor de conversión conoces tú mismo? Añádelo aquí manualmente - deliberadamente no ofrecemos conversión automática entre volumen y peso, ya que eso supondría adivinar según el ingrediente, la marca y la consistencia.",
-    einkaufsmodus_start_btn: "🛒 Lista de la compra",
-    einkaufsmodus_beenden_btn: "✕ Finalizar selección",
-    kopf_neu_btn: "+ Nueva",
-    suche_placeholder: "🔍 Receta o ingredientes (p. ej. harina, huevos)…",
-    kochbuch_loeschen_title: "Eliminar colección",
-    kochbuch_loeschen_aria: "Eliminar colección {{name}}",
-    kochbuch_speichern_btn: "+ Guardar como colección inteligente",
-    kochbuch_name_placeholder: "Nombre para esta colección, p. ej. Recetas de otoño",
-    fehler_kochbuch_name_fehlt: "Introduce un nombre para la colección.",
-    kochbuch_info_aria: "Mostrar explicación de las colecciones inteligentes",
-    kochbuch_info_titel: "¿Qué es una colección inteligente?",
-    kochbuch_info_text:
-      "Una colección inteligente no guarda una lista fija de recetas, " +
-      "sino una combinación de categoría, etiquetas y término de " +
-      "búsqueda, tal como están configurados en el momento de " +
-      "guardarla. Después se actualiza sola: una nueva receta que " +
-      "encaje aparece automáticamente, y una receta cuya categoría o " +
-      "etiquetas cambien puede desaparecer igual de automáticamente.",
-    einkaufs_zaehler: "{{anzahl}} seleccionadas",
-    einkaufsliste_erstellen_btn: "Crear lista de la compra",
-    fehler_einkaufsliste_keine_konfiguration: "Aún falta la configuración para la lista de la compra: indica 'shopping_list_entity' en la configuración de la tarjeta (p. ej. shopping_list_entity: todo.einkaufsliste) - para ello se necesita un SEGUNDO asistente de Lista de tareas local. Consulta ANLEITUNG-Backup.md, sección 18.",
-    fehler_einkaufsliste_keine_auswahl: "Selecciona al menos una receta.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Selecciona al menos un ingrediente.",
-    zutaten_fehlend_einkaufsliste_btn: "Añadir seleccionados a la lista de la compra",
-    fehler_einkaufsliste_keine_zutaten: "Las recetas seleccionadas no contienen ingredientes.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "No se pudo añadir \"{{zeile}}\" a la lista de la compra:\n{{fehler}}\n\nLos ingredientes ya añadidos permanecen en la lista.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediente(s) añadido(s) a \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" eliminada.",
-    undo_rueckgaengig_btn: "Deshacer",
-    leer_keine_rezepte: "Aún no hay recetas – empieza con \"+ Nueva\"",
-    leer_keine_treffer: "No se encontraron recetas para \"{{begriff}}\"",
-    fehler_liste_laden_titel: "No se pudo cargar \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "¿Existe esta lista de tareas? (Ajustes → Dispositivos y servicios → Asistentes)",
-    kachel_aria_label_oeffnen: "Abrir receta {{titel}}",
-    sterne_aria_label_gruppe: "Tu valoración",
-    sterne_aria_label: "{{zahl}} de 5 estrellas",
-    fehler_kein_benutzer_bewertung: "No se pudo determinar tu usuario - no es posible valorar.",
-    detail_teilen_drucken_btn: "📤 Compartir / Imprimir",
-    detail_erstellt_von: "👤 Creada por {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} valoración)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} valoraciones)",
-    detail_keine_bewertungen: "Aún no hay valoraciones",
-    detail_deine_bewertung: "Tu valoración:",
-    detail_zubereitet_x: "🍳 preparada {{anzahl}} veces",
-    detail_portionen_suffix: "raciones",
-    abschnitt_titel_zutaten: "Ingredientes",
-    abschnitt_titel_zubereitung: "Preparación",
-    keine_zutaten: "No hay ingredientes indicados",
-    detail_kommentare_titel: "Comentarios",
-    detail_keine_kommentare: "Aún no hay comentarios",
-    detail_kommentar_placeholder: "Añadido, consejo o nota…",
-    detail_kommentar_hinzufuegen_btn: "Añadir comentario",
-    detail_bearbeiten_hinweis: "Solo {{name}} (o un administrador) puede editar o eliminar esta receta.",
-    detail_ersteller_unbekannt: "quien la creó",
-    modal_zubereitet_frage: "¿Preparaste \"{{titel}}\"?",
-    modal_drucken_bild_frage: "¿Incluir la foto de la receta?",
-    modal_drucken_ohne_bild_btn: "Sin foto",
-    modal_drucken_mit_bild_btn: "Con foto",
-    statistik_btn: "📊 Estadísticas",
-    statistik_titel: "Estadísticas de cocina",
-    statistik_info_aria: "Mostrar explicación de las estadísticas",
-    statistik_einstellungen_btn_title: "Ajustes del registro de cocina",
-    statistik_einstellungen_titel: "Ajustes del registro de cocina",
-    statistik_einstellungen_text: "Aquí puedes elegir si, al salir de una receta, se te pregunta si la preparaste, y si las estadísticas resultantes se muestran en esta tarjeta.",
-    statistik_einstellungen_schalter_label: "Activar pregunta y estadísticas",
-    tags_einstellung_schalter_label: "Mostrar filtro de etiquetas en la vista general",
-    zufallsrezept_einstellung_schalter_label: "Mostrar botón de receta aleatoria en la vista general",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Mostrar botón de tabla de conversión en la vista general",
-    umrechnungstabelle_kopf_einstellung_hinweis: "Para la categoría configurada para recetas americanas, la tabla de conversión sigue apareciendo en la receta y en el modo de cocina, incluso si este botón está desactivado aquí.",
-    farben_abschnitt_titel: "Colores",
-    farben_hinweis: "Personaliza los colores de la tarjeta uno a uno. Restablecer todo devuelve todos los colores a los valores predeterminados.",
-    farben_akzent_label: "Color principal (botones, filtros activos)",
-    farben_akzent_text_label: "Color de acento para textos y bordes",
-    farben_loeschen_label: "Eliminar / advertencia",
-    farben_sterne_label: "Estrellas de valoración",
-    farben_titel_label: "Títulos",
-    farben_zuruecksetzen_btn: "Restablecer todo",
-    us_kategorie_einstellung_label: "Categoría para recetas americanas",
-    us_kategorie_einstellung_text: "Las recetas con esta categoría muestran también un botón para la tabla de conversión en la propia receta y en el modo cocina.",
-    us_kategorie_einstellung_keine: "— Ninguna —",
-    statistik_info_titel: "¿Cómo se calcula esta estadística?",
-    statistik_info_text:
-      "Este resumen cuenta cada confirmación de la pregunta «¿Lo preparaste?» - independientemente del tamaño de la porción o de cuántas veces el mismo día. Si esta pregunta está desactivada mediante el interruptor de los ajustes de estadísticas (⚙️), los números dejan de aumentar, pero las preparaciones ya registradas se conservan.",
-    statistik_dieses_jahr: "Has cocinado {{anzahl}}x de tu recetario en {{jahr}}",
-    statistik_gesamt: "Has cocinado {{anzahl}}x de tu recetario en total",
-    statistik_top_titel: "Más preparado",
-    statistik_keine_daten: "Todavía no hay preparaciones registradas.",
-    modal_loeschen_frage: "¿Eliminar realmente \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Sí, eliminar",
-    modal_kommentar_loeschen_frage: "¿Eliminar realmente este comentario?",
-    wochenplan_titel: "Plan semanal",
-    wochenplan_tab_diese: "Esta semana",
-    wochenplan_tab_folgewoche: "Próxima semana",
-    wochenplan_hinweis_folgewoche: "Planifica aquí ya la próxima semana - pasará automáticamente a \"Esta semana\" en cuanto termine la semana actual.",
-    wochenplan_hinweis_diese: "Los días pasados se vacían automáticamente (la receta en sí se conserva, solo desaparece la asignación).",
-    wochenplan_hinweis_speicherung: "Se guarda en todos los dispositivos (como entrada adicional oculta en la misma lista de recetas, no se necesita ningún otro asistente).",
-    wochenplan_leer: "Aún no hay recetas - crea primero algunas.",
-    wochenplan_kein_rezept_option: "– sin receta –",
-    wochenplan_einkaufsliste_btn: "Crear lista de la compra a partir de {{ziel}}",
-    wochenplan_wort: "plan semanal",
-    wochenplan_folgewoche_wort: "próxima semana",
-    wochenplan_aktuelle_woche_wort: "semana actual",
-    wochenplan_keine_zuweisung: "{{zeitraum}} aún no contiene recetas asignadas.",
-    formular_titel_neu: "Nueva receta",
-    formular_titel_bearbeiten: "Editar receta",
-    formular_url_import_btn: "🌐 Importar URL de receta",
-    formular_url_label: "Enlace al sitio web de la receta",
-    formular_url_placeholder: "https://www.recetas-ejemplo.es/mi-receta",
-    formular_url_hinweis: "Carga la página y lee los datos estructurados de la receta ya incorporados en ella (los mismos datos con los que, p. ej., Google muestra valoraciones con estrellas en la búsqueda) - normalmente más fiable que el reconocimiento de texto. Solo funciona en sitios que proporcionan esos datos y no bloquean solicitudes automatizadas.",
-    formular_url_importieren_btn: "Importar",
-    formular_url_laedt: "Cargando …",
-    formular_text_einfuegen_btn: "🔍 Pegar texto de la receta (detección automática)",
-    formular_text_label: "Pega aquí el texto de la receta (p. ej. copiado de un sitio de recetas)",
-    formular_text_placeholder: "Título, ingredientes, preparación - simplemente pega todo el texto",
-    formular_text_hinweis: "Reconocimiento puramente automático sin IA - funciona mejor con los títulos \"Ingredientes\" y \"Preparación\" en el texto. Comprueba brevemente el resultado después, puede estar incompleto.",
-    formular_text_erkennen_btn: "Detectar",
-    formular_json_einfuegen_btn: "📋 Pegar JSON generado por IA",
-    formular_json_info_aria: "Mostrar un prompt listo para una IA",
-    json_info_titel: "Prompt para una IA",
-    json_info_erklaerung:
-      "Copia este texto, pégalo en una IA de tu elección (p. ej. ChatGPT o Claude), añade el texto de tu receta y luego pega la respuesta arriba en «Pega el JSON aquí».",
-    json_info_prompt:
-      "Convierte el texto de la receta que te voy a enviar a continuación en UN único objeto JSON - sin explicaciones, sin texto antes ni después, solo el JSON. Usa exactamente este formato:\n\n" +
-      "{\n" +
-      '  "title": "nombre de la receta",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "una de: {{kategorien}}",\n' +
-      '  "ingredients": ["un ingrediente por entrada, p. ej. 200 g de harina"],\n' +
-      '  "steps": ["un paso de preparación por entrada"],\n' +
-      '  "tags": ["etiquetas opcionales, p. ej. vegetariano"]\n' +
-      "}\n\n" +
-      "Reglas: «category» debe ser EXACTAMENTE uno de los valores indicados arriba (cópialo sin modificar, aunque el texto de la receta esté en otro idioma - son valores internos fijos). " +
-      "«tags» es opcional, un array vacío también sirve. " +
-      "No inventes ingredientes ni pasos que no estén en el texto. " +
-      "Aquí está el texto de la receta:",
-    json_info_kopieren_btn: "📋 Copiar prompt",
-    json_info_kopiert: "¡Copiado!",
-    formular_json_label: "Pega el JSON aquí",
-    formular_json_uebernehmen_btn: "Aplicar",
-    formular_label_titel: "Título",
-    formular_label_kategorie: "Categoría",
-    formular_label_tags: "Etiquetas (varias posibles, p. ej. \"vegetariano\", \"rápido\")",
-    formular_tag_placeholder: "Escribe y añade una etiqueta",
-    formular_tag_hinzufuegen_btn: "+ Etiqueta",
-    formular_tag_entfernen_aria: "Eliminar etiqueta {{tag}}",
-    formular_label_portionen: "Raciones (base)",
-    formular_label_zutaten: "Ingredientes",
-    formular_zutat_hinzufuegen_btn: "+ Ingrediente",
-    formular_zutat_menge_placeholder: "Cantidad",
-    formular_zutat_einheit_placeholder: "Unidad",
-    formular_zutat_name_placeholder: "Ingrediente",
-    formular_zutat_entfernen_aria: "Eliminar ingrediente",
-    formular_label_zubereitung: "Preparación (pasos)",
-    formular_schritt_hinzufuegen_btn: "+ Paso",
-    formular_schritt_placeholder_beispiel: "p. ej. lavar y cortar las verduras",
-    formular_schritt_placeholder_naechster: "siguiente paso",
-    formular_schritt_entfernen_aria: "Eliminar paso",
-    formular_schritt_hoch_aria: "Mover paso hacia arriba",
-    formular_schritt_runter_aria: "Mover paso hacia abajo",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(existe – un nuevo archivo la sustituirá)",
-    formular_bild_hinweis: "La foto actual se conserva si no eliges un nuevo archivo.",
-    formular_bild_verkleinern_text: "Reduciendo la foto…",
-    fehler_url_ungueltig: "Introduce una dirección completa que empiece por http:// o https://.",
-    fehler_url_apostroph: "Esta dirección contiene un apóstrofo (') y lamentablemente no se puede importar.",
-    fehler_url_keine_ausgabe: "El script no devolvió ninguna salida. ¿Está configurado 'rezeptbuch_url_importieren' en configuration.yaml y se ha reiniciado Home Assistant por completo desde entonces?",
-    fehler_url_kein_json: "La respuesta del script de importación no era un JSON válido.",
-    fehler_url_import_fehlgeschlagen: "Error al importar la URL: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Lamentablemente no se pudo reconocer nada en el texto pegado. Rellena los campos siguientes manualmente.",
-    warnung_texterkennung_unvollstaendig: "El reconocimiento fue incompleto (faltan ingredientes o pasos, o pueden estar asignados incorrectamente) - comprueba y completa en el formulario.",
-    fehler_json_ungueltig: "El JSON pegado no es válido. Compruébalo e inténtalo de nuevo.",
-    fehler_json_titel_fehlt: "En el JSON falta al menos el campo 'title'.",
-    fehler_titel_fehlt: "Introduce un título.",
-    fehler_unerwartet: "Error inesperado:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" ha sido eliminada mientras tanto por otra persona. Tus cambios no se guardaron.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" ha sido modificada mientras tanto por otra persona (p. ej. un comentario, valoración o edición propia).\n\nPara evitar que algo se sobrescriba, tus cambios NO se guardaron. Abre la receta de nuevo e introduce tus cambios otra vez.",
-    fehler_vorgang_fehlgeschlagen: "La operación falló:\n{{fehler}}",
-    fehler_teilen_drucken: "Error inesperado al compartir/imprimir:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Indica 'entity' en la configuración de la tarjeta, p. ej. entity: todo.rezepte",
-    fehler_bild_lesen: "No se pudo leer la foto (archivo dañado o no compatible).",
-    fehler_bild_verarbeiten: "No se pudo procesar la foto como imagen (¿formato no compatible?).",
-    teilen_ueberschrift_zutaten: "INGREDIENTES",
-    teilen_ueberschrift_zubereitung: "PREPARACIÓN",
-    seite_zurueck_btn: "← Atrás",
-    seite_weiter_btn: "Siguiente →",
-    seite_anzeige: "Página {{aktuell}} de {{gesamt}}",
-    update_neue_version: "Nueva versión disponible: {{version}}",
-    update_ansehen_btn: "Ver",
-    update_schliessen_aria: "Ocultar aviso",
-    ressourcen_version_hinweis: "⚠️ Esta tarjeta se actualizó, pero la URL del recurso no cambió (sigue siendo \"?v={{version}}\"). Otros navegadores/dispositivos podrían seguir cargando el archivo antiguo en caché - aumenta el número de versión en la URL del recurso (Ajustes → Paneles → Recursos).",
-    detail_kochmodus_btn: "🍳 Modo cocina",
-    kochmodus_schritt_anzeige: "Paso {{aktuell}} de {{gesamt}}",
-    kochmodus_schliessen_aria: "Cerrar modo cocina",
-    kochmodus_schritt_zurueck_aria: "Paso anterior",
-    kochmodus_schritt_weiter_aria: "Paso siguiente",
-    kochmodus_zutaten_ein_aria: "Mostrar ingredientes",
-    kochmodus_zutaten_aus_aria: "Ocultar ingredientes",
-    kochmodus_timer_ein_aria: "Mostrar temporizador",
-    kochmodus_timer_aus_aria: "Ocultar temporizador",
-    kochmodus_timer_minuten_aria: "Minutos",
-    kochmodus_timer_start_btn: "Iniciar",
-    kochmodus_timer_abbrechen_btn: "Cancelar",
-    kochmodus_timer_abgelaufen_text: "⏰ ¡Tiempo terminado!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Iniciar temporizador de {{minuten}} min",
-    kopf_sammel_pdf_btn: "📚 PDF conjunto",
-    sammel_pdf_keine_rezepte: "No se encontraron recetas para exportar.",
-    sammel_pdf_frage_toc: "¿Crear un índice para las recetas seleccionadas?",
-    sammel_pdf_ja_toc_btn: "Sí, crear índice",
-    sammel_pdf_nein_toc_btn: "No, sin índice",
-    sammel_pdf_name_placeholder: "Nombre del recetario",
-    sammel_pdf_erstellen_btn: "Crear PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Índice",
-    sammel_pdf_frage_umfang: "¿Qué recetas deben incluirse en el PDF conjunto?",
-    sammel_pdf_alle_rezepte_btn: "Todas las recetas mostradas",
-    sammel_pdf_auswahl_btn: "Seleccionar recetas concretas",
-    sammel_pdf_auswahl_titel: "Seleccionar recetas",
-    sammel_pdf_alle_auswaehlen_link: "Seleccionar todas",
-    sammel_pdf_keine_auswaehlen_link: "Deseleccionar todas",
-    sammel_pdf_weiter_btn: "Siguiente",
-    sammel_pdf_bilder_mitdrucken_label: "Incluir imágenes en el PDF",
-    sammel_pdf_auswahl_keine_hinweis: "Selecciona al menos una receta.",
-  },
-  sv: {
-    allgemein_zurueck: "← Tillbaka",
-    allgemein_ja: "Ja",
-    allgemein_nein: "Nej",
-    allgemein_an: "På",
-    allgemein_aus: "Av",
-    allgemein_speichern: "Spara",
-    allgemein_speichert: "Sparar…",
-    allgemein_abbrechen: "Avbryt",
-    allgemein_bearbeiten: "Redigera",
-    allgemein_loeschen: "Ta bort",
-    allgemein_oeffnen: "Öppna",
-    allgemein_unbekannt: "Okänd",
-    allgemein_schliessen: "Stäng",
-    kategorie_hauptgericht: "Huvudrätt",
-    kategorie_vorspeise: "Förrätt",
-    kategorie_suppe: "Soppa",
-    kategorie_salat: "Sallad",
-    kategorie_beilage: "Tillbehör",
-    kategorie_dessert: "Efterrätt",
-    kategorie_kuchen_gebaeck: "Bakverk och tårtor",
-    kategorie_fruehstueck: "Frukost",
-    kategorie_snack: "Mellanmål",
-    kategorie_getraenk: "Dryck",
-    kategorie_sonstiges: "Övrigt",
-    kategorie_filter_alle: "Alla",
-    kategorie_neu_btn: "+ Ny kategori",
-    kategorie_name_placeholder: "Kategorinamn",
-    fehler_kategorie_name_fehlt: "Ange ett namn för kategorin.",
-    fehler_kategorie_existiert_bereits: "Den här kategorin finns redan.",
-    kategorie_loeschen_title: "Ta bort kategori",
-    kategorie_loeschen_aria: "Ta bort kategori {{name}}",
-    kategorie_bearbeiten_title: "Byt namn på kategori",
-    kategorie_bearbeiten_aria: "Byt namn på kategori {{name}}",
-    kategorie_umbenennen_titel: "Byt namn på kategorin \"{{name}}\":",
-    fehler_kategorie_wird_verwendet: "Den här kategorin används fortfarande av {{anzahl}}x recept - tilldela dem först en annan kategori.",
-    wochentag_montag: "Måndag",
-    wochentag_dienstag: "Tisdag",
-    wochentag_mittwoch: "Onsdag",
-    wochentag_donnerstag: "Torsdag",
-    wochentag_freitag: "Fredag",
-    wochentag_samstag: "Lördag",
-    wochentag_sonntag: "Söndag",
-    sortier_titel: "Alfabetiskt (A-Ö)",
-    sortier_bewertung: "Bäst betyg först",
-    sortier_kategorie: "Efter kategori",
-    sortier_neu: "Senaste först",
-    sortieren_label: "Sortera efter:",
-    kopf_titel_standard: "Kokbok",
-    kopf_sichern_btn: "💾 Säkerhetskopia",
-    kopf_wochenplan_btn: "📅 Veckoplan",
-    kopf_zufallsrezept_btn: "🎲 Slumpmässigt recept",
-    umrechnungstabelle_btn: "📐 Omvandlingstabell",
-    umrechnungstabelle_titel: "Omvandlingstabell",
-    umrechnungstabelle_hinweis: "Ungefärliga gramvärden för vanliga köksingredienser - varierar beroende på märke och konsistens, så endast som referens. Används INTE automatiskt på dina recept.",
-    umrechnungstabelle_suche_placeholder: "Sök ingrediens …",
-    umrechnungstabelle_spalte_zutat: "Ingrediens",
-    umrechnungstabelle_spalte_tasse: "1 kopp",
-    umrechnungstabelle_spalte_el: "1 msk",
-    umrechnungstabelle_spalte_tl: "1 tsk",
-    umrechnungstabelle_gramm_wert: "{{wert}} g",
-    umrechnungstabelle_keine_treffer: "Ingen ingrediens hittades.",
-    umrechnungstabelle_eigene_hinzufuegen_btn: "+ Lägg till egen ingrediens",
-    umrechnungstabelle_eigene_name_platzhalter: "Ingrediensens namn",
-    umrechnungstabelle_eigene_tasse_platzhalter: "g/kopp",
-    umrechnungstabelle_eigene_el_platzhalter: "g/msk",
-    umrechnungstabelle_eigene_tl_platzhalter: "g/tsk",
-    umrechnungstabelle_eigene_loeschen_titel: "Ta bort egen ingrediens",
-    umrechnungstabelle_eigene_bearbeiten_titel: "Redigera egen ingrediens",
-    umrechnungstabelle_eigene_name_fehlt: "Ange ett namn.",
-    umrechnungstabelle_eigene_hinweis: "Saknas en ingrediens vars omvandlingsvärde du själv känner till? Lägg till den här manuellt - vi erbjuder medvetet inte automatisk omvandling mellan volym och vikt, eftersom det skulle innebära att gissa utifrån ingrediens, märke och konsistens.",
-    einkaufsmodus_start_btn: "🛒 Inköpslista",
-    einkaufsmodus_beenden_btn: "✕ Avsluta val",
-    kopf_neu_btn: "+ Ny",
-    suche_placeholder: "🔍 Recept eller ingredienser (t.ex. mjöl, ägg)…",
-    kochbuch_loeschen_title: "Ta bort samling",
-    kochbuch_loeschen_aria: "Ta bort samling {{name}}",
-    kochbuch_speichern_btn: "+ Spara som smart samling",
-    kochbuch_name_placeholder: "Namn på denna samling, t.ex. Höstrecept",
-    fehler_kochbuch_name_fehlt: "Ange ett namn för samlingen.",
-    kochbuch_info_aria: "Visa förklaring av smarta samlingar",
-    kochbuch_info_titel: "Vad är en smart samling?",
-    kochbuch_info_text:
-      "En smart samling sparar inte en fast lista med recept, utan " +
-      "en kombination av kategori, taggar och sökterm, exakt som de " +
-      "är inställda när du sparar den. Den uppdaterar sig sedan " +
-      "själv: ett nytt recept som matchar dyker automatiskt upp, och " +
-      "ett recept vars kategori eller taggar ändras kan lika " +
-      "automatiskt försvinna igen.",
-    einkaufs_zaehler: "{{anzahl}} valda",
-    einkaufsliste_erstellen_btn: "Skapa inköpslista",
-    fehler_einkaufsliste_keine_konfiguration: "Konfigurationen för inköpslistan saknas fortfarande: ange 'shopping_list_entity' i kortets konfiguration (t.ex. shopping_list_entity: todo.einkaufsliste) - för detta krävs en ANDRA hjälpare Lokal att-göra-lista. Se ANLEITUNG-Backup.md, avsnitt 18.",
-    fehler_einkaufsliste_keine_auswahl: "Välj minst ett recept.",
-    fehler_einkaufsliste_keine_auswahl_zutaten: "Välj minst en ingrediens.",
-    zutaten_fehlend_einkaufsliste_btn: "Lägg till valda i inköpslistan",
-    fehler_einkaufsliste_keine_zutaten: "De valda recepten innehåller inga ingredienser.",
-    fehler_einkaufsliste_eintrag_fehlgeschlagen: "Det gick inte att lägga till \"{{zeile}}\" i inköpslistan:\n{{fehler}}\n\nRedan tillagda ingredienser finns kvar i listan.",
-    einkaufsliste_hinzugefuegt: "{{anzahl}} ingrediens(er) tillagda i \"{{entity}}\".",
-    undo_geloescht: "\"{{titel}}\" borttaget.",
-    undo_rueckgaengig_btn: "Ångra",
-    leer_keine_rezepte: "Inga recept än – kom igång med \"+ Ny\"",
-    leer_keine_treffer: "Inga recept hittades för \"{{begriff}}\"",
-    fehler_liste_laden_titel: "Det gick inte att läsa in \"{{entity}}\".",
-    fehler_liste_laden_hinweis: "Finns denna att-göra-lista? (Inställningar → Enheter och tjänster → Hjälpare)",
-    kachel_aria_label_oeffnen: "Öppna recept {{titel}}",
-    sterne_aria_label_gruppe: "Ditt betyg",
-    sterne_aria_label: "{{zahl}} av 5 stjärnor",
-    fehler_kein_benutzer_bewertung: "Det gick inte att fastställa din användare - betygsättning inte möjlig.",
-    detail_teilen_drucken_btn: "📤 Dela / Skriv ut",
-    detail_erstellt_von: "👤 Skapat av {{name}}",
-    detail_bewertung_singular: "{{durchschnitt}} ({{anzahl}} betyg)",
-    detail_bewertung_plural: "{{durchschnitt}} ({{anzahl}} betyg)",
-    detail_keine_bewertungen: "Inga betyg än",
-    detail_deine_bewertung: "Ditt betyg:",
-    detail_zubereitet_x: "🍳 tillagat {{anzahl}} gånger",
-    detail_portionen_suffix: "portioner",
-    abschnitt_titel_zutaten: "Ingredienser",
-    abschnitt_titel_zubereitung: "Tillagning",
-    keine_zutaten: "Inga ingredienser angivna",
-    detail_kommentare_titel: "Kommentarer",
-    detail_keine_kommentare: "Inga kommentarer än",
-    detail_kommentar_placeholder: "Tillägg, tips eller anmärkning…",
-    detail_kommentar_hinzufuegen_btn: "Lägg till kommentar",
-    detail_bearbeiten_hinweis: "Endast {{name}} (eller en administratör) kan redigera eller ta bort detta recept.",
-    detail_ersteller_unbekannt: "den som skapade det",
-    modal_zubereitet_frage: "Lagade du \"{{titel}}\"?",
-    modal_drucken_bild_frage: "Ska receptbilden inkluderas?",
-    modal_drucken_ohne_bild_btn: "Utan bild",
-    modal_drucken_mit_bild_btn: "Med bild",
-    statistik_btn: "📊 Statistik",
-    statistik_titel: "Matlagningsstatistik",
-    statistik_info_aria: "Visa förklaring av statistiken",
-    statistik_einstellungen_btn_title: "Inställningar för tillagningsloggen",
-    statistik_einstellungen_titel: "Inställningar för tillagningsloggen",
-    statistik_einstellungen_text: "Här kan du välja om du blir tillfrågad, när du lämnar ett recept, om du lagade det, och om den resulterande statistiken visas på det här kortet.",
-    statistik_einstellungen_schalter_label: "Aktivera fråga och statistik",
-    tags_einstellung_schalter_label: "Visa taggfilter i översikten",
-    zufallsrezept_einstellung_schalter_label: "Visa knappen Slumpmässigt recept i översikten",
-    umrechnungstabelle_kopf_einstellung_schalter_label: "Visa knappen för omräkningstabell i översikten",
-    umrechnungstabelle_kopf_einstellung_hinweis: "För den inställda kategorin för amerikanska recept visas omräkningstabellen fortfarande i receptet och i matlagningsläget, även om den här knappen är avstängd här.",
-    farben_abschnitt_titel: "Färger",
-    farben_hinweis: "Anpassa kortets enskilda färger. Återställ allt sätter alla färger till standard.",
-    farben_akzent_label: "Huvudfärg (knappar, aktiva filter)",
-    farben_akzent_text_label: "Accentfärg för text och kanter",
-    farben_loeschen_label: "Radera / varning",
-    farben_sterne_label: "Betygsstjärnor",
-    farben_titel_label: "Rubriker",
-    farben_zuruecksetzen_btn: "Återställ allt",
-    us_kategorie_einstellung_label: "Kategori för amerikanska recept",
-    us_kategorie_einstellung_text: "Recept med denna kategori visar även en knapp för omvandlingstabellen direkt i receptet och i lagningsläget.",
-    us_kategorie_einstellung_keine: "— Ingen —",
-    statistik_info_titel: "Hur beräknas denna statistik?",
-    statistik_info_text:
-      "Den här sammanställningen räknar varje bekräftelse av frågan „Lagade du den?“ - oavsett portionsstorlek eller hur många gånger samma dag. Om frågan är inaktiverad via reglaget i statistikinställningarna (⚙️) slutar siffrorna att öka, men redan registrerade tillagningar behålls.",
-    statistik_dieses_jahr: "Du har lagat mat {{anzahl}}x från din receptbok under {{jahr}}",
-    statistik_gesamt: "Du har lagat mat {{anzahl}}x från din receptbok totalt",
-    statistik_top_titel: "Mest tillagad",
-    statistik_keine_daten: "Inga tillagningar registrerade ännu.",
-    modal_loeschen_frage: "Verkligen ta bort \"{{titel}}\"?",
-    modal_loeschen_ja_btn: "Ja, ta bort",
-    modal_kommentar_loeschen_frage: "Vill du verkligen ta bort den här kommentaren?",
-    wochenplan_titel: "Veckoplan",
-    wochenplan_tab_diese: "Denna vecka",
-    wochenplan_tab_folgewoche: "Nästa vecka",
-    wochenplan_hinweis_folgewoche: "Planera redan nu kommande vecka här - den flyttas automatiskt till \"Denna vecka\" så snart aktuell vecka är slut.",
-    wochenplan_hinweis_diese: "Passerade dagar töms automatiskt (själva receptet finns kvar, bara tilldelningen försvinner).",
-    wochenplan_hinweis_speicherung: "Sparas mellan enheter (som en dold extra post i samma receptlista, ingen ytterligare hjälpare behövs).",
-    wochenplan_leer: "Inga recept än - skapa några först.",
-    wochenplan_kein_rezept_option: "– inget recept –",
-    wochenplan_einkaufsliste_btn: "Skapa inköpslista från {{ziel}}",
-    wochenplan_wort: "veckoplan",
-    wochenplan_folgewoche_wort: "nästa vecka",
-    wochenplan_aktuelle_woche_wort: "aktuell vecka",
-    wochenplan_keine_zuweisung: "{{zeitraum}} innehåller ännu inga tilldelade recept.",
-    formular_titel_neu: "Nytt recept",
-    formular_titel_bearbeiten: "Redigera recept",
-    formular_url_import_btn: "🌐 Importera recept-URL",
-    formular_url_label: "Länk till receptets webbsida",
-    formular_url_placeholder: "https://www.exempel-recept.se/mitt-recept",
-    formular_url_hinweis: "Läser in sidan och läser receptets strukturerade data som redan finns inbäddade i den (samma data som t.ex. Google använder för att visa stjärnbetyg i sökresultat) - vanligtvis mer tillförlitligt än textigenkänning. Fungerar bara på sidor som tillhandahåller sådan data och inte blockerar automatiserade förfrågningar.",
-    formular_url_importieren_btn: "Importera",
-    formular_url_laedt: "Läser in …",
-    formular_text_einfuegen_btn: "🔍 Klistra in recepttext (automatisk igenkänning)",
-    formular_text_label: "Klistra in recepttexten här (t.ex. kopierad från en receptwebbsida)",
-    formular_text_placeholder: "Titel, ingredienser, tillagning - klistra bara in hela texten",
-    formular_text_hinweis: "Rent automatisk igenkänning utan AI - fungerar bäst med rubrikerna \"Ingredienser\" och \"Tillagning\" i texten. Kontrollera resultatet kort efteråt, det kan vara ofullständigt.",
-    formular_text_erkennen_btn: "Känn igen",
-    formular_json_einfuegen_btn: "📋 Klistra in AI-genererad JSON",
-    formular_json_info_aria: "Visa en färdig prompt för en AI",
-    json_info_titel: "Prompt för en AI",
-    json_info_erklaerung:
-      "Kopiera den här texten, klistra in den i en AI du väljer (t.ex. ChatGPT eller Claude), lägg till din receptext och klistra sedan in svaret ovan under „Klistra in JSON här“.",
-    json_info_prompt:
-      "Gör om receptexten som jag strax skickar till EXAKT ETT JSON-objekt - utan förklaring, utan text före eller efter, bara JSON. Använd exakt det här formatet:\n\n" +
-      "{\n" +
-      '  "title": "receptets namn",\n' +
-      '  "servings": 4,\n' +
-      '  "category": "en av: {{kategorien}}",\n' +
-      '  "ingredients": ["en ingrediens per rad, t.ex. 200 g mjöl"],\n' +
-      '  "steps": ["ett tillagningssteg per rad"],\n' +
-      '  "tags": ["valfria nyckelord, t.ex. vegetariskt"]\n' +
-      "}\n\n" +
-      "Regler: „category“ måste vara EXAKT ett av värdena som listas ovan (kopiera det oförändrat, även om receptexten är på ett annat språk - det är fasta interna värden). " +
-      "„tags“ är valfritt, en tom array funkar också. " +
-      "Hitta inte på ingredienser eller steg som inte finns i texten. " +
-      "Här är receptexten:",
-    json_info_kopieren_btn: "📋 Kopiera prompt",
-    json_info_kopiert: "Kopierad!",
-    formular_json_label: "Klistra in JSON här",
-    formular_json_uebernehmen_btn: "Använd",
-    formular_label_titel: "Titel",
-    formular_label_kategorie: "Kategori",
-    formular_label_tags: "Taggar (flera möjliga, t.ex. \"vegetariskt\", \"snabbt\")",
-    formular_tag_placeholder: "Skriv in och lägg till en tagg",
-    formular_tag_hinzufuegen_btn: "+ Tagg",
-    formular_tag_entfernen_aria: "Ta bort tagg {{tag}}",
-    formular_label_portionen: "Portioner (bas)",
-    formular_label_zutaten: "Ingredienser",
-    formular_zutat_hinzufuegen_btn: "+ Ingrediens",
-    formular_zutat_menge_placeholder: "Mängd",
-    formular_zutat_einheit_placeholder: "Enhet",
-    formular_zutat_name_placeholder: "Ingrediens",
-    formular_zutat_entfernen_aria: "Ta bort ingrediens",
-    formular_label_zubereitung: "Tillagning (steg)",
-    formular_schritt_hinzufuegen_btn: "+ Steg",
-    formular_schritt_placeholder_beispiel: "t.ex. tvätta och skär grönsakerna",
-    formular_schritt_placeholder_naechster: "nästa steg",
-    formular_schritt_entfernen_aria: "Ta bort steg",
-    formular_schritt_hoch_aria: "Flytta steget uppåt",
-    formular_schritt_runter_aria: "Flytta steget nedåt",
-    formular_label_bild: "Foto",
-    formular_bild_vorhanden_hinweis: "(finns – en ny fil ersätter det)",
-    formular_bild_hinweis: "Nuvarande foto behålls om du inte väljer en ny fil.",
-    formular_bild_verkleinern_text: "Fotot förminskas…",
-    fehler_url_ungueltig: "Ange en fullständig adress som börjar med http:// eller https://.",
-    fehler_url_apostroph: "Denna adress innehåller en apostrof (') och kan tyvärr inte importeras.",
-    fehler_url_keine_ausgabe: "Skriptet returnerade ingen utdata. Är 'rezeptbuch_url_importieren' konfigurerat i configuration.yaml och har Home Assistant startats om helt sedan dess?",
-    fehler_url_kein_json: "Importskriptets svar var inte giltig JSON.",
-    fehler_url_import_fehlgeschlagen: "URL-import misslyckades: {{fehler}}",
-    fehler_texterkennung_nichts_gefunden: "Tyvärr gick det inte att känna igen något i den inklistrade texten. Fyll i fälten nedan manuellt.",
-    warnung_texterkennung_unvollstaendig: "Igenkänningen var ofullständig (ingredienser eller steg saknas/kan vara felaktigt tilldelade) - kontrollera och komplettera i formuläret.",
-    fehler_json_ungueltig: "Den inklistrade JSON:en är ogiltig. Kontrollera den och försök igen.",
-    fehler_json_titel_fehlt: "I JSON:en saknas åtminstone fältet 'title'.",
-    fehler_titel_fehlt: "Ange en titel.",
-    fehler_unerwartet: "Oväntat fel:\n{{fehler}}",
-    fehler_konflikt_geloescht: "\"{{titel}}\" har under tiden tagits bort av någon annan. Dina ändringar sparades inte.",
-    fehler_konflikt_geaendert: "\"{{titel}}\" har under tiden ändrats av någon annan (t.ex. en kommentar, ett betyg eller en egen redigering).\n\nFör att inget ska skrivas över sparades dina ändringar INTE. Öppna receptet igen och ange dina ändringar på nytt.",
-    fehler_vorgang_fehlgeschlagen: "Åtgärden misslyckades:\n{{fehler}}",
-    fehler_teilen_drucken: "Oväntat fel vid delning/utskrift:\n{{fehler}}",
-    fehler_config_entity_fehlt: "Ange 'entity' i kortets konfiguration, t.ex. entity: todo.rezepte",
-    fehler_bild_lesen: "Fotot kunde inte läsas (filen är skadad eller stöds inte).",
-    fehler_bild_verarbeiten: "Fotot kunde inte behandlas som en bild (format som inte stöds?).",
-    teilen_ueberschrift_zutaten: "INGREDIENSER",
-    teilen_ueberschrift_zubereitung: "TILLAGNING",
-    seite_zurueck_btn: "← Tillbaka",
-    seite_weiter_btn: "Nästa →",
-    seite_anzeige: "Sida {{aktuell}} av {{gesamt}}",
-    update_neue_version: "Ny version tillgänglig: {{version}}",
-    update_ansehen_btn: "Visa",
-    update_schliessen_aria: "Dölj meddelande",
-    ressourcen_version_hinweis: "⚠️ Det här kortet uppdaterades, men resurs-URL:en ändrades inte (fortfarande \"?v={{version}}\"). Andra webbläsare/enheter kan därför fortsätta ladda den gamla, cachade filen - öka versionsnumret i resurs-URL:en (Inställningar → Instrumentpaneler → Resurser).",
-    detail_kochmodus_btn: "🍳 Matlagningsläge",
-    kochmodus_schritt_anzeige: "Steg {{aktuell}} av {{gesamt}}",
-    kochmodus_schliessen_aria: "Stäng matlagningsläge",
-    kochmodus_schritt_zurueck_aria: "Föregående steg",
-    kochmodus_schritt_weiter_aria: "Nästa steg",
-    kochmodus_zutaten_ein_aria: "Visa ingredienser",
-    kochmodus_zutaten_aus_aria: "Dölj ingredienser",
-    kochmodus_timer_ein_aria: "Visa timer",
-    kochmodus_timer_aus_aria: "Dölj timer",
-    kochmodus_timer_minuten_aria: "Minuter",
-    kochmodus_timer_start_btn: "Starta",
-    kochmodus_timer_abbrechen_btn: "Avbryt",
-    kochmodus_timer_abgelaufen_text: "⏰ Timern är slut!",
-    kochmodus_timer_ok_btn: "OK",
-    kochmodus_timer_preset_aria: "Starta {{minuten}} min timer",
-    kopf_sammel_pdf_btn: "📚 Samlings-PDF",
-    sammel_pdf_keine_rezepte: "Inga recept hittades att exportera.",
-    sammel_pdf_frage_toc: "Vill du skapa en innehållsförteckning för de valda recepten?",
-    sammel_pdf_ja_toc_btn: "Ja, skapa innehållsförteckning",
-    sammel_pdf_nein_toc_btn: "Nej, ingen innehållsförteckning",
-    sammel_pdf_name_placeholder: "Namn på kokboken",
-    sammel_pdf_erstellen_btn: "Skapa PDF",
-    abschnitt_titel_inhaltsverzeichnis: "Innehållsförteckning",
-    sammel_pdf_frage_umfang: "Vilka recept ska ingå i den samlade PDF-filen?",
-    sammel_pdf_alle_rezepte_btn: "Alla visade recept",
-    sammel_pdf_auswahl_btn: "Välj specifika recept",
-    sammel_pdf_auswahl_titel: "Välj recept",
-    sammel_pdf_alle_auswaehlen_link: "Markera alla",
-    sammel_pdf_keine_auswaehlen_link: "Avmarkera alla",
-    sammel_pdf_weiter_btn: "Nästa",
-    sammel_pdf_bilder_mitdrucken_label: "Inkludera bilder i PDF:en",
-    sammel_pdf_auswahl_keine_hinweis: "Välj minst ett recept.",
+    // Einrichtung & Wartung, Fotos, Sicherung (ab 2.3.0)
+    setup_titel: "Willkommen im Rezeptbuch",
+    setup_text: "Die To-do-Liste „{{entity}}“, in der die Rezepte gespeichert werden, gibt es noch nicht. Soll sie jetzt automatisch angelegt werden?",
+    setup_btn: "Jetzt automatisch einrichten",
+    setup_laeuft: "Wird eingerichtet …",
+    setup_nur_admin: "Die Liste muss zuerst von einem Administrator angelegt werden – bitte einen Administrator, diese Karte einmal zu öffnen.",
+    setup_fehler: "Einrichtung fehlgeschlagen: {{fehler}}",
+    einrichtung_abschnitt_titel: "Einrichtung & Wartung",
+    einrichtung_abschnitt_hinweis: "Hier siehst du, was das Rezeptbuch bereits selbst erledigt hat – und kannst Fehlendes mit einem Klick nachholen.",
+    einrichtung_rezeptliste: "Rezeptliste: {{entity}}",
+    einrichtung_einkaufsliste: "Einkaufsliste: {{entity}}",
+    einrichtung_einkaufsliste_fehlt: "Keine Einkaufsliste gefunden",
+    einrichtung_sicherung_vorhanden: "Tägliche Sicherung: zuletzt {{datum}} ({{anzahl}} gespeichert)",
+    einrichtung_sicherung_noch_keine: "noch keine",
+    einrichtung_sicherung_fehlt: "Tägliche Sicherung ist noch nicht eingerichtet",
+    einrichtung_sicherung_jetzt_btn: "Jetzt sichern",
+    einrichtung_sicherung_wiederherstellen_btn: "Wiederherstellen …",
+    einrichtung_sicherung_auto_label: "Automatisch täglich sichern",
+    einrichtung_sicherung_erstellt: "Die Sicherung wurde erstellt.",
+    einrichtung_sicherung_fehlgeschlagen: "Die Sicherung konnte nicht erstellt werden.",
+    einrichtung_einrichten_btn: "Einrichten",
+    einrichtung_angelegt: "Die Liste „{{entity}}“ wurde angelegt.",
+    einrichtung_fotos_ok: "Fotos: alles in Ordnung",
+    einrichtung_fotos_offen: "{{anzahl}} Foto(s) stecken noch als Text im Rezept",
+    einrichtung_fotos_auslagern_btn: "Jetzt auslagern",
+    einrichtung_fotos_ausgelagert: "{{anzahl}} Foto(s) wurden ausgelagert.",
+    einrichtung_fotos_nichts_ausgelagert: "Es konnte kein Foto ausgelagert werden.",
+    einrichtung_url_import_ok: "URL-Import: eingerichtet",
+    einrichtung_url_import_fehlt: "URL-Import: nicht eingerichtet (optional, siehe README)",
+    einrichtung_nur_admin: "Dafür sind Administrator-Rechte nötig.",
+    einrichtung_fehler: "Das hat nicht geklappt: {{fehler}}",
+    einrichtung_fehler_unerwartet: "Home Assistant hat die Einrichtung nicht wie erwartet abgeschlossen.",
+    einrichtung_fehler_entity_fehlt: "Die Liste wurde angelegt, die Entität „{{entity}}“ ist aber nicht aufgetaucht. Bitte in der Kartenkonfiguration den tatsächlichen Namen angeben.",
+    sicherung_modal_titel: "Sicherung wiederherstellen",
+    sicherung_modal_hinweis: "Fehlende Rezepte werden aus der gewählten Sicherung ergänzt. Bereits vorhandene Rezepte bleiben unverändert.",
+    sicherung_modal_rezepte: "{{anzahl}} Rezepte",
+    sicherung_modal_ergaenzen_btn: "Fehlende ergänzen",
+    sicherung_modal_ergebnis: "{{anzahl}} Rezept(e) wurden ergänzt.",
+    sicherung_modal_nichts_fehlt: "Es fehlt nichts – alle Rezepte aus dieser Sicherung sind vorhanden.",
+    formular_label_fotos: "Fotos (bis zu {{max}}, das erste ist das Titelbild)",
+    formular_fotos_hinweis: "Mehrere Fotos auf einmal wählbar. Mit ⭐ wird ein Foto zum Titelbild.",
+    formular_foto_titelbild: "Titelbild",
+    formular_foto_als_titelbild_title: "Als Titelbild verwenden",
+    formular_foto_entfernen_aria: "Foto entfernen",
+    formular_fotos_maximum: "Es sind höchstens {{max}} Fotos pro Rezept möglich.",
+    detail_foto_aria: "Foto {{nummer}} von {{anzahl}} anzeigen",
   },
 };
 
-// Die 24 offiziellen Amtssprachen der EU plus Schwiizerdütsch, für die
-// UEBERSETZUNGEN oben einen eigenen Eintrag enthält (siehe _sprache()).
+// Alle Sprachen, für die es eine Sprachdatei "rezeptbuch-sprache-<code>.js"
+// gibt (siehe oben und _sprache()): die 24 offiziellen Amtssprachen der EU,
+// Schwiizerdütsch sowie Russisch und Türkisch. Deutsch steckt direkt in
+// UEBERSETZUNGEN oben.
 // Alle sind LTR - keine RTL-Sprache ist darunter, daher gibt es keine
 // Layout-Sonderfälle dafür. "gsw" (Schwiizerdütsch) ist absichtlich mit
 // drin, obwohl es - anders als alle anderen Einträge hier - KEIN
@@ -7646,8 +524,83 @@ const UEBERSETZUNGEN = {
 const UNTERSTUETZTE_SPRACHEN = new Set([
   "de", "en", "bg", "hr", "cs", "da", "nl", "et", "fi", "fr", "el", "hu",
   "ga", "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv",
-  "gsw",
+  "gsw", "ru", "tr",
 ]);
+
+// ---------------------------------------------------------------------
+// Nachladen der Sprachdateien (rezeptbuch-sprache-<code>.js)
+//
+// Jede Sprachdatei ist ein ganz normales Skript, das sich beim Ausführen
+// selbst in window.__rezeptbuchSprachen[<code>] einträgt - bewusst KEIN
+// JSON und KEIN ES-Modul: HACS lädt aus dem Repository-Stamm nur .js-Dateien
+// herunter, und ein normales Skript funktioniert in jeder Umgebung (auch im
+// Testaufbau). Gesucht wird in dieser Reihenfolge: im selben Ordner, aus dem
+// diese Karte geladen wurde -> /hacsfiles/rezeptbuch-card/ (HACS) -> /local/
+// (manuelle Installation). Ergebnis ist je Sprache nur ein Versuch pro
+// Seitenaufruf (siehe SPRACH_LADEVERSUCHE), damit nicht bei jedem
+// Home-Assistant-Update erneut gesucht wird.
+// ---------------------------------------------------------------------
+const SPRACH_LADEVERSUCHE = {};
+
+function sprachtabelle(code) {
+  const register = window.__rezeptbuchSprachen;
+  return (register && register[code]) || null;
+}
+
+// Ordner, in dem diese Kartendatei liegt (mit abschließendem "/"), soweit
+// sich das ermitteln lässt - sonst null. Zuerst über das eigene <script>-
+// Element, ersatzweise über die Ressourcen-Liste des Browsers.
+function kartenOrdnerErmitteln() {
+  let url = "";
+  try {
+    const skript = document.querySelector('script[src*="rezeptbuch-card"]');
+    if (skript && skript.src) url = skript.src;
+  } catch (e) {
+    url = "";
+  }
+  if (!url) {
+    try {
+      const eintrag = performance.getEntriesByType("resource").find((e) => /rezeptbuch-card[^/]*\.js(\?|#|$)/.test(e.name));
+      if (eintrag) url = eintrag.name;
+    } catch (e) {
+      url = "";
+    }
+  }
+  if (!url) return null;
+  const ohneAnhang = url.split(/[?#]/)[0];
+  return ohneAnhang.slice(0, ohneAnhang.lastIndexOf("/") + 1);
+}
+
+// Mögliche Ordner für Zusatzdateien (Sprachdateien, jsPDF), in
+// Probier-Reihenfolge, ohne Doppelte.
+function zusatzdateiOrdner() {
+  const liste = [];
+  if (typeof window.__rezeptbuchSprachBasis === "string") liste.push(window.__rezeptbuchSprachBasis);
+  const eigener = kartenOrdnerErmitteln();
+  if (eigener) liste.push(eigener);
+  liste.push("/hacsfiles/rezeptbuch-card/", "/local/");
+  return liste.filter((ordner, i) => liste.indexOf(ordner) === i);
+}
+
+// Lädt ein Skript; löst immer auf (true = geladen, false = Fehler/Timeout).
+function skriptLaden(url, timeoutMs = 5000) {
+  return new Promise((resolve) => {
+    const skript = document.createElement("script");
+    let fertig = false;
+    const beenden = (erfolg) => {
+      if (fertig) return;
+      fertig = true;
+      clearTimeout(timer);
+      if (!erfolg) skript.remove();
+      resolve(erfolg);
+    };
+    const timer = setTimeout(() => beenden(false), timeoutMs);
+    skript.onload = () => beenden(true);
+    skript.onerror = () => beenden(false);
+    skript.src = url;
+    document.head.appendChild(skript);
+  });
+}
 
 const KATEGORIEN = [
   "Hauptgericht", "Vorspeise", "Suppe", "Salat", "Beilage",
@@ -7689,6 +642,9 @@ const SORTIER_OPTIONEN = [
 // Datensätze beim Einlesen auf den aktuellen Stand gebracht werden - so
 // bleiben auch sehr alte, nie neu gespeicherte Rezepte les- und bearbeitbar.
 const SCHEMA_VERSION = 2;
+
+// Höchstzahl Fotos pro Rezept (Titelbild + weitere).
+const MAX_FOTOS = 6;
 
 // Version der Karte selbst (nicht zu verwechseln mit SCHEMA_VERSION oben,
 // die die Datenstruktur EINES Rezepts betrifft). Wird klein in der
@@ -8167,35 +1123,12 @@ const UMRECHNUNGSTABELLE_ZUTATEN = [
   { schluessel: "panko", cup: 60, tbsp: 3.8 },
 ];
 
-// Übersetzte Anzeigenamen für die Zutaten oben, je Sprachcode ein Array in
-// GENAU derselben Reihenfolge wie UMRECHNUNGSTABELLE_ZUTATEN (per Index
-// zusammengeführt, siehe RezeptbuchCard._umrechnungstabelleNamen()).
+// Deutsche Anzeigenamen für die Zutaten oben, in GENAU derselben Reihenfolge
+// wie UMRECHNUNGSTABELLE_ZUTATEN (per Index zusammengeführt, siehe
+// RezeptbuchCard._umrechnungstabelleNamen()). Die Namen aller anderen
+// Sprachen stehen im Feld "zutaten" der jeweiligen Sprachdatei.
 const UMRECHNUNGSTABELLE_NAMEN = {
   de: ["Mehl (Weizen, Type 405)", "Zucker (Kristallzucker)", "Puderzucker", "Brauner Zucker (fest gepackt)", "Butter", "Honig", "Ahornsirup", "Pflanzenöl", "Olivenöl", "Milch", "Sahne (Schlagsahne)", "Wasser", "Naturjoghurt", "Saure Sahne", "Frischkäse", "Reis, ungekocht (Langkorn)", "Haferflocken", "Kakaopulver", "Backpulver", "Natron", "Salz, fein", "Hefe, trocken", "Mandeln, gemahlen", "Walnüsse, gehackt", "Haselnüsse, gehackt", "Rosinen", "Schokoladenstückchen", "Semmelbrösel, trocken", "Parmesan, gerieben", "Käse, gerieben (z.B. Gouda, Cheddar)", "Quinoa, ungekocht", "Linsen, getrocknet", "Couscous, trocken", "Erdnussbutter", "Tomatenmark", "Essig", "Zitronensaft", "Vanilleextrakt", "Zimt, gemahlen", "Ingwer, gemahlen", "Paprikapulver", "Pfeffer, gemahlen", "Knoblauchpulver", "Kurkuma, gemahlen", "Sesam (Sesamsamen)", "Leinsamen", "Chiasamen", "Kokosflocken, ungesüßt", "Kokosmilch (Dose, flüssig)", "Maisstärke", "Vollkornmehl (Weizen)", "Dinkelmehl", "Grieß (Hartweizen)", "Senf (Dijon)", "Sojasauce", "Ketchup", "Mayonnaise", "Buttermilch", "Kondensmilch, gezuckert", "Petersilie, frisch, gehackt", "Basilikum, frisch, gehackt", "Oregano, getrocknet", "Thymian, getrocknet", "Muskatnuss, gemahlen", "Kreuzkümmel, gemahlen", "Cayennepfeffer", "Pekannüsse, gehackt", "Cashewkerne, gehackt", "Pistazien, gehackt", "Panko (grobe Semmelbrösel)"],
-  gsw: ["Mehl (Weize, Type 405)", "Zucker (Kristallzucker)", "Puderzucker", "Brune Zucker (fescht packt)", "Angge", "Honig", "Ahornsirup", "Pflanzeöl", "Olivenöl", "Milch", "Nidle (Schlagnidle)", "Wasser", "Natur-Joghurt", "Suuri Nidle", "Frischchäs", "Riis, ungkochet (Langkorn)", "Haferflocke", "Kakaopulver", "Bagpulver", "Natron", "Salz, fiin", "Hefe, trochne", "Mandle, gmahle", "Nüssli (Baumnüss), ghackt", "Haselnüss, ghackt", "Rosine", "Schoggistückli", "Brösmeli, trochne", "Parmesan, gribe", "Chäs, gribe (z.B. Gouda, Cheddar)", "Quinoa, ungkochet", "Linse, trochnet", "Couscous, trochne", "Erdnussbutter", "Tomatemark", "Essig", "Zitronesaft", "Vanilleextrakt", "Zimt, gmahle", "Ingwer, gmahle", "Paprikapulver", "Pfeffer, gmahle", "Chnobli-Pulver", "Kurkuma, gmahle", "Sesam", "Leisome", "Chiasome", "Kokosflocke, ungsüesst", "Kokosmilch (Büchs, flüssig)", "Maisstärchi", "Vollkornmehl (Weize)", "Dinkelmehl", "Grieß (Hartweize)", "Senf (Dijon)", "Sojasauce", "Ketchup", "Mayonnaise", "Buttermilch", "Kondensmilch, gsüesst", "Peterli, frisch, ghackt", "Basilikum, frisch, ghackt", "Oregano, trochnet", "Thymian, trochnet", "Muskat, gmahle", "Kreuzchümmel, gmahle", "Cayennepfeffer", "Pekannüss, ghackt", "Cashewkern, ghackt", "Pistazie, ghackt", "Panko (grobi Brösmeli)"],
-  en: ["Flour (all-purpose)", "Sugar (granulated)", "Powdered sugar", "Brown sugar (packed)", "Butter", "Honey", "Maple syrup", "Vegetable oil", "Olive oil", "Milk", "Heavy cream", "Water", "Plain yogurt", "Sour cream", "Cream cheese", "Rice, uncooked (long grain)", "Rolled oats", "Cocoa powder", "Baking powder", "Baking soda", "Salt, fine", "Yeast, dry", "Almonds, ground", "Walnuts, chopped", "Hazelnuts, chopped", "Raisins", "Chocolate chips", "Breadcrumbs, dry", "Parmesan, grated", "Cheese, shredded (e.g. cheddar)", "Quinoa, uncooked", "Lentils, dried", "Couscous, dry", "Peanut butter", "Tomato paste", "Vinegar", "Lemon juice", "Vanilla extract", "Cinnamon, ground", "Ginger, ground", "Paprika", "Pepper, ground", "Garlic powder", "Turmeric, ground", "Sesame seeds", "Flaxseed", "Chia seeds", "Coconut flakes, unsweetened", "Coconut milk (canned, liquid)", "Cornstarch", "Whole wheat flour", "Spelt flour", "Semolina", "Mustard (Dijon)", "Soy sauce", "Ketchup", "Mayonnaise", "Buttermilk", "Sweetened condensed milk", "Parsley, fresh, chopped", "Basil, fresh, chopped", "Oregano, dried", "Thyme, dried", "Nutmeg, ground", "Cumin, ground", "Cayenne pepper", "Pecans, chopped", "Cashews, chopped", "Pistachios, chopped", "Panko (coarse breadcrumbs)"],
-  bg: ["Брашно (пшенично, тип 405)", "Захар (кристална)", "Пудра захар", "Кафява захар (набита)", "Масло", "Мед", "Кленов сироп", "Растително масло", "Зехтин", "Мляко", "Сметана (за разбиване)", "Вода", "Натурално кисело мляко", "Заквасена сметана", "Крема сирене", "Ориз, суров (дългозърнест)", "Овесени ядки", "Какао на прах", "Бакпулвер", "Сода бикарбонат", "Сол, фина", "Мая, суха", "Бадеми, смлени", "Орехи, нарязани", "Лешници, нарязани", "Стафиди", "Шоколадови капки", "Галета, суха", "Пармезан, настърган", "Сирене, настъргано (напр. чедър)", "Киноа, сурова", "Леща, сушена", "Кус-кус, сух", "Фъстъчено масло", "Доматено пюре", "Оцет", "Лимонов сок", "Екстракт от ванилия", "Канела, смляна", "Джинджифил, смлян", "Червен пипер", "Черен пипер, смлян", "Чеснов прах", "Куркума, смляна", "Сусам", "Ленено семе", "Чиа семена", "Кокосови стърготини, неподсладени", "Кокосово мляко (консерва, течно)", "Царевично нишесте", "Пълнозърнесто брашно", "Лимец (спелта) брашно", "Грис", "Горчица (дижонска)", "Соев сос", "Кетчуп", "Майонеза", "Айрян/Бутермилк", "Кондензирано мляко, подсладено", "Магданоз, пресен, нарязан", "Босилек, пресен, нарязан", "Риган, сушен", "Мащерка, сушена", "Индийско орехче, смляно", "Кимион, смлян", "Лют червен пипер (кайен)", "Пекан, нарязан", "Кашу, нарязано", "Шам фъстък, нарязан", "Панко (едра галета)"],
-  hr: ["Brašno (pšenično, tip 405)", "Šećer (kristal)", "Šećer u prahu", "Smeđi šećer (nabijen)", "Maslac", "Med", "Javorov sirup", "Biljno ulje", "Maslinovo ulje", "Mlijeko", "Vrhnje za šlag", "Voda", "Prirodni jogurt", "Kiselo vrhnje", "Krem sir", "Riža, nekuhana (dugo zrno)", "Zobene pahuljice", "Kakao u prahu", "Prašak za pecivo", "Soda bikarbona", "Sol, fina", "Kvasac, suhi", "Bademi, mljeveni", "Orasi, sjeckani", "Lješnjaci, sjeckani", "Grožđice", "Čokoladne kapljice", "Krušne mrvice, suhe", "Parmezan, ribani", "Sir, ribani (npr. čedar)", "Kvinoja, nekuhana", "Leća, sušena", "Kuskus, suhi", "Maslac od kikirikija", "Koncentrat rajčice", "Ocat", "Limunov sok", "Ekstrakt vanilije", "Cimet, mljeveni", "Đumbir, mljeveni", "Mljevena paprika", "Papar, mljeveni", "Češnjak u prahu", "Kurkuma, mljevena", "Sezam", "Laneno sjeme", "Chia sjemenke", "Kokosove pahuljice, neslađene", "Kokosovo mlijeko (konzerva, tekuće)", "Kukuruzni škrob", "Integralno brašno", "Pir brašno", "Griz", "Senf (Dijon)", "Umak od soje", "Kečap", "Majoneza", "Mlaćenica", "Zaslađeno kondenzirano mlijeko", "Peršin, svježi, sjeckani", "Bosiljak, svježi, sjeckani", "Origano, sušeni", "Majčina dušica, sušena", "Muškatni oraščić, mljeveni", "Kumin, mljeveni", "Čili papar (kajenski)", "Pekan orasi, sjeckani", "Indijski oraščići, sjeckani", "Pistacije, sjeckane", "Panko (grube krušne mrvice)"],
-  cs: ["Mouka (pšeničná, hladká)", "Cukr (krystalový)", "Moučkový cukr", "Hnědý cukr (natlačený)", "Máslo", "Med", "Javorový sirup", "Rostlinný olej", "Olivový olej", "Mléko", "Smetana ke šlehání", "Voda", "Bílý jogurt", "Zakysaná smetana", "Smetanový sýr", "Rýže, syrová (dlouhozrnná)", "Ovesné vločky", "Kakaový prášek", "Prášek do pečiva", "Jedlá soda", "Sůl, jemná", "Droždí, sušené", "Mandle, mleté", "Vlašské ořechy, nasekané", "Lískové ořechy, nasekané", "Rozinky", "Čokoládové čočky", "Strouhanka, suchá", "Parmazán, strouhaný", "Sýr, strouhaný (např. čedar)", "Quinoa, syrová", "Čočka, sušená", "Kuskus, suchý", "Arašídové máslo", "Rajčatový protlak", "Ocet", "Citronová šťáva", "Vanilkový extrakt", "Skořice, mletá", "Zázvor, mletý", "Mletá paprika", "Pepř, mletý", "Česnekový prášek", "Kurkuma, mletá", "Sezam", "Lněné semínko", "Chia semínka", "Kokosové lupínky, neslazené", "Kokosové mléko (konzerva, tekuté)", "Kukuřičný škrob", "Celozrnná mouka", "Špaldová mouka", "Krupice", "Hořčice (dijonská)", "Sójová omáčka", "Kečup", "Majonéza", "Podmáslí", "Slazené kondenzované mléko", "Petržel, čerstvá, nasekaná", "Bazalka, čerstvá, nasekaná", "Oregano, sušené", "Tymián, sušený", "Muškátový oříšek, mletý", "Kmín, mletý", "Kajenský pepř", "Pekanové ořechy, nasekané", "Kešu ořechy, nasekané", "Pistácie, nasekané", "Panko (hrubá strouhanka)"],
-  da: ["Mel (hvede)", "Sukker (hvidt)", "Flormelis", "Brun farin (presset)", "Smør", "Honning", "Ahornsirup", "Vegetabilsk olie", "Olivenolie", "Mælk", "Fløde (piske)", "Vand", "Naturel yoghurt", "Cremefraiche", "Flødeost", "Ris, ukogt (langkornet)", "Havregryn", "Kakaopulver", "Bagepulver", "Natron", "Salt, fint", "Gær, tørret", "Mandler, malede", "Valnødder, hakkede", "Hasselnødder, hakkede", "Rosiner", "Chokoladeknapper", "Rasp, tørt", "Parmesan, revet", "Ost, revet (f.eks. cheddar)", "Quinoa, ukogt", "Linser, tørrede", "Couscous, tør", "Peanutbutter", "Tomatpuré", "Eddike", "Citronsaft", "Vaniljeekstrakt", "Kanel, stødt", "Ingefær, stødt", "Paprika", "Peber, stødt", "Hvidløgspulver", "Gurkemeje, stødt", "Sesamfrø", "Hørfrø", "Chiafrø", "Kokosmel, usødet", "Kokosmælk (dåse, flydende)", "Majsstivelse", "Fuldkornshvedemel", "Spelthvedemel", "Semulje", "Sennep (dijon)", "Sojasovs", "Ketchup", "Mayonnaise", "Kærnemælk", "Kondenseret mælk, sødet", "Persille, frisk, hakket", "Basilikum, frisk, hakket", "Oregano, tørret", "Timian, tørret", "Muskatnød, stødt", "Spidskommen, stødt", "Cayennepeber", "Pekannødder, hakkede", "Cashewnødder, hakkede", "Pistacienødder, hakkede", "Panko (grove rasp)"],
-  nl: ["Bloem (tarwe)", "Suiker (kristal)", "Poedersuiker", "Bruine suiker (aangedrukt)", "Boter", "Honing", "Ahornsiroop", "Plantaardige olie", "Olijfolie", "Melk", "Slagroom", "Water", "Naturel yoghurt", "Zure room", "Roomkaas", "Rijst, ongekookt (langkorrel)", "Havermout", "Cacaopoeder", "Bakpoeder", "Zuiveringszout", "Zout, fijn", "Gist, droog", "Amandelen, gemalen", "Walnoten, gehakt", "Hazelnoten, gehakt", "Rozijnen", "Chocoladedruppels", "Paneermeel, droog", "Parmezaan, geraspt", "Kaas, geraspt (bijv. cheddar)", "Quinoa, ongekookt", "Linzen, gedroogd", "Couscous, droog", "Pindakaas", "Tomatenpuree", "Azijn", "Citroensap", "Vanille-extract", "Kaneel, gemalen", "Gember, gemalen", "Paprikapoeder", "Peper, gemalen", "Knoflookpoeder", "Kurkuma, gemalen", "Sesamzaad", "Lijnzaad", "Chiazaad", "Kokosrasp, ongezoet", "Kokosmelk (blik, vloeibaar)", "Maïzena", "Volkorenmeel", "Speltmeel", "Griesmeel", "Mosterd (dijon)", "Sojasaus", "Ketchup", "Mayonaise", "Karnemelk", "Gecondenseerde melk, gezoet", "Peterselie, vers, gehakt", "Basilicum, vers, gehakt", "Oregano, gedroogd", "Tijm, gedroogd", "Nootmuskaat, gemalen", "Komijn, gemalen", "Cayennepeper", "Pecannoten, gehakt", "Cashewnoten, gehakt", "Pistachenoten, gehakt", "Panko (grof paneermeel)"],
-  et: ["Jahu (nisu)", "Suhkur (kristall)", "Tuhksuhkur", "Pruun suhkur (tihendatud)", "Või", "Mesi", "Vahtrasiirup", "Taimeõli", "Oliiviõli", "Piim", "Vahukoor", "Vesi", "Naturaalne jogurt", "Hapukoor", "Toorjuust", "Riis, keetmata (pikateraline)", "Kaerahelbed", "Kakaopulber", "Küpsetuspulber", "Söögisooda", "Sool, peen", "Pärm, kuiv", "Mandlid, jahvatatud", "Kreeka pähklid, tükeldatud", "Sarapuupähklid, tükeldatud", "Rosinad", "Šokolaaditükid", "Riivsai, kuiv", "Parmesan, riivitud", "Juust, riivitud (nt cheddar)", "Kinoa, keetmata", "Läätsed, kuivatatud", "Kuskuss, kuiv", "Maapähklivõi", "Tomatipasta", "Äädikas", "Sidrunimahl", "Vanilliekstrakt", "Kaneel, jahvatatud", "Ingver, jahvatatud", "Paprika", "Pipar, jahvatatud", "Küüslaugupulber", "Kurkum, jahvatatud", "Seesamiseemned", "Linaseemned", "Chia seemned", "Kookoshelbed, magustamata", "Kookospiim (purk, vedel)", "Maisitärklis", "Täistera nisujahu", "Spelditera jahu", "Manna", "Sinep (dijon)", "Sojakaste", "Ketšup", "Majonees", "Keefir/petipiim", "Magustatud kondenspiim", "Petersell, värske, hakitud", "Basiilik, värske, hakitud", "Oregano, kuivatatud", "Tüümian, kuivatatud", "Muskaatpähkel, jahvatatud", "Köömen, jahvatatud", "Cayenne'i pipar", "Pekanipähklid, tükeldatud", "Kašupähklid, tükeldatud", "Pistaatsiapähklid, tükeldatud", "Panko (jäme riivsai)"],
-  fi: ["Vehnäjauho", "Sokeri (kide)", "Tomusokeri", "Fariinisokeri (tiivistetty)", "Voi", "Hunaja", "Vaahterasiirappi", "Kasviöljy", "Oliiviöljy", "Maito", "Kuohukerma", "Vesi", "Luonnonjogurtti", "Smetana", "Tuorejuusto", "Riisi, keittämätön (pitkäjyväinen)", "Kaurahiutaleet", "Kaakaojauhe", "Leivinjauhe", "Ruokasooda", "Suola, hieno", "Hiiva, kuiva", "Manteli, jauhettu", "Saksanpähkinä, pilkottu", "Hasselpähkinä, pilkottu", "Rusina", "Suklaarouhe", "Korppujauho, kuiva", "Parmesan, raastettu", "Juusto, raastettu (esim. cheddar)", "Kvinoa, keittämätön", "Linssit, kuivatut", "Couscous, kuiva", "Maapähkinävoi", "Tomaattipyree", "Etikka", "Sitruunamehu", "Vaniljauute", "Kaneli, jauhettu", "Inkivääri, jauhettu", "Paprikajauhe", "Pippuri, jauhettu", "Valkosipulijauhe", "Kurkuma, jauhettu", "Seesaminsiemenet", "Pellavansiemenet", "Chiansiemenet", "Kookoshiutaleet, makeuttamaton", "Kookosmaito (tölkki, nestemäinen)", "Maissitärkkelys", "Täysjyvävehnäjauho", "Spelttijauho", "Mannasuurimo", "Sinappi (dijon)", "Soijakastike", "Ketsuppi", "Majoneesi", "Kirnupiimä", "Makeutettu kondensoitu maito", "Persilja, tuore, silputtu", "Basilika, tuore, silputtu", "Oregano, kuivattu", "Timjami, kuivattu", "Muskottipähkinä, jauhettu", "Juustokumina, jauhettu", "Cayennepippuri", "Pekaanipähkinä, pilkottu", "Cashewpähkinä, pilkottu", "Pistaasipähkinä, pilkottu", "Panko (karkea korppujauho)"],
-  fr: ["Farine (blé, T55)", "Sucre (cristallisé)", "Sucre glace", "Cassonade (tassée)", "Beurre", "Miel", "Sirop d'érable", "Huile végétale", "Huile d'olive", "Lait", "Crème liquide (entière)", "Eau", "Yaourt nature", "Crème aigre", "Fromage frais (type Philadelphia)", "Riz, cru (long grain)", "Flocons d'avoine", "Cacao en poudre", "Levure chimique", "Bicarbonate de soude", "Sel fin", "Levure sèche", "Amandes moulues", "Noix, hachées", "Noisettes, hachées", "Raisins secs", "Pépites de chocolat", "Chapelure sèche", "Parmesan râpé", "Fromage râpé (ex. cheddar)", "Quinoa, cru", "Lentilles séchées", "Couscous, sec", "Beurre de cacahuète", "Concentré de tomate", "Vinaigre", "Jus de citron", "Extrait de vanille", "Cannelle moulue", "Gingembre moulu", "Paprika", "Poivre moulu", "Ail en poudre", "Curcuma moulu", "Graines de sésame", "Graines de lin", "Graines de chia", "Noix de coco râpée, non sucrée", "Lait de coco (boîte, liquide)", "Fécule de maïs", "Farine complète", "Farine d'épeautre", "Semoule", "Moutarde (de Dijon)", "Sauce soja", "Ketchup", "Mayonnaise", "Babeurre", "Lait concentré sucré", "Persil, frais, haché", "Basilic, frais, haché", "Origan séché", "Thym séché", "Muscade moulue", "Cumin moulu", "Poivre de Cayenne", "Noix de pécan, hachées", "Noix de cajou, hachées", "Pistaches, hachées", "Panko (chapelure grossière)"],
-  el: ["Αλεύρι (σιταριού)", "Ζάχαρη (κρυσταλλική)", "Ζάχαρη άχνη", "Καστανή ζάχαρη (πιεσμένη)", "Βούτυρο", "Μέλι", "Σιρόπι σφενδάμου", "Φυτικό λάδι", "Ελαιόλαδο", "Γάλα", "Κρέμα γάλακτος (για χτύπημα)", "Νερό", "Γιαούρτι φυσικό", "Ξινή κρέμα", "Τυρί κρέμα", "Ρύζι, ωμό (μακρύκοκκο)", "Νιφάδες βρώμης", "Κακάο σε σκόνη", "Μπέικιν πάουντερ", "Μαγειρική σόδα", "Αλάτι, ψιλό", "Μαγιά, ξηρή", "Αμύγδαλα, αλεσμένα", "Καρύδια, κομμένα", "Φουντούκια, κομμένα", "Σταφίδες", "Σταγόνες σοκολάτας", "Τριμμένη φρυγανιά, στεγνή", "Παρμεζάνα, τριμμένη", "Τυρί, τριμμένο (π.χ. τσένταρ)", "Κινόα, ωμή", "Φακές, αποξηραμένες", "Κους-κους, ξηρό", "Φυστικοβούτυρο", "Πελτές ντομάτας", "Ξύδι", "Χυμός λεμονιού", "Εκχύλισμα βανίλιας", "Κανέλα, τριμμένη", "Τζίντζερ, τριμμένο", "Πάπρικα", "Πιπέρι, τριμμένο", "Σκόρδο σε σκόνη", "Κουρκουμάς, τριμμένος", "Σουσάμι", "Λιναρόσπορος", "Σπόροι chia", "Ξύσμα καρύδας, χωρίς ζάχαρη", "Γάλα καρύδας (κονσέρβα, υγρό)", "Κορν φλάουρ", "Αλεύρι ολικής άλεσης", "Αλεύρι σίκαλης (spelt)", "Σιμιγδάλι", "Μουστάρδα (Dijon)", "Σάλτσα σόγιας", "Κέτσαπ", "Μαγιονέζα", "Βουτυρόγαλα", "Γάλα συμπυκνωμένο, γλυκό", "Μαϊντανός, φρέσκος, ψιλοκομμένος", "Βασιλικός, φρέσκος, ψιλοκομμένος", "Ρίγανη, αποξηραμένη", "Θυμάρι, αποξηραμένο", "Μοσχοκάρυδο, τριμμένο", "Κύμινο, τριμμένο", "Πιπέρι καγιέν", "Πεκάν, κομμένα", "Κάσιους, κομμένα", "Φιστίκια Αιγίνης, κομμένα", "Πανκό (χοντρή φρυγανιά)"],
-  hu: ["Liszt (búza)", "Cukor (kristály)", "Porcukor", "Barna cukor (tömörített)", "Vaj", "Méz", "Juharszirup", "Növényi olaj", "Olívaolaj", "Tej", "Tejszín (habtejszín)", "Víz", "Natúr joghurt", "Tejföl", "Krémsajt", "Rizs, nyers (hosszú szemű)", "Zabpehely", "Kakaópor", "Sütőpor", "Szódabikarbóna", "Só, finom", "Élesztő, szárított", "Mandula, őrölt", "Dió, darabolt", "Mogyoró, darabolt", "Mazsola", "Csokoládédarabka", "Zsemlemorzsa, száraz", "Parmezán, reszelt", "Sajt, reszelt (pl. cheddar)", "Quinoa, nyers", "Lencse, szárított", "Kuszkusz, száraz", "Mogyoróvaj", "Paradicsompüré", "Ecet", "Citromlé", "Vaníliakivonat", "Fahéj, őrölt", "Gyömbér, őrölt", "Pirospaprika", "Bors, őrölt", "Fokhagymapor", "Kurkuma, őrölt", "Szezámmag", "Lenmag", "Chia mag", "Kókuszreszelék, cukrozatlan", "Kókusztej (konzerv, folyékony)", "Kukoricakeményítő", "Teljes kiőrlésű liszt", "Tönkölybúzaliszt", "Búzadara", "Mustár (dijoni)", "Szójaszósz", "Ketchup", "Majonéz", "Író", "Cukrozott sűrített tej", "Petrezselyem, friss, aprított", "Bazsalikom, friss, aprított", "Oregánó, szárított", "Kakukkfű, szárított", "Szerecsendió, őrölt", "Kömény, őrölt", "Cayenne bors", "Pekándió, darabolt", "Kesudió, darabolt", "Pisztácia, darabolt", "Panko (durva zsemlemorzsa)"],
-  ga: ["Plúr (cruithneachta)", "Siúcra (gráinneach)", "Siúcra reoáin", "Siúcra donn (brúite)", "Im", "Mil", "Síoróip mhailpe", "Ola glasraí", "Ola olóige", "Bainne", "Uachtar (coipthe)", "Uisce", "Iógart nádúrtha", "Uachtar géar", "Cáis uachtair", "Rís, amh (gráinne fada)", "Calóga coirce", "Púdar cócó", "Púdar bácála", "Sóid aráin", "Salann, mín", "Giosta, triomaithe", "Almóinní, meilte", "Gallchnónna, gearrtha", "Cnónna coill, gearrtha", "Rísíní", "Smearóidí seacláide", "Grabhróga aráin, triomaithe", "Parmesan, grátáilte", "Cáis, grátáilte (m.sh. cheddar)", "Quinoa, amh", "Lintilí, triomaithe", "Couscous, triom", "Im piseanna talún", "Taos trátaí", "Fínéagar", "Sú líomóide", "Úscra fanaile", "Cainéal, meilte", "Sinséar, meilte", "Paprica", "Piobar, meilte", "Púdar gairleoige", "Turmaric, meilte", "Síol seasam", "Síol líon", "Síol chia", "Calóga cnó cócó, gan siúcra", "Bainne cnó cócó (stán, leachtach)", "Stáirse arbhair", "Plúr caiscín", "Plúr speilt", "Grainneach", "Mustard (dijon)", "Anlann soighe", "Citeapúl", "Maonáis", "Bainne géar", "Bainne comhdhlúite milsithe", "Peirsil, úr, gearrtha", "Basal, úr, gearrtha", "Oragán, triomaithe", "Tím, triomaithe", "Noitmig, meilte", "Cmín, meilte", "Piobar cayenne", "Cnónna pecan, gearrtha", "Cnónna caisiú, gearrtha", "Pistasio, gearrtha", "Panko (grabhróga aráin gharbh)"],
-  it: ["Farina (grano, tipo 00)", "Zucchero (semolato)", "Zucchero a velo", "Zucchero di canna (pressato)", "Burro", "Miele", "Sciroppo d'acero", "Olio vegetale", "Olio d'oliva", "Latte", "Panna (da montare)", "Acqua", "Yogurt naturale", "Panna acida", "Formaggio cremoso", "Riso, crudo (chicco lungo)", "Fiocchi d'avena", "Cacao in polvere", "Lievito per dolci", "Bicarbonato di sodio", "Sale, fine", "Lievito secco", "Mandorle, macinate", "Noci, tritate", "Nocciole, tritate", "Uvetta", "Gocce di cioccolato", "Pangrattato, secco", "Parmigiano, grattugiato", "Formaggio, grattugiato (es. cheddar)", "Quinoa, cruda", "Lenticchie, secche", "Couscous, secco", "Burro di arachidi", "Concentrato di pomodoro", "Aceto", "Succo di limone", "Estratto di vaniglia", "Cannella, macinata", "Zenzero, macinato", "Paprica", "Pepe, macinato", "Aglio in polvere", "Curcuma, macinata", "Semi di sesamo", "Semi di lino", "Semi di chia", "Cocco rapé, non zuccherato", "Latte di cocco (lattina, liquido)", "Amido di mais", "Farina integrale", "Farina di farro", "Semolino", "Senape (digione)", "Salsa di soia", "Ketchup", "Maionese", "Latticello", "Latte condensato zuccherato", "Prezzemolo, fresco, tritato", "Basilico, fresco, tritato", "Origano, essiccato", "Timo, essiccato", "Noce moscata, macinata", "Cumino, macinato", "Pepe di Cayenna", "Noci pecan, tritate", "Anacardi, tritati", "Pistacchi, tritati", "Panko (pangrattato grosso)"],
-  lv: ["Milti (kviešu)", "Cukurs (kristāliskais)", "Pūdercukurs", "Brūnais cukurs (sablīvēts)", "Sviests", "Medus", "Kļavu sīrups", "Augu eļļa", "Olīveļļa", "Piens", "Krējums (saldais)", "Ūdens", "Dabīgais jogurts", "Skābais krējums", "Krēmsiers", "Rīsi, nevārīti (garengraudu)", "Auzu pārslas", "Kakao pulveris", "Cepamais pulveris", "Soda", "Sāls, smalka", "Raugs, sausais", "Mandeles, maltas", "Valrieksti, smalcināti", "Lazdu rieksti, smalcināti", "Rozīnes", "Šokolādes gabaliņi", "Rīvmaize, sausa", "Parmezāns, rīvēts", "Siers, rīvēts (piem. čedars)", "Kvinoja, nevārīta", "Lēcas, žāvētas", "Kuskuss, sauss", "Zemesriekstu sviests", "Tomātu pasta", "Etiķis", "Citronu sula", "Vaniļas ekstrakts", "Kanēlis, malts", "Ingvers, malts", "Paprika", "Pipari, malti", "Ķiploku pulveris", "Kurkuma, malta", "Sezama sēklas", "Linsēklas", "Chia sēklas", "Kokosa skaidiņas, nesaldinātas", "Kokosa piens (konservs, šķidrs)", "Kukurūzas ciete", "Pilngraudu milti", "Speltas milti", "Mannas putraimi", "Sinepes (dižonas)", "Sojas mērce", "Kečups", "Majonēze", "Paniņas", "Saldinātais iebiezinātais piens", "Pētersīļi, svaigi, smalcināti", "Baziliks, svaigs, smalcināts", "Raudene, žāvēta", "Timiāns, žāvēts", "Muskatrieksts, malts", "Ķimenes, maltas", "Kajennas pipari", "Pekanrieksti, smalcināti", "Indiešu rieksti, smalcināti", "Pistācijas, smalcinātas", "Panko (rupja rīvmaize)"],
-  lt: ["Miltai (kvietiniai)", "Cukrus (kristalinis)", "Cukraus pudra", "Rudasis cukrus (sugrūstas)", "Sviestas", "Medus", "Klevų sirupas", "Augalinis aliejus", "Alyvuogių aliejus", "Pienas", "Grietinėlė (plakama)", "Vanduo", "Natūralus jogurtas", "Grietinė", "Varškės sūris (kreminis)", "Ryžiai, žali (ilgagrūdžiai)", "Avižiniai dribsniai", "Kakavos milteliai", "Kepimo milteliai", "Soda", "Druska, smulki", "Mielės, sausos", "Migdolai, malti", "Graikiniai riešutai, smulkinti", "Lazdyno riešutai, smulkinti", "Razinos", "Šokolado gabaliukai", "Džiūvėsėliai, sausi", "Parmezanas, tarkuotas", "Sūris, tarkuotas (pvz. čederis)", "Kinoja, žalia", "Lęšiai, džiovinti", "Kuskusas, sausas", "Žemės riešutų sviestas", "Pomidorų pasta", "Actas", "Citrinų sultys", "Vanilės ekstraktas", "Cinamonas, maltas", "Imbieras, maltas", "Paprika", "Pipirai, malti", "Česnako milteliai", "Ciberžolė, malta", "Sezamo sėklos", "Linų sėmenys", "Chia sėklos", "Kokoso drožlės, nesaldintos", "Kokosų pienas (skardinė, skystas)", "Kukurūzų krakmolas", "Kvietiniai viso grūdo miltai", "Spelta miltai", "Manų kruopos", "Garstyčios (dižono)", "Sojų padažas", "Kečupas", "Majonezas", "Pasukos", "Saldintas tirštintas pienas", "Petražolės, šviežios, smulkintos", "Bazilikas, šviežias, smulkintas", "Raudonėlis, džiovintas", "Čiobrelis, džiovintas", "Muskato riešutas, maltas", "Kmynai, malti", "Čili pipirai (kajeno)", "Pekanai, smulkinti", "Anakardžiai, smulkinti", "Pistacijos, smulkintos", "Panko (stambūs džiūvėsėliai)"],
-  mt: ["Dqiq (qamħ)", "Zokkor (granulat)", "Zokkor ipprocessat (icing)", "Zokkor kannella (ippressat)", "Butir", "Għasel", "Ġulepp tal-maple", "Żejt veġetali", "Żejt taż-żebbuġa", "Ħalib", "Krema (tal-ħawd)", "Ilma", "Jogurt naturali", "Krema ħamuża", "Ġobon tal-krema", "Ross, mhux imsajjar (ħabba twila)", "Ħafur imgħaffeġ", "Trab tal-kawkaw", "Trab tal-ħami", "Sodju bikarbonat", "Melħ, fin", "Ħmira, niexfa", "Lewż, mitħun", "Ġewż, imqatta'", "Ġellewż, imqatta'", "Żbib", "Biċċiet taċ-ċikkulata", "Tifrik tal-ħobż, xott", "Parmiġjan, mħakkek", "Ġobon, mħakkek (eż. cheddar)", "Kinwa, mhux imsajra", "Għads, imnixxef", "Kuskus, xott", "Butir tal-karawett", "Pasta tat-tadam", "Ħall", "Meraq tal-lumi", "Estratt tal-vanilja", "Kannella, mitħuna", "Ġinġer, mitħun", "Paprika", "Bżar, mitħun", "Trab tat-tewm", "Kurkuma, mitħuna", "Żrieragħ tas-sesam", "Żrieragħ tal-kittien", "Żrieragħ tac-chia", "Qxur tal-ġewż tal-Indi, mingħajr zokkor", "Ħalib tal-ġewż tal-Indi (laned, likwidu)", "Lamtu tal-qamħirrun", "Dqiq sħiħ", "Dqiq tal-ispelt", "Semolina", "Mustarda (dijon)", "Zalza tas-soja", "Ketchup", "Majonejż", "Ħalib tal-ħawd (buttermilk)", "Ħalib ikkondensat, imħallat biz-zokkor", "Tursin, frisk, imqatta'", "Ħabaq, frisk, imqatta'", "Oregano, niexef", "Timu, niexef", "Noċemuskata, mitħuna", "Kemmun, mitħun", "Bżar cayenne", "Ġewż tal-pekan, imqatta'", "Ġewż tal-anakardju, imqatta'", "Fustuq, imqatta'", "Panko (tifrik tal-ħobż oħxon)"],
-  pl: ["Mąka (pszenna)", "Cukier (kryształ)", "Cukier puder", "Brązowy cukier (ubity)", "Masło", "Miód", "Syrop klonowy", "Olej roślinny", "Oliwa z oliwek", "Mleko", "Śmietana (kremówka)", "Woda", "Jogurt naturalny", "Śmietana (kwaśna)", "Serek śmietankowy", "Ryż, surowy (długoziarnisty)", "Płatki owsiane", "Kakao w proszku", "Proszek do pieczenia", "Soda oczyszczona", "Sól, drobna", "Drożdże, suszone", "Migdały, mielone", "Orzechy włoskie, posiekane", "Orzechy laskowe, posiekane", "Rodzynki", "Kawałki czekolady", "Bułka tarta, sucha", "Parmezan, tarty", "Ser, tarty (np. cheddar)", "Komosa ryżowa, surowa", "Soczewica, suszona", "Kuskus, suchy", "Masło orzechowe", "Koncentrat pomidorowy", "Ocet", "Sok z cytryny", "Ekstrakt waniliowy", "Cynamon, mielony", "Imbir, mielony", "Papryka mielona", "Pieprz, mielony", "Czosnek w proszku", "Kurkuma, mielona", "Sezam", "Siemię lniane", "Nasiona chia", "Wiórki kokosowe, bez cukru", "Mleko kokosowe (puszka, płynne)", "Skrobia kukurydziana", "Mąka pełnoziarnista", "Mąka orkiszowa", "Kasza manna", "Musztarda (dijon)", "Sos sojowy", "Ketchup", "Majonez", "Maślanka", "Mleko skondensowane, słodzone", "Pietruszka, świeża, posiekana", "Bazylia, świeża, posiekana", "Oregano, suszone", "Tymianek, suszony", "Gałka muszkatołowa, mielona", "Kmin rzymski, mielony", "Pieprz cayenne", "Orzechy pekan, posiekane", "Orzechy nerkowca, posiekane", "Pistacje, posiekane", "Panko (grube bułka tarta)"],
-  pt: ["Farinha (trigo)", "Açúcar (cristal)", "Açúcar em pó", "Açúcar mascavado (compactado)", "Manteiga", "Mel", "Xarope de ácer", "Óleo vegetal", "Azeite", "Leite", "Natas (para bater)", "Água", "Iogurte natural", "Natas azedas", "Queijo creme", "Arroz, cru (grão longo)", "Flocos de aveia", "Cacau em pó", "Fermento em pó", "Bicarbonato de sódio", "Sal, fino", "Fermento seco", "Amêndoas, moídas", "Nozes, picadas", "Avelãs, picadas", "Passas", "Pepitas de chocolate", "Pão ralado, seco", "Parmesão, ralado", "Queijo, ralado (ex. cheddar)", "Quinoa, crua", "Lentilhas, secas", "Cuscuz, seco", "Manteiga de amendoim", "Concentrado de tomate", "Vinagre", "Sumo de limão", "Extrato de baunilha", "Canela, moída", "Gengibre, moído", "Páprica", "Pimenta, moída", "Alho em pó", "Curcuma, moída", "Sementes de sésamo", "Sementes de linhaça", "Sementes de chia", "Coco ralado, sem açúcar", "Leite de coco (lata, líquido)", "Amido de milho", "Farinha integral", "Farinha de espelta", "Sêmola", "Mostarda (dijon)", "Molho de soja", "Ketchup", "Maionese", "Leitelho", "Leite condensado, adoçado", "Salsa, fresca, picada", "Manjericão, fresco, picado", "Orégãos, secos", "Tomilho, seco", "Noz-moscada, moída", "Cominho, moído", "Pimenta caiena", "Nozes pecã, picadas", "Castanha de caju, picada", "Pistáchios, picados", "Panko (pão ralado grosso)"],
-  ro: ["Făină (grâu)", "Zahăr (granulat)", "Zahăr pudră", "Zahăr brun (îndesat)", "Unt", "Miere", "Sirop de arțar", "Ulei vegetal", "Ulei de măsline", "Lapte", "Smântână pentru frișcă", "Apă", "Iaurt natural", "Smântână acră", "Cremă de brânză", "Orez, crud (bob lung)", "Fulgi de ovăz", "Pudră de cacao", "Praf de copt", "Bicarbonat de sodiu", "Sare, fină", "Drojdie, uscată", "Migdale, măcinate", "Nuci, tocate", "Alune de pădure, tocate", "Stafide", "Bucăți de ciocolată", "Pesmet, uscat", "Parmezan, ras", "Brânză, rasă (ex. cheddar)", "Quinoa, crudă", "Linte, uscată", "Cușcuș, uscat", "Unt de arahide", "Pastă de tomate", "Oțet", "Suc de lămâie", "Extract de vanilie", "Scorțișoară, măcinată", "Ghimbir, măcinat", "Boia de ardei", "Piper, măcinat", "Usturoi pudră", "Turmeric, măcinat", "Semințe de susan", "Semințe de in", "Semințe de chia", "Fulgi de cocos, neîndulciți", "Lapte de cocos (conservă, lichid)", "Amidon de porumb", "Făină integrală", "Făină de alac (spelta)", "Griș", "Muștar (dijon)", "Sos de soia", "Ketchup", "Maioneză", "Zară", "Lapte condensat, îndulcit", "Pătrunjel, proaspăt, tocat", "Busuioc, proaspăt, tocat", "Oregano, uscat", "Cimbru, uscat", "Nucșoară, măcinată", "Chimen, măcinat", "Piper cayenne", "Nuci pecan, tocate", "Caju, tocate", "Fistic, tocat", "Panko (pesmet grosier)"],
-  sk: ["Múka (pšeničná)", "Cukor (kryštálový)", "Práškový cukor", "Hnedý cukor (natlačený)", "Maslo", "Med", "Javorový sirup", "Rastlinný olej", "Olivový olej", "Mlieko", "Smotana na šľahanie", "Voda", "Biely jogurt", "Kyslá smotana", "Smotanový syr", "Ryža, surová (dlhozrnná)", "Ovsené vločky", "Kakaový prášok", "Prášok do pečiva", "Jedlá sóda", "Soľ, jemná", "Droždie, sušené", "Mandle, mleté", "Vlašské orechy, nasekané", "Lieskové orechy, nasekané", "Hrozienka", "Čokoládové cesnačky", "Strúhanka, suchá", "Parmezán, strúhaný", "Syr, strúhaný (napr. čedar)", "Quinoa, surová", "Šošovica, sušená", "Kuskus, suchý", "Arašidové maslo", "Paradajkový pretlak", "Ocot", "Citrónová šťava", "Vanilkový extrakt", "Škorica, mletá", "Zázvor, mletý", "Mletá paprika", "Korenie, mleté", "Cesnakový prášok", "Kurkuma, mletá", "Sezam", "Ľanové semienka", "Chia semienka", "Kokosové vločky, nesladené", "Kokosové mlieko (konzerva, tekuté)", "Kukuričný škrob", "Celozrnná múka", "Špaldová múka", "Krupica", "Horčica (dijonská)", "Sójová omáčka", "Kečup", "Majonéza", "Cmar", "Sladené kondenzované mlieko", "Petržlen, čerstvý, nasekaný", "Bazalka, čerstvá, nasekaná", "Oregano, sušené", "Tymian, sušený", "Muškátový oriešok, mletý", "Rasca, mletá", "Čili korenie (cayenne)", "Pekanové orechy, nasekané", "Kešu orechy, nasekané", "Pistácie, nasekané", "Panko (hrubá strúhanka)"],
-  sl: ["Moka (pšenična)", "Sladkor (kristalni)", "Sladkor v prahu", "Rjavi sladkor (stisnjen)", "Maslo", "Med", "Javorjev sirup", "Rastlinsko olje", "Oljčno olje", "Mleko", "Smetana za stepanje", "Voda", "Naravni jogurt", "Kisla smetana", "Smetanov sir", "Riž, surov (dolgozrnat)", "Ovseni kosmiči", "Kakav v prahu", "Pecilni prašek", "Soda bikarbona", "Sol, fina", "Kvas, suh", "Mandlji, mleti", "Orehi, sesekljani", "Lešniki, sesekljani", "Rozine", "Čokoladne kapljice", "Drobtine, suhe", "Parmezan, nastrgan", "Sir, nastrgan (npr. cheddar)", "Kvinoja, surova", "Leča, sušena", "Kuskus, suh", "Arašidovo maslo", "Paradižnikov koncentrat", "Kis", "Limonin sok", "Vanilijev ekstrakt", "Cimet, mlet", "Ingver, mlet", "Mleta paprika", "Poper, mlet", "Česnov prah", "Kurkuma, mleta", "Sezam", "Lanena semena", "Chia semena", "Kokosovi kosmiči, nesladkani", "Kokosovo mleko (konzerva, tekoče)", "Koruzni škrob", "Polnozrnata moka", "Pirina moka", "Zdrob", "Gorčica (dijonska)", "Sojina omaka", "Kečap", "Majoneza", "Pinjenec", "Kondenzirano mleko, sladkano", "Peteršilj, svež, sesekljan", "Bazilika, sveža, sesekljana", "Origano, posušen", "Timijan, posušen", "Muškatni orešček, mlet", "Kumina, mleta", "Kajenski poper", "Pekani, sesekljani", "Indijski oreščki, sesekljani", "Pistacije, sesekljane", "Panko (grobe drobtine)"],
-  es: ["Harina (trigo)", "Azúcar (granulado)", "Azúcar glas", "Azúcar moreno (compactado)", "Mantequilla", "Miel", "Jarabe de arce", "Aceite vegetal", "Aceite de oliva", "Leche", "Nata para montar", "Agua", "Yogur natural", "Nata agria", "Queso crema", "Arroz, crudo (grano largo)", "Copos de avena", "Cacao en polvo", "Levadura química", "Bicarbonato de sodio", "Sal, fina", "Levadura seca", "Almendras, molidas", "Nueces, picadas", "Avellanas, picadas", "Pasas", "Chispas de chocolate", "Pan rallado, seco", "Parmesano, rallado", "Queso, rallado (ej. cheddar)", "Quinoa, cruda", "Lentejas, secas", "Cuscús, seco", "Mantequilla de cacahuete", "Concentrado de tomate", "Vinagre", "Zumo de limón", "Extracto de vainilla", "Canela, molida", "Jengibre, molido", "Pimentón", "Pimienta, molida", "Ajo en polvo", "Cúrcuma, molida", "Semillas de sésamo", "Semillas de lino", "Semillas de chía", "Coco rallado, sin azúcar", "Leche de coco (lata, líquida)", "Maicena", "Harina integral", "Harina de espelta", "Sémola", "Mostaza (dijon)", "Salsa de soja", "Ketchup", "Mayonesa", "Suero de leche", "Leche condensada, azucarada", "Perejil, fresco, picado", "Albahaca, fresca, picada", "Orégano, seco", "Tomillo, seco", "Nuez moscada, molida", "Comino, molido", "Pimienta de cayena", "Nueces pecanas, picadas", "Anacardos, picados", "Pistachos, picados", "Panko (pan rallado grueso)"],
-  sv: ["Vetemjöl", "Socker (strö)", "Florsocker", "Farinsocker (packat)", "Smör", "Honung", "Lönnsirap", "Vegetabilisk olja", "Olivolja", "Mjölk", "Vispgrädde", "Vatten", "Naturell yoghurt", "Gräddfil", "Färskost", "Ris, okokt (långkornigt)", "Havregryn", "Kakaopulver", "Bakpulver", "Bikarbonat", "Salt, fint", "Jäst, torr", "Mandel, malen", "Valnötter, hackade", "Hasselnötter, hackade", "Russin", "Chokladknappar", "Ströbröd, torrt", "Parmesan, riven", "Ost, riven (t.ex. cheddar)", "Quinoa, okokt", "Linser, torkade", "Couscous, torr", "Jordnötssmör", "Tomatpuré", "Ättika", "Citronsaft", "Vaniljextrakt", "Kanel, malen", "Ingefära, malen", "Paprikapulver", "Peppar, malen", "Vitlökspulver", "Gurkmeja, malen", "Sesamfrön", "Linfrön", "Chiafrön", "Kokosflingor, osötade", "Kokosmjölk (burk, flytande)", "Majsstärkelse", "Fullkornsvetemjöl", "Speltmjöl", "Mannagryn", "Senap (dijon)", "Sojasås", "Ketchup", "Majonnäs", "Kärnmjölk", "Kondenserad mjölk, sötad", "Persilja, färsk, hackad", "Basilika, färsk, hackad", "Oregano, torkad", "Timjan, torkad", "Muskotnöt, malen", "Spiskummin, malen", "Cayennepeppar", "Pekannötter, hackade", "Cashewnötter, hackade", "Pistagenötter, hackade", "Panko (grovt ströbröd)"],
 };
 
 function _zutatZeileParsen(rohzeile) {
@@ -8529,6 +1462,9 @@ class RezeptbuchCard extends HTMLElement {
     this._suchbegriff = "";
     this._aktiveKategorie = "Alle";
     this._sortierung = "titel";
+    this._einrichtungNoetig = false; // true = To-do-Liste fehlt, Einrichtungs-Ansicht zeigen
+    this._hinweisText = null; // offene Meldung (Ersatz für alert()), siehe _hinweis()
+    this._autoSicherungTag = null; // Tag der letzten automatischen Sicherung dieser Sitzung
     this._historyGeschoben = false;
     this._popstateHandler = null;
     this._programmatischerPop = false;
@@ -8655,7 +1591,8 @@ class RezeptbuchCard extends HTMLElement {
   // ersetzt einfache "{{platzhalter}}"-Stellen aus "ersetzungen".
   _t(schluessel, ersetzungen) {
     const sprache = this._sprache();
-    const tabelle = UEBERSETZUNGEN[sprache] || UEBERSETZUNGEN.de;
+    const nachgeladen = sprache === "de" ? null : sprachtabelle(sprache);
+    const tabelle = (nachgeladen && nachgeladen.texte) || UEBERSETZUNGEN.de;
     let text = tabelle[schluessel];
     if (text === undefined) text = UEBERSETZUNGEN.de[schluessel];
     if (text === undefined) return schluessel; // sollte nie vorkommen, siehe oben
@@ -8813,13 +1750,10 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   setConfig(config) {
-    if (!config.entity) {
-      // Übersetzt trotz "this._hass" noch nicht gesetzt sein könnte
-      // (setConfig() läuft üblicherweise VOR dem ersten hass-Update) -
-      // _sprache()/_t() fallen in dem Fall einfach auf Deutsch zurück.
-      throw new Error(this._t("fehler_config_entity_fehlt"));
-    }
-    this._config = config;
+    // "entity" ist seit 2.3.0 optional (Standard: todo.rezepte) - fehlt die
+    // Liste, legt die Karte sie beim ersten Öffnen selbst an (siehe
+    // _renderEinrichtung).
+    this._config = { ...config, entity: (config && config.entity) || "todo.rezepte" };
   }
 
   set hass(hass) {
@@ -8829,7 +1763,11 @@ class RezeptbuchCard extends HTMLElement {
       // Erst laden, DANACH versuchen, eine zuvor offene Detailansicht aus
       // der URL wiederherzustellen (siehe _urlHashSetzen/_rezeptAusUrlWiederherstellen)
       // - die Rezeptliste muss dafür schon vorhanden sein.
-      this._rezepteLaden().then(() => this._rezeptAusUrlWiederherstellen());
+      // Zuerst (falls nötig) die Sprachdatei laden, damit die erste Anzeige
+      // gleich in der richtigen Sprache erscheint statt kurz auf Deutsch.
+      this._sprachdateiSicherstellen()
+        .then(() => this._rezepteLaden())
+        .then(() => this._rezeptAusUrlWiederherstellen());
       // Bewusst NICHT abgewartet (fire-and-forget) - das Laden der Rezepte
       // darf nicht auf einen (u.U. langsamen oder fehlschlagenden)
       // Netzwerkzugriff auf GitHub warten. Rein informativ, siehe
@@ -8838,7 +1776,41 @@ class RezeptbuchCard extends HTMLElement {
       // Rein lokal, kein Netzwerkzugriff - kann daher synchron nebenbei
       // laufen (siehe _ressourcenVersionPruefen).
       this._ressourcenVersionPruefen();
+    } else {
+      // Stellt der Nutzer Home Assistant im laufenden Betrieb auf eine andere
+      // Sprache um, wird deren Sprachdatei nachgeladen und die Liste neu
+      // gezeichnet (nur in der Listenansicht - eine geöffnete Detailansicht
+      // oder ein Formular wird dafür nicht unterbrochen).
+      const sprache = this._sprache();
+      if (sprache !== "de" && !sprachtabelle(sprache) && sprache !== this._spracheAngefordert) {
+        this._spracheAngefordert = sprache;
+        this._sprachdateiSicherstellen().then((geladen) => {
+          if (geladen && this._ansicht === "liste") this._render();
+        });
+      }
     }
+  }
+
+  // Lädt die Sprachdatei der aktuellen Anzeigesprache nach (siehe
+  // SPRACH_LADEVERSUCHE und rezeptbuch-sprache-<code>.js). Für Deutsch bzw.
+  // eine bereits geladene Sprache passiert nichts. Löst IMMER auf (true =
+  // Sprache steht jetzt zur Verfügung, false = nicht gefunden; die Karte
+  // zeigt dann einfach Deutsch).
+  _sprachdateiSicherstellen() {
+    const sprache = this._sprache();
+    if (sprache === "de") return Promise.resolve(false);
+    if (sprachtabelle(sprache)) return Promise.resolve(true);
+    if (!SPRACH_LADEVERSUCHE[sprache]) {
+      SPRACH_LADEVERSUCHE[sprache] = (async () => {
+        for (const ordner of zusatzdateiOrdner()) {
+          const geladen = await skriptLaden(`${ordner}rezeptbuch-sprache-${sprache}.js?v=${CARD_VERSION}`);
+          if (geladen && sprachtabelle(sprache)) return true;
+        }
+        console.warn(`Rezeptbuch: Sprachdatei "${sprache}" nicht gefunden - die Karte zeigt Deutsch an.`);
+        return false;
+      })();
+    }
+    return SPRACH_LADEVERSUCHE[sprache];
   }
 
   // Prüft einmal pro Kartenladen (nicht öfter als 1x/Tag pro Browser, siehe
@@ -9016,7 +1988,19 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   async _rezepteLaden() {
+    // Gibt es die To-do-Liste noch nicht, zeigt die Karte statt einer
+    // Fehlermeldung die Einrichtungs-Ansicht (siehe _renderEinrichtung).
+    if (this._entitaetVorhanden(this._config.entity) === false) {
+      this._einrichtungNoetig = true;
+      this._rezepte = [];
+      this._ladeFehler = null;
+      this._render();
+      return;
+    }
+    this._einrichtungNoetig = false;
+    let geladen = false;
     try {
+      this._ladeFehler = null;
       const antwort = await this._hass.connection.sendMessagePromise({
         type: "todo/item/list",
         entity_id: this._config.entity,
@@ -9037,12 +2021,16 @@ class RezeptbuchCard extends HTMLElement {
       this._rezepte = items
         .filter((item) => item.summary !== WOCHENPLAN_MARKER && item.summary !== KOCHBUECHER_MARKER && item.summary !== KATEGORIEN_MARKER && item.summary !== EINSTELLUNGEN_MARKER)
         .map((item) => this._itemZuRezept(item));
+      geladen = true;
     } catch (fehler) {
       console.error("Rezeptbuch: Laden fehlgeschlagen", fehler);
       this._rezepte = [];
       this._ladeFehler = fehler.message || String(fehler);
     }
     this._render();
+    // Tägliche Sicherung im Hintergrund (nicht abwarten, siehe
+    // _autoSicherungPruefen).
+    if (geladen) this._autoSicherungPruefen();
   }
 
   // Wochenplan aus dem versteckten Marker-Item parsen (siehe WOCHENPLAN_MARKER).
@@ -9210,7 +2198,7 @@ class RezeptbuchCard extends HTMLElement {
   _einstellungenAusItem(item) {
     const standard = {
       erfassungAktiv: true, amerikanischeKategorie: "", eigeneUmrechnungen: [], tagsAnzeigen: true,
-      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true, farben: {},
+      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true, autoSicherung: true, farben: {},
     };
     if (!item || !item.description) return standard;
     try {
@@ -9222,6 +2210,7 @@ class RezeptbuchCard extends HTMLElement {
       if (typeof geparst.tagsAnzeigen === "boolean") ergebnis.tagsAnzeigen = geparst.tagsAnzeigen;
       if (typeof geparst.zufallsrezeptAnzeigen === "boolean") ergebnis.zufallsrezeptAnzeigen = geparst.zufallsrezeptAnzeigen;
       if (typeof geparst.umrechnungstabelleKopfAnzeigen === "boolean") ergebnis.umrechnungstabelleKopfAnzeigen = geparst.umrechnungstabelleKopfAnzeigen;
+      if (typeof geparst.autoSicherung === "boolean") ergebnis.autoSicherung = geparst.autoSicherung;
       if (geparst.farben && typeof geparst.farben === "object") {
         for (const rolle of FARB_ROLLEN) {
           const wert = geparst.farben[rolle.schluessel];
@@ -9375,7 +2364,7 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   _itemZuRezept(item) {
-    let daten = { servings: 1, ingredients: [], steps: [], image: null, ratings: {}, comments: [], creator: null, creatorName: null, created: null, category: "Sonstiges", tags: [], cookLog: [], schemaVersion: SCHEMA_VERSION };
+    let daten = { servings: 1, ingredients: [], steps: [], image: null, images: [], ratings: {}, comments: [], creator: null, creatorName: null, created: null, category: "Sonstiges", tags: [], cookLog: [], schemaVersion: SCHEMA_VERSION };
     if (item.description) {
       try {
         const geparst = this._migriereRezept(JSON.parse(item.description));
@@ -9384,6 +2373,7 @@ class RezeptbuchCard extends HTMLElement {
           ingredients: geparst.ingredients || [],
           steps: geparst.steps || [],
           image: geparst.image || null,
+          images: Array.isArray(geparst.images) ? geparst.images.filter(Boolean) : [],
           ratings: geparst.ratings || {},
           comments: geparst.comments || [],
           creator: geparst.creator || null,
@@ -9405,6 +2395,7 @@ class RezeptbuchCard extends HTMLElement {
       ingredients: daten.ingredients,
       steps: daten.steps,
       image: daten.image,
+      images: daten.images,
       ratings: daten.ratings,
       comments: daten.comments,
       creator: daten.creator,
@@ -9427,6 +2418,7 @@ class RezeptbuchCard extends HTMLElement {
       ingredients: r.ingredients,
       steps: r.steps,
       image: r.image,
+      images: Array.isArray(r.images) ? r.images : [],
       ratings: r.ratings || {},
       comments: r.comments || [],
       creator: r.creator || null,
@@ -9657,7 +2649,7 @@ class RezeptbuchCard extends HTMLElement {
 
   async _bewertungSetzen(sterne) {
     if (!this._hass.user || !this._hass.user.id) {
-      alert(this._t("fehler_kein_benutzer_bewertung"));
+      this._hinweis(this._t("fehler_kein_benutzer_bewertung"));
       return;
     }
     const r = this._aktivesRezept;
@@ -9682,7 +2674,7 @@ class RezeptbuchCard extends HTMLElement {
       return true;
     } catch (fehler) {
       console.error("Rezeptbuch: Service-Aufruf fehlgeschlagen", service, daten, fehler);
-      alert(this._t("fehler_vorgang_fehlgeschlagen", { fehler: fehler.message || fehler }));
+      this._hinweis(this._t("fehler_vorgang_fehlgeschlagen", { fehler: fehler.message || fehler }));
       return false;
     }
   }
@@ -9760,17 +2752,17 @@ class RezeptbuchCard extends HTMLElement {
   // Bewusst additiv (append) statt die Liste vorher zu leeren - einfacher
   // und unüberraschender, siehe ANLEITUNG-Backup.md Abschnitt 18.
   async _einkaufslisteErstellen(rezepteListe) {
-    if (!this._config.shopping_list_entity) {
-      alert(this._t("fehler_einkaufsliste_keine_konfiguration"));
+    if (!this._einkaufslisteEntity()) {
+      this._hinweis(this._t("fehler_einkaufsliste_keine_konfiguration"));
       return;
     }
     if (!rezepteListe || rezepteListe.length === 0) {
-      alert(this._t("fehler_einkaufsliste_keine_auswahl"));
+      this._hinweis(this._t("fehler_einkaufsliste_keine_auswahl"));
       return;
     }
     const zeilen = this._einkaufslisteAggregieren(rezepteListe);
     if (zeilen.length === 0) {
-      alert(this._t("fehler_einkaufsliste_keine_zutaten"));
+      this._hinweis(this._t("fehler_einkaufsliste_keine_zutaten"));
       return;
     }
     await this._einkaufslisteZeilenAnlegen(zeilen);
@@ -9790,14 +2782,14 @@ class RezeptbuchCard extends HTMLElement {
         // Bewusst hass.callService() direkt statt _serviceAufrufen(): letzteres
         // ruft den Dienst immer für this._config.entity (die Rezeptliste) auf -
         // hier soll er aber für die separat konfigurierte Einkaufsliste laufen.
-        await this._hass.callService("todo", "add_item", { item: zeile, entity_id: this._config.shopping_list_entity });
+        await this._hass.callService("todo", "add_item", { item: zeile, entity_id: this._einkaufslisteEntity() });
       } catch (fehler) {
         console.error("Rezeptbuch: Einkaufsliste - Eintrag konnte nicht angelegt werden", zeile, fehler);
-        alert(this._t("fehler_einkaufsliste_eintrag_fehlgeschlagen", { zeile, fehler: fehler.message || fehler }));
+        this._hinweis(this._t("fehler_einkaufsliste_eintrag_fehlgeschlagen", { zeile, fehler: fehler.message || fehler }));
         return;
       }
     }
-    alert(this._t("einkaufsliste_hinzugefuegt", { anzahl: zeilen.length, entity: this._config.shopping_list_entity }));
+    this._hinweis(this._t("einkaufsliste_hinzugefuegt", { anzahl: zeilen.length, entity: this._einkaufslisteEntity() }));
   }
 
   // Wertet die cookLog-Einträge (je ein ISO-Zeitstempel pro Bestätigung der
@@ -9854,6 +2846,536 @@ class RezeptbuchCard extends HTMLElement {
   // entnehmen und unverändert in das normale "JSON einfügen"-Feld eines
   // Rezepts pasten (siehe zutatUebernehmen oben, das genau dieses Format
   // erwartet).
+  // =====================================================================
+  // Einrichtung & Wartung (seit 2.3.0)
+  //
+  // Alles, wofür früher Handarbeit in configuration.yaml bzw. eigene Skripte
+  // nötig war, erledigt die Karte jetzt selbst - mit Hilfe der Dienste, die
+  // Home Assistant ohnehin bereitstellt:
+  //  - To-do-Listen (Rezepte, Sicherung, Einkaufsliste) legt die Karte über
+  //    Home Assistants eigenen Einrichtungs-Dialog (Config Flow) an,
+  //  - Fotos landen im eingebauten Bilderspeicher ("image_upload", Teil von
+  //    default_config) statt als Text im Rezept, inklusive fertiger
+  //    Vorschaubilder,
+  //  - die tägliche Sicherung schreibt die Karte in eine zweite To-do-Liste.
+  // Alles, was Home Assistant nur über YAML-Dateien erlaubt (shell_command,
+  // Python-Skripte), kann eine Karte prinzipbedingt NICHT selbst einrichten -
+  // das betrifft nur noch den optionalen URL-Import.
+  // =====================================================================
+
+  _istAdmin() {
+    return !!(this._hass && this._hass.user && this._hass.user.is_admin);
+  }
+
+  // true/false = Entität gibt es / gibt es nicht; null = nicht feststellbar
+  // (kein states-Objekt, z.B. im Testaufbau).
+  _entitaetVorhanden(entityId) {
+    const zustaende = this._hass && this._hass.states;
+    if (!zustaende || !entityId) return null;
+    return Object.prototype.hasOwnProperty.call(zustaende, entityId);
+  }
+
+  // Einkaufsliste: ausdrücklich konfigurierte Liste, sonst automatisch eine
+  // vorhandene ("todo.einkaufsliste" bzw. Home Assistants eingebaute
+  // "todo.shopping_list").
+  _einkaufslisteEntity() {
+    if (this._config.shopping_list_entity) return this._config.shopping_list_entity;
+    for (const kandidat of ["todo.einkaufsliste", "todo.shopping_list"]) {
+      if (this._entitaetVorhanden(kandidat) === true) return kandidat;
+    }
+    return null;
+  }
+
+  // To-do-Liste für die automatischen Sicherungen (Standard: Rezeptliste + "_backup").
+  _sicherungsEntity() {
+    return this._config.backup_entity || `${this._config.entity}_backup`;
+  }
+
+  _anzeigenameAusEntity(entityId) {
+    const zustand = this._hass && this._hass.states && this._hass.states[entityId];
+    const name = zustand && zustand.attributes && zustand.attributes.friendly_name;
+    if (name) return name;
+    const roh = String(entityId).split(".")[1].replace(/_/g, " ");
+    return roh.charAt(0).toUpperCase() + roh.slice(1);
+  }
+
+  async _warteBis(bedingungFn, maxMs = 15000) {
+    const ende = Date.now() + maxMs;
+    while (Date.now() < ende) {
+      if (bedingungFn()) return true;
+      await new Promise((resolve) => setTimeout(resolve, 250));
+    }
+    return bedingungFn();
+  }
+
+  // Legt eine "Lokale To-do-Liste" an - dieselbe Einrichtung wie über
+  // Einstellungen -> Geräte & Dienste -> Integration hinzufügen, nur eben
+  // automatisch. Nur für Administratoren möglich (Home Assistant verlangt
+  // das für das Anlegen von Integrationen). Wartet, bis die erwartete
+  // Entität tatsächlich da ist, und wirft sonst einen Fehler.
+  async _localTodoAnlegen(anzeigeName, erwarteteEntity) {
+    if (!this._istAdmin()) throw new Error(this._t("einrichtung_nur_admin"));
+    if (typeof this._hass.callApi !== "function") throw new Error("callApi nicht verfügbar");
+    const flow = await this._hass.callApi("POST", "config/config_entries/flow", {
+      handler: "local_todo",
+      show_advanced_options: false,
+    });
+    if (flow && flow.type === "form") {
+      const ergebnis = await this._hass.callApi("POST", `config/config_entries/flow/${flow.flow_id}`, {
+        todo_list_name: anzeigeName,
+      });
+      if (!ergebnis || (ergebnis.type !== "create_entry" && ergebnis.type !== "abort")) {
+        throw new Error(this._t("einrichtung_fehler_unerwartet"));
+      }
+    }
+    const vorhanden = await this._warteBis(() => this._entitaetVorhanden(erwarteteEntity) === true);
+    if (!vorhanden) throw new Error(this._t("einrichtung_fehler_entity_fehlt", { entity: erwarteteEntity }));
+  }
+
+  // Willkommens-/Einrichtungs-Ansicht: erscheint, wenn die Rezeptliste (die
+  // To-do-Entität) noch nicht existiert.
+  _renderEinrichtung(stil) {
+    const admin = this._istAdmin();
+    this.shadowRoot.innerHTML = `
+      ${stil}
+      <ha-card>
+        <div style="text-align:center; padding:12px 6px;">
+          <div style="font-size:2.4em;">📖</div>
+          <h2 class="kopf-titel-einrichtung" style="margin:6px 0 10px; font-family:var(--kb-schrift-titel); color:var(--kb-titel);">${this._t("setup_titel")}</h2>
+          <p style="margin:0 0 14px;">${this._t("setup_text", { entity: this._escape(this._config.entity) })}</p>
+          ${admin
+            ? `<button class="primaer" id="setup-start-btn">${this._t("setup_btn")}</button>
+               <p class="hinweis" id="setup-status" style="margin-top:12px;"></p>`
+            : `<p class="hinweis">${this._t("setup_nur_admin")}</p>`}
+        </div>
+      </ha-card>
+    `;
+    const startBtn = this.shadowRoot.getElementById("setup-start-btn");
+    if (!startBtn) return;
+    startBtn.addEventListener("click", async () => {
+      const status = this.shadowRoot.getElementById("setup-status");
+      startBtn.disabled = true;
+      status.textContent = this._t("setup_laeuft");
+      try {
+        await this._localTodoAnlegen(this._anzeigenameAusEntity(this._config.entity), this._config.entity);
+        // Die Sicherungsliste ist "nice to have" - scheitert sie, läuft das
+        // Rezeptbuch trotzdem; in den Einstellungen lässt sie sich nachholen.
+        try {
+          const sicherung = this._sicherungsEntity();
+          if (this._entitaetVorhanden(sicherung) !== true) {
+            await this._localTodoAnlegen(`${this._anzeigenameAusEntity(this._config.entity)} Backup`, sicherung);
+          }
+        } catch (fehler) {
+          console.warn("Rezeptbuch: Sicherungsliste konnte nicht automatisch angelegt werden", fehler);
+        }
+        this._einrichtungNoetig = false;
+        await this._rezepteLaden();
+      } catch (fehler) {
+        console.error("Rezeptbuch: Einrichtung fehlgeschlagen", fehler);
+        startBtn.disabled = false;
+        status.textContent = this._t("setup_fehler", { fehler: fehler.message || fehler });
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // Hinweis-Fenster: ersetzt die nativen alert()-Dialoge, die in der Home-
+  // Assistant-App unzuverlässig sind (teils gar nicht oder ohne Text
+  // angezeigt). Der Text wird als Zustand gemerkt und bei JEDEM Neuzeichnen
+  // wieder eingeblendet, bis er bestätigt wurde. Zusätzlich löst jede
+  // Meldung ein "rezeptbuch-hinweis"-Ereignis aus (praktisch für Tests).
+  // ---------------------------------------------------------------------
+  _hinweis(text) {
+    this._hinweisText = String(text);
+    this.dispatchEvent(new CustomEvent("rezeptbuch-hinweis", { detail: { text: this._hinweisText }, bubbles: true, composed: true }));
+    this._hinweisEinblenden();
+  }
+
+  _hinweisEinblenden() {
+    const alt = this.shadowRoot.getElementById("hinweis-modal");
+    if (alt) alt.remove();
+    if (!this._hinweisText) return;
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    overlay.id = "hinweis-modal";
+    overlay.style.display = "flex";
+    overlay.style.zIndex = "10000";
+    overlay.innerHTML = `
+      <div class="modal-box modal-box-scroll" role="alertdialog" aria-modal="true">
+        <p id="hinweis-modal-text" style="white-space:pre-wrap; text-align:left; margin-top:0;"></p>
+        <div class="modal-aktionen">
+          <button type="button" class="primaer" id="hinweis-modal-ok-btn">OK</button>
+        </div>
+      </div>`;
+    // Text bewusst NICHT per innerHTML einsetzen (Meldungen können fremde
+    // Texte wie Rezepttitel oder Fehlermeldungen enthalten).
+    overlay.querySelector("#hinweis-modal-text").textContent = this._hinweisText;
+    overlay.querySelector("#hinweis-modal-ok-btn").addEventListener("click", () => {
+      this._hinweisText = null;
+      overlay.remove();
+    });
+    this.shadowRoot.appendChild(overlay);
+    overlay.querySelector("#hinweis-modal-ok-btn").focus();
+  }
+
+  // ---------------------------------------------------------------------
+  // Fotos im Home-Assistant-Bilderspeicher
+  // ---------------------------------------------------------------------
+  _datenUrlZuBlob(datenUrl) {
+    const teile = String(datenUrl).split(",");
+    const mime = (teile[0].match(/^data:([^;,]+)/) || [])[1] || "image/jpeg";
+    const binaer = atob(teile[1] || "");
+    const bytes = new Uint8Array(binaer.length);
+    for (let i = 0; i < binaer.length; i++) bytes[i] = binaer.charCodeAt(i);
+    return new Blob([bytes], { type: mime });
+  }
+
+  // Lädt ein Foto (Data-URL) in Home Assistants Bilderspeicher hoch und
+  // liefert dessen Adresse zurück - oder null, wenn das nicht möglich war
+  // (dann bleibt das Foto einfach als Text im Rezept, wie bisher).
+  async _fotoHochladen(datenUrl) {
+    try {
+      if (!this._hass || typeof this._hass.fetchWithAuth !== "function") return null;
+      const formular = new FormData();
+      formular.append("file", this._datenUrlZuBlob(datenUrl), "rezeptfoto.jpg");
+      const antwort = await this._hass.fetchWithAuth("/api/image/upload", { method: "POST", body: formular });
+      if (!antwort || !antwort.ok) return null;
+      const json = await antwort.json();
+      // Die ID landet später in einer Bildadresse - nur das erwartete Format zulassen.
+      if (!json || !/^[0-9a-f]{32}$/.test(String(json.id || ""))) return null;
+      return `/api/image/serve/${json.id}/original`;
+    } catch (fehler) {
+      console.warn("Rezeptbuch: Foto-Upload in den HA-Bilderspeicher fehlgeschlagen", fehler);
+      return null;
+    }
+  }
+
+  // Passende Bildadresse in der gewünschten Größe: Fotos aus dem HA-
+  // Bilderspeicher gibt es serverseitig verkleinert (256 bzw. 512 Pixel) -
+  // für Kacheln und Vorschaustreifen reicht das völlig und spart Daten.
+  _bildSrc(src, groesse) {
+    if (!src) return "";
+    const treffer = /^(\/api\/image\/serve\/[0-9a-f]{32})\/original$/.exec(src);
+    if (treffer && groesse) return `${treffer[1]}/${groesse}x${groesse}`;
+    return src;
+  }
+
+  // <img>-Attribute für eine Kachel/Vorschau: Verkleinerung + träges Laden.
+  _bildAttribute(src, sizes) {
+    const klein = this._bildSrc(src, 256);
+    const gross = this._bildSrc(src, 512);
+    const srcset = klein !== src && gross !== src ? ` srcset="${this._escape(klein)} 256w, ${this._escape(gross)} 512w" sizes="${sizes}"` : "";
+    return `src="${this._escape(gross !== src ? klein : src)}"${srcset} loading="lazy" decoding="async"`;
+  }
+
+  // Alle Fotos eines Rezepts: Titelbild zuerst, dann die weiteren.
+  _rezeptFotos(r) {
+    return [r.image, ...(Array.isArray(r.images) ? r.images : [])].filter(Boolean);
+  }
+
+  _fotosZaehlenOffen() {
+    let anzahl = 0;
+    this._rezepte.forEach((r) => {
+      anzahl += this._rezeptFotos(r).filter((f) => String(f).startsWith("data:")).length;
+    });
+    return anzahl;
+  }
+
+  // Lagert alle noch als Text im Rezept liegenden Fotos in den Bilderspeicher
+  // aus (nur Administratoren, weil dabei auch Rezepte anderer Nutzer
+  // angepasst werden). Gibt zurück, wie viele Fotos ausgelagert wurden.
+  async _fotosAuslagern() {
+    let ausgelagert = 0;
+    for (const r of this._rezepte.slice()) {
+      if (!this._rezeptFotos(r).some((f) => String(f).startsWith("data:"))) continue;
+      const frisch = await this._rezeptFrischLaden(r.uid);
+      if (!frisch) continue;
+      const neu = [];
+      let geaendert = false;
+      for (const foto of this._rezeptFotos(frisch)) {
+        if (String(foto).startsWith("data:")) {
+          const url = await this._fotoHochladen(foto);
+          if (url) {
+            neu.push(url);
+            geaendert = true;
+            ausgelagert++;
+            continue;
+          }
+        }
+        neu.push(foto);
+      }
+      if (!geaendert) continue;
+      const payload = { ...this._rezeptPayload(frisch), image: neu[0] || null, images: neu.slice(1) };
+      await this._hass.callService("todo", "update_item", {
+        entity_id: this._config.entity,
+        item: frisch.uid,
+        description: JSON.stringify(payload),
+      });
+    }
+    return ausgelagert;
+  }
+
+  // ---------------------------------------------------------------------
+  // Automatische Sicherung in eine zweite To-do-Liste
+  // ---------------------------------------------------------------------
+  // Sicherungs-Objekt wie beim manuellen Export. Mit entferneDatenFotos
+  // werden noch als Text eingebettete Fotos weggelassen (sie würden die
+  // Sicherung riesig machen) - die Anzahl steht im Ergebnis.
+  _sicherungsObjekt(entferneDatenFotos) {
+    let entfernt = 0;
+    const bereinigen = (foto) => {
+      if (entferneDatenFotos && foto && String(foto).startsWith("data:")) {
+        entfernt++;
+        return null;
+      }
+      return foto;
+    };
+    const rezepte = this._rezepte.map((r) => {
+      const payload = this._rezeptPayload(r);
+      const fotos = [payload.image, ...(payload.images || [])].map(bereinigen).filter(Boolean);
+      return { title: r.title, ...payload, image: fotos[0] || null, images: fotos.slice(1) };
+    });
+    return {
+      daten: {
+        schemaVersion: 2,
+        exportiertAm: new Date().toISOString(),
+        rezepte,
+        einstellungen: this._einstellungen,
+        eigeneKategorien: this._eigeneKategorien,
+        kochbuecher: this._kochbuecher,
+        wochenplan: this._wochenplan,
+      },
+      entfernteFotos: entfernt,
+    };
+  }
+
+  async _sicherungsItemsLaden() {
+    const entity = this._sicherungsEntity();
+    if (this._entitaetVorhanden(entity) !== true) return null;
+    const antwort = await this._hass.connection.sendMessagePromise({ type: "todo/item/list", entity_id: entity });
+    return ((antwort && antwort.items) || [])
+      .filter((i) => /^sicherung-\d{4}-\d{2}-\d{2}$/.test(i.summary || ""))
+      .sort((a, b) => a.summary.localeCompare(b.summary));
+  }
+
+  // Schreibt höchstens eine Sicherung pro Tag und behält die letzten 14.
+  // Läuft still im Hintergrund nach dem Laden der Rezepte - bei jedem Nutzer,
+  // der die Karte öffnet (To-do-Einträge anlegen dürfen alle).
+  async _autoSicherungPruefen(erzwingen) {
+    try {
+      if (!erzwingen && this._einstellungen.autoSicherung === false) return false;
+      if (!this._rezepte.length) return false;
+      const heute = _isoDatumHeute();
+      if (!erzwingen && this._autoSicherungTag === heute) return false;
+      this._autoSicherungTag = heute;
+      const items = await this._sicherungsItemsLaden();
+      if (items === null) return false;
+      const name = `sicherung-${heute}`;
+      const heutige = items.find((i) => i.summary === name);
+      const { daten } = this._sicherungsObjekt(true);
+      const beschreibung = JSON.stringify(daten);
+      const entity = this._sicherungsEntity();
+      if (heutige) {
+        if (!erzwingen) return false;
+        await this._hass.callService("todo", "update_item", { entity_id: entity, item: heutige.uid, description: beschreibung });
+      } else {
+        await this._hass.callService("todo", "add_item", { entity_id: entity, item: name, description: beschreibung });
+        const alle = items.slice();
+        const ueberzaehlig = alle.length + 1 - 14;
+        for (let i = 0; i < ueberzaehlig; i++) {
+          await this._hass.callService("todo", "remove_item", { entity_id: entity, item: alle[i].uid });
+        }
+      }
+      return true;
+    } catch (fehler) {
+      console.warn("Rezeptbuch: automatische Sicherung fehlgeschlagen", fehler);
+      return false;
+    }
+  }
+
+  // Ergänzt aus einer Sicherung alle Rezepte, die es aktuell nicht (mehr)
+  // gibt (Vergleich über den Titel). Bestehende Rezepte werden NIE
+  // verändert oder überschrieben. Gibt die Anzahl ergänzter Rezepte zurück.
+  async _sicherungErgaenzen(item) {
+    const daten = JSON.parse(item.description || "{}");
+    const vorhanden = new Set(this._rezepte.map((r) => (r.title || "").trim().toLowerCase()));
+    let ergaenzt = 0;
+    for (const eintrag of Array.isArray(daten.rezepte) ? daten.rezepte : []) {
+      if (!eintrag || !eintrag.title) continue;
+      const schluessel = String(eintrag.title).trim().toLowerCase();
+      if (vorhanden.has(schluessel)) continue;
+      const { title, ...rest } = eintrag;
+      const rezept = this._itemZuRezept({ uid: null, summary: title, description: JSON.stringify(rest) });
+      await this._hass.callService("todo", "add_item", {
+        entity_id: this._config.entity,
+        item: title,
+        description: JSON.stringify(this._rezeptPayload(rezept)),
+      });
+      vorhanden.add(schluessel);
+      ergaenzt++;
+    }
+    return ergaenzt;
+  }
+
+  // ---------------------------------------------------------------------
+  // Bereich "Einrichtung & Wartung" im Einstellungen-Fenster
+  // ---------------------------------------------------------------------
+  _urlImportVerfuegbar() {
+    const dienste = this._hass && this._hass.services;
+    // Ohne Dienste-Liste (Testaufbau) nicht ausblenden.
+    if (!dienste) return true;
+    return !!(dienste.shell_command && dienste.shell_command.rezeptbuch_url_importieren);
+  }
+
+  async _einrichtungBereichAktualisieren() {
+    const bereich = this.shadowRoot.getElementById("einrichtung-bereich");
+    if (!bereich) return;
+    const admin = this._istAdmin();
+    const zeile = (symbol, text, knoepfe) => `
+      <div class="einrichtung-zeile" style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin:6px 0; text-align:left;">
+        <span>${symbol} ${text}</span>
+        ${knoepfe ? `<span style="display:flex; gap:6px; flex-wrap:wrap;">${knoepfe}</span>` : ""}
+      </div>`;
+    const knopf = (id, text) => `<button type="button" class="sekundaer klein" id="${id}">${text}</button>`;
+    const e = (x) => this._escape(x);
+
+    const einkauf = this._einkaufslisteEntity();
+    let sicherungZeile;
+    let items = null;
+    try {
+      items = await this._sicherungsItemsLaden();
+    } catch (fehler) {
+      items = null;
+    }
+    if (items !== null) {
+      const letzte = items.length ? items[items.length - 1].summary.slice(10) : this._t("einrichtung_sicherung_noch_keine");
+      const aktiv = this._einstellungen.autoSicherung !== false;
+      sicherungZeile = zeile("✅", this._t("einrichtung_sicherung_vorhanden", { datum: e(letzte), anzahl: items.length }),
+        knopf("einrichtung-sicherung-jetzt-btn", this._t("einrichtung_sicherung_jetzt_btn")) +
+        (items.length && admin ? knopf("einrichtung-sicherung-wiederherstellen-btn", this._t("einrichtung_sicherung_wiederherstellen_btn")) : ""))
+        + `<div class="schalter-zeile">
+             <span class="schalter-label">${this._t("einrichtung_sicherung_auto_label")}</span>
+             <label class="schalter-btn ${aktiv ? "schalter-btn-aktiv" : ""}">
+               <input type="checkbox" id="einrichtung-auto-sicherung-schalter" ${aktiv ? "checked" : ""}>
+               <span>${aktiv ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
+             </label>
+           </div>`;
+    } else {
+      sicherungZeile = zeile("⚠️", this._t("einrichtung_sicherung_fehlt"),
+        admin ? knopf("einrichtung-sicherung-einrichten-btn", this._t("einrichtung_einrichten_btn")) : "");
+    }
+
+    const offeneFotos = this._fotosZaehlenOffen();
+    const fotoZeile = offeneFotos
+      ? zeile("⚠️", this._t("einrichtung_fotos_offen", { anzahl: offeneFotos }),
+          admin ? knopf("einrichtung-fotos-auslagern-btn", this._t("einrichtung_fotos_auslagern_btn")) : "")
+      : zeile("✅", this._t("einrichtung_fotos_ok"));
+
+    bereich.innerHTML =
+      zeile("✅", this._t("einrichtung_rezeptliste", { entity: e(this._config.entity) })) +
+      (einkauf
+        ? zeile("✅", this._t("einrichtung_einkaufsliste", { entity: e(einkauf) }))
+        : zeile("⚠️", this._t("einrichtung_einkaufsliste_fehlt"), admin ? knopf("einrichtung-einkauf-btn", this._t("einrichtung_einrichten_btn")) : "")) +
+      sicherungZeile +
+      fotoZeile +
+      (this._urlImportVerfuegbar()
+        ? zeile("✅", this._t("einrichtung_url_import_ok"))
+        : zeile("ℹ️", this._t("einrichtung_url_import_fehlt")));
+
+    const verdrahten = (id, fn) => {
+      const el = bereich.querySelector(`#${id}`);
+      if (!el) return;
+      el.addEventListener("click", async () => {
+        el.disabled = true;
+        try {
+          await fn();
+        } catch (fehler) {
+          console.error("Rezeptbuch: Einrichtung/Wartung fehlgeschlagen", fehler);
+          this._hinweis(this._t("einrichtung_fehler", { fehler: fehler.message || fehler }));
+        }
+        await this._einrichtungBereichAktualisieren();
+      });
+    };
+    verdrahten("einrichtung-einkauf-btn", async () => {
+      const name = "Einkaufsliste";
+      await this._localTodoAnlegen(name, "todo.einkaufsliste");
+      this._hinweis(this._t("einrichtung_angelegt", { entity: "todo.einkaufsliste" }));
+    });
+    verdrahten("einrichtung-sicherung-einrichten-btn", async () => {
+      const entity = this._sicherungsEntity();
+      await this._localTodoAnlegen(`${this._anzeigenameAusEntity(this._config.entity)} Backup`, entity);
+      await this._autoSicherungPruefen(true);
+      this._hinweis(this._t("einrichtung_angelegt", { entity }));
+    });
+    verdrahten("einrichtung-sicherung-jetzt-btn", async () => {
+      const ok = await this._autoSicherungPruefen(true);
+      this._hinweis(this._t(ok ? "einrichtung_sicherung_erstellt" : "einrichtung_sicherung_fehlgeschlagen"));
+    });
+    verdrahten("einrichtung-fotos-auslagern-btn", async () => {
+      const anzahl = await this._fotosAuslagern();
+      await this._rezepteLaden();
+      this._hinweis(this._t(anzahl ? "einrichtung_fotos_ausgelagert" : "einrichtung_fotos_nichts_ausgelagert", { anzahl }));
+    });
+    verdrahten("einrichtung-sicherung-wiederherstellen-btn", async () => {
+      this._sicherungWiederherstellenFensterZeigen(items || []);
+    });
+    const autoSchalter = bereich.querySelector("#einrichtung-auto-sicherung-schalter");
+    if (autoSchalter) {
+      autoSchalter.addEventListener("change", async (ev) => {
+        const aktiv = ev.target.checked;
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, autoSicherung: aktiv }));
+        await this._einrichtungBereichAktualisieren();
+      });
+    }
+  }
+
+  // Kleines Fenster mit den vorhandenen Sicherungen; "Fehlende Rezepte
+  // ergänzen" fügt nur hinzu, was aktuell fehlt - nichts wird überschrieben.
+  _sicherungWiederherstellenFensterZeigen(items) {
+    const alt = this.shadowRoot.getElementById("sicherung-modal");
+    if (alt) alt.remove();
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    overlay.id = "sicherung-modal";
+    overlay.style.display = "flex";
+    overlay.style.zIndex = "10000";
+    const zeilen = items.slice().reverse().map((i) => {
+      let anzahl = "?";
+      try { anzahl = (JSON.parse(i.description || "{}").rezepte || []).length; } catch (fehler) { anzahl = "?"; }
+      return `<div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0;">
+        <span>${this._escape(i.summary.slice(10))} (${this._t("sicherung_modal_rezepte", { anzahl })})</span>
+        <button type="button" class="sekundaer klein" data-sicherung-uid="${this._escape(i.uid)}">${this._t("sicherung_modal_ergaenzen_btn")}</button>
+      </div>`;
+    }).join("");
+    overlay.innerHTML = `
+      <div class="modal-box modal-box-breit modal-box-scroll">
+        <h3 style="margin-top:0;">${this._t("sicherung_modal_titel")}</h3>
+        <p class="hinweis" style="text-align:left;">${this._t("sicherung_modal_hinweis")}</p>
+        ${zeilen}
+        <div class="modal-aktionen" style="margin-top:14px;">
+          <button type="button" class="primaer" id="sicherung-modal-schliessen-btn">${this._t("allgemein_schliessen")}</button>
+        </div>
+      </div>`;
+    overlay.querySelector("#sicherung-modal-schliessen-btn").addEventListener("click", () => overlay.remove());
+    overlay.querySelectorAll("[data-sicherung-uid]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        btn.disabled = true;
+        try {
+          const item = items.find((i) => i.uid === btn.dataset.sicherungUid);
+          const anzahl = await this._sicherungErgaenzen(item);
+          overlay.remove();
+          await this._rezepteLaden();
+          this._hinweis(this._t(anzahl ? "sicherung_modal_ergebnis" : "sicherung_modal_nichts_fehlt", { anzahl }));
+        } catch (fehler) {
+          console.error("Rezeptbuch: Wiederherstellen fehlgeschlagen", fehler);
+          btn.disabled = false;
+          this._hinweis(this._t("einrichtung_fehler", { fehler: fehler.message || fehler }));
+        }
+      });
+    });
+    this.shadowRoot.appendChild(overlay);
+  }
+
   _backupErstellen() {
     const daten = {
       schemaVersion: 2,
@@ -10242,14 +3764,29 @@ class RezeptbuchCard extends HTMLElement {
       // verglichen.
       const frisch = await this._rezeptFrischLaden(rezept.uid);
       if (frisch === null) {
-        alert(this._t("fehler_konflikt_geloescht", { titel: rezept.title }));
+        this._hinweis(this._t("fehler_konflikt_geloescht", { titel: rezept.title }));
         this._navigationZurueck();
         return;
       }
       const aktuellerStand = JSON.stringify(this._rezeptPayload(frisch));
       if (this._bearbeitungsSnapshot !== null && aktuellerStand !== this._bearbeitungsSnapshot) {
-        alert(this._t("fehler_konflikt_geaendert", { titel: rezept.title }));
+        this._hinweis(this._t("fehler_konflikt_geaendert", { titel: rezept.title }));
         return;
+      }
+    }
+
+    // Fotos: Titelbild + weitere. Noch als Text vorliegende (frisch
+    // verkleinerte) Fotos wandern jetzt in den Home-Assistant-Bilderspeicher;
+    // klappt das nicht, bleiben sie wie früher als Text im Rezept.
+    const fotosRoh = Array.isArray(formDaten.fotos)
+      ? formDaten.fotos
+      : [formDaten.image, ...(Array.isArray(formDaten.images) ? formDaten.images : [])].filter(Boolean);
+    const fotos = [];
+    for (const foto of fotosRoh.slice(0, MAX_FOTOS)) {
+      if (String(foto).startsWith("data:")) {
+        fotos.push((await this._fotoHochladen(foto)) || foto);
+      } else {
+        fotos.push(foto);
       }
     }
 
@@ -10263,7 +3800,8 @@ class RezeptbuchCard extends HTMLElement {
       tags: (formDaten.tags || []).map((t) => (t || "").trim()).filter(Boolean),
       ingredients: formDaten.ingredients.filter((z) => z.name),
       steps: formDaten.steps.filter((s) => s.trim()),
-      image: formDaten.image,
+      image: fotos[0] || null,
+      images: fotos.slice(1),
       ratings: rezept.ratings || {},
       comments: rezept.comments || [],
       // War hier zuvor NICHT enthalten - dadurch wurde die Zubereitungs-
@@ -10299,18 +3837,21 @@ class RezeptbuchCard extends HTMLElement {
 
     if (!erfolg) return;
 
-    // Ein neu hochgeladenes (oder noch nicht migriertes) Foto liegt hier noch
-    // als Base64-Data-URL im JSON. Das Bild-Skript lagert es in eine echte
-    // Datei unter /config/www/rezeptbuch-bilder/ aus - warten wir kurz darauf,
-    // damit die Liste danach schon den optimierten Zustand zeigt. Schlägt es
-    // fehl, bleibt das Foto einfach als Base64 im JSON (funktioniert weiterhin
-    // überall, ist nur nicht ausgelagert) - kein Grund, das Speichern selbst
-    // scheitern zu lassen.
-    if (payload.image && payload.image.startsWith("data:")) {
-      try {
-        await this._hass.callService("shell_command", "rezeptbuch_bilder_verarbeiten", {});
-      } catch (fehler) {
-        console.warn("Rezeptbuch: Foto-Auslagerung fehlgeschlagen, Foto bleibt vorerst als Base64 gespeichert", fehler);
+    // Konnte ein Foto nicht in den Bilderspeicher hochgeladen werden, liegt es
+    // noch als Base64-Text im JSON. Wer das ältere Bild-Skript eingerichtet
+    // hat (shell_command), lässt es von dort auslagern - alle anderen können
+    // das später in den Einstellungen nachholen. Schlägt es fehl, bleibt das
+    // Foto einfach als Text im Rezept (funktioniert überall) - kein Grund,
+    // das Speichern selbst scheitern zu lassen.
+    if (fotos.some((f) => String(f).startsWith("data:"))) {
+      const dienste = this._hass.services;
+      const skriptDa = !dienste || (dienste.shell_command && dienste.shell_command.rezeptbuch_bilder_verarbeiten);
+      if (skriptDa) {
+        try {
+          await this._hass.callService("shell_command", "rezeptbuch_bilder_verarbeiten", {});
+        } catch (fehler) {
+          console.warn("Rezeptbuch: Foto-Auslagerung fehlgeschlagen, Foto bleibt vorerst als Base64 gespeichert", fehler);
+        }
       }
     }
 
@@ -10337,7 +3878,9 @@ class RezeptbuchCard extends HTMLElement {
   // aktiven Sprache (siehe UMRECHNUNGSTABELLE_NAMEN) - fällt wie _t() auf
   // Deutsch zurück, falls eine Sprache (sollte nicht vorkommen) fehlt.
   _umrechnungstabelleNamen() {
-    return UMRECHNUNGSTABELLE_NAMEN[this._sprache()] || UMRECHNUNGSTABELLE_NAMEN.de;
+    const sprache = this._sprache();
+    const nachgeladen = sprache === "de" ? null : sprachtabelle(sprache);
+    return (nachgeladen && nachgeladen.zutaten) || UMRECHNUNGSTABELLE_NAMEN.de;
   }
 
   // HTML für das Umrechnungstabelle-Popup selbst - als eigene Methode, weil
@@ -10769,6 +4312,11 @@ class RezeptbuchCard extends HTMLElement {
   }
 
   _render() {
+    this._renderRumpf();
+    this._hinweisEinblenden();
+  }
+
+  _renderRumpf() {
     if (!this.shadowRoot) return;
     const stil = `
       <style>
@@ -10913,6 +4461,20 @@ class RezeptbuchCard extends HTMLElement {
         .detail-bildbox { width:100%; aspect-ratio: 16 / 9; max-height: 42vh; border-radius:16px; overflow:hidden;
           box-shadow: 0 3px 14px rgba(0,0,0,0.14); margin-bottom:14px; }
         .detail-bild { width:100%; height:100%; object-fit:cover; display:block; }
+        .foto-streifen { display:flex; gap:8px; flex-wrap:wrap; margin:-4px 0 14px; }
+        .foto-streifen-btn { width:64px; height:64px; padding:0; border:2px solid transparent; border-radius:10px; overflow:hidden;
+          cursor:pointer; background:var(--kb-terrakotta-hell2); opacity:0.85; }
+        .foto-streifen-btn.aktiv { border-color:var(--kb-terrakotta); opacity:1; }
+        .foto-streifen-btn img { width:100%; height:100%; object-fit:cover; display:block; }
+        .fotos-liste { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 8px; }
+        .foto-item { position:relative; width:96px; }
+        .foto-item img { width:96px; height:96px; object-fit:cover; border-radius:10px; display:block; border:2px solid transparent; }
+        .foto-item.titelbild img { border-color:var(--kb-terrakotta); }
+        .foto-item-knoepfe { display:flex; gap:4px; margin-top:4px; }
+        .foto-item-knoepfe button { flex:1; padding:3px 0; font-size:0.8em; border-radius:8px; border:1px solid var(--kb-terrakotta-hell);
+          background:var(--card-background-color); color:var(--kb-terrakotta-dunkel); cursor:pointer; }
+        .foto-badge { position:absolute; top:4px; left:4px; background:var(--kb-terrakotta); color:var(--kb-auf-akzent);
+          font-size:0.7em; padding:1px 6px; border-radius:8px; }
         /* Standardmäßig (schmaler Bildschirm) eine einzige Spalte, genau wie
            bisher - Bild/Zutaten/Zubereitung stehen einfach untereinander.
            Auf ausreichend breiten Bildschirmen wird daraus eine Zwei-
@@ -11284,6 +4846,11 @@ class RezeptbuchCard extends HTMLElement {
       </style>
     `;
 
+    if (this._einrichtungNoetig) {
+      this._renderEinrichtung(stil);
+      return;
+    }
+
     if (this._ladeFehler) {
       this.shadowRoot.innerHTML = `
         ${stil}
@@ -11525,6 +5092,10 @@ class RezeptbuchCard extends HTMLElement {
             <div class="modal-aktionen" style="margin-top:10px; justify-content:flex-start;">
               <button type="button" class="sekundaer klein" id="farben-zuruecksetzen-btn" ${Object.keys(this._einstellungen.farben || {}).length ? "" : "disabled"}>${this._t("farben_zuruecksetzen_btn")}</button>
             </div>
+            <hr class="detail-trenner trenner-voll">
+            <h4 style="margin:0 0 6px; text-align:left;">${this._t("einrichtung_abschnitt_titel")}</h4>
+            <p class="hinweis" style="text-align:left; margin-top:0;">${this._t("einrichtung_abschnitt_hinweis")}</p>
+            <div id="einrichtung-bereich"></div>
             <div class="modal-aktionen" style="margin-top:14px;">
               <button type="button" class="primaer" id="statistik-einstellungen-schliessen-btn">${this._t("allgemein_schliessen")}</button>
             </div>
@@ -11676,7 +5247,7 @@ class RezeptbuchCard extends HTMLElement {
     if (sammelPdfAuswahlWeiterBtn) {
       sammelPdfAuswahlWeiterBtn.addEventListener("click", () => {
         if (this._sammelPdfAusgewaehlteUids.size === 0) {
-          alert(this._t("sammel_pdf_auswahl_keine_hinweis"));
+          this._hinweis(this._t("sammel_pdf_auswahl_keine_hinweis"));
           return;
         }
         this._sammelPdfWahlModus = "auswahl";
@@ -11827,7 +5398,7 @@ class RezeptbuchCard extends HTMLElement {
       kategorieBestaetigenBtn.addEventListener("click", async () => {
         const nameFeld = this.shadowRoot.getElementById("kategorie-name-feld");
         const name = nameFeld.value.trim();
-        if (!name) { alert(this._t("fehler_kategorie_name_fehlt")); return; }
+        if (!name) { this._hinweis(this._t("fehler_kategorie_name_fehlt")); return; }
         const umbenennenZiel = this._kategorieBearbeitungsZiel;
         // Groß-/Kleinschreibung ignorierend gegen ALLE wählbaren Kategorien
         // prüfen (fest eingebaute, übersetzt UND deutsch, sowie eigene) -
@@ -11838,7 +5409,7 @@ class RezeptbuchCard extends HTMLElement {
           k !== umbenennenZiel &&
           (k.toLowerCase() === name.toLowerCase() || this._kategorieLabel(k).toLowerCase() === name.toLowerCase())
         );
-        if (existiertBereits) { alert(this._t("fehler_kategorie_existiert_bereits")); return; }
+        if (existiertBereits) { this._hinweis(this._t("fehler_kategorie_existiert_bereits")); return; }
         kategorieBestaetigenBtn.disabled = true;
         if (umbenennenZiel) {
           await this._kategorieUmbenennen(umbenennenZiel, name);
@@ -11861,7 +5432,7 @@ class RezeptbuchCard extends HTMLElement {
         // müssen die betroffenen Rezepte umkategorisiert werden.
         const anzahlVerwendet = this._rezepte.filter((r) => (r.category || "Sonstiges") === kategorie).length;
         if (anzahlVerwendet > 0) {
-          alert(this._t("fehler_kategorie_wird_verwendet", { anzahl: anzahlVerwendet }));
+          this._hinweis(this._t("fehler_kategorie_wird_verwendet", { anzahl: anzahlVerwendet }));
           return;
         }
         btn.disabled = true;
@@ -11924,7 +5495,7 @@ class RezeptbuchCard extends HTMLElement {
       kochbuchBestaetigenBtn.addEventListener("click", async () => {
         const nameFeld = this.shadowRoot.getElementById("kochbuch-name-feld");
         const name = nameFeld.value.trim();
-        if (!name) { alert(this._t("fehler_kochbuch_name_fehlt")); return; }
+        if (!name) { this._hinweis(this._t("fehler_kochbuch_name_fehlt")); return; }
         kochbuchBestaetigenBtn.disabled = true;
         const neuesKochbuch = {
           name,
@@ -11981,6 +5552,7 @@ class RezeptbuchCard extends HTMLElement {
       statistikEinstellungenBtn.addEventListener("click", () => {
         this._einstellungenModalSichtbar = true;
         this.shadowRoot.getElementById("statistik-einstellungen-modal").style.display = "flex";
+        this._einrichtungBereichAktualisieren();
       });
     }
     const statistikEinstellungenSchliessenBtn = this.shadowRoot.getElementById("statistik-einstellungen-schliessen-btn");
@@ -12051,6 +5623,8 @@ class RezeptbuchCard extends HTMLElement {
       });
     }
 
+    if (this._einstellungenModalSichtbar) this._einrichtungBereichAktualisieren();
+
     this._ergebnisAktualisieren();
   }
 
@@ -12084,7 +5658,7 @@ class RezeptbuchCard extends HTMLElement {
         // alt="" markiert es korrekt als rein dekorativ/redundant, OHNE
         // (wie ganz ohne alt-Attribut) den Dateipfad vorzulesen.
         const bild = r.image
-          ? `<img class="kachel-bild" src="${this._escape(r.image)}" alt="">`
+          ? `<img class="kachel-bild" ${this._bildAttribute(r.image, "(max-width: 600px) 50vw, 260px")} alt="">`
           : `<div class="icon">🍽️</div>`;
         const { durchschnitt, anzahl } = this._durchschnittsBewertung(r.ratings);
         const bewertungBadge = anzahl > 0
@@ -12198,39 +5772,21 @@ class RezeptbuchCard extends HTMLElement {
     });
   }
 
-  _jsPdfLaden() {
-    return new Promise((resolve, reject) => {
-      if (window.jspdf && window.jspdf.jsPDF) {
-        resolve(window.jspdf.jsPDF);
-        return;
-      }
-      const vorhandenesScript = document.getElementById("rezeptbuch-jspdf-script");
-      if (vorhandenesScript) {
-        vorhandenesScript.addEventListener("load", () => resolve(window.jspdf.jsPDF));
-        vorhandenesScript.addEventListener("error", () => reject(new Error("jsPDF konnte nicht geladen werden")));
-        return;
-      }
-      // Bevorzugt lokal von Home Assistant selbst ausgeliefert (/config/www/
-      // -> /local/), damit der PDF-Export auch ohne Internetzugang und ohne
-      // Abhängigkeit von einem externen CDN funktioniert. Ist die Datei
-      // (noch) nicht hochgeladen, fällt es automatisch auf das CDN zurück -
-      // bestehende Installationen ohne die lokale Datei funktionieren also
-      // unverändert weiter.
-      const script = document.createElement("script");
-      script.id = "rezeptbuch-jspdf-script";
-      script.src = "/local/rezeptbuch-jspdf.min.js";
-      script.onload = () => resolve(window.jspdf.jsPDF);
-      script.onerror = () => {
-        script.remove();
-        const cdnScript = document.createElement("script");
-        cdnScript.id = "rezeptbuch-jspdf-script";
-        cdnScript.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
-        cdnScript.onload = () => resolve(window.jspdf.jsPDF);
-        cdnScript.onerror = () => reject(new Error("jsPDF konnte nicht geladen werden (weder lokal noch über CDN)"));
-        document.head.appendChild(cdnScript);
-      };
-      document.head.appendChild(script);
-    });
+  // Bevorzugt lokal von Home Assistant selbst ausgeliefert (im selben Ordner
+  // wie die Karte, ersatzweise unter /hacsfiles/ bzw. /local/), damit der
+  // PDF-Export auch ohne Internetzugang und ohne Abhängigkeit von einem
+  // externen CDN funktioniert. Ist die Datei nirgends vorhanden, fällt es
+  // automatisch auf das CDN zurück.
+  async _jsPdfLaden() {
+    const vorhanden = () => window.jspdf && window.jspdf.jsPDF;
+    if (vorhanden()) return window.jspdf.jsPDF;
+    for (const ordner of zusatzdateiOrdner()) {
+      if ((await skriptLaden(`${ordner}rezeptbuch-jspdf.min.js`)) && vorhanden()) return window.jspdf.jsPDF;
+    }
+    if ((await skriptLaden("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js", 15000)) && vorhanden()) {
+      return window.jspdf.jsPDF;
+    }
+    throw new Error("jsPDF konnte nicht geladen werden (weder lokal noch über CDN)");
   }
 
   // Seit Fotos als echte Dateien (/local/...) statt als eingebettete
@@ -13005,7 +6561,7 @@ class RezeptbuchCard extends HTMLElement {
       setTimeout(() => URL.revokeObjectURL(url), 60000);
     } catch (fehler) {
       console.error("Rezeptbuch: Teilen/Drucken fehlgeschlagen", fehler);
-      alert(this._t("fehler_teilen_drucken", { fehler: fehler.message || fehler }));
+      this._hinweis(this._t("fehler_teilen_drucken", { fehler: fehler.message || fehler }));
     }
   }
 
@@ -13019,7 +6575,7 @@ class RezeptbuchCard extends HTMLElement {
   _sammelPdfModalOeffnen() {
     const liste = this._sortiereRezepte(this._gefilterteRezepte());
     if (!liste.length) {
-      alert(this._t("sammel_pdf_keine_rezepte"));
+      this._hinweis(this._t("sammel_pdf_keine_rezepte"));
       return;
     }
     this._sammelPdfGefilterteListe = liste;
@@ -13105,7 +6661,7 @@ class RezeptbuchCard extends HTMLElement {
   async _sammelPdfExport(optionen = {}) {
     const liste = optionen.rezepte || this._sortiereRezepte(this._gefilterteRezepte());
     if (!liste.length) {
-      alert(this._t("sammel_pdf_keine_rezepte"));
+      this._hinweis(this._t("sammel_pdf_keine_rezepte"));
       return;
     }
     try {
@@ -13124,17 +6680,23 @@ class RezeptbuchCard extends HTMLElement {
       setTimeout(() => URL.revokeObjectURL(url), 60000);
     } catch (fehler) {
       console.error("Rezeptbuch: Sammel-PDF-Export fehlgeschlagen", fehler);
-      alert(this._t("fehler_teilen_drucken", { fehler: fehler.message || fehler }));
+      this._hinweis(this._t("fehler_teilen_drucken", { fehler: fehler.message || fehler }));
     }
   }
 
   _renderDetail(stil) {
     const r = this._aktivesRezept;
     const basisPortionen = r.servings || 1;
-    const bild = r.image
-      // alt="": der Rezepttitel folgt direkt als <h1> unter dem Foto (siehe
-      // unten) - ein beschreibender Alt-Text würde ihn nur doppelt vorlesen.
-      ? `<div class="detail-bildbox"><img class="detail-bild" src="${this._escape(r.image)}" alt=""></div>`
+    const fotos = this._rezeptFotos(r);
+    // alt="": der Rezepttitel folgt direkt als <h1> unter dem Foto (siehe
+    // unten) - ein beschreibender Alt-Text würde ihn nur doppelt vorlesen.
+    // Mehrere Fotos: darunter ein Vorschaustreifen, ein Klick tauscht das
+    // große Bild aus.
+    const bild = fotos.length
+      ? `<div class="detail-bildbox"><img class="detail-bild" id="detail-hauptbild" src="${this._escape(fotos[0])}" alt=""></div>` +
+        (fotos.length > 1
+          ? `<div class="foto-streifen">${fotos.map((f, i) => `<button type="button" class="foto-streifen-btn ${i === 0 ? "aktiv" : ""}" data-foto-index="${i}" aria-label="${this._t("detail_foto_aria", { nummer: i + 1, anzahl: fotos.length })}"><img ${this._bildAttribute(f, "64px")} alt=""></button>`).join("")}</div>`
+          : "")
       : "";
     // "zutat-fehlt-checkbox" + data-index: erlaubt, einzelne fehlende
     // Zutaten auszuwählen und NUR diese (statt zwangsläufig das ganze
@@ -13360,6 +6922,16 @@ class RezeptbuchCard extends HTMLElement {
       this._umrechnungstabelleVerdrahten(["detail-umrechnungstabelle-btn", "kochmodus-umrechnungstabelle-btn"]);
     }
 
+    this.shadowRoot.querySelectorAll(".foto-streifen-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const hauptbild = this.shadowRoot.getElementById("detail-hauptbild");
+        const foto = fotos[parseInt(btn.dataset.fotoIndex, 10)];
+        if (!hauptbild || !foto) return;
+        hauptbild.src = foto;
+        this.shadowRoot.querySelectorAll(".foto-streifen-btn").forEach((b) => b.classList.toggle("aktiv", b === btn));
+      });
+    });
+
     this.shadowRoot.getElementById("zurueck-btn").addEventListener("click", () => {
       if (this._zubereitetAbfrageAktiv()) {
         this._zubereitetModalAnzeigen();
@@ -13465,11 +7037,11 @@ class RezeptbuchCard extends HTMLElement {
         const ausgewaehlteIndices = Array.from(this.shadowRoot.querySelectorAll(".zutat-fehlt-checkbox:checked"))
           .map((cb) => parseInt(cb.dataset.index, 10));
         if (ausgewaehlteIndices.length === 0) {
-          alert(this._t("fehler_einkaufsliste_keine_auswahl_zutaten"));
+          this._hinweis(this._t("fehler_einkaufsliste_keine_auswahl_zutaten"));
           return;
         }
-        if (!this._config.shopping_list_entity) {
-          alert(this._t("fehler_einkaufsliste_keine_konfiguration"));
+        if (!this._einkaufslisteEntity()) {
+          this._hinweis(this._t("fehler_einkaufsliste_keine_konfiguration"));
           return;
         }
         const zeilen = ausgewaehlteIndices
@@ -13649,7 +7221,7 @@ class RezeptbuchCard extends HTMLElement {
         const uids = Object.values(days).filter(Boolean);
         const rezepte = uids.map((uid) => this._rezepte.find((r) => r.uid === uid)).filter(Boolean);
         if (rezepte.length === 0) {
-          alert(this._t("wochenplan_keine_zuweisung", { zeitraum: zeigtFolgewoche ? this._t("wochenplan_folgewoche_wort") : this._t("wochenplan_aktuelle_woche_wort") }));
+          this._hinweis(this._t("wochenplan_keine_zuweisung", { zeitraum: zeigtFolgewoche ? this._t("wochenplan_folgewoche_wort") : this._t("wochenplan_aktuelle_woche_wort") }));
         } else {
           await this._einkaufslisteErstellen(rezepte);
         }
@@ -13694,7 +7266,10 @@ class RezeptbuchCard extends HTMLElement {
           <h2>${istNeu ? this._t("formular_titel_neu") : this._t("formular_titel_bearbeiten")}</h2>
         </div>
         <div class="formular">
-          <button type="button" class="sekundaer" id="url-einfuegen-btn" style="margin-bottom:12px;">${this._t("formular_url_import_btn")}</button>
+          <!-- Der URL-Import braucht ein Skript auf dem Home-Assistant-Rechner
+               (eine Karte kann fremde Webseiten nicht selbst abrufen) - ist es
+               nicht eingerichtet, bleibt der Knopf unsichtbar. -->
+          <button type="button" class="sekundaer" id="url-einfuegen-btn" style="margin-bottom:12px;${this._urlImportVerfuegbar() ? "" : " display:none;"}">${this._t("formular_url_import_btn")}</button>
           <div id="url-bereich" style="display:none; margin-bottom:16px;">
             <label>${this._t("formular_url_label")}</label>
             <input type="text" id="url-feld" placeholder="${this._t("formular_url_placeholder")}">
@@ -13770,9 +7345,10 @@ class RezeptbuchCard extends HTMLElement {
           <div id="schritte-liste">${schritteZeilen}</div>
           <button type="button" class="sekundaer" id="schritt-hinzufuegen">${this._t("formular_schritt_hinzufuegen_btn")}</button>
 
-          <label>${this._t("formular_label_bild")} ${r.image ? this._t("formular_bild_vorhanden_hinweis") : ""}</label>
-          <input type="file" id="bild-feld" accept="image/*">
-          ${r.image ? `<div class="hinweis">${this._t("formular_bild_hinweis")}</div>` : ""}
+          <label>${this._t("formular_label_fotos", { max: MAX_FOTOS })}</label>
+          <div id="fotos-liste" class="fotos-liste"></div>
+          <input type="file" id="bild-feld" accept="image/*" multiple>
+          <div class="hinweis" id="fotos-hinweis">${this._t("formular_fotos_hinweis")}</div>
 
           <div class="aktionen">
             <button class="primaer" id="speichern-btn">${this._t("allgemein_speichern")}</button>
@@ -13805,14 +7381,14 @@ class RezeptbuchCard extends HTMLElement {
       const url = feld.value.trim();
       if (!url) return;
       if (!/^https?:\/\//i.test(url)) {
-        alert(this._t("fehler_url_ungueltig"));
+        this._hinweis(this._t("fehler_url_ungueltig"));
         return;
       }
       if (url.includes("'")) {
         // Die URL wird serverseitig in einfache Anführungszeichen
         // eingebettet (siehe shell_command in configuration.yaml) - ein
         // Apostroph darin würde den Shell-Befehl kaputt machen.
-        alert(this._t("fehler_url_apostroph"));
+        this._hinweis(this._t("fehler_url_apostroph"));
         return;
       }
 
@@ -13866,7 +7442,10 @@ class RezeptbuchCard extends HTMLElement {
         if (Array.isArray(geparst.steps) && geparst.steps.length) {
           this._aktivesRezept.steps = geparst.steps;
         }
-        if (geparst.image) this._aktivesRezept.image = geparst.image;
+        if (geparst.image) {
+          this._aktivesRezept.image = geparst.image;
+          this._aktivesRezept.fotoListe = [geparst.image, ...(this._aktivesRezept.fotoListe || []).filter((f) => f !== geparst.image)].slice(0, MAX_FOTOS);
+        }
         if (!this._aktivesRezept.uid && !this._aktivesRezept.created) {
           this._aktivesRezept.created = new Date().toISOString();
         }
@@ -13875,7 +7454,7 @@ class RezeptbuchCard extends HTMLElement {
         this._render();
       } catch (fehler) {
         console.error("Rezeptbuch: URL-Import fehlgeschlagen", fehler);
-        alert(this._t("fehler_url_import_fehlgeschlagen", { fehler: fehler.message || fehler }));
+        this._hinweis(this._t("fehler_url_import_fehlgeschlagen", { fehler: fehler.message || fehler }));
         knopf.disabled = false;
         knopf.textContent = urspruenglicherText;
       }
@@ -13892,7 +7471,7 @@ class RezeptbuchCard extends HTMLElement {
       const erkannt = rezeptAusTextErkennen(text);
 
       if (!erkannt.title && erkannt.ingredients.length === 0 && erkannt.steps.length === 0) {
-        alert(this._t("fehler_texterkennung_nichts_gefunden"));
+        this._hinweis(this._t("fehler_texterkennung_nichts_gefunden"));
         return;
       }
 
@@ -13914,7 +7493,7 @@ class RezeptbuchCard extends HTMLElement {
         // Erst NACH dem Neuzeichnen warnen, damit das (Teil-)Ergebnis schon
         // sichtbar ist und der alert() nicht den Eindruck erweckt, gar
         // nichts sei übernommen worden.
-        alert(this._t("warnung_texterkennung_unvollstaendig"));
+        this._hinweis(this._t("warnung_texterkennung_unvollstaendig"));
       }
     });
 
@@ -13930,12 +7509,12 @@ class RezeptbuchCard extends HTMLElement {
       try {
         geparst = JSON.parse(text);
       } catch {
-        alert(this._t("fehler_json_ungueltig"));
+        this._hinweis(this._t("fehler_json_ungueltig"));
         return;
       }
       const daten = Array.isArray(geparst) ? geparst[0] : geparst;
       if (!daten || !daten.title) {
-        alert(this._t("fehler_json_titel_fehlt"));
+        this._hinweis(this._t("fehler_json_titel_fehlt"));
         return;
       }
       this._aktivesRezept.title = daten.title || "";
@@ -13974,7 +7553,15 @@ class RezeptbuchCard extends HTMLElement {
       // Bewertungen/Kommentare aus einem Backup-Datensatz).
       if (daten.category) this._aktivesRezept.category = daten.category;
       if (Array.isArray(daten.tags)) this._aktivesRezept.tags = daten.tags;
-      if (daten.image) this._aktivesRezept.image = daten.image;
+      if (daten.image) {
+        this._aktivesRezept.image = daten.image;
+        this._aktivesRezept.fotoListe = [daten.image, ...(this._aktivesRezept.fotoListe || []).filter((f) => f !== daten.image)].slice(0, MAX_FOTOS);
+      }
+      if (Array.isArray(daten.images) && daten.images.length) {
+        this._aktivesRezept.images = daten.images.filter(Boolean);
+        const bisher = this._aktivesRezept.fotoListe || [];
+        this._aktivesRezept.fotoListe = [...bisher, ...this._aktivesRezept.images.filter((f) => !bisher.includes(f))].slice(0, MAX_FOTOS);
+      }
       if (daten.ratings) this._aktivesRezept.ratings = daten.ratings;
       if (daten.comments) this._aktivesRezept.comments = daten.comments;
       if (daten.cookLog) this._aktivesRezept.cookLog = daten.cookLog;
@@ -14061,11 +7648,11 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.getElementById("formular-kategorie-speichern-btn").addEventListener("click", async () => {
       const nameFeld = this.shadowRoot.getElementById("formular-kategorie-name-feld");
       const name = nameFeld.value.trim();
-      if (!name) { alert(this._t("fehler_kategorie_name_fehlt")); return; }
+      if (!name) { this._hinweis(this._t("fehler_kategorie_name_fehlt")); return; }
       const existiertBereits = this._alleKategorien().some((k) =>
         k.toLowerCase() === name.toLowerCase() || this._kategorieLabel(k).toLowerCase() === name.toLowerCase()
       );
-      if (existiertBereits) { alert(this._t("fehler_kategorie_existiert_bereits")); return; }
+      if (existiertBereits) { this._hinweis(this._t("fehler_kategorie_existiert_bereits")); return; }
       const speichernBtn = this.shadowRoot.getElementById("formular-kategorie-speichern-btn");
       speichernBtn.disabled = true;
       const erfolg = await this._eigeneKategorienSpeichern([...(this._eigeneKategorien || []), name]);
@@ -14198,6 +7785,63 @@ class RezeptbuchCard extends HTMLElement {
     schritteListeEl.querySelectorAll(".schritt-zeile").forEach((zeile) => schrittZeileVerdrahten(zeile));
     schritteAktualisieren();
 
+    // Fotos: Titelbild + weitere. Die Arbeitsliste lebt in
+    // this._aktivesRezept.fotoListe (Adressen oder frisch verkleinerte
+    // Data-URLs); hochgeladen wird erst beim Speichern (_formularSpeichern).
+    if (!Array.isArray(this._aktivesRezept.fotoListe)) {
+      this._aktivesRezept.fotoListe = this._rezeptFotos(this._aktivesRezept);
+    }
+    const fotosListeEl = this.shadowRoot.getElementById("fotos-liste");
+    const fotosListeRendern = () => {
+      const fotos = this._aktivesRezept.fotoListe;
+      fotosListeEl.innerHTML = fotos.map((f, i) => `
+        <div class="foto-item ${i === 0 ? "titelbild" : ""}">
+          <img ${this._bildAttribute(f, "96px")} alt="">
+          ${i === 0 ? `<span class="foto-badge">${this._t("formular_foto_titelbild")}</span>` : ""}
+          <div class="foto-item-knoepfe">
+            ${i > 0 ? `<button type="button" data-foto-aktion="titel" data-foto-index="${i}" title="${this._t("formular_foto_als_titelbild_title")}" aria-label="${this._t("formular_foto_als_titelbild_title")}">⭐</button>` : ""}
+            <button type="button" data-foto-aktion="weg" data-foto-index="${i}" title="${this._t("formular_foto_entfernen_aria")}" aria-label="${this._t("formular_foto_entfernen_aria")}">✕</button>
+          </div>
+        </div>`).join("");
+      fotosListeEl.querySelectorAll("[data-foto-aktion]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const i = parseInt(btn.dataset.fotoIndex, 10);
+          const liste = this._aktivesRezept.fotoListe;
+          if (btn.dataset.fotoAktion === "weg") {
+            liste.splice(i, 1);
+          } else {
+            const [foto] = liste.splice(i, 1);
+            liste.unshift(foto);
+          }
+          fotosListeRendern();
+        });
+      });
+    };
+    fotosListeRendern();
+    const bildFeld = this.shadowRoot.getElementById("bild-feld");
+    bildFeld.addEventListener("change", async () => {
+      const dateien = Array.from(bildFeld.files || []);
+      const hinweisEl = this.shadowRoot.getElementById("fotos-hinweis");
+      const urspruenglich = hinweisEl.textContent;
+      hinweisEl.textContent = this._t("formular_bild_verkleinern_text");
+      try {
+        for (const datei of dateien) {
+          if (this._aktivesRezept.fotoListe.length >= MAX_FOTOS) {
+            this._hinweis(this._t("formular_fotos_maximum", { max: MAX_FOTOS }));
+            break;
+          }
+          this._aktivesRezept.fotoListe.push(await this._bildKomprimieren(datei));
+        }
+      } catch (fehler) {
+        console.error("Rezeptbuch: Foto konnte nicht verarbeitet werden", fehler);
+        this._hinweis(fehler.message || String(fehler));
+      } finally {
+        bildFeld.value = "";
+        hinweisEl.textContent = urspruenglich;
+        fotosListeRendern();
+      }
+    });
+
     const speichernBtn = this.shadowRoot.getElementById("speichern-btn");
     speichernBtn.addEventListener("click", async () => {
       if (speichernBtn.disabled) return;
@@ -14208,7 +7852,7 @@ class RezeptbuchCard extends HTMLElement {
       try {
         const titel = this.shadowRoot.getElementById("titel-feld").value.trim();
         if (!titel) {
-          alert(this._t("fehler_titel_fehlt"));
+          this._hinweis(this._t("fehler_titel_fehlt"));
           return;
         }
         const zeilen = Array.from(this.shadowRoot.querySelectorAll(".zutat-zeile")).map((zeile) => ({
@@ -14218,14 +7862,6 @@ class RezeptbuchCard extends HTMLElement {
         }));
         const schritte = Array.from(this.shadowRoot.querySelectorAll("[data-schritt-feld]")).map((feld) => feld.value);
 
-        const bildDatei = this.shadowRoot.getElementById("bild-feld").files[0] || null;
-        let bildDaten = this._aktivesRezept.image || null;
-        if (bildDatei) {
-          speichernBtn.textContent = this._t("formular_bild_verkleinern_text");
-          bildDaten = await this._bildKomprimieren(bildDatei);
-          speichernBtn.textContent = this._t("allgemein_speichert");
-        }
-
         await this._formularSpeichern({
           title: titel,
           servings: this.shadowRoot.getElementById("portionen-feld").value,
@@ -14233,11 +7869,11 @@ class RezeptbuchCard extends HTMLElement {
           tags: this._aktivesRezept.tags || [],
           ingredients: zeilen,
           steps: schritte,
-          image: bildDaten,
+          fotos: (this._aktivesRezept.fotoListe || []).slice(),
         });
       } catch (fehler) {
         console.error("Rezeptbuch: Unerwarteter Fehler beim Speichern", fehler);
-        alert(this._t("fehler_unerwartet", { fehler: fehler.message || fehler }));
+        this._hinweis(this._t("fehler_unerwartet", { fehler: fehler.message || fehler }));
       } finally {
         speichernBtn.disabled = false;
         speichernBtn.textContent = urspruenglicherText;
