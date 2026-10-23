@@ -112,7 +112,7 @@ unangetastet:
    ergänzen, damit `RezeptbuchCard._sprache()` die Sprache erkennt: jede dort
    nicht enthaltene Sprache fällt auf "en" zurück.
 3. `node test/sprachen-pruefen.js` ausführen: prüft, dass jede Sprachdatei
-   genau dieselben Schlüssel wie `de` hat (aktuell 312), dass die
+   genau dieselben Schlüssel wie `de` hat (aktuell 321), dass die
    Platzhalter übereinstimmen und alle im Code benutzten Schlüssel
    existieren.
 4. Die Datei in `eslint.config.js` ist bereits über das Muster

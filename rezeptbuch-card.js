@@ -483,6 +483,18 @@ const UEBERSETZUNGEN = {
     einrichtung_fehler: "Das hat nicht geklappt: {{fehler}}",
     einrichtung_fehler_unerwartet: "Home Assistant hat die Einrichtung nicht wie erwartet abgeschlossen.",
     einrichtung_fehler_entity_fehlt: "Die Liste wurde angelegt, die Entität „{{entity}}“ ist aber nicht aufgetaucht. Bitte in der Kartenkonfiguration den tatsächlichen Namen angeben.",
+    // Listen zuordnen / neue Listen anlegen (ab 2.3.0)
+    foto_upload_ausgewichen: "Hinweis: {{anzahl}} Foto(s) konnten nicht im Home-Assistant-Bilderspeicher abgelegt werden ({{grund}}) und werden stattdessen direkt im Rezept gespeichert.",
+    foto_speichern_fehlt: "Achtung: Es wurden nur {{ist}} von {{soll}} Fotos gespeichert. Bitte das Rezept erneut öffnen und prüfen.",
+    listen_titel: "Listen zuordnen",
+    listen_hinweis: "Wähle, welche To-do-Liste als Einkaufsliste und welche für Sicherungen dient – oder lege direkt eine neue an. Gilt für alle Geräte.",
+    listen_rolle_einkauf: "Einkaufsliste",
+    listen_rolle_sicherung: "Sicherung",
+    listen_automatisch: "– automatisch –",
+    listen_per_konfiguration: "in der Karten-Konfiguration festgelegt",
+    listen_neu_name_placeholder: "Name der neuen Liste",
+    listen_neu_btn: "+ Neue Liste anlegen",
+    listen_zugewiesen: "Liste „{{name}}“ angelegt und zugewiesen.",
     sicherung_modal_titel: "Sicherung wiederherstellen",
     sicherung_modal_hinweis: "Fehlende Rezepte werden aus der gewählten Sicherung ergänzt. Bereits vorhandene Rezepte bleiben unverändert.",
     sicherung_modal_rezepte: "{{anzahl}} Rezepte",
@@ -2186,12 +2198,12 @@ class RezeptbuchCard extends HTMLElement {
   _einstellungenAusItem(item) {
     const standard = {
       erfassungAktiv: true, amerikanischeKategorie: "", eigeneUmrechnungen: [], tagsAnzeigen: true,
-      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true, autoSicherung: true, farben: {},
+      zufallsrezeptAnzeigen: true, umrechnungstabelleKopfAnzeigen: true, autoSicherung: true, farben: {}, listen: { einkauf: "", sicherung: "" },
     };
     if (!item || !item.description) return standard;
     try {
       const geparst = JSON.parse(item.description);
-      const ergebnis = { ...standard, farben: {} };
+      const ergebnis = { ...standard, farben: {}, listen: { einkauf: "", sicherung: "" } };
       if (typeof geparst.erfassungAktiv === "boolean") ergebnis.erfassungAktiv = geparst.erfassungAktiv;
       else if (typeof geparst.showStatistics === "boolean") ergebnis.erfassungAktiv = geparst.showStatistics;
       if (typeof geparst.amerikanischeKategorie === "string") ergebnis.amerikanischeKategorie = geparst.amerikanischeKategorie;
@@ -2199,6 +2211,12 @@ class RezeptbuchCard extends HTMLElement {
       if (typeof geparst.zufallsrezeptAnzeigen === "boolean") ergebnis.zufallsrezeptAnzeigen = geparst.zufallsrezeptAnzeigen;
       if (typeof geparst.umrechnungstabelleKopfAnzeigen === "boolean") ergebnis.umrechnungstabelleKopfAnzeigen = geparst.umrechnungstabelleKopfAnzeigen;
       if (typeof geparst.autoSicherung === "boolean") ergebnis.autoSicherung = geparst.autoSicherung;
+      if (geparst.listen && typeof geparst.listen === "object") {
+        for (const rolle of ["einkauf", "sicherung"]) {
+          const wert = geparst.listen[rolle];
+          if (typeof wert === "string" && /^todo\.[a-z0-9_]+$/.test(wert)) ergebnis.listen[rolle] = wert;
+        }
+      }
       if (geparst.farben && typeof geparst.farben === "object") {
         for (const rolle of FARB_ROLLEN) {
           const wert = geparst.farben[rolle.schluessel];
@@ -2868,6 +2886,8 @@ class RezeptbuchCard extends HTMLElement {
   // "todo.shopping_list").
   _einkaufslisteEntity() {
     if (this._config.shopping_list_entity) return this._config.shopping_list_entity;
+    const gewaehlt = this._einstellungen && this._einstellungen.listen && this._einstellungen.listen.einkauf;
+    if (gewaehlt && this._entitaetVorhanden(gewaehlt) !== false) return gewaehlt;
     for (const kandidat of ["todo.einkaufsliste", "todo.shopping_list"]) {
       if (this._entitaetVorhanden(kandidat) === true) return kandidat;
     }
@@ -2876,7 +2896,10 @@ class RezeptbuchCard extends HTMLElement {
 
   // To-do-Liste für die automatischen Sicherungen (Standard: Rezeptliste + "_backup").
   _sicherungsEntity() {
-    return this._config.backup_entity || `${this._config.entity}_backup`;
+    if (this._config.backup_entity) return this._config.backup_entity;
+    const gewaehlt = this._einstellungen && this._einstellungen.listen && this._einstellungen.listen.sicherung;
+    if (gewaehlt && this._entitaetVorhanden(gewaehlt) !== false) return gewaehlt;
+    return `${this._config.entity}_backup`;
   }
 
   _anzeigenameAusEntity(entityId) {
@@ -2904,6 +2927,8 @@ class RezeptbuchCard extends HTMLElement {
   async _localTodoAnlegen(anzeigeName, erwarteteEntity) {
     if (!this._istAdmin()) throw new Error(this._t("einrichtung_nur_admin"));
     if (typeof this._hass.callApi !== "function") throw new Error("callApi nicht verfügbar");
+    const todoSchluessel = () => Object.keys(this._hass.states || {}).filter((k) => k.startsWith("todo."));
+    const vorher = new Set(todoSchluessel());
     const flow = await this._hass.callApi("POST", "config/config_entries/flow", {
       handler: "local_todo",
       show_advanced_options: false,
@@ -2916,8 +2941,20 @@ class RezeptbuchCard extends HTMLElement {
         throw new Error(this._t("einrichtung_fehler_unerwartet"));
       }
     }
+    // Ohne bekannte Ziel-Entität (frei benannte neue Liste) wird die neu
+    // hinzugekommene todo.*-Entität erkannt und zurückgegeben.
+    if (!erwarteteEntity) {
+      let neu = null;
+      await this._warteBis(() => {
+        neu = todoSchluessel().find((k) => !vorher.has(k)) || null;
+        return !!neu;
+      });
+      if (!neu) throw new Error(this._t("einrichtung_fehler_entity_fehlt", { entity: anzeigeName }));
+      return neu;
+    }
     const vorhanden = await this._warteBis(() => this._entitaetVorhanden(erwarteteEntity) === true);
     if (!vorhanden) throw new Error(this._t("einrichtung_fehler_entity_fehlt", { entity: erwarteteEntity }));
+    return erwarteteEntity;
   }
 
   // Willkommens-/Einrichtungs-Ansicht: erscheint, wenn die Rezeptliste (die
@@ -3023,17 +3060,27 @@ class RezeptbuchCard extends HTMLElement {
   // (dann bleibt das Foto einfach als Text im Rezept, wie bisher).
   async _fotoHochladen(datenUrl) {
     try {
-      if (!this._hass || typeof this._hass.fetchWithAuth !== "function") return null;
+      if (!this._hass || typeof this._hass.fetchWithAuth !== "function") {
+        this._letzterUploadFehler = "fetchWithAuth nicht verfügbar";
+        return null;
+      }
       const formular = new FormData();
       formular.append("file", this._datenUrlZuBlob(datenUrl), "rezeptfoto.jpg");
       const antwort = await this._hass.fetchWithAuth("/api/image/upload", { method: "POST", body: formular });
-      if (!antwort || !antwort.ok) return null;
+      if (!antwort || !antwort.ok) {
+        this._letzterUploadFehler = antwort && antwort.status ? `HTTP ${antwort.status}` : "keine Antwort";
+        return null;
+      }
       const json = await antwort.json();
       // Die ID landet später in einer Bildadresse - nur das erwartete Format zulassen.
-      if (!json || !/^[0-9a-f]{32}$/.test(String(json.id || ""))) return null;
+      if (!json || !/^[0-9a-f]{32}$/.test(String(json.id || ""))) {
+        this._letzterUploadFehler = "ungültige Antwort";
+        return null;
+      }
       return `/api/image/serve/${json.id}/original`;
     } catch (fehler) {
       console.warn("Rezeptbuch: Foto-Upload in den HA-Bilderspeicher fehlgeschlagen", fehler);
+      this._letzterUploadFehler = (fehler && fehler.message) || String(fehler);
       return null;
     }
   }
@@ -3259,6 +3306,37 @@ class RezeptbuchCard extends HTMLElement {
           admin ? knopf("einrichtung-fotos-auslagern-btn", this._t("einrichtung_fotos_auslagern_btn")) : "")
       : zeile("✅", this._t("einrichtung_fotos_ok"));
 
+    // Listen zuordnen: welche To-do-Liste dient als Einkaufsliste bzw. für
+    // Sicherungen - oder gleich eine neue Liste anlegen (nur Admins).
+    const alleListen = Object.keys((this._hass && this._hass.states) || {})
+      .filter((k) => k.startsWith("todo.") && k !== this._config.entity)
+      .sort();
+    const listenOptionen = (aktuell) =>
+      `<option value="">${this._t("listen_automatisch")}</option>` +
+      alleListen.map((k) => `<option value="${e(k)}" ${k === aktuell ? "selected" : ""}>${e(this._anzeigenameAusEntity(k))} (${e(k)})</option>`).join("");
+    const listenZeile = (rolle, label, festgelegt, aktuell) => `
+      <div class="schalter-zeile" style="flex-wrap:wrap; gap:6px;">
+        <span class="schalter-label">${label}</span>
+        ${festgelegt
+          ? `<span class="hinweis">${e(festgelegt)} – ${this._t("listen_per_konfiguration")}</span>`
+          : `<select id="liste-select-${rolle}" ${admin ? "" : "disabled"}>${listenOptionen(aktuell)}</select>`}
+      </div>`;
+    const listenBlock = `
+      <div style="margin-top:12px;">
+        <strong>${this._t("listen_titel")}</strong>
+        <p class="hinweis">${this._t("listen_hinweis")}</p>
+        ${listenZeile("einkauf", this._t("listen_rolle_einkauf"), this._config.shopping_list_entity, (this._einstellungen.listen || {}).einkauf)}
+        ${listenZeile("sicherung", this._t("listen_rolle_sicherung"), this._config.backup_entity, (this._einstellungen.listen || {}).sicherung)}
+        ${admin ? `<div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+          <input type="text" id="liste-neu-name" placeholder="${this._t("listen_neu_name_placeholder")}" style="flex:1; min-width:140px;">
+          <select id="liste-neu-rolle">
+            <option value="einkauf">${this._t("listen_rolle_einkauf")}</option>
+            <option value="sicherung">${this._t("listen_rolle_sicherung")}</option>
+          </select>
+          <button type="button" class="sekundaer klein" id="liste-neu-btn">${this._t("listen_neu_btn")}</button>
+        </div>` : ""}
+      </div>`;
+
     bereich.innerHTML =
       zeile("✅", this._t("einrichtung_rezeptliste", { entity: e(this._config.entity) })) +
       (einkauf
@@ -3268,7 +3346,8 @@ class RezeptbuchCard extends HTMLElement {
       fotoZeile +
       (this._urlImportVerfuegbar()
         ? zeile("✅", this._t("einrichtung_url_import_ok"))
-        : zeile("ℹ️", this._t("einrichtung_url_import_fehlt")));
+        : zeile("ℹ️", this._t("einrichtung_url_import_fehlt"))) +
+      listenBlock;
 
     const verdrahten = (id, fn) => {
       const el = bereich.querySelector(`#${id}`);
@@ -3306,6 +3385,31 @@ class RezeptbuchCard extends HTMLElement {
     });
     verdrahten("einrichtung-sicherung-wiederherstellen-btn", async () => {
       this._sicherungWiederherstellenFensterZeigen(items || []);
+    });
+    for (const rolle of ["einkauf", "sicherung"]) {
+      const auswahl = bereich.querySelector(`#liste-select-${rolle}`);
+      if (!auswahl) continue;
+      auswahl.addEventListener("change", async (ev) => {
+        const wert = ev.target.value;
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, listen: { ...(stand.listen || {}), [rolle]: wert } }));
+        if (rolle === "sicherung") this._autoSicherungTag = null;
+        await this._einrichtungBereichAktualisieren();
+      });
+    }
+    verdrahten("liste-neu-btn", async () => {
+      const name = (bereich.querySelector("#liste-neu-name").value || "").trim();
+      if (!name) {
+        this._hinweis(this._t("umrechnungstabelle_eigene_name_fehlt"));
+        return;
+      }
+      const rolle = bereich.querySelector("#liste-neu-rolle").value === "sicherung" ? "sicherung" : "einkauf";
+      const entity = await this._localTodoAnlegen(name, null);
+      await this._einstellungenAktualisieren((stand) => ({ ...stand, listen: { ...(stand.listen || {}), [rolle]: entity } }));
+      if (rolle === "sicherung") {
+        this._autoSicherungTag = null;
+        await this._autoSicherungPruefen(true);
+      }
+      this._hinweis(this._t("listen_zugewiesen", { name }));
     });
     const autoSchalter = bereich.querySelector("#einrichtung-auto-sicherung-schalter");
     if (autoSchalter) {
@@ -3770,9 +3874,13 @@ class RezeptbuchCard extends HTMLElement {
       ? formDaten.fotos
       : [formDaten.image, ...(Array.isArray(formDaten.images) ? formDaten.images : [])].filter(Boolean);
     const fotos = [];
+    let uploadsFehlgeschlagen = 0;
+    this._letzterUploadFehler = "";
     for (const foto of fotosRoh.slice(0, MAX_FOTOS)) {
       if (String(foto).startsWith("data:")) {
-        fotos.push((await this._fotoHochladen(foto)) || foto);
+        const adresse = await this._fotoHochladen(foto);
+        if (!adresse) uploadsFehlgeschlagen++;
+        fotos.push(adresse || foto);
       } else {
         fotos.push(foto);
       }
@@ -3824,6 +3932,23 @@ class RezeptbuchCard extends HTMLElement {
     }
 
     if (!erfolg) return;
+
+    // Kontrolle: Sind die Fotos wirklich gespeichert? Sonst lieber eine
+    // klare Meldung als stilles Verschwinden.
+    try {
+      if (rezept.uid) {
+        const gespeichert = await this._rezeptFrischLaden(rezept.uid);
+        const ist = gespeichert ? this._rezeptFotos(gespeichert).length : 0;
+        if (gespeichert && ist < fotos.length) {
+          this._hinweis(this._t("foto_speichern_fehlt", { ist, soll: fotos.length }));
+        }
+      }
+    } catch (fehler) {
+      console.warn("Rezeptbuch: Foto-Kontrolle nach dem Speichern fehlgeschlagen", fehler);
+    }
+    if (uploadsFehlgeschlagen) {
+      this._hinweis(this._t("foto_upload_ausgewichen", { anzahl: uploadsFehlgeschlagen, grund: this._letzterUploadFehler || "?" }));
+    }
 
     // Konnte ein Foto nicht in den Bilderspeicher hochgeladen werden, liegt es
     // noch als Base64-Text im JSON. Wer das ältere Bild-Skript eingerichtet

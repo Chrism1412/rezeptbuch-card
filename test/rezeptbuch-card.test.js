@@ -478,6 +478,53 @@ async function testEntityIstOptionalMitStandard(browser) {
   }
 }
 
+async function testListenZuordnenUndNeueListeAnlegen(browser) {
+  console.log("\nTest: Listen zuordnen und neue Liste direkt in der Karte anlegen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const states = {
+        "todo.rezepte": { state: "0", attributes: { friendly_name: "Rezepte" } },
+        "todo.meine_liste": { state: "0", attributes: { friendly_name: "Meine Liste" } },
+      };
+      const apiAufrufe = [];
+      karte.hass = {
+        ...window.__fakeHass, states,
+        callApi: async (methode, pfad, daten) => {
+          apiAufrufe.push(daten);
+          if (pfad === "config/config_entries/flow") return { type: "form", flow_id: "f" };
+          states["todo.party_einkauf"] = { state: "0", attributes: { friendly_name: daten.todo_list_name } };
+          return { type: "create_entry" };
+        },
+      };
+      await new Promise((r) => setTimeout(r, 500));
+      await karte._rezepteLaden();
+      const bereich = karte.shadowRoot.getElementById("einrichtung-bereich");
+      await karte._einrichtungBereichAktualisieren();
+      const optionen = [...bereich.querySelectorAll("#liste-select-einkauf option")].map((o) => o.value);
+      const auswahl = bereich.querySelector("#liste-select-einkauf");
+      auswahl.value = "todo.meine_liste";
+      auswahl.dispatchEvent(new Event("change"));
+      await karte._warteBis(() => karte._einstellungen.listen && karte._einstellungen.listen.einkauf === "todo.meine_liste", 5000);
+      const gewaehlt = karte._einkaufslisteEntity();
+      await karte._warteBis(() => bereich.querySelector("#liste-neu-name") && bereich.querySelector("#liste-select-einkauf").value === "todo.meine_liste", 5000);
+      bereich.querySelector("#liste-neu-name").value = "Party-Einkauf";
+      bereich.querySelector("#liste-neu-rolle").value = "einkauf";
+      bereich.querySelector("#liste-neu-btn").click();
+      await karte._warteBis(() => karte._einstellungen.listen.einkauf === "todo.party_einkauf", 20000);
+      return { optionen, gewaehlt, neu: karte._einkaufslisteEntity(), namen: apiAufrufe.filter((a) => a && a.todo_list_name).map((a) => a.todo_list_name), gespeichert: JSON.parse(window.__speicher.find((i) => i.summary.includes("einstellungen")).description).listen };
+    });
+    assert(ergebnis.optionen.includes("todo.meine_liste") && !ergebnis.optionen.includes("todo.rezepte"), "Auswahl zeigt andere To-do-Listen, nicht die Rezeptliste");
+    assert(ergebnis.gewaehlt === "todo.meine_liste", "Gewählte Liste wird als Einkaufsliste benutzt");
+    assert(ergebnis.namen.includes("Party-Einkauf"), "Neue Liste wird mit dem eingegebenen Namen angelegt");
+    assert(ergebnis.neu === "todo.party_einkauf", "Neue Liste wird erkannt und als Einkaufsliste zugewiesen");
+    assert(ergebnis.gespeichert.einkauf === "todo.party_einkauf", "Zuordnung wird geräteübergreifend in den Einstellungen gespeichert");
+  } finally {
+    await page.close();
+  }
+}
+
 // ---------------------------------------------------------------------
 // Test 1: Grundfunktion - neues Rezept über _formularSpeichern anlegen.
 // ---------------------------------------------------------------------
@@ -6818,6 +6865,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testMehrereFotosWerdenGespeichertUndAngezeigt(browser);
     await testUrlImportKnopfUndEinkaufslisteAutomatisch(browser);
     await testEntityIstOptionalMitStandard(browser);
+    await testListenZuordnenUndNeueListeAnlegen(browser);
   } finally {
     await browser.close();
   }

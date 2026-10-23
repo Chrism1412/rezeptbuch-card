@@ -23,6 +23,13 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 - **Fotos im Bilderspeicher von Home Assistant**: neue Fotos werden dorthin
   hochgeladen (kleine Vorschaubilder, träges Laden); bestehende Base64-Fotos
   lassen sich per Knopf auslagern. Das Bild-Skript ist nicht mehr nötig.
+- **Listen zuordnen und neue Listen anlegen**: im Bereich "Einrichtung &
+  Wartung" lässt sich wählen, welche To-do-Liste als Einkaufsliste und welche
+  für Sicherungen dient (gilt auf allen Geräten), oder direkt eine neue Liste
+  mit eigenem Namen anlegen und zuweisen.
+- **Foto-Kontrolle beim Speichern**: Die Karte meldet jetzt, wenn Fotos nicht
+  im Bilderspeicher abgelegt werden konnten (mit Grund) oder nach dem
+  Speichern nicht vollständig im Rezept ankommen.
 - **Neue Sprachen**: Russisch und Türkisch.
 - Test `test/sprachen-pruefen.js` prüft alle Sprachdateien auf Vollständigkeit.
 
