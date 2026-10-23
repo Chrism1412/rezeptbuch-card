@@ -37,7 +37,7 @@ const REZEPTE = [
 ].map((r, i) => ({
   title: r.t,
   payload: {
-    schemaVersion: 1, servings: r.p, category: r.k, tags: r.tags, image: r.f,
+    schemaVersion: 1, servings: r.p, category: r.k, tags: r.tags, image: r.f, images: i === 0 ? [foto("#bc4b51", "#f4a259", "#c1440e"), foto("#8cb369", "#e9c46a", "#7a9e3c")] : [],
     ingredients: r.zutaten.map(([amount, unit, name]) => ({ amount, unit, name })),
     steps: r.schritte,
     ratings: Object.fromEntries(r.bew.map((w, j) => ["demo-" + j, w])),
@@ -55,11 +55,11 @@ const HA_STIL = (dunkel) => `
   rezeptbuch-card { display:block; max-width:1000px; margin:0 auto; }
 `;
 
-async function neueSeite(browser, { breite = 1100, hoehe = 820, dunkel = false, farben = null } = {}) {
+async function neueSeite(browser, { breite = 1100, hoehe = 820, dunkel = false, farben = null, leerStart = false } = {}) {
   const page = await browser.newPage({ viewport: { width: breite, height: hoehe } });
   await page.addStyleTag({ content: HA_STIL(dunkel) });
   await page.addScriptTag({ path: KARTEN_DATEI });
-  await page.evaluate(({ rezepte, farben }) => {
+  await page.evaluate(({ rezepte, farben, leerStart }) => {
     // Nachbau von <ha-card> (in Home Assistant ein eigenes Element mit Karten-Optik).
     if (!customElements.get("ha-card")) {
       customElements.define("ha-card", class extends HTMLElement {
@@ -79,6 +79,13 @@ async function neueSeite(browser, { breite = 1100, hoehe = 820, dunkel = false, 
     window.__speicher = speicher;
     const hass = {
       language: "de", user: { id: "demo-user", name: "Demo", is_admin: true },
+      states: leerStart ? {} : {
+        "todo.rezepte": { state: "8", attributes: { friendly_name: "Rezepte" } },
+        "todo.einkaufsliste": { state: "0", attributes: { friendly_name: "Einkaufsliste" } },
+        "todo.rezepte_backup": { state: "1", attributes: { friendly_name: "Rezepte Backup" } },
+        "todo.party_einkauf": { state: "0", attributes: { friendly_name: "Party-Einkauf" } },
+      },
+      services: { shell_command: { rezeptbuch_url_importieren: {} } },
       callService: async (domain, service, d) => {
         if (domain !== "todo") throw new Error("nicht simuliert");
         if (service === "update_item") { const e = speicher.find((i) => i.uid === d.item || i.summary === d.item); if (e && d.description !== undefined) e.description = d.description; }
@@ -91,7 +98,7 @@ async function neueSeite(browser, { breite = 1100, hoehe = 820, dunkel = false, 
     document.body.appendChild(karte);
     karte.hass = hass;
     window.__karte = karte;
-  }, { rezepte: REZEPTE, farben });
+  }, { rezepte: REZEPTE, farben, leerStart });
   await page.waitForFunction(() => window.__karte._geladen === true);
   await page.waitForTimeout(300);
   return page;
@@ -141,6 +148,24 @@ async function seitenShot(page, datei) {
     });
     await page.waitForTimeout(200);
     await seitenShot(page, "einstellungen-farben.png");
+    await page.close();
+
+    page = await neueSeite(browser, { hoehe: 1100 });
+    await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte.shadowRoot.getElementById("statistik-einstellungen-btn").click();
+      await karte._einrichtungBereichAktualisieren();
+      const bereich = karte.shadowRoot.getElementById("einrichtung-bereich");
+      bereich.scrollIntoView({ block: "start" });
+    });
+    await page.waitForTimeout(300);
+    await seitenShot(page, "einstellungen-listen.png");
+    await page.close();
+
+    page = await neueSeite(browser, { hoehe: 500, leerStart: true });
+    await page.evaluate(() => window.__karte._rezepteLaden());
+    await page.waitForTimeout(300);
+    await kartenShot(page, "willkommen.png");
     await page.close();
 
     page = await neueSeite(browser, { farben: { akzent: "#2b7cb2", akzentText: "#1d5a85", sterne: "#e63946" } });

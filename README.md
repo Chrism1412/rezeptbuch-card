@@ -87,6 +87,15 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
   </tr>
 </table>
 
+### Selbst einrichten und Listen verwalten
+
+<table>
+  <tr>
+    <td width="60%" valign="top"><img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/einstellungen-listen.png" alt="Einstellungen: je eine Karte für Rezeptliste, Einkaufsliste und Sicherung mit Auswahl vorhandener Listen und Anlegen einer neuen Liste"></td>
+    <td width="40%" valign="top"><img src="https://raw.githubusercontent.com/Chrism1412/rezeptbuch-card/main/docs/screenshots/willkommen.png" alt="Willkommens-Ansicht, wenn die Rezeptliste noch fehlt, mit dem Knopf Jetzt automatisch einrichten"></td>
+  </tr>
+</table>
+
 ## Funktionen
 
 - Rezepte anlegen, bearbeiten, löschen, nach Kategorie/Suchbegriff filtern
