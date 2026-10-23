@@ -206,6 +206,279 @@ function leererPayload(zusatz = {}) {
 }
 
 // ---------------------------------------------------------------------
+// Tests für 2.3.0: Sprachdateien nachladen, Einrichtung, Sicherung, Fotos
+// ---------------------------------------------------------------------
+async function testSprachdateienWerdenNachgeladen(browser) {
+  console.log("\nTest: Sprachdateien werden bei Bedarf nachgeladen (und Deutsch bleibt Fallback)");
+  const page = await neueTestUmgebung(browser, {}, { sprachenVorladen: false });
+  try {
+    const aufgerufen = [];
+    await page.route(/__sprachen__\/.*\.js/, async (route) => {
+      const datei = route.request().url().split("/").pop().split("?")[0];
+      aufgerufen.push(datei);
+      const pfad = path.join(WURZEL, datei);
+      if (fs.existsSync(pfad)) await route.fulfill({ status: 200, contentType: "application/javascript", body: fs.readFileSync(pfad, "utf8") });
+      else await route.fulfill({ status: 404, body: "" });
+    });
+    const ergebnis = await page.evaluate(async () => {
+      window.__rezeptbuchSprachBasis = "http://rezeptbuch.test/__sprachen__/";
+      const karte = window.__karte;
+      const deutsch = karte._t("allgemein_speichern");
+      karte._hass = { ...window.__fakeHass, language: "ru" };
+      await karte._sprachdateiSicherstellen();
+      const russisch = karte._t("allgemein_speichern");
+      karte._hass = { ...window.__fakeHass, language: "xx" };
+      await karte._sprachdateiSicherstellen();
+      return { deutsch, russisch, unbekannt: karte._t("allgemein_speichern") };
+    });
+    assert(ergebnis.deutsch === "Speichern", "Standard ist Deutsch");
+    assert(ergebnis.russisch === "Сохранить", "Russisch wurde nachgeladen");
+    assert(aufgerufen.some((d) => d === "rezeptbuch-sprache-ru.js"), "Es wurde genau die Russisch-Datei angefordert");
+    assert(ergebnis.unbekannt !== "", "Unbekannte Sprache liefert trotzdem Text");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testEinrichtungsAnsichtUndAutomatischeEinrichtung(browser) {
+  console.log("\nTest: Fehlende Rezeptliste zeigt Einrichtung und legt sie automatisch an");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const aufrufe = [];
+      const hass = {
+        ...window.__fakeHass,
+        states: {},
+        callApi: async (methode, pfad, daten) => {
+          aufrufe.push({ methode, pfad, daten });
+          if (pfad === "config/config_entries/flow") return { type: "form", flow_id: "f1" };
+          hass.states["todo.rezepte"] = { state: "0", attributes: { friendly_name: "Rezepte" } };
+          hass.states["todo.rezepte_backup"] = { state: "0", attributes: { friendly_name: "Rezepte Backup" } };
+          return { type: "create_entry" };
+        },
+      };
+      karte.hass = hass;
+      await karte._rezepteLaden();
+      const nachLaden = { noetig: karte._einrichtungNoetig, html: karte.shadowRoot.innerHTML.includes("Willkommen") };
+      karte.shadowRoot.getElementById("setup-start-btn").click();
+      await karte._warteBis(() => !karte._einrichtungNoetig, 20000);
+      return { nachLaden, noetigDanach: karte._einrichtungNoetig, flowAufrufe: aufrufe.filter((a) => a.pfad === "config/config_entries/flow").length, namen: aufrufe.filter((a) => a.daten && a.daten.todo_list_name).map((a) => a.daten.todo_list_name) };
+    });
+    assert(ergebnis.nachLaden.noetig === true, "Einrichtung ist nötig, wenn die Liste fehlt");
+    assert(ergebnis.nachLaden.html, "Willkommens-Ansicht wird gezeigt");
+    assert(ergebnis.noetigDanach === false, "Nach der Einrichtung ist die Liste da");
+    assert(ergebnis.flowAufrufe >= 1 && ergebnis.namen.includes("Rezepte"), "Liste 'Rezepte' wurde per Config-Flow angelegt");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testEinrichtungNurFuerAdmins(browser) {
+  console.log("\nTest: Einrichtung ohne Admin-Rechte zeigt nur Hinweis");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte.hass = { ...window.__fakeHass, user: { id: "u2", name: "Gast", is_admin: false }, states: {}, callApi: async () => { throw new Error("darf nicht aufgerufen werden"); } };
+      await karte._rezepteLaden();
+      return { noetig: karte._einrichtungNoetig, knopf: !!karte.shadowRoot.getElementById("setup-start-btn") };
+    });
+    assert(ergebnis.noetig === true, "Einrichtung wird erkannt");
+    assert(ergebnis.knopf === false, "Nicht-Admins sehen keinen Einrichten-Knopf");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testAutomatischeSicherungEinmalProTagUndBeschneiden(browser) {
+  console.log("\nTest: Automatische Sicherung - einmal pro Tag, letzte 14, ohne Base64-Fotos");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Suppe", payload: leererPayload({ image: "data:image/jpeg;base64,AAAA" }) });
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const sicherungen = [];
+      for (let i = 1; i <= 14; i++) sicherungen.push({ uid: "alt-" + i, summary: "sicherung-2020-01-" + String(i).padStart(2, "0"), description: "{}" });
+      const dienste = [];
+      karte.hass = {
+        ...window.__fakeHass,
+        states: { "todo.rezepte": { state: "1", attributes: {} }, "todo.rezepte_backup": { state: "14", attributes: {} } },
+        callService: async (domain, service, daten) => {
+          if (daten.entity_id === "todo.rezepte_backup") {
+            dienste.push({ service, daten });
+            if (service === "add_item") sicherungen.push({ uid: "neu", summary: daten.item, description: daten.description });
+            if (service === "remove_item") { const i = sicherungen.findIndex((s) => s.uid === daten.item); if (i >= 0) sicherungen.splice(i, 1); }
+            return;
+          }
+          return window.__fakeHass.callService(domain, service, daten);
+        },
+        connection: { sendMessagePromise: async (m) => (m.entity_id === "todo.rezepte_backup" ? { items: sicherungen.map((s) => ({ ...s })) } : window.__fakeHass.connection.sendMessagePromise(m)) },
+      };
+      karte._autoSicherungTag = null;
+      const erste = await karte._autoSicherungPruefen(false);
+      const zweite = await karte._autoSicherungPruefen(false);
+      const neu = sicherungen.find((s) => s.uid === "neu");
+      return {
+        erste, zweite,
+        anzahl: sicherungen.length,
+        aeltesteEntfernt: !sicherungen.some((s) => s.uid === "alt-1"),
+        ohneBase64: neu && !neu.description.includes("base64"),
+        hatRezept: neu && JSON.parse(neu.description).rezepte.length === 1,
+        addAufrufe: dienste.filter((d) => d.service === "add_item").length,
+      };
+    });
+    assert(ergebnis.erste === true && ergebnis.zweite === false, "Es wird nur einmal pro Tag gesichert");
+    assert(ergebnis.addAufrufe === 1, "Genau ein Sicherungs-Eintrag angelegt");
+    assert(ergebnis.anzahl === 14 && ergebnis.aeltesteEntfernt, "Die älteste Sicherung wurde entfernt (maximal 14)");
+    assert(ergebnis.ohneBase64, "Base64-Fotos sind nicht in der Sicherung");
+    assert(ergebnis.hatRezept, "Rezept ist in der Sicherung enthalten");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testSicherungWiederherstellenErgaenztNurFehlendes(browser) {
+  console.log("\nTest: Wiederherstellen ergänzt nur fehlende Rezepte und überschreibt nichts");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Suppe", payload: leererPayload({ steps: ["Neu bearbeitet"] }) });
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const item = { uid: "s1", summary: "sicherung-2026-01-01", description: JSON.stringify({ rezepte: [
+        { title: "Suppe", servings: 4, category: "Suppe", ingredients: [], steps: ["Alt"] },
+        { title: "Kuchen", servings: 8, category: "Dessert", ingredients: [], steps: ["Backen"] },
+      ] }) };
+      const anzahl = await karte._sicherungErgaenzen(item);
+      await karte._rezepteLaden();
+      const suppe = karte._rezepte.find((r) => r.title === "Suppe");
+      return { anzahl, titel: karte._rezepte.map((r) => r.title).sort(), schritte: suppe.steps };
+    });
+    assert(ergebnis.anzahl === 1, "Genau ein fehlendes Rezept wurde ergänzt");
+    assert(ergebnis.titel.join() === "Kuchen,Suppe", "Kuchen ist wieder da");
+    assert(ergebnis.schritte[0] === "Neu bearbeitet", "Bestehendes Rezept bleibt unverändert");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testHinweisFensterStattAlert(browser) {
+  console.log("\nTest: Hinweise erscheinen als Fenster in der Karte (kein alert)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      let alertGerufen = false;
+      window.alert = () => { alertGerufen = true; };
+      const karte = window.__karte;
+      karte._hinweis("Testmeldung 123");
+      const sichtbar = !!karte.shadowRoot.getElementById("hinweis-modal") && karte.shadowRoot.getElementById("hinweis-modal").textContent.includes("Testmeldung 123");
+      karte._render();
+      const nachRender = !!karte.shadowRoot.getElementById("hinweis-modal");
+      return { alertGerufen, sichtbar, nachRender };
+    });
+    assert(!ergebnis.alertGerufen, "window.alert wird nicht benutzt");
+    assert(ergebnis.sichtbar, "Hinweis wird im Karten-Fenster angezeigt");
+    assert(ergebnis.nachRender, "Hinweis übersteht ein erneutes Rendern");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testFotoUploadInBilderspeicherUndMehrereFotos(browser) {
+  console.log("\nTest: Foto-Upload in den HA-Bilderspeicher, Thumbnails und mehrere Fotos");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      const id = "0123456789abcdef0123456789abcdef";
+      karte._hass = { ...window.__fakeHass, fetchWithAuth: async () => ({ ok: true, json: async () => ({ id }) }) };
+      const pixel = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=";
+      const url = await karte._fotoHochladen(pixel);
+      karte._hass = { ...window.__fakeHass, fetchWithAuth: async () => ({ ok: true, json: async () => ({ id: "<script>" }) }) };
+      const boese = await karte._fotoHochladen(pixel);
+      karte._hass = { ...window.__fakeHass, fetchWithAuth: async () => ({ ok: false }) };
+      const fehler = await karte._fotoHochladen(pixel);
+      const attr = karte._bildAttribute(url, "200px");
+      const fotos = karte._rezeptFotos({ image: "a", images: ["b", "c"] });
+      return { url, boese, fehler, attr, fotos, klein: karte._bildSrc(url, 256) };
+    });
+    assert(ergebnis.url === "/api/image/serve/0123456789abcdef0123456789abcdef/original", "Upload liefert die Bildadresse");
+    assert(ergebnis.boese === null, "Ungültige ID wird abgelehnt");
+    assert(ergebnis.fehler === null, "Fehlgeschlagener Upload liefert null (Fallback auf Base64)");
+    assert(ergebnis.klein.endsWith("/256x256"), "Thumbnail-Adresse 256x256");
+    assert(ergebnis.attr.includes("loading=\"lazy\"") && ergebnis.attr.includes("srcset"), "Kachelbild lädt träge und mit srcset");
+    assert(ergebnis.fotos.join() === "a,b,c", "Titelbild zuerst, dann weitere Fotos");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testMehrereFotosWerdenGespeichertUndAngezeigt(browser) {
+  console.log("\nTest: Rezept mit mehreren Fotos speichern und Fotostreifen anzeigen");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._neuesRezeptFormular();
+      await karte._formularSpeichern({
+        title: "Torte", servings: "8", category: "Dessert", ingredients: [], steps: ["Backen"],
+        image: "https://x.test/1.jpg", images: ["https://x.test/2.jpg", "https://x.test/3.jpg"],
+      });
+      const beschr = JSON.parse(window.__speicher[0].description);
+      await karte._rezepteLaden();
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      return {
+        image: beschr.image, images: beschr.images, schema: beschr.schemaVersion,
+        streifen: karte.shadowRoot.querySelectorAll(".foto-streifen img").length,
+        hauptbild: !!karte.shadowRoot.getElementById("detail-hauptbild"),
+      };
+    });
+    assert(ergebnis.image === "https://x.test/1.jpg", "Titelbild gespeichert");
+    assert(ergebnis.images && ergebnis.images.length === 2, "Weitere Fotos gespeichert");
+    assert(ergebnis.schema === 2, "schemaVersion bleibt 2");
+    assert(ergebnis.streifen === 3, "Fotostreifen zeigt alle drei Fotos");
+    assert(ergebnis.hauptbild, "Hauptbild vorhanden");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testUrlImportKnopfUndEinkaufslisteAutomatisch(browser) {
+  console.log("\nTest: URL-Import-Knopf ausgeblendet ohne Skript; Einkaufsliste wird automatisch erkannt");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(() => {
+      const karte = window.__karte;
+      karte._hass = { ...window.__fakeHass, services: { shell_command: {} }, states: { "todo.rezepte": { state: "0", attributes: {} }, "todo.shopping_list": { state: "0", attributes: {} } } };
+      const ohneSkript = karte._urlImportVerfuegbar();
+      karte._hass = { ...karte._hass, services: { shell_command: { rezeptbuch_url_importieren: {} } } };
+      const mitSkript = karte._urlImportVerfuegbar();
+      return { ohneSkript, mitSkript, liste: karte._einkaufslisteEntity(), cfg: karte._config.entity, backup: karte._sicherungsEntity() };
+    });
+    assert(ergebnis.ohneSkript === false && ergebnis.mitSkript === true, "URL-Import nur mit vorhandenem Skript verfügbar");
+    assert(ergebnis.liste === "todo.shopping_list", "Einkaufsliste wird automatisch erkannt");
+    assert(ergebnis.backup === "todo.rezepte_backup", "Sicherungsliste folgt der Rezeptliste");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testEntityIstOptionalMitStandard(browser) {
+  console.log("\nTest: Konfiguration ohne entity verwendet todo.rezepte");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const entity = await page.evaluate(() => {
+      const k = document.createElement("rezeptbuch-card");
+      k.setConfig({});
+      return k._config.entity;
+    });
+    assert(entity === "todo.rezepte", "Standard-Entity ist todo.rezepte");
+  } finally {
+    await page.close();
+  }
+}
+
+// ---------------------------------------------------------------------
 // Test 1: Grundfunktion - neues Rezept über _formularSpeichern anlegen.
 // ---------------------------------------------------------------------
 async function testGrundfunktionNeuesRezept(browser) {
@@ -6535,6 +6808,16 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testKochmodusTimerLaeuftAbUndUeberlebtSchliessen(browser);
     await testKochmodusTimerWirdBeimVerlassenDesRezeptsZurueckgesetzt(browser);
     await testKochmodusWakeLock(browser);
+    await testSprachdateienWerdenNachgeladen(browser);
+    await testEinrichtungsAnsichtUndAutomatischeEinrichtung(browser);
+    await testEinrichtungNurFuerAdmins(browser);
+    await testAutomatischeSicherungEinmalProTagUndBeschneiden(browser);
+    await testSicherungWiederherstellenErgaenztNurFehlendes(browser);
+    await testHinweisFensterStattAlert(browser);
+    await testFotoUploadInBilderspeicherUndMehrereFotos(browser);
+    await testMehrereFotosWerdenGespeichertUndAngezeigt(browser);
+    await testUrlImportKnopfUndEinkaufslisteAutomatisch(browser);
+    await testEntityIstOptionalMitStandard(browser);
   } finally {
     await browser.close();
   }

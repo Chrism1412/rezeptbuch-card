@@ -11,7 +11,7 @@ import globals from "globals";
 
 export default [
   {
-    files: ["rezeptbuch-card.js"],
+    files: ["rezeptbuch-card.js", "rezeptbuch-sprache-*.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "script",

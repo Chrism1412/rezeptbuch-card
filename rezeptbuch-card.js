@@ -9,78 +9,66 @@
   Die Karte selbst braucht dafür KEIN Pyscript und KEIN eigenes Backend -
   nur Home Assistants eingebaute, seit Jahren stabile To-do-Dienste.
 
-  Optionale Zusatz-Skripte (siehe docs/ANLEITUNG-Backup.md), NICHT für den
-  Grundbetrieb der Karte nötig, sondern für automatische Wartungsaufgaben,
-  die absichtlich außerhalb der Karte laufen:
-  - rezeptbuch_backup.py / rezeptbuch_restore.py: tägliches Backup + manuelles
-    Wiederherstellen (shell_command, per REST-API, kein Pyscript).
-  - rezeptbuch_bilder_verarbeiten.py: lagert Rezeptfotos aus dem JSON in
-    echte Dateien unter /config/www/rezeptbuch-bilder/ aus (wird von der
-    Karte nach jedem Foto-Upload automatisch angestoßen).
+  Einrichtung: Die Karte richtet sich weitgehend selbst ein. Fehlt die
+  To-do-Liste (Standard: todo.rezepte), zeigt sie beim ersten Öffnen eine
+  Willkommens-Ansicht; ein Administrator legt die Liste dort mit einem Klick
+  an (inkl. Liste für automatische Sicherungen). Eine Einkaufsliste
+  (todo.einkaufsliste bzw. todo.shopping_list) wird automatisch erkannt,
+  Fotos landen im Home-Assistant-Bilderspeicher, und tägliche Sicherungen
+  schreibt die Karte selbst in die Sicherungsliste (<entity>_backup). Den
+  Stand zeigt der Bereich "Einrichtung & Wartung" in den Einstellungen.
+
+  Nur der "Rezept-URL importieren"-Knopf braucht weiterhin ein Zusatz-
+  Skript (siehe docs/ANLEITUNG-Backup.md) - ohne das Skript blendet die
+  Karte den Knopf aus:
   - rezeptbuch_url_import.py: lädt eine vom Nutzer angegebene Rezept-URL
     serverseitig herunter und liest deren eingebettete schema.org/Recipe-
-    Strukturdaten aus, damit die Karte das Formular automatisch befüllen
-    kann ("Rezept-URL importieren"-Knopf im Formular).
-
-  Voraussetzung:
-  1. Einstellungen -> Geräte & Dienste -> Integrationen -> "+ Integration
-     hinzufügen" -> "Lokale To-do" -> z.B. "Rezepte" anlegen
-     (erzeugt direkt eine Entität wie todo.rezepte)
+    Strukturdaten aus (shell_command rezeptbuch_url_importieren).
+  Die älteren Skripte rezeptbuch_backup.py / rezeptbuch_restore.py /
+  rezeptbuch_bilder_verarbeiten.py sind OPTIONAL und nur noch für
+  bestehende Installationen gedacht.
 
   Installation der Karte - ausführlich mit Screenshots siehe README.md
-  ("Grundinstallation") bzw. docs/ANLEITUNG-Backup.md, hier nur die
-  Kurzfassung:
+  ("Grundinstallation"), hier nur die Kurzfassung:
   Empfohlen über HACS ("Benutzerdefinierte Repositories" -> dieses Repo
   als Kategorie "Dashboard" eintragen -> "Rezeptbuch-Karte" installieren);
-  HACS legt die Datei automatisch ab und trägt die Dashboard-Ressource
+  HACS legt die Dateien automatisch ab und trägt die Dashboard-Ressource
   meist auch gleich selbst ein.
   Alternativ manuell, ganz ohne HACS:
-  1. Diese Datei nach /config/www/rezeptbuch-card.js kopieren
+  1. rezeptbuch-card.js UND alle Dateien rezeptbuch-sprache-*.js (sowie
+     rezeptbuch-jspdf.min.js) in denselben Ordner kopieren,
+     z.B. /config/www/
   2. Einstellungen -> Dashboards -> Ressourcen -> Ressource hinzufügen
      URL: /local/rezeptbuch-card.js   Typ: JavaScript-Modul
   3. Karte hinzufügen mit:
      type: custom:rezeptbuch-card
-     entity: todo.rezepte
-     shopping_list_entity: todo.einkaufsliste   # optional, siehe unten
-
-  Optional: shopping_list_entity zeigt auf eine ZWEITE Lokale To-do-Liste
-  (eigene Integration, siehe docs/ANLEITUNG-Backup.md Abschnitt 18) - erst
-  damit funktioniert der "Einkaufsliste erstellen"-Knopf (Zutaten mehrerer
-  ausgewählter Rezepte bzw. des Wochenplans werden dort angehängt). Ohne
-  diese Angabe funktioniert die Karte unverändert weiter, der Knopf zeigt
-  dann nur einen erklärenden Hinweis statt eines Absturzes.
+     (optional: entity, shopping_list_entity, backup_entity)
 
   ---------------------------------------------------------------------
   INHALTSVERZEICHNIS (grobe Zeilennummern, ändern sich mit jedem Release
   etwas - dient zur schnellen Orientierung, nicht als exakte Referenz):
 
-    68    Übersetzungen (UEBERSETZUNGEN, alle 25 Sprachblöcke)
-    7018  class RezeptbuchCard - Beginn
-      7019   Konstruktor (Grundzustand aller internen Felder)
-      7127   Sprache/Übersetzung (_sprache, _t)
-      7318   hass-Setter (Einstiegspunkt bei jedem HA-Update)
-      7347   Update-Hinweis über GitHub-Releases (_updatePruefen)
-      7409   Ressourcen-Versions-Warnung (_ressourcenVersionPruefen)
-      7478   Laden/Speichern: Rezepte, Wochenplan, Kochbücher,
+    113   Übersetzungen (UEBERSETZUNGEN - nur Deutsch; andere Sprachen
+          liegen in rezeptbuch-sprache-<code>.js)
+    543   Nachladen von Sprachdateien/Zusatzdateien (SPRACH_LADEVERSUCHE,
+          kartenOrdnerErmitteln, skriptLaden)
+    1453  class RezeptbuchCard - Beginn
+      1570   Sprache/Übersetzung (_sprache, _t)
+      1759   hass-Setter (Einstiegspunkt bei jedem HA-Update)
+      1826   Update-Hinweis über GitHub-Releases (_updatePruefen)
+      1990   Laden/Speichern: Rezepte, Wochenplan, Kochbücher,
              Kategorien, Einstellungen (die "versteckten Marker-Items")
-      7750   Rezept-Hilfsfunktionen (Migration, Bearbeitungsrechte,
-             Bewertungen/Sterne, Kommentare)
-      7978   Einkaufsliste (_einkaufslisteAggregieren/-Erstellen)
-      8053   Statistik ("Hast du zubereitet?"-Auswertung)
-      8149   Kochmodus (inkl. Timer, Screen-Wake-Lock)
-      8321   Rezept-Formular (Neu/Bearbeiten/Löschen, Bildkompression,
-             Speichern)
-      8531   Mengen-Skalierung nach Portionen, Sortierung, Filter
-      8634   _render() - zentraler Render-Dispatcher (wählt je nach
-             _ansicht die passende _render*-Methode unten)
-      9124   _renderListe() - Rezeptübersicht (inkl. Kategorie-Chips,
-             Update-/Ressourcen-Version-Banner)
-      9823   PDF-Export (Einzel- und Sammel-PDF, jsPDF, Wasserzeichen,
-             Deckblatt-Collage)
-      10743  _renderDetail() - Detailansicht eines Rezepts
-      11033  _renderWochenplan() - Wochenplan-Ansicht
-      11128  _renderFormular() - Formular zum Anlegen/Bearbeiten
-    11650 customElements.define(...) - Ende
+      2714   Einkaufsliste (_einkaufslisteAggregieren/-Erstellen)
+      2801   Statistik ("Hast du zubereitet?"-Auswertung)
+      2881   Einrichtung & Wartung: Listen anlegen, Hinweis-Fenster,
+             Foto-Upload, automatische Sicherung, Einstellungs-Bereich
+      3460   Kochmodus (inkl. Timer, Screen-Wake-Lock)
+      3753   Rezept-Formular (Speichern, mehrere Fotos)
+      4314   _render() - zentraler Render-Dispatcher (wählt je nach
+             _ansicht die passende _render*-Methode)
+      4896   _renderListe() - Rezeptübersicht
+      5916   PDF-Export (Einzel- und Sammel-PDF, jsPDF, Deckblatt)
+    (weiter unten: _renderDetail, _renderWochenplan, _renderFormular)
 
   Bei größeren Änderungen gerne kurz mit "grep -n" die aktuellen
   Zeilennummern der betroffenen Methode(n) neu prüfen, statt sich blind
@@ -652,7 +640,7 @@ const MAX_FOTOS = 6;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "2.2.0";
+const CARD_VERSION = "2.3.0";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v2.0.0".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";

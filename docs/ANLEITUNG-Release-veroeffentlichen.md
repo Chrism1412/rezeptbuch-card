@@ -91,6 +91,11 @@ Auf `github.com/Chrism1412/rezeptbuch-card` → Reiter **"Releases"**
   `CHANGELOG.md` (Abschnitt `## [2.0.0] - ...` ohne die
   Versions-/Datumszeile selbst, der Rest lässt sich direkt
   hineinkopieren - GitHub rendert das Markdown genauso)
+- **Dateien anhängen (ab 2.3.0 wichtig):** unten im Feld "Attach binaries"
+  ALLE Dateien `rezeptbuch-card.js`, `rezeptbuch-sprache-*.js` (alle 26) und
+  `rezeptbuch-jspdf.min.js` hineinziehen. HACS lädt, sobald ein Release
+  Dateien enthält, genau diese herunter - fehlen die Sprachdateien dort,
+  zeigt die Karte nur Deutsch.
 - **"Set as the latest release"** angehakt lassen (Standard) - genau
   dieses Flag ist es, was die von der Karte abgefragte
   `/releases/latest`-API liefert
@@ -136,6 +141,9 @@ GitHub-Releases, nicht nach reinen Tags).
 - [ ] Auf GitHub unter "Releases" eine echte Release-Seite aus dem Tag
       erstellen (nicht nur den Tag pushen!), Beschreibung aus
       `CHANGELOG.md` übernehmen, "Set as the latest release" angehakt
+- [ ] Beim Erstellen der Release-Seite alle `rezeptbuch-*.js`-Dateien als
+      Release-Dateien anhängen (Karte, alle Sprachdateien, jsPDF)
+- [ ] `node test/sprachen-pruefen.js` ohne Fehler
 - [ ] "Actions" prüfen: beide Workflows grün
 - [ ] Optional: Update-Hinweis in der Karte und/oder HACS-Update
       stichprobenartig testen

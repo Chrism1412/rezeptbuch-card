@@ -4,6 +4,45 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.3.0] - 2026-10-23
+
+### Hinzugefügt
+- **Die Karte richtet sich selbst ein**: Fehlt die Rezept-Liste, zeigt die
+  Karte eine Willkommens-Ansicht; ein Administrator legt die Liste (und eine
+  Liste für Sicherungen) mit einem Klick an. `entity` ist jetzt optional
+  (Standard `todo.rezepte`). Eine Einkaufsliste (`todo.einkaufsliste` bzw.
+  `todo.shopping_list`) wird automatisch erkannt.
+- **Automatische Sicherung ohne Skript**: höchstens einmal täglich schreibt
+  die Karte eine Sicherung in die Sicherungsliste (die letzten 14 bleiben).
+  Wiederherstellen ergänzt nur fehlende Rezepte und überschreibt nichts.
+- **Bereich "Einrichtung & Wartung"** in den Einstellungen: Status der Listen,
+  Sicherung (jetzt sichern, wiederherstellen, automatisch an/aus), Fotos und
+  URL-Import.
+- **Mehrere Fotos pro Rezept** (bis zu 6) mit Titelbild-Auswahl und
+  Fotostreifen in der Detailansicht.
+- **Fotos im Bilderspeicher von Home Assistant**: neue Fotos werden dorthin
+  hochgeladen (kleine Vorschaubilder, träges Laden); bestehende Base64-Fotos
+  lassen sich per Knopf auslagern. Das Bild-Skript ist nicht mehr nötig.
+- **Neue Sprachen**: Russisch und Türkisch.
+- Test `test/sprachen-pruefen.js` prüft alle Sprachdateien auf Vollständigkeit.
+
+### Geändert
+- **Sprachen ausgelagert**: `rezeptbuch-card.js` enthält nur noch Deutsch
+  (statt 905 KB nur noch rund 360 KB); jede andere Sprache liegt in einer
+  eigenen Datei `rezeptbuch-sprache-<code>.js` und wird bei Bedarf
+  nachgeladen. Fehlt eine Datei, zeigt die Karte Deutsch.
+  **Beim manuellen Installieren müssen diese Dateien mit in den Ordner**
+  (bei HACS geschieht das automatisch).
+- Meldungen erscheinen als Fenster in der Karte statt als Browser-`alert`.
+- Der URL-Import-Knopf wird ausgeblendet, solange das Skript nicht
+  eingerichtet ist.
+- Das Skript-Backup und die Bild-Skripte sind nur noch optional.
+
+### Entfernt
+- Die Texte `formular_label_bild`, `formular_bild_hinweis`,
+  `formular_bild_vorhanden_hinweis`, `fehler_config_entity_fehlt`
+  (ersetzt durch die neuen Foto- und Einrichtungs-Texte).
+
 ## [2.2.0] - 2026-10-08
 
 ### Hinzugefügt

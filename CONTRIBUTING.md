@@ -92,31 +92,35 @@ Deutsch und Englisch wurden KI-generiert und noch nicht von
 Muttersprachler:innen gegengelesen - Korrekturen per Issue oder Pull Request
 sind ausdrücklich willkommen.
 
-Für eine 25. Sprache (z.B. eine Nicht-EU-Sprache, oder eine RTL-Sprache wie
-Arabisch oder Hebräisch) braucht es dafür KEINE neue Datei und KEINEN
-Build-Schritt, nur Ergänzungen in `rezeptbuch-card.js` selbst - nach exakt
-demselben Muster wie die bestehenden 24 Sprachen:
+Seit Version 2.3.0 stehen Russisch (`ru`) und Türkisch (`tr`) ebenfalls zur
+Verfügung. Für eine weitere Sprache (z.B. eine andere Nicht-EU-Sprache oder
+eine RTL-Sprache wie Arabisch oder Hebräisch) wird **eine neue kleine Datei**
+angelegt - `rezeptbuch-card.js` selbst enthält nur Deutsch und bleibt dabei
+unangetastet:
 
-1. In der `UEBERSETZUNGEN`-Tabelle nahe des Dateianfangs einen neuen
-   Sprachschlüssel (z.B. `tr` für Türkisch) mit demselben Aufbau wie
-   `de`/`en` ergänzen - JEDER Schlüssel aus `de` muss dort eine Übersetzung
-   bekommen, sonst greift beim Rendern automatisch der deutsche Rückfall aus
-   `RezeptbuchCard._t()` (kein Fehler, aber eine unvollständig übersetzte
-   Oberfläche). Ein kurzes Node-Skript, das `Object.keys()` aller
-   Sprachblöcke vergleicht, hilft beim Prüfen auf Vollständigkeit (271
-   Schlüssel je Sprache, Stand 2.2.0).
-2. Den neuen Sprachcode in `UNTERSTUETZTE_SPRACHEN` (direkt unterhalb von
-   `UEBERSETZUNGEN`) ergänzen, damit `RezeptbuchCard._sprache()` die neue
-   Sprache auch tatsächlich ERKENNT: aktuell fällt dort jede nicht in
-   `UNTERSTUETZTE_SPRACHEN` enthaltene Sprache automatisch auf "en" zurück
-   (mangels weiterer Übersetzungen).
-3. Neuen Regressionstest in `test/rezeptbuch-card.test.js` ergänzen (analog
-   zu `testInternationalisierung`/`testWeitereEuSprachen`):
-   `window.__karte._hass.language` auf den neuen Sprachcode setzen, neu
-   rendern (`window.__karte._render()` bzw. `await window.__karte._zurListe()`),
-   ein paar repräsentative Texte prüfen. Bei einer RTL-Sprache zusätzlich
-   prüfen, ob am Wurzelelement ein passendes `dir="rtl"` gesetzt werden muss
-   (aktuell nicht der Fall, da alle 24 eingebauten Sprachen LTR sind).
+1. Eine bestehende Sprachdatei (z.B. `rezeptbuch-sprache-pl.js`) nach
+   `rezeptbuch-sprache-<code>.js` kopieren (`<code>` = Sprachcode von Home
+   Assistant, z.B. `ar`; die Datei liegt im Hauptordner des Repos, weil HACS
+   nur dort liegende `.js`-Dateien mit ausliefert) und ALLE Texte
+   übersetzen. Aufbau: `texte` (jeder Schlüssel aus `UEBERSETZUNGEN.de`,
+   mit denselben `{{Platzhaltern}}`) und `zutaten` (die 70 Namen der
+   Umrechnungstabelle in derselben Reihenfolge wie `UMRECHNUNGSTABELLE_NAMEN.de`).
+   Die Datei registriert sich selbst über
+   `(window.__rezeptbuchSprachen = window.__rezeptbuchSprachen || {}).<code> = {...}`
+   und ist bewusst ein normales Skript (kein JSON, kein ES-Modul).
+2. Den Sprachcode in `UNTERSTUETZTE_SPRACHEN` (in `rezeptbuch-card.js`)
+   ergänzen, damit `RezeptbuchCard._sprache()` die Sprache erkennt: jede dort
+   nicht enthaltene Sprache fällt auf "en" zurück.
+3. `node test/sprachen-pruefen.js` ausführen: prüft, dass jede Sprachdatei
+   genau dieselben Schlüssel wie `de` hat (aktuell 312), dass die
+   Platzhalter übereinstimmen und alle im Code benutzten Schlüssel
+   existieren.
+4. Die Datei in `eslint.config.js` ist bereits über das Muster
+   `rezeptbuch-sprache-*.js` abgedeckt; bei einer RTL-Sprache zusätzlich
+   prüfen, ob am Wurzelelement ein `dir="rtl"` nötig ist (aktuell nicht der
+   Fall, alle eingebauten Sprachen sind LTR).
+5. Beim Veröffentlichen die neue Datei als Release-Datei mit anhängen (siehe
+   `docs/ANLEITUNG-Release-veroeffentlichen.md`).
 
 ## Verhaltenskodex
 

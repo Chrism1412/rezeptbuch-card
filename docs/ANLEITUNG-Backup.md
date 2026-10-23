@@ -8,6 +8,14 @@ Konflikt-Schutz beim gleichzeitigen Bearbeiten (Abschnitt 10), den
 CDN-unabhängigen PDF-Export (Abschnitt 11) und die automatisierte Testsuite
 (Abschnitt 12) ab.
 
+> **Hinweis ab Version 2.3.0:** Die Karte erledigt Sicherung (täglich, in
+> eine eigene To-do-Liste) und Foto-Ablage (Bilderspeicher von Home
+> Assistant) jetzt selbst und legt benötigte Listen automatisch an (siehe
+> Bereich "Einrichtung & Wartung" in den Einstellungen). Die Skripte in
+> dieser Anleitung sind deshalb **optional** und nur für bestehende
+> Installationen gedacht; nur der **Rezept-URL-Import** braucht weiterhin
+> sein Skript.
+
 ## Warum v2? (wichtig, falls du die erste Version schon eingerichtet hattest)
 
 Die erste Version übergab alle Rezeptdaten (inkl. Base64-kodierter Fotos) über eine

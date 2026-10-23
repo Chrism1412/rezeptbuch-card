@@ -202,7 +202,7 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
   sie einen wegklickbaren Warnhinweis - ein Zeichen dafür, dass andere
   Geräte unter derselben URL sonst weiterhin die alte, zwischengespeicherte
   Datei bekommen würden. Rein lokal (kein Netzwerkzugriff)
-- **Mehrsprachige Oberfläche (alle 24 offiziellen EU-Sprachen + Schwiizerdütsch)**:
+- **Mehrsprachige Oberfläche (alle 24 offiziellen EU-Sprachen + Schwiizerdütsch, Russisch und Türkisch)**:
   die Kartensprache wird automatisch anhand der in Home Assistant
   eingestellten Sprache erkannt - bei Deutsch (und wenn die Sprache nicht
   ermittelt werden kann) bleibt alles wie gewohnt Deutsch, jede andere
@@ -210,8 +210,12 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
   Niederländisch, Englisch, Estnisch, Finnisch, Französisch, Griechisch,
   Ungarisch, Irisch, Italienisch, Lettisch, Litauisch, Maltesisch,
   Polnisch, Portugiesisch, Rumänisch, Slowakisch, Slowenisch, Spanisch,
-  Schwedisch) sowie Schwiizerdütsch wird direkt in ihrer eigenen Sprache
-  angezeigt, jede sonstige Sprache zeigt Englisch als Rückfall
+  Schwedisch) sowie Schwiizerdütsch, Russisch und Türkisch wird direkt in
+  ihrer eigenen Sprache angezeigt, jede sonstige Sprache zeigt Englisch als
+  Rückfall. Die Hauptdatei enthält nur Deutsch; jede weitere Sprache liegt
+  in einer eigenen kleinen Datei (`rezeptbuch-sprache-<code>.js`) und wird
+  nur geladen, wenn sie gebraucht wird - die Karte bleibt dadurch klein
+  und schnell.
 
 ## Installation
 
@@ -227,26 +231,38 @@ Reicht für den vollen Funktionsumfang der Karte selbst - kein Python, kein
    Repositories"** → URL `https://github.com/Chrism1412/rezeptbuch-card`
    eintragen, Kategorie **"Dashboard"** auswählen → hinzufügen.
 2. Die "Rezeptbuch-Karte" in HACS suchen und installieren. HACS legt die
-   Datei dabei automatisch unter `/config/www/community/rezeptbuch-card/`
-   ab und trägt die Dashboard-Ressource meist auch gleich selbst ein. Falls
+   Dateien (die Karte `rezeptbuch-card.js` und die kleinen Sprachdateien
+   `rezeptbuch-sprache-*.js`) dabei automatisch unter
+   `/config/www/community/rezeptbuch-card/` ab und trägt die
+   Dashboard-Ressource meist auch gleich selbst ein. Falls
    die Karte nach einem Neuladen trotzdem nicht gefunden wird, unter
    Einstellungen → Dashboards → ⋮ → Ressourcen prüfen, ob dort ein Eintrag
    mit `/hacsfiles/rezeptbuch-card/rezeptbuch-card.js` existiert - falls
    nicht, manuell mit genau dieser URL hinzufügen (Typ
    **JavaScript-Modul**).
-3. Für den Offline-PDF-Export zusätzlich `rezeptbuch-jspdf.min.js` aus
-   diesem Repository nach `/config/www/community/rezeptbuch-card/`
-   kopieren (HACS installiert davon nur die eigentliche Karte automatisch).
-4. In Home Assistant eine **Lokale To-do-Liste** anlegen: Einstellungen →
-   Geräte & Dienste → **Integrationen** → unten rechts "+ Integration
-   hinzufügen" → "Lokale To-do" auswählen → z. B. Name "Rezepte" (erzeugt
-   direkt die Entity `todo.rezepte`, kein separater Helfer-Schritt nötig).
-5. Karte einbinden, z. B. im YAML-Modus eines Dashboards:
+3. Für den Offline-PDF-Export liegt `rezeptbuch-jspdf.min.js` im selben
+   Ordner. Falls HACS sie nicht mit installiert hat, die Datei aus diesem
+   Repository nach `/config/www/community/rezeptbuch-card/` kopieren (ohne
+   sie lädt die Karte jsPDF ersatzweise aus dem Internet).
+4. Karte einbinden, z. B. im YAML-Modus eines Dashboards:
 
    ```yaml
    type: custom:rezeptbuch-card
-   entity: todo.rezepte
    ```
+
+   Das war's. **Alles Weitere richtet die Karte selbst ein**: Gibt es die
+   Rezept-Liste (`todo.rezepte`) noch nicht, zeigt die Karte eine
+   Willkommens-Ansicht, und ein Administrator legt die Liste dort mit einem
+   Klick an (inklusive einer Liste für die automatischen Sicherungen).
+   Eine vorhandene Einkaufsliste (`todo.einkaufsliste` oder
+   `todo.shopping_list`) wird automatisch erkannt, Fotos werden im
+   Bilderspeicher von Home Assistant abgelegt (auf Wunsch in mehreren
+   Exemplaren pro Rezept, bis zu 6), und täglich schreibt die Karte
+   automatisch eine Sicherung. Was bereits eingerichtet ist, zeigt der
+   Bereich **"Einrichtung & Wartung"** in den Einstellungen (⚙️) - dort
+   lässt sich Fehlendes mit einem Klick nachholen und eine Sicherung
+   wiederherstellen. Eigene Namen sind weiterhin möglich:
+   `entity`, `shopping_list_entity` und `backup_entity`.
 
 **Tipp bei sehr schmaler Darstellung (z. B. am PC/großen Monitor):** Die
 Karte selbst passt sich responsiv an ihre Umgebung an, kann aber nicht
@@ -302,6 +318,12 @@ ist aber weniger zuverlässig (wirkt z. B. nicht auf andere Geräte/die
 Companion-App).
 
 ### Optionale Python-Skripte
+
+Seit Version 2.3.0 braucht die Karte **keines** dieser Skripte mehr für
+Sicherung und Fotos (das erledigt sie selbst, siehe oben). Nur der
+**Rezept-URL-Import** benötigt weiterhin das Skript `rezeptbuch_url_import.py`
+(ohne es blendet die Karte den Knopf aus). Die übrigen Skripte sind für
+bestehende Installationen gedacht und bleiben nutzbar.
 
 Jede der folgenden Funktionen ist unabhängig von den anderen - nur
 einrichten, was tatsächlich gebraucht wird. Gemeinsame Basis für alle:
@@ -475,7 +497,8 @@ items_per_page: 12
 ## Projektstruktur
 
 ```
-rezeptbuch-card.js          Die Karte selbst (einzige Pflicht-Datei)
+rezeptbuch-card.js          Die Karte selbst (enthält nur Deutsch)
+rezeptbuch-sprache-*.js     Eine Datei je weiterer Sprache (werden bei Bedarf nachgeladen)
 rezeptbuch-jspdf.min.js     Lokal gehostetes jsPDF für Offline-PDF-Export (optional)
 scripts/                    Optionale Python-Hilfsskripte (Backup, Restore,
                              Fotoauslagerung, URL-Import) - alle ohne
@@ -494,6 +517,7 @@ test/                       Playwright-Testsuite für die Karte (echter Browser)
 npm install
 npm run lint                                            # ESLint
 npm test                                                # Karten-Testsuite (Playwright)
+node test/sprachen-pruefen.js                            # Sprachdateien auf Vollständigkeit prüfen
 python3 scripts/test_rezeptbuch_url_import.py           # Tests für den URL-Import
 python3 scripts/test_rezeptbuch_backup_bereinigen.py    # Tests für die Backup-Bereinigung
 ```
