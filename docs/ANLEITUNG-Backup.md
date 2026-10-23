@@ -1191,7 +1191,7 @@ Abschnitt brauchen:
 
 ## 40. Übersetzung korrigieren (Issue-Vorlage)
 
-Fällt dir in einer der 25 Sprachen eine falsche, unnatürliche oder
+Fällt dir in einer der 27 Sprachen eine falsche, unnatürliche oder
 fehlende Übersetzung auf, gibt es dafür jetzt auf GitHub unter "Issues" →
 "New issue" eine eigene, strukturierte Vorlage "Übersetzung korrigieren" -
 mit Sprachauswahl, der betroffenen Stelle (bzw. dem technischen

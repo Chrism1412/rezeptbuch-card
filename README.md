@@ -28,9 +28,9 @@ Fotos, Bewertungen, Kommentare, Koch-Historie und PDF-Export inklusive.
 JSON in der `description` eines Eintrags einer ganz normalen Home-Assistant-
 **Lokalen To-do-Liste** (`local_todo`). Kein Pyscript, kein eigenes Backend,
 keine Datenbank, keine externe Cloud - nur Home Assistants eingebaute,
-seit Jahren stabile To-do-Dienste. Ein paar optionale Python-Skripte (siehe
-unten) ergänzen Backup, Fotoverwaltung und automatischen Rezept-Import,
-sind für den Grundbetrieb der Karte aber nicht erforderlich.
+seit Jahren stabile To-do-Dienste. Die Karte richtet sich weitgehend selbst
+ein (Listen, tägliche Sicherung, Foto-Ablage). Nur der automatische
+Rezept-Import per Link braucht ein optionales Python-Skript (siehe unten).
 
 ## Inhalt
 
@@ -120,6 +120,19 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
   (gilt inzwischen auch für die Einstellungen selbst, z.B. wenn zwei Geräte
   fast gleichzeitig unterschiedliche Schalter/eigene Umrechnungstabelle-
   Zutaten ändern)
+- **Selbst einrichten und Listen verwalten**: fehlt die Rezeptliste, legt ein
+  Administrator sie direkt in der Karte mit einem Klick an. Im Bereich
+  "Einrichtung & Wartung" der Einstellungen (⚙️) gibt es je eine Karte für
+  Rezeptliste, Einkaufsliste und Sicherung: eine vorhandene To-do-Liste
+  auswählen oder mit eigenem Namen eine neue anlegen und sofort verwenden
+  (gilt auf allen Geräten, hat Vorrang vor `shopping_list_entity` bzw.
+  `backup_entity`). Dort stehen auch "Jetzt sichern", "Wiederherstellen"
+  (ergänzt nur fehlende Rezepte) und der Schalter für die tägliche
+  automatische Sicherung (die letzten 14 bleiben).
+- **Mehrere Fotos pro Rezept**: bis zu 6, mit Titelbild-Auswahl (⭐) und
+  Fotostreifen in der Detailansicht. Fotos liegen im Bilderspeicher von Home
+  Assistant (Vorschaubilder, träges Laden); die Karte meldet, wenn ein Foto
+  nicht dort abgelegt werden konnte.
 - **Automatische Einkaufsliste**: mehrere Rezepte auswählen und ihre
   Zutaten (gleicher Name+Einheit summiert) in eine zweite To-do-Liste
   übertragen - alternativ lässt sich auch direkt im einzelnen Rezept per
@@ -155,7 +168,7 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
   sofern in den Einstellungen eine "Kategorie für amerikanische Rezepte"
   ausgewählt ist, zusätzlich direkt in passenden Rezepten und im
   Kochmodus) öffnet ein durchsuchbares Nachschlage-Popup mit Richtwerten
-  in Gramm für 70 gängige Zutaten (je 1 Tasse/EL/TL) in allen 25 Sprachen -
+  in Gramm für 70 gängige Zutaten (je 1 Tasse/EL/TL) in allen 27 Sprachen -
   rein informativ, nie automatisch auf ein Rezept angewendet. Fehlende
   Zutaten lassen sich selbst ergänzen und nachträglich bearbeiten ("+
   Eigene Zutat hinzufügen" bzw. ✎)
@@ -446,10 +459,10 @@ rezeptbuch_backup_bereinigen:
 ```
 
 **Einkaufsliste + Wochenplan** brauchen dagegen **keinen** `shell_command`
-und **keine** `scripts.yaml` - nur eine zweite Lokale To-do-Liste (über
-Integrationen angelegt, z. B. `todo.einkaufsliste`) sowie das zusätzliche
-Kartenfeld
-`shopping_list_entity:`:
+und **keine** `scripts.yaml` - nur eine zweite Lokale To-do-Liste. Seit 2.3.0
+legst du sie am einfachsten in den Einstellungen der Karte an ("Einrichtung &
+Wartung"); alternativ per Integrationen (z. B. `todo.einkaufsliste`) und
+dem Kartenfeld `shopping_list_entity:`:
 
 ```yaml
 type: custom:rezeptbuch-card
