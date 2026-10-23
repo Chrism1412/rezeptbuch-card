@@ -459,9 +459,6 @@ const UEBERSETZUNGEN = {
     setup_fehler: "Einrichtung fehlgeschlagen: {{fehler}}",
     einrichtung_abschnitt_titel: "Einrichtung & Wartung",
     einrichtung_abschnitt_hinweis: "Hier siehst du, was das Rezeptbuch bereits selbst erledigt hat – und kannst Fehlendes mit einem Klick nachholen.",
-    einrichtung_rezeptliste: "Rezeptliste: {{entity}}",
-    einrichtung_einkaufsliste: "Einkaufsliste: {{entity}}",
-    einrichtung_einkaufsliste_fehlt: "Keine Einkaufsliste gefunden",
     einrichtung_sicherung_vorhanden: "Tägliche Sicherung: zuletzt {{datum}} ({{anzahl}} gespeichert)",
     einrichtung_sicherung_noch_keine: "noch keine",
     einrichtung_sicherung_fehlt: "Tägliche Sicherung ist noch nicht eingerichtet",
@@ -486,14 +483,19 @@ const UEBERSETZUNGEN = {
     // Listen zuordnen / neue Listen anlegen (ab 2.3.0)
     foto_upload_ausgewichen: "Hinweis: {{anzahl}} Foto(s) konnten nicht im Home-Assistant-Bilderspeicher abgelegt werden ({{grund}}) und werden stattdessen direkt im Rezept gespeichert.",
     foto_speichern_fehlt: "Achtung: Es wurden nur {{ist}} von {{soll}} Fotos gespeichert. Bitte das Rezept erneut öffnen und prüfen.",
-    listen_titel: "Listen zuordnen",
-    listen_hinweis: "Wähle, welche To-do-Liste als Einkaufsliste und welche für Sicherungen dient – oder lege direkt eine neue an. Gilt für alle Geräte.",
+    listen_rolle_rezepte: "Rezeptliste",
+    listen_erklaerung_rezepte: "Hier sind alle Rezepte und Einstellungen gespeichert. Sie wird in der Karten-Konfiguration festgelegt (entity) und lässt sich hier nicht ändern.",
+    listen_erklaerung_einkauf: "Hierhin kommen die Zutaten, wenn du eine Einkaufsliste aus Rezepten oder dem Wochenplan erstellst.",
+    listen_erklaerung_sicherung: "Hier legt die Karte täglich eine Sicherung aller Rezepte ab.",
+    listen_verwendete: "Andere vorhandene Liste verwenden:",
+    listen_neu_label: "Oder eine neue Liste anlegen:",
+    listen_keine_gewaehlt: "– noch keine Liste –",
+    listen_titel: "Listen: Wo speichert die Karte was?",
+    listen_hinweis: "Jede Aufgabe hat eine eigene To-do-Liste in Home Assistant. Du kannst für jede eine vorhandene Liste wählen oder darunter eine neue anlegen – sie wird dann sofort benutzt. Gilt für alle Geräte.",
     listen_rolle_einkauf: "Einkaufsliste",
     listen_rolle_sicherung: "Sicherung",
-    listen_automatisch: "– automatisch –",
-    listen_per_konfiguration: "in der Karten-Konfiguration festgelegt",
     listen_neu_name_placeholder: "Name der neuen Liste",
-    listen_neu_btn: "+ Neue Liste anlegen",
+    listen_neu_btn: "+ Anlegen und verwenden",
     listen_zugewiesen: "Liste „{{name}}“ angelegt und zugewiesen.",
     sicherung_modal_titel: "Sicherung wiederherstellen",
     sicherung_modal_hinweis: "Fehlende Rezepte werden aus der gewählten Sicherung ergänzt. Bereits vorhandene Rezepte bleiben unverändert.",
@@ -2885,9 +2887,9 @@ class RezeptbuchCard extends HTMLElement {
   // vorhandene ("todo.einkaufsliste" bzw. Home Assistants eingebaute
   // "todo.shopping_list").
   _einkaufslisteEntity() {
-    if (this._config.shopping_list_entity) return this._config.shopping_list_entity;
     const gewaehlt = this._einstellungen && this._einstellungen.listen && this._einstellungen.listen.einkauf;
     if (gewaehlt && this._entitaetVorhanden(gewaehlt) !== false) return gewaehlt;
+    if (this._config.shopping_list_entity) return this._config.shopping_list_entity;
     for (const kandidat of ["todo.einkaufsliste", "todo.shopping_list"]) {
       if (this._entitaetVorhanden(kandidat) === true) return kandidat;
     }
@@ -2896,9 +2898,9 @@ class RezeptbuchCard extends HTMLElement {
 
   // To-do-Liste für die automatischen Sicherungen (Standard: Rezeptliste + "_backup").
   _sicherungsEntity() {
-    if (this._config.backup_entity) return this._config.backup_entity;
     const gewaehlt = this._einstellungen && this._einstellungen.listen && this._einstellungen.listen.sicherung;
     if (gewaehlt && this._entitaetVorhanden(gewaehlt) !== false) return gewaehlt;
+    if (this._config.backup_entity) return this._config.backup_entity;
     return `${this._config.entity}_backup`;
   }
 
@@ -3266,38 +3268,65 @@ class RezeptbuchCard extends HTMLElement {
     const bereich = this.shadowRoot.getElementById("einrichtung-bereich");
     if (!bereich) return;
     const admin = this._istAdmin();
+    const e = (x) => this._escape(x);
+    const knopf = (id, text) => `<button type="button" class="sekundaer klein" id="${id}">${text}</button>`;
     const zeile = (symbol, text, knoepfe) => `
       <div class="einrichtung-zeile" style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin:6px 0; text-align:left;">
         <span>${symbol} ${text}</span>
         ${knoepfe ? `<span style="display:flex; gap:6px; flex-wrap:wrap;">${knoepfe}</span>` : ""}
       </div>`;
-    const knopf = (id, text) => `<button type="button" class="sekundaer klein" id="${id}">${text}</button>`;
-    const e = (x) => this._escape(x);
+    const kartenStil = "border:1px solid var(--rb-rand, #d8d8d8); border-radius:12px; padding:12px; margin:10px 0; text-align:left;";
 
-    const einkauf = this._einkaufslisteEntity();
-    let sicherungZeile;
+    // Eine Karte je Aufgabe: Was ist das, welche Liste wird benutzt, andere
+    // Liste wählen oder eine neue anlegen.
+    const alleListen = Object.keys((this._hass && this._hass.states) || {})
+      .filter((k) => k.startsWith("todo.") && k !== this._config.entity)
+      .sort();
+    const listenKarte = (rolle, symbol, titel, erklaerung, aktuell, extra) => {
+      const gibtEs = !!aktuell && this._entitaetVorhanden(aktuell) !== false;
+      const optionen = `<option value="">${this._t("listen_keine_gewaehlt")}</option>` +
+        alleListen.map((k) => `<option value="${e(k)}" ${k === aktuell ? "selected" : ""}>${e(this._anzeigenameAusEntity(k))} (${e(k)})</option>`).join("");
+      return `
+      <div class="liste-karte" style="${kartenStil}">
+        <div><strong>${symbol} ${titel}</strong></div>
+        <p class="hinweis" style="margin:4px 0 8px;">${erklaerung}</p>
+        ${gibtEs ? `<div>✅ ${e(aktuell)}</div>` : `<div>⚠️ ${this._t("listen_keine_gewaehlt")}</div>`}
+        ${admin ? `
+          <label style="display:block; margin-top:8px;">${this._t("listen_verwendete")}</label>
+          <select id="liste-select-${rolle}" style="width:100%; box-sizing:border-box;">${optionen}</select>
+          <label style="display:block; margin-top:8px;">${this._t("listen_neu_label")}</label>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <input type="text" id="liste-neu-name-${rolle}" placeholder="${this._t("listen_neu_name_placeholder")}" style="flex:1; min-width:140px; box-sizing:border-box;">
+            ${knopf(`liste-neu-btn-${rolle}`, this._t("listen_neu_btn"))}
+          </div>` : ""}
+        ${extra || ""}
+      </div>`;
+    };
+
+    // Sicherung: Status, Knöpfe und Automatik gehören in die Sicherungs-Karte.
     let items = null;
     try {
       items = await this._sicherungsItemsLaden();
     } catch (fehler) {
       items = null;
     }
+    let sicherungExtra = "";
     if (items !== null) {
       const letzte = items.length ? items[items.length - 1].summary.slice(10) : this._t("einrichtung_sicherung_noch_keine");
       const aktiv = this._einstellungen.autoSicherung !== false;
-      sicherungZeile = zeile("✅", this._t("einrichtung_sicherung_vorhanden", { datum: e(letzte), anzahl: items.length }),
-        knopf("einrichtung-sicherung-jetzt-btn", this._t("einrichtung_sicherung_jetzt_btn")) +
-        (items.length && admin ? knopf("einrichtung-sicherung-wiederherstellen-btn", this._t("einrichtung_sicherung_wiederherstellen_btn")) : ""))
-        + `<div class="schalter-zeile">
-             <span class="schalter-label">${this._t("einrichtung_sicherung_auto_label")}</span>
-             <label class="schalter-btn ${aktiv ? "schalter-btn-aktiv" : ""}">
-               <input type="checkbox" id="einrichtung-auto-sicherung-schalter" ${aktiv ? "checked" : ""}>
-               <span>${aktiv ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
-             </label>
-           </div>`;
+      sicherungExtra = `<div style="margin-top:10px;">` +
+        zeile("💾", this._t("einrichtung_sicherung_vorhanden", { datum: e(letzte), anzahl: items.length }),
+          knopf("einrichtung-sicherung-jetzt-btn", this._t("einrichtung_sicherung_jetzt_btn")) +
+          (items.length && admin ? knopf("einrichtung-sicherung-wiederherstellen-btn", this._t("einrichtung_sicherung_wiederherstellen_btn")) : "")) +
+        `<div class="schalter-zeile">
+           <span class="schalter-label">${this._t("einrichtung_sicherung_auto_label")}</span>
+           <label class="schalter-btn ${aktiv ? "schalter-btn-aktiv" : ""}">
+             <input type="checkbox" id="einrichtung-auto-sicherung-schalter" ${aktiv ? "checked" : ""}>
+             <span>${aktiv ? this._t("allgemein_an") : this._t("allgemein_aus")}</span>
+           </label>
+         </div></div>`;
     } else {
-      sicherungZeile = zeile("⚠️", this._t("einrichtung_sicherung_fehlt"),
-        admin ? knopf("einrichtung-sicherung-einrichten-btn", this._t("einrichtung_einrichten_btn")) : "");
+      sicherungExtra = `<div style="margin-top:10px;">${zeile("⚠️", this._t("einrichtung_sicherung_fehlt"))}</div>`;
     }
 
     const offeneFotos = this._fotosZaehlenOffen();
@@ -3306,48 +3335,20 @@ class RezeptbuchCard extends HTMLElement {
           admin ? knopf("einrichtung-fotos-auslagern-btn", this._t("einrichtung_fotos_auslagern_btn")) : "")
       : zeile("✅", this._t("einrichtung_fotos_ok"));
 
-    // Listen zuordnen: welche To-do-Liste dient als Einkaufsliste bzw. für
-    // Sicherungen - oder gleich eine neue Liste anlegen (nur Admins).
-    const alleListen = Object.keys((this._hass && this._hass.states) || {})
-      .filter((k) => k.startsWith("todo.") && k !== this._config.entity)
-      .sort();
-    const listenOptionen = (aktuell) =>
-      `<option value="">${this._t("listen_automatisch")}</option>` +
-      alleListen.map((k) => `<option value="${e(k)}" ${k === aktuell ? "selected" : ""}>${e(this._anzeigenameAusEntity(k))} (${e(k)})</option>`).join("");
-    const listenZeile = (rolle, label, festgelegt, aktuell) => `
-      <div class="schalter-zeile" style="flex-wrap:wrap; gap:6px;">
-        <span class="schalter-label">${label}</span>
-        ${festgelegt
-          ? `<span class="hinweis">${e(festgelegt)} – ${this._t("listen_per_konfiguration")}</span>`
-          : `<select id="liste-select-${rolle}" ${admin ? "" : "disabled"}>${listenOptionen(aktuell)}</select>`}
-      </div>`;
-    const listenBlock = `
-      <div style="margin-top:12px;">
-        <strong>${this._t("listen_titel")}</strong>
-        <p class="hinweis">${this._t("listen_hinweis")}</p>
-        ${listenZeile("einkauf", this._t("listen_rolle_einkauf"), this._config.shopping_list_entity, (this._einstellungen.listen || {}).einkauf)}
-        ${listenZeile("sicherung", this._t("listen_rolle_sicherung"), this._config.backup_entity, (this._einstellungen.listen || {}).sicherung)}
-        ${admin ? `<div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-          <input type="text" id="liste-neu-name" placeholder="${this._t("listen_neu_name_placeholder")}" style="flex:1; min-width:140px;">
-          <select id="liste-neu-rolle">
-            <option value="einkauf">${this._t("listen_rolle_einkauf")}</option>
-            <option value="sicherung">${this._t("listen_rolle_sicherung")}</option>
-          </select>
-          <button type="button" class="sekundaer klein" id="liste-neu-btn">${this._t("listen_neu_btn")}</button>
-        </div>` : ""}
-      </div>`;
-
     bereich.innerHTML =
-      zeile("✅", this._t("einrichtung_rezeptliste", { entity: e(this._config.entity) })) +
-      (einkauf
-        ? zeile("✅", this._t("einrichtung_einkaufsliste", { entity: e(einkauf) }))
-        : zeile("⚠️", this._t("einrichtung_einkaufsliste_fehlt"), admin ? knopf("einrichtung-einkauf-btn", this._t("einrichtung_einrichten_btn")) : "")) +
-      sicherungZeile +
+      `<div><strong>${this._t("listen_titel")}</strong></div>
+       <p class="hinweis" style="margin:4px 0;">${this._t("listen_hinweis")}</p>` +
+      `<div class="liste-karte" style="${kartenStil}">
+         <div><strong>📖 ${this._t("listen_rolle_rezepte")}</strong></div>
+         <p class="hinweis" style="margin:4px 0 8px;">${this._t("listen_erklaerung_rezepte")}</p>
+         <div>✅ ${e(this._config.entity)}</div>
+       </div>` +
+      listenKarte("einkauf", "🛒", this._t("listen_rolle_einkauf"), this._t("listen_erklaerung_einkauf"), this._einkaufslisteEntity(), "") +
+      listenKarte("sicherung", "💾", this._t("listen_rolle_sicherung"), this._t("listen_erklaerung_sicherung"), this._sicherungsEntity(), sicherungExtra) +
       fotoZeile +
       (this._urlImportVerfuegbar()
         ? zeile("✅", this._t("einrichtung_url_import_ok"))
-        : zeile("ℹ️", this._t("einrichtung_url_import_fehlt"))) +
-      listenBlock;
+        : zeile("ℹ️", this._t("einrichtung_url_import_fehlt")));
 
     const verdrahten = (id, fn) => {
       const el = bereich.querySelector(`#${id}`);
@@ -3363,17 +3364,6 @@ class RezeptbuchCard extends HTMLElement {
         await this._einrichtungBereichAktualisieren();
       });
     };
-    verdrahten("einrichtung-einkauf-btn", async () => {
-      const name = "Einkaufsliste";
-      await this._localTodoAnlegen(name, "todo.einkaufsliste");
-      this._hinweis(this._t("einrichtung_angelegt", { entity: "todo.einkaufsliste" }));
-    });
-    verdrahten("einrichtung-sicherung-einrichten-btn", async () => {
-      const entity = this._sicherungsEntity();
-      await this._localTodoAnlegen(`${this._anzeigenameAusEntity(this._config.entity)} Backup`, entity);
-      await this._autoSicherungPruefen(true);
-      this._hinweis(this._t("einrichtung_angelegt", { entity }));
-    });
     verdrahten("einrichtung-sicherung-jetzt-btn", async () => {
       const ok = await this._autoSicherungPruefen(true);
       this._hinweis(this._t(ok ? "einrichtung_sicherung_erstellt" : "einrichtung_sicherung_fehlgeschlagen"));
@@ -3388,29 +3378,32 @@ class RezeptbuchCard extends HTMLElement {
     });
     for (const rolle of ["einkauf", "sicherung"]) {
       const auswahl = bereich.querySelector(`#liste-select-${rolle}`);
-      if (!auswahl) continue;
-      auswahl.addEventListener("change", async (ev) => {
-        const wert = ev.target.value;
-        await this._einstellungenAktualisieren((stand) => ({ ...stand, listen: { ...(stand.listen || {}), [rolle]: wert } }));
-        if (rolle === "sicherung") this._autoSicherungTag = null;
-        await this._einrichtungBereichAktualisieren();
+      if (auswahl) {
+        auswahl.addEventListener("change", async (ev) => {
+          const wert = ev.target.value;
+          await this._einstellungenAktualisieren((stand) => ({ ...stand, listen: { ...(stand.listen || {}), [rolle]: wert } }));
+          if (rolle === "sicherung") {
+            this._autoSicherungTag = null;
+            await this._autoSicherungPruefen(true);
+          }
+          await this._einrichtungBereichAktualisieren();
+        });
+      }
+      verdrahten(`liste-neu-btn-${rolle}`, async () => {
+        const name = (bereich.querySelector(`#liste-neu-name-${rolle}`).value || "").trim();
+        if (!name) {
+          this._hinweis(this._t("umrechnungstabelle_eigene_name_fehlt"));
+          return;
+        }
+        const entity = await this._localTodoAnlegen(name, null);
+        await this._einstellungenAktualisieren((stand) => ({ ...stand, listen: { ...(stand.listen || {}), [rolle]: entity } }));
+        if (rolle === "sicherung") {
+          this._autoSicherungTag = null;
+          await this._autoSicherungPruefen(true);
+        }
+        this._hinweis(this._t("listen_zugewiesen", { name }));
       });
     }
-    verdrahten("liste-neu-btn", async () => {
-      const name = (bereich.querySelector("#liste-neu-name").value || "").trim();
-      if (!name) {
-        this._hinweis(this._t("umrechnungstabelle_eigene_name_fehlt"));
-        return;
-      }
-      const rolle = bereich.querySelector("#liste-neu-rolle").value === "sicherung" ? "sicherung" : "einkauf";
-      const entity = await this._localTodoAnlegen(name, null);
-      await this._einstellungenAktualisieren((stand) => ({ ...stand, listen: { ...(stand.listen || {}), [rolle]: entity } }));
-      if (rolle === "sicherung") {
-        this._autoSicherungTag = null;
-        await this._autoSicherungPruefen(true);
-      }
-      this._hinweis(this._t("listen_zugewiesen", { name }));
-    });
     const autoSchalter = bereich.querySelector("#einrichtung-auto-sicherung-schalter");
     if (autoSchalter) {
       autoSchalter.addEventListener("change", async (ev) => {

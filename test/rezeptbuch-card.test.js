@@ -508,10 +508,9 @@ async function testListenZuordnenUndNeueListeAnlegen(browser) {
       auswahl.dispatchEvent(new Event("change"));
       await karte._warteBis(() => karte._einstellungen.listen && karte._einstellungen.listen.einkauf === "todo.meine_liste", 5000);
       const gewaehlt = karte._einkaufslisteEntity();
-      await karte._warteBis(() => bereich.querySelector("#liste-neu-name") && bereich.querySelector("#liste-select-einkauf").value === "todo.meine_liste", 5000);
-      bereich.querySelector("#liste-neu-name").value = "Party-Einkauf";
-      bereich.querySelector("#liste-neu-rolle").value = "einkauf";
-      bereich.querySelector("#liste-neu-btn").click();
+      await karte._warteBis(() => bereich.querySelector("#liste-neu-name-einkauf") && bereich.querySelector("#liste-select-einkauf").value === "todo.meine_liste", 5000);
+      bereich.querySelector("#liste-neu-name-einkauf").value = "Party-Einkauf";
+      bereich.querySelector("#liste-neu-btn-einkauf").click();
       await karte._warteBis(() => karte._einstellungen.listen.einkauf === "todo.party_einkauf", 20000);
       return { optionen, gewaehlt, neu: karte._einkaufslisteEntity(), namen: apiAufrufe.filter((a) => a && a.todo_list_name).map((a) => a.todo_list_name), gespeichert: JSON.parse(window.__speicher.find((i) => i.summary.includes("einstellungen")).description).listen };
     });
