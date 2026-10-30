@@ -138,6 +138,8 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
   `backup_entity`). Dort stehen auch "Jetzt sichern", "Wiederherstellen"
   (ergänzt nur fehlende Rezepte) und der Schalter für die tägliche
   automatische Sicherung (die letzten 14 bleiben).
+- **Schriftgröße einstellbar**: vier Stufen für die ganze Karte (je Gerät,
+  z. B. größer auf dem Küchen-Tablet) und im Kochmodus zusätzlich A−/A+.
 - **Mehrere Fotos pro Rezept**: bis zu 6, mit Titelbild-Auswahl (⭐) und
   Fotostreifen in der Detailansicht. Fotos liegen im Bilderspeicher von Home
   Assistant (Vorschaubilder, träges Laden); die Karte meldet, wenn ein Foto

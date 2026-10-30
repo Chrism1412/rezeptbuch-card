@@ -524,6 +524,37 @@ async function testListenZuordnenUndNeueListeAnlegen(browser) {
   }
 }
 
+async function testSchriftgroesseEinstellbar(browser) {
+  console.log("\nTest: Schriftgröße (ganze Karte und Kochmodus) ist einstellbar");
+  const page = await neueTestUmgebung(browser);
+  try {
+    await rezeptDirektAnlegen(page, { title: "Suppe", payload: leererPayload({ steps: ["Kochen", "Servieren"] }) });
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._schriftMemo = {};
+      karte._render();
+      const vorher = karte.shadowRoot.querySelector("style").textContent.includes("font-size: 100%");
+      karte.shadowRoot.querySelector('[data-schrift-stufe="2"]').click();
+      const nachher = karte.shadowRoot.querySelector("style").textContent.includes("font-size: 130%");
+      const gespeichert = String(karte._schriftMemo.rezeptbuch_schrift);
+      karte._rezeptOeffnen(karte._rezepte[0]);
+      karte.shadowRoot.getElementById("kochmodus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-schrift-plus-btn").click();
+      karte.shadowRoot.getElementById("kochmodus-schrift-plus-btn").click();
+      const skala = karte.shadowRoot.getElementById("kochmodus-overlay").style.getPropertyValue("--kb-koch-skala");
+      karte.shadowRoot.getElementById("kochmodus-schrift-minus-btn").click();
+      const skalaMinus = karte.shadowRoot.getElementById("kochmodus-overlay").style.getPropertyValue("--kb-koch-skala");
+      return { vorher, nachher, gespeichert, skala, skalaMinus };
+    });
+    assert(ergebnis.vorher, "Standard: 100 %");
+    assert(ergebnis.nachher && ergebnis.gespeichert === "2", "Stufe 'Sehr groß' setzt 130 % und wird gemerkt");
+    assert(ergebnis.skala === "1.6", "Zweimal A+ im Kochmodus ergibt Faktor 1.6");
+    assert(ergebnis.skalaMinus === "1.3", "A- verkleinert wieder");
+  } finally {
+    await page.close();
+  }
+}
+
 // ---------------------------------------------------------------------
 // Test 1: Grundfunktion - neues Rezept über _formularSpeichern anlegen.
 // ---------------------------------------------------------------------
@@ -6865,6 +6896,7 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testUrlImportKnopfUndEinkaufslisteAutomatisch(browser);
     await testEntityIstOptionalMitStandard(browser);
     await testListenZuordnenUndNeueListeAnlegen(browser);
+    await testSchriftgroesseEinstellbar(browser);
   } finally {
     await browser.close();
   }

@@ -267,6 +267,14 @@ const UEBERSETZUNGEN = {
     zufallsrezept_einstellung_schalter_label: "Zufallsrezept-Knopf in der Übersicht anzeigen",
     umrechnungstabelle_kopf_einstellung_schalter_label: "Umrechnungstabelle-Knopf in der Übersicht anzeigen",
     umrechnungstabelle_kopf_einstellung_hinweis: "Bei der eingestellten Kategorie für amerikanische Rezepte erscheint die Umrechnungstabelle im Rezept und im Kochmodus weiterhin, auch wenn dieser Knopf hier ausgeschaltet ist.",
+    schrift_titel: "Schriftgröße",
+    schrift_hinweis: "Gilt nur für dieses Gerät, z. B. größer auf dem Küchen-Tablet. Im Kochmodus lässt sich die Schrift zusätzlich mit A− und A+ ändern.",
+    schrift_normal: "Normal",
+    schrift_gross: "Groß",
+    schrift_sehr_gross: "Sehr groß",
+    schrift_riesig: "Riesig",
+    kochmodus_schrift_kleiner_aria: "Schrift im Kochmodus verkleinern",
+    kochmodus_schrift_groesser_aria: "Schrift im Kochmodus vergrößern",
     farben_abschnitt_titel: "Farben",
     farben_hinweis: "Passe einzelne Farben der Karte an. Mit Alles zurücksetzen kehren alle Farben zum Standard zurück.",
     farben_akzent_label: "Hauptfarbe (Knöpfe, aktive Filter)",
@@ -679,6 +687,9 @@ const KATEGORIEN_MARKER = "__rezeptbuch_kategorien__";
 // _erfassungAktiv/_einstellungenModal*) - bewusst als eigenes, verstecktes
 // Item statt einer Kartenoption in der Dashboard-YAML, damit man dafür
 // nie die YAML-Konfiguration bearbeiten muss.
+// Schriftgrößen-Stufen (ganze Karte in Prozent, Kochmodus als Faktor).
+const SCHRIFT_PROZENT = [100, 115, 130, 150];
+const KOCH_SCHRIFT_SKALA = [1, 1.3, 1.6, 2, 2.5];
 const EINSTELLUNGEN_MARKER = "__rezeptbuch_einstellungen__";
 
 // "schluessel" bleibt der interne, sprachunabhängige Speicherschlüssel
@@ -2871,6 +2882,41 @@ class RezeptbuchCard extends HTMLElement {
   // das betrifft nur noch den optionalen URL-Import.
   // =====================================================================
 
+  // Schriftgröße: gilt je Gerät (Tablet in der Küche braucht mehr als das
+  // Handy) und wird deshalb im Browser gespeichert, nicht in den
+  // geteilten Einstellungen. Stufe 0-3 für die ganze Karte, 0-4 für den
+  // Kochmodus.
+  _schriftStufeLesen(schluessel, max) {
+    const memo = (this._schriftMemo || {})[schluessel];
+    if (memo !== undefined && memo >= 0 && memo <= max) return memo;
+    try {
+      const wert = parseInt(localStorage.getItem(schluessel), 10);
+      if (wert >= 0 && wert <= max) return wert;
+    } catch (fehler) {
+      // localStorage evtl. nicht verfügbar - dann gilt die Standardgröße
+    }
+    return 0;
+  }
+
+  _schriftStufeSetzen(schluessel, stufe) {
+    // Zusätzlich im Speicher halten: wirkt auch dann sofort, wenn der
+    // Browser kein localStorage erlaubt (dann gilt es bis zum Neuladen).
+    this._schriftMemo = { ...(this._schriftMemo || {}), [schluessel]: stufe };
+    try {
+      localStorage.setItem(schluessel, String(stufe));
+    } catch (fehler) {
+      // nicht dauerhaft speicherbar
+    }
+  }
+
+  _schriftProzent() {
+    return SCHRIFT_PROZENT[this._schriftStufeLesen("rezeptbuch_schrift", SCHRIFT_PROZENT.length - 1)];
+  }
+
+  _kochSchriftSkala() {
+    return KOCH_SCHRIFT_SKALA[this._schriftStufeLesen("rezeptbuch_kochschrift", KOCH_SCHRIFT_SKALA.length - 1)];
+  }
+
   _istAdmin() {
     return !!(this._hass && this._hass.user && this._hass.user.is_admin);
   }
@@ -4428,6 +4474,7 @@ class RezeptbuchCard extends HTMLElement {
       <style>
         :host {
           display: block;
+          font-size: ${this._schriftProzent()}%;
           /* Barrierefreiheit/Kontrast: #c1652f (die ursprüngliche Farbe) kam auf
              weißem Grund nur auf einen Kontrast von 4.06:1 - WCAG AA verlangt für
              normal großen Text mindestens 4.5:1, betroffen wären u.a. die weiße
@@ -4869,7 +4916,7 @@ class RezeptbuchCard extends HTMLElement {
         }
         .kochmodus-schliessen-btn:focus-visible { outline:2px solid var(--kb-terrakotta); outline-offset:2px; }
         .kochmodus-werkzeuge { display:flex; gap:8px; margin:10px 0; flex-wrap:wrap; }
-        .kochmodus-werkzeuge button.aktiv { background: var(--kb-terrakotta); color: var(--kb-auf-akzent); }
+        button.sekundaer.aktiv, .kochmodus-werkzeuge button.aktiv { background: var(--kb-terrakotta); color: var(--kb-auf-akzent); }
         .kochmodus-zutaten-panel {
           background: var(--kb-terrakotta-hell); border-radius:12px; padding:12px 16px;
           margin-bottom:10px; max-height:32vh; overflow-y:auto; flex-shrink:0;
@@ -4905,7 +4952,7 @@ class RezeptbuchCard extends HTMLElement {
           text-align:center; overflow-y:auto; padding:10px 4px; min-height:0;
         }
         .kochmodus-schritt-anzeige { color: var(--secondary-text-color); font-size:0.9em; margin-bottom:10px; }
-        .kochmodus-schritt-text { font-size:1.4em; line-height:1.45; color: var(--primary-text-color); max-width:640px; }
+        .kochmodus-schritt-text { font-size:calc(1.4em * var(--kb-koch-skala, 1)); line-height:1.45; color: var(--primary-text-color); max-width:min(960px, 100%); }
         .kochmodus-fuss { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:12px; flex-shrink:0; }
         .kochmodus-nav-btn { font-size:1.2em; padding:14px 22px; border-radius:12px; flex:1; max-width:160px; }
         .kochmodus-nav-btn:disabled { opacity:0.35; }
@@ -5186,6 +5233,12 @@ class RezeptbuchCard extends HTMLElement {
                 <option value="">${this._t("us_kategorie_einstellung_keine")}</option>
                 ${this._alleKategorien().map((k) => `<option value="${this._escape(k)}" ${this._einstellungen.amerikanischeKategorie === k ? "selected" : ""}>${this._escape(this._kategorieLabel(k))}</option>`).join("")}
               </select>
+            </div>
+            <hr class="detail-trenner trenner-voll">
+            <h4 style="margin:0 0 6px; text-align:left;">${this._t("schrift_titel")}</h4>
+            <p class="hinweis" style="text-align:left; margin-top:0;">${this._t("schrift_hinweis")}</p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              ${["schrift_normal", "schrift_gross", "schrift_sehr_gross", "schrift_riesig"].map((k, i) => `<button type="button" class="sekundaer klein${this._schriftStufeLesen("rezeptbuch_schrift", SCHRIFT_PROZENT.length - 1) === i ? " aktiv" : ""}" data-schrift-stufe="${i}" style="font-size:${SCHRIFT_PROZENT[i]}%;">${this._t(k)}</button>`).join("")}
             </div>
             <hr class="detail-trenner trenner-voll">
             <h4 style="margin:0 0 6px; text-align:left;">${this._t("farben_abschnitt_titel")}</h4>
@@ -5708,6 +5761,12 @@ class RezeptbuchCard extends HTMLElement {
         this._render();
       });
     }
+    this.shadowRoot.querySelectorAll("[data-schrift-stufe]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this._schriftStufeSetzen("rezeptbuch_schrift", parseInt(btn.dataset.schriftStufe, 10));
+        this._render();
+      });
+    });
     this.shadowRoot.querySelectorAll(".farben-feld").forEach((feld) => {
       feld.addEventListener("change", async (ev) => {
         const schluessel = ev.target.dataset.farbe;
@@ -6971,12 +7030,14 @@ class RezeptbuchCard extends HTMLElement {
         </div>
 
         ${schritte.length ? `
-        <div class="kochmodus-overlay" id="kochmodus-overlay" style="display:${this._kochmodusAktiv ? "flex" : "none"};">
+        <div class="kochmodus-overlay" id="kochmodus-overlay" style="display:${this._kochmodusAktiv ? "flex" : "none"}; --kb-koch-skala:${this._kochSchriftSkala()};">
           <div class="kochmodus-kopf">
             <h3 class="kochmodus-titel">${this._escape(r.title)}</h3>
             <button class="kochmodus-schliessen-btn" id="kochmodus-schliessen-btn" aria-label="${this._t("kochmodus_schliessen_aria")}">✕</button>
           </div>
           <div class="kochmodus-werkzeuge">
+            <button class="sekundaer klein" id="kochmodus-schrift-minus-btn" aria-label="${this._t("kochmodus_schrift_kleiner_aria")}">A−</button>
+            <button class="sekundaer klein" id="kochmodus-schrift-plus-btn" aria-label="${this._t("kochmodus_schrift_groesser_aria")}">A+</button>
             <button class="sekundaer klein${this._kochmodusZutatenSichtbar ? " aktiv" : ""}" id="kochmodus-zutaten-btn" aria-label="${this._t(this._kochmodusZutatenSichtbar ? "kochmodus_zutaten_aus_aria" : "kochmodus_zutaten_ein_aria")}">🥕 ${this._t("abschnitt_titel_zutaten")}</button>
             <button class="sekundaer klein${this._kochmodusTimerPanelSichtbar ? " aktiv" : ""}" id="kochmodus-timer-btn" aria-label="${this._t(this._kochmodusTimerPanelSichtbar ? "kochmodus_timer_aus_aria" : "kochmodus_timer_ein_aria")}">⏱${this._kochmodusTimerEndeZeitpunkt ? ` <span class="kochmodus-timer-badge">${this._kochmodusTimerRestAnzeige()}</span>` : this._kochmodusTimerAbgelaufen ? " ⏰" : ""}</button>
             ${this._istAmerikanischeKategorie(r.category) ? `<button class="sekundaer klein" id="kochmodus-umrechnungstabelle-btn">${this._t("umrechnungstabelle_btn")}</button>` : ""}
@@ -7076,6 +7137,16 @@ class RezeptbuchCard extends HTMLElement {
     const kochmodusSchliessenBtn = this.shadowRoot.getElementById("kochmodus-schliessen-btn");
     if (kochmodusSchliessenBtn) {
       kochmodusSchliessenBtn.addEventListener("click", () => this._kochmodusSchliessen());
+    }
+    for (const [id, schritt] of [["kochmodus-schrift-minus-btn", -1], ["kochmodus-schrift-plus-btn", 1]]) {
+      const btn = this.shadowRoot.getElementById(id);
+      if (btn) {
+        btn.addEventListener("click", () => {
+          const neu = Math.min(KOCH_SCHRIFT_SKALA.length - 1, Math.max(0, this._schriftStufeLesen("rezeptbuch_kochschrift", KOCH_SCHRIFT_SKALA.length - 1) + schritt));
+          this._schriftStufeSetzen("rezeptbuch_kochschrift", neu);
+          this._render();
+        });
+      }
     }
     const kochmodusZutatenBtn = this.shadowRoot.getElementById("kochmodus-zutaten-btn");
     if (kochmodusZutatenBtn) {

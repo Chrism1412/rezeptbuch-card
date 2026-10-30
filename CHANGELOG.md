@@ -30,6 +30,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 - **Foto-Kontrolle beim Speichern**: Die Karte meldet jetzt, wenn Fotos nicht
   im Bilderspeicher abgelegt werden konnten (mit Grund) oder nach dem
   Speichern nicht vollständig im Rezept ankommen.
+- **Schriftgröße einstellbar** (Wunsch aus Issue #13): in den Einstellungen
+  (⚙️) gibt es vier Stufen für die ganze Karte (Normal, Groß, Sehr groß,
+  Riesig), gespeichert je Gerät - z. B. größer auf dem Küchen-Tablet. Im
+  Kochmodus lässt sich die Schrift zusätzlich mit A− und A+ in fünf Stufen
+  ändern; der Schritt-Text nutzt dabei die volle Breite.
 - **Neue Sprachen**: Russisch und Türkisch.
 - Test `test/sprachen-pruefen.js` prüft alle Sprachdateien auf Vollständigkeit.
 
