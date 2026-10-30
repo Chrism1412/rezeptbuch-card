@@ -314,6 +314,7 @@
     schrift_riesig: "Devasa",
     kochmodus_schrift_kleiner_aria: "Pişirme modunda metni küçült",
     kochmodus_schrift_groesser_aria: "Pişirme modunda metni büyüt",
+    fehler_datei_ausgeben: "Dosya bu cihazda indirilemedi ({{fehler}}). İpucu: Ayarlar’da (⚙️) “Kurulum ve bakım” altında “Şimdi yedekle” ile yedeği doğrudan Home Assistant’a kaydedebilirsiniz.",
     listen_titel: "Listeler: kart neyi nerede saklar?",
     listen_hinweis: "Her görevin Home Assistant’ta kendi yapılacaklar listesi vardır. Her biri için mevcut bir liste seçebilir veya aşağıda yeni bir liste oluşturabilirsiniz – hemen kullanılır. Tüm cihazlar için geçerlidir.",
     listen_rolle_einkauf: "Alışveriş listesi",

@@ -314,6 +314,7 @@
     schrift_riesig: "Tohutu",
     kochmodus_schrift_kleiner_aria: "Vähenda teksti toiduvalmistamise režiimis",
     kochmodus_schrift_groesser_aria: "Suurenda teksti toiduvalmistamise režiimis",
+    fehler_datei_ausgeben: "Faili ei õnnestunud sellel seadmel alla laadida ({{fehler}}). Näpunäide: Seadetes (⚙️) jaotises „Seadistus ja hooldus“ saab nupuga „Varunda kohe“ salvestada varukoopia otse Home Assistanti.",
     listen_titel: "Loendid: mida kaart kuhu salvestab?",
     listen_hinweis: "Igal ülesandel on oma ülesandeloend Home Assistantis. Igaühe jaoks saad valida olemasoleva loendi või luua allpool uue – seda kasutatakse kohe. Kehtib kõigile seadmetele.",
     listen_rolle_einkauf: "Ostunimekiri",

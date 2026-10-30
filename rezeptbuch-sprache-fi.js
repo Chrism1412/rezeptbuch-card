@@ -314,6 +314,7 @@
     schrift_riesig: "Valtava",
     kochmodus_schrift_kleiner_aria: "Pienennä tekstiä ruoanlaittotilassa",
     kochmodus_schrift_groesser_aria: "Suurenna tekstiä ruoanlaittotilassa",
+    fehler_datei_ausgeben: "Tiedostoa ei voitu ladata tällä laitteella ({{fehler}}). Vinkki: Asetuksissa (⚙️) kohdassa ”Käyttöönotto ja ylläpito” voit tallentaa varmuuskopion suoraan Home Assistantiin painikkeella ”Varmuuskopioi nyt”.",
     listen_titel: "Listat: mitä kortti tallentaa minne?",
     listen_hinweis: "Jokaisella tehtävällä on oma tehtävälistansa Home Assistantissa. Voit valita kullekin olemassa olevan listan tai luoda alla uuden – se otetaan heti käyttöön. Koskee kaikkia laitteita.",
     listen_rolle_einkauf: "Ostoslista",

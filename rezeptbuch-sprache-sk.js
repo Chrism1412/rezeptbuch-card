@@ -314,6 +314,7 @@
     schrift_riesig: "Obrovské",
     kochmodus_schrift_kleiner_aria: "Zmenšiť text v režime varenia",
     kochmodus_schrift_groesser_aria: "Zväčšiť text v režime varenia",
+    fehler_datei_ausgeben: "Súbor sa na tomto zariadení nepodarilo stiahnuť ({{fehler}}). Tip: v Nastaveniach (⚙️) v časti „Nastavenie a údržba“ môžete tlačidlom „Zálohovať teraz“ uložiť zálohu priamo do Home Assistantu.",
     listen_titel: "Zoznamy: čo karta kam ukladá?",
     listen_hinweis: "Každá úloha má vlastný zoznam úloh v Home Assistante. Pre každú môžete vybrať existujúci zoznam alebo nižšie vytvoriť nový – použije sa okamžite. Platí pre všetky zariadenia.",
     listen_rolle_einkauf: "Nákupný zoznam",

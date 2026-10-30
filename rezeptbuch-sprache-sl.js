@@ -314,6 +314,7 @@
     schrift_riesig: "Ogromno",
     kochmodus_schrift_kleiner_aria: "Pomanjšaj besedilo v načinu kuhanja",
     kochmodus_schrift_groesser_aria: "Povečaj besedilo v načinu kuhanja",
+    fehler_datei_ausgeben: "Datoteke na tej napravi ni bilo mogoče prenesti ({{fehler}}). Namig: v Nastavitvah (⚙️) pod »Nastavitev in vzdrževanje« lahko z »Varnostno kopiraj zdaj« shranite kopijo neposredno v Home Assistant.",
     listen_titel: "Seznami: kaj kartica kam shranjuje?",
     listen_hinweis: "Vsaka naloga ima svoj seznam opravil v Home Assistantu. Za vsako lahko izberete obstoječ seznam ali spodaj ustvarite novega – uporabi se takoj. Velja za vse naprave.",
     listen_rolle_einkauf: "Nakupovalni seznam",

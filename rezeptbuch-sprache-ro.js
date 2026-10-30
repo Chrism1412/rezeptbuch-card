@@ -314,6 +314,7 @@
     schrift_riesig: "Uriaș",
     kochmodus_schrift_kleiner_aria: "Micșorează textul în modul de gătit",
     kochmodus_schrift_groesser_aria: "Mărește textul în modul de gătit",
+    fehler_datei_ausgeben: "Fișierul nu a putut fi descărcat pe acest dispozitiv ({{fehler}}). Sfat: în Setări (⚙️), la „Configurare și întreținere”, cu „Fă copie acum” poți salva o copie de siguranță direct în Home Assistant.",
     listen_titel: "Liste: ce salvează cardul și unde?",
     listen_hinweis: "Fiecare sarcină are propria listă de activități în Home Assistant. Pentru fiecare poți alege o listă existentă sau poți crea una nouă mai jos – se folosește imediat. Se aplică tuturor dispozitivelor.",
     listen_rolle_einkauf: "Listă de cumpărături",

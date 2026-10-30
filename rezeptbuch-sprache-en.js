@@ -314,6 +314,7 @@
     schrift_riesig: "Huge",
     kochmodus_schrift_kleiner_aria: "Decrease text size in cooking mode",
     kochmodus_schrift_groesser_aria: "Increase text size in cooking mode",
+    fehler_datei_ausgeben: "The file could not be downloaded on this device ({{fehler}}). Tip: in Settings (⚙️) under “Setup & maintenance” you can use “Back up now” to store a backup directly in Home Assistant.",
     listen_titel: "Lists: where does the card store what?",
     listen_hinweis: "Each task has its own to-do list in Home Assistant. For each one you can pick an existing list or create a new one below – it is used right away. Applies to all devices.",
     listen_rolle_einkauf: "Shopping list",

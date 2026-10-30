@@ -314,6 +314,7 @@
     schrift_riesig: "Milzīgs",
     kochmodus_schrift_kleiner_aria: "Samazināt tekstu gatavošanas režīmā",
     kochmodus_schrift_groesser_aria: "Palielināt tekstu gatavošanas režīmā",
+    fehler_datei_ausgeben: "Failu šajā ierīcē neizdevās lejupielādēt ({{fehler}}). Padoms: Iestatījumos (⚙️) sadaļā „Iestatīšana un uzturēšana” ar „Dublēt tagad” var saglabāt dublējumu tieši Home Assistant.",
     listen_titel: "Saraksti: ko karte kur saglabā?",
     listen_hinweis: "Katram uzdevumam ir sava uzdevumu saraksts Home Assistant. Katram varat izvēlēties esošu sarakstu vai zemāk izveidot jaunu – to izmanto uzreiz. Attiecas uz visām ierīcēm.",
     listen_rolle_einkauf: "Iepirkumu saraksts",

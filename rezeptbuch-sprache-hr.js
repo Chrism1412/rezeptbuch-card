@@ -314,6 +314,7 @@
     schrift_riesig: "Ogromno",
     kochmodus_schrift_kleiner_aria: "Smanji tekst u načinu kuhanja",
     kochmodus_schrift_groesser_aria: "Povećaj tekst u načinu kuhanja",
+    fehler_datei_ausgeben: "Datoteku nije bilo moguće preuzeti na ovom uređaju ({{fehler}}). Savjet: u Postavkama (⚙️) pod „Postavljanje i održavanje“ možete pomoću „Sigurnosna kopija sada“ spremiti kopiju izravno u Home Assistant.",
     listen_titel: "Popisi: što kartica gdje sprema?",
     listen_hinweis: "Svaki zadatak ima vlastiti popis zadataka u Home Assistantu. Za svaki možete odabrati postojeći popis ili ispod izraditi novi – koristi se odmah. Vrijedi za sve uređaje.",
     listen_rolle_einkauf: "Popis za kupnju",

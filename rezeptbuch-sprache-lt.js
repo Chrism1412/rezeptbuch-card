@@ -314,6 +314,7 @@
     schrift_riesig: "Milžiniškas",
     kochmodus_schrift_kleiner_aria: "Sumažinti tekstą gaminimo režime",
     kochmodus_schrift_groesser_aria: "Padidinti tekstą gaminimo režime",
+    fehler_datei_ausgeben: "Šiame įrenginyje failo atsisiųsti nepavyko ({{fehler}}). Patarimas: Nustatymuose (⚙️) skiltyje „Sąranka ir priežiūra“ mygtuku „Kurti kopiją dabar“ galima išsaugoti kopiją tiesiai „Home Assistant“.",
     listen_titel: "Sąrašai: ką kortelė kur saugo?",
     listen_hinweis: "Kiekviena užduotis turi savo užduočių sąrašą „Home Assistant“. Kiekvienai galite pasirinkti esamą sąrašą arba žemiau sukurti naują – jis naudojamas iškart. Taikoma visiems įrenginiams.",
     listen_rolle_einkauf: "Pirkinių sąrašas",

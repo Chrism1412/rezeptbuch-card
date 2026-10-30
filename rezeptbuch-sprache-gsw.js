@@ -314,6 +314,7 @@
     schrift_riesig: "Riesig",
     kochmodus_schrift_kleiner_aria: "Schrift im Choch-Modus chliiner mache",
     kochmodus_schrift_groesser_aria: "Schrift im Choch-Modus grösser mache",
+    fehler_datei_ausgeben: "D Datei het uf däm Gerät nöd chöne abeglade wärde ({{fehler}}). Tipp: I de Iistellige (⚙️) under «Iirichtig & Wartig» chasch mit «Jetzt sichere» e Sicherig direkt i Home Assistant ablege.",
     listen_titel: "Liste: Wo speichert d Charte was?",
     listen_hinweis: "Jedi Ufgab het e eigeni To-do-Liste i Home Assistant. Du chasch für jedi e vorhandeni Liste wähle oder drunder e neui aalege – si wird sofort bruucht. Gilt für alli Gerät.",
     listen_rolle_einkauf: "Iikaufsliste",

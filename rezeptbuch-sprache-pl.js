@@ -314,6 +314,7 @@
     schrift_riesig: "Ogromny",
     kochmodus_schrift_kleiner_aria: "Zmniejsz tekst w trybie gotowania",
     kochmodus_schrift_groesser_aria: "Powiększ tekst w trybie gotowania",
+    fehler_datei_ausgeben: "Nie udało się pobrać pliku na tym urządzeniu ({{fehler}}). Wskazówka: w Ustawieniach (⚙️) w sekcji „Konfiguracja i konserwacja” przyciskiem „Utwórz kopię teraz” można zapisać kopię zapasową bezpośrednio w Home Assistant.",
     listen_titel: "Listy: co karta gdzie zapisuje?",
     listen_hinweis: "Każde zadanie ma własną listę zadań w Home Assistant. Dla każdego możesz wybrać istniejącą listę lub poniżej utworzyć nową – będzie używana od razu. Dotyczy wszystkich urządzeń.",
     listen_rolle_einkauf: "Lista zakupów",

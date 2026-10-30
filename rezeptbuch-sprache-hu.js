@@ -314,6 +314,7 @@
     schrift_riesig: "Hatalmas",
     kochmodus_schrift_kleiner_aria: "Szöveg kicsinyítése főzés módban",
     kochmodus_schrift_groesser_aria: "Szöveg nagyítása főzés módban",
+    fehler_datei_ausgeben: "A fájlt nem sikerült letölteni ezen az eszközön ({{fehler}}). Tipp: a Beállításokban (⚙️) a „Beállítás és karbantartás” alatt a „Mentés most” gombbal közvetlenül a Home Assistantba menthetsz biztonsági másolatot.",
     listen_titel: "Listák: mit hová ment a kártya?",
     listen_hinweis: "Minden feladatnak saját teendőlistája van a Home Assistantban. Mindegyikhez választhatsz meglévő listát, vagy lent létrehozhatsz újat – azonnal használatba kerül. Minden eszközre érvényes.",
     listen_rolle_einkauf: "Bevásárlólista",

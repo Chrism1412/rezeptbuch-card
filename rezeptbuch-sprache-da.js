@@ -314,6 +314,7 @@
     schrift_riesig: "Kæmpestor",
     kochmodus_schrift_kleiner_aria: "Gør teksten mindre i madlavningstilstand",
     kochmodus_schrift_groesser_aria: "Gør teksten større i madlavningstilstand",
+    fehler_datei_ausgeben: "Filen kunne ikke downloades på denne enhed ({{fehler}}). Tip: I Indstillinger (⚙️) under „Opsætning og vedligehold“ kan du med „Sikkerhedskopiér nu“ gemme en sikkerhedskopi direkte i Home Assistant.",
     listen_titel: "Lister: Hvad gemmer kortet hvor?",
     listen_hinweis: "Hver opgave har sin egen opgaveliste i Home Assistant. Du kan vælge en eksisterende liste for hver eller oprette en ny nedenfor – den bruges med det samme. Gælder for alle enheder.",
     listen_rolle_einkauf: "Indkøbsliste",

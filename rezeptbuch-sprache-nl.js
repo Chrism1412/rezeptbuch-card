@@ -314,6 +314,7 @@
     schrift_riesig: "Enorm",
     kochmodus_schrift_kleiner_aria: "Tekst verkleinen in kookmodus",
     kochmodus_schrift_groesser_aria: "Tekst vergroten in kookmodus",
+    fehler_datei_ausgeben: "Het bestand kon op dit apparaat niet worden gedownload ({{fehler}}). Tip: in Instellingen (⚙️) onder „Inrichten & onderhoud” kun je met „Nu back-uppen” een back-up rechtstreeks in Home Assistant opslaan.",
     listen_titel: "Lijsten: wat slaat de kaart waar op?",
     listen_hinweis: "Elke taak heeft een eigen takenlijst in Home Assistant. Je kunt voor elke taak een bestaande lijst kiezen of hieronder een nieuwe maken – die wordt meteen gebruikt. Geldt voor alle apparaten.",
     listen_rolle_einkauf: "Boodschappenlijst",

@@ -498,6 +498,7 @@ const UEBERSETZUNGEN = {
     listen_verwendete: "Andere vorhandene Liste verwenden:",
     listen_neu_label: "Oder eine neue Liste anlegen:",
     listen_keine_gewaehlt: "– noch keine Liste –",
+    fehler_datei_ausgeben: "Die Datei konnte auf diesem Gerät nicht heruntergeladen werden ({{fehler}}). Tipp: In den Einstellungen (⚙️) unter „Einrichtung & Wartung“ lässt sich mit „Jetzt sichern“ eine Sicherung direkt in Home Assistant ablegen.",
     listen_titel: "Listen: Wo speichert die Karte was?",
     listen_hinweis: "Jede Aufgabe hat eine eigene To-do-Liste in Home Assistant. Du kannst für jede eine vorhandene Liste wählen oder darunter eine neue anlegen – sie wird dann sofort benutzt. Gilt für alle Geräte.",
     listen_rolle_einkauf: "Einkaufsliste",
@@ -3507,7 +3508,7 @@ class RezeptbuchCard extends HTMLElement {
     this.shadowRoot.appendChild(overlay);
   }
 
-  _backupErstellen() {
+  async _backupErstellen() {
     const daten = {
       schemaVersion: 2,
       exportiertAm: new Date().toISOString(),
@@ -3522,15 +3523,61 @@ class RezeptbuchCard extends HTMLElement {
     };
     const text = JSON.stringify(daten, null, 2);
     const blob = new Blob([text], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
     const datum = new Date().toISOString().slice(0, 10);
-    a.download = `rezeptbuch-sicherung-${datum}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    await this._dateiAusgeben(blob, `rezeptbuch-sicherung-${datum}.json`, "application/json", "Rezeptbuch");
+  }
+
+  // Gibt eine Datei an den Nutzer aus - so, dass es auch in der Home-
+  // Assistant-App (WebView) klappt, wo ein unsichtbarer <a download>-Link oft
+  // stillschweigend nichts tut: 1. Teilen-Dialog des Geräts (falls Dateien
+  // geteilt werden können), 2. neues Fenster/System-Browser, 3. klassischer
+  // Download-Link. Ist keine Variante möglich, bekommt der Nutzer einen
+  // Hinweis mit dem Weg über "Jetzt sichern" in den Einstellungen.
+  async _dateiAusgeben(blob, dateiname, mimeType, titel) {
+    try {
+      // Im normalen Browser funktioniert der klassische Download-Link
+      // zuverlässig - nur die Home-Assistant-App (erkennbar am User-Agent)
+      // braucht die Umwege.
+      const inApp = /home ?assistant/i.test(navigator.userAgent || "");
+      if (!inApp) {
+        const urlBrowser = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = urlBrowser;
+        link.download = dateiname;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(urlBrowser), 60000);
+        return true;
+      }
+      if (navigator.canShare) {
+        const datei = new File([blob], dateiname, { type: mimeType });
+        if (navigator.canShare({ files: [datei] })) {
+          try {
+            await navigator.share({ title: titel, files: [datei] });
+            return true;
+          } catch (e) {
+            if (e.name === "AbortError") return true;
+          }
+        }
+      }
+      const url = URL.createObjectURL(blob);
+      const neuesFenster = window.open(url, "_blank");
+      if (!neuesFenster) {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = dateiname;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      return true;
+    } catch (fehler) {
+      console.error("Rezeptbuch: Datei konnte nicht ausgegeben werden", fehler);
+      this._hinweis(this._t("fehler_datei_ausgeben", { fehler: fehler.message || fehler }));
+      return false;
+    }
   }
 
   _rezeptOeffnen(rezept) {

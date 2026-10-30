@@ -314,6 +314,7 @@
     schrift_riesig: "Enorme",
     kochmodus_schrift_kleiner_aria: "Riduci il testo in modalità cucina",
     kochmodus_schrift_groesser_aria: "Ingrandisci il testo in modalità cucina",
+    fehler_datei_ausgeben: "Impossibile scaricare il file su questo dispositivo ({{fehler}}). Suggerimento: in Impostazioni (⚙️), sotto «Configurazione e manutenzione», con «Esegui backup ora» puoi salvare un backup direttamente in Home Assistant.",
     listen_titel: "Liste: cosa salva la scheda e dove?",
     listen_hinweis: "Ogni compito ha un proprio elenco di attività in Home Assistant. Per ciascuno puoi scegliere una lista esistente o crearne una nuova qui sotto – viene usata subito. Vale per tutti i dispositivi.",
     listen_rolle_einkauf: "Lista della spesa",

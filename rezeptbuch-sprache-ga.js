@@ -314,6 +314,7 @@
     schrift_riesig: "Ollmhór",
     kochmodus_schrift_kleiner_aria: "Laghdaigh an téacs sa mhodh cócaireachta",
     kochmodus_schrift_groesser_aria: "Méadaigh an téacs sa mhodh cócaireachta",
+    fehler_datei_ausgeben: "Níorbh fhéidir an comhad a íoslódáil ar an bhfeiste seo ({{fehler}}). Leid: sna Socruithe (⚙️) faoi “Socrú agus cothabháil” is féidir cúltaca a shábháil go díreach i Home Assistant le “Cúltacaigh anois”.",
     listen_titel: "Liostaí: cad a stórálann an cárta cá háit?",
     listen_hinweis: "Tá a liosta tascanna féin ag gach tasc i Home Assistant. Do gach ceann, is féidir liosta atá ann cheana a roghnú nó ceann nua a chruthú thíos – úsáidtear láithreach é. Baineann sé le gach feiste.",
     listen_rolle_einkauf: "Liosta siopadóireachta",

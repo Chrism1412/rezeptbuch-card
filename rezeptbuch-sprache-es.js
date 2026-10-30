@@ -314,6 +314,7 @@
     schrift_riesig: "Enorme",
     kochmodus_schrift_kleiner_aria: "Reducir el texto en el modo cocina",
     kochmodus_schrift_groesser_aria: "Aumentar el texto en el modo cocina",
+    fehler_datei_ausgeben: "No se pudo descargar el archivo en este dispositivo ({{fehler}}). Consejo: en Ajustes (⚙️), en «Configuración y mantenimiento», «Copia de seguridad ahora» guarda una copia directamente en Home Assistant.",
     listen_titel: "Listas: ¿qué guarda la tarjeta y dónde?",
     listen_hinweis: "Cada tarea tiene su propia lista de tareas en Home Assistant. Para cada una puedes elegir una lista existente o crear una nueva abajo; se usa al instante. Se aplica a todos los dispositivos.",
     listen_rolle_einkauf: "Lista de la compra",

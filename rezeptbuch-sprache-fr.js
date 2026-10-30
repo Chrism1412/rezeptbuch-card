@@ -314,6 +314,7 @@
     schrift_riesig: "Énorme",
     kochmodus_schrift_kleiner_aria: "Réduire le texte en mode cuisine",
     kochmodus_schrift_groesser_aria: "Agrandir le texte en mode cuisine",
+    fehler_datei_ausgeben: "Le fichier n’a pas pu être téléchargé sur cet appareil ({{fehler}}). Astuce : dans les Réglages (⚙️), sous « Configuration et maintenance », « Sauvegarder maintenant » enregistre une sauvegarde directement dans Home Assistant.",
     listen_titel: "Listes : que la carte enregistre-t-elle où ?",
     listen_hinweis: "Chaque tâche a sa propre liste de tâches dans Home Assistant. Pour chacune, vous pouvez choisir une liste existante ou en créer une nouvelle ci-dessous – elle est utilisée immédiatement. Valable pour tous les appareils.",
     listen_rolle_einkauf: "Liste de courses",

@@ -314,6 +314,7 @@
     schrift_riesig: "Enorm",
     kochmodus_schrift_kleiner_aria: "Minska texten i matlagningsläget",
     kochmodus_schrift_groesser_aria: "Öka texten i matlagningsläget",
+    fehler_datei_ausgeben: "Filen kunde inte laddas ned på den här enheten ({{fehler}}). Tips: I Inställningar (⚙️) under ”Installation och underhåll” kan du med ”Säkerhetskopiera nu” spara en säkerhetskopia direkt i Home Assistant.",
     listen_titel: "Listor: vad sparar kortet var?",
     listen_hinweis: "Varje uppgift har sin egen att göra-lista i Home Assistant. För varje kan du välja en befintlig lista eller skapa en ny nedan – den används direkt. Gäller för alla enheter.",
     listen_rolle_einkauf: "Inköpslista",

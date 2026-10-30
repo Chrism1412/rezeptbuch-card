@@ -35,6 +35,11 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   Riesig), gespeichert je Gerät - z. B. größer auf dem Küchen-Tablet. Im
   Kochmodus lässt sich die Schrift zusätzlich mit A− und A+ in fünf Stufen
   ändern; der Schritt-Text nutzt dabei die volle Breite.
+- **Sicherungs-Download in der Home-Assistant-App**: der Knopf "💾 Sichern"
+  nutzt dort jetzt den Teilen-Dialog bzw. ein neues Fenster statt eines
+  unsichtbaren Download-Links (der in der App nichts tat); im Browser bleibt
+  der normale Download. Klappt es nicht, erklärt ein Hinweis den Weg über
+  "Jetzt sichern" in den Einstellungen.
 - **Neue Sprachen**: Russisch und Türkisch.
 - Test `test/sprachen-pruefen.js` prüft alle Sprachdateien auf Vollständigkeit.
 

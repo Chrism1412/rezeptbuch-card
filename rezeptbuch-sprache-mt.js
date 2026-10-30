@@ -314,6 +314,7 @@
     schrift_riesig: "Enormi",
     kochmodus_schrift_kleiner_aria: "Naqqas it-test fil-modalità tat-tisjir",
     kochmodus_schrift_groesser_aria: "Kabbar it-test fil-modalità tat-tisjir",
+    fehler_datei_ausgeben: "Il-fajl ma setax jitniżżel fuq dan l-apparat ({{fehler}}). Suġġeriment: fis-Settings (⚙️) taħt “Konfigurazzjoni u manutenzjoni” tista’ tuża “Agħmel backup issa” biex taħżen backup direttament f’Home Assistant.",
     listen_titel: "Listi: x’taħżen il-karta u fejn?",
     listen_hinweis: "Kull kompitu għandu l-lista tiegħu tal-ħidma f’Home Assistant. Għal kull wieħed tista’ tagħżel lista eżistenti jew toħloq waħda ġdida hawn taħt – tintuża immedjatament. Tgħodd għall-apparati kollha.",
     listen_rolle_einkauf: "Lista tax-xiri",

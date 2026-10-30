@@ -314,6 +314,7 @@
     schrift_riesig: "Enorme",
     kochmodus_schrift_kleiner_aria: "Diminuir o texto no modo de cozinha",
     kochmodus_schrift_groesser_aria: "Aumentar o texto no modo de cozinha",
+    fehler_datei_ausgeben: "Não foi possível transferir o ficheiro neste dispositivo ({{fehler}}). Dica: em Definições (⚙️), em «Configuração e manutenção», «Fazer cópia agora» guarda uma cópia de segurança diretamente no Home Assistant.",
     listen_titel: "Listas: o que o cartão guarda e onde?",
     listen_hinweis: "Cada tarefa tem a sua própria lista de tarefas no Home Assistant. Para cada uma pode escolher uma lista existente ou criar uma nova abaixo – é usada de imediato. Aplica-se a todos os dispositivos.",
     listen_rolle_einkauf: "Lista de compras",
