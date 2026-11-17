@@ -362,6 +362,7 @@ const UEBERSETZUNGEN = {
       'Sprache ist). "tags" ist optional, notfalls ein leeres Array. ' +
       "Erfinde keine Zutaten oder Schritte, die nicht im Text stehen. " +
       "Hier ist der Rezepttext:",
+    json_info_gruppen_hinweis: "Hat das Rezept Zutaten-Gruppen (z. B. \"Für den Teig\"), schreibe die Überschrift als eigenen Eintrag in \"ingredients\" direkt vor die zugehörigen Zutaten, im Format {\"gruppe\": \"Für den Teig\"}.",
     json_info_kopieren_btn: "📋 Prompt kopieren",
     json_info_kopiert: "Kopiert!",
     formular_json_label: "JSON hier einfügen",
@@ -375,6 +376,8 @@ const UEBERSETZUNGEN = {
     formular_label_portionen: "Portionen (Basis)",
     formular_label_zutaten: "Zutaten",
     formular_zutat_hinzufuegen_btn: "+ Zutat",
+    formular_gruppe_hinzufuegen_btn: "+ Überschrift",
+    formular_gruppe_placeholder: "Überschrift, z. B. Für den Teig",
     formular_zutat_menge_placeholder: "Menge",
     formular_zutat_einheit_placeholder: "Einheit",
     formular_zutat_name_placeholder: "Zutat",
@@ -499,6 +502,8 @@ const UEBERSETZUNGEN = {
     listen_neu_label: "Oder eine neue Liste anlegen:",
     listen_keine_gewaehlt: "– noch keine Liste –",
     fehler_datei_ausgeben: "Die Datei konnte auf diesem Gerät nicht heruntergeladen werden ({{fehler}}). Tipp: In den Einstellungen (⚙️) unter „Einrichtung & Wartung“ lässt sich mit „Jetzt sichern“ eine Sicherung direkt in Home Assistant ablegen.",
+    foto_status_gewaehlt: "{{anzahl}} Datei(en) ausgewählt, werden verarbeitet …",
+    foto_status_fertig: "{{anzahl}} Foto(s) hinzugefügt. Zum Übernehmen unten auf Speichern tippen.",
     listen_titel: "Listen: Wo speichert die Karte was?",
     listen_hinweis: "Jede Aufgabe hat eine eigene To-do-Liste in Home Assistant. Du kannst für jede eine vorhandene Liste wählen oder darunter eine neue anlegen – sie wird dann sofort benutzt. Gilt für alle Geräte.",
     listen_rolle_einkauf: "Einkaufsliste",
@@ -663,7 +668,7 @@ const MAX_FOTOS = 6;
 // neuesten GitHub-Version) verwendet. Kein automatischer Build-Schritt in
 // diesem Projekt - muss bei jedem Release manuell synchron zu
 // package.json/CHANGELOG.md gepflegt werden.
-const CARD_VERSION = "2.3.0";
+const CARD_VERSION = "2.3.1";
 // Für den Vergleich der GitHub-Version mit CARD_VERSION (siehe
 // _updatePruefen) - GitHub-Releases/Tags in diesem Projekt heißen "v2.0.0".
 const GITHUB_REPO = "Chrism1412/rezeptbuch-card";
@@ -1256,11 +1261,17 @@ function _zutatenBlockParsen(zeilen) {
     const reihenfolge = _zutatenReihenfolgeErmitteln(kandidaten);
     return _zutatenPaarweiseParsen(zeilen, reihenfolge).filter((z) => z.name);
   }
+  // Unterüberschriften ("Für den Teig:") werden als Gruppen-Eintrag
+  // { gruppe: "Für den Teig" } übernommen, damit die Gliederung erhalten bleibt.
   return zeilen
     .map((z) => (z || "").trim())
-    .filter((z) => z && !FUSSZEILEN_MUSTER.test(z) && !ZUTATEN_UNTERUEBERSCHRIFT_MUSTER.test(z.replace(/^\s*[-*•]\s*/, "")))
-    .map(_zutatZeileParsen)
-    .filter((z) => z.name);
+    .filter((z) => z && !FUSSZEILEN_MUSTER.test(z))
+    .map((z) => {
+      const ohneZeichen = z.replace(/^\s*[-*•]\s*/, "");
+      if (ZUTATEN_UNTERUEBERSCHRIFT_MUSTER.test(ohneZeichen)) return { gruppe: ohneZeichen.replace(/\s*:\s*$/, "") };
+      return _zutatZeileParsen(z);
+    })
+    .filter((z) => z.gruppe || z.name);
 }
 
 // Zubereitungsschritte aus Zeilen ermitteln - unterstützt sowohl "1. Text"
@@ -2737,6 +2748,7 @@ class RezeptbuchCard extends HTMLElement {
 
     for (const rezept of rezepteListe) {
       for (const zutat of rezept.ingredients || []) {
+        if (zutat.gruppe) continue;
         const name = (zutat.name || "").trim();
         if (!name) continue;
         const einheitRoh = (zutat.unit || "").trim();
@@ -3980,7 +3992,9 @@ class RezeptbuchCard extends HTMLElement {
       servings: parseFloat(formDaten.servings) || 1,
       category: formDaten.category || "Sonstiges",
       tags: (formDaten.tags || []).map((t) => (t || "").trim()).filter(Boolean),
-      ingredients: formDaten.ingredients.filter((z) => z.name),
+      ingredients: formDaten.ingredients
+        .map((z) => (z.gruppe !== undefined ? { gruppe: String(z.gruppe).trim() } : z))
+        .filter((z) => z.gruppe || z.name),
       steps: formDaten.steps.filter((s) => s.trim()),
       image: fotos[0] || null,
       images: fotos.slice(1),
@@ -4436,6 +4450,28 @@ class RezeptbuchCard extends HTMLElement {
     return this._alleTags().filter((t) => !kategorienNormalisiert.has(this._normalisieren(t)));
   }
 
+  // Suchindex: normalisierte Texte je Rezept werden einmal berechnet und
+  // wiederverwendet (WeakMap, räumt sich mit den Rezepten selbst auf). Der
+  // Eintrag wird neu erzeugt, sobald Titel, Zutaten- oder Tag-Liste ein
+  // anderes Objekt bzw. eine andere Länge haben (Bearbeiten/Neuladen).
+  _suchIndex(r) {
+    if (!this._suchIndexCache) this._suchIndexCache = new WeakMap();
+    const zutaten = r.ingredients || [];
+    const tags = r.tags || [];
+    let e = this._suchIndexCache.get(r);
+    if (!e || e.titel !== r.title || e.zRef !== zutaten || e.zLen !== zutaten.length || e.tRef !== tags || e.tLen !== tags.length || e.zSig !== (zutaten[0] && zutaten[0].name) + "|" + (zutaten[zutaten.length - 1] && zutaten[zutaten.length - 1].name)) {
+      e = {
+        titel: r.title, zRef: zutaten, zLen: zutaten.length, tRef: tags, tLen: tags.length,
+        zSig: (zutaten[0] && zutaten[0].name) + "|" + (zutaten[zutaten.length - 1] && zutaten[zutaten.length - 1].name),
+        titelNorm: this._normalisieren(r.title),
+        zutatenNorm: zutaten.map((z) => this._normalisieren(z.name)),
+        tagsNorm: tags.map((t) => this._normalisieren(t)),
+      };
+      this._suchIndexCache.set(r, e);
+    }
+    return e;
+  }
+
   _gefilterteRezepte() {
     let liste = this._rezepte;
 
@@ -4450,7 +4486,7 @@ class RezeptbuchCard extends HTMLElement {
       // aufzuweiten.
       const aktiveTagsNorm = Array.from(this._aktiveTags).map((t) => this._normalisieren(t));
       liste = liste.filter((r) => {
-        const tagsNorm = (r.tags || []).map((t) => this._normalisieren(t));
+        const tagsNorm = this._suchIndex(r).tagsNorm;
         return aktiveTagsNorm.every((tag) => tagsNorm.includes(tag));
       });
     }
@@ -4463,8 +4499,7 @@ class RezeptbuchCard extends HTMLElement {
     if (begriffe.length === 0) return liste;
 
     return liste.filter((r) => {
-      const titelNorm = this._normalisieren(r.title);
-      const zutatenNorm = (r.ingredients || []).map((z) => this._normalisieren(z.name));
+      const { titelNorm, zutatenNorm } = this._suchIndex(r);
       return begriffe.some((begriff) => {
         if (titelNorm.includes(begriff)) return true;
         return zutatenNorm.some((z) => z.includes(begriff));
@@ -4625,7 +4660,9 @@ class RezeptbuchCard extends HTMLElement {
           border-radius:999px; padding:3px 9px;
         }
         .leer { text-align:center; color: var(--secondary-text-color); padding: 32px 0; font-size:0.95em; }
-        .seiten-navigation { display:flex; justify-content:center; align-items:center; gap:14px; margin:20px 0; }
+        .seiten-navigation { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; margin:20px 0; }
+        .seiten-navigation .seite-nummer { min-width:38px; }
+        .seiten-navigation .seiten-anzeige { flex-basis:100%; text-align:center; }
         .seiten-anzeige { color: var(--secondary-text-color); font-size:0.9em; }
         /* Dezenter Versions-Vermerk unten links auf der Rezeptübersicht -
            rein informativ (z.B. beim Melden eines Fehlers hilfreich), soll
@@ -4735,6 +4772,8 @@ class RezeptbuchCard extends HTMLElement {
           font-weight:700; font-size:0.85em; border-radius:999px; padding:3px 11px; white-space:nowrap;
         }
         .zutat-name { color: var(--primary-text-color); }
+        ul.zutaten-liste li.zutat-gruppe { font-weight:700; color: var(--kb-terrakotta-dunkel); border-bottom:2px solid var(--kb-terrakotta-hell); padding-top:14px; }
+        .zutat-zeile.gruppe-zeile input { font-weight:700; background: var(--kb-terrakotta-hell2); }
 
         ol.schritte-liste { list-style:none; padding:0; margin:0; counter-reset: schritt; }
         ol.schritte-liste li {
@@ -4763,7 +4802,14 @@ class RezeptbuchCard extends HTMLElement {
           outline: 2.5px solid var(--kb-terrakotta-dunkel); outline-offset: 2px;
         }
         .zutat-zeile { display:flex; gap:6px; margin-bottom:6px; }
-        .zutat-zeile input { flex:1; }
+        .zutat-zeile { align-items:stretch; }
+        .zutat-zeile input { flex:1; min-width:0; }
+        .zutat-zeile .zutat-bewegen { flex:0 0 28px; display:flex; flex-direction:column; gap:2px; }
+        .zutat-zeile .zutat-bewegen button {
+          flex:1 1 0; min-height:0; padding:0; font-size:0.7em; line-height:1;
+          background: var(--kb-terrakotta-hell); color: var(--kb-terrakotta-dunkel);
+        }
+        .zutat-zeile .zutat-bewegen button:disabled { opacity:0.35; cursor:default; }
         .zutat-zeile input.menge-feld { flex: 0 0 70px; }
         .zutat-zeile input.einheit-feld { flex: 0 0 70px; }
         .zutat-zeile button, .schritt-zeile button {
@@ -5528,7 +5574,13 @@ class RezeptbuchCard extends HTMLElement {
       suchFeld.addEventListener("input", () => {
         this._suchbegriff = suchFeld.value;
         this._aktuelleSeite = 1; // neue Suche -> zurück auf die erste Seite
-        this._ergebnisAktualisieren();
+        // Bei großen Sammlungen kurz warten, bis weitergetippt wurde.
+        clearTimeout(this._suchTimer);
+        if ((this._rezepte || []).length > 150) {
+          this._suchTimer = setTimeout(() => this._ergebnisAktualisieren(), 150);
+        } else {
+          this._ergebnisAktualisieren();
+        }
       });
     }
 
@@ -5862,7 +5914,7 @@ class RezeptbuchCard extends HTMLElement {
 
     const kacheln = seitenListe
       .map((r) => {
-        const anzahlZutaten = (r.ingredients || []).length;
+        const anzahlZutaten = (r.ingredients || []).filter((z) => !z.gruppe).length;
         // alt="" (statt ganz fehlendem alt-Attribut): das Foto steht direkt
         // neben dem Rezepttitel als Text (siehe .titel unten) und innerhalb
         // derselben klickbaren Kachel - ein zusätzlicher Bild-Alt-Text wie
@@ -5915,36 +5967,47 @@ class RezeptbuchCard extends HTMLElement {
     // angezeigt (zwei baugleiche Leisten mit unterschiedlichem ID-Suffix,
     // da IDs im DOM eindeutig sein müssen) - bei vielen Rezepten muss man
     // sonst immer erst nach unten scrollen, nur um die Seite zu wechseln.
-    const seitenNavigationHtml = (suffix) => gesamtSeiten > 1
-      ? `<div class="seiten-navigation">
-          <button type="button" class="sekundaer klein" id="seite-zurueck-btn-${suffix}" ${this._aktuelleSeite <= 1 ? "disabled" : ""}>${this._t("seite_zurueck_btn")}</button>
-          <span class="seiten-anzeige">${this._t("seite_anzeige", { aktuell: this._aktuelleSeite, gesamt: gesamtSeiten })}</span>
-          <button type="button" class="sekundaer klein" id="seite-weiter-btn-${suffix}" ${this._aktuelleSeite >= gesamtSeiten ? "disabled" : ""}>${this._t("seite_weiter_btn")}</button>
-        </div>`
-      : "";
+    const seitenNavigationHtml = (suffix) => {
+      if (gesamtSeiten <= 1) return "";
+      const akt = this._aktuelleSeite;
+      const von = akt;
+      const bis = akt;
+      let nummern = "";
+      for (let n = von; n <= bis; n++) {
+        nummern += n === akt
+          ? `<button type="button" class="klein seite-nummer aktiv" aria-current="page" disabled>${n}</button>`
+          : `<button type="button" class="sekundaer klein seite-nummer" data-seite="${n}">${n}</button>`;
+      }
+      return `<div class="seiten-navigation">
+          <button type="button" class="sekundaer klein" id="seite-anfang-btn-${suffix}" aria-label="1" ${akt <= 1 ? "disabled" : ""}>«</button>
+          <button type="button" class="sekundaer klein" id="seite-zurueck-btn-${suffix}" ${akt <= 1 ? "disabled" : ""}>${this._t("seite_zurueck_btn")}</button>
+          ${nummern}
+          <button type="button" class="sekundaer klein" id="seite-weiter-btn-${suffix}" ${akt >= gesamtSeiten ? "disabled" : ""}>${this._t("seite_weiter_btn")}</button>
+          <button type="button" class="sekundaer klein" id="seite-ende-btn-${suffix}" aria-label="${gesamtSeiten}" ${akt >= gesamtSeiten ? "disabled" : ""}>»</button>
+          <span class="seiten-anzeige">${this._t("seite_anzeige", { aktuell: akt, gesamt: gesamtSeiten })}</span>
+        </div>`;
+    };
     bereich.innerHTML = `${seitenNavigationHtml("oben")}<div class="grid">${kacheln}</div>${seitenNavigationHtml("unten")}`;
 
+    const geheZuSeite = (n) => {
+      this._aktuelleSeite = Math.min(gesamtSeiten, Math.max(1, n));
+      this._ergebnisAktualisieren();
+      // Beim Seitenwechsel nach oben scrollen.
+      bereich.scrollIntoView({ block: "start" });
+    };
     ["oben", "unten"].forEach((suffix) => {
-      const seiteZurueckBtn = this.shadowRoot.getElementById(`seite-zurueck-btn-${suffix}`);
-      if (seiteZurueckBtn) {
-        seiteZurueckBtn.addEventListener("click", () => {
-          this._aktuelleSeite = Math.max(1, this._aktuelleSeite - 1);
-          this._ergebnisAktualisieren();
-          // Beim Seitenwechsel nach oben scrollen - sonst bleibt der Blick
-          // auf der Stelle stehen, an der vorher die letzte Kachel der
-          // alten Seite war, was mitten in der neuen Seite landen kann.
-          bereich.scrollIntoView({ block: "start" });
-        });
-      }
-      const seiteWeiterBtn = this.shadowRoot.getElementById(`seite-weiter-btn-${suffix}`);
-      if (seiteWeiterBtn) {
-        seiteWeiterBtn.addEventListener("click", () => {
-          this._aktuelleSeite = Math.min(gesamtSeiten, this._aktuelleSeite + 1);
-          this._ergebnisAktualisieren();
-          bereich.scrollIntoView({ block: "start" });
-        });
-      }
+      const knopf = (id, fn) => {
+        const el = this.shadowRoot.getElementById(`${id}-${suffix}`);
+        if (el) el.addEventListener("click", fn);
+      };
+      knopf("seite-anfang-btn", () => geheZuSeite(1));
+      knopf("seite-zurueck-btn", () => geheZuSeite(this._aktuelleSeite - 1));
+      knopf("seite-weiter-btn", () => geheZuSeite(this._aktuelleSeite + 1));
+      knopf("seite-ende-btn", () => geheZuSeite(gesamtSeiten));
     });
+    bereich.querySelectorAll("[data-seite]").forEach((el) =>
+      el.addEventListener("click", () => geheZuSeite(Number(el.dataset.seite)))
+    );
 
     // Barrierefreiheit: die eigentliche Aktivierungslogik ist in eine
     // eigene Funktion ausgelagert, damit sie sowohl vom Maus-Klick als auch
@@ -6351,6 +6414,7 @@ class RezeptbuchCard extends HTMLElement {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
     const zutatenZeilen = (r.ingredients || []).flatMap((z) => {
+      if (z.gruppe) return doc.splitTextToSize(`${z.gruppe}:`, spaltenBreite);
       const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
       const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
       return doc.splitTextToSize(`•  ${mengeText ? mengeText + " " : ""}${z.name}`, spaltenBreite);
@@ -6484,6 +6548,15 @@ class RezeptbuchCard extends HTMLElement {
       doc.setFont("helvetica", "normal");
       doc.setFontSize(11);
       (r.ingredients || []).forEach((z) => {
+        if (z.gruppe) {
+          neueSeiteFallsNoetig(8);
+          y += 2;
+          doc.setFont("helvetica", "bold");
+          doc.text(`${z.gruppe}:`, margin, y);
+          doc.setFont("helvetica", "normal");
+          y += 6;
+          return;
+        }
         const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
         const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
         const zeile = `${mengeText ? mengeText + " " : ""}${z.name}`;
@@ -6636,6 +6709,7 @@ class RezeptbuchCard extends HTMLElement {
     const basisPortionen = r.servings || 1;
     const zeilenHtml = (r.ingredients || [])
       .map((z) => {
+        if (z.gruppe) return `<li style="list-style:none;margin-top:10px"><strong>${this._escape(z.gruppe)}:</strong></li>`;
         const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
         const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
         return `<li>${mengeText ? `<strong>${this._escape(mengeText)}</strong> ` : ""}${this._escape(z.name)}</li>`;
@@ -6731,6 +6805,7 @@ class RezeptbuchCard extends HTMLElement {
         const basisPortionen = r.servings || 1;
         const zutatenText = (r.ingredients || [])
           .map((z) => {
+            if (z.gruppe) return `\n${z.gruppe}:`;
             const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
             const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
             return `- ${mengeText ? mengeText + " " : ""}${z.name}`;
@@ -6918,6 +6993,7 @@ class RezeptbuchCard extends HTMLElement {
     // in r.ingredients - innerhalb dieses einen Render-Durchlaufs stabil.
     const zeilen = (r.ingredients || [])
       .map((z, i) => {
+        if (z.gruppe) return `<li class="zutat-gruppe">${this._escape(z.gruppe)}</li>`;
         const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
         const mengeText = [menge !== "" ? menge : "", z.unit || ""].filter(Boolean).join(" ");
         return `<li><label class="zutat-fehlt-label"><input type="checkbox" class="zutat-fehlt-checkbox" data-index="${i}">${mengeText ? `<span class="zutat-menge-chip">${this._escape(mengeText)}</span>` : ""}<span class="zutat-name">${this._escape(z.name)}</span></label></li>`;
@@ -7010,7 +7086,7 @@ class RezeptbuchCard extends HTMLElement {
             </div>
             <h3 class="abschnitt-titel">${this._t("abschnitt_titel_zutaten")}</h3>
             <ul class="zutaten-liste">${zeilen || `<li>${this._t("keine_zutaten")}</li>`}</ul>
-            ${(r.ingredients || []).length ? `<button type="button" class="sekundaer klein" id="zutaten-fehlend-einkaufsliste-btn">${this._t("zutaten_fehlend_einkaufsliste_btn")}</button>` : ""}
+            ${(r.ingredients || []).some((z) => !z.gruppe) ? `<button type="button" class="sekundaer klein" id="zutaten-fehlend-einkaufsliste-btn">${this._t("zutaten_fehlend_einkaufsliste_btn")}</button>` : ""}
           </div>
           ${schritteListe ? `
           <div class="detail-spalte-rechts">
@@ -7270,7 +7346,7 @@ class RezeptbuchCard extends HTMLElement {
         }
         const zeilen = ausgewaehlteIndices
           .map((i) => r.ingredients[i])
-          .filter(Boolean)
+          .filter((z) => z && !z.gruppe)
           .map((z) => {
             const menge = this._skaliereMenge(z.amount, basisPortionen, this._portionen);
             return [menge !== "" ? menge : "", z.unit || "", z.name].filter(Boolean).join(" ");
@@ -7454,13 +7530,28 @@ class RezeptbuchCard extends HTMLElement {
     }
   }
 
+  // Auf/Ab-Knöpfe (übereinander gestapelt, damit die Eingabefelder breit bleiben)
+  // für eine Zutaten- oder Überschriften-Zeile im Formular.
+  _zutatBewegenHtml() {
+    return `<span class="zutat-bewegen">
+          <button type="button" class="zutat-hoch" aria-label="${this._t("formular_schritt_hoch_aria")}">▲</button>
+          <button type="button" class="zutat-runter" aria-label="${this._t("formular_schritt_runter_aria")}">▼</button>
+        </span>`;
+}
+
   _renderFormular(stil) {
     const r = this._aktivesRezept;
     const istNeu = !r.uid;
     const zutatenZeilen = (r.ingredients.length ? r.ingredients : [{ amount: "", unit: "", name: "" }])
       .map(
-        (z) => `
+        (z) => z.gruppe !== undefined ? `
+        <div class="zutat-zeile gruppe-zeile">
+          ${this._zutatBewegenHtml()}
+          <input type="text" placeholder="${this._t("formular_gruppe_placeholder")}" value="${this._escape(z.gruppe)}" data-feld="gruppe">
+          <button type="button" class="zutat-entfernen" aria-label="${this._t("formular_zutat_entfernen_aria")}">✕</button>
+        </div>` : `
         <div class="zutat-zeile">
+          ${this._zutatBewegenHtml()}
           <input class="menge-feld" type="text" placeholder="${this._t("formular_zutat_menge_placeholder")}" value="${this._escape(z.amount ?? "")}" data-feld="amount">
           <input class="einheit-feld" type="text" placeholder="${this._t("formular_zutat_einheit_placeholder")}" value="${this._escape(z.unit ?? "")}" data-feld="unit">
           <input type="text" placeholder="${this._t("formular_zutat_name_placeholder")}" value="${this._escape(z.name ?? "")}" data-feld="name">
@@ -7564,6 +7655,7 @@ class RezeptbuchCard extends HTMLElement {
           <label>${this._t("formular_label_zutaten")}</label>
           <div id="zutaten-liste">${zutatenZeilen}</div>
           <button type="button" class="sekundaer" id="zutat-hinzufuegen">${this._t("formular_zutat_hinzufuegen_btn")}</button>
+          <button type="button" class="sekundaer" id="gruppe-hinzufuegen">${this._t("formular_gruppe_hinzufuegen_btn")}</button>
 
           <label>${this._t("formular_label_zubereitung")}</label>
           <div id="schritte-liste">${schritteZeilen}</div>
@@ -7571,7 +7663,7 @@ class RezeptbuchCard extends HTMLElement {
 
           <label>${this._t("formular_label_fotos", { max: MAX_FOTOS })}</label>
           <div id="fotos-liste" class="fotos-liste"></div>
-          <input type="file" id="bild-feld" accept="image/*" multiple>
+          <input type="file" id="bild-feld" accept="image/*" ${/home ?assistant/i.test(navigator.userAgent || "") ? "" : "multiple"}>
           <div class="hinweis" id="fotos-hinweis">${this._t("formular_fotos_hinweis")}</div>
 
           <div class="aktionen">
@@ -7758,7 +7850,12 @@ class RezeptbuchCard extends HTMLElement {
       // automatischen Texterkennung verwendet wird; ist sie schon ein
       // Objekt (z.B. aus einem Backup-/Restore-JSON), unverändert übernehmen.
       const zutatUebernehmen = (eintrag) => {
-        if (typeof eintrag === "string") return _zutatZeileParsen(eintrag);
+        if (typeof eintrag === "string") {
+          const t = eintrag.trim().replace(/^\s*[-*•]\s*/, "");
+          if (ZUTATEN_UNTERUEBERSCHRIFT_MUSTER.test(t)) return { gruppe: t.replace(/\s*:\s*$/, "") };
+          return _zutatZeileParsen(eintrag);
+        }
+        if (eintrag && typeof eintrag === "object" && eintrag.gruppe) return { gruppe: String(eintrag.gruppe) };
         if (eintrag && typeof eintrag === "object") {
           return {
             amount: eintrag.amount !== undefined && eintrag.amount !== null ? String(eintrag.amount) : "",
@@ -7821,9 +7918,15 @@ class RezeptbuchCard extends HTMLElement {
     // in derselben Sprache; eine neue Sprache wird vollständig erst beim
     // nächsten tatsächlichen Neuzeichnen sichtbar (z.B. Formular schließen
     // und neu öffnen) - kein Teil-Update, das mit dem Rest nicht zusammenpasst.
-    this.shadowRoot.getElementById("json-info-prompt-text").value = this._t("json_info_prompt", {
+    // Hinweis zu Zutaten-Gruppen wird hinter den JSON-Formatblock eingefügt
+    // (in jeder Sprache endet er mit "}" + Leerzeile).
+    const promptBasis = this._t("json_info_prompt", {
       kategorien: this._alleKategorien().join(", "),
     });
+    const formatEnde = promptBasis.indexOf("}\n\n");
+    this.shadowRoot.getElementById("json-info-prompt-text").value = formatEnde >= 0
+      ? promptBasis.slice(0, formatEnde + 3) + this._t("json_info_gruppen_hinweis") + "\n\n" + promptBasis.slice(formatEnde + 3)
+      : promptBasis;
     this.shadowRoot.getElementById("json-info-btn").addEventListener("click", () => {
       this.shadowRoot.getElementById("json-info-modal").style.display = "flex";
     });
@@ -7936,21 +8039,59 @@ class RezeptbuchCard extends HTMLElement {
 
     this.shadowRoot.getElementById("abbrechen-btn").addEventListener("click", () => this._navigationZurueck());
 
+    // Zutaten und Überschriften lassen sich wie die Schritte per ▲/▼
+    // verschieben und per ✕ entfernen (ein Klick-Handler für die ganze Liste;
+    // die Reihenfolge beim Speichern ergibt sich aus der DOM-Reihenfolge).
+    const zutatenListeEl = this.shadowRoot.getElementById("zutaten-liste");
+    const zutatenAktualisieren = () => {
+      const zeilen = zutatenListeEl.querySelectorAll(".zutat-zeile");
+      zeilen.forEach((zeile, i) => {
+        zeile.querySelector(".zutat-hoch").disabled = i === 0;
+        zeile.querySelector(".zutat-runter").disabled = i === zeilen.length - 1;
+      });
+    };
+    zutatenListeEl.addEventListener("click", (e) => {
+      const knopf = e.target.closest("button");
+      const zeile = knopf && knopf.closest(".zutat-zeile");
+      if (!zeile) return;
+      if (knopf.classList.contains("zutat-entfernen")) {
+        zeile.remove();
+      } else if (knopf.classList.contains("zutat-hoch") && zeile.previousElementSibling) {
+        zutatenListeEl.insertBefore(zeile, zeile.previousElementSibling);
+      } else if (knopf.classList.contains("zutat-runter") && zeile.nextElementSibling) {
+        zutatenListeEl.insertBefore(zeile.nextElementSibling, zeile);
+      } else {
+        return;
+      }
+      zutatenAktualisieren();
+    });
+    zutatenAktualisieren();
+
     this.shadowRoot.getElementById("zutat-hinzufuegen").addEventListener("click", () => {
       const liste = this.shadowRoot.getElementById("zutaten-liste");
       const div = document.createElement("div");
       div.className = "zutat-zeile";
       div.innerHTML = `
+        ${this._zutatBewegenHtml()}
         <input class="menge-feld" type="text" placeholder="${this._t("formular_zutat_menge_placeholder")}" data-feld="amount">
         <input class="einheit-feld" type="text" placeholder="${this._t("formular_zutat_einheit_placeholder")}" data-feld="unit">
         <input type="text" placeholder="${this._t("formular_zutat_name_placeholder")}" data-feld="name">
         <button type="button" class="zutat-entfernen" aria-label="${this._t("formular_zutat_entfernen_aria")}">✕</button>`;
       liste.appendChild(div);
-      div.querySelector(".zutat-entfernen").addEventListener("click", () => div.remove());
+      zutatenAktualisieren();
     });
 
-    this.shadowRoot.querySelectorAll(".zutat-entfernen").forEach((btn) => {
-      btn.addEventListener("click", (e) => e.target.closest(".zutat-zeile").remove());
+    this.shadowRoot.getElementById("gruppe-hinzufuegen").addEventListener("click", () => {
+      const liste = this.shadowRoot.getElementById("zutaten-liste");
+      const div = document.createElement("div");
+      div.className = "zutat-zeile gruppe-zeile";
+      div.innerHTML = `
+        ${this._zutatBewegenHtml()}
+        <input type="text" placeholder="${this._t("formular_gruppe_placeholder")}" data-feld="gruppe">
+        <button type="button" class="zutat-entfernen" aria-label="${this._t("formular_zutat_entfernen_aria")}">✕</button>`;
+      liste.appendChild(div);
+      zutatenAktualisieren();
+      div.querySelector("input").focus();
     });
 
     // Zubereitungsschritte lassen sich per ▲/▼ verschieben statt nur zu
@@ -8043,11 +8184,17 @@ class RezeptbuchCard extends HTMLElement {
     };
     fotosListeRendern();
     const bildFeld = this.shadowRoot.getElementById("bild-feld");
-    bildFeld.addEventListener("change", async () => {
+    // Läuft bei "change" UND "input": manche WebViews (z. B. die Home-
+    // Assistant-App) melden die Dateiauswahl nur über eines von beiden.
+    let fotoVerarbeitungLaeuft = false;
+    const dateienUebernehmen = async () => {
       const dateien = Array.from(bildFeld.files || []);
+      if (!dateien.length || fotoVerarbeitungLaeuft) return;
+      fotoVerarbeitungLaeuft = true;
       const hinweisEl = this.shadowRoot.getElementById("fotos-hinweis");
       const urspruenglich = hinweisEl.textContent;
-      hinweisEl.textContent = this._t("formular_bild_verkleinern_text");
+      hinweisEl.textContent = this._t("foto_status_gewaehlt", { anzahl: dateien.length });
+      let hinzugefuegt = 0;
       try {
         for (const datei of dateien) {
           if (this._aktivesRezept.fotoListe.length >= MAX_FOTOS) {
@@ -8055,16 +8202,22 @@ class RezeptbuchCard extends HTMLElement {
             break;
           }
           this._aktivesRezept.fotoListe.push(await this._bildKomprimieren(datei));
+          hinzugefuegt++;
         }
+        fotosListeRendern();
+        hinweisEl.textContent = this._t("foto_status_fertig", { anzahl: hinzugefuegt });
       } catch (fehler) {
         console.error("Rezeptbuch: Foto konnte nicht verarbeitet werden", fehler);
         this._hinweis(fehler.message || String(fehler));
+        fotosListeRendern();
+        hinweisEl.textContent = urspruenglich;
       } finally {
         bildFeld.value = "";
-        hinweisEl.textContent = urspruenglich;
-        fotosListeRendern();
+        fotoVerarbeitungLaeuft = false;
       }
-    });
+    };
+    bildFeld.addEventListener("change", dateienUebernehmen);
+    bildFeld.addEventListener("input", dateienUebernehmen);
 
     const speichernBtn = this.shadowRoot.getElementById("speichern-btn");
     speichernBtn.addEventListener("click", async () => {
@@ -8079,7 +8232,7 @@ class RezeptbuchCard extends HTMLElement {
           this._hinweis(this._t("fehler_titel_fehlt"));
           return;
         }
-        const zeilen = Array.from(this.shadowRoot.querySelectorAll(".zutat-zeile")).map((zeile) => ({
+        const zeilen = Array.from(this.shadowRoot.querySelectorAll(".zutat-zeile")).map((zeile) => zeile.querySelector('[data-feld="gruppe"]') ? { gruppe: zeile.querySelector('[data-feld="gruppe"]').value } : ({
           amount: zeile.querySelector('[data-feld="amount"]').value,
           unit: zeile.querySelector('[data-feld="unit"]').value,
           name: zeile.querySelector('[data-feld="name"]').value,

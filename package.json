@@ -1,6 +1,6 @@
 {
   "name": "rezeptbuch-card",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Home-Assistant-Rezeptbuch: eine Custom-Lovelace-Karte, die Rezepte in einer Lokalen To-do-Liste speichert - kein Pyscript, kein separates Backend.",
   "license": "MIT",
   "private": true,

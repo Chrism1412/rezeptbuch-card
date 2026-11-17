@@ -28,7 +28,7 @@ function foto(farbeA, farbeB, teller) {
 const REZEPTE = [
   { t: "Kürbissuppe mit Ingwer", k: "Suppe", tags: ["vegetarisch", "herbst"], f: foto("#f4a259", "#bc4b51", "#e8883a"), p: 4, bew: [5, 5, 4], zutaten: [["800", "g", "Hokkaido-Kürbis"], ["1", "", "Zwiebel"], ["20", "g", "Ingwer"], ["700", "ml", "Gemüsebrühe"], ["150", "ml", "Kokosmilch"]], schritte: ["Kürbis würfeln, Zwiebel und Ingwer fein hacken.", "Alles in etwas Öl 5 Minuten anbraten.", "Mit Brühe aufgießen und 20 Minuten köcheln lassen.", "Kokosmilch zugeben, pürieren und abschmecken."] },
   { t: "Gemüsecurry", k: "Hauptgericht", tags: ["vegetarisch", "schnell"], f: foto("#8cb369", "#5b8e7d", "#e9c46a"), p: 4, bew: [4, 5], zutaten: [["400", "g", "Kichererbsen"], ["300", "g", "Blumenkohl"], ["2", "EL", "Currypaste"], ["400", "ml", "Kokosmilch"]], schritte: ["Gemüse in Stücke schneiden.", "Currypaste anrösten, Kokosmilch zugeben.", "Gemüse 15 Minuten garen."] },
-  { t: "Apfelkuchen vom Blech", k: "Backen", tags: ["süß"], f: foto("#e5989b", "#b5838d", "#d9a05b"), p: 12, bew: [5], zutaten: [["500", "g", "Mehl"], ["250", "g", "Butter"], ["6", "", "Äpfel"], ["150", "g", "Zucker"]], schritte: ["Mürbeteig kneten und ausrollen.", "Äpfel schneiden und verteilen.", "Bei 180 °C 40 Minuten backen."] },
+  { t: "Apfelkuchen vom Blech", k: "Backen", tags: ["süß"], f: foto("#e5989b", "#b5838d", "#d9a05b"), p: 12, bew: [5], zutaten: [["Für den Teig"], ["300", "g", "Mehl (Type 405)"], ["130", "g", "weiche Butter"], ["100", "g", "Zucker"], ["2", "", "Eier (Größe M)"], ["Für den Belag"], ["6", "", "Äpfel"], ["2", "EL", "Zitronensaft"], ["1", "TL", "Zimt"]], schritte: ["Mürbeteig kneten und ausrollen.", "Äpfel schneiden und verteilen.", "Bei 180 °C 40 Minuten backen."] },
   { t: "Spaghetti Pomodoro", k: "Hauptgericht", tags: ["vegetarisch", "schnell"], f: foto("#ee6c4d", "#9d0208", "#f6bd60"), p: 2, bew: [4, 4], zutaten: [["250", "g", "Spaghetti"], ["400", "g", "Tomaten (Dose)"], ["2", "", "Knoblauchzehen"]], schritte: ["Nudeln kochen.", "Sauce 10 Minuten einkochen.", "Alles vermengen."] },
   { t: "Griechischer Bauernsalat", k: "Salat", tags: ["vegetarisch", "sommer"], f: foto("#90be6d", "#43aa8b", "#f94144"), p: 2, bew: [5, 4], zutaten: [["3", "", "Tomaten"], ["1", "", "Gurke"], ["150", "g", "Feta"]], schritte: ["Gemüse schneiden.", "Mit Feta und Öl anrichten."] },
   { t: "Linsendal", k: "Hauptgericht", tags: ["vegan", "herbst"], f: foto("#f9c74f", "#f3722c", "#c77d3a"), p: 4, bew: [4], zutaten: [["250", "g", "rote Linsen"], ["1", "", "Zwiebel"], ["1", "TL", "Kurkuma"]], schritte: ["Linsen waschen.", "Mit Gewürzen 20 Minuten kochen."] },
@@ -38,7 +38,7 @@ const REZEPTE = [
   title: r.t,
   payload: {
     schemaVersion: 1, servings: r.p, category: r.k, tags: r.tags, image: r.f, images: i === 0 ? [foto("#bc4b51", "#f4a259", "#c1440e"), foto("#8cb369", "#e9c46a", "#7a9e3c")] : [],
-    ingredients: r.zutaten.map(([amount, unit, name]) => ({ amount, unit, name })),
+    ingredients: r.zutaten.map((z) => z.length === 1 ? { gruppe: z[0] } : { amount: z[0], unit: z[1], name: z[2] }),
     steps: r.schritte,
     ratings: Object.fromEntries(r.bew.map((w, j) => ["demo-" + j, w])),
     comments: i === 0 ? [{ author: "Alex", text: "Sehr lecker, mit etwas mehr Ingwer noch besser!", zeit: "2026-09-20T18:00:00.000Z" }] : [],
@@ -122,6 +122,25 @@ async function seitenShot(page, datei) {
     await page.evaluate(() => window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.title.startsWith("Kürbissuppe"))));
     await page.waitForTimeout(200);
     await kartenShot(page, "rezept-detail.png");
+
+    await page.evaluate(() => window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.title.startsWith("Apfelkuchen"))));
+    await page.waitForTimeout(200);
+    await kartenShot(page, "zutaten-gruppen.png");
+    await page.evaluate(() => window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.title.startsWith("Kürbissuppe"))));
+    await page.waitForTimeout(200);
+
+    await page.setViewportSize({ width: 430, height: 900 });
+    await page.evaluate(() => {
+      window.__karte._rezeptBearbeitenFormular
+        ? window.__karte._rezeptBearbeitenFormular(window.__karte._rezepte.find((r) => r.title.startsWith("Apfelkuchen")))
+        : window.__karte.shadowRoot.getElementById("bearbeiten-btn").click();
+    });
+    await page.waitForTimeout(300);
+    await page.evaluate(() => window.__karte.shadowRoot.getElementById("zutaten-liste").scrollIntoView());
+    await kartenShot(page, "formular-zutaten-verschieben.png");
+    await page.setViewportSize({ width: 1100, height: 820 });
+    await page.evaluate(() => window.__karte._rezeptOeffnen(window.__karte._rezepte.find((r) => r.title.startsWith("Kürbissuppe"))));
+    await page.waitForTimeout(200);
 
     await page.setViewportSize({ width: 900, height: 520 });
     await page.evaluate(() => {

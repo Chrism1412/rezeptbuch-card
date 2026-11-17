@@ -4,6 +4,24 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier festgehalten.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.3.1] - 2026-11-16
+
+### Hinzugefügt
+- **Zutaten-Überschriften** (z. B. „Für den Teig", „Für den Belag"): im
+  Formular über „+ Überschrift" einfügen. Sie erscheinen in der Rezeptansicht,
+  im Kochmodus, im PDF, im Druck und beim Teilen, nicht in der Einkaufsliste.
+  Beim Text-Import werden solche Zeilen jetzt als Überschrift übernommen.
+- **Zutaten und Überschriften verschieben**: Im Formular hat jede Zutaten-Zeile
+  jetzt ▲/▼ zum Verschieben, wie bei den Zubereitungsschritten.
+- **KI-Prompt kennt Überschriften**: Der Prompt für die JSON-Umwandlung erklärt der
+  KI das Format `{"gruppe": "Für den Teig"}`. Der JSON-Import übernimmt solche
+  Einträge (und Textzeilen wie „Für den Belag:") als Überschriften.
+- **Seitenauswahl** oben und unten: Anfang, zurück, aktuelle Seite,
+  weiter, Ende.
+- **Schneller bei vielen Rezepten**: Die Suche nutzt einen Suchindex (Titel,
+  Zutaten, Tags werden nur einmal aufbereitet) und wartet bei mehr als 150
+  Rezepten kurz, bis das Tippen pausiert. Getestet mit 600 Rezepten.
+
 ## [2.3.0] - 2026-10-23
 
 ### Hinzugefügt
@@ -40,6 +58,10 @@ Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
   unsichtbaren Download-Links (der in der App nichts tat); im Browser bleibt
   der normale Download. Klappt es nicht, erklärt ein Hinweis den Weg über
   "Jetzt sichern" in den Einstellungen.
+- **Foto-Auswahl in der Home-Assistant-App**: Dort wird die Datei-Auswahl
+  wieder einzeln (ohne Mehrfachauswahl) angeboten, die Auswahl wird über
+  "change" und "input" erkannt, und unter dem Feld zeigt eine Statuszeile,
+  wie viele Fotos gewählt und hinzugefügt wurden.
 - **Neue Sprachen**: Russisch und Türkisch.
 - Test `test/sprachen-pruefen.js` prüft alle Sprachdateien auf Vollständigkeit.
 

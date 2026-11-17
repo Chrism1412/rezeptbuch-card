@@ -210,8 +210,15 @@ Hauptfarbe, Akzentfarbe, Lösch-/Warnfarbe, Bewertungssterne und
 - Automatisierte Testsuite (Playwright, echter Browser, keine Mock-Kopie
   der Kartenlogik) und Schema-Versionierung für künftige Formatänderungen
 - **Seitenweise Rezeptübersicht** bei vielen Rezepten (Seitengröße über
-  `items_per_page` konfigurierbar, siehe unten) sowie ein dezenter
-  Versionshinweis (`vX.Y.Z`) unten in der Übersicht
+  `items_per_page` konfigurierbar, siehe unten). Die Seitenauswahl steht oben
+  und unten (Anfang, Zurück, aktuelle Seite, Weiter, Ende). Die Suche nutzt
+  einen Suchindex und bleibt auch bei Hunderten Rezepten flott. Dazu ein
+  dezenter Versionshinweis (`vX.Y.Z`) unten in der Übersicht
+- **Zutaten-Überschriften** wie „Für den Teig" und „Für den Belag": im
+  Formular über „+ Überschrift" einfügen und mit ▲/▼ an die richtige Stelle
+  schieben (das geht auch bei Zutaten). Die Überschriften erscheinen in der
+  Rezeptansicht, im Kochmodus, im PDF, im Druck und beim Teilen, nicht in der
+  Einkaufsliste. Der Text-Import erkennt Zeilen wie „Für den Teig:" automatisch
 - **Eigener Update-Hinweis**: die Karte prüft beim Laden zusätzlich zur
   automatischen Update-Erkennung von HACS selbst über die öffentliche
   GitHub-API, ob eine neuere Version veröffentlicht wurde, und zeigt bei

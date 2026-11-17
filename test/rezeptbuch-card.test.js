@@ -555,6 +555,166 @@ async function testSchriftgroesseEinstellbar(browser) {
   }
 }
 
+async function testVieleRezepteSucheSchnell(browser) {
+  console.log("\nTest: 600 Rezepte - Suche, Index und Seitenwechsel");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      for (let i = 0; i < 600; i++) {
+        window.__speicher.push({
+          uid: "viele-" + i,
+          summary: "Rezept " + i + (i % 50 === 7 ? " Käsekuchen" : ""),
+          description: JSON.stringify({
+            schemaVersion: 1, servings: 4, category: "Sonstiges",
+            ingredients: [{ amount: "1", unit: "kg", name: i % 100 === 3 ? "Süßkartoffel" : "Mehl" + i }],
+            steps: ["Mischen"], image: null, ratings: {}, comments: [], tags: ["t" + (i % 5)],
+            created: "2026-01-01T00:00:00.000Z", cookLog: [],
+          }),
+          status: "needs_action",
+        });
+      }
+      const karte = window.__karte;
+      await karte._rezepteLaden();
+      const anzahl = karte._rezepte.length;
+      const kacheln = karte.shadowRoot.querySelectorAll(".rezept-kachel, .rezept-karte, [data-uid]").length;
+      karte._gefilterteRezepte(); // Index aufbauen
+      const t0 = performance.now();
+      for (let i = 0; i < 20; i++) karte._gefilterteRezepte();
+      const msProDurchlauf = (performance.now() - t0) / 20;
+      karte._suchbegriff = "kasekuchen";
+      const kase = karte._gefilterteRezepte().length;
+      karte._suchbegriff = "susskartoffel";
+      const susse = karte._gefilterteRezepte().length;
+      // Änderung muss den Index aktualisieren
+      karte._rezepte[0].title = "Zebrabraten";
+      karte._suchbegriff = "zebra";
+      const zebra = karte._gefilterteRezepte().length;
+      // Eingabe mit Tipp-Pause
+      karte._suchbegriff = "";
+      karte._render();
+      const feld = karte.shadowRoot.getElementById("such-feld");
+      feld.value = "kasekuchen";
+      feld.dispatchEvent(new Event("input"));
+      await new Promise((r) => setTimeout(r, 400));
+      const bereich = karte.shadowRoot.getElementById("ergebnis-bereich").innerHTML;
+      return { anzahl, kacheln, msProDurchlauf, kase, susse, zebra, trifft: bereich.includes("Käsekuchen") };
+    });
+    assert(ergebnis.anzahl === 600, "600 Rezepte geladen");
+    assert(ergebnis.msProDurchlauf < 25, "Filtern mit Index schnell (" + ergebnis.msProDurchlauf.toFixed(2) + " ms)");
+    assert(ergebnis.kase === 12, "Suche 'kasekuchen' findet 12 (Umlaute normalisiert)");
+    assert(ergebnis.susse === 6, "Suche 'susskartoffel' findet 6 Zutaten-Treffer");
+    assert(ergebnis.zebra === 1, "Geänderter Titel wird im Index aktualisiert");
+    assert(ergebnis.trifft, "Eingabe im Suchfeld (mit Tipp-Pause) zeigt Treffer");
+    const nav = await page.evaluate(() => {
+      const k = window.__karte; k._suchbegriff = ""; k._aktuelleSeite = 15; k._ergebnisAktualisieren();
+      const r = k.shadowRoot;
+      const nummern = (s) => Array.from(r.querySelectorAll(".seiten-navigation")[s].querySelectorAll(".seite-nummer")).map((e) => e.textContent).join(",");
+      const unten = nummern(1), oben = nummern(0);
+      r.getElementById("seite-ende-btn-unten").click();
+      const ende = k._aktuelleSeite;
+      r.getElementById("seite-anfang-btn-unten").click();
+      const anfang = k._aktuelleSeite;
+      r.getElementById("seite-weiter-btn-oben").click();
+      return { unten, oben, ende, anfang, nachNummer: k._aktuelleSeite, gesamt: Math.ceil(k._rezepte.length / 20) };
+    });
+    assert(nav.unten === "15" && nav.oben === nav.unten, "Seitenauswahl oben+unten: aktuelle Seite mit ohne Nachbarseiten");
+    assert(nav.ende === nav.gesamt && nav.anfang === 1 && nav.nachNummer === 2, "Anfang, Ende und Weiter funktionieren");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testZutatenGruppenImFormularUndDetail(browser) {
+  console.log("\nTest: Zutaten-Überschriften (Für den Teig / Für den Belag)");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const ergebnis = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._neuesRezeptFormular();
+      const root = karte.shadowRoot;
+      root.getElementById("titel-feld").value = "Nusskuchen";
+      const erste = root.querySelector(".zutat-zeile");
+      erste.querySelector('[data-feld="name"]').value = "Mehl";
+      erste.querySelector('[data-feld="amount"]').value = "300";
+      erste.querySelector('[data-feld="unit"]').value = "g";
+      root.getElementById("gruppe-hinzufuegen").click();
+      root.querySelector('[data-feld="gruppe"]').value = "Für den Belag";
+      root.getElementById("zutat-hinzufuegen").click();
+      const zeilen = root.querySelectorAll(".zutat-zeile");
+      zeilen[2].querySelector('[data-feld="name"]').value = "Haselnüsse";
+      zeilen[2].querySelector('[data-feld="amount"]').value = "200";
+      zeilen[2].querySelector('[data-feld="unit"]').value = "g";
+      // leere Überschrift soll nicht gespeichert werden
+      root.getElementById("gruppe-hinzufuegen").click();
+      root.getElementById("schritt-hinzufuegen") && 0;
+      root.getElementById("speichern-btn").click();
+      await new Promise((r) => setTimeout(r, 500));
+      const rezept = karte._rezepte.find((x) => x.title === "Nusskuchen");
+      karte._rezeptOeffnen(rezept);
+      const li = Array.from(root.querySelectorAll("ul.zutaten-liste li")).map((e) => e.className + ":" + e.textContent.trim().replace(/\s+/g, " "));
+      const checkboxen = root.querySelectorAll(".zutat-fehlt-checkbox").length;
+      const aggregiert = karte._einkaufslisteAggregieren([rezept]);
+      return { zutaten: rezept.ingredients, li, checkboxen, aggregiert: JSON.stringify(aggregiert) };
+    });
+    const ki = await page.evaluate(async () => {
+      const karte = window.__karte;
+      karte._neuesRezeptFormular();
+      const root = karte.shadowRoot;
+      const prompt = root.getElementById("json-info-prompt-text").value;
+      root.getElementById("json-einfuegen-btn").click();
+      root.getElementById("json-feld").value = JSON.stringify({ title: "KI-Kuchen", servings: 4, ingredients: [{ gruppe: "Für den Teig" }, "200 g Mehl", "Für den Belag:", "3 Äpfel"], steps: ["Backen"] });
+      root.getElementById("json-uebernehmen-btn").click();
+      const z = karte._aktivesRezept.ingredients;
+      return { prompt, import: z.map((e) => e.gruppe ? "G:" + e.gruppe : e.name).join("|") };
+    });
+    assert(ki.prompt.includes('{"gruppe": "Für den Teig"}') && ki.prompt.indexOf('"gruppe"') < ki.prompt.indexOf("Regeln:"), "KI-Prompt erklärt die Gruppen-Überschriften");
+    assert(ki.import === "G:Für den Teig|Mehl|G:Für den Belag|Äpfel", "JSON-Import übernimmt Gruppen (als Objekt und als Textzeile)");
+    assert(ergebnis.zutaten.length === 3 && ergebnis.zutaten[1].gruppe === "Für den Belag", "Überschrift wird gespeichert, leere Überschrift nicht");
+    assert(ergebnis.li[1] === "zutat-gruppe:Für den Belag", "Überschrift wird in der Rezeptansicht als eigene Zeile gezeigt");
+    assert(ergebnis.checkboxen === 2, "Überschrift hat keine Auswahl-Checkbox");
+    assert(!ergebnis.aggregiert.includes("Belag"), "Überschrift landet nicht in der Einkaufsliste");
+  } finally {
+    await page.close();
+  }
+}
+
+async function testZutatenVerschieben(browser) {
+  console.log("\nTest: Zutaten und Überschriften verschieben");
+  const page = await neueTestUmgebung(browser);
+  try {
+    const r = await page.evaluate(() => {
+      const karte = window.__karte;
+      karte._neuesRezeptFormular();
+      const root = karte.shadowRoot;
+      const liste = root.getElementById("zutaten-liste");
+      const name = (z) => { const f = z.querySelector("[data-feld]"); return z.classList.contains("gruppe-zeile") ? "G:" + f.value : z.querySelector('[data-feld="name"]').value; };
+      liste.querySelector('[data-feld="name"]').value = "Mehl";
+      root.getElementById("zutat-hinzufuegen").click();
+      liste.children[1].querySelector('[data-feld="name"]').value = "Zucker";
+      root.getElementById("gruppe-hinzufuegen").click();
+      liste.children[2].querySelector('[data-feld="gruppe"]').value = "Für den Teig";
+      const reihenfolge = () => Array.from(liste.children).map(name).join("|");
+      const start = reihenfolge();
+      liste.children[2].querySelector(".zutat-hoch").click();
+      liste.children[1].querySelector(".zutat-hoch").click();
+      const nachHoch = reihenfolge();
+      liste.children[0].querySelector(".zutat-runter").click();
+      const nachRunter = reihenfolge();
+      const obenGesperrt = liste.children[0].querySelector(".zutat-hoch").disabled;
+      const untenGesperrt = liste.children[2].querySelector(".zutat-runter").disabled;
+      liste.children[0].querySelector(".zutat-entfernen").click();
+      return { start, nachHoch, nachRunter, obenGesperrt, untenGesperrt, rest: reihenfolge() };
+    });
+    assert(r.start === "Mehl|Zucker|G:Für den Teig", "Ausgangsreihenfolge");
+    assert(r.nachHoch === "G:Für den Teig|Mehl|Zucker", "Überschrift lässt sich nach oben schieben");
+    assert(r.nachRunter === "Mehl|G:Für den Teig|Zucker", "Zeile lässt sich nach unten schieben");
+    assert(r.obenGesperrt && r.untenGesperrt, "Erste Zeile kann nicht höher, letzte nicht tiefer");
+    assert(r.rest === "G:Für den Teig|Zucker", "Entfernen funktioniert weiterhin");
+  } finally {
+    await page.close();
+  }
+}
+
 // ---------------------------------------------------------------------
 // Test 1: Grundfunktion - neues Rezept über _formularSpeichern anlegen.
 // ---------------------------------------------------------------------
@@ -2215,7 +2375,7 @@ async function testBruchUndBereichsMengenWerdenErkannt(browser) {
 // nächsten Menge verknüpft).
 // ---------------------------------------------------------------------
 async function testZutatenUnterueberschriftenWerdenIgnoriert(browser) {
-  console.log("\nTest: Zutaten-Unterüberschriften werden ignoriert");
+  console.log("\nTest: Zutaten-Unterüberschriften werden als Gruppen erkannt");
   const page = await neueTestUmgebung(browser);
   try {
     const text = [
@@ -2239,8 +2399,9 @@ async function testZutatenUnterueberschriftenWerdenIgnoriert(browser) {
       return window.__karte._aktivesRezept;
     }, text);
 
-    assert(aktiv.ingredients.length === 4, "Nur die 4 echten Zutaten werden übernommen, die 2 Unterüberschriften nicht");
-    assert(!aktiv.ingredients.some((z) => /für den teig|für die füllung/i.test(z.name)), "Keine Unterüberschrift landet als Zutatenname");
+    assert(aktiv.ingredients.filter((z) => z.name).length === 4, "Die 4 echten Zutaten werden übernommen");
+    assert(aktiv.ingredients.filter((z) => z.gruppe).map((z) => z.gruppe).join("|") === "Für den Teig|Für die Füllung", "Unterüberschriften werden als Gruppen übernommen (ohne Doppelpunkt)");
+    assert(!aktiv.ingredients.some((z) => /für den teig|für die füllung/i.test(z.name || "")), "Keine Unterüberschrift landet als Zutatenname");
   } finally {
     await page.close();
   }
@@ -6897,6 +7058,9 @@ async function testUpdateHinweisSchliessenBlendetIhnDauerhaftAus(browser) {
     await testEntityIstOptionalMitStandard(browser);
     await testListenZuordnenUndNeueListeAnlegen(browser);
     await testSchriftgroesseEinstellbar(browser);
+    await testVieleRezepteSucheSchnell(browser);
+    await testZutatenGruppenImFormularUndDetail(browser);
+    await testZutatenVerschieben(browser);
   } finally {
     await browser.close();
   }
